@@ -324,7 +324,7 @@
       "evidence": [
         "docs/evidence/T041_HOSTED_DEPLOYMENT.md"
       ],
-      "note": "Supabase (Mumbai ap-south-1) provisioned, migrated (0001_initial_schema head), seeded (21 materials, 8 facilities, 12 price observations). Render Docker service live at https://sahitol-api.onrender.com \u2014 /health/live 200 OK and /health/ready 200 OK confirmed in Render deploy logs. Cloudflare Pages (web console) pending.",
+      "note": "Supabase (Mumbai ap-south-1) provisioned, migrated (0001_initial_schema head), seeded. Render Docker API live at https://sahitol-api.onrender.com \u2014 /health/live 200 OK confirmed. Cloudflare Pages web console live at https://sahitol.pages.dev \u2014 4 files uploaded, deployment complete.",
       "owner": "Owner + coding agent"
     },
     "T042": {
