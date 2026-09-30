@@ -1,6 +1,30 @@
 # Changelog
 
-## 2026-09-30 — Local Fallback, Backup, Restore, and Disaster Recovery (T042 DONE)
+## 2026-09-30 -- T046 DONE: Translation and Audio Audit
+
+Completed full automated and manual audit of Hindi/Marathi translations and offline audio, fulfilling T046 output requirements for R-LANG-01, R-LANG-02, AT-049, AT-050:
+
+- **String parity (automated)**: 145/145 keys across en/hi/mr. Zero missing, zero extra, zero placeholder mismatches. Only lang_en (English label) correctly matches across all three locales.
+- **Audio manifest integrity (automated)**: 258/258 MP3 clips present on disk. All 258 SHA-256 checksums verified. runtime_cloud_call=false confirmed. All review_status=APPROVED. Number 0-99 complete in both hi and mr.
+- **AudioGrammarAndManifestTest (Gradle unit tests, exit 0)**: All 8 test methods PASS covering every spec fixture from docs/14_TRANSLATION_AUDIO_AUDIT.md: irregular numbers (0,1,2,11,19,21,29,99), place values (100-100000), paise preservation, gram/kg weight, rate/range, negative economics, null/unknown fallbacks, status clips, safety card clips.
+- **Devanagari spot-check**: mr_num_2=don vs hi_num_2=do confirms locale separation. Key UI strings (non_epr_disclaimer, status labels, safety warnings, classifier advisory) correctly localized in both locales without English fallbacks.
+- **On-device bilingual rendering**: Confirmed from T044 screenshots -- bilingual labels, no Devanagari clipping at 1080x2372/480dpi.
+- **Honest gaps documented**: Native-speaker review NOT_REVIEWED; TalkBack on-device NOT_RUN. Both explicitly tracked per spec requirement.
+- Evidence: docs/evidence/T046_TRANSLATION_AUDIO_AUDIT.md
+
+
+## 2026-09-30 -- T044 DONE: Real-Device Usability Tests
+
+Completed owner scenario usability tests on real Android device N7OZPV59XWWKPF4X:
+
+- Full E2E: S00 launch, C05 lot, C06/C07 price, C08 sync, C09 offer, C10 discrepancy accept, C11 QR handover record (Ref ST-7022), C16 Material Passport.
+- Discrepancy handling verified: 2.5 kg estimated vs 2.3 kg measured (-200g tare); Accept/Dispute confirmed; SHA-256 HASH updated.
+- C11 Digital Handover Record: QR rendered, SHA-256 Secure, Offline Ready, honest EPR disclaimer present.
+- Bilingual labels (Hindi/English) throughout; Offline Ready badge on C10/C11.
+- Evidence: docs/evidence/T044_REAL_DEVICE_USABILITY.md
+- Fieldwork obligation remains UNMET and tracked separately.
+
+## 2026-09-30 â€” Local Fallback, Backup, Restore, and Disaster Recovery (T042 DONE)
 
 Implemented and verified the local reproducible fallback stack, disaster recovery toolchain, Android network security configurations, web camera fallbacks, and health/diagnostics middleware across the SahiTol platform, fulfilling requirements `R-SEC-02`, `R-OPS-02`, and `R-OPS-04`, and passing acceptance cases `AT-073`, `AT-075`, and `AT-077`:
 - **Cryptographic Backup and Disaster Recovery Engine (`scripts/backup_restore.py` / `AT-075` PASS)**:
@@ -30,7 +54,7 @@ Implemented and verified the local reproducible fallback stack, disaster recover
   - Android resource and unit test compilation verified.
   - Authored comprehensive evidence artifact `docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md`.
 
-## 2026-09-30 — Security, Privacy, and Abuse Boundaries Verification (T040 DONE)
+## 2026-09-30 â€” Security, Privacy, and Abuse Boundaries Verification (T040 DONE)
 
 Implemented and verified the comprehensive automated security, privacy, and abuse boundaries test suite across the SahiTol platform in `services/api/tests/test_security_and_abuse_boundaries.py` (19 passing unit/integration tests), fulfilling requirements `R-AUTH-02`, `R-AUTH-04`, `R-HAND-04`, `R-DATA-06`, `R-DATA-08`, `R-SEC-01`, and `R-SEC-02`, passing acceptance cases `AT-008`, `AT-032`, and `AT-060`, and contributing verified evidence to `AT-010`, `AT-058`, `AT-072`, and `AT-073`:
 - **Object-Level Authorization & IDOR Boundaries (`R-AUTH-02` / `AT-008` PASS)**:
@@ -71,7 +95,7 @@ Implemented and verified the comprehensive automated security, privacy, and abus
   - Android unit tests verified (79 passed out of 79 tests in `testDebugUnitTest`).
   - Authored comprehensive evidence artifact `docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md`.
 
-## 2026-09-30 — Contextual Safety Hub and Interactive Unit Economics Views (T039 DONE)
+## 2026-09-30 â€” Contextual Safety Hub and Interactive Unit Economics Views (T039 DONE)
 
 Implemented the approved contextual safety views (`C17`) in native Android Jetpack Compose and interactive illustrative unit-economics views (`U01`) in React/Vite conforming strictly to Google Stitch designs `1579fe53bac5` and `cab89a974c04` under project `245073995801566548`, fulfilling requirements `R-GOV-02`, `R-SAFE-01`, and `R-ECON-01`, and passing acceptance cases `AT-002`, `AT-048`, and `AT-067`:
 - **Mandatory Frontend Gate Full Completion (`SCREEN_REGISTRY.md` / `AT-002`)**:
@@ -89,10 +113,10 @@ Implemented the approved contextual safety views (`C17`) in native Android Jetpa
   - Built same-lot comparison workspace for standardized 10 kg stripped copper cable lot (`LOT-2024-9082`).
   - Side-by-side comparison matrix: Baseline (Manual / Current Yard Practice) vs SahiTol Optimized.
   - Unit Economics Waterfall visual stacked bar chart displaying Acquisition, Logistics, Rejection Loss, and Net Margin.
-  - Interactive operating assumption sliders: Transport efficiency (0%–50%), Grading & Rejection loss (1%–10%), Payment delay window (0–30 days).
-  - Toggles: Auto weigh-slip calibration (-₹10 tare disputes), Direct smelter linkage (+₹190 margin).
-  - Real-time recalculation of gross, costs, net realization, and net profit variance (+₹ / -₹).
-  - Honest baseline handling: when baseline net profit is $\le 0$, percentage comparison is reported as `baseline ≤ 0` / not meaningful, avoiding misleading inverted signs.
+  - Interactive operating assumption sliders: Transport efficiency (0%â€“50%), Grading & Rejection loss (1%â€“10%), Payment delay window (0â€“30 days).
+  - Toggles: Auto weigh-slip calibration (-â‚¹10 tare disputes), Direct smelter linkage (+â‚¹190 margin).
+  - Real-time recalculation of gross, costs, net realization, and net profit variance (+â‚¹ / -â‚¹).
+  - Honest baseline handling: when baseline net profit is $\le 0$, percentage comparison is reported as `baseline â‰¤ 0` / not meaningful, avoiding misleading inverted signs.
   - Mandatory illustrative disclaimer footer banner, Tier-1 urban telemetry sourcing disclosure, and **0 paise collector transaction fee guarantee** (`R-ECON-02`).
   - Reset scenario and export breakdown to JSON with SHA-256 integrity seal.
   - Routed `/economics` in `App.tsx` and linked from `A07_EvidenceLinks.tsx`.
@@ -101,12 +125,12 @@ Implemented the approved contextual safety views (`C17`) in native Android Jetpa
   - Authored and verified `U01_UnitEconomics.test.tsx` (6 unit tests, 24/24 Web unit tests passing 100%).
   - Authored comprehensive evidence artifact `docs/evidence/T039_ECONOMICS_AND_SAFETY_VIEWS.md`.
 
-## 2026-09-30 — Pre-generated Offline Hindi/Marathi Audio and Dynamic Spoken Grammar (T037 DONE)
+## 2026-09-30 â€” Pre-generated Offline Hindi/Marathi Audio and Dynamic Spoken Grammar (T037 DONE)
 
 Implemented the complete pre-generated offline voice guidance system across Hindi (`hi`) and Marathi (`mr`) for informal e-waste collectors, fulfilling requirements `R-LANG-02` and `R-OPS-03`, and contributing verified evidence to acceptance cases `AT-050` and `AT-076`:
 - **Pre-generated Offline Audio Inventory (258 Audio Clips)**:
   - Synthesized 258 offline MP3 audio clips using permissive open-access neural voices (`hi-IN-MadhurNeural`, `mr-IN-AarohiNeural`) via Edge-TTS under Permissive Non-Commercial Research & Evaluation licensing.
-  - Covers numbers 0–99 (100 clips each for Hindi and Marathi = 200 clips) with authentic irregular numbering (e.g. *उन्नीस*, *इक्कीस*, *निन्यानवे* in Hindi; *एकोणीस*, *एकवीस*, *नव्व्याण्णव* in Marathi).
+  - Covers numbers 0â€“99 (100 clips each for Hindi and Marathi = 200 clips) with authentic irregular numbering (e.g. *à¤‰à¤¨à¥à¤¨à¥€à¤¸*, *à¤‡à¤•à¥à¤•à¥€à¤¸*, *à¤¨à¤¿à¤¨à¥à¤¯à¤¾à¤¨à¤µà¥‡* in Hindi; *à¤à¤•à¥‹à¤£à¥€à¤¸*, *à¤à¤•à¤µà¥€à¤¸*, *à¤¨à¤µà¥à¤µà¥à¤¯à¤¾à¤£à¥à¤£à¤µ* in Marathi).
   - Covers scale words (hundred, thousand, lakh, crore), units (rupee/rupees, paise, gram, kilogram, per kg, point/decimal, to, negative, unknown), four immutable status invariants (saved locally, synced, confirmed, paid), statutory non-EPR disclaimer, and 9 material-specific contextual safety cards.
   - Bundled directly in `apps/android/app/src/main/assets/audio/` and packaged into APK (`assembleDebug` verified in 46s).
 - **Cryptographic Audio Manifest (`audio_manifest.json`)**:
@@ -116,7 +140,7 @@ Implemented the complete pre-generated offline voice guidance system across Hind
 - **Dynamic Indian Numbering Grammar (`AudioGrammar.kt`)**:
   - Implemented `AudioGrammar.kt` supporting `speakMoney`, `speakWeight`, `speakRate`, `speakRange`, `speakStatus`, and `speakSafety`.
   - Handles numbers up to crores with proper Indian grouping and irregular number names.
-  - Handles singular/plural agreement (रुपया vs रुपये, पैसा vs पैसे), exact fractional decimals (1.25 kg -> "एक दशमलव पच्चीस किलोग्राम"), price ranges (₹120–₹180/kg), and negative net amounts.
+  - Handles singular/plural agreement (à¤°à¥à¤ªà¤¯à¤¾ vs à¤°à¥à¤ªà¤¯à¥‡, à¤ªà¥ˆà¤¸à¤¾ vs à¤ªà¥ˆà¤¸à¥‡), exact fractional decimals (1.25 kg -> "à¤à¤• à¤¦à¤¶à¤®à¤²à¤µ à¤ªà¤šà¥à¤šà¥€à¤¸ à¤•à¤¿à¤²à¥‹à¤—à¥à¤°à¤¾à¤®"), price ranges (â‚¹120â€“â‚¹180/kg), and negative net amounts.
 - **Resilient Audio Guidance Manager (`AudioGuidanceManager.kt`)**:
   - Sequential playback queue execution via Android `MediaPlayer`.
   - Supports play, repeat, mute, and automatic queue cancellation on language switching.
@@ -126,7 +150,7 @@ Implemented the complete pre-generated offline voice guidance system across Hind
   - Clean `assembleDebug` APK build verified (46s).
   - Authored comprehensive evidence artifact `docs/evidence/T037_OFFLINE_AUDIO_AND_GRAMMAR.md`.
 
-## 2026-09-30 — Complete Language Resources, Numeral Preference, and Accessible Interaction (T036 DONE)
+## 2026-09-30 â€” Complete Language Resources, Numeral Preference, and Accessible Interaction (T036 DONE)
 
 Implemented complete native Android string localization across Hindi (`hi`), Marathi (`mr`), and English (`en`), colloquial scrap material aliases from the curated taxonomy (`T010`), locale-aware Indian numbering and paise preservation formatting, explicit NumeralPreference (`LATIN` vs `DEVANAGARI`), TalkBack screen-reader semantics (`label + value + unit + status`), and touch-target accessibility standards conforming to `docs/14_TRANSLATION_AUDIO_AUDIT.md`, `docs/05_DESIGN_STITCH.md`, and `design/stitch/SCREEN_REGISTRY.md`, fulfilling requirements `R-LANG-01` and `R-UX-01`, and contributing verified evidence to acceptance cases `AT-049` and `AT-051`:
 - **Stable Semantic Keys Across 13 Namespaces (`values/strings.xml`, `values-hi/strings.xml`, `values-mr/strings.xml`)**:
@@ -136,16 +160,16 @@ Implemented complete native Android string localization across Hindi (`hi`), Mar
 - **Audit-Reported Missing Translations (`R-LANG-01` / `AT-049`)**:
   - `SahiTolStrings.get()` records unavailable key accesses into an audit trail (`missingKeyAccessAudit`) rather than silently hiding missing strings behind English fallbacks.
 - **Colloquial Scrap Material Aliases (`T010` / `MaterialAliases.kt`)**:
-  - Integrated 139 curated informal scrap yard aliases across all categories in Hindi, Marathi, and English (e.g. *हरा पत्ता* / *मदरबोर्ड* for PCB, *तांबा तार* / *तांब्याची वायर* for Cable, *गाड़ी की बैटरी* for Lead-Acid, *कूलर मोटर* for Motor, *पुराना टीवी* for CRT).
+  - Integrated 139 curated informal scrap yard aliases across all categories in Hindi, Marathi, and English (e.g. *à¤¹à¤°à¤¾ à¤ªà¤¤à¥à¤¤à¤¾* / *à¤®à¤¦à¤°à¤¬à¥‹à¤°à¥à¤¡* for PCB, *à¤¤à¤¾à¤‚à¤¬à¤¾ à¤¤à¤¾à¤°* / *à¤¤à¤¾à¤‚à¤¬à¥à¤¯à¤¾à¤šà¥€ à¤µà¤¾à¤¯à¤°* for Cable, *à¤—à¤¾à¤¡à¤¼à¥€ à¤•à¥€ à¤¬à¥ˆà¤Ÿà¤°à¥€* for Lead-Acid, *à¤•à¥‚à¤²à¤° à¤®à¥‹à¤Ÿà¤°* for Motor, *à¤ªà¥à¤°à¤¾à¤¨à¤¾ à¤Ÿà¥€à¤µà¥€* for CRT).
   - Bundled `material_aliases.json` in Android assets for offline access.
   - Visualized colloquial aliases directly in `C05_LotEditorScreen` under the material selection grid, and enabled reverse colloquial search mapping informal terms to domain categories.
 - **Locale-Aware Indian Numbering & Paise Preservation (`LocaleFormatter.kt`)**:
   - Formats numbers in Indian grouping (thousands, lakhs, crores: `1,50,000`, `1,00,00,000`).
-  - Preserves exact fractional paise without silent rounding (1 paise $\to$ `₹0.01`, 50 paise $\to$ `₹0.50`, 1050 paise $\to$ `₹10.50`, 15000000 paise $\to$ `₹1,50,000`, negative net $\to$ `-₹50`).
-  - Formats mass into localized units (250g $\to$ `250 g` / `250 ग्राम` / `250 ग्रॅम`; 1000g $\to$ `1 kg` / `1 किग्रा` / `1 किलो`; 2500g $\to$ `2.50 kg`).
-  - Formats rates and ranges (`₹150 / kg`, `₹120 – ₹180 / kg`).
+  - Preserves exact fractional paise without silent rounding (1 paise $\to$ `â‚¹0.01`, 50 paise $\to$ `â‚¹0.50`, 1050 paise $\to$ `â‚¹10.50`, 15000000 paise $\to$ `â‚¹1,50,000`, negative net $\to$ `-â‚¹50`).
+  - Formats mass into localized units (250g $\to$ `250 g` / `250 à¤—à¥à¤°à¤¾à¤®` / `250 à¤—à¥à¤°à¥…à¤®`; 1000g $\to$ `1 kg` / `1 à¤•à¤¿à¤—à¥à¤°à¤¾` / `1 à¤•à¤¿à¤²à¥‹`; 2500g $\to$ `2.50 kg`).
+  - Formats rates and ranges (`â‚¹150 / kg`, `â‚¹120 â€“ â‚¹180 / kg`).
 - **Explicit Numeral Display Preference (`R-UX-01` / `AT-051`)**:
-  - Implemented `NumeralPreference` (`LATIN` vs `DEVANAGARI`) allowing collectors to view numbers, weights, and currency figures in standard Latin digits (`0-9`) or authentic Devanagari numerals (`०-९`).
+  - Implemented `NumeralPreference` (`LATIN` vs `DEVANAGARI`) allowing collectors to view numbers, weights, and currency figures in standard Latin digits (`0-9`) or authentic Devanagari numerals (`à¥¦-à¥¯`).
   - Added live toggle in `C15_SettingsScreen` and persisted preference in `SessionManager` (`KEY_NUMERAL_PREF`).
   - Preserved across app restarts and safe logout.
 - **Accessibility Standards & TalkBack Semantics (`AccessibilityUtils.kt`)**:
@@ -157,12 +181,12 @@ Implemented complete native Android string localization across Hindi (`hi`), Mar
   - Verified documentation integrity via `check_docs.py` reporting 0 errors across 2,893 local links.
   - Authored comprehensive evidence artifact `docs/evidence/T036_LANGUAGE_RESOURCES_AND_ACCESSIBILITY.md`.
 
-## 2026-09-30 — On-Device Classifier Android Flow Integration (T034 DONE)
+## 2026-09-30 â€” On-Device Classifier Android Flow Integration (T034 DONE)
 
 Integrated the bundled on-device MobileNetV3-Small LiteRT image classifier into the approved native Android collector creation flow (`C05_LotEditorScreen.kt` and `CollectorNavHost.kt`) conforming to `docs/19_AI_ML.md`, `docs/05_DESIGN_STITCH.md`, and `design/stitch/SCREEN_REGISTRY.md`, fulfilling requirements `R-GOV-02`, `R-ML-03`, and `R-ML-04`:
 - **Mandatory Frontend Gate Compliance (`design/stitch/SCREEN_REGISTRY.md`)**:
   - Wired live inference directly into screen `C05` (Screen ID `afa6f950fa3a`) approved in Google Stitch project `245073995801566548`.
-  - Implemented 3 reactive UI states: Analyzing progress indicator, High Confidence Advisory with Confirm/Change buttons, and Low Confidence Abstain warning banner routing to manual 3×3 grid selection.
+  - Implemented 3 reactive UI states: Analyzing progress indicator, High Confidence Advisory with Confirm/Change buttons, and Low Confidence Abstain warning banner routing to manual 3Ã—3 grid selection.
 - **Asynchronous Off-Thread Inference & Memory Safety (`R-ML-03` / `AT-046`)**:
   - Implemented `classifyBitmapAsync` on `Dispatchers.Default` and `classifyFileAsync` on `Dispatchers.IO`.
   - Sub-sampled bitmap decoding (`inSampleSize`) strictly bounds temporary decoding memory to <15 MB, recycling bitmaps immediately after inference.
@@ -189,7 +213,7 @@ Integrated the bundled on-device MobileNetV3-Small LiteRT image classifier into 
   - Rendered and verified documentation with `check_docs.py` reporting 0 errors across 2,883 local links.
   - Authored comprehensive evidence artifact `docs/evidence/T034_CLASSIFIER_ANDROID_FLOW.md`.
 
-## 2026-09-30 — Collector Ledger and Payment Settlement (T027 DONE)
+## 2026-09-30 â€” Collector Ledger and Payment Settlement (T027 DONE)
 
 Implemented the approved native Android Jetpack Compose collector ledger and payment settlement screens (`C12`, `C13`) conforming to `docs/05_DESIGN_STITCH.md`, `docs/16_API_CONTRACT.md`, `docs/17_OFFLINE_SYNC.md`, and `design/stitch/SCREEN_REGISTRY.md`, fulfilling requirements `R-GOV-02`, `R-HAND-05`, `R-PAY-01`, `R-PAY-02`, `R-PAY-03`, `R-OFF-01`, and `R-OFF-05`:
 - **Mandatory Frontend Gate Compliance (`design/stitch/SCREEN_REGISTRY.md`)**:
@@ -216,7 +240,7 @@ Implemented the approved native Android Jetpack Compose collector ledger and pay
   - Rendered and verified documentation with `check_docs.py` reporting 0 errors across 2,866 local links.
   - Authored comprehensive evidence artifact `docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md`.
 
-## 2026-09-30 — Offline QR and Collector Receipt (T024 DONE)
+## 2026-09-30 â€” Offline QR and Collector Receipt (T024 DONE)
 
 Implemented the approved native Android Jetpack Compose offline QR code, handover capture, and digital receipt/passport screens (`C10`, `C11`, `C16`) conforming to `docs/05_DESIGN_STITCH.md`, `docs/17_OFFLINE_SYNC.md`, `docs/16_API_CONTRACT.md`, and `design/stitch/SCREEN_REGISTRY.md`, fulfilling requirements `R-GOV-02`, `R-HAND-01`, `R-HAND-03`, `R-HAND-04`, `R-HAND-05`, `R-HAND-06`, `R-LOT-04`, and `R-OFF-01`:
 - **Mandatory Frontend Gate Compliance (`design/stitch/SCREEN_REGISTRY.md`)**:
@@ -230,10 +254,10 @@ Implemented the approved native Android Jetpack Compose offline QR code, handove
   - Verified byte-for-byte digest parity against frozen test fixture `docs/planning/handover_fixture.json` (`a091623365372138e72b1d767cca58ac80c59667b59b86f511ebf11b64eb783f`).
   - Strict UI invariant: digest is badged as "Cryptographic SHA-256 Seal", never a digital signature.
 - **Privacy-Preserving Offline QR Generator (`QrGenerator.kt`)**:
-  - Generates 512×512 px QR code Bitmaps using ZXing core encoding minimal unguessable verification URL: `https://sahitol.in/v/{handoverId}`.
+  - Generates 512Ã—512 px QR code Bitmaps using ZXing core encoding minimal unguessable verification URL: `https://sahitol.in/v/{handoverId}`.
   - Zero PII in QR: never embeds collector mobile numbers, GPS coordinates, photos, or raw financial details.
 - **Native ISO A4 PDF Receipt Generation (`ReceiptPdfGenerator.kt`)**:
-  - Renders standard ISO A4 (595 × 842 pt) PDF documents via `android.graphics.pdf.PdfDocument`.
+  - Renders standard ISO A4 (595 Ã— 842 pt) PDF documents via `android.graphics.pdf.PdfDocument`.
   - Prominently embeds the mandatory statutory disclosure notice:
     *"SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling."*
 - **Handover Repository & Outbox Persistence (`HandoverRepository.kt`)**:
@@ -247,15 +271,15 @@ Implemented the approved native Android Jetpack Compose offline QR code, handove
   - Rendered and verified documentation with `check_docs.py` reporting 0 errors across 2,856 local links.
   - Authored comprehensive evidence artifact `docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md`.
 
-## 2026-09-30 — Collector Price Discovery, Valuation, and Recycler Directory (T020 DONE)
+## 2026-09-30 â€” Collector Price Discovery, Valuation, and Recycler Directory (T020 DONE)
 
-Implemented the approved native Android Jetpack Compose collector pricing and recycler matching views (`C06`–`C09`) conforming to `docs/05_DESIGN_STITCH.md`, `docs/04_APPFLOW.md`, `design/stitch/SCREEN_REGISTRY.md`, and `docs/18_DATA_PROVENANCE.md`, fulfilling requirements `R-PRICE-01`, `R-PRICE-02`, `R-PRICE-03`, `R-PRICE-05`, `R-REC-01`, `R-REC-04`, `R-REC-05`, `R-OFF-01`, `R-OFF-05`, and `R-UX-01`:
+Implemented the approved native Android Jetpack Compose collector pricing and recycler matching views (`C06`â€“`C09`) conforming to `docs/05_DESIGN_STITCH.md`, `docs/04_APPFLOW.md`, `design/stitch/SCREEN_REGISTRY.md`, and `docs/18_DATA_PROVENANCE.md`, fulfilling requirements `R-PRICE-01`, `R-PRICE-02`, `R-PRICE-03`, `R-PRICE-05`, `R-REC-01`, `R-REC-04`, `R-REC-05`, `R-OFF-01`, `R-OFF-05`, and `R-UX-01`:
 - **Mandatory Frontend Gate Compliance (`design/stitch/SCREEN_REGISTRY.md`)**:
   - Implemented all 4 screens (`C06`, `C07`, `C08`, `C09`) faithful to owner-approved Google Stitch designs from project `245073995801566548` without autonomous UI generation:
     - `C06`: Screen ID `3815df5204ef` (Daily scrap mandi rates, category filter, 30-day trends, source details, field observation form with atomic outbox queue).
     - `C07`: Screen ID `e975b81e8e5d` (Indicative valuation breakdown, expandable condition deductions, recycler quote comparisons, offer acceptance state).
     - `C08`: Screen ID `f7a4946ebc60` (Authorized recycler yard radar, GPS status banner, distance/travel times, verified badges, instant UPI badges, restricted-locality fallback picker).
-    - `C09`: Screen ID `d2ce8e025883` (Commercial offer profile, route compatibility guard, commercial breakdown with ₹0 fee invariant, interactive request/accept/reject lifecycle, helpline CTA).
+    - `C09`: Screen ID `d2ce8e025883` (Commercial offer profile, route compatibility guard, commercial breakdown with â‚¹0 fee invariant, interactive request/accept/reject lifecycle, helpline CTA).
   - Registered all 4 screens in `SCREEN_REGISTRY.md` as `IMPLEMENTED_VERIFIED`.
 - **Matching Engine Parity (`MatchingEngine.kt`)**:
   - Implemented MATCH_V1 scoring in pure Kotlin: Haversine distance within 0.5% tolerance of PostGIS reference, battery isolation route guard (`R-REC-04`), material compatibility checks, 5-factor scoring (distance 30%, rate 30%, pickup 20%, availability 15%, reliability 5%), and deterministic tie-breaking.
@@ -269,9 +293,9 @@ Implemented the approved native Android Jetpack Compose collector pricing and re
   - Rendered and verified documentation with `check_docs.py` reporting 0 errors across 2,844 local links.
   - Authored comprehensive evidence artifact `docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md`.
 
-## 2026-09-30 — Collector Onboarding, Lot Creation, and Sync UI (T017 DONE)
+## 2026-09-30 â€” Collector Onboarding, Lot Creation, and Sync UI (T017 DONE)
 
-Implemented the approved native Android Jetpack Compose collector onboarding, home, lot creation, sync centre, and settings screens (`C01`–`C05`, `C14`, `C15`) conforming to `docs/05_DESIGN_STITCH.md`, `docs/04_APPFLOW.md`, `design/stitch/SCREEN_REGISTRY.md`, and `docs/14_TRANSLATION_AUDIO_AUDIT.md`, fulfilling requirements `R-GOV-02`, `R-AUTH-01`, `R-AUTH-03`, `R-LOT-01`, `R-LOT-02`, `R-LOT-03`, `R-LOT-05`, `R-OFF-01`, `R-OFF-05`, `R-OFF-06`, and `R-UX-01`:
+Implemented the approved native Android Jetpack Compose collector onboarding, home, lot creation, sync centre, and settings screens (`C01`â€“`C05`, `C14`, `C15`) conforming to `docs/05_DESIGN_STITCH.md`, `docs/04_APPFLOW.md`, `design/stitch/SCREEN_REGISTRY.md`, and `docs/14_TRANSLATION_AUDIO_AUDIT.md`, fulfilling requirements `R-GOV-02`, `R-AUTH-01`, `R-AUTH-03`, `R-LOT-01`, `R-LOT-02`, `R-LOT-03`, `R-LOT-05`, `R-OFF-01`, `R-OFF-05`, `R-OFF-06`, and `R-UX-01`:
 - **Mandatory Frontend Gate Compliance (`design/stitch/SCREEN_REGISTRY.md`)**:
   - Implemented all 7 screens (`C01`, `C02`, `C03`, `C04`, `C05`, `C14`, `C15`) faithful to owner-approved Google Stitch designs from project `245073995801566548` without autonomous UI generation. Registered all screens as `IMPLEMENTED_VERIFIED`.
 - **Session & Identity Management (`SessionManager.kt`, `C01_WelcomeScreen.kt`, `C02_AuthScreen.kt`)**:
@@ -280,15 +304,15 @@ Implemented the approved native Android Jetpack Compose collector onboarding, ho
   - Added phone masking (`+91 98*** **456`) and zero-PII reassurance (no Aadhaar, PAN, or bank details collected).
   - Provided explicit demo collector flow (`col_demo_santosh`) with visual demo isolation badges (`AT-007`).
 - **Offline Ledger & Scrap Work Table (`C03_HomeScreen.kt`)**:
-  - Top app bar with prominent "ऑफ़लाइन तैयार (Offline Ready)" connectivity status.
-  - Hero "माल बेचें और वजन करें (SELL MATERIAL & WEIGH)" terracotta CTA leading directly to lot creation.
+  - Top app bar with prominent "à¤‘à¤«à¤¼à¤²à¤¾à¤‡à¤¨ à¤¤à¥ˆà¤¯à¤¾à¤° (Offline Ready)" connectivity status.
+  - Hero "à¤®à¤¾à¤² à¤¬à¥‡à¤šà¥‡à¤‚ à¤”à¤° à¤µà¤œà¤¨ à¤•à¤°à¥‡à¤‚ (SELL MATERIAL & WEIGH)" terracotta CTA leading directly to lot creation.
   - Horizontal quick status carousel (Rates, Lots, Today's Weight, Authorized Recyclers, Battery Safety).
   - Reactive Room Flow (`getLotsForAccountFlow`) rendering paper-slip physical ledger cards with local/synced status chips.
 - **Camera & Image Compression Pipeline (`C04_CameraScreen.kt`, `PhotoCompressor.kt`)**:
   - Live CameraX 3:4 viewfinder with scrap alignment frame.
   - Runtime permission denied guidance with system settings intent and file picker / gallery import fallback (`GetContent()`).
   - Integrated `PhotoCompressor.compress()` ensuring all scrap photos are bounded to 1024px and <500 KB.
-  - "बिना फोटो के जारी रखें (Skip Photo)" fallback with explicit evidence flags.
+  - "à¤¬à¤¿à¤¨à¤¾ à¤«à¥‹à¤Ÿà¥‹ à¤•à¥‡ à¤œà¤¾à¤°à¥€ à¤°à¤–à¥‡à¤‚ (Skip Photo)" fallback with explicit evidence flags.
 - **Scrap Taxonomy & Lot Editor (`MaterialCategory.kt`, `C05_LotEditorScreen.kt`)**:
   - Full 9-category canonical taxonomy (CRT, LCD, PCB, Cable, Battery, Motor, Plastics, Mixed, Other) with Hindi/Marathi/English display names and regulatory hazard routing (`BATTERY` -> separate hazardous route).
   - Decimal KG weight input with quick adjusters (-1kg, -100g, +100g, +1kg) converted to integer grams (`estimatedWeightG`) to eliminate floating-point errors.
@@ -304,7 +328,7 @@ Implemented the approved native Android Jetpack Compose collector onboarding, ho
   - Passed acceptance cases `AT-007`, `AT-009`, `AT-011`, `AT-012`, `AT-013`, `AT-015`.
   - Documented evidence in `docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md`.
 
-## 2026-09-30 — Dataset Exports, Recycler Procurement Logs, and Data Lineage (T031 DONE)
+## 2026-09-30 â€” Dataset Exports, Recycler Procurement Logs, and Data Lineage (T031 DONE)
 
 Implemented the dataset exports, recycler procurement history, closed-loop price observation lineage, and statutory non-EPR disclosure packaging conforming to `docs/18_DATA_PROVENANCE.md`, `docs/16_API_CONTRACT.md`, and `docs/06_SCHEMA.md`, fulfilling requirements `R-HAND-06`, `R-DATA-01` through `R-DATA-06`, `R-DATA-08`, `R-DATA-09`, `R-DATA-11`, and `R-REG-01`:
 - **Closed-Loop Data Lineage (`services/api/app/routers/payments.py`)**:
@@ -327,7 +351,7 @@ Implemented the dataset exports, recycler procurement history, closed-loop price
   - 18 Vitest frontend tests in `apps/web` passing 100%.
   - Documented evidence in `docs/evidence/T031_DATASET_EXPORTS.md`.
 
-## 2026-09-29 — Android Background and Manual Synchronization Worker (T015 DONE)
+## 2026-09-29 â€” Android Background and Manual Synchronization Worker (T015 DONE)
 
 
 Implemented the native Android client background and manual synchronization worker and reconciliation engine in `apps/android/app/src/main/java/com/sahitol/collector/data/sync/` conforming to `docs/17_OFFLINE_SYNC.md` and `docs/16_API_CONTRACT.md`, fulfilling requirements `R-AUTH-03`, `R-OFF-04`, `R-OFF-05`, and `R-OFF-06`:
@@ -346,7 +370,7 @@ Implemented the native Android client background and manual synchronization work
   - Built and verified debug APK `app-debug.apk`.
   - Documented evidence in `docs/evidence/T015_ANDROID_SYNC_WORKER.md`.
 
-## 2026-09-29 — Android Room Repositories and Durable Outbox (T013 DONE)
+## 2026-09-29 â€” Android Room Repositories and Durable Outbox (T013 DONE)
 
 Implemented the native Android offline persistence architecture, Room database v2, and durable outbox in `apps/android/app/src/main/java/com/sahitol/collector/data/` conforming to `docs/17_OFFLINE_SYNC.md` and `docs/06_SCHEMA.md`, fulfilling requirements `R-AUTH-03`, `R-LOT-02`, `R-LOT-05`, `R-OFF-01`, and `R-OFF-02`:
 - **Local Room Database v2 (`SahiTolDatabase.kt`)**:
@@ -365,12 +389,12 @@ Implemented the native Android offline persistence architecture, Room database v
   - Android test suite now passes 17/17 tests (100% success rate).
   - Documented evidence in `docs/evidence/T013_ROOM_REPOSITORIES_OUTBOX.md`.
 
-## 2026-09-29 — Android Feasibility Diagnostic Screen S00 and LiteRT Inference (T003 DONE)
+## 2026-09-29 â€” Android Feasibility Diagnostic Screen S00 and LiteRT Inference (T003 DONE)
 
 Implemented the approved native Android feasibility diagnostic screen `S00` in Jetpack Compose matching Google Stitch design `e2a3f1170e73` (`screens/S00_e2a3f117.html`) from project `245073995801566548`, fulfilling requirement `R-ARC-01` and marking acceptance case `AT-005` as `PASS`:
 - **Approved S00 Diagnostic Screen (`S00_DiagnosticScreen.kt`)**:
   - Implemented responsive, accessibility-ready Jetpack Compose layout using SahiTol design system tokens (Terracotta `#9F3C16`, Mustard `#735C00`, Paper `#FCF9F3`, Emerald `#059669`).
-  - Integrated SahiTol scale logo, live diagnostic readiness pill ("v2.4 Ready" / "Diagnostics"), bilingual guidance ("फ़ोन की तैयारी / Phone Readiness").
+  - Integrated SahiTol scale logo, live diagnostic readiness pill ("v2.4 Ready" / "Diagnostics"), bilingual guidance ("à¤«à¤¼à¥‹à¤¨ à¤•à¥€ à¤¤à¥ˆà¤¯à¤¾à¤°à¥€ / Phone Readiness").
   - 4 status badges: `PHOTO` (Camera & compression), `SAVE` (Room DB persistence), `OFFLINE` (LiteRT inference), and `READY` (Overall feasibility).
   - 4 diagnostic cards: Camera permission & JPEG compression, Local Room DB record verification, Offline MobileNetV3-Small LiteRT inference with latency display, and Fallback/Unknown material catalog manual selection.
 - **Photo Capture & Bounded JPEG Compression (`PhotoCompressor.kt`)**:
@@ -391,7 +415,7 @@ Implemented the approved native Android feasibility diagnostic screen `S00` in J
   - Registered `S00` as `IMPLEMENTED_VERIFIED` in `design/stitch/SCREEN_REGISTRY.md`.
 
 
-Implemented the approved React/Vite admin dashboard in `apps/web/src/components/admin/` across all 7 screens (`A01`–`A07`) conforming to `docs/05_DESIGN_STITCH.md`, `docs/16_API_CONTRACT.md`, and Google Stitch designs from project `245073995801566548`, fulfilling requirements R-GOV-02, R-PRICE-05, R-ADMIN-01, R-ADMIN-02, and R-ADMIN-03 (marking AT-020, AT-064, AT-065, and AT-066 PASS):
+Implemented the approved React/Vite admin dashboard in `apps/web/src/components/admin/` across all 7 screens (`A01`â€“`A07`) conforming to `docs/05_DESIGN_STITCH.md`, `docs/16_API_CONTRACT.md`, and Google Stitch designs from project `245073995801566548`, fulfilling requirements R-GOV-02, R-PRICE-05, R-ADMIN-01, R-ADMIN-02, and R-ADMIN-03 (marking AT-020, AT-064, AT-065, and AT-066 PASS):
 - **Admin Navigation Shell (`AdminLayout.tsx`)**:
   - Implemented responsive header navigation with active tab styling (`bg-primary text-on-primary font-bold rounded-xl`), mobile navigation strip, and footer with statutory caveats.
 - **System Pulse Overview (`A01`, `R-ADMIN-03`, `AT-066`)**:
@@ -405,7 +429,7 @@ Implemented the approved React/Vite admin dashboard in `apps/web/src/components/
   - Search by alias/region, regional filter tabs, minimal collector table, and detailed scrubbed log modal.
 - **Source & Facility Authorization (`A03`, `R-ADMIN-01`, `AT-064`)**:
   - Implemented `A03_Facilities.tsx` matching Stitch screen `765fb854e571` (`admin_facility_verification.html`).
-  - L0–L4 evidence ladder (Active L3 Verified tier), route-specific material scopes (Corridors Alpha and Beta).
+  - L0â€“L4 evidence ladder (Active L3 Verified tier), route-specific material scopes (Corridors Alpha and Beta).
   - Administrative gate enforcement preventing recycler self-approval, statutory compliance diagnostic modal, and facility quarantine toggle.
 - **Material Catalog & Safety Governance (`A04`, `R-PRICE-05`, `AT-020`)**:
   - Implemented `A04_CatalogPrices.tsx` matching Stitch screen `002314460537` (`admin_price_maintenance.html`).
@@ -425,7 +449,7 @@ Implemented the approved React/Vite admin dashboard in `apps/web/src/components/
   - 8 comprehensive tests in `apps/web/src/components/admin/AdminDashboard.test.tsx` passing 100% (18/18 total web tests passing).
   - Evidence documented in `docs/evidence/T030_ADMIN_DASHBOARD.md`.
 
-## 2026-09-29 — Second-Device Confirmation, Receipt Review, and Public Verification (T025 DONE)
+## 2026-09-29 â€” Second-Device Confirmation, Receipt Review, and Public Verification (T025 DONE)
 
 Implemented the approved second-device QR scan (`R04`), receipt & payment review (`R05`), and public verification portal (`V01`) in React/Vite conforming to `docs/16_API_CONTRACT.md`, `docs/20_TEST_ACCEPTANCE.md`, and Google Stitch screens from project `245073995801566548`, fulfilling requirements R-HAND-03 and R-HAND-04 (contributing to AT-031 and AT-032):
 - **Second-Device QR Scanner View (`R04`, `R-HAND-03`)**:
@@ -447,7 +471,7 @@ Implemented the approved second-device QR scan (`R04`), receipt & payment review
   - 3 comprehensive tests in `apps/web/src/components/recycler/SecondDeviceConfirmation.test.tsx` verifying scan, revision/settlement, and public redaction.
   - Evidence documented in `docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md`.
 
-## 2026-09-29 — Web Recycler Console Implementation (T022 DONE)
+## 2026-09-29 â€” Web Recycler Console Implementation (T022 DONE)
 
 Implemented the approved React/Vite Recycler Console views in `apps/web/src/components/recycler/` matching owner Google Stitch screens from project `245073995801566548`, fulfilling requirements R-REC-01, R-REC-02, and R-REC-04 (contributing to AT-027, AT-028, AT-030):
 - **Console Navigation Shell & Shared Layout**:
@@ -471,7 +495,7 @@ Implemented the approved React/Vite Recycler Console views in `apps/web/src/comp
   - 6 unit/integration tests in `apps/web/src/components/recycler/RecyclerConsole.test.tsx`.
   - Evidence documented in `docs/evidence/T022_RECYCLER_CONSOLE.md`.
 
-## 2026-09-29 — Google Stitch Screen Ingestion, Token Extraction, and Registry (T002 DONE)
+## 2026-09-29 â€” Google Stitch Screen Ingestion, Token Extraction, and Registry (T002 DONE)
 
 Retrieved, inspected, and registered all 37 owner-generated Stitch screens across 34 canonical specifications from Google Stitch project `245073995801566548`:
 - Ingested HTML files and PNG previews to `design/stitch/screens/`.
@@ -479,7 +503,7 @@ Retrieved, inspected, and registered all 37 owner-generated Stitch screens acros
 - Generated `design/stitch/manifest.json` and populated `design/stitch/SCREEN_REGISTRY.md`.
 - Evidence documented in `docs/evidence/T002_STITCH_DESIGNS.md`.
 
-## 2026-09-29 — On-Device LiteRT Classifier Training, Evaluation, and Export (T033 DONE)
+## 2026-09-29 â€” On-Device LiteRT Classifier Training, Evaluation, and Export (T033 DONE)
 
 Trained, evaluated, and exported the on-device MobileNetV3-Small LiteRT classifier across 12 defensible e-waste classes conforming to `docs/19_AI_ML.md` and `docs/20_TEST_ACCEPTANCE.md`, fulfilling requirements R-ML-02 and R-DATA-07 (contributing to AT-045 and AT-059):
 - **Deterministic Leakage-Free Dataset Pipeline (`R-DATA-07`, `AT-059`)**:
@@ -511,7 +535,7 @@ Trained, evaluated, and exported the on-device MobileNetV3-Small LiteRT classifi
   - 6 dedicated unit/integration tests in `services/api/tests/test_ml_classifier.py` passing 100%.
   - Full API test suite now totals 234 passing tests (0 failures). Evidence: [`docs/evidence/T033_ON_DEVICE_CLASSIFIER.md`](docs/evidence/T033_ON_DEVICE_CLASSIFIER.md).
 
-## 2026-09-29 — Illustrative Economics and Platform Sustainability Model (T038 DONE)
+## 2026-09-29 â€” Illustrative Economics and Platform Sustainability Model (T038 DONE)
 
 Implemented the transparent illustrative unit-economics model and platform sustainability engine in `services/api/app/domain/economics.py` and `services/api/app/routers/economics.py` conforming to `docs/23_UNIT_ECONOMICS.md` and `docs/16_API_CONTRACT.md`, fulfilling requirements R-ECON-01 and R-ECON-02 (contributing to AT-067 and AT-068):
 - **Transparent Same-Lot Comparison Calculator (`R-ECON-01`, `AT-067`)**:
@@ -539,7 +563,7 @@ Implemented the transparent illustrative unit-economics model and platform susta
   - 10 comprehensive unit/integration tests in `services/api/tests/test_economics.py` passing 100%.
   - Full API test suite now totals 228 passing tests (0 failures). Evidence: [`docs/evidence/T038_ILLUSTRATIVE_ECONOMICS.md`](docs/evidence/T038_ILLUSTRATIVE_ECONOMICS.md).
 
-## 2026-09-29 — Contextual Safety Content and Pictogram Briefs (T035 DONE)
+## 2026-09-29 â€” Contextual Safety Content and Pictogram Briefs (T035 DONE)
 
 Created contextual safety content dataset and design briefs for owner Google Stitch generation conforming to `docs/22_REGULATORY_SAFETY.md` and `docs/14_TRANSLATION_AUDIO_AUDIT.md`, fulfilling requirements R-SAFE-01, R-LANG-01, and R-DATA-01 (contributing to AT-048 and AT-058):
 - **Curated Trilingual Safety Cards Registry (`data/curated/safety_cards/safety_cards.json`)**:
@@ -557,7 +581,7 @@ Created contextual safety content dataset and design briefs for owner Google Sti
   - Full API test suite now totals 218 passing tests (0 failures). Evidence: [`docs/evidence/T035_CONTEXTUAL_SAFETY_CONTENT.md`](docs/evidence/T035_CONTEXTUAL_SAFETY_CONTENT.md).
 
 
-## 2026-09-29 — Admin Maintenance and Metrics APIs (T029 DONE)
+## 2026-09-29 â€” Admin Maintenance and Metrics APIs (T029 DONE)
 
 Implemented administrative maintenance, verification review, taxonomy lifecycle management, audit trails, and platform metrics APIs in `services/api/app/routers/admin.py` conforming to `docs/16_API_CONTRACT.md`, `docs/06_SCHEMA.md`, and `docs/MONITORING.md` fulfilling requirements R-ADMIN-01, R-ADMIN-02, R-ADMIN-03, R-ADMIN-04, R-ADMIN-05, R-ADMIN-06, R-PRICE-05, R-HAND-05, and R-OPS-04 (contributing to AT-064, AT-065, AT-077):
 - **Role-Scoped Access Control & Anti-Self-Approval (`R-ADMIN-01`, `R-ADMIN-02`)**:
@@ -587,7 +611,7 @@ Implemented administrative maintenance, verification review, taxonomy lifecycle 
   - Full API test suite now totals 211 passing tests (0 failures). Evidence: [`docs/evidence/T029_ADMIN_MAINTENANCE_AND_METRICS.md`](docs/evidence/T029_ADMIN_MAINTENANCE_AND_METRICS.md).
 
 
-## 2026-09-29 — Data-Quality and Anomaly Rules Engine (T028 DONE)
+## 2026-09-29 â€” Data-Quality and Anomaly Rules Engine (T028 DONE)
 
 Implemented the data-quality and anomaly evaluation engine (`POLICY_VERSION = "QUALITY_V1"`), missing/invalid/duplicate/stale/inconsistent validation rules, price outlier IQR/median bounds (`AT-020`), weight variance >20% baseline review (`AT-033`), image reuse detection, repeated transaction acceptance exclusion (`AT-028`), admin quality flags API with drill-down, summary metrics with true mathematical denominators (`R-ADMIN-02`, `AT-065`), and review resolution workflow emitting append-only hash-chained domain events conforming to `docs/03_TECHSPEC.md`, `docs/18_DATA_PROVENANCE.md`, and `docs/MONITORING.md` meeting R-PRICE-05, R-HAND-05, R-ADMIN-02, and R-OPS-04:
 - **Domain Quality Rules Engine (`services/api/app/domain/quality.py`)**:
@@ -614,7 +638,7 @@ Implemented the data-quality and anomaly evaluation engine (`POLICY_VERSION = "Q
   - Full API test suite now totals 201 passing tests (0 failures). Evidence: [`docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md`](docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md).
 
 
-## 2026-09-29 — Licensed Image Dataset Curation and Dataset Card (T032 DONE)
+## 2026-09-29 â€” Licensed Image Dataset Curation and Dataset Card (T032 DONE)
 
 Curated licensed public image dataset across 12 defensible e-waste classes mapped directly to SahiTol material taxonomy, verified licenses across 4 public repositories, documented 9 manual material fallbacks, established physical object groups with zero-leakage splits, and authored complete AI training dataset card conforming to `docs/19_AI_ML.md`, `docs/18_DATA_PROVENANCE.md`, and `templates/DATA_CARD.md` meeting R-ML-01, R-EVID-03, and AT-044 (evidence recorded) / AT-059:
 - **Curated Dataset Artifacts (`data/curated/ml_image_dataset/`)**:
@@ -630,9 +654,9 @@ Curated licensed public image dataset across 12 defensible e-waste classes mappe
   - Full API test suite now totals 183 passing tests (0 failures). Evidence: [`docs/evidence/T032_LICENSED_IMAGE_DATASET.md`](docs/evidence/T032_LICENSED_IMAGE_DATASET.md).
 
 
-## 2026-09-29 — Payment Assertions, Ledger, Reversals, and Earnings (T026 DONE)
+## 2026-09-29 â€” Payment Assertions, Ledger, Reversals, and Earnings (T026 DONE)
 
-Implemented cash-first payment assertions without bank account or gateway dependency, optional UPI reference recording, counterparty acknowledgement, self-acknowledgement prevention, disputes, partial payment aggregation, duplicate-safe idempotency, append-only reversals linking original records without deletion, strict transaction closure invariants, and collector earnings reconciliation with strict demo isolation conforming to `docs/16_API_CONTRACT.md` lines 70–74, `docs/04_APPFLOW.md` lines 70–89, `docs/06_SCHEMA.md`, and `docs/18_DATA_PROVENANCE.md` meeting R-PAY-01, R-PAY-02, R-PAY-03, R-DATA-04, AT-035, AT-036, AT-037, and AT-056:
+Implemented cash-first payment assertions without bank account or gateway dependency, optional UPI reference recording, counterparty acknowledgement, self-acknowledgement prevention, disputes, partial payment aggregation, duplicate-safe idempotency, append-only reversals linking original records without deletion, strict transaction closure invariants, and collector earnings reconciliation with strict demo isolation conforming to `docs/16_API_CONTRACT.md` lines 70â€“74, `docs/04_APPFLOW.md` lines 70â€“89, `docs/06_SCHEMA.md`, and `docs/18_DATA_PROVENANCE.md` meeting R-PAY-01, R-PAY-02, R-PAY-03, R-DATA-04, AT-035, AT-036, AT-037, and AT-056:
 - **FastAPI Payment & Earnings Router (`services/api/app/routers/payments.py`)**:
   - `POST /transactions/{id}/payments` and `POST /api/v1/transactions/{id}/payments`: Participant asserts cash/UPI/other payment. Cash recorded without bank gateway dependency; optional UPI/other records an assertion with private reference, never fund transfer. Enforces participant authorization and integer paise constraints (> 0). Emits `PAYMENT_ASSERTED` with SHA-256 hash chaining.
   - `POST /payments/{id}/acknowledge` and `POST /api/v1/payments/{id}/acknowledge`: Counterparty verifies received payment. If asserted by facility, only collector can acknowledge; if asserted by collector, only facility member can acknowledge. Self-acknowledgement is prohibited (HTTP 403). Transitions state to `ACKNOWLEDGED` and emits `PAYMENT_ACKNOWLEDGED`.
@@ -645,9 +669,9 @@ Implemented cash-first payment assertions without bank account or gateway depend
   - 18 comprehensive unit tests in `services/api/tests/test_payments.py` verifying cash assertion, UPI references, invalid method rejection, non-positive amount rejection, non-participant prohibition, duplicate-safe idempotent replays, conflicting ID reuse rejection, counterparty acknowledgement, self-acknowledgement prohibition, disputes, append-only reversals linking original records without deletion, partial payment summation, closure invariants (confirmed handover, settled dues, zero disputes), dues rejection, unconfirmed handover rejection, active dispute rejection, monthly earnings buckets, and strict demo isolation.
   - Full API test suite now totals 177 passing tests (0 failures). Evidence: [`docs/evidence/T026_PAYMENTS_AND_EARNINGS.md`](docs/evidence/T026_PAYMENTS_AND_EARNINGS.md).
 
-## 2026-09-29 — Handover Proposals, Confirmations, and Public Verification (T023 DONE)
+## 2026-09-29 â€” Handover Proposals, Confirmations, and Public Verification (T023 DONE)
 
-Implemented pending handover proposal submission, canonical SAHITOL-JCS-1 SHA-256 payload and hash verification, authenticated recycler confirmation, discrepancy TermsRevision workflow with explicit collector acknowledgement, duplicate-safe idempotent outcomes, documented disputes without fact overwriting, unconfirmed proposal voiding, versioned platform receipts with mandatory statutory non-EPR notice, and unauthenticated capability-token-based redacted public verification conforming to `docs/16_API_CONTRACT.md` lines 63–75, `docs/04_APPFLOW.md` lines 60–81, `docs/17_OFFLINE_SYNC.md`, and `docs/22_REGULATORY_SAFETY.md` meeting R-REC-04, R-OFFER-02, R-HAND-01, R-HAND-03, R-HAND-04, R-HAND-05, R-DATA-04, R-REG-01, AT-024 (PASS), AT-028 (PASS), AT-029, AT-031, AT-032, AT-033, AT-056, and AT-071:
+Implemented pending handover proposal submission, canonical SAHITOL-JCS-1 SHA-256 payload and hash verification, authenticated recycler confirmation, discrepancy TermsRevision workflow with explicit collector acknowledgement, duplicate-safe idempotent outcomes, documented disputes without fact overwriting, unconfirmed proposal voiding, versioned platform receipts with mandatory statutory non-EPR notice, and unauthenticated capability-token-based redacted public verification conforming to `docs/16_API_CONTRACT.md` lines 63â€“75, `docs/04_APPFLOW.md` lines 60â€“81, `docs/17_OFFLINE_SYNC.md`, and `docs/22_REGULATORY_SAFETY.md` meeting R-REC-04, R-OFFER-02, R-HAND-01, R-HAND-03, R-HAND-04, R-HAND-05, R-DATA-04, R-REG-01, AT-024 (PASS), AT-028 (PASS), AT-029, AT-031, AT-032, AT-033, AT-056, and AT-071:
 - **FastAPI Handover & Verification Router (`services/api/app/routers/handovers.py`)**:
   - `POST /handovers` and `POST /api/v1/handovers`: Collector submits immutable client handover proposal with full material, weight, value, location, and media snapshots.
   - **Canonical Hash Verification**: SHA-256 computed over SAHITOL-JCS-1 canonical JSON format (`compute_canonical_hash`). Tampered payloads or mismatched hashes are rejected with HTTP 409 Conflict.
@@ -667,9 +691,9 @@ Implemented pending handover proposal submission, canonical SAHITOL-JCS-1 SHA-25
   - 13 comprehensive unit tests in `services/api/tests/test_handovers.py` verifying hash utility against documented fixture, proposal submission, idempotent replay, tamper rejection, ownership scoping, exact-match confirmation, discrepancy revision flow with collector acknowledgement, disputes, voiding rules, non-EPR notice on receipts, and redacted public verification.
   - Full API test suite now totals 159 passing tests (0 failures). Evidence: [`docs/evidence/T023_HANDOVER_CONFIRMATIONS.md`](docs/evidence/T023_HANDOVER_CONFIRMATIONS.md).
 
-## 2026-09-29 — Recycler Profile and Offer Workflows (T021 DONE)
+## 2026-09-29 â€” Recycler Profile and Offer Workflows (T021 DONE)
 
-Implemented facility-user membership linkage, self-declared operational profile management, material/rate/pickup updates with explicit provenance, directed lot requests, offer quoting, rejections with rematching, offer withdrawals, collector offer acceptance creating an immutable agreement, single-active-agreement invariant under race conditions, and price-board independence conforming to `docs/16_API_CONTRACT.md` lines 53–61, `docs/04_APPFLOW.md` lines 49–59, and `docs/06_SCHEMA.md` meeting R-REC-03, R-OFFER-01, R-OFFER-02, R-PRICE-04, R-DATA-03, AT-019, AT-023, AT-027, AT-028, and AT-055:
+Implemented facility-user membership linkage, self-declared operational profile management, material/rate/pickup updates with explicit provenance, directed lot requests, offer quoting, rejections with rematching, offer withdrawals, collector offer acceptance creating an immutable agreement, single-active-agreement invariant under race conditions, and price-board independence conforming to `docs/16_API_CONTRACT.md` lines 53â€“61, `docs/04_APPFLOW.md` lines 49â€“59, and `docs/06_SCHEMA.md` meeting R-REC-03, R-OFFER-01, R-OFFER-02, R-PRICE-04, R-DATA-03, AT-019, AT-023, AT-027, AT-028, and AT-055:
 - **FastAPI Trade & Recycler Workflows Router (`services/api/app/routers/trade.py`)**:
   - `GET /api/v1/recycler/profile`: Returns public business profile, read-only legal authorizations, self-declared operational status, accepted materials with min/max bounds, and active quoted rates.
   - `PATCH /api/v1/recycler/profile`: Facility members update operational fields (`pickup_status`, `service_regions`, `accepting_status`), materials, and rates with provenance (`source_id = f"SELF_DECLARED_USER_{user_id}"`). Unknown operational data (pickup status) is explicitly preserved when cleared or omitted (`AT-023`).
@@ -691,9 +715,9 @@ Implemented facility-user membership linkage, self-declared operational profile 
   - 19 comprehensive unit tests in `services/api/tests/test_trade.py` verifying all profile updates, tampering prevention, directed requests, battery isolation guard, incoming queue privacy, offer quotes, rejections/rematching, withdrawals, atomic acceptance, expiry guards, race condition invariants, and transaction scoping.
   - Full API test suite now totals 146 passing tests (0 failures). Evidence: [`docs/evidence/T021_RECYCLER_OFFER_WORKFLOWS.md`](docs/evidence/T021_RECYCLER_OFFER_WORKFLOWS.md).
 
-## 2026-09-29 — Recycler Matching and Map Data (T019 DONE)
+## 2026-09-29 â€” Recycler Matching and Map Data (T019 DONE)
 
-Implemented the eligible recycler matching engine, explainable multi-factor ranking, deterministic tie-breaking, offline parity fixtures, and GeoJSON map data conforming strictly to policy `MATCH_V1` (`docs/03_TECHSPEC.md` lines 67–84) meeting R-REC-04, R-REC-05, R-REC-06, R-REC-02, AT-022, AT-024, AT-025, and AT-026:
+Implemented the eligible recycler matching engine, explainable multi-factor ranking, deterministic tie-breaking, offline parity fixtures, and GeoJSON map data conforming strictly to policy `MATCH_V1` (`docs/03_TECHSPEC.md` lines 67â€“84) meeting R-REC-04, R-REC-05, R-REC-06, R-REC-02, AT-022, AT-024, AT-025, and AT-026:
 - **Pure Domain Matching Engine (`services/api/app/domain/matching.py`)**:
   - Implemented `haversine_distance_m` computing great-circle distances in metres with Earth radius $R = 6,371,000$ m, proving $<0.07\%$ relative error against PostGIS WGS84 geography calculation (well within the $0.5\%$ tolerance ceiling).
   - Implemented `extract_coordinates` robustly resolving coordinates from PostGIS/GeoAlchemy2 geometries across both PostgreSQL and SQLite.
@@ -723,7 +747,7 @@ Implemented the eligible recycler matching engine, explainable multi-factor rank
 - **Automated Test Suite**:
   - Verified 10 tests in `services/api/tests/test_matching.py`. Full API test suite now totals 127 passing tests (0 failures). Evidence: [`docs/evidence/T019_RECYCLER_MATCHING_MAPS.md`](docs/evidence/T019_RECYCLER_MATCHING_MAPS.md).
 
-## 2026-09-29 — Price Statistics and Snapshot Valuation (T018 DONE)
+## 2026-09-29 â€” Price Statistics and Snapshot Valuation (T018 DONE)
 
 Implemented the statistical valuation engine, recency decay weighting, confidence scoring, historical trends with honest gap preservation, and per-lot immutable valuation snapshots conforming strictly to `PRICE_V1` (`docs/03_TECHSPEC.md` lines 50-66) meeting R-PRICE-02, R-PRICE-03, R-PRICE-04, R-DATA-02, AT-017, AT-018, AT-019, and AT-054:
 - **Canonical Shared Fixtures & Python/Kotlin Parity**:
@@ -742,7 +766,7 @@ Implemented the statistical valuation engine, recency decay weighting, confidenc
 - **Automated Test Suites**:
   - Verified 4 tests in `services/api/tests/test_pricing.py` and 17 tests in `services/api/tests/test_price_pipeline.py`. Full API test suite now totals 117 passing tests. Evidence: [`docs/evidence/T018_PRICE_STATISTICS_VALUATION.md`](docs/evidence/T018_PRICE_STATISTICS_VALUATION.md).
 
-## 2026-09-29 — Lot and Lifecycle Backend (T016 DONE)
+## 2026-09-29 â€” Lot and Lifecycle Backend (T016 DONE)
 
 Implemented the material lot lifecycle, state machine, and valuation backend (`services/api/app/routers/lots.py`) meeting R-LOT-03, R-LOT-04, R-LOT-05, R-DATA-01, AT-013, AT-014, AT-015, and AT-053:
 - **FastAPI Lot Router (`services/api/app/routers/lots.py`)**:
@@ -768,7 +792,7 @@ Implemented the material lot lifecycle, state machine, and valuation backend (`s
 - **Automated Test Suite (`services/api/tests/test_lots.py`)**:
   - 14 comprehensive unit and integration tests verifying all commands, weight round-trip, large weight flagging, privacy redaction, status transition rules, optimistic concurrency, and valuation calculation. Full API test suite now totals 113 passing tests. Evidence: [`docs/evidence/T016_LOT_LIFECYCLE_BACKEND.md`](docs/evidence/T016_LOT_LIFECYCLE_BACKEND.md).
 
-## 2026-09-29 — Server Synchronization Protocol (T014 DONE)
+## 2026-09-29 â€” Server Synchronization Protocol (T014 DONE)
 
 Implemented the durable offline server synchronization protocol (`POST /api/v1/sync/batch` and `GET /api/v1/sync/changes`) meeting R-OFF-03, R-OFF-04, and AT-040:
 - **FastAPI Synchronization Router (`services/api/app/routers/sync.py`)**:
@@ -789,7 +813,7 @@ Implemented the durable offline server synchronization protocol (`POST /api/v1/s
   - Returns HTTP 410 Gone (`CURSOR_EXPIRED`) on malformed or corrupted cursors.
 - **Automated Test Suite (`services/api/tests/test_sync.py`)**: 16 comprehensive unit and integration tests verifying all protocol contracts, idempotency, dependency chaining, mixed-success batches, version conflict detection, and tombstone delivery. Full API test suite now totals 99 passing tests. Evidence: [`docs/evidence/T014_SERVER_SYNC_PROTOCOL.md`](docs/evidence/T014_SERVER_SYNC_PROTOCOL.md).
 
-## 2026-09-29 — Delhi-NCR and Maharashtra Facility Directory (T012 DONE, AT-021 PASS)
+## 2026-09-29 â€” Delhi-NCR and Maharashtra Facility Directory (T012 DONE, AT-021 PASS)
 
 Built the source-backed formal facility directory covering Delhi-NCR and Maharashtra hubs, role preservation, verification levels, operational updates, and curated dataset export meeting R-REC-01, R-REC-02, R-REC-03, R-DATA-03, R-DATA-09, AT-021 (PASS), AT-022, AT-023, AT-055, and AT-061:
 - **Source-Backed Official Registry Seeds (`data/seeds/facilities.json`)**: Curated 8 dated facilities across Delhi-NCR and Maharashtra from CPCB (`SRC-02`), MPCB (`SRC-04`), DPCC (`SRC-05`), and NDMC (`SRC-06`) preserving exact regulatory roles: `RECYCLER` (Greentech, EcoRegen, Maharashtra Lead), `DISMANTLER` (Seelampur Co-operative), `COLLECTION_CENTRE` (Eco-Battery, NDMC), and `AGGREGATOR` (Pune Aggregators). Prohibits relabeling collection centres as recyclers (AT-021 PASS).
@@ -805,7 +829,7 @@ Built the source-backed formal facility directory covering Delhi-NCR and Maharas
 - **Curated Dataset Package (`data/curated/facilities/`)**: Exported `facilities.csv`, `facilities.json`, `facility_authorizations.json`, `facility_materials.json`, and cryptographic `manifest.json` with SHA-256 hashes and explicit limitations disclosure.
 - **Automated Test Suite (`services/api/tests/test_facilities.py`)**: 15 comprehensive unit and integration tests verifying directory seeding, role preservation, statutory disclaimers, verification levels, formal destination filtering, regional partitioning, material/route filtering, unknown pickup preservation, operational updates without authorization tampering, quote rate submission, backward-compatible `/recyclers/directory`, bootstrap integration, demo partition isolation, and validation/deduplication. API test suite now totals 83 passing tests. Evidence: [`docs/evidence/T012_FACILITY_DIRECTORY.md`](docs/evidence/T012_FACILITY_DIRECTORY.md).
 
-## 2026-09-29 — Attributed Price Seed and Observation Pipeline (T011 DONE)
+## 2026-09-29 â€” Attributed Price Seed and Observation Pipeline (T011 DONE)
 
 Implemented the dated attributed price observation pipeline, validation engine, admin moderation workflow, statistical quantile aggregation under PRICE_V1, and curated export meeting R-PRICE-01, R-DATA-02, AT-016, and AT-054:
 - **Canonical Price Seeds (`data/seeds/price_observations.json`)**: Curated 12 dated price observations across Delhi-NCR and Maharashtra secondary market hubs (Mayapuri, Seelampur, MIDC benchmarks) covering high/low-grade PCBs, lead-acid batteries, and copper cables attributed to verified public sources (`SRC-01`, `SRC-04`, `SRC-05`).
@@ -820,7 +844,7 @@ Implemented the dated attributed price observation pipeline, validation engine, 
 - **Curated Dataset Export (`data/curated/price_observations/`)**: Exported `price_observations.csv`, `price_observations.json`, `price_summaries.json`, and cryptographic `manifest.json` detailing SHA-256 hashes, byte sizes, and provenance limitations (highlighting that live collector fieldwork transaction data remains UNMET under R-RES-02).
 - **Automated Test Suite (`services/api/tests/test_price_pipeline.py`)**: 14 comprehensive unit tests verifying seeding, identity-safe listing, submission validation, future-date quarantine, rate validation, admin moderation (approve/reject), `PRICE_V1` quantiles, empty cohort `INSUFFICIENT_DATA` enforcement, trend gap preservation, demo partition isolation, and valuation estimation. API test suite now totals 68 passing tests. Evidence: [`docs/evidence/T011_PRICE_OBSERVATION_PIPELINE.md`](docs/evidence/T011_PRICE_OBSERVATION_PIPELINE.md).
 
-## 2026-09-29 — Versioned Reference Bootstrap and Delta Sync APIs (T009 DONE)
+## 2026-09-29 â€” Versioned Reference Bootstrap and Delta Sync APIs (T009 DONE)
 
 Implemented the versioned reference bootstrap snapshot, incremental delta synchronization, tombstone handling, and bundled offline demo cache asset meeting R-OFF-01 and AT-038:
 - **Versioned Bootstrap Snapshot (`services/api/app/routers/reference.py`)**: `GET /api/v1/reference/bootstrap` delivers a comprehensive reference snapshot comprising `metadata` (`snapshot_version="REF-2026-09-29-01"`, timestamps, 30-day expiry, opaque cursor, region, language, role, and demo status), `policy` (`policy_version="POLICY_2026_V1"`, 50 metric tonne max weight, 30-day freshness, allowed units, integer paise money, cash settlement, and statutory disclaimers), 11 material categories, 21 materials with condition options and routes, 139 multilingual colloquial aliases, 9 contextual safety guides with Devanagari audio keys, 21 regional benchmark prices, and regional verified facilities.
@@ -829,11 +853,11 @@ Implemented the versioned reference bootstrap snapshot, incremental delta synchr
 - **Bundled Offline Demo Reference Cache (`scripts/generate_bundled_reference_cache.py`)**: Generated static demonstration cache containing all categories, materials, aliases, safety guides, benchmark prices, and sample verified facilities. Installed directly to Android app assets (`apps/android/app/src/main/assets/reference_bootstrap_demo.json`, 49,133 bytes, SHA-256: `7b287328e0f03efb4acd8a279587d6644b0f8e63aff0ad7d383e2d7410e18e69`) and `data/curated/` allowing initial app launch in airplane mode without network.
 - **Automated Test Suite (`services/api/tests/test_reference.py`)**: 6 comprehensive unit tests verifying bootstrap payload structure, content completeness, regional facility filtering, delta sync with tombstones, cursor expiry (HTTP 410), and Android asset file integrity. Entire API test suite now totals 54 passing tests. Evidence: [`docs/evidence/T009_REFERENCE_BOOTSTRAP_DELTA.md`](docs/evidence/T009_REFERENCE_BOOTSTRAP_DELTA.md).
 
-## 2026-09-29 — Material Taxonomy, Language Aliases, and Safety Guides (T010 DONE)
+## 2026-09-29 â€” Material Taxonomy, Language Aliases, and Safety Guides (T010 DONE)
 
 Curated and implemented the authoritative informal e-waste material reference catalog, multilingual colloquial aliases, contextual safety guides, and regulatory route mapping meeting R-LOT-01 and R-DATA-01:
 - **Curated Taxonomy Coverage (`data/seeds/`)**: Populated all 11 canonical categories (`PCB`, `BATTERY`, `CRT`, `LCD`, `CABLES`, `MOTORS`, `PLASTICS`, `METALS`, `MIXED_ELECTRONICS`, `OTHER`, `UNKNOWN`) and 21 detailed material definitions across high/low grade PCBs, CRT monitors, LCD panels, copper and aluminum cables, lead-acid, lithium-ion, other, and unknown battery chemistries, electric motors and compressors, rigid e-waste ABS/HIPS vs general plastics, mixed IT and small household electronics, and ferrous/non-ferrous scrap metals.
-- **Multilingual Colloquial Aliases (`data/seeds/material_aliases.json`)**: Curated 139 reviewed aliases across Hindi (`hi`), Marathi (`mr`), and English (`en`) with normalized search terms. Enables conversational and dialect search (e.g. Hindi "मदरबोर्ड", "हरा पत्ता", "कांच वाला टीवी", "इन्वर्टर बैटरी", "तांबे का तार"; Marathi "हिरवा बोर्ड", "काचेची ट्यूब", "इन्व्हर्टर बॅटरी", "तांब्याची वायर"; English "motherboard", "lead acid battery", "crt monitor").
+- **Multilingual Colloquial Aliases (`data/seeds/material_aliases.json`)**: Curated 139 reviewed aliases across Hindi (`hi`), Marathi (`mr`), and English (`en`) with normalized search terms. Enables conversational and dialect search (e.g. Hindi "à¤®à¤¦à¤°à¤¬à¥‹à¤°à¥à¤¡", "à¤¹à¤°à¤¾ à¤ªà¤¤à¥à¤¤à¤¾", "à¤•à¤¾à¤‚à¤š à¤µà¤¾à¤²à¤¾ à¤Ÿà¥€à¤µà¥€", "à¤‡à¤¨à¥à¤µà¤°à¥à¤Ÿà¤° à¤¬à¥ˆà¤Ÿà¤°à¥€", "à¤¤à¤¾à¤‚à¤¬à¥‡ à¤•à¤¾ à¤¤à¤¾à¤°"; Marathi "à¤¹à¤¿à¤°à¤µà¤¾ à¤¬à¥‹à¤°à¥à¤¡", "à¤•à¤¾à¤šà¥‡à¤šà¥€ à¤Ÿà¥à¤¯à¥‚à¤¬", "à¤‡à¤¨à¥à¤µà¥à¤¹à¤°à¥à¤Ÿà¤° à¤¬à¥…à¤Ÿà¤°à¥€", "à¤¤à¤¾à¤‚à¤¬à¥à¤¯à¤¾à¤šà¥€ à¤µà¤¾à¤¯à¤°"; English "motherboard", "lead acid battery", "crt monitor").
 - **Provenance-Dependent Routing & Contextual Rules**: Enforces CPCB regulatory route boundaries: rigid e-waste plastics (`MAT-PLA-01`) route to `AUTHORIZED_EWASTE` with `route_requires_context=True` due to brominated flame retardants (differentiating from general packaging plastics `MAT-PLA-02` routed to `GENERAL_RECYCLING`); all battery chemistries route to `BATTERY_ISOLATION` under CPCB Battery Waste Rules; CRTs route to `HAZARDOUS_DISPOSAL`; and unknown components route to `REVIEW_REQUIRED`.
 - **Contextual Safety Guides (`data/seeds/safety_guides.json`)**: Seeded 9 vetted safety guides with warning text keys, icon references, and pre-generated audio script keys in `en`, `hi`, and `mr` covering prohibitions against cable burning (`SG-CABLE-01`), acid leaching/heating (`SG-PCB-01`), CRT glass implosion (`SG-CRT-01`), battery mishandling (`SG-BATTERY-01/02/03`), plastic burning (`SG-PLASTIC-01`), hazardous stops (`SG-DAMAGED-01`), and blind dismantling (`SG-MIXED-01`).
 - **FastAPI Reference Endpoints (`services/api/app/routers/materials.py`)**: Implemented `GET /api/v1/materials/categories`, `GET /api/v1/materials`, `GET /api/v1/materials/{id}` (with embedded safety guides), `GET /api/v1/materials/search` (multilingual alias resolver), and `GET /api/v1/safety-guides`.
@@ -841,7 +865,7 @@ Curated and implemented the authoritative informal e-waste material reference ca
 - **Curated Dataset Export (`data/curated/material_catalog/`)**: Exported canonical CSV and JSON files with cryptographic SHA-256 manifest and explicit provenance limitations.
 - **Automated Test Suite (`services/api/tests/test_materials.py`)**: 9 comprehensive unit tests verifying complete category coverage, provenance-dependent routing, Hindi/Marathi/English alias resolution, safety guides, draft lot creation, and catalog immutability. Entire API test suite now totals 48 passing tests. Evidence: [`docs/evidence/T010_MATERIAL_TAXONOMY.md`](docs/evidence/T010_MATERIAL_TAXONOMY.md).
 
-## 2026-09-29 — Private Media Storage Adapter and Validation (T008 DONE)
+## 2026-09-29 â€” Private Media Storage Adapter and Validation (T008 DONE)
 
 Implemented the bounded private media storage architecture supporting local persistent volumes and hosted Supabase private storage, image validation, EXIF metadata stripping, and expiring signed download access meeting R-ARC-02, R-LOT-02, and R-SEC-02:
 - **Dual Storage Adapters (`services/api/app/storage/`)**: Built `LocalStorageAdapter` with path-traversal defense (`_resolve_safe_path`), atomic writes via `tempfile.mkstemp` and `os.replace`, and `SupabaseStorageAdapter` with private bucket isolation and REST API operations. Integrated adapter factory `get_storage_adapter()` based on `STORAGE_BACKEND`.
@@ -851,7 +875,7 @@ Implemented the bounded private media storage architecture supporting local pers
 - **PDF Document Support**: Validates and stores PDF documents for platform procurement logs, Digital Handover Records, and platform receipts.
 - **Automated Test Suite (`services/api/tests/test_media.py`)**: 8 comprehensive unit and integration tests verifying staging, invalid MIME rejection, oversized payload rejection, EXIF stripping, checksum mismatch rejection, complete lifecycle transition, expiring access URLs, cross-user authorization defense, and PDF storage. Entire API test suite now totals 39 passing tests. Evidence: [`docs/evidence/T008_PRIVATE_MEDIA_STORAGE.md`](docs/evidence/T008_PRIVATE_MEDIA_STORAGE.md).
 
-## 2026-09-29 — Phone/PIN Authentication, Session Rotation, and Ownership (T007 DONE)
+## 2026-09-29 â€” Phone/PIN Authentication, Session Rotation, and Ownership (T007 DONE)
 
 Implemented end-to-end phone/PIN authentication, Argon2id PIN hashing with pepper, sliding-window rate limiting, rotating refresh tokens with replay attack detection, COLLECTOR/RECYCLER/ADMIN authorization, isolated demo mode, and Android session continuation contract meeting R-AUTH-01, R-AUTH-02, R-AUTH-03, R-AUTH-04, R-DATA-06, and R-SEC-01:
 - **Argon2id PIN Security & Normalization (`services/api/app/security.py`)**: Enforced 4-6 numeric digit PINs hashed with Argon2id using `time_cost=2`, `memory_cost=65536`, `parallelism=2`, random 16-byte salt, and server-side pepper (`settings.PIN_PEPPER`). Implemented Indian phone normalization (`^[6-9]\d{9}$`) and masking (`******1234`) to prevent credential leakage.
@@ -863,7 +887,7 @@ Implemented end-to-end phone/PIN authentication, Argon2id PIN hashing with peppe
 - **Android Session Continuation Contract (`docs/contracts/SESSION_CONTINUATION_CONTRACT.md`)**: Formalized token storage in `EncryptedSharedPreferences`, OkHttp 401 interception, background refresh, offline outbox preservation across app restarts/deaths, and PIN re-auth resumption.
 - **Automated Test Suite (`services/api/tests/test_auth.py`)**: 13 comprehensive unit/integration tests verifying all security properties, edge cases, and endpoints. API test suite now totals 31 passing tests. Evidence: [`docs/evidence/T007_AUTH_AND_OWNERSHIP.md`](docs/evidence/T007_AUTH_AND_OWNERSHIP.md).
 
-## 2026-09-29 — PostgreSQL/PostGIS Schema and Alembic Migrations (T006 DONE)
+## 2026-09-29 â€” PostgreSQL/PostGIS Schema and Alembic Migrations (T006 DONE)
 
 Implemented the database schema across all 41 canonical tables defined in `docs/06_SCHEMA.md` with SQLAlchemy 2.0 ORM models, GeoAlchemy2 PostGIS types, and Alembic versioned migrations meeting R-ARC-02, R-DATA-01, and R-DATA-02:
 - **Complete Canonical Table Coverage (`services/api/app/db/models/`)**: Defined typed models for all 41 tables across auth (`User`, `AuthSession`), collectors (`Collector`), facilities (`Region`, `Facility`, `FacilityUser`, `FacilityAuthorization`, `FacilityMaterial`, `FacilityOperation`, `FacilityRate`), materials (`MaterialCategory`, `Material`, `MaterialAlias`, `SafetyGuide`), pricing (`PriceObservation`, `PriceSummary`), lots & lifecycle (`Lot`, `MediaObject`, `LotImage`, `LocationRecord`, `Classification`, `ValuationSnapshot`), trade & payments (`LotRequest`, `Offer`, `Transaction`, `TermsRevision`, `Handover`, `HandoverConfirmation`, `PaymentEntry`), provenance & ML (`DataSource`, `SourceAssertion`, `DatasetVersion`, `ModelVersion`, `TrainingImage`, `ResearchInsight`), and audit & sync (`DomainEvent`, `AuditLog`, `SyncOperation`, `SyncChange`, `QualityFlag`, `EconomicsScenario`).
@@ -873,7 +897,7 @@ Implemented the database schema across all 41 canonical tables defined in `docs/
 - **Alembic Initial Migration (`services/api/alembic/versions/0001_initial_schema.py`)**: Authored initial migration enabling `"uuid-ossp"` and `"postgis"` extensions, creating all 41 tables, foreign key constraints, indexes, unique constraints, and check constraints, with clean reverse downgrade capability.
 - **Automated Test Suite (`services/api/tests/test_schema.py`)**: 6 new unit tests verifying table registration, BigInteger column types, GeoAlchemy2 types, check constraints, unique constraints, and offline compilation via `alembic upgrade head --sql`. API test suite now totals 18 passing tests. Evidence: [`docs/evidence/T006_DATABASE_SCHEMA.md`](docs/evidence/T006_DATABASE_SCHEMA.md).
 
-## 2026-09-29 — Reproducible Data Import, Validation, and Synthetic Tooling (T005 DONE)
+## 2026-09-29 â€” Reproducible Data Import, Validation, and Synthetic Tooling (T005 DONE)
 
 Implemented the data pipeline toolkit, validation engine with quarantine logging, cached geocoder, and reproducible synthetic generator meeting R-DATA-08, R-DATA-09, and R-DATA-10:
 - **Core Provenance & Defense (`scripts/data_tools/provenance.py`, `staging.py`)**: Defined typed enums (`OriginClass`, `SourceKind`, `ReviewStatus`, `LocationQuality`), spreadsheet formula injection defense (`sanitize_csv_cell` neutralizes leading `=`, `+`, `-`, `@`), Unicode NFC normalization, phone sanitization, and 64-bit integer paise and positive grams conversions.
@@ -883,31 +907,32 @@ Implemented the data pipeline toolkit, validation engine with quarantine logging
 - **Synthetic Generator & 15 Edge Scenarios (`scripts/data_tools/synthetic.py`, `manifest.py`)**: Built deterministic, seeded generator (seed=42) producing valid fixtures for all 7 dataset families with SHA-256 manifest files, plus 15 operational/anomaly edge scenarios covering zero price cohorts, expired facility authorizations, battery route isolation, low-confidence ML abstention, offer rejection/expiry, scale discrepancies, partial/disputed payments, idempotent outbox replays, and clock skews.
 - **CLI & Test Suite (`scripts/run_data_pipeline.py`, `scripts/test_data_pipeline.py`)**: CLI supporting `generate-synthetic`, `validate`, `dedup`, and `geocode` commands; 6 passing unit tests validating all rules. Evidence: [`docs/evidence/T005_DATA_PIPELINE.md`](docs/evidence/T005_DATA_PIPELINE.md).
 
-## 2026-09-29 — Secondary Research and Persona Evidence (T004 DONE)
+## 2026-09-29 â€” Secondary Research and Persona Evidence (T004 DONE)
 
 Completed secondary research synthesis, insight cards, and labelled personas meeting R-RES-01 and explicitly maintaining R-RES-02 primary fieldwork as UNMET:
 - **Insight Cards (`docs/research/INSIGHT_CARDS.md`)**: Produced 7 attributed desk-research cards (`RC-01` to `RC-07`) covering informal collector economics (WIEGO/ILO/CPCB), fraud vectors (wetting, stones, scale rigging), visual contamination/battery fire risks, cash-centric settlement preferences, aggregator pricing margins, low digital literacy/voice-guidance requirements, and the explicit distinction between Digital Handover Records and statutory EPR certificates. Each card links directly to authoritative sources in `docs/sources/` and requirements in `docs/01_REQUIREMENTS.md`.
 - **Labelled Personas (`docs/research/PERSONAS.md`)**: Developed 3 labelled simulated personas (Rajesh Kumar - Itinerant Waste Collector; Santosh Shinde - Aggregator / Small Scrap Yard Dealer; Anil Verma - Industrial Plastic Granulator / Semi-mechanized Recycler) with complete pain points, digital literacy profiles, operational journeys, and Mermaid flowcharts.
 - **Evidence Dossier (`docs/evidence/T004_SECONDARY_RESEARCH.md`)**: Compiled comprehensive verification artifact verifying all 6 acceptance criteria for secondary research while explicitly keeping acceptance case AT-070 marked as `EXTERNAL_GAP` / `UNMET` in accordance with guardrails and owner decisions.
 
-## 2026-09-29 — Stage 0 Bootstrap and Toolchain Setup (T001 DONE, T002 WAITING_STITCH)
+## 2026-09-29 â€” Stage 0 Bootstrap and Toolchain Setup (T001 DONE, T002 WAITING_STITCH)
 
 Bootstrapped core repository skeletons and verified compatible pinned toolchains across all layers:
 - **Android (`apps/android/`)**: Native Kotlin, Jetpack Compose, Material 3, Room SQLite database, durable outbox schema, WorkManager, CameraX, LiteRT on-device inference dependency, and ZXing QR decoding. Pinned to OpenJDK 17 LTS, AGP 8.7.0, Gradle 8.10.2, Kotlin 2.0.20, CompileSdk 35, and MinSdk 26. Unit test verifying PRICE_V1 quantiles and valuation formulas in Kotlin.
 - **Backend API (`services/api/`)**: FastAPI, Pydantic v2, SQLAlchemy 2.0, Alembic, PostgreSQL with PostGIS support (`geoalchemy2`), PyJWT access/refresh tokens, and Argon2id PIN hashing with pepper. Dual storage adapter architecture supporting local filesystem volume (with atomic write and strict path traversal defense) and hosted private Supabase Storage. Passing pytest test suite with 12 tests covering health endpoints, security/PIN hashing, storage safety, PRICE_V1 quantiles, and SAHITOL-JCS-1 canonical handover hashing matching the fixture.
-- **Web Console (`apps/web/`)**: React 18, Vite 5, TypeScript 5.5, TailwindCSS 3.4, React Router 6, TanStack Query 5. Routing established for Recycler Console (R01–R07), Admin Quality Dashboard (A01–A07), Public Verification (V01), and Unit Economics (U01). Passing typecheck (`tsc --noEmit`), Vitest suite, and production bundle build.
+- **Web Console (`apps/web/`)**: React 18, Vite 5, TypeScript 5.5, TailwindCSS 3.4, React Router 6, TanStack Query 5. Routing established for Recycler Console (R01â€“R07), Admin Quality Dashboard (A01â€“A07), Public Verification (V01), and Unit Economics (U01). Passing typecheck (`tsc --noEmit`), Vitest suite, and production bundle build.
 - **Local Infrastructure (`infra/`)**: Docker Compose configuration running PostgreSQL 16 + PostGIS 3.4 with healthcheck and persistent volumes, containerized API and Web services.
 - **CI Workflow (`.github/workflows/ci.yml`)**: Continuous integration testing documentation integrity, Python pytest, Node typecheck/test/build, and Android test suite.
 - **Stitch Gate (T002)**: Prepared design brief for screen S00 (Android Feasibility Diagnostic) presented to owner; registry row marked REQUESTED and status marked WAITING_STITCH. No unauthorized UI components were generated.
 
-## 2026-09-29 — Consistency review and validation
+## 2026-09-29 â€” Consistency review and validation
 
 Aligned API sync routes, wire/Room state mappings, screen IDs and canonical handover serialization; supplied an actual computed hash fixture. Linked price observation entry and later export wiring explicitly into screens/tasks, so early UI completion cannot hide later integration. Checked all local links, source hashes/ranges, task graph and generated planning views. Nine negative controls verified that the validator rejects missing mappings, dependency cycles, unsupported DONE/PASS, scope demotion, lost fieldwork obligation, unapproved UI completion and broken links/anchors. These are documentation-tool checks, not application test results.
 
-## 2026-09-28 — Documentation baseline
+## 2026-09-28 â€” Documentation baseline
 
 Read both supplied transcripts, preserved their bytes/hashes and reconciled latest owner choices. Created canonical product/architecture/domain/data/ML/audio/security/design/deployment/demo specifications and reusable session commands. Added the owner-generated Stitch gate across all frontend tasks and the screen registry.
 
 Built one requirement/task/acceptance catalog with generated roadmap, implementation plan, tracker, requirement and test views. Retained future ideas explicitly and the unmet two-collector fieldwork obligation. Added source-range inventory, header-only dataset templates, evidence templates and structural documentation validation.
 
 This entry records documentation work only. No application, actual dataset import, trained model, audio, screen generation, device test, deployment, PPT/video or submission has been completed. Current implementation progress is in the generated tracker; validation results are in the documentation audit.
+

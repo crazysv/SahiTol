@@ -1,0 +1,140 @@
+{
+  "format_version": "1.0",
+  "generated_at": "2026-09-30T15:07:15Z",
+  "description": "SahiTol Release v1.0 -- Frozen Dataset and Model Evidence Package (T047)",
+  "fieldwork_status": "R-RES-02 UNMET: Two-collector primary fieldwork not conducted. All datasets are desk-research / public-source only.",
+  "artifacts": {
+    "classifier_tflite": {
+      "path": "apps/android/app/src/main/assets/model/classifier.tflite",
+      "sha256": "35d0ad7cdd7f8c3d5f20ecda408b87d7f091a8b997f30793554ce416f790eb23",
+      "size_bytes": 1233896,
+      "description": "LiteRT quantized MobileNetV3-Small e-waste classifier v1.0",
+      "linked_card": "data/curated/model/model_card.md"
+    },
+    "model_card": {
+      "path": "data/curated/model/model_card.md",
+      "sha256": "e5c3217d04a9db75e64141e1233b869c1219c693b661d43b4846aeb892513513",
+      "description": "Model card with actual evaluation results (macro-F1 0.0159, 100pct abstention, 7.57ms inference), advisory policy, limitations"
+    },
+    "ml_image_dataset": {
+      "path": "data/curated/ml_image_dataset",
+      "dataset_card": "data/curated/ml_image_dataset/dataset_card.md",
+      "dataset_card_sha256": "2678b415caf0a5e89075a7101a3bd339dbb2f525a8b957a053b64af837464013",
+      "directory_sha256": "1b63e4bd4d8a7a478bb9d7fc27e9f8ee8bfc43ce3a6e94d0fab278f341601341",
+      "total_files": 176,
+      "split": "train 115 / val 19 / test 38 (172 total)",
+      "classes": 12,
+      "fieldwork": "ZERO primary field photos. Public licensed sources only."
+    },
+    "audio_clips": {
+      "manifest_path": "apps/android/app/src/main/assets/audio/audio_manifest.json",
+      "manifest_sha256": "de5de1a8fc5b00e105a017a665d28f0ecf1413d06ad13aeaf193cbbae80a82d4",
+      "clips_sha256": "0e0241a72f2c18db2213efe20f700cc3a1f7b21159a188b091393d07f3afe9c7",
+      "total_clips": 258,
+      "locales": {
+        "hi": 129,
+        "mr": 129
+      },
+      "runtime_cloud_call": false
+    },
+    "seven_data_cards": {
+      "material_catalog": {
+        "path": "data/curated/material_catalog/data_card.md",
+        "sha256": "8071b2bdc9596a0a81215f1030c7728fa7a473eb43639697bdc047c98e087232",
+        "exists": true
+      },
+      "price_observations": {
+        "path": "data/curated/price_observations/data_card.md",
+        "sha256": "e6e4961f70161162ad792b8449dcefd2cd2a3659b51f72f1c2cd6ffe5a7fe483",
+        "exists": true
+      },
+      "facilities_recycler": {
+        "path": "data/curated/facilities/data_card.md",
+        "sha256": "6d585ed2014bcd3630d0e9b0383df13a8130f946f9dd1cdf40ceacb9f7d35a2a",
+        "exists": true
+      },
+      "transactions": {
+        "path": "data/curated/transactions/data_card.md",
+        "sha256": "172b6d3d13b6ff938ae350be4e868fb89adb07b7ca977c536967a9f950fb7055",
+        "exists": true
+      },
+      "traceability": {
+        "path": "data/curated/traceability/data_card.md",
+        "sha256": "21e94889f6c63768b261a0554d0641f55bd503cac4dc1dc8c422c53adb85e8f1",
+        "exists": true
+      },
+      "collectors": {
+        "path": "data/curated/collectors/data_card.md",
+        "sha256": "1d41ee22b297494c965c1cf41754e28d9f93257afc68913167a7d008462a7c8c",
+        "exists": true
+      },
+      "payments": {
+        "path": "data/curated/payments/data_card.md",
+        "sha256": "fbf48bcf862d444826c50794e006df69d67090e2fc9152fbd3879f4355eec952",
+        "exists": true
+      }
+    },
+    "dataset_manifests": {
+      "collectors": {
+        "path": "data/curated\\collectors\\manifest.json",
+        "sha256": "3a7572965247fa628c55f0093cdfa7c375bb44fb90c1fadc66433c7699c2f55b"
+      },
+      "facilities": {
+        "path": "data/curated\\facilities\\manifest.json",
+        "sha256": "d4fd50bb9af3f04b72ed22bbb153e4a03a65cc542d6e89581559aec903d2203e"
+      },
+      "material_catalog": {
+        "path": "data/curated\\material_catalog\\manifest.json",
+        "sha256": "72ada165b0ecaf4b533d050c031f6fdd24f18ef675cb9b66b68b18c33a5151a7"
+      },
+      "ml_image_dataset": {
+        "path": "data/curated\\ml_image_dataset\\manifest.json",
+        "sha256": "3f6aae14832cc16aa32c25e4607ebe7fb6d46abbda855a1eed312fd193ff79ed"
+      },
+      "payments": {
+        "path": "data/curated\\payments\\manifest.json",
+        "sha256": "b93fa6b1d24af488c4b7a6b681d5337dfd8a3e012e21b18e9d5204771ed060ce"
+      },
+      "price_observations": {
+        "path": "data/curated\\price_observations\\manifest.json",
+        "sha256": "ebe2d900f9242a53967abe2d7388abf29dbd35ff7a06bf72ab8b2314454425ba"
+      },
+      "safety_cards": {
+        "path": "data/curated\\safety_cards\\manifest.json",
+        "sha256": "7f79438395cd9115fdcbaaf4d7fd7f000e4e8befd3e20d7a0518917adfca59ce"
+      },
+      "traceability": {
+        "path": "data/curated\\traceability\\manifest.json",
+        "sha256": "79e70c67abc12a3da5ea2e218a5268efb22e414ebaebde43f10dbe87284ed2b8"
+      },
+      "transactions": {
+        "path": "data/curated\\transactions\\manifest.json",
+        "sha256": "0bbbef7985e1693179e50df53036158b0cdf43cc00ca0b74cab47e2c5f9074e7"
+      }
+    },
+    "research_evidence": {
+      "insight_cards": {
+        "path": "docs/research/INSIGHT_CARDS.md",
+        "sha256": "46a7f14dff61c4d30a08209b38e5b0b4a54410f72e130af471b9466c957535f7"
+      },
+      "personas": {
+        "path": "docs/research/PERSONAS.md",
+        "sha256": "dda010dbdc6a4e513c32622b2c5d3418897bdfd5117af6901e2e4e0a39541146"
+      },
+      "fieldwork_status": "R-RES-02 UNMET. No interviews, surveys, or field data collection claimed."
+    }
+  },
+  "summary": {
+    "data_cards_complete": 7,
+    "data_cards_required": 7,
+    "classifier_sha256": "35d0ad7cdd7f8c3d5f20ecda408b87d7f091a8b997f30793554ce416f790eb23",
+    "model_card_sha256": "e5c3217d04a9db75e64141e1233b869c1219c693b661d43b4846aeb892513513",
+    "audio_manifest_sha256": "de5de1a8fc5b00e105a017a665d28f0ecf1413d06ad13aeaf193cbbae80a82d4",
+    "honest_gaps": [
+      "R-RES-02 UNMET: Two-collector primary fieldwork not conducted.",
+      "Model macro-F1 0.0159 and 100pct abstention at threshold 0.65 -- classifier safe but low accuracy; full manual fallback mandatory and implemented.",
+      "Native-speaker review of Hindi/Marathi audio NOT_REVIEWED.",
+      "Desk-research prices only; no confirmed primary field market transactions."
+    ]
+  }
+}

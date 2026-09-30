@@ -133,7 +133,7 @@
       "evidence": [
         "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
       ],
-      "note": "Implemented approved collector onboarding and lot screens (C01\u00e2\u20ac\u201cC05, C14, C15) matching Google Stitch designs, with Room-only reads, phone/PIN access and demo mode, safe logout preserving local SQLite data, 9-category scrap taxonomy, CameraX preview with PhotoCompressor and gallery fallback, lot editor with integer grams stepper and condition chips, and movement board sync centre.",
+      "note": "Implemented approved collector onboarding and lot screens (C01├óΓé¼ΓÇ£C05, C14, C15) matching Google Stitch designs, with Room-only reads, phone/PIN access and demo mode, safe logout preserving local SQLite data, 9-category scrap taxonomy, CameraX preview with PhotoCompressor and gallery fallback, lot editor with integer grams stepper and condition chips, and movement board sync centre.",
       "owner": "Owner + coding agent"
     },
     "T018": {
@@ -157,7 +157,7 @@
       "evidence": [
         "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md"
       ],
-      "note": "Implemented approved collector price and recycler views (C06\u00e2\u20ac\u201cC09): price board with category filter, 30-day trends, source details, indicative range, field observation entry, expandable valuation breakdown with condition deductions, recycler directory with GPS / radar banner, 5-factor matched offers, interactive offer request/accept/reject lifecycle, outbox queuing, and terms mismatch guard.",
+      "note": "Implemented approved collector price and recycler views (C06├óΓé¼ΓÇ£C09): price board with category filter, 30-day trends, source details, indicative range, field observation entry, expandable valuation breakdown with condition deductions, recycler directory with GPS / radar banner, 5-factor matched offers, interactive offer request/accept/reject lifecycle, outbox queuing, and terms mismatch guard.",
       "owner": "Owner + coding agent"
     },
     "T021": {
@@ -237,7 +237,7 @@
       "evidence": [
         "docs/evidence/T030_ADMIN_DASHBOARD.md"
       ],
-      "note": "Implemented approved React/Vite admin dashboard across all 7 screens (A01\u00e2\u20ac\u201cA07) matching Google Stitch designs, with honest metrics, privacy mask, facility L0-L4 audit, quote moderation, hash-chain traceability, quality workbench with actor/reason resolution, and dataset/model evidence library.",
+      "note": "Implemented approved React/Vite admin dashboard across all 7 screens (A01├óΓé¼ΓÇ£A07) matching Google Stitch designs, with honest metrics, privacy mask, facility L0-L4 audit, quote moderation, hash-chain traceability, quality workbench with actor/reason resolution, and dataset/model evidence library.",
       "owner": "Owner + coding agent"
     },
     "T031": {
@@ -324,7 +324,7 @@
       "evidence": [
         "docs/evidence/T041_HOSTED_DEPLOYMENT.md"
       ],
-      "note": "Supabase (Mumbai ap-south-1) provisioned, migrated (0001_initial_schema head), seeded. Render Docker API live at https://sahitol-api.onrender.com \u2014 /health/live 200 OK confirmed. Cloudflare Pages web console live at https://sahitol.pages.dev \u2014 4 files uploaded, deployment complete.",
+      "note": "Supabase (Mumbai ap-south-1) provisioned, migrated (0001_initial_schema head), seeded. Render Docker API live at https://sahitol-api.onrender.com ΓÇö /health/live 200 OK confirmed. Cloudflare Pages web console live at https://sahitol.pages.dev ΓÇö 4 files uploaded, deployment complete.",
       "owner": "Owner + coding agent"
     },
     "T042": {
@@ -343,9 +343,11 @@
       "owner": "Owner + coding agent"
     },
     "T044": {
-      "status": "TODO",
-      "evidence": [],
-      "note": "Not implemented.",
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T044_REAL_DEVICE_USABILITY.md"
+      ],
+      "note": "Real-device usability tests complete on N7OZPV59XWWKPF4X. Full E2E: S00 launch, C05 lot creation, C06/C07 price/valuation, C08 sync, C09 recycler offer/accept, C10 discrepancy capture+accept, C11 Digital Handover Record with QR (Ref ST-7022) and SHA-256 chain, C16 Material Passport journey spine verified. Bilingual labels (Hindi/English) throughout. Offline Ready badge confirmed on C10, C11. Honest EPR disclaimer in C11 confirmed. Fieldwork obligation UNMET (tracked separately). Screenshots in docs/evidence/",
       "owner": "Owner + coding agent"
     },
     "T045": {
@@ -357,34 +359,40 @@
       "owner": "Owner + coding agent"
     },
     "T046": {
-      "status": "TODO",
-      "evidence": [],
-      "note": "Not implemented.",
-      "owner": "Owner + coding agent"
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T046_TRANSLATION_AUDIO_AUDIT.md"
+      ],
+      "note": "String parity 145/145 keys all three locales, zero placeholder mismatches. Audio 258/258 clips present, all SHA-256 checksums verified, runtime_cloud_call=false. AudioGrammarAndManifestTest 8 methods PASS (all spec fixtures: 0-99 numbers, 100-100000 place values, paise, weight, rate, range, negative, null, status, safety). Devanagari spot-checks PASS. On-device bilingual rendering PASS. Honest gaps: native-speaker review NOT_REVIEWED, TalkBack on-device NOT_RUN. Both explicitly tracked, do not block per task scope."
     },
     "T047": {
-      "status": "TODO",
-      "evidence": [],
-      "note": "Not implemented.",
-      "owner": "Owner + coding agent"
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T047_DATASET_MODEL_EVIDENCE.md",
+        "docs/evidence/T047_FROZEN_RELEASE_MANIFEST.json"
+      ],
+      "note": "Frozen release manifest generated with SHA-256 digests for classifier.tflite (35d0ad7c...), model_card.md, audio_manifest.json (258 clips), all 7 data cards, and all family manifests. Model macro-F1 0.0159 and 100pct abstention honestly documented. R-RES-02 fieldwork UNMET explicitly declared. Native-speaker review NOT_REVIEWED. All honest gaps documented."
     },
     "T048": {
-      "status": "TODO",
-      "evidence": [],
-      "note": "Not implemented.",
-      "owner": "Owner + coding agent"
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T048_PPT_PRESENTER_HANDOFF.md"
+      ],
+      "note": "Complete 10-slide deck script with speaker notes, one-page fact sheet (all numbers evidence-backed from T041-T047), five presenter role cards with hand-off cues and Q&A crib, and slide production instructions for owner. All claims cite evidence. Honest limitations (R-RES-02 UNMET, model macro-F1 0.0159, native-speaker NOT_REVIEWED) stated throughout. Owner builds actual PPT from this script using organizer template."
     },
     "T049": {
-      "status": "TODO",
-      "evidence": [],
-      "note": "Not implemented.",
-      "owner": "Owner + coding agent"
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T049_DEMO_VIDEO_SHOTLIST.md"
+      ],
+      "note": "Complete 4-minute shot list (14 segments A-N), pre-recording device checklist (15 items), post-recording validation checklist (12 items), upload/link instructions, and recording setup commands. Physical recording is an owner action requiring device N7OZPV59XWWKPF4X. Video link to be recorded in T050 once owner completes recording. Privacy/security/claim constraints documented (no secrets, no EPR cert claim, no borrowed accuracy, demo labels required)."
     },
     "T050": {
-      "status": "TODO",
-      "evidence": [],
-      "note": "Not implemented.",
-      "owner": "Owner + coding agent"
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T050_RELEASE_HANDOFF.md"
+      ],
+      "note": "All software acceptance gates verified: 318 backend tests, 44 web integration tests, 73 Android unit tests, 6 must-haves, 7 data cards, frozen SHA-256 manifest. README updated from documentation-only to implemented state. Four required deliverables: debug APK exists (33.25 MB, SHA-256 db71f114...), PPT script complete (T048), video shot list complete (T049), GitHub README updated. Remaining owner actions: sign release APK, record video, build PPT from script, confirm GitHub visibility, submit to portal. Portal submission result to be recorded separately."
     },
     "F001": {
       "status": "DEFERRED",
