@@ -22,7 +22,8 @@ COPY scripts /scripts
 
 # Copy and wire up the production startup script
 COPY infra/start.sh /start.sh
-RUN chmod +x /start.sh
+# Strip Windows CRLF so the shebang works in Linux (git on Windows may store \r\n)
+RUN sed -i 's/\r$//' /start.sh && chmod +x /start.sh
 
 # Render free plan requires port 10000
 EXPOSE 10000
