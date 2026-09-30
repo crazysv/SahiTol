@@ -15,23 +15,14 @@ services:
     dockerfilePath: infra/Dockerfile.api
     dockerContext: .
     plan: free          # Review free-plan limits at render.com/docs/free
-    region: singapore   # Choose closest to users (India → Singapore or ap-south-1)
+    region: oregon      # Free tier only supports Oregon/Frankfurt; ap-south-1 not available on free
     numInstances: 1
 
     # Health check — must match /health/live endpoint implemented in T042
     healthCheckPath: /health/live
 
-    # Ordered startup: migrate then start server (idempotent, never destructive)
-    startCommand: >-
-      alembic upgrade head &&
-      python scripts/seed_production.py &&
-      uvicorn app.main:app
-      --host 0.0.0.0
-      --port 10000
-      --workers 2
-      --proxy-headers
-      --forwarded-allow-ips='*'
-      --log-level info
+    # Startup logic is in infra/start.sh (baked into Docker image via Dockerfile.api)
+    # Docker runtime does not support startCommand in render.yaml
 
     envVars:
       # ── Database (Supabase PostgreSQL + PostGIS) ───────────────────────────

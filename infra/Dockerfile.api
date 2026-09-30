@@ -20,10 +20,13 @@ COPY services/api /app
 COPY data /data
 COPY scripts /scripts
 
-# Render free plan exposes port 10000; local docker-compose uses 8000.
-# The start command in render.yaml overrides CMD for production.
-EXPOSE 8000
+# Copy and wire up the production startup script
+COPY infra/start.sh /start.sh
+RUN chmod +x /start.sh
 
-# Local development default — render.yaml startCommand overrides this in production.
-# Production uses 2 workers, --proxy-headers, --forwarded-allow-ips='*'.
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
+# Render free plan requires port 10000
+EXPOSE 10000
+
+# Production: migrate → seed → serve
+# Local override: docker run ... uvicorn app.main:app --port 8000
+CMD ["/bin/sh", "/start.sh"]
