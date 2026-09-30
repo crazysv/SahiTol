@@ -1,0 +1,29 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install system dependencies: libpq for psycopg3, curl for health check
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies first for better layer caching
+COPY services/api/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application source
+COPY services/api /app
+
+# Copy seed data and scripts (needed by seed_production.py and reference bootstrap)
+COPY data /data
+COPY scripts /scripts
+
+# Render free plan exposes port 10000; local docker-compose uses 8000.
+# The start command in render.yaml overrides CMD for production.
+EXPOSE 8000
+
+# Local development default — render.yaml startCommand overrides this in production.
+# Production uses 2 workers, --proxy-headers, --forwarded-allow-ips='*'.
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

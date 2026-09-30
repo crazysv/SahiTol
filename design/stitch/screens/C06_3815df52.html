@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-container": "#fffbff",
+          "inverse-on-surface": "#f3f0ea",
+          "surface-container-low": "#f6f3ed",
+          "on-error-container": "#93000a",
+          "inverse-surface": "#31312d",
+          "surface-container-high": "#ebe8e2",
+          "surface-container": "#f0eee8",
+          "tertiary-container": "#7a7371",
+          "surface-container-lowest": "#ffffff",
+          "on-secondary-fixed-variant": "#574500",
+          "on-primary": "#ffffff",
+          "surface-bright": "#fcf9f3",
+          "outline": "#8a726a",
+          "tertiary-fixed": "#eae0de",
+          "surface-container-highest": "#e5e2dc",
+          "surface": "#fcf9f3",
+          "on-tertiary": "#ffffff",
+          "secondary-fixed-dim": "#e9c349",
+          "on-primary-fixed": "#390c00",
+          "primary-fixed-dim": "#ffb59c",
+          "on-secondary-fixed": "#241a00",
+          "secondary": "#735c00",
+          "on-tertiary-fixed-variant": "#4b4544",
+          "on-primary-container": "#fffbff",
+          "surface-dim": "#dcdad4",
+          "on-secondary": "#ffffff",
+          "surface-variant": "#e5e2dc",
+          "secondary-container": "#fed65b",
+          "primary-container": "#bf542c",
+          "tertiary-fixed-dim": "#cec4c3",
+          "surface-tint": "#a23e18",
+          "on-error": "#ffffff",
+          "inverse-primary": "#ffb59c",
+          "error": "#ba1a1a",
+          "on-background": "#1c1c18",
+          "outline-variant": "#dec0b7",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed-root": "#1f1b1a",
+          "on-surface-variant": "#57423b",
+          "on-primary-fixed-variant": "#822801",
+          "primary": "#9f3c16",
+          "primary-fixed": "#ffdbcf",
+          "tertiary": "#615a59",
+          "secondary-fixed": "#ffe088",
+          "background": "#fcf9f3",
+          "on-surface": "#1c1c18",
+          "on-secondary-container": "#745c00"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "gutter": "16px",
+          "space-lg": "24px",
+          "space-sm": "8px",
+          "space-xs": "4px",
+          "space-md": "16px",
+          "space-xl": "32px",
+          "margin": "16px"
+        },
+        "fontFamily": {
+          "body-md": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "headline-md": ["Sora"],
+          "headline-lg-mobile": ["Sora"],
+          "headline-lg": ["Sora"],
+          "label-sm": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Sora"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "label-lg": ["Plus Jakarta Sans"],
+          "headline-xl": ["Sora"]
+        },
+        "fontSize": {
+          "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+          "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+          "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+          "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+          "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+          "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],
+          "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+          "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+          "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+          "label-lg": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],
+          "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }]
+        }
+      }
+    }
+  }
+</script><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl pt-safe"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="bg-primary text-on-primary font-headline-md px-space-xs py-1 rounded text-headline-md">सहीTol</div><div class="flex flex-col"><span class="text-label-sm font-headline-md uppercase tracking-wider text-on-surface">SahiTol</span><span class="text-[10px] text-on-surface-variant">Collector App</span></div></div><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1 bg-surface-container-high px-space-sm py-1 rounded-full text-label-sm text-secondary"><span class="w-2 h-2 rounded-full bg-secondary"></span><span>Offline Ready</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full px-gutter pt-16 pb-20 bg-surface flex-1"><div class="flex flex-col w-full pb-20">
+<!-- Top Header -->
+<div class="flex flex-col mb-space-lg">
+<div class="flex items-center justify-between">
+<h1 class="font-headline-lg-mobile text-on-surface">Price Board <span class="text-primary font-headline-md font-normal">/ भाव बोर्ड</span></h1>
+<button class="bg-surface-container-high px-space-sm py-space-xs rounded-lg text-label-sm text-on-surface-variant flex items-center gap-1 active:scale-95 transition-transform" id="toggle-offline-mode">
+<span class="material-symbols-outlined text-[16px] text-secondary">wifi</span>
+<span id="network-status-text">Live Feed</span>
+</button>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Indicative yard rates and local market trends</p>
+</div>
+<!-- Material Filter Pills -->
+<div class="flex gap-space-sm overflow-x-auto pb-space-sm -mx-gutter px-gutter no-scrollbar mb-space-lg">
+<button class="px-space-md py-space-xs bg-primary text-on-primary rounded-full text-label-md whitespace-nowrap shadow-sm flex items-center gap-1" data-filter="all">
+<span>All Materials</span>
+</button>
+<button class="px-space-md py-space-xs bg-surface-container-high text-on-surface rounded-full text-label-md whitespace-nowrap shadow-sm hover:bg-surface-container-highest transition-colors" data-filter="cable">
+<span>Cable (केबल)</span>
+</button>
+<button class="px-space-md py-space-xs bg-surface-container-high text-on-surface rounded-full text-label-md whitespace-nowrap shadow-sm hover:bg-surface-container-highest transition-colors" data-filter="pcb">
+<span>PCB (पीसीबी)</span>
+</button>
+<button class="px-space-md py-space-xs bg-surface-container-high text-on-surface rounded-full text-label-md whitespace-nowrap shadow-sm hover:bg-surface-container-highest transition-colors" data-filter="iron">
+<span>Iron (लोहा)</span>
+</button>
+<button class="px-space-md py-space-xs bg-surface-container-high text-on-surface rounded-full text-label-md whitespace-nowrap shadow-sm hover:bg-surface-container-highest transition-colors" data-filter="copper">
+<span>Copper (तांबा)</span>
+</button>
+<button class="px-space-md py-space-xs bg-surface-container-high text-on-surface rounded-full text-label-md whitespace-nowrap shadow-sm hover:bg-surface-container-highest transition-colors" data-filter="plastic">
+<span>PET (प्लास्टिक)</span>
+</button>
+<button class="px-space-md py-space-xs bg-surface-container-high text-on-surface rounded-full text-label-md whitespace-nowrap shadow-sm hover:bg-surface-container-highest transition-colors" data-filter="paper">
+<span>Paper (रद्दी)</span>
+</button>
+</div>
+<!-- Price Board Cards List -->
+<div class="flex flex-col gap-space-md mb-space-xl" id="price-cards-container">
+<!-- Material Card 1: Copper -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm relative overflow-hidden transition-all hover:shadow-md" data-category="copper">
+<div class="absolute top-0 right-0 bg-secondary-container text-on-secondary-container px-space-sm py-1 rounded-bl-lg text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>Verified Yard</span>
+</div>
+<div class="flex items-start justify-between mb-space-sm">
+<div>
+<h3 class="font-headline-md text-on-surface">Copper Wire (Grade A)</h3>
+<p class="text-body-sm text-on-surface-variant font-medium">तांबा तार (ए-ग्रेड)</p>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm my-space-sm">
+<span class="text-headline-xl font-headline-xl text-primary">₹ 745</span>
+<span class="text-body-sm text-on-surface-variant font-medium">/ kg</span>
+<div class="ml-auto flex items-center gap-1 bg-surface-container-high px-space-sm py-0.5 rounded text-label-sm text-primary font-medium">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+4.2% this week</span>
+</div>
+</div>
+<!-- Sparkline / Trend Visualization -->
+<div class="my-space-sm py-2 bg-surface-container rounded-lg px-space-sm">
+<div class="flex justify-between text-[10px] text-on-surface-variant mb-1">
+<span>30 Days Trend</span>
+<span>Range: ₹710 - ₹745</span>
+</div>
+<div class="h-8 w-full flex items-end gap-1">
+<div class="bg-primary/30 w-1/10 rounded-t h-[40%]"></div>
+<div class="bg-primary/30 w-1/10 rounded-t h-[45%]"></div>
+<div class="bg-primary/40 w-1/10 rounded-t h-[50%]"></div>
+<div class="bg-primary/40 w-1/10 rounded-t h-[48%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[60%]"></div>
+<div class="bg-primary/60 w-1/10 rounded-t h-[65%]"></div>
+<div class="bg-primary/70 w-1/10 rounded-t h-[75%]"></div>
+<div class="bg-primary/80 w-1/10 rounded-t h-[80%]"></div>
+<div class="bg-primary/90 w-1/10 rounded-t h-[90%]"></div>
+<div class="bg-primary w-1/10 rounded-t h-[100%]"></div>
+</div>
+</div>
+<!-- Supporting Evidence Strip -->
+<div class="flex flex-wrap items-center justify-between text-label-sm text-on-surface-variant pt-space-xs border-t border-surface-container-high gap-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Delhi Central Yard</span>
+</div>
+<div class="flex items-center gap-1 cache-time-text">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Updated today, 10:30 AM</span>
+</div>
+</div>
+</div>
+<!-- Material Card 2: Cable -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm relative overflow-hidden transition-all hover:shadow-md" data-category="cable">
+<div class="flex items-start justify-between mb-space-sm">
+<div>
+<h3 class="font-headline-md text-on-surface">Mixed Aluminium Cable</h3>
+<p class="text-body-sm text-on-surface-variant font-medium">मिश्रित एल्युमिनियम केबल</p>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm my-space-sm">
+<span class="text-headline-xl font-headline-xl text-primary">₹ 142</span>
+<span class="text-body-sm text-on-surface-variant font-medium">/ kg</span>
+<div class="ml-auto flex items-center gap-1 bg-surface-container-high px-space-sm py-0.5 rounded text-label-sm text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-[14px]">trending_flat</span>
+<span>Stable</span>
+</div>
+</div>
+<div class="my-space-sm py-2 bg-surface-container rounded-lg px-space-sm">
+<div class="flex justify-between text-[10px] text-on-surface-variant mb-1">
+<span>30 Days Trend</span>
+<span>Range: ₹138 - ₹144</span>
+</div>
+<div class="h-8 w-full flex items-end gap-1">
+<div class="bg-primary/50 w-1/10 rounded-t h-[70%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[72%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[68%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[75%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[78%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[70%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[72%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[75%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[80%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[78%]"></div>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between text-label-sm text-on-surface-variant pt-space-xs border-t border-surface-container-high gap-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Okhla Industrial Area</span>
+</div>
+<div class="flex items-center gap-1 cache-time-text">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Updated today, 09:15 AM</span>
+</div>
+</div>
+</div>
+<!-- Material Card 3: Iron -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm relative overflow-hidden transition-all hover:shadow-md" data-category="iron">
+<div class="flex items-start justify-between mb-space-sm">
+<div>
+<h3 class="font-headline-md text-on-surface">Heavy Iron Scrap</h3>
+<p class="text-body-sm text-on-surface-variant font-medium">लोहा (भारी स्क्रैप)</p>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm my-space-sm">
+<span class="text-headline-xl font-headline-xl text-primary">₹ 34.50</span>
+<span class="text-body-sm text-on-surface-variant font-medium">/ kg</span>
+<div class="ml-auto flex items-center gap-1 bg-surface-container-high px-space-sm py-0.5 rounded text-label-sm text-error font-medium">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+<span>-1.2% this week</span>
+</div>
+</div>
+<div class="my-space-sm py-2 bg-surface-container rounded-lg px-space-sm">
+<div class="flex justify-between text-[10px] text-on-surface-variant mb-1">
+<span>30 Days Trend</span>
+<span>Range: ₹34.00 - ₹36.00</span>
+</div>
+<div class="h-8 w-full flex items-end gap-1">
+<div class="bg-primary/70 w-1/10 rounded-t h-[90%]"></div>
+<div class="bg-primary/70 w-1/10 rounded-t h-[85%]"></div>
+<div class="bg-primary/60 w-1/10 rounded-t h-[80%]"></div>
+<div class="bg-primary/60 w-1/10 rounded-t h-[82%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[75%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[70%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[72%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[68%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[65%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[65%]"></div>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between text-label-sm text-on-surface-variant pt-space-xs border-t border-surface-container-high gap-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Mayapuri Market</span>
+</div>
+<div class="flex items-center gap-1 cache-time-text">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Updated yesterday</span>
+</div>
+</div>
+</div>
+<!-- Material Card 4: PCB -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm relative overflow-hidden transition-all hover:shadow-md" data-category="pcb">
+<div class="flex items-start justify-between mb-space-sm">
+<div>
+<h3 class="font-headline-md text-on-surface">Motherboard / PCB scrap</h3>
+<p class="text-body-sm text-on-surface-variant font-medium">पीसीबी सर्किट बोर्ड</p>
+</div>
+</div>
+<div class="flex items-baseline gap-space-sm my-space-sm">
+<span class="text-headline-xl font-headline-xl text-primary">₹ 340</span>
+<span class="text-body-sm text-on-surface-variant font-medium">/ kg</span>
+<div class="ml-auto flex items-center gap-1 bg-surface-container-high px-space-sm py-0.5 rounded text-label-sm text-primary font-medium">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+6.5% this week</span>
+</div>
+</div>
+<div class="my-space-sm py-2 bg-surface-container rounded-lg px-space-sm">
+<div class="flex justify-between text-[10px] text-on-surface-variant mb-1">
+<span>30 Days Trend</span>
+<span>Range: ₹310 - ₹340</span>
+</div>
+<div class="h-8 w-full flex items-end gap-1">
+<div class="bg-primary/30 w-1/10 rounded-t h-[30%]"></div>
+<div class="bg-primary/30 w-1/10 rounded-t h-[35%]"></div>
+<div class="bg-primary/40 w-1/10 rounded-t h-[40%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[50%]"></div>
+<div class="bg-primary/50 w-1/10 rounded-t h-[55%]"></div>
+<div class="bg-primary/60 w-1/10 rounded-t h-[60%]"></div>
+<div class="bg-primary/70 w-1/10 rounded-t h-[70%]"></div>
+<div class="bg-primary/80 w-1/10 rounded-t h-[85%]"></div>
+<div class="bg-primary/90 w-1/10 rounded-t h-[90%]"></div>
+<div class="bg-primary w-1/10 rounded-t h-[100%]"></div>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between text-label-sm text-on-surface-variant pt-space-xs border-t border-surface-container-high gap-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Seelampur E-Waste Hub</span>
+</div>
+<div class="flex items-center gap-1 cache-time-text">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Updated today, 08:00 AM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- New Observation Entry Section -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-sm border-2 border-primary/20 mb-space-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">add_chart</span>
+</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Record Field Observation</h3>
+<p class="text-body-sm text-on-surface-variant">अपनी बाजार कीमत दर्ज करें</p>
+</div>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-[11px] font-bold uppercase">My Observation</span>
+</div>
+<form class="flex flex-col gap-space-md mt-space-md" id="observation-form">
+<!-- Material Select -->
+<div class="flex flex-col gap-space-xs">
+<label class="text-label-md text-on-surface">Select Material / सामग्री चुनें</label>
+<select class="w-full bg-surface-container-lowest text-on-surface p-space-sm rounded-lg text-body-md outline-none focus:ring-2 focus:ring-primary transition-all" required="">
+<option disabled="" selected="" value="">Choose material category...</option>
+<option value="copper">Copper Wire (तांबा तार)</option>
+<option value="cable">Aluminium Cable (एल्युमिनियम केबल)</option>
+<option value="iron">Heavy Iron Scrap (लोहा)</option>
+<option value="pcb">Motherboard / PCB (पीसीबी)</option>
+<option value="plastic">PET Bottles (प्लास्टिक बोतल)</option>
+<option value="paper">Mixed Paper / Raddi (रद्दी)</option>
+</select>
+</div>
+<!-- Price & Unit -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-space-xs">
+<label class="text-label-md text-on-surface">Observed Rate (₹)</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-on-surface-variant font-bold">₹</span>
+<input class="w-full bg-surface-container-lowest text-on-surface pl-8 pr-3 py-space-sm rounded-lg text-body-md outline-none focus:ring-2 focus:ring-primary" placeholder="0.00" required="" step="0.5" type="number"/>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="text-label-md text-on-surface">Unit / इकाई</label>
+<select class="w-full bg-surface-container-lowest text-on-surface p-space-sm rounded-lg text-body-md outline-none focus:ring-2 focus:ring-primary">
+<option value="kg">Per Kg (प्रति किलो)</option>
+<option value="quintal">Per Quintal (क्विंटल)</option>
+<option value="piece">Per Piece (प्रति पीस)</option>
+</select>
+</div>
+</div>
+<!-- Region & Context -->
+<div class="flex flex-col gap-space-xs">
+<label class="text-label-md text-on-surface">Location / क्षेत्र या मंडी का नाम</label>
+<input class="w-full bg-surface-container-lowest text-on-surface px-space-md py-space-sm rounded-lg text-body-md outline-none focus:ring-2 focus:ring-primary" placeholder="e.g., Azadpur Mandi, Sector 62 Yard" required="" type="text"/>
+</div>
+<!-- Source Provenance & Notes -->
+<div class="flex flex-col gap-space-xs">
+<label class="text-label-md text-on-surface">Source / किससे जानकारी मिली?</label>
+<input class="w-full bg-surface-container-lowest text-on-surface px-space-md py-space-sm rounded-lg text-body-md outline-none focus:ring-2 focus:ring-primary" placeholder="e.g., Direct talk with yard dealer Ramesh" type="text"/>
+</div>
+<!-- Offline sync state indication -->
+<div class="flex items-center gap-space-xs bg-surface-container-high p-space-sm rounded-lg text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[18px]">cloud_queue</span>
+<span id="sync-indicator-text">Saved on this phone — waiting to sync</span>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary font-label-lg py-space-md rounded-lg active:scale-98 transition-transform shadow-sm flex items-center justify-center gap-space-sm mt-space-xs" type="submit">
+<span class="material-symbols-outlined">save</span>
+<span>Save Observation to Ledger</span>
+</button>
+</form>
+</div>
+<!-- Success Toast (Hidden by default) -->
+<div class="fixed bottom-24 inset-x-gutter bg-inverse-surface text-inverse-on-surface p-space-md rounded-xl shadow-xl flex items-center justify-between opacity-0 pointer-events-none transition-opacity duration-300 z-50" id="toast">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary-fixed">check_circle</span>
+<div>
+<h4 class="font-label-md text-inverse-on-surface">Observation Saved!</h4>
+<p class="text-body-sm text-inverse-surface/80">Queued for sync when online.</p>
+</div>
+</div>
+</div>
+<!-- Client-side Interactive Script -->
+<script>
+    // Material Category Filtering
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    const priceCards = document.querySelectorAll('[data-category]');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active classes on pills
+        filterButtons.forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary');
+          b.classList.add('bg-surface-container-high', 'text-on-surface');
+        });
+        btn.classList.remove('bg-surface-container-high', 'text-on-surface');
+        btn.classList.add('bg-primary', 'text-on-primary');
+
+        const filter = btn.getAttribute('data-filter');
+        priceCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Offline / Live Toggle simulation
+    const toggleOfflineBtn = document.getElementById('toggle-offline-mode');
+    const networkStatusText = document.getElementById('network-status-text');
+    const cacheTimeTexts = document.querySelectorAll('.cache-time-text span:last-child');
+    let isOffline = false;
+
+    toggleOfflineBtn.addEventListener('click', () => {
+      isOffline = !isOffline;
+      const icon = toggleOfflineBtn.querySelector('.material-symbols-outlined');
+      
+      if (isOffline) {
+        icon.textContent = 'cloud_off';
+        icon.classList.remove('text-secondary');
+        icon.classList.add('text-error');
+        networkStatusText.textContent = 'Offline Mode';
+        cacheTimeTexts.forEach(el => {
+          el.textContent = 'Updated 2 days ago (Cached)';
+        });
+      } else {
+        icon.textContent = 'wifi';
+        icon.classList.remove('text-error');
+        icon.classList.add('text-secondary');
+        networkStatusText.textContent = 'Live Feed';
+        cacheTimeTexts.forEach(el => {
+          el.textContent = 'Updated today, 10:30 AM';
+        });
+      }
+    });
+
+    // Form submission handling
+    const observationForm = document.getElementById('observation-form');
+    const toast = document.getElementById('toast');
+
+    observationForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Show toast
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+
+      // Reset form
+      observationForm.reset();
+
+      // Hide toast after 3 seconds
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 3500);
+    });
+  </script>
+</div></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]" data-active-classes="bg-primary-container text-on-primary-container font-bold"><div class="flex justify-around items-center h-20 px-gutter"><a class="flex flex-col items-center justify-center gap-space-xs w-16 h-16 text-on-surface-variant transition-all rounded-xl" data-path="home" href="#"><span class="material-symbols-outlined">home</span><span class="text-label-sm">Home</span></a><a class="flex flex-col items-center justify-center gap-space-xs w-16 h-16 text-on-surface-variant transition-all rounded-xl" data-path="price-board" href="#"><span class="material-symbols-outlined">trending_up</span><span class="text-label-sm">Prices</span></a><a class="flex flex-col items-center justify-center gap-space-xs w-16 h-16 text-on-surface-variant transition-all rounded-xl" data-path="sync-centre" href="#"><span class="material-symbols-outlined">sync</span><span class="text-label-sm">Sync</span></a><a class="flex flex-col items-center justify-center gap-space-xs w-16 h-16 text-on-surface-variant transition-all rounded-xl" data-path="settings" href="#"><span class="material-symbols-outlined">settings</span><span class="text-label-sm">Settings</span></a></div></nav></body></html>

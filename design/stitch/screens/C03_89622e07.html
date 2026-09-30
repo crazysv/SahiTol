@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-container": "#fffbff",
+          "inverse-on-surface": "#f3f0ea",
+          "surface-container-low": "#f6f3ed",
+          "on-error-container": "#93000a",
+          "inverse-surface": "#31312d",
+          "surface-container-high": "#ebe8e2",
+          "surface-container": "#f0eee8",
+          "tertiary-container": "#7a7371",
+          "surface-container-lowest": "#ffffff",
+          "on-secondary-fixed-variant": "#574500",
+          "on-primary": "#ffffff",
+          "surface-bright": "#fcf9f3",
+          "outline": "#8a726a",
+          "tertiary-fixed": "#eae0de",
+          "surface-container-highest": "#e5e2dc",
+          "surface": "#fcf9f3",
+          "on-tertiary": "#ffffff",
+          "secondary-fixed-dim": "#e9c349",
+          "on-primary-fixed": "#390c00",
+          "primary-fixed-dim": "#ffb59c",
+          "on-secondary-fixed": "#241a00",
+          "secondary": "#735c00",
+          "on-tertiary-fixed-variant": "#4b4544",
+          "on-primary-container": "#fffbff",
+          "surface-dim": "#dcdad4",
+          "on-secondary": "#ffffff",
+          "surface-variant": "#e5e2dc",
+          "secondary-container": "#fed65b",
+          "primary-container": "#bf542c",
+          "tertiary-fixed-dim": "#cec4c3",
+          "surface-tint": "#a23e18",
+          "on-error": "#ffffff",
+          "inverse-primary": "#ffb59c",
+          "error": "#ba1a1a",
+          "on-background": "#1c1c18",
+          "outline-variant": "#dec0b7",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed-root": "#1f1b1a",
+          "on-surface-variant": "#57423b",
+          "on-primary-fixed-variant": "#822801",
+          "primary": "#9f3c16",
+          "primary-fixed": "#ffdbcf",
+          "tertiary": "#615a59",
+          "secondary-fixed": "#ffe088",
+          "background": "#fcf9f3",
+          "on-surface": "#1c1c18",
+          "on-secondary-container": "#745c00"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "gutter": "16px",
+          "space-lg": "24px",
+          "space-sm": "8px",
+          "space-xs": "4px",
+          "space-md": "16px",
+          "space-xl": "32px",
+          "margin": "16px"
+        },
+        "fontFamily": {
+          "body-md": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "headline-md": ["Sora"],
+          "headline-lg-mobile": ["Sora"],
+          "headline-lg": ["Sora"],
+          "label-sm": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Sora"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "label-lg": ["Plus Jakarta Sans"],
+          "headline-xl": ["Sora"]
+        },
+        "fontSize": {
+          "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+          "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+          "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+          "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+          "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+          "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],
+          "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+          "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+          "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+          "label-lg": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],
+          "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }]
+        }
+      }
+    }
+  }
+</script><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl pt-safe"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="bg-primary text-on-primary font-headline-md px-space-xs py-1 rounded text-headline-md">सहीTol</div><div class="flex flex-col"><span class="text-label-sm font-headline-md uppercase tracking-wider text-on-surface">SahiTol</span><span class="text-[10px] text-on-surface-variant">Collector App</span></div></div><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1 bg-surface-container-high px-space-sm py-1 rounded-full text-label-sm text-secondary"><span class="w-2 h-2 rounded-full bg-secondary"></span><span>Offline Ready</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full px-gutter pt-16 pb-20 bg-surface flex-1"><div class="flex flex-col w-full pb-10">
+<!-- Warm Welcome & Work Table Intro -->
+<div class="flex items-center justify-between mb-space-md pt-2">
+<div>
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">नमित / Namit's Work Table</span>
+<h1 class="text-headline-lg-mobile font-headline-lg text-on-surface">आज का बही-खाता</h1>
+</div>
+<div class="flex items-center gap-space-xs bg-secondary-container text-on-secondary-container px-space-sm py-1.5 rounded-xl font-label-md shadow-sm">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>Duty Active</span>
+</div>
+</div>
+<!-- Dominant Primary Action Button: SELL MATERIAL / सामग्री बेचें -->
+<div class="mb-space-lg">
+<button class="w-full bg-primary text-on-primary py-4 px-space-md rounded-xl font-headline-md text-headline-md flex items-center justify-between shadow-[0_4px_20px_rgba(159,60,22,0.3)] active:scale-[0.98] transition-all relative overflow-hidden group" onclick="openSellModal()">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-on-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[24px]">scale</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="text-headline-md leading-tight">सामग्री बेचें</span>
+<span class="text-body-sm text-primary-fixed font-body-sm">SELL MATERIAL &amp; WEIGH</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-primary text-[28px] bg-on-primary/10 p-2 rounded-lg">arrow_forward</span>
+</button>
+</div>
+<!-- Quick-Status Strips (Horizontal Scrollable Marquee/Strip) -->
+<div class="mb-space-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="text-label-md text-on-surface-variant font-headline-md">त्वरित स्थिति / Quick Status</span>
+<span class="text-label-sm text-primary">लाइव बाज़ार</span>
+</div>
+<div class="flex gap-space-sm overflow-x-auto pb-2 -mx-gutter px-gutter no-scrollbar">
+<!-- Prices -->
+<div class="flex-shrink-0 bg-surface-container-low p-space-sm rounded-xl min-w-[130px] shadow-sm flex flex-col justify-between cursor-pointer active:scale-95 transition-transform" onclick="showQuickDetail('prices')">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="text-label-sm">आज के भाव</span>
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+</div>
+<span class="text-headline-md text-on-surface">₹24.50<span class="text-body-sm text-on-surface-variant">/kg</span></span>
+<span class="text-[10px] text-secondary font-label-sm mt-1">KABADI RATES</span>
+</div>
+<!-- My Lots -->
+<div class="flex-shrink-0 bg-surface-container-low p-space-sm rounded-xl min-w-[130px] shadow-sm flex flex-col justify-between cursor-pointer active:scale-95 transition-transform" onclick="showQuickDetail('lots')">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="text-label-sm">मेरे लॉट</span>
+<span class="material-symbols-outlined text-[16px]">inventory_2</span>
+</div>
+<span class="text-headline-md text-on-surface">14 Lots</span>
+<span class="text-[10px] text-primary font-label-sm mt-1">420 kg total</span>
+</div>
+<!-- My Earnings -->
+<div class="flex-shrink-0 bg-surface-container-low p-space-sm rounded-xl min-w-[130px] shadow-sm flex flex-col justify-between cursor-pointer active:scale-95 transition-transform" onclick="showQuickDetail('earnings')">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="text-label-sm">कमाई</span>
+<span class="material-symbols-outlined text-[16px]">payments</span>
+</div>
+<span class="text-headline-md text-on-surface">₹12,450</span>
+<span class="text-[10px] text-secondary font-label-sm mt-1">This Week</span>
+</div>
+<!-- Recyclers -->
+<div class="flex-shrink-0 bg-surface-container-low p-space-sm rounded-xl min-w-[130px] shadow-sm flex flex-col justify-between cursor-pointer active:scale-95 transition-transform" onclick="showQuickDetail('recyclers')">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="text-label-sm">रिसाइकिलर</span>
+<span class="material-symbols-outlined text-[16px]">factory</span>
+</div>
+<span class="text-headline-md text-on-surface">4 Active</span>
+<span class="text-[10px] text-primary font-label-sm mt-1">Nearest 2.4km</span>
+</div>
+<!-- Safety -->
+<div class="flex-shrink-0 bg-surface-container-low p-space-sm rounded-xl min-w-[130px] shadow-sm flex flex-col justify-between cursor-pointer active:scale-95 transition-transform" onclick="showQuickDetail('safety')">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="text-label-sm">सुरक्षा</span>
+<span class="material-symbols-outlined text-[16px]">shield</span>
+</div>
+<span class="text-headline-md text-on-surface">Verified</span>
+<span class="text-[10px] text-secondary font-label-sm mt-1">Kit Issued</span>
+</div>
+</div>
+</div>
+<!-- Bottom Work-Waiting Section (Paper Slips on a Table Metaphor) -->
+<div class="mb-space-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<h2 class="text-headline-md font-headline-md text-on-surface">2 items waiting to sync</h2>
+</div>
+<button class="text-label-sm text-primary font-label-md bg-primary-fixed px-space-sm py-1 rounded-lg" onclick="triggerSyncAll()">सिंक करें</button>
+</div>
+<div class="relative bg-surface-container-lowest p-space-md rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] transform rotate-[-0.5deg] border-l-4 border-primary">
+<div class="absolute -top-3 right-4 bg-error-container text-on-error-container text-[10px] px-2 py-0.5 rounded font-label-sm shadow-sm">
+        सिंक होने बाकी हैं
+      </div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="text-headline-md text-on-surface">Mixed Paper &amp; Cartons</span>
+<div class="text-body-sm text-on-surface-variant flex items-center gap-2 mt-0.5">
+<span>वजन: <strong>48.5 kg</strong></span>
+<span>•</span>
+<span class="bg-surface-container-high px-1.5 py-0.5 rounded text-[12px]">Dry &amp; Clean</span>
+</div>
+</div>
+<span class="text-headline-md text-primary">₹970</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-container">
+<span class="text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Aaj, 02:45 PM
+        </span>
+<span class="text-label-sm text-error flex items-center gap-1 bg-error-container/40 px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-[14px]">sync_problem</span> सिंक हो रहा है
+        </span>
+</div>
+</div>
+<!-- Second paper slip stacked slightly -->
+<div class="relative bg-surface-container-lowest p-space-md rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] transform rotate-[0.5deg] mt-3 border-l-4 border-secondary">
+<div class="absolute -top-3 right-4 bg-secondary-container text-on-secondary-container text-[10px] px-2 py-0.5 rounded font-label-sm shadow-sm">
+        स्थानीय सेव
+      </div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="text-headline-md text-on-surface">Iron Scrap (लोहा)</span>
+<div class="text-body-sm text-on-surface-variant flex items-center gap-2 mt-0.5">
+<span>वजन: <strong>112.0 kg</strong></span>
+<span>•</span>
+<span class="bg-surface-container-high px-1.5 py-0.5 rounded text-[12px]">Heavy Grade</span>
+</div>
+</div>
+<span class="text-headline-md text-secondary">₹3,360</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-container">
+<span class="text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Aaj, 11:20 AM
+        </span>
+<span class="text-label-sm text-secondary flex items-center gap-1 bg-secondary-container/40 px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-[14px]">phone_android</span> फोन पर सेव है
+        </span>
+</div>
+</div>
+</div>
+<!-- Recent Material Ledger List -->
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<h2 class="text-headline-md font-headline-md text-on-surface">हाल की सामग्री / Recent Lots</h2>
+<span class="text-label-sm text-on-surface-variant">आज के 5 लॉट</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Item 1: Synchronized -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface font-headline-md">
+<span class="material-symbols-outlined text-primary">recycling</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-headline-md text-on-surface">PET Plastic Bottles</span>
+<span class="text-[10px] bg-secondary-container text-on-secondary-container px-1.5 py-0.5 rounded-full font-label-sm">Grade A</span>
+</div>
+<div class="text-body-sm text-on-surface-variant">32 kg • ₹18/kg</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-headline-md text-on-surface">₹576</span>
+<span class="text-[11px] text-secondary flex items-center gap-1 mt-1 font-label-sm">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">done_all</span> सिंक हो गया
+          </span>
+</div>
+</div>
+<!-- Item 2: Synchronized -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface font-headline-md">
+<span class="material-symbols-outlined text-primary">newspaper</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-headline-md text-on-surface">Old Newspapers</span>
+<span class="text-[10px] bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded-full font-label-sm">Dry Bundle</span>
+</div>
+<div class="text-body-sm text-on-surface-variant">65 kg • ₹22/kg</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-headline-md text-on-surface">₹1,430</span>
+<span class="text-[11px] text-secondary flex items-center gap-1 mt-1 font-label-sm">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">done_all</span> सिंक हो गया
+          </span>
+</div>
+</div>
+<!-- Item 3: Saved locally -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface font-headline-md">
+<span class="material-symbols-outlined text-primary">bolt</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-headline-md text-on-surface">Copper Wire</span>
+<span class="text-[10px] bg-primary-fixed text-on-primary-fixed px-1.5 py-0.5 rounded-full font-label-sm">Stripped</span>
+</div>
+<div class="text-body-sm text-on-surface-variant">4.2 kg • ₹450/kg</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-headline-md text-on-surface">₹1,890</span>
+<span class="text-[11px] text-on-surface-variant flex items-center gap-1 mt-1 font-label-sm">
+<span class="material-symbols-outlined text-[14px]">phone_android</span> फोन पर सेव है
+          </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Modal Overlay (Hidden by default) -->
+<div class="fixed inset-0 bg-inverse-surface/60 backdrop-blur-sm z-50 flex items-end justify-center hidden opacity-0 transition-opacity duration-300" id="quickModal">
+<div class="bg-surface w-full max-w-lg rounded-t-2xl p-space-lg shadow-2xl translate-y-full transition-transform duration-300 max-h-[707px] overflow-y-auto" id="modalContent">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="text-headline-lg font-headline-lg text-on-surface" id="modalTitle">विवरण</h3>
+<button class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface" onclick="closeQuickDetail()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="text-body-md text-on-surface-variant space-y-4" id="modalBody">
+<!-- Content injected dynamically -->
+</div>
+<div class="mt-space-lg pt-4 border-t border-surface-container">
+<button class="w-full bg-primary text-on-primary py-3 rounded-xl font-headline-md" onclick="closeQuickDetail()">समझ गए / Close</button>
+</div>
+</div>
+</div>
+<script>
+    function openSellModal() {
+      const modal = document.getElementById('quickModal');
+      const title = document.getElementById('modalTitle');
+      const body = document.getElementById('modalBody');
+      
+      title.innerText = "सामग्री की एंट्री / New Weigh-slip";
+      body.innerHTML = `
+        <div class="space-y-4">
+          <div>
+            <label class="text-label-md text-on-surface block mb-1">सामग्री का प्रकार / Material Category</label>
+            <select class="w-full bg-surface-container p-3 rounded-xl text-on-surface border-0 font-body-md">
+              <option>लोहा / Iron Scrap (₹30/kg)</option>
+              <option>कागज / Mixed Paper (₹20/kg)</option>
+              <option>प्लास्टिक / PET Bottles (₹18/kg)</option>
+              <option>तांबा / Copper (₹450/kg)</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-label-md text-on-surface block mb-1">वजन (किलोग्राम में) / Weight (kg)</label>
+            <input type="number" placeholder="0.0" class="w-full bg-surface-container p-3 rounded-xl text-on-surface border-0 font-body-md" value="25.0">
+          </div>
+          <div>
+            <label class="text-label-md text-on-surface block mb-1">ग्राहक का नाम / Customer Name</label>
+            <input type="text" placeholder="Enter name or phone" class="w-full bg-surface-container p-3 rounded-xl text-on-surface border-0 font-body-md" value="Ramesh Kumar">
+          </div>
+          <div class="bg-primary-fixed p-3 rounded-xl flex items-center justify-between text-on-primary-fixed">
+            <span class="text-label-md">कुल देय राशि / Total Payout</span>
+            <span class="text-headline-md">₹750.00</span>
+          </div>
+        </div>
+      `;
+      
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        document.getElementById('modalContent').classList.remove('translate-y-full');
+      }, 10);
+    }
+
+    function showQuickDetail(type) {
+      const modal = document.getElementById('quickModal');
+      const title = document.getElementById('modalTitle');
+      const body = document.getElementById('modalBody');
+      
+      let titleText = "";
+      let htmlContent = "";
+      
+      if(type === 'prices') {
+        titleText = "आज के बाजार भाव / Today's Rates";
+        htmlContent = `
+          <div class="space-y-3">
+            <div class="flex justify-between items-center p-3 bg-surface-container rounded-xl">
+              <span class="font-headline-md text-on-surface">लोहा (Heavy Iron)</span>
+              <span class="text-primary font-headline-md">₹30.00 / kg</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-surface-container rounded-xl">
+              <span class="font-headline-md text-on-surface">अखबार (Newspaper)</span>
+              <span class="text-primary font-headline-md">₹22.00 / kg</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-surface-container rounded-xl">
+              <span class="font-headline-md text-on-surface">प्लास्टिक बोतल (PET)</span>
+              <span class="text-primary font-headline-md">₹18.00 / kg</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-surface-container rounded-xl">
+              <span class="font-headline-md text-on-surface">तांबा (Copper)</span>
+              <span class="text-primary font-headline-md">₹450.00 / kg</span>
+            </div>
+          </div>
+        `;
+      } else if(type === 'lots') {
+        titleText = "मेरे सक्रिय लॉट / My Active Lots";
+        htmlContent = `<p>आपके पास कुल 14 लॉट हैं जो गोदाम में प्रोसेस होने के लिए तैयार हैं। कुल वजन लगभग 420 किलोग्राम है।</p>`;
+      } else if(type === 'earnings') {
+        titleText = "इस सप्ताह की कमाई / Weekly Earnings";
+        htmlContent = `
+          <div class="bg-surface-container p-4 rounded-xl text-center mb-4">
+            <span class="text-label-sm text-on-surface-variant">कुल भुगतान</span>
+            <div class="text-headline-xl text-primary font-headline-xl">₹12,450</div>
+            <span class="text-body-sm text-secondary">पिछले हफ्ते से 14% अधिक</span>
+          </div>
+        `;
+      } else if(type === 'recyclers') {
+        titleText = "निकटवर्ती रिसाइकिलर / Nearby Recyclers";
+        htmlContent = `<p>राजधानी रिसाइकिलिंग यूनिट (2.4 किमी) - सामग्री स्वीकार कर रहे हैं।<br>ग्रीन अर्थ प्लांट (5.1 किमी) - फुल कैपेसिटी।</p>`;
+      } else if(type === 'safety') {
+        titleText = "सुरक्षा और सत्यापन / Safety & Compliance";
+        htmlContent = `<p>आपका सुरक्षा गियर किट वेरिफाइड है। दस्ताने और रिफ्लेक्टिव जैकेट अनिवार्य हैं। कोई दुर्घटना रिपोर्ट नहीं की गई।</p>`;
+      }
+      
+      title.innerText = titleText;
+      body.innerHTML = htmlContent;
+      
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        document.getElementById('modalContent').classList.remove('translate-y-full');
+      }, 10);
+    }
+
+    function closeQuickDetail() {
+      const modal = document.getElementById('quickModal');
+      modal.classList.add('opacity-0');
+      document.getElementById('modalContent').classList.add('translate-y-full');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+
+    function triggerSyncAll() {
+      alert("सिंक प्रक्रिया शुरू हो गई है / Syncing offline slips...");
+    }
+  </script>
+</div></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]" data-active-classes="bg-primary-container text-on-primary-container font-bold"><div class="flex justify-around items-center h-20 px-gutter"><a aria-current="page" class="flex flex-col items-center justify-center gap-space-xs w-16 h-16 transition-all rounded-xl bg-primary-container text-on-primary-container font-bold" data-path="home" href="#"><span class="material-symbols-outlined">home</span><span class="text-label-sm">Home</span></a><a class="flex flex-col items-center justify-center gap-space-xs w-16 h-16 text-on-surface-variant transition-all rounded-xl" data-path="sync-centre" href="#"><span class="material-symbols-outlined">sync</span><span class="text-label-sm">Sync</span></a><a class="flex flex-col items-center justify-center gap-space-xs w-16 h-16 text-on-surface-variant transition-all rounded-xl" data-path="settings" href="#"><span class="material-symbols-outlined">settings</span><span class="text-label-sm">Settings</span></a></div></nav></body></html>

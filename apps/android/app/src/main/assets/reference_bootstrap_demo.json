@@ -1,0 +1,1772 @@
+{
+  "metadata": {
+    "snapshot_version": "REF-DEMO-2026-09-29",
+    "generated_at": "2026-09-28T21:34:13.522263+00:00",
+    "expires_at": "2026-12-27T21:34:13.522263+00:00",
+    "opaque_cursor": "c2FoaXRvbF9jdXJfdjE6MQ==",
+    "region": "DELHI_NCR",
+    "language": "hi",
+    "role": "COLLECTOR",
+    "is_demo": true,
+    "disclaimer": "Labelled demonstration cache for initial offline activation. Disjoint from real commercial transactions."
+  },
+  "policy": {
+    "policy_version": "POLICY_2026_V1",
+    "max_weight_grams": 50000000,
+    "max_active_drafts": 100,
+    "price_freshness_days": 30,
+    "sync_batch_limit": 50,
+    "allowed_units": [
+      "kg",
+      "g",
+      "piece"
+    ],
+    "default_currency": "INR",
+    "cash_settlement_enabled": true,
+    "disclaimer": "Indicative prices are market estimates, not binding commitments or statutory EPR valuations."
+  },
+  "categories": [
+    {
+      "id": "PCB",
+      "code": "PCB",
+      "label_key": "category.pcb.title",
+      "display_order": 1,
+      "active": true
+    },
+    {
+      "id": "BATTERY",
+      "code": "BATTERY",
+      "label_key": "category.battery.title",
+      "display_order": 2,
+      "active": true
+    },
+    {
+      "id": "CRT",
+      "code": "CRT",
+      "label_key": "category.crt.title",
+      "display_order": 3,
+      "active": true
+    },
+    {
+      "id": "LCD",
+      "code": "LCD",
+      "label_key": "category.lcd.title",
+      "display_order": 4,
+      "active": true
+    },
+    {
+      "id": "CABLES",
+      "code": "CABLES",
+      "label_key": "category.cables.title",
+      "display_order": 5,
+      "active": true
+    },
+    {
+      "id": "MOTORS",
+      "code": "MOTORS",
+      "label_key": "category.motors.title",
+      "display_order": 6,
+      "active": true
+    },
+    {
+      "id": "PLASTICS",
+      "code": "PLASTICS",
+      "label_key": "category.plastics.title",
+      "display_order": 7,
+      "active": true
+    },
+    {
+      "id": "METALS",
+      "code": "METALS",
+      "label_key": "category.metals.title",
+      "display_order": 8,
+      "active": true
+    },
+    {
+      "id": "MIXED_ELECTRONICS",
+      "code": "MIXED_ELECTRONICS",
+      "label_key": "category.mixed_electronics.title",
+      "display_order": 9,
+      "active": true
+    },
+    {
+      "id": "OTHER",
+      "code": "OTHER",
+      "label_key": "category.other.title",
+      "display_order": 10,
+      "active": true
+    },
+    {
+      "id": "UNKNOWN",
+      "code": "UNKNOWN",
+      "label_key": "category.unknown.title",
+      "display_order": 11,
+      "active": true
+    }
+  ],
+  "materials": [
+    {
+      "id": "MAT-PCB-01",
+      "category_id": "PCB",
+      "subcategory_code": "PCB_HIGH_GRADE",
+      "description_key": "material.pcb.high_grade",
+      "condition_options": [
+        "INTACT",
+        "DAMAGED",
+        "DEPOPULATED",
+        "BURNT"
+      ],
+      "allowed_units": "kg,g",
+      "default_route": "AUTHORIZED_EWASTE",
+      "route_requires_context": false,
+      "safety_guide_ids": [
+        "SG-PCB-01",
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-PCB-02",
+      "category_id": "PCB",
+      "subcategory_code": "PCB_LOW_GRADE",
+      "description_key": "material.pcb.low_grade",
+      "condition_options": [
+        "INTACT",
+        "DAMAGED",
+        "DEPOPULATED",
+        "BURNT"
+      ],
+      "allowed_units": "kg,g",
+      "default_route": "AUTHORIZED_EWASTE",
+      "route_requires_context": false,
+      "safety_guide_ids": [
+        "SG-PCB-01",
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-BAT-01",
+      "category_id": "BATTERY",
+      "subcategory_code": "BAT_LEAD_ACID",
+      "description_key": "material.battery.lead_acid",
+      "condition_options": [
+        "INTACT",
+        "LEAKING",
+        "CORRODED",
+        "DAMAGED",
+        "TERMINALS_ISOLATED"
+      ],
+      "allowed_units": "kg,piece",
+      "default_route": "BATTERY_ISOLATION",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-BATTERY-01",
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-BAT-02",
+      "category_id": "BATTERY",
+      "subcategory_code": "BAT_LI_ION",
+      "description_key": "material.battery.li_ion",
+      "condition_options": [
+        "INTACT",
+        "SWOLLEN",
+        "PUNCTURED",
+        "LEAKING",
+        "TERMINALS_TAPED"
+      ],
+      "allowed_units": "kg,piece",
+      "default_route": "BATTERY_ISOLATION",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-BATTERY-02",
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-BAT-03",
+      "category_id": "BATTERY",
+      "subcategory_code": "BAT_OTHER_CHEM",
+      "description_key": "material.battery.other_chem",
+      "condition_options": [
+        "INTACT",
+        "CORRODED",
+        "LEAKING"
+      ],
+      "allowed_units": "kg,piece",
+      "default_route": "BATTERY_ISOLATION",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-BATTERY-03",
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-BAT-04",
+      "category_id": "BATTERY",
+      "subcategory_code": "BAT_UNKNOWN",
+      "description_key": "material.battery.unknown",
+      "condition_options": [
+        "INTACT",
+        "DAMAGED",
+        "UNLABELED"
+      ],
+      "allowed_units": "kg,piece",
+      "default_route": "BATTERY_ISOLATION",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-BATTERY-03",
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-CRT-01",
+      "category_id": "CRT",
+      "subcategory_code": "CRT_TUBE",
+      "description_key": "material.crt.tube",
+      "condition_options": [
+        "INTACT",
+        "CRACKED_GLASS",
+        "BROKEN_FUNNEL"
+      ],
+      "allowed_units": "piece,kg",
+      "default_route": "HAZARDOUS_DISPOSAL",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-CRT-01",
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-LCD-01",
+      "category_id": "LCD",
+      "subcategory_code": "LCD_PANEL",
+      "description_key": "material.lcd.panel",
+      "condition_options": [
+        "INTACT",
+        "CRACKED_SCREEN",
+        "STRIPPED_BACKLIGHT"
+      ],
+      "allowed_units": "piece,kg",
+      "default_route": "AUTHORIZED_EWASTE",
+      "route_requires_context": false,
+      "safety_guide_ids": [
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-CAB-01",
+      "category_id": "CABLES",
+      "subcategory_code": "CAB_COPPER",
+      "description_key": "material.cables.copper",
+      "condition_options": [
+        "INSULATED",
+        "PARTIALLY_STRIPPED",
+        "BARE",
+        "BURNT"
+      ],
+      "allowed_units": "kg,g",
+      "default_route": "GENERAL_RECYCLING",
+      "route_requires_context": false,
+      "safety_guide_ids": [
+        "SG-CABLE-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-CAB-02",
+      "category_id": "CABLES",
+      "subcategory_code": "CAB_ALUMINUM",
+      "description_key": "material.cables.aluminum",
+      "condition_options": [
+        "INSULATED",
+        "BARE",
+        "MIXED"
+      ],
+      "allowed_units": "kg,g",
+      "default_route": "GENERAL_RECYCLING",
+      "route_requires_context": false,
+      "safety_guide_ids": [
+        "SG-CABLE-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-MOT-01",
+      "category_id": "MOTORS",
+      "subcategory_code": "MOT_ELECTRIC",
+      "description_key": "material.motors.electric",
+      "condition_options": [
+        "INTACT",
+        "OPENED",
+        "BURNT_WINDING"
+      ],
+      "allowed_units": "kg,piece",
+      "default_route": "GENERAL_RECYCLING",
+      "route_requires_context": false,
+      "safety_guide_ids": [
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-MOT-02",
+      "category_id": "MOTORS",
+      "subcategory_code": "MOT_COMPRESSOR",
+      "description_key": "material.motors.compressor",
+      "condition_options": [
+        "SEALED",
+        "DRAINED",
+        "UNSEALED"
+      ],
+      "allowed_units": "kg,piece",
+      "default_route": "GENERAL_RECYCLING",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-PLA-01",
+      "category_id": "PLASTICS",
+      "subcategory_code": "PLA_EWASTE_RIGID",
+      "description_key": "material.plastics.ewaste_rigid",
+      "condition_options": [
+        "CLEAN_CASING",
+        "CRUSHED",
+        "MIXED_FRAGMENTS"
+      ],
+      "allowed_units": "kg,g",
+      "default_route": "AUTHORIZED_EWASTE",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-PLASTIC-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-PLA-02",
+      "category_id": "PLASTICS",
+      "subcategory_code": "PLA_GENERAL_MIXED",
+      "description_key": "material.plastics.general_mixed",
+      "condition_options": [
+        "SORTED",
+        "MIXED_SCRAP"
+      ],
+      "allowed_units": "kg,g",
+      "default_route": "GENERAL_RECYCLING",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-PLASTIC-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-MET-01",
+      "category_id": "METALS",
+      "subcategory_code": "MET_COPPER",
+      "description_key": "material.metals.copper",
+      "condition_options": [
+        "BARE_BRIGHT",
+        "BURNT",
+        "MIXED"
+      ],
+      "allowed_units": "kg,g",
+      "default_route": "GENERAL_RECYCLING",
+      "route_requires_context": false,
+      "safety_guide_ids": [],
+      "active": true
+    },
+    {
+      "id": "MAT-MET-02",
+      "category_id": "METALS",
+      "subcategory_code": "MET_ALUMINUM",
+      "description_key": "material.metals.aluminum",
+      "condition_options": [
+        "EXTRUSION",
+        "CAST",
+        "MIXED"
+      ],
+      "allowed_units": "kg,g",
+      "default_route": "GENERAL_RECYCLING",
+      "route_requires_context": false,
+      "safety_guide_ids": [],
+      "active": true
+    },
+    {
+      "id": "MAT-MET-03",
+      "category_id": "METALS",
+      "subcategory_code": "MET_FERROUS",
+      "description_key": "material.metals.ferrous",
+      "condition_options": [
+        "HEAVY_IRON",
+        "SHEET_METAL",
+        "RUSTED"
+      ],
+      "allowed_units": "kg",
+      "default_route": "GENERAL_RECYCLING",
+      "route_requires_context": false,
+      "safety_guide_ids": [],
+      "active": true
+    },
+    {
+      "id": "MAT-MIX-01",
+      "category_id": "MIXED_ELECTRONICS",
+      "subcategory_code": "MIX_IT_EQUIP",
+      "description_key": "material.mixed.it_equip",
+      "condition_options": [
+        "INTACT",
+        "PARTIALLY_DISMANTLED",
+        "STRIPPED"
+      ],
+      "allowed_units": "kg,piece",
+      "default_route": "AUTHORIZED_EWASTE",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-MIXED-01",
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-MIX-02",
+      "category_id": "MIXED_ELECTRONICS",
+      "subcategory_code": "MIX_APPLIANCES",
+      "description_key": "material.mixed.appliances",
+      "condition_options": [
+        "INTACT",
+        "DAMAGED",
+        "SCRAP"
+      ],
+      "allowed_units": "kg,piece",
+      "default_route": "AUTHORIZED_EWASTE",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-MIXED-01",
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-OTH-01",
+      "category_id": "OTHER",
+      "subcategory_code": "OTH_RECYCLABLE",
+      "description_key": "material.other.recyclable",
+      "condition_options": [
+        "WORKING",
+        "SCRAP",
+        "DAMAGED"
+      ],
+      "allowed_units": "kg,piece",
+      "default_route": "REVIEW_REQUIRED",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-MIXED-01"
+      ],
+      "active": true
+    },
+    {
+      "id": "MAT-UNK-01",
+      "category_id": "UNKNOWN",
+      "subcategory_code": "UNK_UNIDENTIFIED",
+      "description_key": "material.unknown.unidentified",
+      "condition_options": [
+        "UNKNOWN",
+        "SUSPICIOUS",
+        "MIXED"
+      ],
+      "allowed_units": "kg,piece",
+      "default_route": "REVIEW_REQUIRED",
+      "route_requires_context": true,
+      "safety_guide_ids": [
+        "SG-MIXED-01",
+        "SG-DAMAGED-01"
+      ],
+      "active": true
+    }
+  ],
+  "aliases": [
+    {
+      "material_id": "MAT-PCB-01",
+      "language": "en",
+      "local_term": "Motherboard / Server PCB",
+      "normalized_term": "motherboard server pcb"
+    },
+    {
+      "material_id": "MAT-PCB-01",
+      "language": "en",
+      "local_term": "High-Grade PCB",
+      "normalized_term": "high grade pcb"
+    },
+    {
+      "material_id": "MAT-PCB-01",
+      "language": "en",
+      "local_term": "Computer Circuit Board",
+      "normalized_term": "computer circuit board"
+    },
+    {
+      "material_id": "MAT-PCB-01",
+      "language": "en",
+      "local_term": "Green Board",
+      "normalized_term": "green board"
+    },
+    {
+      "material_id": "MAT-PCB-01",
+      "language": "hi",
+      "local_term": "मदरबोर्ड",
+      "normalized_term": "मदरबोर्ड"
+    },
+    {
+      "material_id": "MAT-PCB-01",
+      "language": "hi",
+      "local_term": "हरा पत्ता",
+      "normalized_term": "हरा पत्ता"
+    },
+    {
+      "material_id": "MAT-PCB-01",
+      "language": "hi",
+      "local_term": "कंप्यूटर सर्किट बोर्ड",
+      "normalized_term": "कंप्यूटर सर्किट बोर्ड"
+    },
+    {
+      "material_id": "MAT-PCB-01",
+      "language": "mr",
+      "local_term": "मदरबोर्ड",
+      "normalized_term": "मदरबोर्ड"
+    },
+    {
+      "material_id": "MAT-PCB-01",
+      "language": "mr",
+      "local_term": "हिरवा बोर्ड",
+      "normalized_term": "हिरवा बोर्ड"
+    },
+    {
+      "material_id": "MAT-PCB-01",
+      "language": "mr",
+      "local_term": "कॉम्प्युटर सर्किट बोर्ड",
+      "normalized_term": "कॉम्प्युटर सर्किट बोर्ड"
+    },
+    {
+      "material_id": "MAT-PCB-02",
+      "language": "en",
+      "local_term": "Low-Grade Appliance Board",
+      "normalized_term": "low grade appliance board"
+    },
+    {
+      "material_id": "MAT-PCB-02",
+      "language": "en",
+      "local_term": "Brown Board",
+      "normalized_term": "brown board"
+    },
+    {
+      "material_id": "MAT-PCB-02",
+      "language": "en",
+      "local_term": "Power Supply Board",
+      "normalized_term": "power supply board"
+    },
+    {
+      "material_id": "MAT-PCB-02",
+      "language": "hi",
+      "local_term": "भूरा बोर्ड",
+      "normalized_term": "भूरा बोर्ड"
+    },
+    {
+      "material_id": "MAT-PCB-02",
+      "language": "hi",
+      "local_term": "लो-ग्रेड सर्किट बोर्ड",
+      "normalized_term": "लो ग्रेड सर्किट बोर्ड"
+    },
+    {
+      "material_id": "MAT-PCB-02",
+      "language": "hi",
+      "local_term": "टीवी सर्किट बोर्ड",
+      "normalized_term": "टीवी सर्किट बोर्ड"
+    },
+    {
+      "material_id": "MAT-PCB-02",
+      "language": "mr",
+      "local_term": "तपकिरी बोर्ड",
+      "normalized_term": "तपकिरी बोर्ड"
+    },
+    {
+      "material_id": "MAT-PCB-02",
+      "language": "mr",
+      "local_term": "कमी दर्जा बोर्ड",
+      "normalized_term": "कमी दर्जा बोर्ड"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "language": "en",
+      "local_term": "Lead-Acid Battery",
+      "normalized_term": "lead acid battery"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "language": "en",
+      "local_term": "Inverter Battery",
+      "normalized_term": "inverter battery"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "language": "en",
+      "local_term": "Car / Auto Battery",
+      "normalized_term": "car auto battery"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "language": "hi",
+      "local_term": "लेड एसिड बैटरी",
+      "normalized_term": "लेड एसिड बैटरी"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "language": "hi",
+      "local_term": "इन्वर्टर बैटरी",
+      "normalized_term": "इन्वर्टर बैटरी"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "language": "hi",
+      "local_term": "गाड़ी की बैटरी",
+      "normalized_term": "गाड़ी की बैटरी"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "language": "hi",
+      "local_term": "तेज़ाब वाली बैटरी",
+      "normalized_term": "तेज़ाब वाली बैटरी"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "language": "mr",
+      "local_term": "लेड ॲसिड बॅटरी",
+      "normalized_term": "लेड ॲसिड बॅटरी"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "language": "mr",
+      "local_term": "इन्व्हर्टर बॅटरी",
+      "normalized_term": "इन्व्हर्टर बॅटरी"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "language": "mr",
+      "local_term": "गाडीची बॅटरी",
+      "normalized_term": "गाडीची बॅटरी"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "language": "en",
+      "local_term": "Lithium-Ion Battery",
+      "normalized_term": "lithium ion battery"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "language": "en",
+      "local_term": "Mobile Battery",
+      "normalized_term": "mobile battery"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "language": "en",
+      "local_term": "Laptop Battery",
+      "normalized_term": "laptop battery"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "language": "en",
+      "local_term": "18650 Cell",
+      "normalized_term": "18650 cell"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "language": "hi",
+      "local_term": "लिथियम आयन बैटरी",
+      "normalized_term": "लिथियम आयन बैटरी"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "language": "hi",
+      "local_term": "मोबाइल की बैटरी",
+      "normalized_term": "मोबाइल की बैटरी"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "language": "hi",
+      "local_term": "लैपटॉप बैटरी",
+      "normalized_term": "लैपटॉप बैटरी"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "language": "mr",
+      "local_term": "लिथियम बॅटरी",
+      "normalized_term": "लिथियम बॅटरी"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "language": "mr",
+      "local_term": "मोबाईल बॅटरी",
+      "normalized_term": "मोबाईल बॅटरी"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "language": "mr",
+      "local_term": "लॅपटॉप बॅटरी",
+      "normalized_term": "लॅपटॉप बॅटरी"
+    },
+    {
+      "material_id": "MAT-BAT-03",
+      "language": "en",
+      "local_term": "Other Battery Chemistries",
+      "normalized_term": "other battery chemistries"
+    },
+    {
+      "material_id": "MAT-BAT-03",
+      "language": "en",
+      "local_term": "Button Cell",
+      "normalized_term": "button cell"
+    },
+    {
+      "material_id": "MAT-BAT-03",
+      "language": "en",
+      "local_term": "NiMH / NiCd Battery",
+      "normalized_term": "nimh nicd battery"
+    },
+    {
+      "material_id": "MAT-BAT-03",
+      "language": "hi",
+      "local_term": "अन्य बैटरी",
+      "normalized_term": "अन्य बैटरी"
+    },
+    {
+      "material_id": "MAT-BAT-03",
+      "language": "hi",
+      "local_term": "बटन सेल",
+      "normalized_term": "बटन सेल"
+    },
+    {
+      "material_id": "MAT-BAT-03",
+      "language": "hi",
+      "local_term": "घड़ी का सेल",
+      "normalized_term": "घड़ी का सेल"
+    },
+    {
+      "material_id": "MAT-BAT-03",
+      "language": "mr",
+      "local_term": "इतर बॅटरी",
+      "normalized_term": "इतर बॅटरी"
+    },
+    {
+      "material_id": "MAT-BAT-03",
+      "language": "mr",
+      "local_term": "बटन सेल",
+      "normalized_term": "बटन सेल"
+    },
+    {
+      "material_id": "MAT-BAT-04",
+      "language": "en",
+      "local_term": "Unknown Chemistry Battery",
+      "normalized_term": "unknown chemistry battery"
+    },
+    {
+      "material_id": "MAT-BAT-04",
+      "language": "en",
+      "local_term": "Unlabeled Battery",
+      "normalized_term": "unlabeled battery"
+    },
+    {
+      "material_id": "MAT-BAT-04",
+      "language": "hi",
+      "local_term": "अज्ञात बैटरी",
+      "normalized_term": "अज्ञात बैटरी"
+    },
+    {
+      "material_id": "MAT-BAT-04",
+      "language": "hi",
+      "local_term": "पहचान रहित सेल",
+      "normalized_term": "पहचान रहित सेल"
+    },
+    {
+      "material_id": "MAT-BAT-04",
+      "language": "mr",
+      "local_term": "अज्ञात बॅटरी",
+      "normalized_term": "अज्ञात बॅटरी"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "en",
+      "local_term": "Cathode Ray Tube / Monitor Glass",
+      "normalized_term": "cathode ray tube monitor glass"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "en",
+      "local_term": "CRT Monitor",
+      "normalized_term": "crt monitor"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "en",
+      "local_term": "Picture Tube",
+      "normalized_term": "picture tube"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "en",
+      "local_term": "Old Bulky TV",
+      "normalized_term": "old bulky tv"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "hi",
+      "local_term": "सीआरटी मॉनिटर",
+      "normalized_term": "सीआरटी मॉनिटर"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "hi",
+      "local_term": "पिक्चर ट्यूब",
+      "normalized_term": "पिक्चर ट्यूब"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "hi",
+      "local_term": "कांच वाला टीवी",
+      "normalized_term": "कांच वाला टीवी"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "mr",
+      "local_term": "काचेची ट्यूब",
+      "normalized_term": "काचेची ट्यूब"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "mr",
+      "local_term": "सीआरटी मॉनिटर",
+      "normalized_term": "सीआरटी मॉनिटर"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "mr",
+      "local_term": "पिक्चर ट्यूब",
+      "normalized_term": "पिक्चर ट्यूब"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "language": "mr",
+      "local_term": "जुना टीव्ही मॉनिटर",
+      "normalized_term": "जुना टीव्ही मॉनिटर"
+    },
+    {
+      "material_id": "MAT-LCD-01",
+      "language": "en",
+      "local_term": "LCD / LED Display Panel",
+      "normalized_term": "lcd led display panel"
+    },
+    {
+      "material_id": "MAT-LCD-01",
+      "language": "en",
+      "local_term": "Flat Screen Monitor",
+      "normalized_term": "flat screen monitor"
+    },
+    {
+      "material_id": "MAT-LCD-01",
+      "language": "en",
+      "local_term": "Laptop Display Panel",
+      "normalized_term": "laptop display panel"
+    },
+    {
+      "material_id": "MAT-LCD-01",
+      "language": "hi",
+      "local_term": "एलसीडी स्क्रीन",
+      "normalized_term": "एलसीडी स्क्रीन"
+    },
+    {
+      "material_id": "MAT-LCD-01",
+      "language": "hi",
+      "local_term": "एलईडी टीवी पैनल",
+      "normalized_term": "एलईडी टीवी पैनल"
+    },
+    {
+      "material_id": "MAT-LCD-01",
+      "language": "hi",
+      "local_term": "फ्लैट स्क्रीन",
+      "normalized_term": "फ्लैट स्क्रीन"
+    },
+    {
+      "material_id": "MAT-LCD-01",
+      "language": "mr",
+      "local_term": "एलसीडी स्क्रीन",
+      "normalized_term": "एलसीडी स्क्रीन"
+    },
+    {
+      "material_id": "MAT-LCD-01",
+      "language": "mr",
+      "local_term": "एलईडी टीव्ही",
+      "normalized_term": "एलईडी टीव्ही"
+    },
+    {
+      "material_id": "MAT-LCD-01",
+      "language": "mr",
+      "local_term": "फ्लॅट डिस्प्ले",
+      "normalized_term": "फ्लॅट डिस्प्ले"
+    },
+    {
+      "material_id": "MAT-CAB-01",
+      "language": "en",
+      "local_term": "Insulated Copper Wire / Cable",
+      "normalized_term": "insulated copper wire cable"
+    },
+    {
+      "material_id": "MAT-CAB-01",
+      "language": "en",
+      "local_term": "Copper Wire",
+      "normalized_term": "copper wire"
+    },
+    {
+      "material_id": "MAT-CAB-01",
+      "language": "en",
+      "local_term": "Power Cord",
+      "normalized_term": "power cord"
+    },
+    {
+      "material_id": "MAT-CAB-01",
+      "language": "hi",
+      "local_term": "तांबे का तार",
+      "normalized_term": "तांबे का तार"
+    },
+    {
+      "material_id": "MAT-CAB-01",
+      "language": "hi",
+      "local_term": "कॉपर वायर",
+      "normalized_term": "कॉपर वायर"
+    },
+    {
+      "material_id": "MAT-CAB-01",
+      "language": "hi",
+      "local_term": "बिजली का तार",
+      "normalized_term": "बिजली का तार"
+    },
+    {
+      "material_id": "MAT-CAB-01",
+      "language": "mr",
+      "local_term": "तांब्याची वायर",
+      "normalized_term": "तांब्याची वायर"
+    },
+    {
+      "material_id": "MAT-CAB-01",
+      "language": "mr",
+      "local_term": "कॉपर वायर",
+      "normalized_term": "कॉपर वायर"
+    },
+    {
+      "material_id": "MAT-CAB-01",
+      "language": "mr",
+      "local_term": "विजेची वायर",
+      "normalized_term": "विजेची वायर"
+    },
+    {
+      "material_id": "MAT-CAB-02",
+      "language": "en",
+      "local_term": "Aluminum Wiring / Communication Cable",
+      "normalized_term": "aluminum wiring communication cable"
+    },
+    {
+      "material_id": "MAT-CAB-02",
+      "language": "en",
+      "local_term": "Aluminum Cable",
+      "normalized_term": "aluminum cable"
+    },
+    {
+      "material_id": "MAT-CAB-02",
+      "language": "hi",
+      "local_term": "एल्युमिनियम तार",
+      "normalized_term": "एल्युमिनियम तार"
+    },
+    {
+      "material_id": "MAT-CAB-02",
+      "language": "hi",
+      "local_term": "अल्युमिनियम केबल",
+      "normalized_term": "अल्युमिनियम केबल"
+    },
+    {
+      "material_id": "MAT-CAB-02",
+      "language": "mr",
+      "local_term": "ॲल्युमिनियम वायर",
+      "normalized_term": "ॲल्युमिनियम वायर"
+    },
+    {
+      "material_id": "MAT-MOT-01",
+      "language": "en",
+      "local_term": "Electric Motor / Copper Windings",
+      "normalized_term": "electric motor copper windings"
+    },
+    {
+      "material_id": "MAT-MOT-01",
+      "language": "en",
+      "local_term": "Fan Motor",
+      "normalized_term": "fan motor"
+    },
+    {
+      "material_id": "MAT-MOT-01",
+      "language": "en",
+      "local_term": "Pump Motor",
+      "normalized_term": "pump motor"
+    },
+    {
+      "material_id": "MAT-MOT-01",
+      "language": "hi",
+      "local_term": "बिजली की मोटर",
+      "normalized_term": "बिजली की मोटर"
+    },
+    {
+      "material_id": "MAT-MOT-01",
+      "language": "hi",
+      "local_term": "पंखा मोटर",
+      "normalized_term": "पंखा मोटर"
+    },
+    {
+      "material_id": "MAT-MOT-01",
+      "language": "hi",
+      "local_term": "तांबे की वाइंडिंग",
+      "normalized_term": "तांबे की वाइंडिंग"
+    },
+    {
+      "material_id": "MAT-MOT-01",
+      "language": "mr",
+      "local_term": "विजेची मोटर",
+      "normalized_term": "विजेची मोटर"
+    },
+    {
+      "material_id": "MAT-MOT-01",
+      "language": "mr",
+      "local_term": "पंख्याची मोटर",
+      "normalized_term": "पंख्याची मोटर"
+    },
+    {
+      "material_id": "MAT-MOT-01",
+      "language": "mr",
+      "local_term": "कॉपर वाइंडिंग",
+      "normalized_term": "कॉपर वाइंडिंग"
+    },
+    {
+      "material_id": "MAT-MOT-02",
+      "language": "en",
+      "local_term": "Fridge / AC Compressor & Magnets",
+      "normalized_term": "fridge ac compressor magnets"
+    },
+    {
+      "material_id": "MAT-MOT-02",
+      "language": "en",
+      "local_term": "Compressor Pump",
+      "normalized_term": "compressor pump"
+    },
+    {
+      "material_id": "MAT-MOT-02",
+      "language": "hi",
+      "local_term": "फ्रिज कंप्रेसर",
+      "normalized_term": "फ्रिज कंप्रेसर"
+    },
+    {
+      "material_id": "MAT-MOT-02",
+      "language": "hi",
+      "local_term": "चुंबक",
+      "normalized_term": "चुंबक"
+    },
+    {
+      "material_id": "MAT-MOT-02",
+      "language": "mr",
+      "local_term": "फ्रिज कंप्रेसर",
+      "normalized_term": "फ्रिज कंप्रेसर"
+    },
+    {
+      "material_id": "MAT-MOT-02",
+      "language": "mr",
+      "local_term": "चुंबक",
+      "normalized_term": "चुंबक"
+    },
+    {
+      "material_id": "MAT-PLA-01",
+      "language": "en",
+      "local_term": "Rigid E-Waste Plastics (ABS / HIPS)",
+      "normalized_term": "rigid e waste plastics abs hips"
+    },
+    {
+      "material_id": "MAT-PLA-01",
+      "language": "en",
+      "local_term": "Electronic Casing Plastic",
+      "normalized_term": "electronic casing plastic"
+    },
+    {
+      "material_id": "MAT-PLA-01",
+      "language": "hi",
+      "local_term": "ई-वेस्ट प्लास्टिक",
+      "normalized_term": "ई वेस्ट प्लास्टिक"
+    },
+    {
+      "material_id": "MAT-PLA-01",
+      "language": "hi",
+      "local_term": "कंप्यूटर बॉडी प्लास्टिक",
+      "normalized_term": "कंप्यूटर बॉडी प्लास्टिक"
+    },
+    {
+      "material_id": "MAT-PLA-01",
+      "language": "mr",
+      "local_term": "ई-कचरा प्लास्टिक",
+      "normalized_term": "ई कचरा प्लास्टिक"
+    },
+    {
+      "material_id": "MAT-PLA-01",
+      "language": "mr",
+      "local_term": "बॉडी प्लास्टिक",
+      "normalized_term": "बॉडी प्लास्टिक"
+    },
+    {
+      "material_id": "MAT-PLA-02",
+      "language": "en",
+      "local_term": "General Mixed Plastics",
+      "normalized_term": "general mixed plastics"
+    },
+    {
+      "material_id": "MAT-PLA-02",
+      "language": "hi",
+      "local_term": "सामान्य प्लास्टिक",
+      "normalized_term": "सामान्य प्लास्टिक"
+    },
+    {
+      "material_id": "MAT-PLA-02",
+      "language": "mr",
+      "local_term": "सर्वसाधारण प्लास्टिक",
+      "normalized_term": "सर्वसाधारण प्लास्टिक"
+    },
+    {
+      "material_id": "MAT-MET-01",
+      "language": "en",
+      "local_term": "Scrap Copper (Bare / Heavy)",
+      "normalized_term": "scrap copper bare heavy"
+    },
+    {
+      "material_id": "MAT-MET-01",
+      "language": "en",
+      "local_term": "Copper Scrap",
+      "normalized_term": "copper scrap"
+    },
+    {
+      "material_id": "MAT-MET-01",
+      "language": "hi",
+      "local_term": "तांबा स्क्रैप",
+      "normalized_term": "तांबा स्क्रैप"
+    },
+    {
+      "material_id": "MAT-MET-01",
+      "language": "hi",
+      "local_term": "साफ तांबा",
+      "normalized_term": "साफ तांबा"
+    },
+    {
+      "material_id": "MAT-MET-01",
+      "language": "mr",
+      "local_term": "तांबे स्क्रॅप",
+      "normalized_term": "तांबे स्क्रॅप"
+    },
+    {
+      "material_id": "MAT-MET-01",
+      "language": "mr",
+      "local_term": "शुद्ध तांबे",
+      "normalized_term": "शुद्ध तांबे"
+    },
+    {
+      "material_id": "MAT-MET-02",
+      "language": "en",
+      "local_term": "Scrap Aluminum",
+      "normalized_term": "scrap aluminum"
+    },
+    {
+      "material_id": "MAT-MET-02",
+      "language": "hi",
+      "local_term": "एल्युमिनियम स्क्रैप",
+      "normalized_term": "एल्युमिनियम स्क्रैप"
+    },
+    {
+      "material_id": "MAT-MET-02",
+      "language": "mr",
+      "local_term": "ॲल्युमिनियम स्क्रॅप",
+      "normalized_term": "ॲल्युमिनियम स्क्रॅप"
+    },
+    {
+      "material_id": "MAT-MET-03",
+      "language": "en",
+      "local_term": "Iron & Steel Scrap",
+      "normalized_term": "iron steel scrap"
+    },
+    {
+      "material_id": "MAT-MET-03",
+      "language": "hi",
+      "local_term": "लोहा स्क्रैप",
+      "normalized_term": "लोहा स्क्रैप"
+    },
+    {
+      "material_id": "MAT-MET-03",
+      "language": "hi",
+      "local_term": "पत्री",
+      "normalized_term": "पत्री"
+    },
+    {
+      "material_id": "MAT-MET-03",
+      "language": "mr",
+      "local_term": "लोखंड स्क्रॅप",
+      "normalized_term": "लोखंड स्क्रॅप"
+    },
+    {
+      "material_id": "MAT-MET-03",
+      "language": "mr",
+      "local_term": "पत्रा",
+      "normalized_term": "पत्रा"
+    },
+    {
+      "material_id": "MAT-MIX-01",
+      "language": "en",
+      "local_term": "Mixed IT & Telecom Equipment",
+      "normalized_term": "mixed it telecom equipment"
+    },
+    {
+      "material_id": "MAT-MIX-01",
+      "language": "hi",
+      "local_term": "मिक्स कंप्यूटर उपकरण",
+      "normalized_term": "मिक्स कंप्यूटर उपकरण"
+    },
+    {
+      "material_id": "MAT-MIX-01",
+      "language": "mr",
+      "local_term": "मिश्र आयटी उपकरणे",
+      "normalized_term": "मिश्र आयटी उपकरणे"
+    },
+    {
+      "material_id": "MAT-MIX-02",
+      "language": "en",
+      "local_term": "Small Household Appliances / Mixed E-Waste",
+      "normalized_term": "small household appliances mixed e waste"
+    },
+    {
+      "material_id": "MAT-MIX-02",
+      "language": "hi",
+      "local_term": "छोटे घरेलू उपकरण",
+      "normalized_term": "छोटे घरेलू उपकरण"
+    },
+    {
+      "material_id": "MAT-MIX-02",
+      "language": "mr",
+      "local_term": "लहान घरगुती उपकरणे",
+      "normalized_term": "लहान घरगुती उपकरणे"
+    },
+    {
+      "material_id": "MAT-OTH-01",
+      "language": "en",
+      "local_term": "Other Miscellaneous Recyclables",
+      "normalized_term": "other miscellaneous recyclables"
+    },
+    {
+      "material_id": "MAT-OTH-01",
+      "language": "hi",
+      "local_term": "अन्य सामग्री",
+      "normalized_term": "अन्य सामग्री"
+    },
+    {
+      "material_id": "MAT-OTH-01",
+      "language": "mr",
+      "local_term": "इतर साहित्य",
+      "normalized_term": "इतर साहित्य"
+    },
+    {
+      "material_id": "MAT-UNK-01",
+      "language": "en",
+      "local_term": "Unidentified E-Waste / Component",
+      "normalized_term": "unidentified e waste component"
+    },
+    {
+      "material_id": "MAT-UNK-01",
+      "language": "en",
+      "local_term": "Unknown Item",
+      "normalized_term": "unknown item"
+    },
+    {
+      "material_id": "MAT-UNK-01",
+      "language": "hi",
+      "local_term": "अज्ञात सामान",
+      "normalized_term": "अज्ञात सामान"
+    },
+    {
+      "material_id": "MAT-UNK-01",
+      "language": "hi",
+      "local_term": "पहचान नहीं",
+      "normalized_term": "पहचान नहीं"
+    },
+    {
+      "material_id": "MAT-UNK-01",
+      "language": "hi",
+      "local_term": "समझ नहीं आ रहा",
+      "normalized_term": "समझ नहीं आ रहा"
+    },
+    {
+      "material_id": "MAT-UNK-01",
+      "language": "mr",
+      "local_term": "अज्ञात वस्तू",
+      "normalized_term": "अज्ञात वस्तू"
+    },
+    {
+      "material_id": "MAT-UNK-01",
+      "language": "mr",
+      "local_term": "ओळख नसलेली वस्तू",
+      "normalized_term": "ओळख नसलेली वस्तू"
+    }
+  ],
+  "safety_guides": [
+    {
+      "id": "SG-CABLE-01",
+      "material_ids": [
+        "MAT-CAB-01",
+        "MAT-CAB-02"
+      ],
+      "route": "GENERAL_RECYCLING",
+      "text_key": "safety.cables.no_burning",
+      "icon_asset_ref": "icons/safety/no_burn_cables.svg",
+      "image_asset_ref": null,
+      "audio_keys": {
+        "en": "audio_sg_cables_en",
+        "hi": "audio_sg_cables_hi",
+        "mr": "audio_sg_cables_mr"
+      },
+      "source_ids": [
+        "SRC-01"
+      ],
+      "version": "v1.0",
+      "review_status": "APPROVED"
+    },
+    {
+      "id": "SG-PCB-01",
+      "material_ids": [
+        "MAT-PCB-01",
+        "MAT-PCB-02"
+      ],
+      "route": "AUTHORIZED_EWASTE",
+      "text_key": "safety.pcb.no_acid_heating",
+      "icon_asset_ref": "icons/safety/no_acid_pcb.svg",
+      "image_asset_ref": null,
+      "audio_keys": {
+        "en": "audio_sg_pcb_en",
+        "hi": "audio_sg_pcb_hi",
+        "mr": "audio_sg_pcb_mr"
+      },
+      "source_ids": [
+        "SRC-01"
+      ],
+      "version": "v1.0",
+      "review_status": "APPROVED"
+    },
+    {
+      "id": "SG-CRT-01",
+      "material_ids": [
+        "MAT-CRT-01"
+      ],
+      "route": "HAZARDOUS_DISPOSAL",
+      "text_key": "safety.crt.no_breaking",
+      "icon_asset_ref": "icons/safety/no_break_crt.svg",
+      "image_asset_ref": null,
+      "audio_keys": {
+        "en": "audio_sg_crt_en",
+        "hi": "audio_sg_crt_hi",
+        "mr": "audio_sg_crt_mr"
+      },
+      "source_ids": [
+        "SRC-01"
+      ],
+      "version": "v1.0",
+      "review_status": "APPROVED"
+    },
+    {
+      "id": "SG-BATTERY-01",
+      "material_ids": [
+        "MAT-BAT-01"
+      ],
+      "route": "BATTERY_ISOLATION",
+      "text_key": "safety.battery.lead_acid",
+      "icon_asset_ref": "icons/safety/isolated_battery.svg",
+      "image_asset_ref": null,
+      "audio_keys": {
+        "en": "audio_sg_battery_lead_en",
+        "hi": "audio_sg_battery_lead_hi",
+        "mr": "audio_sg_battery_lead_mr"
+      },
+      "source_ids": [
+        "SRC-02"
+      ],
+      "version": "v1.0",
+      "review_status": "APPROVED"
+    },
+    {
+      "id": "SG-BATTERY-02",
+      "material_ids": [
+        "MAT-BAT-02"
+      ],
+      "route": "BATTERY_ISOLATION",
+      "text_key": "safety.battery.li_ion",
+      "icon_asset_ref": "icons/safety/tape_terminals.svg",
+      "image_asset_ref": null,
+      "audio_keys": {
+        "en": "audio_sg_battery_li_ion_en",
+        "hi": "audio_sg_battery_li_ion_hi",
+        "mr": "audio_sg_battery_li_ion_mr"
+      },
+      "source_ids": [
+        "SRC-02"
+      ],
+      "version": "v1.0",
+      "review_status": "APPROVED"
+    },
+    {
+      "id": "SG-BATTERY-03",
+      "material_ids": [
+        "MAT-BAT-03",
+        "MAT-BAT-04"
+      ],
+      "route": "BATTERY_ISOLATION",
+      "text_key": "safety.battery.unknown",
+      "icon_asset_ref": "icons/safety/isolated_container.svg",
+      "image_asset_ref": null,
+      "audio_keys": {
+        "en": "audio_sg_battery_unk_en",
+        "hi": "audio_sg_battery_unk_hi",
+        "mr": "audio_sg_battery_unk_mr"
+      },
+      "source_ids": [
+        "SRC-02"
+      ],
+      "version": "v1.0",
+      "review_status": "APPROVED"
+    },
+    {
+      "id": "SG-DAMAGED-01",
+      "material_ids": [
+        "MAT-PCB-01",
+        "MAT-PCB-02",
+        "MAT-BAT-01",
+        "MAT-BAT-02",
+        "MAT-BAT-03",
+        "MAT-BAT-04",
+        "MAT-CRT-01",
+        "MAT-LCD-01",
+        "MAT-MOT-01",
+        "MAT-MOT-02",
+        "MAT-MIX-01",
+        "MAT-MIX-02",
+        "MAT-UNK-01"
+      ],
+      "route": "HAZARDOUS_DISPOSAL",
+      "text_key": "safety.damaged.stop_handling",
+      "icon_asset_ref": "icons/safety/stop_handling_hazard.svg",
+      "image_asset_ref": null,
+      "audio_keys": {
+        "en": "audio_sg_damaged_hazard_en",
+        "hi": "audio_sg_damaged_hazard_hi",
+        "mr": "audio_sg_damaged_hazard_mr"
+      },
+      "source_ids": [
+        "SRC-01",
+        "SRC-02"
+      ],
+      "version": "v1.0",
+      "review_status": "APPROVED"
+    },
+    {
+      "id": "SG-PLASTIC-01",
+      "material_ids": [
+        "MAT-PLA-01",
+        "MAT-PLA-02"
+      ],
+      "route": "AUTHORIZED_EWASTE",
+      "text_key": "safety.plastic.no_burning",
+      "icon_asset_ref": "icons/safety/no_burn_plastics.svg",
+      "image_asset_ref": null,
+      "audio_keys": {
+        "en": "audio_sg_plastics_en",
+        "hi": "audio_sg_plastics_hi",
+        "mr": "audio_sg_plastics_mr"
+      },
+      "source_ids": [
+        "SRC-01"
+      ],
+      "version": "v1.0",
+      "review_status": "APPROVED"
+    },
+    {
+      "id": "SG-MIXED-01",
+      "material_ids": [
+        "MAT-MIX-01",
+        "MAT-MIX-02",
+        "MAT-OTH-01",
+        "MAT-UNK-01"
+      ],
+      "route": "REVIEW_REQUIRED",
+      "text_key": "safety.mixed.no_dismantling",
+      "icon_asset_ref": "icons/safety/no_dismantle_mixed.svg",
+      "image_asset_ref": null,
+      "audio_keys": {
+        "en": "audio_sg_mixed_en",
+        "hi": "audio_sg_mixed_hi",
+        "mr": "audio_sg_mixed_mr"
+      },
+      "source_ids": [
+        "SRC-01"
+      ],
+      "version": "v1.0",
+      "review_status": "APPROVED"
+    }
+  ],
+  "price_benchmarks": [
+    {
+      "material_id": "MAT-PCB-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 35000,
+      "median_rate": 42000,
+      "q3_rate": 48000,
+      "unit": "kg",
+      "confidence": "HIGH"
+    },
+    {
+      "material_id": "MAT-PCB-02",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 8000,
+      "median_rate": 11000,
+      "q3_rate": 14000,
+      "unit": "kg",
+      "confidence": "HIGH"
+    },
+    {
+      "material_id": "MAT-BAT-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 7500,
+      "median_rate": 8200,
+      "q3_rate": 9000,
+      "unit": "kg",
+      "confidence": "HIGH"
+    },
+    {
+      "material_id": "MAT-BAT-02",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 12000,
+      "median_rate": 16000,
+      "q3_rate": 20000,
+      "unit": "kg",
+      "confidence": "MEDIUM"
+    },
+    {
+      "material_id": "MAT-BAT-03",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 3000,
+      "median_rate": 5000,
+      "q3_rate": 7000,
+      "unit": "kg",
+      "confidence": "LOW"
+    },
+    {
+      "material_id": "MAT-BAT-04",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 2000,
+      "median_rate": 3500,
+      "q3_rate": 5000,
+      "unit": "kg",
+      "confidence": "LOW"
+    },
+    {
+      "material_id": "MAT-CRT-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 500,
+      "median_rate": 1000,
+      "q3_rate": 1500,
+      "unit": "kg",
+      "confidence": "HIGH"
+    },
+    {
+      "material_id": "MAT-LCD-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 1500,
+      "median_rate": 2500,
+      "q3_rate": 3500,
+      "unit": "kg",
+      "confidence": "MEDIUM"
+    },
+    {
+      "material_id": "MAT-CAB-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 38000,
+      "median_rate": 45000,
+      "q3_rate": 52000,
+      "unit": "kg",
+      "confidence": "HIGH"
+    },
+    {
+      "material_id": "MAT-CAB-02",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 11000,
+      "median_rate": 14000,
+      "q3_rate": 17000,
+      "unit": "kg",
+      "confidence": "MEDIUM"
+    },
+    {
+      "material_id": "MAT-MOT-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 18000,
+      "median_rate": 22000,
+      "q3_rate": 26000,
+      "unit": "kg",
+      "confidence": "HIGH"
+    },
+    {
+      "material_id": "MAT-MOT-02",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 14000,
+      "median_rate": 17000,
+      "q3_rate": 20000,
+      "unit": "kg",
+      "confidence": "MEDIUM"
+    },
+    {
+      "material_id": "MAT-PLA-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 2000,
+      "median_rate": 2800,
+      "q3_rate": 3500,
+      "unit": "kg",
+      "confidence": "HIGH"
+    },
+    {
+      "material_id": "MAT-PLA-02",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 1200,
+      "median_rate": 1800,
+      "q3_rate": 2400,
+      "unit": "kg",
+      "confidence": "MEDIUM"
+    },
+    {
+      "material_id": "MAT-MET-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 65000,
+      "median_rate": 72000,
+      "q3_rate": 78000,
+      "unit": "kg",
+      "confidence": "HIGH"
+    },
+    {
+      "material_id": "MAT-MET-02",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 14000,
+      "median_rate": 17500,
+      "q3_rate": 21000,
+      "unit": "kg",
+      "confidence": "HIGH"
+    },
+    {
+      "material_id": "MAT-MET-03",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 2800,
+      "median_rate": 3300,
+      "q3_rate": 3800,
+      "unit": "kg",
+      "confidence": "HIGH"
+    },
+    {
+      "material_id": "MAT-MIX-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 4000,
+      "median_rate": 6500,
+      "q3_rate": 9000,
+      "unit": "kg",
+      "confidence": "MEDIUM"
+    },
+    {
+      "material_id": "MAT-MIX-02",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 2500,
+      "median_rate": 4000,
+      "q3_rate": 5500,
+      "unit": "kg",
+      "confidence": "MEDIUM"
+    },
+    {
+      "material_id": "MAT-OTH-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 1000,
+      "median_rate": 2000,
+      "q3_rate": 3000,
+      "unit": "kg",
+      "confidence": "LOW"
+    },
+    {
+      "material_id": "MAT-UNK-01",
+      "region_id": "DELHI_NCR",
+      "q1_rate": 500,
+      "median_rate": 1000,
+      "q3_rate": 1500,
+      "unit": "kg",
+      "confidence": "INSUFFICIENT_DATA"
+    }
+  ],
+  "facilities": [
+    {
+      "facility_id": "fac-dl-01",
+      "name": "Greentech Recyclers Pvt Ltd",
+      "kind": "RECYCLER",
+      "region_id": "DELHI_NCR",
+      "district": "Mayapuri Industrial Area",
+      "state": "Delhi",
+      "address_public": "Phase II, Mayapuri Industrial Area, New Delhi, Delhi 110064",
+      "verification_level": "L3",
+      "authorized_routes": [
+        "AUTHORIZED_EWASTE",
+        "GENERAL_RECYCLING"
+      ],
+      "materials_accepted": [
+        "MAT-PCB-01",
+        "MAT-PCB-02",
+        "MAT-LCD-01",
+        "MAT-CAB-01",
+        "MAT-PLA-01"
+      ],
+      "contact_public": "+91-11-28114400",
+      "active": true
+    },
+    {
+      "facility_id": "fac-dl-02",
+      "name": "Apex Battery Isolators & Recyclers",
+      "kind": "RECYCLER",
+      "region_id": "DELHI_NCR",
+      "district": "Okhla Industrial Area",
+      "state": "Delhi",
+      "address_public": "Phase III, Okhla Industrial Area, New Delhi, Delhi 110020",
+      "verification_level": "L3",
+      "authorized_routes": [
+        "BATTERY_ISOLATION"
+      ],
+      "materials_accepted": [
+        "MAT-BAT-01",
+        "MAT-BAT-02",
+        "MAT-BAT-03",
+        "MAT-BAT-04"
+      ],
+      "contact_public": "+91-11-26915500",
+      "active": true
+    }
+  ]
+}

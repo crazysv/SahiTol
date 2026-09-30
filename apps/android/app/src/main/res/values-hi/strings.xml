@@ -1,0 +1,180 @@
+<resources>
+    <!-- App & Identity -->
+    <string name="app_name">सही तोल</string>
+    <string name="tagline">सही वजन, पारदर्शी दाम, पक्की रसीद</string>
+    <string name="demo_mode_label">डेमो मोड — केवल परीक्षण डेटा</string>
+    <string name="demo_subtext">अलग पार्टीशन। कोई वास्तविक लेन-देन दर्ज नहीं होता।</string>
+
+    <!-- Language Selection -->
+    <string name="lang_select_title">भाषा चुनें</string>
+    <string name="lang_en">English</string>
+    <string name="lang_hi">हिंदी</string>
+    <string name="lang_mr">मराठी</string>
+
+    <!-- Actions & Common Buttons -->
+    <string name="btn_continue">आगे बढ़ें</string>
+    <string name="btn_cancel">रद्द करें</string>
+    <string name="btn_confirm">पुष्टि करें</string>
+    <string name="btn_back">पीछे जाएं</string>
+    <string name="btn_retry">पुनः प्रयास करें</string>
+    <string name="btn_dismiss">खारिज करें</string>
+    <string name="btn_save">सुरक्षित करें</string>
+    <string name="btn_close">बंद करें</string>
+    <string name="btn_delete">हटाएं</string>
+    <string name="btn_capture_photo">फोटो खींचें</string>
+    <string name="btn_save_draft">ड्राफ्ट सुरक्षित करें</string>
+    <string name="btn_sync_now">सिंक करें</string>
+
+    <!-- Four Immutable Status Invariants -->
+    <string name="status_saved_locally">फोन में सुरक्षित</string>
+    <string name="status_saved_locally_desc">फ़ोन की मेमोरी में सुरक्षित। अभी सर्वर पर नहीं भेजा गया।</string>
+    <string name="status_synced">सर्वर पर सिंक हुआ</string>
+    <string name="status_synced_desc">सर्वर पर अपलोड और सुरक्षित किया गया।</string>
+    <string name="status_confirmed">रिसाइकलर द्वारा पुष्टि</string>
+    <string name="status_confirmed_desc">पंजीकृत रिसाइकलर ने वजन जांच कर रसीद की पुष्टि की।</string>
+    <string name="status_paid">भुगतान स्वीकृत</string>
+    <string name="status_paid_desc">नकद या यूपीआई भुगतान दोनों पक्षों द्वारा स्वीकृत। बैंक निपटान नहीं।</string>
+
+    <!-- Statutory Disclaimer -->
+    <string name="non_epr_disclaimer">सही तोल डिजिटल हैंडओवर रिकॉर्ड केवल कबाड़ प्राप्ति का प्रमाण है, यह कोई वैधानिक ईपीआर प्रमाण पत्र नहीं है। प्राप्त वजन रिसाइक्लिंग को सिद्ध नहीं करता।</string>
+
+    <!-- Onboarding, Auth & Profile -->
+    <string name="auth_title">कबाड़ी साथी लॉगिन</string>
+    <string name="auth_phone_label">मोबाइल नंबर</string>
+    <string name="auth_phone_hint">10 अंकों का मोबाइल नंबर दर्ज करें</string>
+    <string name="auth_pin_label">4 अंकों का सुरक्षा पिन</string>
+    <string name="auth_pin_hint">अपना गुप्त पिन दर्ज करें</string>
+    <string name="auth_login_btn">लॉगिन करें</string>
+    <string name="auth_demo_btn">डेमो खाता देखें (संतोष यादव)</string>
+    <string name="auth_zero_pii">गोपनीयता सुरक्षा: आधार या बैंक खाते की कोई जानकारी नहीं मांगी जाती।</string>
+    <string name="auth_err_invalid_pin">गलत पिन। कृपया पुनः प्रयास करें।</string>
+    <string name="auth_err_throttled">कई बार गलत प्रयास। %1$d सेकंड के लिए लॉक किया गया।</string>
+    <string name="auth_logout_title">सुरक्षित लॉगआउट</string>
+    <string name="auth_logout_confirm">लॉगआउट करें</string>
+    <string name="auth_logout_warning">आपके पास %1$d असिंक रिकॉर्ड हैं। वे इस फोन में सुरक्षित रहेंगे और हटेंगे नहीं।</string>
+
+    <!-- Navigation & Home -->
+    <string name="nav_home">होम</string>
+    <string name="nav_lots">कबाड़ लॉट</string>
+    <string name="nav_prices">बाजार भाव</string>
+    <string name="nav_recyclers">रिसाइकलर यार्ड</string>
+    <string name="nav_ledger">खाता बही</string>
+    <string name="nav_sync">सिंक केंद्र</string>
+    <string name="nav_settings">सेटिंग्स</string>
+    <string name="nav_safety">सुरक्षा निर्देश</string>
+    <string name="home_greeting">नमस्ते, %1$s</string>
+    <string name="home_quick_add">नया कबाड़ जोड़ें</string>
+    <string name="home_pending_sync">%1$d रिकॉर्ड सिंक होना बाकी</string>
+    <string name="home_recent_lots">हाल की गतिविधियां</string>
+    <string name="home_empty_lots">अभी कोई कबाड़ लॉट नहीं बना है। पहला लॉट जोड़ने के लिए \'+\' दबाएं।</string>
+
+    <!-- Lot Creation & Editor -->
+    <string name="lot_editor_title">कबाड़ लॉट विवरण</string>
+    <string name="lot_material_label">कबाड़ का प्रकार</string>
+    <string name="lot_weight_label">वजन</string>
+    <string name="lot_unit_kg">किग्रा</string>
+    <string name="lot_unit_g">ग्राम</string>
+    <string name="lot_unit_piece">नग (पीस)</string>
+    <string name="lot_condition_label">हालत / स्थिति</string>
+    <string name="lot_cond_intact">साबुत / सही सलामत</string>
+    <string name="lot_cond_damaged">टूटा-फूटा / क्षतिग्रस्त</string>
+    <string name="lot_cond_depopulated">पुर्जे निकाले हुए</string>
+    <string name="lot_cond_burnt">जला हुआ</string>
+    <string name="lot_cond_leaking">रिसाव / तेजाब जंग</string>
+    <string name="lot_photo_tap_to_capture">कबाड़ की फोटो खींचें</string>
+    <string name="lot_photo_retake">दोबारा फोटो लें</string>
+    <string name="lot_save_draft">फोन में सुरक्षित करें</string>
+    <string name="lot_submit_action">सुरक्षित कर आगे बढ़ें</string>
+    <string name="lot_err_no_material">कृपया कबाड़ का प्रकार चुनें।</string>
+    <string name="lot_err_invalid_weight">कृपया शून्य से अधिक मान्य वजन दर्ज करें।</string>
+    <string name="lot_warning_heavy_weight">वजन 500 किग्रा से अधिक है। गुणवत्ता समीक्षा हेतु चिन्हित किया गया।</string>
+
+    <!-- AI Classifier & Advisory -->
+    <string name="classifier_analyzing">ऑन-डिवाइस एआई द्वारा फोटो की पहचान की जा रही है…</string>
+    <string name="classifier_high_confidence">एआई सुझाव: %1$s (%2$d%% अनुमान)</string>
+    <string name="classifier_advisory_note">यह केवल सहायता सुझाव है। कबाड़ का सही प्रकार आप तय करें।</string>
+    <string name="classifier_confirm_btn">सुझाव स्वीकारें</string>
+    <string name="classifier_change_btn">स्वयं दूसरा चुनें</string>
+    <string name="classifier_abstain_warning">एआई स्पष्ट पहचान नहीं कर सका (%1$d%% अनुमान)। कृपया स्वयं सामग्री चुनें।</string>
+
+    <!-- Prices & Units -->
+    <string name="price_title">मंडी भाव व दर</string>
+    <string name="price_indicative_notice">सार्वजनिक स्रोतों पर आधारित सांकेतिक भाव। कोई बाध्यकारी वादा नहीं।</string>
+    <string name="price_per_kg">₹%1$s / किग्रा</string>
+    <string name="price_range_format">₹%1$s – ₹%2$s / किग्रा</string>
+    <string name="price_confidence_high">उच्च विश्वसनीयता (%1$d भाव दर्ज)</string>
+    <string name="price_confidence_med">मध्यम विश्वसनीयता</string>
+    <string name="price_confidence_low">कम डेटा / क्षेत्रीय अनुमान</string>
+    <string name="price_insufficient_data">पर्याप्त भाव उपलब्ध नहीं</string>
+    <string name="price_add_observation">मंडी का नया भाव बताएं</string>
+    <string name="price_obs_submitted">भाव रिपोर्ट समीक्षा के लिए भेजा गया।</string>
+
+    <!-- Recycler Directory & Matching -->
+    <string name="recycler_dir_title">अधिकृत रिसाइकलर यार्ड</string>
+    <string name="recycler_distance">%1$.1f किमी दूर</string>
+    <string name="recycler_route_authorized">प्रदूषण नियंत्रण बोर्ड अधिकृत</string>
+    <string name="recycler_route_battery">बैटरी नियम 2022 पंजीकृत</string>
+    <string name="recycler_battery_isolation">खतरनाक बैटरी का अलग अधिकृत निपटान अनिवार्य है।</string>
+    <string name="recycler_request_quote">भाव मांगें</string>
+    <string name="recycler_offer_received">प्रस्ताव: ₹%1$s / किग्रा</string>
+    <string name="recycler_offer_accept">प्रस्ताव स्वीकारें</string>
+    <string name="recycler_offer_reject">अस्वीकार करें</string>
+    <string name="recycler_no_match">आपके क्षेत्र में इस कबाड़ के लिए कोई अधिकृत यार्ड नहीं मिला।</string>
+
+    <!-- Handover, QR & Digital Record -->
+    <string name="handover_title">कबाड़ सुपुर्दगी व रसीद</string>
+    <string name="handover_qr_title">रिसाइकलर को क्यूआर दिखाएं</string>
+    <string name="handover_qr_desc">रिसाइकलर अपने फोन से इसे स्कैन कर रसीद की पुष्टि करेंगे।</string>
+    <string name="handover_actual_weight">यार्ड में तौला गया वजन</string>
+    <string name="handover_weight_diff">वजन में अंतर: %1$s</string>
+    <string name="handover_variance_warning">वजन में 20%% से अधिक अंतर है। पुष्टि से पहले जांच लें।</string>
+    <string name="handover_dispute_reason">आपत्ति या विवाद का कारण</string>
+    <string name="handover_btn_confirm">नये वजन व शर्तों की पुष्टि करें</string>
+    <string name="handover_pdf_share">रसीद पीडीएफ डाउनलोड / शेयर करें</string>
+    <string name="handover_public_seal">डिजिटल सील हैश: %1$s</string>
+
+    <!-- Payments & Ledger -->
+    <string name="ledger_title">कमाई व बकाया हिसाब</string>
+    <string name="ledger_total_earned">कुल कबाड़ मूल्य</string>
+    <string name="ledger_acknowledged_paid">प्राप्त नकद भुगतान</string>
+    <string name="ledger_dues_pending">बकाया रकम</string>
+    <string name="payment_record_cash">नकद भुगतान दर्ज करें</string>
+    <string name="payment_upi_ref_optional">यूपीआई संदर्भ नंबर (वैकल्पिक)</string>
+    <string name="payment_counterparty_ack">सामने वाले पक्ष ने नकद प्राप्ति की पुष्टि की है।</string>
+    <string name="payment_reversal_notice">यह भुगतान निरस्त किया गया: %1$s</string>
+    <string name="payment_empty_ledger">अभी कोई लेन-देन नहीं है।</string>
+
+    <!-- Synchronization & Offline -->
+    <string name="sync_title">सिंक केंद्र</string>
+    <string name="sync_pending_count">फोन में %1$d कार्य लंबित</string>
+    <string name="sync_all_synced">सभी रिकॉर्ड सर्वर पर सुरक्षित सिंक हैं</string>
+    <string name="sync_syncing_progress">सर्वर से सिंक हो रहा है (%1$d / %2$d)…</string>
+    <string name="sync_btn_start">अभी सिंक करें</string>
+    <string name="sync_err_network">ऑफलाइन। इंटरनेट का इंतजार है।</string>
+    <string name="sync_err_conflict">सर्वर पर शर्तें अपडेट हुईं। लोकल कॉपी अपडेट की गई।</string>
+    <string name="sync_safe_notice">हवाई मोड में भी सारा डेटा आपके फोन में पूरी तरह सुरक्षित रहता है।</string>
+
+    <!-- Safety Warnings -->
+    <string name="safety_title">कबाड़ सुरक्षा निर्देश</string>
+    <string name="safety_crt_warning">चेतावनी: सीआरटी कांच फटने का खतरा व जहरीला लेड/फॉस्फोरस। ट्यूब को न तोड़ें।</string>
+    <string name="safety_battery_warning">खतरा: आग और तेजाब से जलने का जोखिम। दोनों सिरों को अलग रखें। दबाएं नहीं।</string>
+    <string name="safety_pcb_warning">सावधानी: जहरीली धातुएं। खुले में आग न लगाएं और तेजाब से न धोएं।</string>
+    <string name="safety_cable_warning">सूचना: तार को जलाना कानूनन अपराध है। कटर से छीलें।</string>
+
+    <!-- Economics & Preferences -->
+    <string name="econ_title">अनुमानित कमाई तुलना</string>
+    <string name="econ_current_net">वर्तमान असंगठित कमाई</string>
+    <string name="econ_platform_net">सही तोल अनुमानित कमाई</string>
+    <string name="econ_zero_fee">कबाड़ी साथियों से कोई शुल्क नहीं (0%)</string>
+    <string name="econ_disclaimer">अनुसंधान पर आधारित सांकेतिक मॉडल। वास्तविक कमाई स्थानीय भाव पर निर्भर करती है।</string>
+    <string name="pref_numeral_title">संख्या प्रदर्शन प्राथमिकता</string>
+    <string name="pref_numeral_latin">अंग्रेजी अंक (1, 2, 3)</string>
+    <string name="pref_numeral_devanagari">देवनागरी अंक (१, २, ३)</string>
+    <string name="pref_language_title">ऐप की भाषा</string>
+
+    <!-- Accessibility & Screen Reader Labels -->
+    <string name="a11y_tap_to_hear">बोलकर सुनने के लिए टैप करें</string>
+    <string name="a11y_weight_readout">वजन: %1$s, सामग्री: %2$s, स्थिति: %3$s</string>
+    <string name="a11y_price_readout">भाव: %1$s प्रति किग्रा, विश्वसनीयता: %2$s</string>
+    <string name="a11y_qr_code">रिसाइकलर स्कैन के लिए हैंडओवर क्यूआर कोड</string>
+</resources>

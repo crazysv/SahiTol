@@ -1,0 +1,32 @@
+[
+  {
+    "actor_role": "COLLECTOR",
+    "aggregate_id": "lot-20260929-001",
+    "aggregate_type": "LOT",
+    "created_at": "2026-09-29T08:30:00Z",
+    "current_hash": "fc38060bd00237df6c5eaaa8c50baceee0e2390572e3af07c7162a40e39f4503",
+    "event_id": "evt-001",
+    "event_type": "LOT_CREATED",
+    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+    "actor_role": "RECYCLER",
+    "aggregate_id": "tx-f1001-c01-001",
+    "aggregate_type": "TRANSACTION",
+    "created_at": "2026-09-29T09:00:00Z",
+    "current_hash": "1c0d6c31dbd5ee6990fac74b98bae330bc12e335b4b163254f4f1454615f7c53",
+    "event_id": "evt-002",
+    "event_type": "HANDOVER_CONFIRMED",
+    "previous_hash": "fc38060bd00237df6c5eaaa8c50baceee0e2390572e3af07c7162a40e39f4503"
+  },
+  {
+    "actor_role": "ADMIN",
+    "aggregate_id": "tx-f1001-c01-001",
+    "aggregate_type": "TRANSACTION",
+    "created_at": "2026-09-29T09:15:00Z",
+    "current_hash": "1a4ad61e4ffe46dc27692b8d0c42ea5e96fdb7b48ff7d5588365bf140ad12fa9",
+    "event_id": "evt-003",
+    "event_type": "TRANSACTION_CLOSED",
+    "previous_hash": "1c0d6c31dbd5ee6990fac74b98bae330bc12e335b4b163254f4f1454615f7c53"
+  }
+]

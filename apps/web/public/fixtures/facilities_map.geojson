@@ -1,0 +1,258 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "generated_at": "2026-09-29T12:00:00Z",
+    "policy_version": "MATCH_V1",
+    "disclaimer": "Public directory lead sourced from official state/central regulator registries. Listing does not represent an endorsement, commercial partnership, or EPR fulfillment certificate."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "fac-dl-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.1256, 28.6358]
+      },
+      "properties": {
+        "facility_id": "fac-dl-01",
+        "name": "Greentech Recyclers Pvt Ltd",
+        "kind": "RECYCLER",
+        "region_id": "DELHI_NCR",
+        "district": "Mayapuri Industrial Area",
+        "state": "Delhi",
+        "address_public": "Phase II, Mayapuri Industrial Area, New Delhi, Delhi 110064",
+        "contact_public": "+91-11-28114400",
+        "geocode_accuracy": "ROOFTOP",
+        "active": true,
+        "verification_level": "L3",
+        "registration_reference": "DPCC/EW/REC-2023/042",
+        "registration_status": "VALID",
+        "valid_until": "2027-12-31T00:00:00Z",
+        "authorized_routes": ["AUTHORIZED_EWASTE"],
+        "materials_accepted": ["MAT-PCB-01", "MAT-PCB-02", "MAT-LCD-01", "MAT-CAB-01", "MAT-PLA-01", "MAT-MET-01"],
+        "pickup_available": null,
+        "service_area": "Delhi-NCR",
+        "is_formal_destination": true,
+        "is_demo": false,
+        "disclaimer": "Public directory lead sourced from official state/central regulator registries. Listing does not represent an endorsement, commercial partnership, or EPR fulfillment certificate."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fac-dl-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.2718, 28.5355]
+      },
+      "properties": {
+        "facility_id": "fac-dl-02",
+        "name": "Eco-Battery Reverse Logistics & Isolation Center",
+        "kind": "COLLECTION_CENTRE",
+        "region_id": "DELHI_NCR",
+        "district": "Okhla Industrial Area",
+        "state": "Delhi",
+        "address_public": "Phase III, Okhla Industrial Area, New Delhi, Delhi 110020",
+        "contact_public": "+91-11-26915500",
+        "geocode_accuracy": "ROOFTOP",
+        "active": true,
+        "verification_level": "L3",
+        "registration_reference": "CPCB/BWM/CC-DL-019",
+        "registration_status": "VALID",
+        "valid_until": "2028-06-30T00:00:00Z",
+        "authorized_routes": ["BATTERY_ISOLATION"],
+        "materials_accepted": ["MAT-BAT-01", "MAT-BAT-02", "MAT-BAT-03", "MAT-BAT-04"],
+        "pickup_available": false,
+        "service_area": "South Delhi & Noida",
+        "is_formal_destination": true,
+        "is_demo": false,
+        "disclaimer": "Public directory lead sourced from official state/central regulator registries. Listing does not represent an endorsement, commercial partnership, or EPR fulfillment certificate."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fac-dl-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.225, 28.675]
+      },
+      "properties": {
+        "facility_id": "fac-dl-03",
+        "name": "North Delhi Municipal E-Waste Collection Point",
+        "kind": "COLLECTION_CENTRE",
+        "region_id": "DELHI_NCR",
+        "district": "Civil Lines",
+        "state": "Delhi",
+        "address_public": "Rajpur Road, Civil Lines, New Delhi, Delhi 110054",
+        "contact_public": "+91-11-23910011",
+        "geocode_accuracy": "APPROXIMATE",
+        "active": true,
+        "verification_level": "L2",
+        "registration_reference": "NDMC/E-DEPO/2022-08",
+        "registration_status": "EXPIRED",
+        "valid_until": "2025-03-31T00:00:00Z",
+        "authorized_routes": ["GENERAL_RECYCLING"],
+        "materials_accepted": ["MAT-MIX-01", "MAT-MIX-02", "MAT-MET-03"],
+        "pickup_available": null,
+        "service_area": "North Delhi",
+        "is_formal_destination": false,
+        "is_demo": false,
+        "disclaimer": "Public directory lead sourced from official state/central regulator registries. Listing does not represent an endorsement, commercial partnership, or EPR fulfillment certificate."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fac-dl-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.2721, 28.6672]
+      },
+      "properties": {
+        "facility_id": "fac-dl-04",
+        "name": "Seelampur Dismantling Co-operative Workshop",
+        "kind": "DISMANTLER",
+        "region_id": "DELHI_NCR",
+        "district": "Seelampur",
+        "state": "Delhi",
+        "address_public": "Dharampura, Seelampur, Shahdara, Delhi 110053",
+        "contact_public": "+91-11-22819922",
+        "geocode_accuracy": "DISTRICT_CENTROID",
+        "active": true,
+        "verification_level": "L3",
+        "registration_reference": "DPCC/DISM/2024/011",
+        "registration_status": "VALID",
+        "valid_until": "2027-08-31T00:00:00Z",
+        "authorized_routes": ["AUTHORIZED_EWASTE"],
+        "materials_accepted": ["MAT-PCB-01", "MAT-PCB-02", "MAT-CRT-01", "MAT-CAB-01", "MAT-MOT-01"],
+        "pickup_available": true,
+        "service_area": "East Delhi & Ghaziabad",
+        "is_formal_destination": true,
+        "is_demo": false,
+        "disclaimer": "Public directory lead sourced from official state/central regulator registries. Listing does not represent an endorsement, commercial partnership, or EPR fulfillment certificate."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fac-mh-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [72.8826, 19.0688]
+      },
+      "properties": {
+        "facility_id": "fac-mh-01",
+        "name": "EcoRegen Solutions Mumbai Ltd",
+        "kind": "RECYCLER",
+        "region_id": "MAHARASHTRA",
+        "district": "Kurla West",
+        "state": "Maharashtra",
+        "address_public": "CST Road, Kurla West, Mumbai, Maharashtra 400070",
+        "contact_public": "+91-22-26528800",
+        "geocode_accuracy": "ROOFTOP",
+        "active": true,
+        "verification_level": "L3",
+        "registration_reference": "MPCB/EW/REC-098/2023",
+        "registration_status": "VALID",
+        "valid_until": "2028-11-30T00:00:00Z",
+        "authorized_routes": ["AUTHORIZED_EWASTE"],
+        "materials_accepted": ["MAT-PCB-01", "MAT-PCB-02", "MAT-LCD-01", "MAT-CAB-01", "MAT-MOT-01", "MAT-PLA-01"],
+        "pickup_available": true,
+        "service_area": "Mumbai Suburban & Thane",
+        "is_formal_destination": true,
+        "is_demo": false,
+        "disclaimer": "Public directory lead sourced from official state/central regulator registries. Listing does not represent an endorsement, commercial partnership, or EPR fulfillment certificate."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fac-mh-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [73.0035, 19.1415]
+      },
+      "properties": {
+        "facility_id": "fac-mh-02",
+        "name": "Maharashtra Lead & Battery Processors",
+        "kind": "RECYCLER",
+        "region_id": "MAHARASHTRA",
+        "district": "Thane-Belapur",
+        "state": "Maharashtra",
+        "address_public": "Plot R-420, MIDC Rabale, Navi Mumbai, Maharashtra 400701",
+        "contact_public": "+91-22-27691100",
+        "geocode_accuracy": "ROOFTOP",
+        "active": true,
+        "verification_level": "L3",
+        "registration_reference": "MPCB/BW/REC-2023-014",
+        "registration_status": "VALID",
+        "valid_until": "2027-04-30T00:00:00Z",
+        "authorized_routes": ["BATTERY_ISOLATION"],
+        "materials_accepted": ["MAT-BAT-01", "MAT-BAT-02"],
+        "pickup_available": null,
+        "service_area": "Navi Mumbai, Thane, Raigad",
+        "is_formal_destination": true,
+        "is_demo": false,
+        "disclaimer": "Public directory lead sourced from official state/central regulator registries. Listing does not represent an endorsement, commercial partnership, or EPR fulfillment certificate."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fac-mh-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [73.847, 18.627]
+      },
+      "properties": {
+        "facility_id": "fac-mh-03",
+        "name": "Pune E-Waste Scrap Aggregators",
+        "kind": "AGGREGATOR",
+        "region_id": "MAHARASHTRA",
+        "district": "Bhosari MIDC",
+        "state": "Maharashtra",
+        "address_public": "Sector 10, PCMC Industrial Area, Bhosari, Pune, Maharashtra 411026",
+        "contact_public": "+91-20-27124455",
+        "geocode_accuracy": "APPROXIMATE",
+        "active": true,
+        "verification_level": "L2",
+        "registration_reference": "MPCB/AGG-PUNE/2024/007",
+        "registration_status": "VALID",
+        "valid_until": "2026-10-31T00:00:00Z",
+        "authorized_routes": ["AUTHORIZED_EWASTE"],
+        "materials_accepted": ["MAT-PCB-02", "MAT-MIX-01", "MAT-CAB-02", "MAT-MET-01"],
+        "pickup_available": false,
+        "service_area": "Pune & Pimpri-Chinchwad",
+        "is_formal_destination": false,
+        "is_demo": false,
+        "disclaimer": "Public directory lead sourced from official state/central regulator registries. Listing does not represent an endorsement, commercial partnership, or EPR fulfillment certificate."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fac-sim-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.209, 28.6139]
+      },
+      "properties": {
+        "facility_id": "fac-sim-01",
+        "name": "Simulated Demonstration Recycling Hub",
+        "kind": "RECYCLER",
+        "region_id": "DELHI_NCR",
+        "district": "Virtual District",
+        "state": "Delhi",
+        "address_public": "123 Virtual Circuit Way, Demo Sandbox, New Delhi 110001",
+        "contact_public": "+91-00-00000000",
+        "geocode_accuracy": "ROOFTOP",
+        "active": true,
+        "verification_level": "L0",
+        "registration_reference": "SIM-DEMO-REG-001",
+        "registration_status": "VALID",
+        "valid_until": "2030-01-01T00:00:00Z",
+        "authorized_routes": ["AUTHORIZED_EWASTE"],
+        "materials_accepted": ["MAT-PCB-01", "MAT-BAT-01"],
+        "pickup_available": true,
+        "service_area": "Demo Simulation Only",
+        "is_formal_destination": false,
+        "is_demo": true,
+        "disclaimer": "Public directory lead sourced from official state/central regulator registries. Listing does not represent an endorsement, commercial partnership, or EPR fulfillment certificate."
+      }
+    }
+  ]
+}

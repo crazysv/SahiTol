@@ -1,0 +1,448 @@
+[
+  {
+    "id": "SC-CAB-01",
+    "guide_id": "SG-CABLE-01",
+    "material_ids": ["MAT-CAB-01", "MAT-CAB-02"],
+    "regulatory_route": "GENERAL_RECYCLING",
+    "hazard_level": "HIGH",
+    "hazard_type": "TOXIC_FUMES",
+    "version": "v1.0",
+    "source_ids": ["SRC-01"],
+    "references": [
+      "CPCB E-Waste (Management) Rules 2022 - Schedule II",
+      "WHO Guidance on Health Risks from E-Waste Exposure (2021)"
+    ],
+    "pictogram_ref": "icons/safety/no_burn_cables.svg",
+    "audio_keys": {
+      "en": "audio_sc_cable_en",
+      "hi": "audio_sc_cable_hi",
+      "mr": "audio_sc_cable_mr"
+    },
+    "locales": {
+      "en": {
+        "title": "Do Not Burn Cable Insulation",
+        "subtitle": "Toxic fume inhalation & severe respiratory damage",
+        "hazard_warning": "Burning plastic or PVC insulation releases toxic dioxins, furans, and hydrochloric acid fumes that cause severe lung damage, bronchitis, and soil contamination.",
+        "safe_handling_instruction": "Keep cables completely intact in dry coils. Use handheld mechanical wire strippers or deliver intact coils to authorized recyclers equipped with mechanical cable granulators.",
+        "prohibited_action": "Never burn cables in open ground fires, barrels, or enclosed drums.",
+        "audio_script": "Warning: Do not burn cables. Burning plastic insulation releases toxic fumes that damage your lungs and the environment. Keep cables intact and use mechanical strippers or hand over to registered recyclers."
+      },
+      "hi": {
+        "title": "तार का इंसुलेशन कभी न जलाएं",
+        "subtitle": "जहरीला धुआं और फेफड़ों को भारी नुकसान",
+        "hazard_warning": "प्लास्टिक या पीवीसी इंसुलेशन जलाने से खतरनाक डायऑक्सिन और तेजाबी धुआं निकलता है, जिससे फेफड़े खराब होते हैं और आसपास की जमीन दूषित होती है।",
+        "safe_handling_instruction": "तार को बिना जलाए सुरक्षित रखें। तार छीलने वाले सुरक्षित औजार (वायर स्ट्रिपर) का उपयोग करें या अधिकृत रीसाइक्लर को सौंपें।",
+        "prohibited_action": "तार को कभी भी खुली आग, गड्ढे या ड्रम में न जलाएं।",
+        "audio_script": "सावधानी: तार को कभी न जलाएं। प्लास्टिक जलने से जहरीला धुआं निकलता है जो फेफड़ों को नुकसान पहुंचाता है। तारों को बिना जलाए रखें और अधिकृत रीसाइक्लर को दें।"
+      },
+      "mr": {
+        "title": "तारांचे इन्सुलेशन कधीही जाळू नका",
+        "subtitle": "विषारी धूर आणि श्वसनविकारांचा गंभीर धोका",
+        "hazard_warning": "प्लास्टिक इन्सुलेशन जाळल्याने अत्यंत विषारी डायऑक्सिन आणि ॲसिडयुक्त धूर निघतो, ज्यामुळे फुप्फुसांना गंभीर इजा होते आणि हवा प्रदूषित होते.",
+        "safe_handling_instruction": "तारा जशा आहेत तशा अखंड ठेवा. यांत्रिक वायर स्ट्रिपर वापरा किंवा केबल ग्रॅन्युलेटर असणाऱ्या अधिकृत रिसायकलिंग केंद्रात जमा करा.",
+        "prohibited_action": "उघड्या आगीत, खड्ड्यात किंवा ड्रममध्ये तारा कधीही जाळू नका.",
+        "audio_script": "सावधान: तारा कधीही जाळू नका. प्लास्टिक जाळल्याने विषारी धूर निघतो ज्यामुळे फुप्फुसांना इजा होते. तारा अखंड ठेवा आणि अधिकृत रिसायकलर्सना द्या."
+      }
+    },
+    "review_status": "APPROVED",
+    "scientific_review": "DESK_REVIEWED_CPCB_WHO",
+    "translation_review": "DRAFT_PENDING_NATIVE_AUDIT"
+  },
+  {
+    "id": "SC-PCB-01",
+    "guide_id": "SG-PCB-01",
+    "material_ids": ["MAT-PCB-01", "MAT-PCB-02"],
+    "regulatory_route": "AUTHORIZED_EWASTE",
+    "hazard_level": "CRITICAL",
+    "hazard_type": "CHEMICAL_BURNS_AND_LETHAL_GAS",
+    "version": "v1.0",
+    "source_ids": ["SRC-01"],
+    "references": [
+      "CPCB Guidelines for Environmentally Sound Management of E-Waste (2022)",
+      "Basel Convention Technical Guidelines on E-Waste (TGs 2021)"
+    ],
+    "pictogram_ref": "icons/safety/no_acid_pcb.svg",
+    "audio_keys": {
+      "en": "audio_sc_pcb_en",
+      "hi": "audio_sc_pcb_hi",
+      "mr": "audio_sc_pcb_mr"
+    },
+    "locales": {
+      "en": {
+        "title": "No Acid Leaching or Open Heating of PCBs",
+        "subtitle": "Lethal cyanide and nitric gas hazards",
+        "hazard_warning": "Using nitric acid, aqua regia, or open gas burners on circuit boards produces lethal nitrogen oxides and hydrogen cyanide gas, causing permanent respiratory burns and death.",
+        "safe_handling_instruction": "Store printed circuit boards dry and unbroken in slotted crates. Hand over directly to formal e-waste recyclers registered with State Pollution Control Boards for automated metallurgical smelting.",
+        "prohibited_action": "Never use acid tubs, gas blowtorches, or open charcoal hearths to extract precious metals.",
+        "audio_script": "Warning: Never use acid or fire on circuit boards. Informal acid leaching releases lethal toxic gas and causes severe chemical burns. Store boards unbroken in dry crates and deliver to registered recyclers."
+      },
+      "hi": {
+        "title": "सर्किट बोर्ड पर तेजाब या आग का प्रयोग न करें",
+        "subtitle": "जानलेवा जहरीली गैस और तेजाब से जलने का खतरा",
+        "hazard_warning": "सर्किट बोर्ड पर तेजाब (नाइट्रिक एसिड) डालने या आग पर तपाने से साइनाइड और नाइट्रोजन ऑक्साइड जैसी जहरीली गैसें निकलती हैं, जिससे फेफड़े जल सकते हैं और जान जा सकती है।",
+        "safe_handling_instruction": "बोर्ड को बिना तोड़े सूखी जगह पर क्रेट में रखें। केवल सीपीसीबी (CPCB) या राज्य प्रदूषण नियंत्रण बोर्ड से अधिकृत ई-कचरा रीसाइक्लर को ही सौंपें।",
+        "prohibited_action": "सोना-चांदी निकालने के लिए कभी भी एसिड बाथ, बर्नर या कोयले की भट्टी का उपयोग न करें।",
+        "audio_script": "सावधानी: सर्किट बोर्ड पर तेजाब या खुली आग कभी न लगाएं। अनौपचारिक एसिड से जानलेवा गैस निकलती है। बोर्ड को बिना तोड़े रखें और अधिकृत रीसाइक्लर को दें।"
+      },
+      "mr": {
+        "title": "सर्किट बोर्डवर ॲसिड किंवा आगीचा वापर करू नका",
+        "subtitle": "घातक विषारी वायू आणि गंभीर भाजण्याचा धोका",
+        "hazard_warning": "सर्किट बोर्डवर ॲसिड टाकल्याने किंवा आगीवर गरम केल्याने सायनाइड आणि नायट्रोजन ऑक्साईडसारखे विषारी वायू तयार होतात, ज्यामुळे श्वसनसंस्था निकामी होऊन मृत्यू ओढवू शकतो.",
+        "safe_handling_instruction": "बोर्ड न तोडता कोरड्या जागी क्रेटमध्ये सुरक्षित ठेवा. केवळ अधिकृत ई-कचरा रिसायकलर्सनाच हे साहित्य सुरक्षित प्रक्रियेसाठी द्या.",
+        "prohibited_action": "मौल्यवान धातू काढण्यासाठी ॲसिडची भांडी, गॅस बर्नर किंवा कोळशाच्या भट्ट्यांचा वापर कधीही करू नका.",
+        "audio_script": "सावधान: सर्किट बोर्डवर ॲसिड किंवा आग वापरू नका. यातून घातक विषारी वायू बाहेर पडतो. बोर्ड कोरड्या क्रेटमध्ये सुरक्षित ठेवा आणि अधिकृत केंद्रात जमा करा."
+      }
+    },
+    "review_status": "APPROVED",
+    "scientific_review": "DESK_REVIEWED_CPCB_WHO",
+    "translation_review": "DRAFT_PENDING_NATIVE_AUDIT"
+  },
+  {
+    "id": "SC-CRT-01",
+    "guide_id": "SG-CRT-01",
+    "material_ids": ["MAT-CRT-01"],
+    "regulatory_route": "HAZARDOUS_DISPOSAL",
+    "hazard_level": "CRITICAL",
+    "hazard_type": "IMPLOSION_AND_LEAD_POISONING",
+    "version": "v1.0",
+    "source_ids": ["SRC-01"],
+    "references": [
+      "CPCB Environmentally Sound Management of Cathode Ray Tubes (CRTs)",
+      "E-Waste (Management) Rules 2022 - Treatment Standards"
+    ],
+    "pictogram_ref": "icons/safety/no_break_crt.svg",
+    "audio_keys": {
+      "en": "audio_sc_crt_en",
+      "hi": "audio_sc_crt_hi",
+      "mr": "audio_sc_crt_mr"
+    },
+    "locales": {
+      "en": {
+        "title": "Do Not Break or Dismantle CRT Glass",
+        "subtitle": "Violent vacuum implosion & toxic lead glass hazard",
+        "hazard_warning": "Cathode Ray Tubes operate under high vacuum and contain up to 1.5kg of toxic lead plus hazardous cadmium/phosphor powder. Breaking the glass results in violent implosion and airborne toxic heavy metal dust.",
+        "safe_handling_instruction": "Keep CRT units fully assembled in their original plastic or wooden chassis. Transport face-down with padded screen support. Never separate the glass funnel from the faceplate.",
+        "prohibited_action": "Never strike CRT tubes with hammers, snap the rear electron gun neck, or shatter the funnel.",
+        "audio_script": "Warning: Do not break CRT monitor glass. CRTs are under vacuum and contain toxic lead and phosphor dust. Breaking causes violent implosion and severe cuts. Keep CRT displays intact and deliver face-down."
+      },
+      "hi": {
+        "title": "सीआरटी (CRT) टीवी या मॉनिटर का कांच कभी न तोड़ें",
+        "subtitle": "जोरदार धमाका (इम्प्लोजन) और लेड जहर का खतरा",
+        "hazard_warning": "सीआरटी ट्यूब में तेज वैक्यूम और लगभग 1.5 किलो जहरीला लेड (सीसा) होता है। इसे तोड़ने पर यह जोरदार धमाके के साथ फूटता है और जहरीला लेड व फॉस्फोर पाउडर हवा में फैलता है।",
+        "safe_handling_instruction": "सीआरटी मॉनिटर को बिना तोड़े पूरा रखें। स्क्रीन को गद्देदार सतह पर नीचे की ओर रखकर सुरक्षित ले जाएं। ग्लास को कभी अलग न करें।",
+        "prohibited_action": "ट्यूब को कभी हथौड़े से न फोड़ें और न ही पीछे की नली (नेक) को तोड़ें।",
+        "audio_script": "सावधानी: सीआरटी मॉनिटर या टीवी का कांच कभी न फोड़ें। इसमें भारी वैक्यूम और जहरीला लेड होता है। फूटने पर यह विस्फोटक रूप लेता है। इसे पूरा सुरक्षित रखें।"
+      },
+      "mr": {
+        "title": "सीआरटी (CRT) टीव्ही किंवा काच कधीही फोडू नका",
+        "subtitle": "स्फोटक आकुंचन (इम्प्लोजन) आणि शिशाच्या विषाचा धोका",
+        "hazard_warning": "सीआरटी ट्यूबमध्ये प्रचंड व्हॅक्यूम आणि दीड किलोपर्यंत विषारी शिसे असते. काच फुटल्यास जोरदार स्फोट होऊन विषारी पावडर हवेत पसरते आणि डोळ्यांना-शरीराला गंभीर जखमा होतात.",
+        "safe_handling_instruction": "सीआरटी संच न तोडता जसा आहे तसा ठेवा. स्क्रीनचा भाग खाली मऊ गादीवर ठेवून सुरक्षित वाहतूक करा. काच वेगळी करण्याचा प्रयत्न करू नका.",
+        "prohibited_action": "ट्यूबवर हातोडा मारू नका किंवा मागचा बारीक भाग (नेक) तोडू नका.",
+        "audio_script": "सावधान: सीआरटी टीव्ही किंवा कॉम्प्युटरची काच कधीही फोडू नका. यात तीव्र व्हॅक्यूम आणि विषारी शिसे असते. फुटल्यास मोठा धोका होतो. काच अखंड ठेवून अधिकृत ठिकाणी द्या."
+      }
+    },
+    "review_status": "APPROVED",
+    "scientific_review": "DESK_REVIEWED_CPCB_WHO",
+    "translation_review": "DRAFT_PENDING_NATIVE_AUDIT"
+  },
+  {
+    "id": "SC-BAT-01",
+    "guide_id": "SG-BATTERY-01",
+    "material_ids": ["MAT-BAT-01"],
+    "regulatory_route": "BATTERY_ISOLATION",
+    "hazard_level": "CRITICAL",
+    "hazard_type": "CORROSIVE_ACID_AND_TOXIC_LEAD",
+    "version": "v1.0",
+    "source_ids": ["SRC-02"],
+    "references": [
+      "CPCB Battery Waste Management Rules 2022",
+      "MoEFCC Lead-Acid Battery Recycling Standards"
+    ],
+    "pictogram_ref": "icons/safety/isolated_battery.svg",
+    "audio_keys": {
+      "en": "audio_sc_battery_lead_en",
+      "hi": "audio_sc_battery_lead_hi",
+      "mr": "audio_sc_battery_lead_mr"
+    },
+    "locales": {
+      "en": {
+        "title": "Lead-Acid Battery Handling & Upright Storage",
+        "subtitle": "Corrosive sulfuric acid & heavy metal toxic lead",
+        "hazard_warning": "Contains concentrated sulfuric acid that causes permanent blindness and skin destruction on contact. Heavy metal lead accumulates in human bones and organs, causing neurological disability.",
+        "safe_handling_instruction": "Store upright in dedicated heavy-duty polyethylene leak-proof spill trays. Wrap both terminal posts with insulating electrical tape to prevent arcing and fire.",
+        "prohibited_action": "Never tip on its side, pour liquid acid into gutters or open ground, or pry open sealed vent caps.",
+        "audio_script": "Warning: Handle lead-acid batteries with care. They contain concentrated acid and toxic lead. Always keep them upright in a spill-proof tray, tape both terminals, and never drain acid into the ground."
+      },
+      "hi": {
+        "title": "लेड-एसिड बैटरी: सीधा रखें और एसिड से बचें",
+        "subtitle": "तेजाब का रिसाव और लेड (सीसा) जहर का खतरा",
+        "hazard_warning": "इसमें गाढ़ा सल्फ्यूरिक तेजाब होता है जो त्वचा को तुरंत जला सकता है और आंखों की रोशनी छीन सकता है। सीसा शरीर में जाकर हड्डियों और दिमाग को नुकसान पहुंचाता है।",
+        "safe_handling_instruction": "बैटरी को हमेशा सीधा (अपराइट) प्लास्टिक ट्रे में रखें। दोनों खूंटियों (टर्मिनलों) पर इंसुलेशन टेप चिपकाएं ताकि स्पार्क न हो।",
+        "prohibited_action": "बैटरी को कभी तिरछा न रखें, तेजाब को नाली या मिट्टी में न बहाएं, और ढक्कन जबरन न खोलें।",
+        "audio_script": "सावधानी: बड़ी लेड-एसिड बैटरी को हमेशा सीधा रखें। इसमें गाढ़ा तेजाब होता है। दोनों टर्मिनलों पर टेप लगाएं और तेजाब को कभी भी जमीन पर न बहाएं।"
+      },
+      "mr": {
+        "title": "लेड-ॲसिड बॅटरी: नेहमी सरळ ठेवा आणि ॲसिड टाळा",
+        "subtitle": "तीव्र ॲसिड आणि विषारी शिशाचा गंभीर धोका",
+        "hazard_warning": "यामध्ये तीव्र सल्फ्यूरिक ॲसिड असते ज्यामुळे त्वचा जळू शकते आणि डोळे निकामी होऊ शकतात. शिसे शरीरासाठी अत्यंत विषारी आहे.",
+        "safe_handling_instruction": "बॅटरी नेहमी सरळ (उभी) ठेवा जेणेकरून ॲसिड सांडणार नाही. स्पार्क टाळण्यासाठी दोन्ही टर्मिनल्सवर इन्सुलेशन टेप लावा.",
+        "prohibited_action": "बॅटरी कधीही आडवी करू नका, ॲसिड नाल्यात किंवा जमिनीत टाकू नका आणि झाकण उघडण्याचा प्रयत्न करू नका.",
+        "audio_script": "सावधान: लेड-ॲसिड बॅटरी नेहमी सरळ ठेवा. यात तीव्र ॲसिड असते. दोन्ही टोकांवर इन्सुलेशन टेप लावा आणि ॲसिड कधीही जमिनीवर सांडू देऊ नका."
+      }
+    },
+    "review_status": "APPROVED",
+    "scientific_review": "DESK_REVIEWED_CPCB_WHO",
+    "translation_review": "DRAFT_PENDING_NATIVE_AUDIT"
+  },
+  {
+    "id": "SC-BAT-02",
+    "guide_id": "SG-BATTERY-02",
+    "material_ids": ["MAT-BAT-02"],
+    "regulatory_route": "BATTERY_ISOLATION",
+    "hazard_level": "CRITICAL",
+    "hazard_type": "THERMAL_RUNAWAY_AND_EXPLOSION",
+    "version": "v1.0",
+    "source_ids": ["SRC-02"],
+    "references": [
+      "CPCB Battery Waste Management Rules 2022 - Electric Vehicle & Portable Batteries",
+      "NFPA 855 Standard for the Installation of Stationary Energy Storage Systems"
+    ],
+    "pictogram_ref": "icons/safety/tape_terminals.svg",
+    "audio_keys": {
+      "en": "audio_sc_battery_li_ion_en",
+      "hi": "audio_sc_battery_li_ion_hi",
+      "mr": "audio_sc_battery_li_ion_mr"
+    },
+    "locales": {
+      "en": {
+        "title": "Lithium-Ion Battery Fire & Terminal Taping",
+        "subtitle": "Thermal runaway fire reaching 800°C and toxic gas",
+        "hazard_warning": "Damaged, compressed, or shorted lithium-ion cells enter self-sustaining thermal runaway, generating explosive 800°C fires that cannot be extinguished with water, emitting hydrofluoric acid gas.",
+        "safe_handling_instruction": "Inspect carefully for swelling, dents, or tears. Individually tape all exposed metal contact pads with non-conductive tape. Store separated in dry, vermiculite-lined or non-combustible containers.",
+        "prohibited_action": "Never puncture with metal tools, throw into mixed metal scrap, expose to water, or crush underfoot.",
+        "audio_script": "Warning: Lithium-ion batteries can catch fire and explode if damaged or shorted. Always tape all battery terminals individually with electrical tape. Never crush, puncture, or store loose in scrap bags."
+      },
+      "hi": {
+        "title": "लिथियम-आयन बैटरी: आग और फटने का खतरा",
+        "subtitle": "अचानक आग और 800 डिग्री तक तापमान का खतरा",
+        "hazard_warning": "दबने, कटने या शॉर्ट सर्किट होने पर लिथियम बैटरी भीषण आग पकड़ सकती है। यह आग 800 डिग्री तक पहुंचती है और पानी से नहीं बुझती, साथ ही जहरीली गैस छोड़ती है।",
+        "safe_handling_instruction": "बैटरी पर सूजन या कट की जांच करें। दोनों टर्मिनलों पर अलग-अलग बिजली की टेप चिपकाएं। इसे सूखे प्लास्टिक के डिब्बे में अलग रखें।",
+        "prohibited_action": "बैटरी को कभी दबाएं नहीं, धातु के औजार से न काटें, और न ही सामान्य कबाड़ की बोरी में ढीला छोड़ें।",
+        "audio_script": "सावधानी: लिथियम बैटरी में आग और धमाके का भारी खतरा होता है। बैटरी के दोनों सिरों पर तुरंत टेप लगाएं। इसे कभी भी लोहे के औजार से न दबाएं और अलग रखें।"
+      },
+      "mr": {
+        "title": "लिथियम-आयन बॅटरी: आग आणि स्फोटाचा इशारा",
+        "subtitle": "अचानक 800 अंश सेल्सिअसची आग आणि विषारी वायू",
+        "hazard_warning": "लिथियम बॅटरी दबल्यास, पंक्चर झाल्यास किंवा शॉर्ट झाल्यास अचानक प्रचंड भडका उडतो. ही आग पाण्याने विझत नाही आणि यातून अत्यंत विषारी वायू निघतो.",
+        "safe_handling_instruction": "बॅटरी फुगली आहे का ते तपासा. बॅटरीच्या प्रत्येक टोकावर स्वतंत्र इन्सुलेशन टेप लावा. कोरड्या, आगप्रतिबंधक डब्यात स्वतंत्र ठेवा.",
+        "prohibited_action": "बॅटरीवर धारदार वस्तू मारू नका, हातोड्याने दाबू नका आणि इतर भंगारात मोकळी सोडू नका.",
+        "audio_script": "सावधान: लिथियम बॅटरीला धक्का लागल्यास किंवा ती शॉर्ट झाल्यास मोठा भडका उडू शकतो. बॅटरीच्या टोकांना लगेच टेप लावा आणि ती इतर भंगारापासून वेगळी ठेवा."
+      }
+    },
+    "review_status": "APPROVED",
+    "scientific_review": "DESK_REVIEWED_CPCB_WHO",
+    "translation_review": "DRAFT_PENDING_NATIVE_AUDIT"
+  },
+  {
+    "id": "SC-BAT-03",
+    "guide_id": "SG-BATTERY-03",
+    "material_ids": ["MAT-BAT-03", "MAT-BAT-04"],
+    "regulatory_route": "BATTERY_ISOLATION",
+    "hazard_level": "HIGH",
+    "hazard_type": "UNKNOWN_CHEMISTRY_SHORT_CIRCUIT",
+    "version": "v1.0",
+    "source_ids": ["SRC-02"],
+    "references": [
+      "CPCB Battery Waste Management Rules 2022 - Collection & Sorting",
+      "UN Recommendations on the Transport of Dangerous Goods (Model Regs)"
+    ],
+    "pictogram_ref": "icons/safety/isolated_container.svg",
+    "audio_keys": {
+      "en": "audio_sc_battery_unk_en",
+      "hi": "audio_sc_battery_unk_hi",
+      "mr": "audio_sc_battery_unk_mr"
+    },
+    "locales": {
+      "en": {
+        "title": "Unknown & Mixed Battery Segregation",
+        "subtitle": "Multi-chemistry cross-contact and fire risk",
+        "hazard_warning": "Unlabelled or custom batteries may contain reactive lithium, toxic nickel-cadmium, or mercury. Loose mixing allows terminals to touch, generating spark ignition and container fires.",
+        "safe_handling_instruction": "Place loose batteries in a non-conductive plastic container. Ensure individual terminals cannot contact neighboring metal surfaces. Route to an authorized battery collection facility.",
+        "prohibited_action": "Never cut outer shrink wrap to identify chemistry, drop into metal drums, or transport in loose bulk sacks.",
+        "audio_script": "Warning: Segregate unknown batteries. Mixing different battery types can cause short circuits and fires. Place in a non-conductive plastic box and never peel the outer casing to identify them."
+      },
+      "hi": {
+        "title": "अज्ञात बैटरी: अलग डिब्बे में सुरक्षित रखें",
+        "subtitle": "आपस में टकराने से चिंगारी और आग का खतरा",
+        "hazard_warning": "बिना नाम वाली बैटरी में लिथियम, कैडमियम या पारा हो सकता है। इन्हें आपस में मिलाकर रखने पर शॉर्ट सर्किट से कबाड़ के थैले में आग लग सकती है।",
+        "safe_handling_instruction": "बैटरियों को अलग प्लास्टिक के डिब्बे में रखें ताकि उनके सिरे आपस में न टकराएं। अधिकृत बैटरी संकलन केंद्र को ही दें।",
+        "prohibited_action": "पहचान करने के लिए बैटरी का बाहरी प्लास्टिक कभी न काटें और न ही लोहे के ड्रम में फेंकें।",
+        "audio_script": "सावधानी: अज्ञात बैटरियों को हमेशा अलग प्लास्टिक के डिब्बे में रखें। अलग-अलग बैटरियां छूने से चिंगारी और आग भड़क सकती है। इनका छिलका कभी न उतारें।"
+      },
+      "mr": {
+        "title": "अज्ञात बॅटरी: स्वतंत्र प्लास्टिक डब्यात ठेवा",
+        "subtitle": "एकमेकांना स्पर्श झाल्यास ठिणगी आणि आगीचा धोका",
+        "hazard_warning": "लेबल नसलेल्या बॅटऱ्यांमध्ये लिथियम किंवा कॅडमियम असू शकते. त्या एकत्र ठेवल्यास टोकांचा एकमेकांना स्पर्श होऊन आगीचा मोठा धोका संभवतो.",
+        "safe_handling_instruction": "बॅटऱ्या स्वतंत्र प्लास्टिकच्या डब्यात सुरक्षित ठेवा जेणेकरून त्या एकमेकांना घासणार नाहीत. अधिकृत संकलन केंद्रात द्या.",
+        "prohibited_action": "रसायन ओळखण्यासाठी बॅटरीचे बाहेरील आवरण कापू नका किंवा लोखंडी पिंपात टाकू नका.",
+        "audio_script": "सावधान: माहिती नसलेल्या बॅटऱ्या स्वतंत्र प्लास्टिक डब्यात ठेवा. एकमेकांना स्पर्श झाल्यास आग लागू शकते. बॅटरीचे कव्हर काढण्याचा प्रयत्न करू नका."
+      }
+    },
+    "review_status": "APPROVED",
+    "scientific_review": "DESK_REVIEWED_CPCB_WHO",
+    "translation_review": "DRAFT_PENDING_NATIVE_AUDIT"
+  },
+  {
+    "id": "SC-DAM-01",
+    "guide_id": "SG-DAMAGED-01",
+    "material_ids": [
+      "MAT-PCB-01", "MAT-PCB-02", "MAT-BAT-01", "MAT-BAT-02",
+      "MAT-BAT-03", "MAT-BAT-04", "MAT-CRT-01", "MAT-LCD-01",
+      "MAT-MOT-01", "MAT-MOT-02", "MAT-MIX-01", "MAT-MIX-02",
+      "MAT-UNK-01"
+    ],
+    "regulatory_route": "HAZARDOUS_DISPOSAL",
+    "hazard_level": "CRITICAL",
+    "hazard_type": "ACTIVE_CHEMICAL_OR_THERMAL_EMERGENCY",
+    "version": "v1.0",
+    "source_ids": ["SRC-01", "SRC-02"],
+    "references": [
+      "CPCB Guidelines on Storage & Transportation of Hazardous E-Waste",
+      "Disaster Management Division Ministry of Home Affairs Protocol"
+    ],
+    "pictogram_ref": "icons/safety/stop_handling_hazard.svg",
+    "audio_keys": {
+      "en": "audio_sc_damaged_hazard_en",
+      "hi": "audio_sc_damaged_hazard_hi",
+      "mr": "audio_sc_damaged_hazard_mr"
+    },
+    "locales": {
+      "en": {
+        "title": "Damaged, Leaking, or Overheating Material",
+        "subtitle": "Immediate stop handling & bystander clearance",
+        "hazard_warning": "Hissing noises, pungent odors, swelling, chemical fluid leaks, or hot surfaces indicate an ongoing hazardous chemical event or imminent thermal reaction.",
+        "safe_handling_instruction": "Cease handling immediately. Clear all bystanders to a safe distance (minimum 10 meters) upwind. If safe to do so, place in an outdoor shaded sand container. Notify formal response or authorized disposal facility.",
+        "prohibited_action": "Never touch leaking liquid with bare hands, inhale fumes, pour water on suspected battery reactions, or load onto passenger transport.",
+        "audio_script": "Emergency Alert: If scrap is hissing, smoking, leaking fluid, or hot, stop handling immediately. Move bystanders away at least 10 meters upwind. Do not touch leaking chemicals. Seek authorized emergency help."
+      },
+      "hi": {
+        "title": "क्षतिग्रस्त, रिसती या गर्म होती सामग्री: तुरंत रुकें",
+        "subtitle": "सामान से तुरंत दूर हटें और दूसरों को बचाएं",
+        "hazard_warning": "यदि कबाड़ से फुफकारने की आवाज आए, बदबू निकले, धुआं उठे, तरल पदार्थ रिसे या वह बहुत गर्म हो, तो यह भीषण रासायनिक खतरे या आग की शुरुआत है।",
+        "safe_handling_instruction": "तुरंत छूना बंद करें। सभी लोगों को कम से कम 10 मीटर दूर हटाएं। यदि सुरक्षित हो तो इसे खुले स्थान पर रेत में रखें और तुरंत अधिकृत केंद्र या आपातकालीन मदद से संपर्क करें।",
+        "prohibited_action": "बहते केमिकल को नंगे हाथों से न छुएं, धुएं को सांस में न लें, और इसे कभी भी आम सवारी गाड़ी में न लादें।",
+        "audio_script": "आपातकालीन चेतावनी: यदि कबाड़ से धुआं निकले, फुफकार की आवाज आए या केमिकल बहे, तो उसे तुरंत छोड़ दें। कम से कम 10 मीटर दूर हटें और दूसरों को भी हटाएं। केमिकल को न छुएं।"
+      },
+      "mr": {
+        "title": "खराब, गळती होणारे किंवा गरम साहित्य: त्वरित थांबा",
+        "subtitle": "हात लावणे तात्काळ थांबवा आणि लोकांना दूर करा",
+        "hazard_warning": "सामान गरम होणे, वास येणे, धूर निघणे किंवा रासायनिक द्रव गळणे हे मोठ्या रासायनिक धोक्याचे किंवा आगीचे लक्षण आहे.",
+        "safe_handling_instruction": "साहित्य हाताळणे त्वरित थांबवा. सर्व लोकांना कमीतकमी १० मीटर अंतरावर सुरक्षित ठेवा. शक्य असल्यास उघड्या जागेत वाळूमध्ये ठेवा आणि अधिकृत मदत घ्या.",
+        "prohibited_action": "गळणाऱ्या द्रवाला उघड्या हाताने स्पर्श करू नका, धूर श्वासात घेऊ नका आणि वाहनांमध्ये हे साहित्य भरू नका.",
+        "audio_script": "धोका सूचना: जर साहित्यातून धूर निघत असेल, आवाज येत असेल किंवा केमिकल गळत असेल तर ताबडतोब लांब व्हा. लोकांना १० मीटर दूर ठेवा आणि रासायनिक द्रवाला हात लावू नका."
+      }
+    },
+    "review_status": "APPROVED",
+    "scientific_review": "DESK_REVIEWED_CPCB_WHO",
+    "translation_review": "DRAFT_PENDING_NATIVE_AUDIT"
+  },
+  {
+    "id": "SC-PLA-01",
+    "guide_id": "SG-PLASTIC-01",
+    "material_ids": ["MAT-PLA-01", "MAT-PLA-02"],
+    "regulatory_route": "AUTHORIZED_EWASTE",
+    "hazard_level": "HIGH",
+    "hazard_type": "BROMINATED_FLAME_RETARDANTS",
+    "version": "v1.0",
+    "source_ids": ["SRC-01"],
+    "references": [
+      "Stockholm Convention on Persistent Organic Pollutants (POPs)",
+      "CPCB Guidelines on Recycling of Plastics from E-Waste"
+    ],
+    "pictogram_ref": "icons/safety/no_burn_plastics.svg",
+    "audio_keys": {
+      "en": "audio_sc_plastics_en",
+      "hi": "audio_sc_plastics_hi",
+      "mr": "audio_sc_plastics_mr"
+    },
+    "locales": {
+      "en": {
+        "title": "Flame-Retardant Electronics Plastics: No Open Burning",
+        "subtitle": "Carcinogenic polybrominated dioxin emissions",
+        "hazard_warning": "E-waste plastics (ABS-FR, HIPS-FR) contain brominated flame retardant additives. Heating or open burning releases polybrominated dibenzodioxins, highly toxic persistent organic pollutants.",
+        "safe_handling_instruction": "Segregate rigid electronic casings from household bottles and food containers. Keep intact in clean sacks and route to authorized e-waste shredding facilities with density-separation equipment.",
+        "prohibited_action": "Never burn plastics for volume reduction, melt in open pots, or re-extrude into consumer utensils or toys.",
+        "audio_script": "Warning: Do not burn electronics plastics. Monitor and TV casings contain flame retardants that release cancer-causing toxic smoke when burned. Keep them separate from bottles and send to authorized recyclers."
+      },
+      "hi": {
+        "title": "इलेक्ट्रॉनिक्स प्लास्टिक: कभी न जलाएं या पिघलाएं",
+        "subtitle": "कैंसर पैदा करने वाले जहरीले धुएं से बचाव",
+        "hazard_warning": "टीवी, कंप्यूटर और प्रिंटर के प्लास्टिक में आग रोकने वाले ब्रोमीन रसायन होते हैं। इसे जलाने या खुले बर्तन में पिघलाने पर जानलेवा कैंसरकारी धुआं निकलता है।",
+        "safe_handling_instruction": "इलेक्ट्रॉनिक प्लास्टिक को पानी की बोतलों व घरेलू प्लास्टिक से अलग रखें। इसे अधिकृत रीसाइक्लर को सौंपें जिनके पास सुरक्षित श्रेडर मशीनें हों।",
+        "prohibited_action": "कबाड़ कम करने के लिए इसे कभी न जलाएं, न पिघलाएं और न ही घरेलू बर्तन बनाने में इस्तेमाल करें।",
+        "audio_script": "सावधानी: इलेक्ट्रॉनिक्स के प्लास्टिक को कभी न जलाएं। कंप्यूटर और टीवी के प्लास्टिक में खतरनाक रसायन होते हैं। इन्हें साधारण प्लास्टिक से अलग रखें और अधिकृत रीसाइक्लर को दें।"
+      },
+      "mr": {
+        "title": "इलेक्ट्रॉनिक्स प्लास्टिक: कधीही जाळू नका",
+        "subtitle": "कर्करोगास कारणीभूत ठरणारा विषारी धूर टाळा",
+        "hazard_warning": "टीव्ही, कॉम्प्युटरच्या प्लास्टिकमध्ये ब्रोमीनयुक्त रसायने असतात. हे जाळल्याने अत्यंत विषारी डायऑक्सिन धूर निघतो, ज्यामुळे कर्करोगाचा धोका निर्माण होतो.",
+        "safe_handling_instruction": "हे प्लास्टिक पाण्याच्या बाटल्या व घरगुती प्लास्टिकपासून वेगळे ठेवा. सुरक्षित प्रक्रिया करणाऱ्या अधिकृत ई-कचरा केंद्रातच जमा करा.",
+        "prohibited_action": "जागेची बचत करण्यासाठी प्लास्टिक कधीही जाळू नका आणि उघड्या कढईत वितळवू नका.",
+        "audio_script": "सावधान: इलेक्ट्रॉनिक्सचे प्लास्टिक कधीही जाळू नका. यात आगप्रतिबंधक विषारी रसायने असतात जी जाळल्यास कर्करोगाचा धोका होतो. हे प्लास्टिक वेगळे ठेवा आणि अधिकृत केंद्रात द्या."
+      }
+    },
+    "review_status": "APPROVED",
+    "scientific_review": "DESK_REVIEWED_CPCB_WHO",
+    "translation_review": "DRAFT_PENDING_NATIVE_AUDIT"
+  },
+  {
+    "id": "SC-MIX-01",
+    "guide_id": "SG-MIXED-01",
+    "material_ids": ["MAT-MIX-01", "MAT-MIX-02", "MAT-OTH-01", "MAT-UNK-01"],
+    "regulatory_route": "REVIEW_REQUIRED",
+    "hazard_level": "HIGH",
+    "hazard_type": "CONCEALED_HAZARDS_IN_ASSEMBLIES",
+    "version": "v1.0",
+    "source_ids": ["SRC-01"],
+    "references": [
+      "CPCB E-Waste Rules 2022 - Collection & Channelization",
+      "National Safety Council India - E-Waste Handling Practices"
+    ],
+    "pictogram_ref": "icons/safety/no_dismantle_mixed.svg",
+    "audio_keys": {
+      "en": "audio_sc_mixed_en",
+      "hi": "audio_sc_mixed_hi",
+      "mr": "audio_sc_mixed_mr"
+    },
+    "locales": {
+      "en": {
+        "title": "Mixed Electronic Assemblies: Do Not Force Dismantle",
+        "subtitle": "Concealed capacitors, mercury switches & lithium cells",
+        "hazard_warning": "Unsorted electronic equipment often conceals charged high-voltage capacitors, mercury tilt switches, or hidden pouch lithium batteries that explode upon physical impact.",
+        "safe_handling_instruction": "Keep mixed electronic devices completely sealed in sturdy cardboard boxes or heavy bags. Mark the lot as 'Review Required' and allow formal recyclers to conduct technical evaluation.",
+        "prohibited_action": "Never use crowbars, axes, or heavy hammers to crack open sealed electronic housings for manual sorting.",
+        "audio_script": "Warning: Do not force open mixed electronic devices. Sealed equipment may conceal high-voltage electrical charges or hidden batteries. Keep assemblies intact in sturdy containers for inspection."
+      },
+      "hi": {
+        "title": "मिश्रित इलेक्ट्रॉनिक सामान: जबरन न तोड़ें",
+        "subtitle": "छिपे हुए करंट, पारे और बैटरी का खतरा",
+        "hazard_warning": "मिश्रित ई-कचरे के अंदर बिजली से चार्ज कैपेसिटर, पारे (मरकरी) के स्विच या छिपी हुई लिथियम बैटरी हो सकती है, जिन पर चोट लगने से करंट या धमाका हो सकता है।",
+        "safe_handling_instruction": "सामान को बिना तोड़े मजबूत बक्सों या बोरियों में रखें। इसे 'रिव्यू रिक्वायर्ड' मानकर अधिकृत रीसाइक्लर को तकनीकी जांच के लिए सौंपें।",
+        "prohibited_action": "सामान को छांटने के लिए कभी भी हथौड़े, कुल्हाड़ी या सब्बल से जबरन न तोड़ें।",
+        "audio_script": "सावधानी: पुराने इलेक्ट्रॉनिक उपकरणों को जबरन न तोड़ें। इनके अंदर करंट या छिपी हुई बैटरी हो सकती है जो चोट लगने पर फट सकती है। इन्हें बक्से में सुरक्षित रखें।"
+      },
+      "mr": {
+        "title": "मिश्रित इलेक्ट्रॉनिक वस्तू: बळजबरीने फोडू नका",
+        "subtitle": "विजेचा धक्का, पारा आणि छुपी बॅटरीचा धोका",
+        "hazard_warning": "मिश्रित ई-कचऱ्यामध्ये चार्ज असलेले कॅपेसिटर, पाऱ्याचे स्विच किंवा छुपी लिथियम बॅटरी असू शकते. घाव घातल्यास मोठा शॉक किंवा स्फोट होऊ शकतो.",
+        "safe_handling_instruction": "वस्तू न तोडता मजबूत खोक्यात किंवा गोणीत ठेवा. अधिकृत केंद्रात तांत्रिक तपासणीसाठी जमा करा.",
+        "prohibited_action": "भाग वेगळे करण्यासाठी हातोडा किंवा लोखंडी रॉडने उपकरणे फोडण्याचा प्रयत्न कधीही करू नका.",
+        "audio_script": "सावधान: जुनी इलेक्ट्रॉनिक उपकरणे जबरदस्तीने फोडू नका. यात विजेचा धक्का किंवा बॅटरी फुटण्याचा धोका असू शकतो. सामान खोक्यात सुरक्षित ठेवा."
+      }
+    },
+    "review_status": "APPROVED",
+    "scientific_review": "DESK_REVIEWED_CPCB_WHO",
+    "translation_review": "DRAFT_PENDING_NATIVE_AUDIT"
+  }
+]

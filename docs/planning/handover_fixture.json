@@ -1,0 +1,39 @@
+{
+  "purpose": "Serialization fixture for a pending proposal with missing agreement/evidence, not confirmation eligibility or real transaction data.",
+  "canonicalization": "SAHITOL-JCS-1",
+  "proposal_payload": {
+    "schema_version": "SAHITOL-HANDOVER-1",
+    "handover_id": "10000000-0000-4000-8000-000000000001",
+    "transaction_id": "20000000-0000-4000-8000-000000000001",
+    "lot_id": "30000000-0000-4000-8000-000000000001",
+    "collector_id": "40000000-0000-4000-8000-000000000001",
+    "facility_id": "50000000-0000-4000-8000-000000000001",
+    "agreed_terms_hash": null,
+    "material_snapshot": {
+      "material_id": "60000000-0000-4000-8000-000000000001",
+      "condition": "UNKNOWN",
+      "regulatory_route": "E_WASTE"
+    },
+    "weight_snapshot": {
+      "estimated_weight_g": 8500,
+      "measured_weight_g": null
+    },
+    "value_snapshot": {
+      "currency": "INR",
+      "estimated_low_paise": null,
+      "estimated_high_paise": null,
+      "agreed_total_paise": null
+    },
+    "location_snapshot": {
+      "location_id": null,
+      "source": "MISSING",
+      "accuracy_m": null,
+      "captured_at": null
+    },
+    "occurred_at": "2026-09-28T08:30:00.000Z",
+    "media": [],
+    "is_demo": true
+  },
+  "canonical_utf8": "{\"agreed_terms_hash\":null,\"collector_id\":\"40000000-0000-4000-8000-000000000001\",\"facility_id\":\"50000000-0000-4000-8000-000000000001\",\"handover_id\":\"10000000-0000-4000-8000-000000000001\",\"is_demo\":true,\"location_snapshot\":{\"accuracy_m\":null,\"captured_at\":null,\"location_id\":null,\"source\":\"MISSING\"},\"lot_id\":\"30000000-0000-4000-8000-000000000001\",\"material_snapshot\":{\"condition\":\"UNKNOWN\",\"material_id\":\"60000000-0000-4000-8000-000000000001\",\"regulatory_route\":\"E_WASTE\"},\"media\":[],\"occurred_at\":\"2026-09-28T08:30:00.000Z\",\"schema_version\":\"SAHITOL-HANDOVER-1\",\"transaction_id\":\"20000000-0000-4000-8000-000000000001\",\"value_snapshot\":{\"agreed_total_paise\":null,\"currency\":\"INR\",\"estimated_high_paise\":null,\"estimated_low_paise\":null},\"weight_snapshot\":{\"estimated_weight_g\":8500,\"measured_weight_g\":null}}",
+  "proposal_hash": "a091623365372138e72b1d767cca58ac80c59667b59b86f511ebf11b64eb783f"
+}

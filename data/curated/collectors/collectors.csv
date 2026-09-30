@@ -1,0 +1,4 @@
+# SahiTol Minimal Collector Directory (Zero-PII Pseudonymized)
+collector_pseudonym,language_preference,coarse_area,lifetime_lots,total_collected_grams,created_at,privacy_standard
+col_anon_8f3a9e1b,hi,Mayapuri Phase II,14,482000,2026-09-20T06:00:00Z,ZERO_PII_STRICT
+col_anon_3b1d7a4c,mr,Dharavi Sector 5,28,1240000,2026-09-18T04:30:00Z,ZERO_PII_STRICT

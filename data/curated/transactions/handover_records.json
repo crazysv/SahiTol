@@ -1,0 +1,24 @@
+[
+  {
+    "confirmed_amount_paise": 1526400,
+    "confirmed_at": "2026-09-29T09:00:00Z",
+    "confirmed_weight_g": 84800,
+    "handover_id": "hnd-rec-001",
+    "non_epr_notice": "SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling.",
+    "status": "CONFIRMED",
+    "terms_hash": "a09162336537b03bfa86b976fe74ccbc9a781dd4e723521b4a242c94318c4e09",
+    "token": "HND-20260929-4091",
+    "transaction_id": "tx-f1001-c01-001"
+  },
+  {
+    "confirmed_amount_paise": 9425000,
+    "confirmed_at": "2026-09-28T11:30:00Z",
+    "confirmed_weight_g": 145000,
+    "handover_id": "hnd-rec-002",
+    "non_epr_notice": "SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling.",
+    "status": "CONFIRMED",
+    "terms_hash": "b18273447648c14cfa97c087fe85ddcd0b892ee5f834632c5b353d05429d5f10",
+    "token": "HND-20260929-4092",
+    "transaction_id": "tx-f1001-c02-002"
+  }
+]

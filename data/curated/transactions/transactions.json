@@ -1,0 +1,36 @@
+[
+  {
+    "agreed_total_paise": 1526400,
+    "closed_at": "2026-09-29T09:15:00Z",
+    "collector_pseudonym": "col_anon_8f3a9e1b",
+    "created_at": "2026-09-29T08:30:00Z",
+    "estimated_weight_g": 85000,
+    "facility_id": "fac-delhi-001",
+    "handover_token": "HND-20260929-4091",
+    "is_demo": true,
+    "lifecycle": "CLOSED",
+    "lot_id": "lot-20260929-001",
+    "material_id": "MAT-CAB-01",
+    "measured_weight_g": 84800,
+    "non_epr_notice": "SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling.",
+    "quoted_total_paise": 1526400,
+    "transaction_id": "tx-f1001-c01-001"
+  },
+  {
+    "agreed_total_paise": 9425000,
+    "closed_at": "2026-09-28T11:45:00Z",
+    "collector_pseudonym": "col_anon_3b1d7a4c",
+    "created_at": "2026-09-28T11:00:00Z",
+    "estimated_weight_g": 145000,
+    "facility_id": "fac-delhi-001",
+    "handover_token": "HND-20260929-4092",
+    "is_demo": true,
+    "lifecycle": "CLOSED",
+    "lot_id": "lot-20260929-002",
+    "material_id": "MAT-MET-01",
+    "measured_weight_g": 145000,
+    "non_epr_notice": "SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling.",
+    "quoted_total_paise": 9425000,
+    "transaction_id": "tx-f1001-c02-002"
+  }
+]

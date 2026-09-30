@@ -1,0 +1,22 @@
+material_id,category_code,subcategory_code,label_en,label_hi,label_mr,default_route,route_requires_context,allowed_units,safety_guide_ids,source_id,origin_class,source_kind,is_demo,schema_version
+MAT-PCB-01,PCB,PCB_HIGH_GRADE,Motherboard / Server PCB,मदरबोर्ड,मदरबोर्ड,AUTHORIZED_EWASTE,False,"kg,g","[""SG-PCB-01"", ""SG-DAMAGED-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-PCB-02,PCB,PCB_LOW_GRADE,Low-Grade Appliance Board,भूरा बोर्ड,तपकिरी बोर्ड,AUTHORIZED_EWASTE,False,"kg,g","[""SG-PCB-01"", ""SG-DAMAGED-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-BAT-01,BATTERY,BAT_LEAD_ACID,Lead-Acid Battery,लेड एसिड बैटरी,लेड ॲसिड बॅटरी,BATTERY_ISOLATION,True,"kg,piece","[""SG-BATTERY-01"", ""SG-DAMAGED-01""]",SRC-02,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-BAT-02,BATTERY,BAT_LI_ION,Lithium-Ion Battery,लिथियम आयन बैटरी,लिथियम बॅटरी,BATTERY_ISOLATION,True,"kg,piece","[""SG-BATTERY-02"", ""SG-DAMAGED-01""]",SRC-02,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-BAT-03,BATTERY,BAT_OTHER_CHEM,Other Battery Chemistries,अन्य बैटरी,इतर बॅटरी,BATTERY_ISOLATION,True,"kg,piece","[""SG-BATTERY-03"", ""SG-DAMAGED-01""]",SRC-02,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-BAT-04,BATTERY,BAT_UNKNOWN,Unknown Chemistry Battery,अज्ञात बैटरी,अज्ञात बॅटरी,BATTERY_ISOLATION,True,"kg,piece","[""SG-BATTERY-03"", ""SG-DAMAGED-01""]",SRC-02,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-CRT-01,CRT,CRT_TUBE,Cathode Ray Tube / Monitor Glass,सीआरटी मॉनिटर,काचेची ट्यूब,HAZARDOUS_DISPOSAL,True,"piece,kg","[""SG-CRT-01"", ""SG-DAMAGED-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-LCD-01,LCD,LCD_PANEL,LCD / LED Display Panel,एलसीडी स्क्रीन,एलसीडी स्क्रीन,AUTHORIZED_EWASTE,False,"piece,kg","[""SG-DAMAGED-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-CAB-01,CABLES,CAB_COPPER,Insulated Copper Wire / Cable,तांबे का तार,तांब्याची वायर,GENERAL_RECYCLING,False,"kg,g","[""SG-CABLE-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-CAB-02,CABLES,CAB_ALUMINUM,Aluminum Wiring / Communication Cable,एल्युमिनियम तार,ॲल्युमिनियम वायर,GENERAL_RECYCLING,False,"kg,g","[""SG-CABLE-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-MOT-01,MOTORS,MOT_ELECTRIC,Electric Motor / Copper Windings,बिजली की मोटर,विजेची मोटर,GENERAL_RECYCLING,False,"kg,piece","[""SG-DAMAGED-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-MOT-02,MOTORS,MOT_COMPRESSOR,Fridge / AC Compressor & Magnets,फ्रिज कंप्रेसर,फ्रिज कंप्रेसर,GENERAL_RECYCLING,True,"kg,piece","[""SG-DAMAGED-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-PLA-01,PLASTICS,PLA_EWASTE_RIGID,Rigid E-Waste Plastics (ABS / HIPS),ई-वेस्ट प्लास्टिक,ई-कचरा प्लास्टिक,AUTHORIZED_EWASTE,True,"kg,g","[""SG-PLASTIC-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-PLA-02,PLASTICS,PLA_GENERAL_MIXED,General Mixed Plastics,सामान्य प्लास्टिक,सर्वसाधारण प्लास्टिक,GENERAL_RECYCLING,True,"kg,g","[""SG-PLASTIC-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-MET-01,METALS,MET_COPPER,Scrap Copper (Bare / Heavy),तांबा स्क्रैप,तांबे स्क्रॅप,GENERAL_RECYCLING,False,"kg,g",[],SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-MET-02,METALS,MET_ALUMINUM,Scrap Aluminum,एल्युमिनियम स्क्रैप,ॲल्युमिनियम स्क्रॅप,GENERAL_RECYCLING,False,"kg,g",[],SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-MET-03,METALS,MET_FERROUS,Iron & Steel Scrap,लोहा स्क्रैप,लोखंड स्क्रॅप,GENERAL_RECYCLING,False,kg,[],SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-MIX-01,MIXED_ELECTRONICS,MIX_IT_EQUIP,Mixed IT & Telecom Equipment,मिक्स कंप्यूटर उपकरण,मिश्र आयटी उपकरणे,AUTHORIZED_EWASTE,True,"kg,piece","[""SG-MIXED-01"", ""SG-DAMAGED-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-MIX-02,MIXED_ELECTRONICS,MIX_APPLIANCES,Small Household Appliances / Mixed E-Waste,छोटे घरेलू उपकरण,लहान घरगुती उपकरणे,AUTHORIZED_EWASTE,True,"kg,piece","[""SG-MIXED-01"", ""SG-DAMAGED-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-OTH-01,OTHER,OTH_RECYCLABLE,Other Miscellaneous Recyclables,अन्य सामग्री,इतर साहित्य,REVIEW_REQUIRED,True,"kg,piece","[""SG-MIXED-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0
+MAT-UNK-01,UNKNOWN,UNK_UNIDENTIFIED,Unidentified E-Waste / Component,अज्ञात सामान,अज्ञात वस्तू,REVIEW_REQUIRED,True,"kg,piece","[""SG-MIXED-01"", ""SG-DAMAGED-01""]",SRC-01,OFFICIAL,GOVERNMENT_PUBLICATION,False,v1.0

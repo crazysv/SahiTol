@@ -1,0 +1,37 @@
+{
+  "counts_by_is_demo": {
+    "true": 2
+  },
+  "counts_by_origin_class": {
+    "PLATFORM_GENERATED": 2
+  },
+  "counts_by_source_kind": {
+    "PLATFORM_OBSERVATION": 2
+  },
+  "data_version": "v1.0-curated",
+  "dataset_family": "collectors",
+  "files": [
+    {
+      "byte_size": 355,
+      "filename": "collectors.csv",
+      "row_count": 2,
+      "sha256": "cd26c0a253c416942243cbffbcba690ff28d7f230c1524e27095110c3a74e6fd"
+    },
+    {
+      "byte_size": 573,
+      "filename": "collectors.json",
+      "row_count": 2,
+      "sha256": "92e4817cf606c9ce0eac85bc3d2cb76090d3061747b89725af21c1cd2e0cb323"
+    }
+  ],
+  "generated_at": "2026-09-29T18:46:38.375319+00:00",
+  "limitations": "Pseudonymized collector profiles; strictly excludes phone numbers, hashed credentials, and home coordinates.",
+  "quarantined_count": 0,
+  "schema_version": "v1.0",
+  "source_ids": [
+    "SRC-SAHITOL-COLLECTOR-PROFILE"
+  ],
+  "statutory_notice": "SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling.",
+  "total_records": 4,
+  "validation_status": "VALID"
+}

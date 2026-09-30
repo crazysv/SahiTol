@@ -1,0 +1,233 @@
+{
+  "metadata": {
+    "policy_version": "MATCH_V1",
+    "specification": "docs/03_TECHSPEC.md lines 67-84",
+    "created_at": "2026-09-29T12:00:00Z",
+    "weights": {
+      "distance": 0.30,
+      "rate": 0.30,
+      "pickup": 0.20,
+      "availability": 0.15,
+      "reliability": 0.05
+    },
+    "default_search_radius_m": 50000,
+    "max_distance_tolerance_pct": 0.5,
+    "statutory_disclaimer": "Public directory lead sourced from official state/central regulator registries. Listing does not represent an endorsement, commercial partnership, or EPR fulfillment certificate."
+  },
+  "haversine_distance_tests": [
+    {
+      "description": "Delhi Mayapuri to Delhi Okhla Industrial Area",
+      "point1": {"latitude": 28.6358, "longitude": 77.1256},
+      "point2": {"latitude": 28.5355, "longitude": 77.2718},
+      "expected_distance_m": 18115.3,
+      "postgis_reference_m": 18127.0,
+      "tolerance_pct": 0.5
+    },
+    {
+      "description": "Delhi Mayapuri to Seelampur Workshop",
+      "point1": {"latitude": 28.6358, "longitude": 77.1256},
+      "point2": {"latitude": 28.6672, "longitude": 77.2721},
+      "expected_distance_m": 14761.5,
+      "postgis_reference_m": 14770.0,
+      "tolerance_pct": 0.5
+    },
+    {
+      "description": "Mumbai Kurla to Thane Rabale MIDC",
+      "point1": {"latitude": 19.0688, "longitude": 72.8826},
+      "point2": {"latitude": 19.1415, "longitude": 73.0035},
+      "expected_distance_m": 15002.8,
+      "postgis_reference_m": 15011.0,
+      "tolerance_pct": 0.5
+    },
+    {
+      "description": "Identical coordinates zero distance",
+      "point1": {"latitude": 28.6358, "longitude": 77.1256},
+      "point2": {"latitude": 28.6358, "longitude": 77.1256},
+      "expected_distance_m": 0.0,
+      "postgis_reference_m": 0.0,
+      "tolerance_pct": 0.0
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "SCN-01-BATTERY-ISOLATION",
+      "title": "Battery Isolation Route Invariant (R-REC-04 / AT-024)",
+      "description": "Battery lots cannot match general e-waste facilities. Only facilities with authorized BATTERY_ISOLATION route match.",
+      "lot": {
+        "material_id": "MAT-BAT-01",
+        "regulatory_route": "BATTERY_ISOLATION",
+        "estimated_weight_g": 25000,
+        "latitude": 28.6358,
+        "longitude": 77.1256,
+        "is_demo": false
+      },
+      "candidates": [
+        {
+          "facility_id": "fac-dl-01",
+          "name": "Greentech Recyclers Pvt Ltd",
+          "authorized_routes": ["AUTHORIZED_EWASTE"],
+          "materials_accepted": ["MAT-PCB-01", "MAT-BAT-01"],
+          "verification_level": "L3",
+          "registration_status": "VALID",
+          "expected_eligible": false,
+          "expected_reason": "ROUTE_INCOMPATIBLE"
+        },
+        {
+          "facility_id": "fac-dl-02",
+          "name": "Eco-Battery Reverse Logistics & Isolation Center",
+          "authorized_routes": ["BATTERY_ISOLATION"],
+          "materials_accepted": ["MAT-BAT-01", "MAT-BAT-02"],
+          "verification_level": "L3",
+          "registration_status": "VALID",
+          "expected_eligible": true,
+          "expected_reason": null
+        },
+        {
+          "facility_id": "fac-dl-03",
+          "name": "North Delhi Municipal E-Waste Collection Point",
+          "authorized_routes": ["GENERAL_RECYCLING"],
+          "materials_accepted": ["MAT-BAT-01"],
+          "verification_level": "L2",
+          "registration_status": "EXPIRED",
+          "expected_eligible": false,
+          "expected_reason": "ROUTE_INCOMPATIBLE"
+        }
+      ]
+    },
+    {
+      "id": "SCN-02-FORMAL-DESTINATION-LEVELS",
+      "title": "Formal Destination Verification Levels (R-REC-02 / AT-022)",
+      "description": "L0, L1, L2 never qualify as formal destinations. When formal destination is required, only L3/L4 with active valid status match.",
+      "lot": {
+        "material_id": "MAT-PCB-02",
+        "regulatory_route": "AUTHORIZED_EWASTE",
+        "estimated_weight_g": 50000,
+        "latitude": 19.0688,
+        "longitude": 72.8826,
+        "is_demo": false,
+        "require_formal_destination": true
+      },
+      "candidates": [
+        {
+          "facility_id": "fac-mh-01",
+          "name": "EcoRegen Solutions Mumbai Ltd",
+          "authorized_routes": ["AUTHORIZED_EWASTE"],
+          "materials_accepted": ["MAT-PCB-02"],
+          "verification_level": "L3",
+          "registration_status": "VALID",
+          "expected_eligible": true,
+          "expected_reason": null
+        },
+        {
+          "facility_id": "fac-mh-03",
+          "name": "Pune E-Waste Scrap Aggregators",
+          "authorized_routes": ["AUTHORIZED_EWASTE"],
+          "materials_accepted": ["MAT-PCB-02"],
+          "verification_level": "L2",
+          "registration_status": "VALID",
+          "expected_eligible": false,
+          "expected_reason": "VERIFICATION_INSUFFICIENT"
+        },
+        {
+          "facility_id": "fac-sim-01",
+          "name": "Simulated Demonstration Recycling Hub",
+          "authorized_routes": ["AUTHORIZED_EWASTE"],
+          "materials_accepted": ["MAT-PCB-02"],
+          "verification_level": "L0",
+          "registration_status": "VALID",
+          "expected_eligible": false,
+          "expected_reason": "DEMO_MISMATCH"
+        }
+      ]
+    },
+    {
+      "id": "SCN-03-WEIGHT-BOUNDS",
+      "title": "Facility Accepted Weight Bounds (R-REC-04 / AT-024)",
+      "description": "Facilities specifying min_weight_g and/or max_weight_g reject lots outside their operational acceptance bounds.",
+      "facility": {
+        "facility_id": "fac-test-weight",
+        "name": "Bulk PCB Dismantler",
+        "authorized_routes": ["AUTHORIZED_EWASTE"],
+        "materials_accepted": ["MAT-PCB-01"],
+        "verification_level": "L3",
+        "registration_status": "VALID",
+        "min_weight_g": 50000,
+        "max_weight_g": 500000
+      },
+      "test_cases": [
+        {
+          "estimated_weight_g": 20000,
+          "expected_eligible": false,
+          "expected_reason": "WEIGHT_INCOMPATIBLE"
+        },
+        {
+          "estimated_weight_g": 100000,
+          "expected_eligible": true,
+          "expected_reason": null
+        },
+        {
+          "estimated_weight_g": 1000000,
+          "expected_eligible": false,
+          "expected_reason": "WEIGHT_INCOMPATIBLE"
+        }
+      ]
+    },
+    {
+      "id": "SCN-04-EXPLAINABLE-RANKING",
+      "title": "MATCH_V1 Weighted Scoring and Deterministic Tie-Breaking (R-REC-05 / AT-025)",
+      "search_radius_m": 50000,
+      "candidates": [
+        {
+          "facility_id": "fac-rank-01",
+          "name": "Close Low-Rate Dropoff Recycler",
+          "distance_m": 10000.0,
+          "active_quote_rate_paise_per_kg": 20000,
+          "pickup_available": false,
+          "accepting_status": "ACCEPTING",
+          "total_transactions": 2,
+          "completed_transactions": 2
+        },
+        {
+          "facility_id": "fac-rank-02",
+          "name": "Medium Distance High-Rate Pickup Recycler",
+          "distance_m": 25000.0,
+          "active_quote_rate_paise_per_kg": 30000,
+          "pickup_available": true,
+          "accepting_status": "ACCEPTING",
+          "total_transactions": 10,
+          "completed_transactions": 9
+        }
+      ],
+      "expected_ranking": [
+        {
+          "rank": 1,
+          "facility_id": "fac-rank-02",
+          "total_score": 84.5,
+          "is_recommended": true
+        },
+        {
+          "rank": 2,
+          "facility_id": "fac-rank-01",
+          "total_score": 41.5,
+          "is_recommended": false
+        }
+      ]
+    },
+    {
+      "id": "SCN-05-EMPTY-MATCHES",
+      "title": "No Matches Behavior and Transparent Exclusions (R-REC-06 / AT-026)",
+      "description": "When no facilities match within the search radius, the engine returns empty matches with transparent exclusion counts, without relaxing legal route.",
+      "lot": {
+        "material_id": "MAT-PCB-01",
+        "regulatory_route": "AUTHORIZED_EWASTE",
+        "estimated_weight_g": 10000,
+        "latitude": 28.6358,
+        "longitude": 77.1256,
+        "is_demo": false
+      },
+      "search_radius_m": 5000,
+      "expected_matches_count": 0,
+      "expected_message_contains": "No eligible facilities found within 5 km"
+    }
+  ]
+}

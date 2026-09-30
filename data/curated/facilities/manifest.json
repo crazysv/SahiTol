@@ -1,0 +1,70 @@
+{
+  "dataset_family": "facilities",
+  "schema_version": "v1.0",
+  "data_version": "v1.0-curated",
+  "generated_at": "2026-09-28T21:58:25.098189+00:00",
+  "total_records": 8,
+  "files": [
+    {
+      "filename": "facilities.csv",
+      "sha256": "565bea9c0d728bb54ef92398668708792c0372bf392b006318355f3a0e38ba4d",
+      "byte_size": 3245,
+      "row_count": 8
+    },
+    {
+      "filename": "facilities.json",
+      "sha256": "5fcc95b05698da59b3b9eeb9d312c61e55249cc74c9080b289a561138992d28f",
+      "byte_size": 8442,
+      "row_count": 8
+    },
+    {
+      "filename": "facility_authorizations.json",
+      "sha256": "148a32b32651e7270133bdcb1d12bf8faa6b0230005134ea2760dc06fe76d2f8",
+      "byte_size": 3118,
+      "row_count": 8
+    },
+    {
+      "filename": "facility_materials.json",
+      "sha256": "78acf06f0dc51833e5798bb62a0ad9b3e77ebca0739931f774b4500067ffd4ed",
+      "byte_size": 4325,
+      "row_count": 32
+    }
+  ],
+  "counts_by_facility_type": {
+    "RECYCLER": 4,
+    "DISMANTLER": 1,
+    "COLLECTION_CENTRE": 2,
+    "AGGREGATOR": 1
+  },
+  "counts_by_verification_level": {
+    "L3": 5,
+    "L2": 2,
+    "L0": 1
+  },
+  "counts_by_region": {
+    "DELHI_NCR": 5,
+    "MAHARASHTRA": 3
+  },
+  "counts_by_origin_class": {
+    "OFFICIAL": 7,
+    "SYNTHETIC": 1
+  },
+  "counts_by_source_kind": {
+    "REGULATOR_LIST": 6,
+    "GOVERNMENT_PUBLICATION": 1,
+    "SYNTHETIC_GENERATOR": 1
+  },
+  "counts_by_is_demo": {
+    "false": 7,
+    "true": 1
+  },
+  "source_ids": [
+    "SRC-01",
+    "SRC-02",
+    "SRC-04",
+    "SRC-05",
+    "SRC-06"
+  ],
+  "validation_status": "VALID",
+  "limitations": "Source-backed directory leads compiled from CPCB, DPCC, MPCB, and NDMC public registers. Actual operational pickup and quote rates remain unverified or self-declared; collection centres are strictly distinguished from recyclers; no formal commercial partnership or statutory EPR certification is implied or certified."
+}

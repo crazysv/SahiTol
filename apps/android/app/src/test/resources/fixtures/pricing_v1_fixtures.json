@@ -1,0 +1,186 @@
+{
+  "policy_version": "PRICE_V1",
+  "description": "Shared test fixtures for SahiTol PRICE_V1 statistical quantiles, recency decay weighting, lot valuation, and confidence scoring. Shared between Python API and Android Kotlin implementations.",
+  "weighted_quantiles": [
+    {
+      "name": "techspec_baseline_equal_weights",
+      "description": "Techspec line 65: equal weights for rates [10000, 20000, 30000, 40000] paise/kg",
+      "observations": [
+        {"rate_paise_per_unit": 10000, "weight": 1.0, "observation_id": "obs_0"},
+        {"rate_paise_per_unit": 20000, "weight": 1.0, "observation_id": "obs_1"},
+        {"rate_paise_per_unit": 30000, "weight": 1.0, "observation_id": "obs_2"},
+        {"rate_paise_per_unit": 40000, "weight": 1.0, "observation_id": "obs_3"}
+      ],
+      "expected_q1": 10000,
+      "expected_median": 20000,
+      "expected_q3": 30000
+    },
+    {
+      "name": "recency_decay_weights",
+      "description": "Observations with ages 0, 7, 14, 21 days with rates 40000, 30000, 20000, 10000",
+      "observations": [
+        {"rate_paise_per_unit": 40000, "weight": 1.0, "observation_id": "obs_fresh"},
+        {"rate_paise_per_unit": 30000, "weight": 0.5, "observation_id": "obs_7d"},
+        {"rate_paise_per_unit": 20000, "weight": 0.25, "observation_id": "obs_14d"},
+        {"rate_paise_per_unit": 10000, "weight": 0.125, "observation_id": "obs_21d"}
+      ],
+      "expected_q1": 30000,
+      "expected_median": 40000,
+      "expected_q3": 40000
+    },
+    {
+      "name": "single_observation",
+      "description": "Single observation returns its rate across all quantiles",
+      "observations": [
+        {"rate_paise_per_unit": 25000, "weight": 1.0, "observation_id": "obs_single"}
+      ],
+      "expected_q1": 25000,
+      "expected_median": 25000,
+      "expected_q3": 25000
+    },
+    {
+      "name": "empty_observations",
+      "description": "Empty observations returns null",
+      "observations": [],
+      "expected_q1": null,
+      "expected_median": null,
+      "expected_q3": null
+    }
+  ],
+  "lot_valuations": [
+    {
+      "name": "techspec_baseline_2500g",
+      "description": "Techspec line 65: 2500g lot at Q1=10000, med=20000, Q3=30000 paise/kg -> [25000, 50000, 75000] paise",
+      "rate_q1": 10000,
+      "rate_median": 20000,
+      "rate_q3": 30000,
+      "weight_g": 2500,
+      "expected_low_paise": 25000,
+      "expected_median_paise": 50000,
+      "expected_high_paise": 75000
+    },
+    {
+      "name": "half_up_boundary_up",
+      "description": "1500 paise/kg * 1g = 1.5 paise -> rounds up to 2 paise",
+      "rate_q1": 1500,
+      "rate_median": 1500,
+      "rate_q3": 1500,
+      "weight_g": 1,
+      "expected_low_paise": 2,
+      "expected_median_paise": 2,
+      "expected_high_paise": 2
+    },
+    {
+      "name": "half_up_boundary_down",
+      "description": "1499 paise/kg * 1g = 1.499 paise -> rounds down to 1 paise",
+      "rate_q1": 1499,
+      "rate_median": 1499,
+      "rate_q3": 1499,
+      "weight_g": 1,
+      "expected_low_paise": 1,
+      "expected_median_paise": 1,
+      "expected_high_paise": 1
+    },
+    {
+      "name": "fractional_round_up",
+      "description": "1000 paise/kg * 333g = 333.0 paise -> 333 paise",
+      "rate_q1": 1000,
+      "rate_median": 1000,
+      "rate_q3": 1000,
+      "weight_g": 333,
+      "expected_low_paise": 333,
+      "expected_median_paise": 333,
+      "expected_high_paise": 333
+    }
+  ],
+  "confidence_evaluations": [
+    {
+      "name": "no_data_insufficient",
+      "count": 0,
+      "sources": 0,
+      "latest_age_days": 0.0,
+      "is_exact_region": true,
+      "cached_hours_ago": null,
+      "expected_confidence": "INSUFFICIENT_DATA",
+      "expected_reasons": ["NO_OBSERVATIONS_IN_WINDOW"],
+      "expected_is_stale": false
+    },
+    {
+      "name": "single_source_low",
+      "count": 4,
+      "sources": 1,
+      "latest_age_days": 1.0,
+      "is_exact_region": true,
+      "cached_hours_ago": null,
+      "expected_confidence": "LOW",
+      "expected_reasons": ["SINGLE_SOURCE"],
+      "expected_is_stale": false
+    },
+    {
+      "name": "few_observations_low",
+      "count": 2,
+      "sources": 2,
+      "latest_age_days": 1.0,
+      "is_exact_region": true,
+      "cached_hours_ago": null,
+      "expected_confidence": "LOW",
+      "expected_reasons": ["FEW_OBSERVATIONS"],
+      "expected_is_stale": false
+    },
+    {
+      "name": "medium_confidence",
+      "count": 3,
+      "sources": 2,
+      "latest_age_days": 4.0,
+      "is_exact_region": true,
+      "cached_hours_ago": null,
+      "expected_confidence": "MEDIUM",
+      "expected_reasons": [],
+      "expected_is_stale": false
+    },
+    {
+      "name": "high_confidence",
+      "count": 10,
+      "sources": 3,
+      "latest_age_days": 2.0,
+      "is_exact_region": true,
+      "cached_hours_ago": null,
+      "expected_confidence": "HIGH",
+      "expected_reasons": [],
+      "expected_is_stale": false
+    },
+    {
+      "name": "stale_observations_low",
+      "count": 10,
+      "sources": 3,
+      "latest_age_days": 12.0,
+      "is_exact_region": true,
+      "cached_hours_ago": null,
+      "expected_confidence": "LOW",
+      "expected_reasons": ["STALE_OBSERVATIONS"],
+      "expected_is_stale": false
+    },
+    {
+      "name": "broader_region_capped_low",
+      "count": 10,
+      "sources": 3,
+      "latest_age_days": 2.0,
+      "is_exact_region": false,
+      "cached_hours_ago": null,
+      "expected_confidence": "LOW",
+      "expected_reasons": ["BROADER_REGION_COHORT"],
+      "expected_is_stale": false
+    },
+    {
+      "name": "cached_summary_stale_cap",
+      "count": 10,
+      "sources": 3,
+      "latest_age_days": 2.0,
+      "is_exact_region": true,
+      "cached_hours_ago": 26.0,
+      "expected_confidence": "LOW",
+      "expected_reasons": ["STALE_CACHED_SUMMARY"],
+      "expected_is_stale": true
+    }
+  ]
+}

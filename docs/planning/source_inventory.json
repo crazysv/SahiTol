@@ -1,0 +1,5174 @@
+[
+  {
+    "alias": "E",
+    "path": "docs/sources/Entire_Content.txt",
+    "lines": 10320,
+    "sha256": "8255866f535798931a6e4c389abd74590c1907cd414e9a7e549216601ea65d28",
+    "sections": [
+      {
+        "start": 1,
+        "end": 508,
+        "topic": "Identity, audience, regulatory frame and full collector journey",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-REG-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 5,
+            "text": "# SIH26229 — RELOOP SETU"
+          },
+          {
+            "line": 7,
+            "text": "## Master Product, Research, Data, AI, Architecture & Hackathon Engineering Bible"
+          },
+          {
+            "line": 20,
+            "text": "# 1. THE ONE-SENTENCE DEFINITION"
+          },
+          {
+            "line": 44,
+            "text": "## **Collector → Formal Recycler Trust & Transaction Infrastructure**"
+          },
+          {
+            "line": 48,
+            "text": "# 2. WHAT THE OFFICIAL PS ACTUALLY DEMANDS"
+          },
+          {
+            "line": 54,
+            "text": "### Mandatory product requirements"
+          },
+          {
+            "line": 92,
+            "text": "# 3. THE ACTUAL PROBLEM"
+          },
+          {
+            "line": 110,
+            "text": "# 4. THE BROKEN LOOP"
+          },
+          {
+            "line": 152,
+            "text": "# 5. WHY THE MINISTRY OF MINES CARES"
+          },
+          {
+            "line": 186,
+            "text": "# 6. VERY IMPORTANT — REGULATORY MODEL"
+          },
+          {
+            "line": 190,
+            "text": "## Our product is NOT the CPCB portal."
+          },
+          {
+            "line": 198,
+            "text": "# 7. OUR HANDOVER RECORD IS NOT AN EPR CERTIFICATE"
+          },
+          {
+            "line": 204,
+            "text": "## **Digital Handover / Chain-of-Custody Record**"
+          },
+          {
+            "line": 249,
+            "text": "# 8. BATTERIES NEED THEIR OWN ROUTE"
+          },
+          {
+            "line": 286,
+            "text": "# 9. PRODUCT VISION"
+          },
+          {
+            "line": 288,
+            "text": "## Vision"
+          },
+          {
+            "line": 292,
+            "text": "## Mission"
+          },
+          {
+            "line": 298,
+            "text": "# 10. WORKING PRODUCT NAME"
+          },
+          {
+            "line": 302,
+            "text": "# **ReLoop Setu**"
+          },
+          {
+            "line": 318,
+            "text": "# 11. PRODUCT POSITIONING"
+          },
+          {
+            "line": 320,
+            "text": "### Weak positioning"
+          },
+          {
+            "line": 324,
+            "text": "### Better"
+          },
+          {
+            "line": 328,
+            "text": "### Strong"
+          },
+          {
+            "line": 332,
+            "text": "### Final positioning"
+          },
+          {
+            "line": 338,
+            "text": "# 12. TARGET USERS"
+          },
+          {
+            "line": 340,
+            "text": "## Persona A — Informal Collector"
+          },
+          {
+            "line": 355,
+            "text": "### Job-to-be-done"
+          },
+          {
+            "line": 361,
+            "text": "## Persona B — Aggregator"
+          },
+          {
+            "line": 374,
+            "text": "## Persona C — Formal Recycler"
+          },
+          {
+            "line": 389,
+            "text": "## Persona D — Admin / Program Manager"
+          },
+          {
+            "line": 403,
+            "text": "# 13. THE CENTRAL OBJECT: LOT"
+          },
+          {
+            "line": 409,
+            "text": "# **Material Lot**"
+          },
+          {
+            "line": 465,
+            "text": "# 14. PRODUCT MODULES"
+          },
+          {
+            "line": 467,
+            "text": "## Module 1 — Collector Identity"
+          },
+          {
+            "line": 487,
+            "text": "# 15. MODULE 2 — CREATE LOT"
+          }
+        ]
+      },
+      {
+        "start": 509,
+        "end": 567,
+        "topic": "Material taxonomy",
+        "requirements": [
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 509,
+            "text": "# 16. MATERIAL TAXONOMY"
+          },
+          {
+            "line": 541,
+            "text": "# 17. MATERIAL RECORD"
+          }
+        ]
+      },
+      {
+        "start": 568,
+        "end": 731,
+        "topic": "Prices and confidence",
+        "requirements": [
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 568,
+            "text": "# 18. MODULE 3 — PRICE DISCOVERY"
+          },
+          {
+            "line": 601,
+            "text": "# 19. PRICE SOURCE HIERARCHY"
+          },
+          {
+            "line": 605,
+            "text": "### Tier 1 — Real field observations"
+          },
+          {
+            "line": 609,
+            "text": "### Tier 2 — Recycler quotes"
+          },
+          {
+            "line": 613,
+            "text": "### Tier 3 — Public commercial price pages"
+          },
+          {
+            "line": 619,
+            "text": "### Tier 4 — Synthetic data"
+          },
+          {
+            "line": 627,
+            "text": "# 20. PRICE DATASET"
+          },
+          {
+            "line": 652,
+            "text": "# 21. PRICE ENGINE"
+          },
+          {
+            "line": 656,
+            "text": "### Do NOT train an ML model."
+          },
+          {
+            "line": 682,
+            "text": "# 22. FAIRNESS ALERT"
+          },
+          {
+            "line": 710,
+            "text": "# 23. PRICE CONFIDENCE"
+          },
+          {
+            "line": 712,
+            "text": "### HIGH"
+          },
+          {
+            "line": 716,
+            "text": "### MEDIUM"
+          },
+          {
+            "line": 720,
+            "text": "### LOW"
+          },
+          {
+            "line": 724,
+            "text": "### INSUFFICIENT"
+          }
+        ]
+      },
+      {
+        "start": 732,
+        "end": 876,
+        "topic": "Recycler evidence and matching",
+        "requirements": [
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 732,
+            "text": "# 24. MODULE 4 — RECYCLER DIRECTORY"
+          },
+          {
+            "line": 750,
+            "text": "# 25. RECYCLER RECORD"
+          },
+          {
+            "line": 782,
+            "text": "# 26. VERIFICATION LEVELS"
+          },
+          {
+            "line": 809,
+            "text": "# 27. RECYCLER DATA SOURCE"
+          },
+          {
+            "line": 830,
+            "text": "# 28. RECYCLER MATCHING"
+          }
+        ]
+      },
+      {
+        "start": 877,
+        "end": 969,
+        "topic": "Competition and differentiation claims",
+        "requirements": [
+          "R-RES-01",
+          "R-RES-02",
+          "R-DOC-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 877,
+            "text": "# 29. COMPETITOR REALITY"
+          },
+          {
+            "line": 881,
+            "text": "## Competitor 1 — Kabadiwalla Connect"
+          },
+          {
+            "line": 893,
+            "text": "## Competitor 2 — MetalMandi"
+          },
+          {
+            "line": 907,
+            "text": "## Competitor 3 — ScrapUncle"
+          },
+          {
+            "line": 920,
+            "text": "## Competitor 4 — The Kabadiwala"
+          },
+          {
+            "line": 930,
+            "text": "## Competitor 5 — Recykal"
+          },
+          {
+            "line": 940,
+            "text": "# 30. OUR ACTUAL WHITESPACE"
+          },
+          {
+            "line": 950,
+            "text": "# TRUST + ACCESS + EVIDENCE"
+          },
+          {
+            "line": 952,
+            "text": "### Trust"
+          },
+          {
+            "line": 956,
+            "text": "### Access"
+          },
+          {
+            "line": 960,
+            "text": "### Evidence"
+          },
+          {
+            "line": 964,
+            "text": "### Economics"
+          }
+        ]
+      },
+      {
+        "start": 970,
+        "end": 1038,
+        "topic": "Passport and handover",
+        "requirements": [
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 970,
+            "text": "# 31. MODULE 5 — LOT PASSPORT"
+          },
+          {
+            "line": 1003,
+            "text": "# 32. LOT PASSPORT"
+          }
+        ]
+      },
+      {
+        "start": 1039,
+        "end": 1112,
+        "topic": "QR hashes and confirmation",
+        "requirements": [
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1039,
+            "text": "# 33. QR RECEIPT"
+          },
+          {
+            "line": 1081,
+            "text": "# 34. HASHING"
+          },
+          {
+            "line": 1105,
+            "text": "### Do not use blockchain."
+          }
+        ]
+      },
+      {
+        "start": 1113,
+        "end": 1170,
+        "topic": "Ledger and payments",
+        "requirements": [
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1113,
+            "text": "# 35. MODULE 6 — EARNINGS LEDGER"
+          },
+          {
+            "line": 1143,
+            "text": "# 36. PAYMENT"
+          }
+        ]
+      },
+      {
+        "start": 1171,
+        "end": 1200,
+        "topic": "Safety",
+        "requirements": [
+          "R-SAFE-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1171,
+            "text": "# 37. MODULE 7 — SAFETY ENGINE"
+          },
+          {
+            "line": 1177,
+            "text": "### Cable"
+          },
+          {
+            "line": 1181,
+            "text": "### PCB"
+          },
+          {
+            "line": 1185,
+            "text": "### CRT"
+          },
+          {
+            "line": 1189,
+            "text": "### Battery"
+          }
+        ]
+      },
+      {
+        "start": 1201,
+        "end": 1256,
+        "topic": "Languages and audio",
+        "requirements": [
+          "R-LANG-01",
+          "R-LANG-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1201,
+            "text": "# 38. MODULE 8 — LANGUAGE"
+          },
+          {
+            "line": 1235,
+            "text": "# 39. AUDIO STRATEGY"
+          },
+          {
+            "line": 1241,
+            "text": "### Pre-generate"
+          }
+        ]
+      },
+      {
+        "start": 1257,
+        "end": 1284,
+        "topic": "Assisted-agent idea",
+        "requirements": [
+          "R-FUT-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1257,
+            "text": "# 40. ASSISTED-AGENT MODE"
+          }
+        ]
+      },
+      {
+        "start": 1285,
+        "end": 1349,
+        "topic": "Offline behavior",
+        "requirements": [
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1285,
+            "text": "# 41. OFFLINE-FIRST ARCHITECTURE"
+          },
+          {
+            "line": 1324,
+            "text": "# 42. OUR FRONTEND DECISION"
+          },
+          {
+            "line": 1334,
+            "text": "# **React + Vite + TypeScript + PWA**"
+          },
+          {
+            "line": 1338,
+            "text": "# **Capacitor → Android APK**"
+          }
+        ]
+      },
+      {
+        "start": 1350,
+        "end": 1585,
+        "topic": "Old architecture alternatives; superseded by native choice",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1350,
+            "text": "# 43. FRONTEND STACK"
+          },
+          {
+            "line": 1377,
+            "text": "# 44. BACKEND"
+          },
+          {
+            "line": 1379,
+            "text": "# **FastAPI**"
+          },
+          {
+            "line": 1412,
+            "text": "# 45. DATABASE"
+          },
+          {
+            "line": 1414,
+            "text": "# **PostgreSQL**"
+          },
+          {
+            "line": 1449,
+            "text": "# 46. SUPABASE"
+          },
+          {
+            "line": 1463,
+            "text": "# 47. LOCAL CANONICAL MODE"
+          },
+          {
+            "line": 1493,
+            "text": "# 48. HOSTING"
+          },
+          {
+            "line": 1497,
+            "text": "### Frontend"
+          },
+          {
+            "line": 1503,
+            "text": "### Backend"
+          },
+          {
+            "line": 1509,
+            "text": "### Database"
+          },
+          {
+            "line": 1513,
+            "text": "### Ultimate fallback"
+          },
+          {
+            "line": 1519,
+            "text": "# 49. WHAT NOT TO MAKE A CORE DEPENDENCY"
+          },
+          {
+            "line": 1541,
+            "text": "# 50. GITHUB PAGES"
+          },
+          {
+            "line": 1551,
+            "text": "# 51. MAPS"
+          }
+        ]
+      },
+      {
+        "start": 1586,
+        "end": 1718,
+        "topic": "Caches and sync",
+        "requirements": [
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1586,
+            "text": "# 52. LOCAL DATA CACHE"
+          },
+          {
+            "line": 1606,
+            "text": "# 53. OFFLINE DATABASE"
+          },
+          {
+            "line": 1627,
+            "text": "# 54. SYNC QUEUE"
+          },
+          {
+            "line": 1659,
+            "text": "# 55. IDEMPOTENCY"
+          },
+          {
+            "line": 1683,
+            "text": "# 56. CONFLICT STRATEGY"
+          },
+          {
+            "line": 1685,
+            "text": "### Reference data"
+          },
+          {
+            "line": 1689,
+            "text": "### Transaction data"
+          }
+        ]
+      },
+      {
+        "start": 1719,
+        "end": 2011,
+        "topic": "Entities lifecycle datasets",
+        "requirements": [
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1719,
+            "text": "# 57. DATABASE TABLES"
+          },
+          {
+            "line": 1761,
+            "text": "# 58. RELATIONSHIPS"
+          },
+          {
+            "line": 1792,
+            "text": "# 59. TRANSACTION STATE MACHINE"
+          },
+          {
+            "line": 1823,
+            "text": "# 60. TRANSACTION EVENTS"
+          },
+          {
+            "line": 1854,
+            "text": "# 61. TRACEABILITY DATASET"
+          },
+          {
+            "line": 1888,
+            "text": "# 62. COLLECTOR DATASET"
+          },
+          {
+            "line": 1905,
+            "text": "# 63. PRICE DATASET"
+          },
+          {
+            "line": 1926,
+            "text": "# 64. RECYCLER DATASET"
+          },
+          {
+            "line": 1949,
+            "text": "# 65. TRANSACTION DATASET"
+          },
+          {
+            "line": 1970,
+            "text": "# 66. MATERIAL DATASET"
+          },
+          {
+            "line": 1987,
+            "text": "# 67. AI/ML DATASET"
+          }
+        ]
+      },
+      {
+        "start": 2012,
+        "end": 2079,
+        "topic": "Targets and data flywheel",
+        "requirements": [
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2012,
+            "text": "# 68. DO WE NEED A MASSIVE DATASET?"
+          },
+          {
+            "line": 2044,
+            "text": "# 69. THE DATA FLYWHEEL"
+          }
+        ]
+      },
+      {
+        "start": 2080,
+        "end": 2218,
+        "topic": "Field study proposals; secondary-only decision wins, obligation retained",
+        "requirements": [
+          "R-RES-01",
+          "R-RES-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2080,
+            "text": "# 70. FIELD RESEARCH IS A PRODUCT INPUT"
+          },
+          {
+            "line": 2105,
+            "text": "# 71. FIELD RESEARCH OUTPUT"
+          },
+          {
+            "line": 2144,
+            "text": "# 72. DATA COLLECTION FROM THE FIELD"
+          },
+          {
+            "line": 2171,
+            "text": "# 73. RECYCLER DATA COLLECTION"
+          },
+          {
+            "line": 2195,
+            "text": "# 74. PRICE DATA COLLECTION"
+          },
+          {
+            "line": 2199,
+            "text": "### 3–5 field price sources"
+          },
+          {
+            "line": 2203,
+            "text": "### multiple observations per material."
+          }
+        ]
+      },
+      {
+        "start": 2219,
+        "end": 2277,
+        "topic": "Synthetic data tooling",
+        "requirements": [
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2219,
+            "text": "# 75. SYNTHETIC DATA GENERATOR"
+          },
+          {
+            "line": 2257,
+            "text": "# 76. SYNTHETIC EDGE CASES"
+          }
+        ]
+      },
+      {
+        "start": 2278,
+        "end": 2456,
+        "topic": "Classification and evaluation",
+        "requirements": [
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-FUT-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2278,
+            "text": "# 77. IMAGE DATASET — HOW TO START"
+          },
+          {
+            "line": 2288,
+            "text": "### Best"
+          },
+          {
+            "line": 2292,
+            "text": "### Second"
+          },
+          {
+            "line": 2296,
+            "text": "### Third"
+          },
+          {
+            "line": 2304,
+            "text": "# 78. IMAGE CLASSIFICATION STRATEGY"
+          },
+          {
+            "line": 2310,
+            "text": "# **Material Category Classification**"
+          },
+          {
+            "line": 2326,
+            "text": "# 79. MODEL CHOICE"
+          },
+          {
+            "line": 2330,
+            "text": "### MobileNetV3-Small"
+          },
+          {
+            "line": 2334,
+            "text": "### MobileNetV2"
+          },
+          {
+            "line": 2351,
+            "text": "# 80. INFERENCE"
+          },
+          {
+            "line": 2382,
+            "text": "# 81. HUMAN-IN-THE-LOOP"
+          },
+          {
+            "line": 2398,
+            "text": "# 82. MODEL EVALUATION"
+          },
+          {
+            "line": 2423,
+            "text": "# 83. IMPORTANT DATASET LEAKAGE RULE"
+          },
+          {
+            "line": 2441,
+            "text": "# 84. MODEL LIMITATION"
+          }
+        ]
+      },
+      {
+        "start": 2457,
+        "end": 2517,
+        "topic": "Statistical valuation and future price ML",
+        "requirements": [
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-FUT-03"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2457,
+            "text": "# 85. APPROXIMATE VALUATION"
+          },
+          {
+            "line": 2491,
+            "text": "# 86. FUTURE PRICE ML"
+          }
+        ]
+      },
+      {
+        "start": 2518,
+        "end": 2563,
+        "topic": "Matching and future learned ranking",
+        "requirements": [
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-FUT-05"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2518,
+            "text": "# 87. RECYCLER RECOMMENDATION ENGINE"
+          },
+          {
+            "line": 2544,
+            "text": "# 88. FUTURE RECYCLER ML"
+          }
+        ]
+      },
+      {
+        "start": 2564,
+        "end": 2609,
+        "topic": "Anomaly rules",
+        "requirements": [
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2564,
+            "text": "# 89. SUSPICIOUS TRANSACTION DETECTION"
+          },
+          {
+            "line": 2590,
+            "text": "# 90. TRACEABILITY ANOMALY"
+          }
+        ]
+      },
+      {
+        "start": 2610,
+        "end": 2708,
+        "topic": "Security privacy provenance",
+        "requirements": [
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-SEC-01",
+          "R-SEC-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2610,
+            "text": "# 91. SECURITY MODEL"
+          },
+          {
+            "line": 2612,
+            "text": "### Authentication"
+          },
+          {
+            "line": 2616,
+            "text": "### Authorization"
+          },
+          {
+            "line": 2626,
+            "text": "### Database"
+          },
+          {
+            "line": 2633,
+            "text": "### API"
+          },
+          {
+            "line": 2642,
+            "text": "# 92. GPS PRIVACY"
+          },
+          {
+            "line": 2664,
+            "text": "# 93. IMAGE PRIVACY"
+          },
+          {
+            "line": 2678,
+            "text": "# 94. DATA PROVENANCE"
+          }
+        ]
+      },
+      {
+        "start": 2709,
+        "end": 2927,
+        "topic": "Old stack/env/repo proposals; reconciled",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2709,
+            "text": "# 95. ZERO-COST ARCHITECTURE"
+          },
+          {
+            "line": 2757,
+            "text": "# 96. COMPLETE DEVELOPMENT ENVIRONMENT"
+          },
+          {
+            "line": 2774,
+            "text": "# 97. TESTING STACK"
+          },
+          {
+            "line": 2776,
+            "text": "### Frontend"
+          },
+          {
+            "line": 2780,
+            "text": "### Browser workflow"
+          },
+          {
+            "line": 2784,
+            "text": "### Backend"
+          },
+          {
+            "line": 2788,
+            "text": "### API"
+          },
+          {
+            "line": 2794,
+            "text": "# 98. CI/CD"
+          },
+          {
+            "line": 2816,
+            "text": "# 99. REPOSITORY STRUCTURE"
+          },
+          {
+            "line": 2890,
+            "text": "# 100. DATA DIRECTORY"
+          }
+        ]
+      },
+      {
+        "start": 2928,
+        "end": 2962,
+        "topic": "Local material aliases",
+        "requirements": [
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-LANG-01",
+          "R-LANG-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2928,
+            "text": "# 101. MATERIAL VOCABULARY SYSTEM"
+          }
+        ]
+      },
+      {
+        "start": 2963,
+        "end": 2990,
+        "topic": "Optional voice input",
+        "requirements": [
+          "R-FUT-06"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2963,
+            "text": "# 102. OPTIONAL VOICE INTERACTION"
+          }
+        ]
+      },
+      {
+        "start": 2991,
+        "end": 3138,
+        "topic": "Screen inventory and usability/performance",
+        "requirements": [
+          "R-GOV-02",
+          "R-UX-01",
+          "R-UX-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2991,
+            "text": "# 103. USER INTERFACE"
+          },
+          {
+            "line": 2993,
+            "text": "## Collector navigation"
+          },
+          {
+            "line": 3004,
+            "text": "### Home"
+          },
+          {
+            "line": 3023,
+            "text": "# 104. SCREEN LIST"
+          },
+          {
+            "line": 3025,
+            "text": "### Collector"
+          },
+          {
+            "line": 3046,
+            "text": "### Recycler"
+          },
+          {
+            "line": 3056,
+            "text": "### Admin"
+          },
+          {
+            "line": 3070,
+            "text": "# 105. LOW-LITERACY DESIGN RULES"
+          },
+          {
+            "line": 3072,
+            "text": "### Large touch targets"
+          },
+          {
+            "line": 3076,
+            "text": "### Icon-first"
+          },
+          {
+            "line": 3080,
+            "text": "### Short text"
+          },
+          {
+            "line": 3084,
+            "text": "### One decision at a time"
+          },
+          {
+            "line": 3093,
+            "text": "### Audio"
+          },
+          {
+            "line": 3097,
+            "text": "### Colours"
+          },
+          {
+            "line": 3113,
+            "text": "# 106. PRODUCT DESIGN PRINCIPLE"
+          },
+          {
+            "line": 3115,
+            "text": "# ONE ACTION → ONE DECISION → ONE OUTCOME"
+          },
+          {
+            "line": 3121,
+            "text": "# 107. ENTRY-LEVEL DEVICE OPTIMISATION"
+          }
+        ]
+      },
+      {
+        "start": 3139,
+        "end": 3259,
+        "topic": "Economics and sustainability",
+        "requirements": [
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-FUT-16"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 3139,
+            "text": "# 108. UNIT ECONOMICS"
+          },
+          {
+            "line": 3149,
+            "text": "## Existing route"
+          },
+          {
+            "line": 3165,
+            "text": "## ReLoop route"
+          },
+          {
+            "line": 3183,
+            "text": "# 109. UNIT ECONOMICS FORMULA"
+          },
+          {
+            "line": 3185,
+            "text": "### Existing net"
+          },
+          {
+            "line": 3194,
+            "text": "### Platform net"
+          },
+          {
+            "line": 3203,
+            "text": "### Improvement"
+          },
+          {
+            "line": 3222,
+            "text": "# 110. BUSINESS MODEL"
+          },
+          {
+            "line": 3228,
+            "text": "### Recycler SaaS"
+          },
+          {
+            "line": 3232,
+            "text": "### Per-lot / per-tonne B2B fee"
+          },
+          {
+            "line": 3236,
+            "text": "### Producer/brand programs"
+          },
+          {
+            "line": 3240,
+            "text": "### PRO integration"
+          },
+          {
+            "line": 3244,
+            "text": "### Municipal programs"
+          },
+          {
+            "line": 3248,
+            "text": "### Analytics"
+          },
+          {
+            "line": 3254,
+            "text": "# 111. BUSINESS MODEL PRINCIPLE"
+          }
+        ]
+      },
+      {
+        "start": 3260,
+        "end": 3345,
+        "topic": "Product metrics",
+        "requirements": [
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-OPS-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 3260,
+            "text": "# 112. NORTH-STAR METRIC"
+          },
+          {
+            "line": 3262,
+            "text": "# **Verified Material Successfully Routed to an Appropriate Formal Destination**"
+          },
+          {
+            "line": 3282,
+            "text": "# 113. PRODUCT METRICS"
+          },
+          {
+            "line": 3284,
+            "text": "### Collector"
+          },
+          {
+            "line": 3293,
+            "text": "### Market"
+          },
+          {
+            "line": 3301,
+            "text": "### Recycler"
+          },
+          {
+            "line": 3309,
+            "text": "### Trust"
+          },
+          {
+            "line": 3318,
+            "text": "### Offline"
+          },
+          {
+            "line": 3328,
+            "text": "# 114. AI METRICS"
+          }
+        ]
+      },
+      {
+        "start": 3346,
+        "end": 3397,
+        "topic": "Future pilot plan",
+        "requirements": [
+          "R-FUT-12"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 3346,
+            "text": "# 115. FIELD PILOT"
+          },
+          {
+            "line": 3352,
+            "text": "# Greater Noida / Delhi NCR pilot"
+          },
+          {
+            "line": 3372,
+            "text": "# 116. WHY PILOT-FIRST"
+          }
+        ]
+      },
+      {
+        "start": 3398,
+        "end": 3597,
+        "topic": "Demo script and data quality",
+        "requirements": [
+          "R-GOV-04",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-QA-01",
+          "R-QA-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 3398,
+            "text": "# 117. GOLDEN DEMO"
+          },
+          {
+            "line": 3402,
+            "text": "### Step 1"
+          },
+          {
+            "line": 3406,
+            "text": "### Step 2"
+          },
+          {
+            "line": 3410,
+            "text": "### Step 3"
+          },
+          {
+            "line": 3414,
+            "text": "### Step 4"
+          },
+          {
+            "line": 3423,
+            "text": "### Step 5"
+          },
+          {
+            "line": 3427,
+            "text": "### Step 6"
+          },
+          {
+            "line": 3435,
+            "text": "### Step 7"
+          },
+          {
+            "line": 3444,
+            "text": "### Step 8"
+          },
+          {
+            "line": 3456,
+            "text": "### Step 9"
+          },
+          {
+            "line": 3460,
+            "text": "### Step 10"
+          },
+          {
+            "line": 3464,
+            "text": "# LOT PASSPORT"
+          },
+          {
+            "line": 3466,
+            "text": "### Step 11"
+          },
+          {
+            "line": 3470,
+            "text": "### Step 12"
+          },
+          {
+            "line": 3474,
+            "text": "### Step 13"
+          },
+          {
+            "line": 3483,
+            "text": "### Step 14"
+          },
+          {
+            "line": 3491,
+            "text": "### Step 15"
+          },
+          {
+            "line": 3499,
+            "text": "# 118. THE BEST DEMO LINE"
+          },
+          {
+            "line": 3505,
+            "text": "# 119. WHAT THE JUDGE SHOULD SEE"
+          },
+          {
+            "line": 3533,
+            "text": "# 120. DATA DEMO"
+          },
+          {
+            "line": 3570,
+            "text": "# 121. DATA QUALITY DASHBOARD"
+          }
+        ]
+      },
+      {
+        "start": 3598,
+        "end": 3875,
+        "topic": "Judge questions and claim boundaries",
+        "requirements": [
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 3598,
+            "text": "# 122. COMPETITOR STRATEGY"
+          },
+          {
+            "line": 3614,
+            "text": "# 123. WHY NOT BLOCKCHAIN?"
+          },
+          {
+            "line": 3628,
+            "text": "# 124. WHY NOT AN LLM?"
+          },
+          {
+            "line": 3642,
+            "text": "# 125. WHY AI AT ALL?"
+          },
+          {
+            "line": 3678,
+            "text": "# 126. QUESTION — “WHAT IF AI IS WRONG?”"
+          },
+          {
+            "line": 3686,
+            "text": "# 127. QUESTION — “HOW DO YOU KNOW THE RECYCLER IS AUTHORIZED?”"
+          },
+          {
+            "line": 3694,
+            "text": "# 128. QUESTION — “WHAT IF THE PRICE IS WRONG?”"
+          },
+          {
+            "line": 3702,
+            "text": "# 129. QUESTION — “WHY WOULD A COLLECTOR USE IT?”"
+          },
+          {
+            "line": 3710,
+            "text": "# 130. QUESTION — “WHAT IF THEY DON'T HAVE A SMARTPHONE?”"
+          },
+          {
+            "line": 3718,
+            "text": "# 131. QUESTION — “IS THIS JUST ANOTHER SCRAP MARKETPLACE?”"
+          },
+          {
+            "line": 3726,
+            "text": "# 132. QUESTION — “IS YOUR QR AN EPR CERTIFICATE?”"
+          },
+          {
+            "line": 3734,
+            "text": "# 133. QUESTION — “WHAT ABOUT BATTERIES?”"
+          },
+          {
+            "line": 3742,
+            "text": "# 134. QUESTION — “WHERE IS YOUR DATA FROM?”"
+          },
+          {
+            "line": 3750,
+            "text": "# 135. QUESTION — “WHY NOT USE REAL-TIME PRICES?”"
+          },
+          {
+            "line": 3758,
+            "text": "# 136. QUESTION — “WHAT HAPPENS OFFLINE?”"
+          },
+          {
+            "line": 3766,
+            "text": "# 137. QUESTION — “CAN THIS SCALE?”"
+          },
+          {
+            "line": 3774,
+            "text": "# 138. QUESTION — “WHY NOT USE WHATSAPP?”"
+          },
+          {
+            "line": 3782,
+            "text": "# 139. QUESTION — “WHY SHOULD RECYCLERS PARTICIPATE?”"
+          },
+          {
+            "line": 3792,
+            "text": "# 140. QUESTION — “WHAT IF NO RECYCLER ACCEPTS THE LOT?”"
+          },
+          {
+            "line": 3810,
+            "text": "# 141. QUESTION — “WHAT IF TWO RECYCLERS OFFER DIFFERENT PRICES?”"
+          },
+          {
+            "line": 3826,
+            "text": "# 142. QUESTION — “WHAT IF THE FINAL WEIGHT CHANGES?”"
+          },
+          {
+            "line": 3847,
+            "text": "# 143. QUESTION — “WHAT IF THE RECYCLER DISPUTES THE MATERIAL?”"
+          }
+        ]
+      },
+      {
+        "start": 3876,
+        "end": 3900,
+        "topic": "Advanced dispute review",
+        "requirements": [
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-FUT-15"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 3876,
+            "text": "# 144. ADVANCED FEATURE — DISPUTE RECORD"
+          }
+        ]
+      },
+      {
+        "start": 3901,
+        "end": 4071,
+        "topic": "Honesty data cards and quality",
+        "requirements": [
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-RES-01",
+          "R-RES-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 3901,
+            "text": "# 145. RED FLAGS"
+          },
+          {
+            "line": 3925,
+            "text": "# 146. FIELD RESEARCH ETHICS"
+          },
+          {
+            "line": 3944,
+            "text": "# 147. DATA CARDS"
+          },
+          {
+            "line": 3948,
+            "text": "### Data Card — Price Dataset"
+          },
+          {
+            "line": 3964,
+            "text": "### Data Card — AI Dataset"
+          },
+          {
+            "line": 3985,
+            "text": "# 148. MODEL CARD"
+          },
+          {
+            "line": 4022,
+            "text": "# 149. DATA QUALITY ENGINE"
+          },
+          {
+            "line": 4026,
+            "text": "### Missing"
+          },
+          {
+            "line": 4030,
+            "text": "### Invalid"
+          },
+          {
+            "line": 4034,
+            "text": "### Duplicate"
+          },
+          {
+            "line": 4038,
+            "text": "### Stale"
+          },
+          {
+            "line": 4042,
+            "text": "### Suspicious"
+          },
+          {
+            "line": 4046,
+            "text": "### Inconsistent"
+          },
+          {
+            "line": 4052,
+            "text": "# 150. ADMIN DATA QUALITY SCREEN"
+          }
+        ]
+      },
+      {
+        "start": 4072,
+        "end": 4158,
+        "topic": "Alternative architecture; latest stack overrides",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 4072,
+            "text": "# 151. ARCHITECTURE — FINAL"
+          },
+          {
+            "line": 4106,
+            "text": "# 152. OFFLINE ARCHITECTURE — FINAL"
+          }
+        ]
+      },
+      {
+        "start": 4159,
+        "end": 4469,
+        "topic": "Old schedule/team/tasks; one-builder deadline overrides",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-QA-01",
+          "R-QA-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 4159,
+            "text": "# 153. 48-HOUR BUILD PRIORITY"
+          },
+          {
+            "line": 4167,
+            "text": "## P0"
+          },
+          {
+            "line": 4186,
+            "text": "## P1"
+          },
+          {
+            "line": 4197,
+            "text": "## P2"
+          },
+          {
+            "line": 4209,
+            "text": "# 154. DAY 1"
+          },
+          {
+            "line": 4211,
+            "text": "## Hours 0–3"
+          },
+          {
+            "line": 4213,
+            "text": "### Architecture"
+          },
+          {
+            "line": 4222,
+            "text": "### Deliverable"
+          },
+          {
+            "line": 4236,
+            "text": "# 155. HOURS 3–8"
+          },
+          {
+            "line": 4251,
+            "text": "# 156. HOURS 8–12"
+          },
+          {
+            "line": 4264,
+            "text": "# 157. HOURS 12–16"
+          },
+          {
+            "line": 4277,
+            "text": "# 158. HOURS 16–20"
+          },
+          {
+            "line": 4290,
+            "text": "# 159. HOURS 20–24"
+          },
+          {
+            "line": 4305,
+            "text": "# **The entire core transaction must work online.**"
+          },
+          {
+            "line": 4309,
+            "text": "# 160. DAY 2"
+          },
+          {
+            "line": 4311,
+            "text": "## Hours 24–29"
+          },
+          {
+            "line": 4325,
+            "text": "# 161. Hours 29–33"
+          },
+          {
+            "line": 4340,
+            "text": "# 162. Hours 33–36"
+          },
+          {
+            "line": 4352,
+            "text": "# 163. Hours 36–40"
+          },
+          {
+            "line": 4366,
+            "text": "# 164. Hours 40–43"
+          },
+          {
+            "line": 4379,
+            "text": "# 165. Hours 43–46"
+          },
+          {
+            "line": 4394,
+            "text": "# 166. Hours 46–48"
+          },
+          {
+            "line": 4410,
+            "text": "# 167. GOLDEN BUILD RULE"
+          },
+          {
+            "line": 4418,
+            "text": "# 168. TEAM SPLIT"
+          },
+          {
+            "line": 4437,
+            "text": "# 169. THE 80% THAT AI CANNOT REPLACE"
+          }
+        ]
+      },
+      {
+        "start": 4470,
+        "end": 4568,
+        "topic": "Tests and definition of done",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-QA-01",
+          "R-QA-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 4470,
+            "text": "# 170. TEST CASES"
+          },
+          {
+            "line": 4472,
+            "text": "## TC01 — Online creation"
+          },
+          {
+            "line": 4480,
+            "text": "## TC02 — Offline creation"
+          },
+          {
+            "line": 4488,
+            "text": "## TC03 — Sync"
+          },
+          {
+            "line": 4496,
+            "text": "## TC04 — Duplicate"
+          },
+          {
+            "line": 4503,
+            "text": "## TC05 — Low confidence"
+          },
+          {
+            "line": 4510,
+            "text": "## TC06 — Stale recycler"
+          },
+          {
+            "line": 4517,
+            "text": "## TC07 — Weight discrepancy"
+          },
+          {
+            "line": 4526,
+            "text": "# 171. DEFINITION OF DONE"
+          }
+        ]
+      },
+      {
+        "start": 4569,
+        "end": 4668,
+        "topic": "Differentiators and evidence",
+        "requirements": [
+          "R-RES-01",
+          "R-RES-02",
+          "R-DOC-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 4569,
+            "text": "# 172. THE MOST IMPORTANT DIFFERENTIATOR"
+          },
+          {
+            "line": 4573,
+            "text": "# **Offline Trust Infrastructure for Informal-to-Formal E-Waste Channelisation**"
+          },
+          {
+            "line": 4577,
+            "text": "### 1. FairRate"
+          },
+          {
+            "line": 4581,
+            "text": "### 2. RecycleMatch"
+          },
+          {
+            "line": 4585,
+            "text": "### 3. Lot Passport"
+          },
+          {
+            "line": 4591,
+            "text": "### 4. Offline Setu"
+          },
+          {
+            "line": 4597,
+            "text": "### 5. AI Assist"
+          },
+          {
+            "line": 4603,
+            "text": "# 173. WHY THIS IS BETTER THAN “AI SCRAP MARKETPLACE”"
+          },
+          {
+            "line": 4619,
+            "text": "# 174. RESEARCH-backed PRODUCT INSIGHT"
+          },
+          {
+            "line": 4639,
+            "text": "# 175. SECOND RESEARCH-BACKED INSIGHT"
+          },
+          {
+            "line": 4645,
+            "text": "# **Material + stakeholder ontology**"
+          },
+          {
+            "line": 4651,
+            "text": "# 176. THIRD RESEARCH-BACKED INSIGHT"
+          }
+        ]
+      },
+      {
+        "start": 4669,
+        "end": 4717,
+        "topic": "Pilot expansion ML agents routes and compliance adapters",
+        "requirements": [
+          "R-FUT-01",
+          "R-FUT-02",
+          "R-FUT-03",
+          "R-FUT-04",
+          "R-FUT-05",
+          "R-FUT-06",
+          "R-FUT-07",
+          "R-FUT-08",
+          "R-FUT-09",
+          "R-FUT-10",
+          "R-FUT-11",
+          "R-FUT-12",
+          "R-FUT-13",
+          "R-FUT-14",
+          "R-FUT-15",
+          "R-FUT-16",
+          "R-FUT-17",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 4669,
+            "text": "# 177. FUTURE VERSION"
+          },
+          {
+            "line": 4673,
+            "text": "## Phase 1"
+          },
+          {
+            "line": 4683,
+            "text": "## Phase 2"
+          },
+          {
+            "line": 4692,
+            "text": "## Phase 3"
+          },
+          {
+            "line": 4702,
+            "text": "## Phase 4"
+          }
+        ]
+      },
+      {
+        "start": 4718,
+        "end": 4791,
+        "topic": "Long-term data network government metrics scale",
+        "requirements": [
+          "R-FUT-09",
+          "R-FUT-13",
+          "R-FUT-14"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 4718,
+            "text": "# 178. LONG-TERM DATA NETWORK"
+          },
+          {
+            "line": 4751,
+            "text": "# 179. LONG-TERM GOVERNMENT VALUE"
+          },
+          {
+            "line": 4770,
+            "text": "# 180. LONG-TERM SCALE"
+          }
+        ]
+      },
+      {
+        "start": 4792,
+        "end": 4916,
+        "topic": "Technology/social value recaps",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-RES-01",
+          "R-RES-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 4792,
+            "text": "# 181. THE PROJECT'S TECHNICAL DEPTH"
+          },
+          {
+            "line": 4819,
+            "text": "# 182. THE PROJECT'S SOCIAL DEPTH"
+          },
+          {
+            "line": 4839,
+            "text": "# 183. FINAL PRODUCT STACK"
+          },
+          {
+            "line": 4841,
+            "text": "## Frontend"
+          },
+          {
+            "line": 4845,
+            "text": "## Mobile/offline"
+          },
+          {
+            "line": 4849,
+            "text": "## Optional Android"
+          },
+          {
+            "line": 4853,
+            "text": "## Backend"
+          },
+          {
+            "line": 4857,
+            "text": "## Database"
+          },
+          {
+            "line": 4861,
+            "text": "## Hosted DB"
+          },
+          {
+            "line": 4865,
+            "text": "## Local fallback"
+          },
+          {
+            "line": 4869,
+            "text": "## AI"
+          },
+          {
+            "line": 4873,
+            "text": "## Statistics"
+          },
+          {
+            "line": 4877,
+            "text": "## Maps"
+          },
+          {
+            "line": 4881,
+            "text": "## Language"
+          },
+          {
+            "line": 4885,
+            "text": "## QR"
+          },
+          {
+            "line": 4889,
+            "text": "## PDF"
+          },
+          {
+            "line": 4893,
+            "text": "## Testing"
+          },
+          {
+            "line": 4897,
+            "text": "## CI"
+          },
+          {
+            "line": 4901,
+            "text": "## Frontend hosting"
+          },
+          {
+            "line": 4905,
+            "text": "## Backend hosting"
+          },
+          {
+            "line": 4911,
+            "text": "# **No mandatory paid runtime API.**"
+          }
+        ]
+      },
+      {
+        "start": 4917,
+        "end": 4940,
+        "topic": "Do-not-build list and future services",
+        "requirements": [
+          "R-SEC-01",
+          "R-SEC-02",
+          "R-FUT-16",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 4917,
+            "text": "# 184. FINAL “DO NOT BUILD” LIST"
+          }
+        ]
+      },
+      {
+        "start": 4941,
+        "end": 4970,
+        "topic": "Must-build synthesis",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-SEC-01",
+          "R-SEC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04",
+          "R-QA-01",
+          "R-QA-02",
+          "R-DOC-01",
+          "R-FUT-01",
+          "R-FUT-02",
+          "R-FUT-03",
+          "R-FUT-04",
+          "R-FUT-05",
+          "R-FUT-06",
+          "R-FUT-07",
+          "R-FUT-08",
+          "R-FUT-09",
+          "R-FUT-10",
+          "R-FUT-11",
+          "R-FUT-12",
+          "R-FUT-13",
+          "R-FUT-14",
+          "R-FUT-15",
+          "R-FUT-16",
+          "R-FUT-17",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 4941,
+            "text": "# 185. FINAL “MUST BUILD” LIST"
+          }
+        ]
+      },
+      {
+        "start": 4971,
+        "end": 5119,
+        "topic": "Narrative principles and quality",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-RES-01",
+          "R-RES-02",
+          "R-DOC-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 4971,
+            "text": "# 186. THE PROJECT STORY IN 30 SECONDS"
+          },
+          {
+            "line": 4977,
+            "text": "# 187. THE PROJECT STORY IN ONE DIAGRAM"
+          },
+          {
+            "line": 5009,
+            "text": "# 188. THE FINAL JUDGE STORY"
+          },
+          {
+            "line": 5023,
+            "text": "# 189. FINAL PRODUCT PRINCIPLES"
+          },
+          {
+            "line": 5025,
+            "text": "### Principle 1"
+          },
+          {
+            "line": 5029,
+            "text": "### Principle 2"
+          },
+          {
+            "line": 5033,
+            "text": "### Principle 3"
+          },
+          {
+            "line": 5037,
+            "text": "### Principle 4"
+          },
+          {
+            "line": 5041,
+            "text": "### Principle 5"
+          },
+          {
+            "line": 5045,
+            "text": "### Principle 6"
+          },
+          {
+            "line": 5049,
+            "text": "### Principle 7"
+          },
+          {
+            "line": 5053,
+            "text": "### Principle 8"
+          },
+          {
+            "line": 5059,
+            "text": "# 190. THE MASTER DEFINITION OF RELOOP SETU"
+          },
+          {
+            "line": 5065,
+            "text": "# 191. THE MASTER MVP"
+          }
+        ]
+      },
+      {
+        "start": 5120,
+        "end": 5284,
+        "topic": "Completion/priorities; final choices override optional labels",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-SEC-01",
+          "R-SEC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04",
+          "R-QA-01",
+          "R-QA-02",
+          "R-DOC-01",
+          "R-FUT-01",
+          "R-FUT-02",
+          "R-FUT-03",
+          "R-FUT-04",
+          "R-FUT-05",
+          "R-FUT-06",
+          "R-FUT-07",
+          "R-FUT-08",
+          "R-FUT-09",
+          "R-FUT-10",
+          "R-FUT-11",
+          "R-FUT-12",
+          "R-FUT-13",
+          "R-FUT-14",
+          "R-FUT-15",
+          "R-FUT-16",
+          "R-FUT-17",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 5120,
+            "text": "# 192. FINAL DEFINITION OF DONE FOR YOUR TWO-DAY BUILD"
+          },
+          {
+            "line": 5173,
+            "text": "# 193. THE THREE MOST IMPORTANT THINGS TO DO FIRST"
+          },
+          {
+            "line": 5175,
+            "text": "### **1. Freeze the schema**"
+          },
+          {
+            "line": 5179,
+            "text": "### **2. Build the offline transaction spine**"
+          },
+          {
+            "line": 5183,
+            "text": "### **3. Get the real field evidence**"
+          },
+          {
+            "line": 5189,
+            "text": "# 194. THE SINGLE MOST IMPORTANT THING NOT TO MESS UP"
+          },
+          {
+            "line": 5191,
+            "text": "## **Data honesty.**"
+          },
+          {
+            "line": 5209,
+            "text": "# 195. FINAL STATUS"
+          },
+          {
+            "line": 5211,
+            "text": "### Product concept"
+          },
+          {
+            "line": 5215,
+            "text": "### Official PS alignment"
+          },
+          {
+            "line": 5219,
+            "text": "### 48-hour prototype feasibility"
+          },
+          {
+            "line": 5223,
+            "text": "### Dataset feasibility"
+          },
+          {
+            "line": 5227,
+            "text": "### AI feasibility"
+          },
+          {
+            "line": 5231,
+            "text": "### Offline feasibility"
+          },
+          {
+            "line": 5235,
+            "text": "### Free-stack feasibility"
+          },
+          {
+            "line": 5239,
+            "text": "### Regulatory complexity"
+          },
+          {
+            "line": 5243,
+            "text": "### Competitive landscape"
+          },
+          {
+            "line": 5247,
+            "text": "### Differentiation"
+          },
+          {
+            "line": 5251,
+            "text": "### Largest product risk"
+          },
+          {
+            "line": 5255,
+            "text": "### Largest technical risk"
+          },
+          {
+            "line": 5259,
+            "text": "### Largest data risk"
+          },
+          {
+            "line": 5263,
+            "text": "### Largest AI risk"
+          },
+          {
+            "line": 5269,
+            "text": "# 196. THE FINAL PRODUCT THESIS"
+          },
+          {
+            "line": 5281,
+            "text": "### **This document should now be treated as the project source of truth.**"
+          }
+        ]
+      },
+      {
+        "start": 5285,
+        "end": 5314,
+        "topic": "Historical citation list and separators",
+        "requirements": [
+          "R-RES-01",
+          "R-RES-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 5315,
+        "end": 5335,
+        "topic": "Second analysis and corrections",
+        "requirements": [
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 5336,
+        "end": 5370,
+        "topic": "Supplied full problem statement including external fieldwork",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-SEC-01",
+          "R-SEC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04",
+          "R-QA-01",
+          "R-QA-02",
+          "R-DOC-01",
+          "R-FUT-01",
+          "R-FUT-02",
+          "R-FUT-03",
+          "R-FUT-04",
+          "R-FUT-05",
+          "R-FUT-06",
+          "R-FUT-07",
+          "R-FUT-08",
+          "R-FUT-09",
+          "R-FUT-10",
+          "R-FUT-11",
+          "R-FUT-12",
+          "R-FUT-13",
+          "R-FUT-14",
+          "R-FUT-15",
+          "R-FUT-16",
+          "R-FUT-17",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 5371,
+        "end": 5446,
+        "topic": "Research statistics competition; unverified claims quarantined",
+        "requirements": [
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 5447,
+        "end": 5478,
+        "topic": "Architecture AI and optional recovery score",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-FUT-11"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 5479,
+        "end": 5499,
+        "topic": "Sync and seven datasets",
+        "requirements": [
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 5500,
+        "end": 5554,
+        "topic": "Old stack UX schema; latest native contracts override",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 5555,
+        "end": 5580,
+        "topic": "Fieldwork/economics proposals",
+        "requirements": [
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 5581,
+        "end": 5673,
+        "topic": "Old roadmap demo FAQ tests and risks",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-REG-01",
+          "R-QA-01",
+          "R-QA-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 5674,
+        "end": 5785,
+        "topic": "Third consolidated analysis identity product",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-RES-01",
+          "R-RES-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 5674,
+            "text": "# Master blueprint: SIH26229"
+          },
+          {
+            "line": 5682,
+            "text": "## 1. Problem statement"
+          },
+          {
+            "line": 5684,
+            "text": "### Official identity"
+          },
+          {
+            "line": 5698,
+            "text": "### The actual problem"
+          },
+          {
+            "line": 5713,
+            "text": "### The product thesis"
+          },
+          {
+            "line": 5721,
+            "text": "## 2. Product definition"
+          },
+          {
+            "line": 5723,
+            "text": "### Recommended product"
+          },
+          {
+            "line": 5732,
+            "text": "### One-line pitch"
+          },
+          {
+            "line": 5736,
+            "text": "### What it is not"
+          },
+          {
+            "line": 5748,
+            "text": "### Core workflow"
+          },
+          {
+            "line": 5774,
+            "text": "### Core product pillars"
+          }
+        ]
+      },
+      {
+        "start": 5786,
+        "end": 5897,
+        "topic": "Regulation and roles",
+        "requirements": [
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-REG-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 5786,
+            "text": "## 3. Regulatory and domain rules"
+          },
+          {
+            "line": 5788,
+            "text": "### EPR certificate boundary"
+          },
+          {
+            "line": 5802,
+            "text": "### Collector identity"
+          },
+          {
+            "line": 5816,
+            "text": "### Recycler verification levels"
+          },
+          {
+            "line": 5853,
+            "text": "### Batteries are a separate route"
+          },
+          {
+            "line": 5876,
+            "text": "### Ministry of Mines connection"
+          }
+        ]
+      },
+      {
+        "start": 5898,
+        "end": 6348,
+        "topic": "Users and core modules",
+        "requirements": [
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-UX-01",
+          "R-UX-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 5898,
+            "text": "## 4. Users and workflows"
+          },
+          {
+            "line": 5900,
+            "text": "### Collector"
+          },
+          {
+            "line": 5902,
+            "text": "#### Main job-to-be-done"
+          },
+          {
+            "line": 5906,
+            "text": "#### Collector features"
+          },
+          {
+            "line": 5925,
+            "text": "### Aggregator"
+          },
+          {
+            "line": 5936,
+            "text": "### Recycler"
+          },
+          {
+            "line": 5951,
+            "text": "### Admin or program user"
+          },
+          {
+            "line": 5964,
+            "text": "## 5. Core modules"
+          },
+          {
+            "line": 5966,
+            "text": "### Module 1: Collector onboarding"
+          },
+          {
+            "line": 5981,
+            "text": "### Module 2: Material lot"
+          },
+          {
+            "line": 6025,
+            "text": "### Module 3: Material taxonomy"
+          },
+          {
+            "line": 6051,
+            "text": "### Module 4: Price board"
+          },
+          {
+            "line": 6078,
+            "text": "### Price methodology"
+          },
+          {
+            "line": 6117,
+            "text": "### Module 5: Recycler matching"
+          },
+          {
+            "line": 6149,
+            "text": "### Module 6: Lot Passport"
+          },
+          {
+            "line": 6182,
+            "text": "### Module 7: Handover record"
+          },
+          {
+            "line": 6206,
+            "text": "### Module 8: Earnings ledger"
+          },
+          {
+            "line": 6251,
+            "text": "### Module 9: Safety guidance"
+          },
+          {
+            "line": 6269,
+            "text": "### Module 10: Vernacular interface"
+          },
+          {
+            "line": 6297,
+            "text": "### Module 11: Offline-first operation"
+          }
+        ]
+      },
+      {
+        "start": 6349,
+        "end": 6526,
+        "topic": "Alternative stack; native lock supersedes frontend/runtime variants",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 6349,
+            "text": "## 6. Recommended technology stack"
+          },
+          {
+            "line": 6351,
+            "text": "### MVP architecture"
+          },
+          {
+            "line": 6365,
+            "text": "### Frontend"
+          },
+          {
+            "line": 6390,
+            "text": "### Backend"
+          },
+          {
+            "line": 6407,
+            "text": "### Database"
+          },
+          {
+            "line": 6434,
+            "text": "### Local fallback"
+          },
+          {
+            "line": 6446,
+            "text": "### Maps"
+          },
+          {
+            "line": 6452,
+            "text": "### Voice and language"
+          },
+          {
+            "line": 6465,
+            "text": "### AI"
+          }
+        ]
+      },
+      {
+        "start": 6527,
+        "end": 6713,
+        "topic": "Datasets and AI",
+        "requirements": [
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-FUT-06"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 6527,
+            "text": "## 7. Dataset strategy"
+          },
+          {
+            "line": 6531,
+            "text": "### Dataset matrix"
+          },
+          {
+            "line": 6543,
+            "text": "### Provenance labels"
+          },
+          {
+            "line": 6571,
+            "text": "### Synthetic data policy"
+          },
+          {
+            "line": 6588,
+            "text": "### Initial data target"
+          },
+          {
+            "line": 6602,
+            "text": "### Data flywheel"
+          },
+          {
+            "line": 6626,
+            "text": "## 8. AI and analytics plan"
+          },
+          {
+            "line": 6628,
+            "text": "### Feature priority"
+          },
+          {
+            "line": 6639,
+            "text": "### Price anomaly detection"
+          },
+          {
+            "line": 6660,
+            "text": "### Traceability anomaly"
+          },
+          {
+            "line": 6676,
+            "text": "### Model evaluation"
+          },
+          {
+            "line": 6691,
+            "text": "### Dataset safeguards"
+          }
+        ]
+      },
+      {
+        "start": 6714,
+        "end": 6860,
+        "topic": "Schema API and security",
+        "requirements": [
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-SEC-01",
+          "R-SEC-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 6714,
+            "text": "## 9. Database and API design"
+          },
+          {
+            "line": 6716,
+            "text": "### Core tables"
+          },
+          {
+            "line": 6747,
+            "text": "### Important constraints"
+          },
+          {
+            "line": 6760,
+            "text": "### API groups"
+          },
+          {
+            "line": 6796,
+            "text": "### Audit events"
+          },
+          {
+            "line": 6813,
+            "text": "## 10. Security and privacy"
+          },
+          {
+            "line": 6815,
+            "text": "### Authentication"
+          },
+          {
+            "line": 6823,
+            "text": "### Database"
+          },
+          {
+            "line": 6833,
+            "text": "### Images"
+          },
+          {
+            "line": 6841,
+            "text": "### Location"
+          },
+          {
+            "line": 6848,
+            "text": "### Privacy design"
+          }
+        ]
+      },
+      {
+        "start": 6861,
+        "end": 7034,
+        "topic": "Competition field proposals and economics",
+        "requirements": [
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 6861,
+            "text": "## 11. Competitor positioning"
+          },
+          {
+            "line": 6865,
+            "text": "### Competitive landscape"
+          },
+          {
+            "line": 6878,
+            "text": "### Differentiation statement"
+          },
+          {
+            "line": 6886,
+            "text": "## 12. Field research"
+          },
+          {
+            "line": 6890,
+            "text": "### Minimum participants"
+          },
+          {
+            "line": 6897,
+            "text": "### Interview questions"
+          },
+          {
+            "line": 6916,
+            "text": "### Research output"
+          },
+          {
+            "line": 6949,
+            "text": "## 13. Unit economics"
+          },
+          {
+            "line": 6953,
+            "text": "### Current route"
+          },
+          {
+            "line": 6975,
+            "text": "### Proposed route"
+          },
+          {
+            "line": 6985,
+            "text": "### Collector net value"
+          },
+          {
+            "line": 7015,
+            "text": "### Revenue model"
+          }
+        ]
+      },
+      {
+        "start": 7035,
+        "end": 7303,
+        "topic": "Scope roadmap demo and testing",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-UX-01",
+          "R-UX-02",
+          "R-QA-01",
+          "R-QA-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 7035,
+            "text": "## 14. 48-hour MVP scope"
+          },
+          {
+            "line": 7037,
+            "text": "### P0: Must work"
+          },
+          {
+            "line": 7055,
+            "text": "### P1: Strong differentiators"
+          },
+          {
+            "line": 7067,
+            "text": "### P2: Post-hackathon"
+          },
+          {
+            "line": 7082,
+            "text": "## 15. Build roadmap"
+          },
+          {
+            "line": 7084,
+            "text": "### Phase 0: Product freeze"
+          },
+          {
+            "line": 7096,
+            "text": "### Phase 1: Foundation"
+          },
+          {
+            "line": 7106,
+            "text": "### Phase 2: Collector workflow"
+          },
+          {
+            "line": 7117,
+            "text": "### Phase 3: Recycler workflow"
+          },
+          {
+            "line": 7126,
+            "text": "### Phase 4: Traceability"
+          },
+          {
+            "line": 7134,
+            "text": "### Phase 5: Offline"
+          },
+          {
+            "line": 7144,
+            "text": "### Phase 6: Differentiators"
+          },
+          {
+            "line": 7153,
+            "text": "### Phase 7: AI"
+          },
+          {
+            "line": 7163,
+            "text": "### Phase 8: Testing and presentation"
+          },
+          {
+            "line": 7176,
+            "text": "## 16. Recommended demo"
+          },
+          {
+            "line": 7178,
+            "text": "### Demo story"
+          },
+          {
+            "line": 7201,
+            "text": "### Strong demo line"
+          },
+          {
+            "line": 7205,
+            "text": "### What judges should see"
+          },
+          {
+            "line": 7217,
+            "text": "## 17. Testing and acceptance criteria"
+          },
+          {
+            "line": 7219,
+            "text": "### Core acceptance test"
+          },
+          {
+            "line": 7245,
+            "text": "### Unit tests"
+          },
+          {
+            "line": 7256,
+            "text": "### Integration tests"
+          },
+          {
+            "line": 7269,
+            "text": "### Security tests"
+          },
+          {
+            "line": 7279,
+            "text": "### Performance targets"
+          }
+        ]
+      },
+      {
+        "start": 7304,
+        "end": 7460,
+        "topic": "Repo and truthful narrative",
+        "requirements": [
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-DOC-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 7304,
+            "text": "## 18. Project structure"
+          },
+          {
+            "line": 7359,
+            "text": "## 19. Claims to avoid"
+          },
+          {
+            "line": 7387,
+            "text": "## 20. Final strategic assessment"
+          },
+          {
+            "line": 7389,
+            "text": "### Strongest positioning"
+          },
+          {
+            "line": 7393,
+            "text": "### Strongest technical differentiators"
+          },
+          {
+            "line": 7405,
+            "text": "### Strongest social differentiator"
+          },
+          {
+            "line": 7409,
+            "text": "### North-star metric"
+          },
+          {
+            "line": 7420,
+            "text": "### Final build order"
+          }
+        ]
+      },
+      {
+        "start": 7461,
+        "end": 7739,
+        "topic": "Fourth repeated synthesis incl optional recovery score and stale free-tier claims",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-SEC-01",
+          "R-SEC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04",
+          "R-QA-01",
+          "R-QA-02",
+          "R-DOC-01",
+          "R-FUT-01",
+          "R-FUT-02",
+          "R-FUT-03",
+          "R-FUT-04",
+          "R-FUT-05",
+          "R-FUT-06",
+          "R-FUT-07",
+          "R-FUT-08",
+          "R-FUT-09",
+          "R-FUT-10",
+          "R-FUT-11",
+          "R-FUT-12",
+          "R-FUT-13",
+          "R-FUT-14",
+          "R-FUT-15",
+          "R-FUT-16",
+          "R-FUT-17",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 7465,
+            "text": "# SIH26229 — MASTER BUILD DOCUMENT (Consolidated, Verified 27 Sept 2026)"
+          },
+          {
+            "line": 7467,
+            "text": "## 0. How this master version was assembled"
+          },
+          {
+            "line": 7482,
+            "text": "## 1. Verified fact base (checked today, 27 Sept 2026)"
+          },
+          {
+            "line": 7494,
+            "text": "## 2. The PS translated into a build contract"
+          },
+          {
+            "line": 7516,
+            "text": "## 3. Product definition (final)"
+          },
+          {
+            "line": 7534,
+            "text": "## 4. Regulatory rules — non-negotiable design constraints"
+          },
+          {
+            "line": 7546,
+            "text": "## 5. Competitive positioning (memorize the table + the line)"
+          },
+          {
+            "line": 7560,
+            "text": "## 6. UX: low-literacy is the product"
+          },
+          {
+            "line": 7572,
+            "text": "## 7. Final tech stack (all free, all demo-safe)"
+          },
+          {
+            "line": 7596,
+            "text": "## 8. Offline-first architecture (the 80% you must own)"
+          },
+          {
+            "line": 7613,
+            "text": "## 9. Data strategy — the flywheel is the product"
+          },
+          {
+            "line": 7628,
+            "text": "## 10. AI/ML plan (assistive, honest, defensible)"
+          },
+          {
+            "line": 7640,
+            "text": "## 11. Field research (do it this week — cheapest edge you'll buy)"
+          },
+          {
+            "line": 7651,
+            "text": "## 12. Unit economics (the deliverable most teams skip)"
+          },
+          {
+            "line": 7669,
+            "text": "## 13. Build plan"
+          },
+          {
+            "line": 7696,
+            "text": "## 14. Demo script + judge Q&A"
+          },
+          {
+            "line": 7715,
+            "text": "## 15. Claims discipline (PPT red lines)"
+          },
+          {
+            "line": 7724,
+            "text": "## 16. Definition of done"
+          }
+        ]
+      },
+      {
+        "start": 7740,
+        "end": 8091,
+        "topic": "Fifth repeated synthesis; alternate product names/auth/host choices superseded",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-SEC-01",
+          "R-SEC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04",
+          "R-QA-01",
+          "R-QA-02",
+          "R-DOC-01",
+          "R-FUT-01",
+          "R-FUT-02",
+          "R-FUT-03",
+          "R-FUT-04",
+          "R-FUT-05",
+          "R-FUT-06",
+          "R-FUT-07",
+          "R-FUT-08",
+          "R-FUT-09",
+          "R-FUT-10",
+          "R-FUT-11",
+          "R-FUT-12",
+          "R-FUT-13",
+          "R-FUT-14",
+          "R-FUT-15",
+          "R-FUT-16",
+          "R-FUT-17",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 7752,
+            "text": "## 1. Executive Product Definition"
+          },
+          {
+            "line": 7791,
+            "text": "## 2. Exact Problem & Regulatory Grounding"
+          },
+          {
+            "line": 7793,
+            "text": "### Official PS Requirements (must be delivered)"
+          },
+          {
+            "line": 7809,
+            "text": "### Critical Regulatory Corrections (non-negotiable)"
+          },
+          {
+            "line": 7826,
+            "text": "## 3. Competitor Landscape & Exact Whitespace"
+          },
+          {
+            "line": 7844,
+            "text": "## 4. Product Vision, Personas & Core Principles"
+          },
+          {
+            "line": 7864,
+            "text": "## 5. Core Modules"
+          },
+          {
+            "line": 7885,
+            "text": "## 6. 100% Free Tech Stack (Local-First Canonical)"
+          },
+          {
+            "line": 7911,
+            "text": "## 7. Data Strategy — Platform-Generated Datasets + Provenance"
+          },
+          {
+            "line": 7915,
+            "text": "### Required Datasets"
+          },
+          {
+            "line": 7923,
+            "text": "### Bootstrap / Seed Data"
+          },
+          {
+            "line": 7930,
+            "text": "### Data Provenance Layer (mandatory)"
+          },
+          {
+            "line": 7937,
+            "text": "## 8. Architecture Highlights"
+          },
+          {
+            "line": 7957,
+            "text": "## 9. 48-Hour / 36-Hour Execution Roadmap"
+          },
+          {
+            "line": 7985,
+            "text": "## 10. Demo Script (≈ 3 minutes)"
+          },
+          {
+            "line": 8003,
+            "text": "## 11. Judge Q&A — Pre-Written Strong Answers"
+          },
+          {
+            "line": 8028,
+            "text": "## 12. Unit Economics (Required by PS)"
+          },
+          {
+            "line": 8044,
+            "text": "## 13. Risk Register & Mitigations"
+          },
+          {
+            "line": 8058,
+            "text": "## 14. Success Metrics & North Star"
+          },
+          {
+            "line": 8067,
+            "text": "## 15. Immediate Next Actions (Before Writing More Code)"
+          }
+        ]
+      },
+      {
+        "start": 8092,
+        "end": 8371,
+        "topic": "Sixth repeated synthesis; invented uplift/authority claims rejected",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-SEC-01",
+          "R-SEC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04",
+          "R-QA-01",
+          "R-QA-02",
+          "R-DOC-01",
+          "R-FUT-01",
+          "R-FUT-02",
+          "R-FUT-03",
+          "R-FUT-04",
+          "R-FUT-05",
+          "R-FUT-06",
+          "R-FUT-07",
+          "R-FUT-08",
+          "R-FUT-09",
+          "R-FUT-10",
+          "R-FUT-11",
+          "R-FUT-12",
+          "R-FUT-13",
+          "R-FUT-14",
+          "R-FUT-15",
+          "R-FUT-16",
+          "R-FUT-17",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 8096,
+            "text": "# SIH26229 — KABADIWALA CONNECT"
+          },
+          {
+            "line": 8097,
+            "text": "## The Master Build Blueprint (Consolidated & Verified)"
+          },
+          {
+            "line": 8099,
+            "text": "### ⚠️ Executive Corrections Before You Begin"
+          },
+          {
+            "line": 8111,
+            "text": "## 1️⃣ The Official Problem Statement — What You Must Build"
+          },
+          {
+            "line": 8133,
+            "text": "## 2️⃣ Competitive Landscape & The Real Whitespace"
+          },
+          {
+            "line": 8148,
+            "text": "## 3️⃣ The Policy Hook — Verified"
+          },
+          {
+            "line": 8156,
+            "text": "## 4️⃣ The Complete Tech Stack — 100% Free, Verified"
+          },
+          {
+            "line": 8176,
+            "text": "## 5️⃣ Data Strategy — How to Build All 7 Datasets for Free"
+          },
+          {
+            "line": 8192,
+            "text": "## 6️⃣ The AI/ML Layer — Enough Detail to Defend It Live"
+          },
+          {
+            "line": 8194,
+            "text": "### 6.1 Material Classification"
+          },
+          {
+            "line": 8197,
+            "text": "### 6.2 Valuation Estimation — Grounded in Real Research"
+          },
+          {
+            "line": 8202,
+            "text": "### 6.3 Anomaly Detection"
+          },
+          {
+            "line": 8205,
+            "text": "### 6.4 Recycler Matching"
+          },
+          {
+            "line": 8210,
+            "text": "## 7️⃣ Offline-First Architecture — The Flow a Judge Will Ask You to Trace"
+          },
+          {
+            "line": 8222,
+            "text": "## 8️⃣ UX for Low Literacy — This Wins or Loses the Room"
+          },
+          {
+            "line": 8233,
+            "text": "## 9️⃣ Field Research Protocol (Do This Before Coding)"
+          },
+          {
+            "line": 8252,
+            "text": "## 🔟 Unit Economics (PS-Mandated Slide)"
+          },
+          {
+            "line": 8267,
+            "text": "## 1️⃣1️⃣ 36-Hour Execution Roadmap"
+          },
+          {
+            "line": 8284,
+            "text": "## 1️⃣2️⃣ Demo Script (90 Seconds)"
+          },
+          {
+            "line": 8295,
+            "text": "## 1️⃣3️⃣ Judge Q&A Stress-Test (Verbatim Answers)"
+          },
+          {
+            "line": 8308,
+            "text": "## 1️⃣4️⃣ Risks & Honest Limitations"
+          },
+          {
+            "line": 8325,
+            "text": "## 1️⃣5️⃣ Final Product Definition"
+          },
+          {
+            "line": 8352,
+            "text": "## ✅ Final Verdict"
+          }
+        ]
+      },
+      {
+        "start": 8372,
+        "end": 8524,
+        "topic": "Seventh detailed synthesis identity and brief",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 8525,
+        "end": 8726,
+        "topic": "Stats regulation privacy and competition",
+        "requirements": [
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-SEC-01",
+          "R-SEC-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 8727,
+        "end": 9034,
+        "topic": "Modules and alternate architecture",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 9035,
+        "end": 9259,
+        "topic": "Entities data lifecycle and AI including future recovery",
+        "requirements": [
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-FUT-11"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 9260,
+        "end": 9690,
+        "topic": "Field economics pitch FAQ and execution",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02",
+          "R-QA-01",
+          "R-QA-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 9691,
+        "end": 10264,
+        "topic": "Claim restrictions and historical references",
+        "requirements": [
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 10265,
+        "end": 10320,
+        "topic": "Historical follow-up questions and summary; latest answers in P override",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      }
+    ]
+  },
+  {
+    "alias": "P",
+    "path": "docs/sources/previous_convo.txt",
+    "lines": 2658,
+    "sha256": "3d11ef10e6fb87bb6895fe516f5699c47fa5849146bf20edb86192912eb5298e",
+    "sections": [
+      {
+        "start": 1,
+        "end": 1042,
+        "topic": "Earlier architecture/schedule/fieldwork discussion; later choices override",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-SEC-01",
+          "R-SEC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04",
+          "R-QA-01",
+          "R-QA-02",
+          "R-DOC-01",
+          "R-FUT-01",
+          "R-FUT-02",
+          "R-FUT-03",
+          "R-FUT-04",
+          "R-FUT-05",
+          "R-FUT-06",
+          "R-FUT-07",
+          "R-FUT-08",
+          "R-FUT-09",
+          "R-FUT-10",
+          "R-FUT-11",
+          "R-FUT-12",
+          "R-FUT-13",
+          "R-FUT-14",
+          "R-FUT-15",
+          "R-FUT-16",
+          "R-FUT-17",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 6,
+            "text": "# 🤖 1. What you can VIBE-CODE"
+          },
+          {
+            "line": 10,
+            "text": "### Frontend"
+          },
+          {
+            "line": 30,
+            "text": "### Backend"
+          },
+          {
+            "line": 48,
+            "text": "### Offline system"
+          },
+          {
+            "line": 65,
+            "text": "### Data handling"
+          },
+          {
+            "line": 80,
+            "text": "### AI/ML"
+          },
+          {
+            "line": 93,
+            "text": "### Other technical pieces"
+          },
+          {
+            "line": 112,
+            "text": "# 👤 2. What YOU need to do manually"
+          },
+          {
+            "line": 116,
+            "text": "## A. Field research — MUST DO YOURSELF"
+          },
+          {
+            "line": 133,
+            "text": "## B. Real recycler verification — YOU DO"
+          },
+          {
+            "line": 152,
+            "text": "## C. Real price data — YOU COLLECT"
+          },
+          {
+            "line": 173,
+            "text": "## D. Decide the product logic"
+          },
+          {
+            "line": 193,
+            "text": "## E. Validate AI output"
+          },
+          {
+            "line": 219,
+            "text": "## F. Regulatory correctness"
+          },
+          {
+            "line": 235,
+            "text": "# 🧠 3. The MOST important manual work"
+          },
+          {
+            "line": 239,
+            "text": "### 1. Field research"
+          },
+          {
+            "line": 243,
+            "text": "### 2. Data provenance"
+          },
+          {
+            "line": 247,
+            "text": "### 3. Business logic"
+          },
+          {
+            "line": 251,
+            "text": "### 4. Regulatory logic"
+          },
+          {
+            "line": 255,
+            "text": "### 5. Testing/demo"
+          },
+          {
+            "line": 261,
+            "text": "# 🔥 4. What this means for your 2-day build"
+          },
+          {
+            "line": 295,
+            "text": "# ⚡ 5. Very simple split"
+          },
+          {
+            "line": 319,
+            "text": "# 🎯 Your role is NOT “coder”"
+          },
+          {
+            "line": 345,
+            "text": "# 1. YOUR JOB — DO THIS MANUALLY"
+          },
+          {
+            "line": 347,
+            "text": "## A. Talk to at least 2 real kabadiwalas/collectors"
+          },
+          {
+            "line": 392,
+            "text": "### What you need to collect"
+          },
+          {
+            "line": 417,
+            "text": "# 2. YOU NEED REAL PRICE OBSERVATIONS"
+          },
+          {
+            "line": 456,
+            "text": "# 3. YOU NEED TO VERIFY RECYCLERS"
+          },
+          {
+            "line": 487,
+            "text": "# 4. YOU NEED TO DECIDE THE ACTUAL PRODUCT BEHAVIOUR"
+          },
+          {
+            "line": 493,
+            "text": "### Example:"
+          },
+          {
+            "line": 541,
+            "text": "# 5. YOU MUST DECIDE WHAT COUNTS AS A \"LOT\""
+          },
+          {
+            "line": 571,
+            "text": "# 6. YOU MUST OWN THE BUSINESS RULES"
+          },
+          {
+            "line": 577,
+            "text": "### Price"
+          },
+          {
+            "line": 595,
+            "text": "### Recycler matching"
+          },
+          {
+            "line": 617,
+            "text": "# 7. YOU MUST HANDLE REGULATORY CORRECTNESS"
+          },
+          {
+            "line": 645,
+            "text": "# 8. YOU NEED TO PREPARE THE REAL DEMO STORY"
+          },
+          {
+            "line": 683,
+            "text": "# 9. YOU NEED UNIT ECONOMICS"
+          },
+          {
+            "line": 689,
+            "text": "### Current model"
+          },
+          {
+            "line": 701,
+            "text": "### Platform model"
+          },
+          {
+            "line": 733,
+            "text": "# 10. YOUR JOB IS ALSO TO TEST EVERYTHING"
+          },
+          {
+            "line": 741,
+            "text": "### Collector side"
+          },
+          {
+            "line": 752,
+            "text": "### Offline"
+          },
+          {
+            "line": 768,
+            "text": "### Recycler side"
+          },
+          {
+            "line": 775,
+            "text": "### Edge cases"
+          },
+          {
+            "line": 792,
+            "text": "# 11. WHAT YOU SHOULD GIVE TO THE AI AGENTS"
+          },
+          {
+            "line": 840,
+            "text": "# 12. WHAT AI SHOULD DO FOR YOU"
+          },
+          {
+            "line": 866,
+            "text": "# 13. YOUR ACTUAL 2-DAY WORK"
+          },
+          {
+            "line": 870,
+            "text": "## DAY 1 — YOU FIRST"
+          },
+          {
+            "line": 872,
+            "text": "### First 2–3 hours"
+          },
+          {
+            "line": 902,
+            "text": "# 14. THEN YOU GIVE EVERYTHING TO AI"
+          },
+          {
+            "line": 923,
+            "text": "# 15. THEN AI BUILDS THE PRODUCT"
+          },
+          {
+            "line": 965,
+            "text": "# 16. DON'T WASTE YOUR TIME ON AI FIRST"
+          },
+          {
+            "line": 985,
+            "text": "# 17. THE SIMPLEST WAY TO THINK ABOUT YOUR JOB"
+          },
+          {
+            "line": 989,
+            "text": "### 1. REAL PEOPLE"
+          },
+          {
+            "line": 993,
+            "text": "### 2. REAL DATA"
+          },
+          {
+            "line": 997,
+            "text": "### 3. PRODUCT DECISIONS"
+          },
+          {
+            "line": 1001,
+            "text": "### 4. DOMAIN CORRECTNESS"
+          },
+          {
+            "line": 1005,
+            "text": "### 5. BUSINESS MODEL"
+          },
+          {
+            "line": 1009,
+            "text": "### 6. VALIDATION"
+          },
+          {
+            "line": 1013,
+            "text": "### 7. DEMO/PITCH"
+          },
+          {
+            "line": 1021,
+            "text": "# Your immediate next step"
+          }
+        ]
+      },
+      {
+        "start": 1043,
+        "end": 1440,
+        "topic": "Owner rejects primary fieldwork, secondary-research strategy",
+        "requirements": [
+          "R-RES-01",
+          "R-RES-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1051,
+            "text": "## What you do instead"
+          },
+          {
+            "line": 1053,
+            "text": "### 1. Replace field interviews with secondary research"
+          },
+          {
+            "line": 1078,
+            "text": "### 2. Build the MVP using clearly labelled data"
+          },
+          {
+            "line": 1116,
+            "text": "### 3. Your “collector” can be a demo persona"
+          },
+          {
+            "line": 1144,
+            "text": "### 4. Keep the requirement visible as a limitation"
+          },
+          {
+            "line": 1154,
+            "text": "## What this changes for YOU"
+          },
+          {
+            "line": 1158,
+            "text": "### You personally need to do:"
+          },
+          {
+            "line": 1188,
+            "text": "# And there is one important consequence"
+          },
+          {
+            "line": 1214,
+            "text": "# In fact, this is better for your 2-day situation"
+          },
+          {
+            "line": 1240,
+            "text": "### Your first actual task now"
+          },
+          {
+            "line": 1252,
+            "text": "## What **you need to do**"
+          },
+          {
+            "line": 1254,
+            "text": "### Your work"
+          },
+          {
+            "line": 1264,
+            "text": "### AI/vibe coding will do"
+          },
+          {
+            "line": 1285,
+            "text": "## What you **will NOT be able to honestly complete** if you don't go outside"
+          },
+          {
+            "line": 1307,
+            "text": "### So your situation is basically:"
+          },
+          {
+            "line": 1325,
+            "text": "### What we create"
+          },
+          {
+            "line": 1359,
+            "text": "### What we should NOT write"
+          },
+          {
+            "line": 1371,
+            "text": "### So your job is now very simple"
+          },
+          {
+            "line": 1388,
+            "text": "### Where this stuff appears"
+          }
+        ]
+      },
+      {
+        "start": 1441,
+        "end": 1763,
+        "topic": "Native Android and broad stack proposal",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 1764,
+        "end": 1941,
+        "topic": "Free tools and remove Redis/MinIO complexity",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 1942,
+        "end": 1979,
+        "topic": "Corrected auth/native stack",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 1980,
+        "end": 2292,
+        "topic": "Further native backend/web/infra stack detail",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 1983,
+            "text": "### What I would accept from Claude"
+          },
+          {
+            "line": 2032,
+            "text": "# Where I disagree slightly with Claude"
+          },
+          {
+            "line": 2061,
+            "text": "# The stack I would now actually freeze for SahiTol"
+          },
+          {
+            "line": 2063,
+            "text": "### Collector Android App"
+          },
+          {
+            "line": 2082,
+            "text": "### Backend"
+          },
+          {
+            "line": 2095,
+            "text": "### Recycler/Admin Web"
+          },
+          {
+            "line": 2111,
+            "text": "### Storage"
+          },
+          {
+            "line": 2123,
+            "text": "### Offline"
+          },
+          {
+            "line": 2139,
+            "text": "### Traceability"
+          },
+          {
+            "line": 2151,
+            "text": "### Maps"
+          },
+          {
+            "line": 2165,
+            "text": "### AI"
+          },
+          {
+            "line": 2184,
+            "text": "### Testing"
+          },
+          {
+            "line": 2208,
+            "text": "# One thing I especially want to change"
+          },
+          {
+            "line": 2218,
+            "text": "### AI does the **construction**"
+          },
+          {
+            "line": 2220,
+            "text": "### You do the **validation**"
+          },
+          {
+            "line": 2258,
+            "text": "## One more correction to Claude"
+          },
+          {
+            "line": 2278,
+            "text": "### Final verdict"
+          }
+        ]
+      },
+      {
+        "start": 2293,
+        "end": 2319,
+        "topic": "PostGIS/MapLibre/LiteRT/photo/data tooling tweaks",
+        "requirements": [
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 2320,
+        "end": 2467,
+        "topic": "Assistant reverted to PWA cleanup; superseded, retain compatible domain clarifications",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-SEC-01",
+          "R-SEC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04",
+          "R-QA-01",
+          "R-QA-02",
+          "R-DOC-01",
+          "R-FUT-01",
+          "R-FUT-02",
+          "R-FUT-03",
+          "R-FUT-04",
+          "R-FUT-05",
+          "R-FUT-06",
+          "R-FUT-07",
+          "R-FUT-08",
+          "R-FUT-09",
+          "R-FUT-10",
+          "R-FUT-11",
+          "R-FUT-12",
+          "R-FUT-13",
+          "R-FUT-14",
+          "R-FUT-15",
+          "R-FUT-16",
+          "R-FUT-17",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": [
+          {
+            "line": 2322,
+            "text": "## My verdict"
+          },
+          {
+            "line": 2334,
+            "text": "### These are the tweaks I would make before Claude gets it"
+          },
+          {
+            "line": 2357,
+            "text": "### One particularly important architecture correction"
+          },
+          {
+            "line": 2410,
+            "text": "### Another important correction"
+          },
+          {
+            "line": 2429,
+            "text": "## What I recommend"
+          },
+          {
+            "line": 2457,
+            "text": "### So: are you ready?"
+          }
+        ]
+      },
+      {
+        "start": 2468,
+        "end": 2506,
+        "topic": "Conflict reconciliation",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 2507,
+        "end": 2550,
+        "topic": "Explicit answers on name/data/field/regions",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-RES-01",
+          "R-RES-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 2551,
+        "end": 2573,
+        "topic": "Explicit conflict resolution and retained choices",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-RES-01",
+          "R-RES-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 2574,
+        "end": 2601,
+        "topic": "Documentation intent and one-builder/presenter split",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-DOC-01"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 2602,
+        "end": 2613,
+        "topic": "Final native/deadline/hosted/all six must-have decisions",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 2614,
+        "end": 2631,
+        "topic": "Economics/audio/device/data answers",
+        "requirements": [
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-ECON-01",
+          "R-ECON-02"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      },
+      {
+        "start": 2632,
+        "end": 2658,
+        "topic": "Final locked summary; controls earlier alternatives",
+        "requirements": [
+          "R-GOV-01",
+          "R-GOV-02",
+          "R-GOV-03",
+          "R-GOV-04",
+          "R-ARC-01",
+          "R-ARC-02",
+          "R-AUTH-01",
+          "R-AUTH-02",
+          "R-AUTH-03",
+          "R-AUTH-04",
+          "R-LOT-01",
+          "R-LOT-02",
+          "R-LOT-03",
+          "R-LOT-04",
+          "R-LOT-05",
+          "R-PRICE-01",
+          "R-PRICE-02",
+          "R-PRICE-03",
+          "R-PRICE-04",
+          "R-PRICE-05",
+          "R-REC-01",
+          "R-REC-02",
+          "R-REC-03",
+          "R-REC-04",
+          "R-REC-05",
+          "R-REC-06",
+          "R-OFFER-01",
+          "R-OFFER-02",
+          "R-HAND-01",
+          "R-HAND-02",
+          "R-HAND-03",
+          "R-HAND-04",
+          "R-HAND-05",
+          "R-HAND-06",
+          "R-PAY-01",
+          "R-PAY-02",
+          "R-PAY-03",
+          "R-OFF-01",
+          "R-OFF-02",
+          "R-OFF-03",
+          "R-OFF-04",
+          "R-OFF-05",
+          "R-OFF-06",
+          "R-ML-01",
+          "R-ML-02",
+          "R-ML-03",
+          "R-ML-04",
+          "R-SAFE-01",
+          "R-LANG-01",
+          "R-LANG-02",
+          "R-UX-01",
+          "R-UX-02",
+          "R-DATA-01",
+          "R-DATA-02",
+          "R-DATA-03",
+          "R-DATA-04",
+          "R-DATA-05",
+          "R-DATA-06",
+          "R-DATA-07",
+          "R-DATA-08",
+          "R-DATA-09",
+          "R-DATA-10",
+          "R-DATA-11",
+          "R-ADMIN-01",
+          "R-ADMIN-02",
+          "R-ADMIN-03",
+          "R-ECON-01",
+          "R-ECON-02",
+          "R-RES-01",
+          "R-RES-02",
+          "R-REG-01",
+          "R-SEC-01",
+          "R-SEC-02",
+          "R-OPS-01",
+          "R-OPS-02",
+          "R-OPS-03",
+          "R-OPS-04",
+          "R-QA-01",
+          "R-QA-02",
+          "R-DOC-01",
+          "R-FUT-01",
+          "R-FUT-02",
+          "R-FUT-03",
+          "R-FUT-04",
+          "R-FUT-05",
+          "R-FUT-06",
+          "R-FUT-07",
+          "R-FUT-08",
+          "R-FUT-09",
+          "R-FUT-10",
+          "R-FUT-11",
+          "R-FUT-12",
+          "R-FUT-13",
+          "R-FUT-14",
+          "R-FUT-15",
+          "R-FUT-16",
+          "R-FUT-17",
+          "R-FUT-18"
+        ],
+        "disposition": "RECONCILED",
+        "headings": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "dataset_family": "price_observations",
+  "schema_version": "v1.0",
+  "data_version": "v1.0-demo",
+  "generated_at": "2026-09-28T20:32:38.060297+00:00",
+  "total_records": 10,
+  "files": [
+    {
+      "filename": "price_observations.csv",
+      "sha256": "ae4ba540c209943f78d6ae22f94871a8e9d83a0ddac1bdc3da4675f679d2b1f9",
+      "byte_size": 2082,
+      "row_count": 10
+    },
+    {
+      "filename": "price_observations.json",
+      "sha256": "a3bfcf26f607923df6d86e070392f9b05be0c1b71006608e6696f172fe69dbd6",
+      "byte_size": 5968,
+      "row_count": 10
+    }
+  ],
+  "counts_by_origin_class": {
+    "SYNTHETIC": 10
+  },
+  "counts_by_source_kind": {
+    "SYNTHETIC_GENERATOR": 10
+  },
+  "counts_by_is_demo": {
+    "true": 10
+  },
+  "counts_by_review_status": {
+    "VERIFIED": 10
+  },
+  "quarantined_count": 0,
+  "source_ids": [
+    "SRC-SYNTHETIC-GEN-01"
+  ],
+  "validation_status": "VALID",
+  "limitations": "Purely synthetic demonstration fixtures; disjoint from real entities."
+}

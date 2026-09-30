@@ -1,0 +1,3 @@
+# Model card template
+
+Model/version/SHA-256 and license; intended use/advisory limits; exact class/label order; dataset version/rights/source composition; grouped split counts and leakage checks; preprocessing/input tensor/dtype/quantization; training config/seeds/checkpoint selection; validation threshold rationale; untouched-test confusion matrix/per-class metrics/macro-F1/accuracy/abstention; representative errors/OOD limitations; Python/export/Android parity; real device latency/memory/APK size; user correction behavior; reproducibility commands and artifact hashes; reviewer/date. Do not fill measured fields with target values.

@@ -1,0 +1,180 @@
+<resources>
+    <!-- App & Identity -->
+    <string name="app_name">सही तोल</string>
+    <string name="tagline">योग्य वजन, पारदर्शक भाव, पक्की पावती</string>
+    <string name="demo_mode_label">डेमो मोड — फक्त चाचणी डेटा</string>
+    <string name="demo_subtext">वेगळे पार्टीशन. कोणतेही प्रत्यक्ष आर्थिक व्यवहार नोंदवले जात नाहीत.</string>
+
+    <!-- Language Selection -->
+    <string name="lang_select_title">भाषा निवडा</string>
+    <string name="lang_en">English</string>
+    <string name="lang_hi">हिंदी</string>
+    <string name="lang_mr">मराठी</string>
+
+    <!-- Actions & Common Buttons -->
+    <string name="btn_continue">पुढे जा</string>
+    <string name="btn_cancel">रद्द करा</string>
+    <string name="btn_confirm">पुष्टी करा</string>
+    <string name="btn_back">मागे जा</string>
+    <string name="btn_retry">पुन्हा प्रयत्न करा</string>
+    <string name="btn_dismiss">बंद करा</string>
+    <string name="btn_save">जतन करा</string>
+    <string name="btn_close">बंद करा</string>
+    <string name="btn_delete">हटवा</string>
+    <string name="btn_capture_photo">फोटो काढा</string>
+    <string name="btn_save_draft">ड्राफ्ट जतन करा</string>
+    <string name="btn_sync_now">सिंक करा</string>
+
+    <!-- Four Immutable Status Invariants -->
+    <string name="status_saved_locally">फोनवर जतन केले</string>
+    <string name="status_saved_locally_desc">फोनच्या मेमरीमध्ये जतन केले. अद्याप सर्व्हरवर पाठवले नाही.</string>
+    <string name="status_synced">सर्व्हरवर सिंक केले</string>
+    <string name="status_synced_desc">सर्व्हरवर सुरक्षितपणे पाठवले गेले.</string>
+    <string name="status_confirmed">रिसायकलरद्वारे पुष्टी केली</string>
+    <string name="status_confirmed_desc">नोंदणीकृत रिसायकलरने वजन तपासून प्रत्यक्ष पावती निश्चित केली.</string>
+    <string name="status_paid">पैसे मिळाल्याची पोच</string>
+    <string name="status_paid_desc">दोन्ही पक्षांनी रोख किंवा यूपीआय पावती स्वीकारली. हे बँक सेटलमेंट नाही.</string>
+
+    <!-- Statutory Disclaimer -->
+    <string name="non_epr_disclaimer">सही तोल डिजिटल हँडओव्हर रेकॉर्ड हा केवळ भंगार मिळाल्याचा पुरावा आहे, हा कोणताही अधिकृत ईपीआर दाखला नाही. मिळालेले वजन पुनर्प्रक्रिया झाल्याचे सिद्ध करत नाही.</string>
+
+    <!-- Onboarding, Auth & Profile -->
+    <string name="auth_title">कबाडी साथी लॉगिन</string>
+    <string name="auth_phone_label">मोबाईल नंबर</string>
+    <string name="auth_phone_hint">10 अंकी मोबाईल नंबर टाका</string>
+    <string name="auth_pin_label">4 अंकी सुरक्षा पिन</string>
+    <string name="auth_pin_hint">तुमचा गुप्त पिन टाका</string>
+    <string name="auth_login_btn">लॉगिन करा</string>
+    <string name="auth_demo_btn">डेमो खाते पहा (संतोष यादव)</string>
+    <string name="auth_zero_pii">गोपनीयता सुरक्षा: आधार किंवा बँक खात्याची माहिती आवश्यक नाही.</string>
+    <string name="auth_err_invalid_pin">चुकीचा पिन. कृपया पुन्हा प्रयत्न करा.</string>
+    <string name="auth_err_throttled">वारंवार चुकीचे प्रयत्न. %1$d सेकंदांसाठी लॉक केले गेले.</string>
+    <string name="auth_logout_title">सुरक्षित लॉगआउट</string>
+    <string name="auth_logout_confirm">लॉगआउट करा</string>
+    <string name="auth_logout_warning">तुमच्याकडे %1$d अनसिंक नोंदी आहेत. त्या फोनवर सुरक्षित राहतील आणि नष्ट होणार नाहीत.</string>
+
+    <!-- Navigation & Home -->
+    <string name="nav_home">मुख्यपृष्ठ</string>
+    <string name="nav_lots">भंगार लॉट</string>
+    <string name="nav_prices">बाजार भाव</string>
+    <string name="nav_recyclers">रिसायकलर यार्ड</string>
+    <string name="nav_ledger">खातावही</string>
+    <string name="nav_sync">सिंक केंद्र</string>
+    <string name="nav_settings">सेटिंग्ज</string>
+    <string name="nav_safety">सुरक्षा मार्गदर्शक</string>
+    <string name="home_greeting">नमस्कार, %1$s</string>
+    <string name="home_quick_add">नवीन भंगार जोडा</string>
+    <string name="home_pending_sync">%1$d नोंदी सिंक होणे बाकी</string>
+    <string name="home_recent_lots">अलीकडील व्यवहार</string>
+    <string name="home_empty_lots">अद्याप कोणताही भंगार लॉट नाही. नवीन लॉट जोडण्यासाठी \'+\' दाबा.</string>
+
+    <!-- Lot Creation & Editor -->
+    <string name="lot_editor_title">भंगार लॉट तपशील</string>
+    <string name="lot_material_label">भंगाराचा प्रकार</string>
+    <string name="lot_weight_label">वजन</string>
+    <string name="lot_unit_kg">किलो</string>
+    <string name="lot_unit_g">ग्रॅम</string>
+    <string name="lot_unit_piece">नग (पीस)</string>
+    <string name="lot_condition_label">स्थिती</string>
+    <string name="lot_cond_intact">अखंड / चांगल्या स्थितीत</string>
+    <string name="lot_cond_damaged">तुटलेले / खराब</string>
+    <string name="lot_cond_depopulated">सुटे भाग काढलेले</string>
+    <string name="lot_cond_burnt">जळालेले</string>
+    <string name="lot_cond_leaking">गळती / गंजलेले</string>
+    <string name="lot_photo_tap_to_capture">भंगाराचा फोटो काढा</string>
+    <string name="lot_photo_retake">पुन्हा फोटो काढा</string>
+    <string name="lot_save_draft">फोनवर जतन करा</string>
+    <string name="lot_submit_action">जतन करून पुढे जा</string>
+    <string name="lot_err_no_material">कृपया भंगाराचा प्रकार निवडा.</string>
+    <string name="lot_err_invalid_weight">कृपया शून्यापेक्षा जास्त वैध वजन टाका.</string>
+    <string name="lot_warning_heavy_weight">वजन 500 किलोपेक्षा जास्त आहे. गुणवत्ता पुनरावलोकनासाठी चिन्हांकित केले.</string>
+
+    <!-- AI Classifier & Advisory -->
+    <string name="classifier_analyzing">ऑन-डिव्हाइस एआय फोटोची तपासणी करत आहे…</string>
+    <string name="classifier_high_confidence">एआय सल्ला: %1$s (%2$d%% जुळणी)</string>
+    <string name="classifier_advisory_note">हा फक्त सल्ला आहे. भंगाराचा खरा प्रकार तुम्ही ठरवा.</string>
+    <string name="classifier_confirm_btn">सल्ला स्वीकारा</string>
+    <string name="classifier_change_btn">स्वतः निवडा</string>
+    <string name="classifier_abstain_warning">एआय खात्री करू शकले नाही (%1$d%%). कृपया स्वतः प्रकार निवडा.</string>
+
+    <!-- Prices & Units -->
+    <string name="price_title">बाजार भाव व दर</string>
+    <string name="price_indicative_notice">सार्वजनिक माहितीवर आधारित अंदाजे भाव. कोणतीही सक्ती नाही.</string>
+    <string name="price_per_kg">₹%1$s / किलो</string>
+    <string name="price_range_format">₹%1$s – ₹%2$s / किलो</string>
+    <string name="price_confidence_high">उच्च विश्वासार्हता (%1$d भाव नोंदवले)</string>
+    <string name="price_confidence_med">मध्यम विश्वासार्हता</string>
+    <string name="price_confidence_low">कमी डेटा / प्रादेशिक अंदाज</string>
+    <string name="price_insufficient_data">पुरेसा भाव उपलब्ध नाही</string>
+    <string name="price_add_observation">बाजारातील नवीन भाव सांगा</string>
+    <string name="price_obs_submitted">भावाची नोंद पुनरावलोकनासाठी पाठवली.</string>
+
+    <!-- Recycler Directory & Matching -->
+    <string name="recycler_dir_title">नोंदणीकृत रिसायकलर यार्ड</string>
+    <string name="recycler_distance">%1$.1f किमी अंतर</string>
+    <string name="recycler_route_authorized">प्रदूषण नियंत्रण मंडळ अधिकृत</string>
+    <string name="recycler_route_battery">बॅटरी नियम २०२२ नोंदणीकृत</string>
+    <string name="recycler_battery_isolation">धोकादायक बॅटरीची स्वतंत्र प्रक्रिया आवश्यक आहे.</string>
+    <string name="recycler_request_quote">भाव मागा</string>
+    <string name="recycler_offer_received">प्रस्ताव: ₹%1$s / किलो</string>
+    <string name="recycler_offer_accept">प्रस्ताव स्वीकारा</string>
+    <string name="recycler_offer_reject">नाकारा</string>
+    <string name="recycler_no_match">तुमच्या परिसरात या भंगारासाठी कोणताही अधिकृत यार्ड सापडला नाही.</string>
+
+    <!-- Handover, QR & Digital Record -->
+    <string name="handover_title">भंगार हस्तांतरण व पावती</string>
+    <string name="handover_qr_title">रिसायकलरला क्यूआर दाखवा</string>
+    <string name="handover_qr_desc">रिसायकलर त्यांच्या फोनने स्कॅन करून पावती निश्चित करतील.</string>
+    <string name="handover_actual_weight">यार्डमध्ये मोजलेले वजन</string>
+    <string name="handover_weight_diff">वजनातील फरक: %1$s</string>
+    <string name="handover_variance_warning">वजनात २०%% पेक्षा जास्त फरक आहे. पुष्टी करण्यापूर्वी तपासा.</string>
+    <string name="handover_dispute_reason">तक्रारीचे कारण</string>
+    <string name="handover_btn_confirm">नवीन वजन व अटी मान्य करा</string>
+    <string name="handover_pdf_share">पावती पीडीएफ डाउनलोड / शेअर करा</string>
+    <string name="handover_public_seal">डिजिटल सील हॅश: %1$s</string>
+
+    <!-- Payments & Ledger -->
+    <string name="ledger_title">कमाई आणि बाकी हिशोब</string>
+    <string name="ledger_total_earned">एकूण भंगार मूल्य</string>
+    <string name="ledger_acknowledged_paid">मिळालेली रोख रक्कम</string>
+    <string name="ledger_dues_pending">उर्वरित बाकी</string>
+    <string name="payment_record_cash">रोख पावती नोंदवा</string>
+    <string name="payment_upi_ref_optional">यूपीआय संदर्भ क्रमांक (पर्यायी)</string>
+    <string name="payment_counterparty_ack">दुसऱ्या पक्षाने रोख रक्कम मिळाल्याची पुष्टी केली आहे.</string>
+    <string name="payment_reversal_notice">हा व्यवहार रद्द करण्यात आला: %1$s</string>
+    <string name="payment_empty_ledger">अद्याप कोणतेही व्यवहार नाहीत.</string>
+
+    <!-- Synchronization & Offline -->
+    <string name="sync_title">सिंक केंद्र</string>
+    <string name="sync_pending_count">फोनवर %1$d व्यवहार प्रलंबित</string>
+    <string name="sync_all_synced">सर्व नोंदी सर्व्हरवर सुरक्षित आहेत</string>
+    <string name="sync_syncing_progress">सर्व्हरशी सिंक होत आहे (%1$d / %2$d)…</string>
+    <string name="sync_btn_start">आता सिंक करा</string>
+    <string name="sync_err_network">ऑफलाइन. इंटरनेटची प्रतीक्षा आहे.</string>
+    <string name="sync_err_conflict">सर्व्हरवरील अटी बदलल्या. स्थानिक माहिती ताजी केली.</string>
+    <string name="sync_safe_notice">विमान मोडमध्येही सर्व माहिती फोनवर पूर्णपणे सुरक्षित राहते.</string>
+
+    <!-- Safety Warnings -->
+    <string name="safety_title">भंगार हाताळणी सुरक्षा</string>
+    <string name="safety_crt_warning">सावधान: सीआरटी काच फुटण्याचा धोका व विषारी फॉस्फरस. ट्यूब फोडू नका.</string>
+    <string name="safety_battery_warning">धोका: आग आणि ॲसिडने भाजण्याचा धोका. टोके वेगळी ठेवा. दाबू नका.</string>
+    <string name="safety_pcb_warning">सावधान: विषारी जड धातू. उघड्यावर जाळू नका किंवा ॲसिडने धुवू नका.</string>
+    <string name="safety_cable_warning">सूचना: केबल जाळणे कायद्याने गुन्हा आहे. कटरने सोला.</string>
+
+    <!-- Economics & Preferences -->
+    <string name="econ_title">अंदाजे कमाई तुलना</string>
+    <string name="econ_current_net">सध्याची असंघटित कमाई</string>
+    <string name="econ_platform_net">सही तोल अंदाजे कमाई</string>
+    <string name="econ_zero_fee">कबाडी बांधवांसाठी कोणतेही शुल्क नाही (०%)</string>
+    <string name="econ_disclaimer">संशोधनावर आधारित मॉडेल. प्रत्यक्ष कमाई स्थानिक भावावर अवलंबून असते.</string>
+    <string name="pref_numeral_title">अंक प्रदर्शन पसंती</string>
+    <string name="pref_numeral_latin">इंग्रजी अंक (1, 2, 3)</string>
+    <string name="pref_numeral_devanagari">देवनागरी अंक (१, २, ३)</string>
+    <string name="pref_language_title">ॲपची भाषा</string>
+
+    <!-- Accessibility & Screen Reader Labels -->
+    <string name="a11y_tap_to_hear">ऐकण्यासाठी टॅप करा</string>
+    <string name="a11y_weight_readout">वजन: %1$s, प्रकार: %2$s, स्थिती: %3$s</string>
+    <string name="a11y_price_readout">भाव: %1$s प्रति किलो, विश्वासार्हता: %2$s</string>
+    <string name="a11y_qr_code">रिसायकलर स्कॅनसाठी हस्तांतरण क्यूआर कोड</string>
+</resources>

@@ -1,0 +1,11 @@
+material_id,category_code,subcategory_code,label_en,label_hi,label_mr,default_route,route_requires_context,allowed_units,safety_guide_ids,source_id,origin_class,source_kind,is_demo,schema_version
+MAT-PCB-01,PCB,PCB_GRADE_A,Motherboard / Server PCB,मदरबोर्ड पीसीबी,मदरबोर्ड पीसीबी,AUTHORIZED_EWASTE,False,"kg,g","[""SG-EWASTE-01""]",SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+MAT-PCB-02,PCB,PCB_LOW,Low-grade appliance board,लो-ग्रेड सर्किट बोर्ड,कमी-दर्जा सर्किट बोर्ड,AUTHORIZED_EWASTE,False,"kg,g","[""SG-EWASTE-01""]",SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+MAT-BAT-01,BATTERY,BAT_LEAD_ACID,Lead-Acid Inverter/Auto Battery,लेड-एसिड बैटरी,लेड-एसिड बॅटरी,BATTERY_ISOLATION,True,"kg,piece","[""SG-BATTERY-01""]",SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+MAT-BAT-02,BATTERY,BAT_LI_ION,Lithium-Ion Phone/Laptop Battery,लिथियम-आयन बैटरी,लिथियम-आयन बॅटरी,BATTERY_ISOLATION,True,"kg,piece","[""SG-BATTERY-02""]",SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+MAT-BAT-03,BATTERY,BAT_UNKNOWN,Unknown Chemistry Battery,अज्ञात रसायन बैटरी,अज्ञात रसायन बॅटरी,BATTERY_ISOLATION,True,"kg,piece","[""SG-BATTERY-03""]",SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+MAT-CAB-01,CABLES,CAB_COPPER,Insulated Copper Wire,कॉपर केबल / तार,तांबे केबल / वायर,GENERAL_RECYCLING,False,"kg,g","[""SG-GENERAL-01""]",SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+MAT-CRT-01,CRT,CRT_MONITOR,CRT Monitor / Glass Tube,सीआरटी मॉनिटर,सीआरटी मॉनिटर,HAZARDOUS_DISPOSAL,True,"piece,kg","[""SG-HAZARD-01""]",SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+MAT-LCD-01,LCD,LCD_PANEL,LCD / LED Flat Screen Panel,एलसीडी / एलईडी स्क्रीन,एलसीडी / एलईडी स्क्रीन,AUTHORIZED_EWASTE,False,"piece,kg","[""SG-EWASTE-02""]",SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+MAT-PLA-01,PLASTICS,PLA_MIXED_E,Rigid E-Waste Plastics (ABS/HIPS),कठोर प्लास्टिक (ई-कचरा),कठीण प्लास्टिक,GENERAL_RECYCLING,False,kg,"[""SG-GENERAL-02""]",SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+MAT-MOT-01,MOTORS,MOT_COPPER,Electric Motor / Copper Coil,इलेक्ट्रिक मोटर,इलेक्ट्रिक मोटर,GENERAL_RECYCLING,False,"kg,piece","[""SG-GENERAL-01""]",SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0

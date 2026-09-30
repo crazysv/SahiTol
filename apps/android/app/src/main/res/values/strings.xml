@@ -1,0 +1,180 @@
+<resources>
+    <!-- App & Identity -->
+    <string name="app_name">SahiTol</string>
+    <string name="tagline">Fair weight, transparent price, documented handover</string>
+    <string name="demo_mode_label">DEMO MODE — Test Data Only</string>
+    <string name="demo_subtext">Isolated partition. Does not record real commercial transactions.</string>
+
+    <!-- Language Selection -->
+    <string name="lang_select_title">Choose Language</string>
+    <string name="lang_en">English</string>
+    <string name="lang_hi">हिंदी (Hindi)</string>
+    <string name="lang_mr">मराठी (Marathi)</string>
+
+    <!-- Actions & Common Buttons -->
+    <string name="btn_continue">Continue</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_confirm">Confirm</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_retry">Retry</string>
+    <string name="btn_dismiss">Dismiss</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_capture_photo">Capture Photo</string>
+    <string name="btn_save_draft">Save Draft</string>
+    <string name="btn_sync_now">Sync Now</string>
+
+    <!-- Four Immutable Status Invariants -->
+    <string name="status_saved_locally">Saved on phone</string>
+    <string name="status_saved_locally_desc">Stored in local phone memory. Not yet uploaded to server.</string>
+    <string name="status_synced">Synchronized</string>
+    <string name="status_synced_desc">Uploaded and safely stored on server.</string>
+    <string name="status_confirmed">Recycler Confirmed</string>
+    <string name="status_confirmed_desc">Registered recycler inspected weight and confirmed physical handover.</string>
+    <string name="status_paid">Payment Acknowledged</string>
+    <string name="status_paid_desc">Cash or UPI receipt acknowledged by counterparty. Not an automated bank settlement.</string>
+
+    <!-- Statutory Disclaimer -->
+    <string name="non_epr_disclaimer">SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling.</string>
+
+    <!-- Onboarding, Auth & Profile -->
+    <string name="auth_title">Collector Login</string>
+    <string name="auth_phone_label">Mobile Number</string>
+    <string name="auth_phone_hint">Enter 10-digit mobile number</string>
+    <string name="auth_pin_label">4-Digit PIN</string>
+    <string name="auth_pin_hint">Enter secret PIN</string>
+    <string name="auth_login_btn">Log In</string>
+    <string name="auth_demo_btn">Explore Demo Account (Santosh)</string>
+    <string name="auth_zero_pii">Zero-PII Zone: No Aadhaar or bank credentials required.</string>
+    <string name="auth_err_invalid_pin">Incorrect PIN. Please try again.</string>
+    <string name="auth_err_throttled">Too many attempts. Locked for %1$d seconds.</string>
+    <string name="auth_logout_title">Safe Logout</string>
+    <string name="auth_logout_confirm">Log Out</string>
+    <string name="auth_logout_warning">You have %1$d unsynchronized items. They will remain safely stored on this phone and will not be lost.</string>
+
+    <!-- Navigation & Home -->
+    <string name="nav_home">Home</string>
+    <string name="nav_lots">Scrap Lots</string>
+    <string name="nav_prices">Price Board</string>
+    <string name="nav_recyclers">Recyclers</string>
+    <string name="nav_ledger">Ledger &amp; Dues</string>
+    <string name="nav_sync">Sync Centre</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_safety">Safety Guides</string>
+    <string name="home_greeting">Welcome, %1$s</string>
+    <string name="home_quick_add">Create Scrap Lot</string>
+    <string name="home_pending_sync">%1$d records waiting to sync</string>
+    <string name="home_recent_lots">Recent Activity</string>
+    <string name="home_empty_lots">No scrap lots created yet. Tap \'+\' to create your first lot.</string>
+
+    <!-- Lot Creation & Editor -->
+    <string name="lot_editor_title">Scrap Lot Details</string>
+    <string name="lot_material_label">Scrap Material</string>
+    <string name="lot_weight_label">Weight</string>
+    <string name="lot_unit_kg">kg</string>
+    <string name="lot_unit_g">grams</string>
+    <string name="lot_unit_piece">pieces</string>
+    <string name="lot_condition_label">Condition</string>
+    <string name="lot_cond_intact">Intact / Working</string>
+    <string name="lot_cond_damaged">Damaged / Broken</string>
+    <string name="lot_cond_depopulated">Depopulated / Stripped</string>
+    <string name="lot_cond_burnt">Burnt / Charred</string>
+    <string name="lot_cond_leaking">Leaking / Corroded</string>
+    <string name="lot_photo_tap_to_capture">Take Photo of Scrap</string>
+    <string name="lot_photo_retake">Retake Photo</string>
+    <string name="lot_save_draft">Save on Phone</string>
+    <string name="lot_submit_action">Save &amp; Continue</string>
+    <string name="lot_err_no_material">Please select a scrap material.</string>
+    <string name="lot_err_invalid_weight">Please enter a valid weight greater than zero.</string>
+    <string name="lot_warning_heavy_weight">Weight exceeds 500 kg. Marked for data quality review.</string>
+
+    <!-- AI Classifier & Advisory -->
+    <string name="classifier_analyzing">Analyzing scrap image with LiteRT on-device AI…</string>
+    <string name="classifier_high_confidence">AI Suggestion: %1$s (%2$d%% match)</string>
+    <string name="classifier_advisory_note">Advisory only. You decide the true material category.</string>
+    <string name="classifier_confirm_btn">Accept Suggestion</string>
+    <string name="classifier_change_btn">Select Manually</string>
+    <string name="classifier_abstain_warning">AI Not Confident (%1$d%% match). Please choose material manually.</string>
+
+    <!-- Prices & Units -->
+    <string name="price_title">Market Scrap Prices</string>
+    <string name="price_indicative_notice">Indicative prices from public sources. Not binding price promises.</string>
+    <string name="price_per_kg">₹%1$s / kg</string>
+    <string name="price_range_format">₹%1$s – ₹%2$s / kg</string>
+    <string name="price_confidence_high">High Confidence (%1$d quotes)</string>
+    <string name="price_confidence_med">Moderate Confidence</string>
+    <string name="price_confidence_low">Low Data / Region Fallback</string>
+    <string name="price_insufficient_data">Insufficient Price Data</string>
+    <string name="price_add_observation">Report Market Rate</string>
+    <string name="price_obs_submitted">Price report submitted for moderation.</string>
+
+    <!-- Recycler Directory & Matching -->
+    <string name="recycler_dir_title">Authorized Recyclers</string>
+    <string name="recycler_distance">%1$.1f km away</string>
+    <string name="recycler_route_authorized">CPCB / SPCB Authorized</string>
+    <string name="recycler_route_battery">Battery Rules 2022 Registered</string>
+    <string name="recycler_battery_isolation">Hazardous batteries require dedicated isolated processing.</string>
+    <string name="recycler_request_quote">Request Quote</string>
+    <string name="recycler_offer_received">Offer: ₹%1$s / kg</string>
+    <string name="recycler_offer_accept">Accept Offer</string>
+    <string name="recycler_offer_reject">Decline</string>
+    <string name="recycler_no_match">No authorized facility found for this scrap in your area.</string>
+
+    <!-- Handover, QR & Digital Record -->
+    <string name="handover_title">Scrap Handover &amp; Receipt</string>
+    <string name="handover_qr_title">Show QR to Recycler</string>
+    <string name="handover_qr_desc">Recycler scans this code to confirm receipt on their device.</string>
+    <string name="handover_actual_weight">Measured Yard Weight</string>
+    <string name="handover_weight_diff">Weight difference: %1$s</string>
+    <string name="handover_variance_warning">Weight discrepancy &gt; 20%%. Please review before confirming.</string>
+    <string name="handover_dispute_reason">Reason for disagreement / dispute</string>
+    <string name="handover_btn_confirm">Accept Measured Terms</string>
+    <string name="handover_pdf_share">Download / Share Receipt PDF</string>
+    <string name="handover_public_seal">Cryptographic Hash: %1$s</string>
+
+    <!-- Payments & Ledger -->
+    <string name="ledger_title">Earnings &amp; Dues Ledger</string>
+    <string name="ledger_total_earned">Total Value</string>
+    <string name="ledger_acknowledged_paid">Cash Received</string>
+    <string name="ledger_dues_pending">Remaining Dues</string>
+    <string name="payment_record_cash">Record Cash Payment</string>
+    <string name="payment_upi_ref_optional">UPI Reference (Optional)</string>
+    <string name="payment_counterparty_ack">Counterparty has acknowledged cash receipt.</string>
+    <string name="payment_reversal_notice">This payment was reversed: %1$s</string>
+    <string name="payment_empty_ledger">No transactions yet.</string>
+
+    <!-- Synchronization & Offline -->
+    <string name="sync_title">Sync Centre</string>
+    <string name="sync_pending_count">%1$d operations queued on phone</string>
+    <string name="sync_all_synced">All records synchronized with server</string>
+    <string name="sync_syncing_progress">Synchronizing batch %1$d of %2$d…</string>
+    <string name="sync_btn_start">Sync Now</string>
+    <string name="sync_err_network">Offline. Waiting for internet connection.</string>
+    <string name="sync_err_conflict">Terms updated on server. Local draft refreshed.</string>
+    <string name="sync_safe_notice">All data stays safely stored on this phone in airplane mode.</string>
+
+    <!-- Safety Warnings -->
+    <string name="safety_title">Scrap Safety Instructions</string>
+    <string name="safety_crt_warning">CAUTION: CRT Glass Implosion &amp; Toxic Phosphors. Do not break tube.</string>
+    <string name="safety_battery_warning">DANGER: Fire &amp; Acid Burn Hazard. Keep terminals insulated. Do not crush.</string>
+    <string name="safety_pcb_warning">NOTICE: Toxic heavy metals. Do not burn or acid-wash in open air.</string>
+    <string name="safety_cable_warning">NOTICE: Copper cable burning is illegal under environmental rules.</string>
+
+    <!-- Economics & Preferences -->
+    <string name="econ_title">Illustrative Earnings Comparison</string>
+    <string name="econ_current_net">Current Informal Net</string>
+    <string name="econ_platform_net">SahiTol Platform Net</string>
+    <string name="econ_zero_fee">Zero Platform Fee for Collectors</string>
+    <string name="econ_disclaimer">Illustrative model based on desk research. Actual income varies with local yard rates.</string>
+    <string name="pref_numeral_title">Numeral Display Preference</string>
+    <string name="pref_numeral_latin">English Digits (1, 2, 3)</string>
+    <string name="pref_numeral_devanagari">Devanagari Numerals (१, २, ३)</string>
+    <string name="pref_language_title">App Language</string>
+
+    <!-- Accessibility & Screen Reader Labels -->
+    <string name="a11y_tap_to_hear">Tap to listen to audio guidance</string>
+    <string name="a11y_weight_readout">Weight: %1$s, Material: %2$s, Status: %3$s</string>
+    <string name="a11y_price_readout">Price: %1$s per kilogram, Confidence: %2$s</string>
+    <string name="a11y_qr_code">Handover verification QR code for recycler scan</string>
+</resources>

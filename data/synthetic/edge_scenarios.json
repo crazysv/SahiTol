@@ -1,0 +1,198 @@
+[
+  {
+    "scenario_id": "EDGE-01-HAPPY-PATH",
+    "category": "WORKFLOW",
+    "title": "Ordinary Successful Trade",
+    "description": "Collector classifies lot, receives quote, accepts, completes QR handover, and acknowledges cash payment.",
+    "expected_error_or_behavior": "All states progress normally; transaction status SETTLED_CASH with zero outstanding balance.",
+    "fixture_data": {
+      "lot_id": "LOT-HAPPY-01",
+      "status": "COMPLETED",
+      "paid_paise": 340000,
+      "agreed_paise": 340000
+    }
+  },
+  {
+    "scenario_id": "EDGE-02-NO-PRICE-COHORT",
+    "category": "PRICING",
+    "title": "Zero or Insufficient Price Cohort",
+    "description": "Rare or unobserved material grade with < 3 recent observations in region.",
+    "expected_error_or_behavior": "Median rate and bounds evaluate to null (never zero placeholder); UI displays INSUFFICIENT_DATA badge.",
+    "fixture_data": {
+      "material_id": "MAT-RARE-01",
+      "observations_count": 0,
+      "expected_rate": null,
+      "reason_code": "INSUFFICIENT_DATA"
+    }
+  },
+  {
+    "scenario_id": "EDGE-03-STALE-EXPIRED-ROUTE",
+    "category": "REGULATION",
+    "title": "Recycler Authorization Expired",
+    "description": "Facility's regulatory authorization expired on 2026-08-31; current date is 2026-09-28.",
+    "expected_error_or_behavior": "Facility is flagged EXPIRED_AUTHORIZATION; filtered out of active matching suggestions.",
+    "fixture_data": {
+      "facility_id": "FAC-EXPIRED-01",
+      "valid_until": "2026-08-31",
+      "current_date": "2026-09-28",
+      "eligible": false
+    }
+  },
+  {
+    "scenario_id": "EDGE-04-UNKNOWN-BATTERY-CHEMISTRY",
+    "category": "SAFETY",
+    "title": "Battery with Unknown Chemistry",
+    "description": "Lot submitted with battery material but unknown chemistry tag (lead-acid vs li-ion ambiguous).",
+    "expected_error_or_behavior": "System routes strictly to BATTERY_ISOLATION route and emits mandatory fire-safety warning guide.",
+    "fixture_data": {
+      "material_id": "MAT-BAT-03",
+      "route": "BATTERY_ISOLATION",
+      "safety_guide": "SG-BATTERY-03"
+    }
+  },
+  {
+    "scenario_id": "EDGE-05-LOW-CONFIDENCE-IMAGE",
+    "category": "ML",
+    "title": "Classifier Low Confidence Abstention",
+    "description": "LiteRT model predicts PCB with top confidence 0.42, below the 0.70 acceptance threshold.",
+    "expected_error_or_behavior": "Model abstains (abstained=true); prompts collector with top-3 manual material selector.",
+    "fixture_data": {
+      "model_confidence": 0.42,
+      "threshold": 0.7,
+      "abstained": true,
+      "top_candidates": [
+        "MAT-PCB-01",
+        "MAT-PCB-02",
+        "OTHER"
+      ]
+    }
+  },
+  {
+    "scenario_id": "EDGE-06-REJECTED-OFFER",
+    "category": "NEGOTIATION",
+    "title": "Collector Rejects Recycler Quote",
+    "description": "Recycler quotes rate below collector expectation; collector explicitly rejects.",
+    "expected_error_or_behavior": "Offer status becomes REJECTED; lot returns to AVAILABLE pool without transaction creation.",
+    "fixture_data": {
+      "offer_id": "OFF-REJ-01",
+      "status": "REJECTED",
+      "rejection_reason": "PRICE_TOO_LOW"
+    }
+  },
+  {
+    "scenario_id": "EDGE-07-EXPIRED-OFFER",
+    "category": "NEGOTIATION",
+    "title": "Recycler Quote Expires",
+    "description": "Offer valid for 4 hours expires before collector acts.",
+    "expected_error_or_behavior": "Server rejects acceptance with 410 Gone / OFFER_EXPIRED; lot unreserved.",
+    "fixture_data": {
+      "offer_id": "OFF-EXP-01",
+      "expires_at": "2026-09-28T08:00:00Z",
+      "attempted_at": "2026-09-28T12:00:00Z",
+      "status": "EXPIRED"
+    }
+  },
+  {
+    "scenario_id": "EDGE-08-CHANGED-WEIGHT",
+    "category": "HANDOVER",
+    "title": "Scale Discrepancy at Recycler Facility",
+    "description": "Collector estimated 15,000g; facility certified scale reads 12,000g.",
+    "expected_error_or_behavior": "Emits TERMS_REVISION; both parties must sign updated terms hash before handover confirms.",
+    "fixture_data": {
+      "estimated_g": 15000,
+      "measured_g": 12000,
+      "delta_pct": -20.0,
+      "requires_terms_revision": true
+    }
+  },
+  {
+    "scenario_id": "EDGE-09-PARTIAL-PAYMENT",
+    "category": "PAYMENT",
+    "title": "Partial Cash Settlement",
+    "description": "Agreed total is Rs 1,000 (100,000 paise); recycler pays Rs 600 in cash now.",
+    "expected_error_or_behavior": "Transaction status PARTIALLY_PAID; outstanding_paise remains 40,000; ledger records balance.",
+    "fixture_data": {
+      "agreed_paise": 100000,
+      "paid_paise": 60000,
+      "outstanding_paise": 40000,
+      "payment_status": "PARTIAL"
+    }
+  },
+  {
+    "scenario_id": "EDGE-10-DISPUTED-PAYMENT",
+    "category": "PAYMENT",
+    "title": "Disputed Cash Payment Assertion",
+    "description": "Recycler asserts cash was handed over; collector denies receipt.",
+    "expected_error_or_behavior": "Payment state remains UNACKNOWLEDGED; triggers DISPUTE quality flag; does not settle.",
+    "fixture_data": {
+      "asserted_by": "FACILITY",
+      "acknowledged_by": null,
+      "state": "DISPUTED",
+      "flag": "PAYMENT_UNACKNOWLEDGED"
+    }
+  },
+  {
+    "scenario_id": "EDGE-11-DUPLICATE-OPERATION",
+    "category": "SYNC",
+    "title": "Replayed Outbox Operation ID",
+    "description": "Client network glitch causes identical operation UUID to be submitted twice.",
+    "expected_error_or_behavior": "Server responds idempotently with original commit result; no duplicate entity or event created.",
+    "fixture_data": {
+      "operation_id": "OP-DUP-001",
+      "attempt_count": 2,
+      "idempotent_replay": true,
+      "http_status": 200
+    }
+  },
+  {
+    "scenario_id": "EDGE-12-CONFLICTING-EDIT",
+    "category": "SYNC",
+    "title": "Optimistic Concurrency Version Conflict",
+    "description": "Client pushes update based on server version 1, but server is already at version 2.",
+    "expected_error_or_behavior": "Server rejects mutation with HTTP 409 Conflict; client preserves local draft and prompts merge.",
+    "fixture_data": {
+      "expected_version": 1,
+      "server_version": 2,
+      "error_code": "VERSION_CONFLICT",
+      "http_status": 409
+    }
+  },
+  {
+    "scenario_id": "EDGE-13-MISSING-IMAGE",
+    "category": "MEDIA",
+    "title": "Lot Created Without Photo",
+    "description": "Offline collector submits draft lot without capturing photo.",
+    "expected_error_or_behavior": "Draft saved locally; submit blocked until photo captured or explicit manual reason provided.",
+    "fixture_data": {
+      "lot_id": "LOT-NOIMG-01",
+      "has_photo": false,
+      "status": "DRAFT",
+      "can_submit": false
+    }
+  },
+  {
+    "scenario_id": "EDGE-14-DENIED-GPS",
+    "category": "LOCATION",
+    "title": "Location Captured Without GPS Permission",
+    "description": "Collector denies Android GPS location runtime permission.",
+    "expected_error_or_behavior": "Location record fallback to LocationQuality.COARSE_DISTRICT; never claims precise distance.",
+    "fixture_data": {
+      "gps_enabled": false,
+      "location_quality": "COARSE_DISTRICT",
+      "point": null,
+      "accuracy_m": null
+    }
+  },
+  {
+    "scenario_id": "EDGE-15-CLOCK-SKEW",
+    "category": "INTEGRITY",
+    "title": "Severe Client Clock Skew (> 2 Hours)",
+    "description": "Client device clock is set 4 hours in the future due to incorrect manual time settings.",
+    "expected_error_or_behavior": "Server records occurred_at_client as evidence, but orders transaction by received_at_server.",
+    "fixture_data": {
+      "client_clock_skew_sec": 14400,
+      "server_override_ordering": true,
+      "flag": "SEVERE_CLOCK_SKEW"
+    }
+  }
+]

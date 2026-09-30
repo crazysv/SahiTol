@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {  "darkMode": "class",  "theme": {    "extend": {      "colors": {        "primary-fixed-dim": "#ffb59c",        "on-error": "#ffffff",        "on-secondary-fixed-variant": "#574500",        "error": "#ba1a1a",        "inverse-surface": "#31312d",        "primary-fixed": "#ffdbcf",        "surface-container": "#f0eee8",        "background": "#fcf9f3",        "on-surface": "#1c1c18",        "on-secondary-fixed": "#241a00",        "on-tertiary-fixed-variant": "#4b4544",        "tertiary-container": "#7a7371",        "on-tertiary-container": "#fffbff",        "surface-container-low": "#f6f3ed",        "on-secondary-container": "#745c00",        "tertiary-fixed": "#eae0de",        "surface-bright": "#fcf9f3",        "on-primary": "#ffffff",        "secondary-fixed-dim": "#e9c349",        "on-tertiary": "#ffffff",        "outline-variant": "#dec0b7",        "on-tertiary-fixed": "#1f1b1a",        "on-surface-variant": "#57423b",        "primary": "#9f3c16",        "surface-dim": "#dcdad4",        "error-container": "#ffdad6",        "surface-variant": "#e5e2dc",        "primary-container": "#bf542c",        "on-secondary": "#ffffff",        "on-background": "#1c1c18",        "on-error-container": "#93000a",        "surface": "#fcf9f3",        "secondary-container": "#fed65b",        "secondary": "#735c00",        "on-primary-container": "#fffbff",        "on-primary-fixed-variant": "#822801",        "outline": "#8a726a",        "surface-tint": "#a23e18",        "surface-container-highest": "#e5e2dc",        "tertiary": "#615a59",        "surface-container-high": "#ebe8e2",        "secondary-fixed": "#ffe088",        "inverse-primary": "#ffb59c",        "tertiary-fixed-dim": "#cec4c3",        "surface-container-lowest": "#ffffff",        "inverse-on-surface": "#f3f0ea",        "on-primary-fixed": "#390c00"      },      "borderRadius": {        "DEFAULT": "0.125rem",        "lg": "0.25rem",        "xl": "0.5rem",        "full": "0.75rem"      },      "spacing": {        "space-sm": "8px",        "gutter": "16px",        "space-md": "16px",        "space-xs": "4px",        "margin": "16px",        "space-lg": "24px",        "space-xl": "32px"      },      "fontFamily": {        "headline-xl-mobile": ["Sora"],        "body-lg": ["Plus Jakarta Sans"],        "label-md": ["Plus Jakarta Sans"],        "label-lg": ["Plus Jakarta Sans"],        "body-sm": ["Plus Jakarta Sans"],        "headline-lg-mobile": ["Sora"],        "label-sm": ["Plus Jakarta Sans"],        "headline-lg": ["Sora"],        "headline-md": ["Sora"],        "headline-xl": ["Sora"],        "body-md": ["Plus Jakarta Sans"]      },      "fontSize": {        "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],        "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],        "label-lg": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],        "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],        "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],        "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],        "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]      }    }  }};</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-lg"><span class="text-headline-md font-headline-md text-primary">SahiTol</span><nav class="hidden lg:flex items-center gap-space-sm" data-active-classes="bg-primary text-on-primary font-bold rounded-xl"><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="overview" href="#">Overview</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="collectors" href="#">Collectors</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="facilities" href="#">Facilities</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="catalog-prices" href="#">Catalog & Prices</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="traceability" href="#">Traceability</a><a aria-current="page" class="px-3 py-2 transition-colors bg-primary text-on-primary font-bold rounded-xl" data-path="quality-review" href="#">Quality Review</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="research-evidence" href="#">Research & Evidence</a></nav></div><div class="flex items-center gap-space-md"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Stats Banner -->
+<div class="bg-surface-container-low px-gutter py-space-lg">
+<div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center gap-space-lg">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-label-sm font-label-sm rounded uppercase tracking-wider">Audit Console</span>
+<span class="text-on-surface-variant text-body-sm">• Live Pipeline Health</span>
+</div>
+<h1 class="text-headline-xl font-headline-xl text-on-surface">Data Quality Workbench</h1>
+<p class="text-on-surface-variant text-body-md mt-1">Review, triage, and resolve flagged anomalies across material batches and facility logs.</p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md w-full lg:w-auto">
+<div class="bg-surface p-space-md rounded-xl shadow-sm">
+<span class="text-on-surface-variant text-label-sm">Total Flags</span>
+<div class="text-headline-lg font-headline-lg text-on-surface mt-1">1,428</div>
+<span class="text-error text-label-sm flex items-center gap-1 mt-1"><span class="material-symbols-outlined text-[14px]">arrow_upward</span> +12% this week</span>
+</div>
+<div class="bg-surface p-space-md rounded-xl shadow-sm">
+<span class="text-on-surface-variant text-label-sm">Critical Severity</span>
+<div class="text-headline-lg font-headline-lg text-primary mt-1">84</div>
+<span class="text-on-surface-variant text-label-sm mt-1 block">Immediate action</span>
+</div>
+<div class="bg-surface p-space-md rounded-xl shadow-sm">
+<span class="text-on-surface-variant text-label-sm">Auto-Resolved</span>
+<div class="text-headline-lg font-headline-lg text-on-surface mt-1">64%</div>
+<span class="text-secondary text-label-sm flex items-center gap-1 mt-1"><span class="material-symbols-outlined text-[14px]">check</span> Pipeline stable</span>
+</div>
+<div class="bg-surface p-space-md rounded-xl shadow-sm">
+<span class="text-on-surface-variant text-label-sm">Audit Score</span>
+<div class="text-headline-lg font-headline-lg text-on-surface mt-1">94.2</div>
+<span class="text-secondary text-label-sm flex items-center gap-1 mt-1"><span class="material-symbols-outlined text-[14px]">verified</span> Grade A</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Layout -->
+<div class="max-w-7xl mx-auto px-gutter py-space-xl w-full">
+<!-- Category Tabs / Filter Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-md mb-space-lg">
+<div class="flex flex-wrap items-center gap-2" id="filter-tabs">
+<button class="tab-btn px-4 py-2 rounded-xl text-label-md font-label-md bg-primary text-on-primary transition-all shadow-sm" onclick="filterCategory('all')">All Issues (1,428)</button>
+<button class="tab-btn px-4 py-2 rounded-xl text-label-md font-label-md bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all" onclick="filterCategory('missing')">Missing (312)</button>
+<button class="tab-btn px-4 py-2 rounded-xl text-label-md font-label-md bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all" onclick="filterCategory('invalid')">Invalid (445)</button>
+<button class="tab-btn px-4 py-2 rounded-xl text-label-md font-label-md bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all" onclick="filterCategory('stale')">Stale (180)</button>
+<button class="tab-btn px-4 py-2 rounded-xl text-label-md font-label-md bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all" onclick="filterCategory('duplicate')">Duplicate (91)</button>
+<button class="tab-btn px-4 py-2 rounded-xl text-label-md font-label-md bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-all" onclick="filterCategory('inconsistent')">Inconsistent (400)</button>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[18px]">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low rounded-xl text-body-sm text-on-surface outline-none focus:ring-2 focus:ring-primary w-64" id="search-input" onkeyup="filterIssues()" placeholder="Search batch ID, facility..." type="text"/>
+</div>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface text-label-md rounded-xl hover:bg-surface-container-highest transition-colors flex items-center gap-2" onclick="alert('Exporting audit log CSV...')">
+<span class="material-symbols-outlined text-[18px]">download</span> Export
+        </button>
+</div>
+</div>
+<!-- Grid Layout: Workbench items on left, Variance & History on right -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<!-- Issues List (2 columns on desktop) -->
+<div class="lg:col-span-2 flex flex-col gap-space-md" id="issues-container">
+<!-- Issue Card 1 -->
+<div class="issue-card bg-surface-container-low p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-category="missing" data-search="batch-8921 dharavi facility">
+<div class="absolute top-0 left-0 w-2 h-full bg-error"></div>
+<div class="flex items-start justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 bg-error-container text-on-error-container text-label-sm rounded font-label-sm">Critical</span>
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface text-label-sm rounded font-label-sm">Missing Field</span>
+<span class="text-on-surface-variant text-body-sm">• Batch #8921</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Null Moisture Content Parameter</h3>
+<p class="text-on-surface-variant text-body-sm mt-1">Dharavi Sorting Yard logged 4.2 tons of corrugated cardboard without mandatory moisture percentage. Yield calculations affected.</p>
+</div>
+<div class="text-right shrink-0">
+<span class="text-on-surface-variant text-label-sm block">Logged</span>
+<span class="text-on-surface text-body-sm font-semibold">12m ago</span>
+</div>
+</div>
+<div class="mt-4 pt-4 flex items-center justify-between border-t border-surface-container-high">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface">AI</div>
+<span class="text-body-sm text-on-surface-variant">Suggested fix: Impute regional median (12.4%)</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-primary text-on-primary text-label-sm rounded-xl hover:bg-primary-container transition-colors" onclick="resolveCard(this)">Apply Fix</button>
+<button class="px-3 py-1.5 bg-surface-container-high text-on-surface text-label-sm rounded-xl hover:bg-surface-container-highest transition-colors" onclick="dismissCard(this)">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Issue Card 2 -->
+<div class="issue-card bg-surface-container-low p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-category="invalid" data-search="batch-7832 okhla facility">
+<div class="absolute top-0 left-0 w-2 h-full bg-secondary"></div>
+<div class="flex items-start justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-label-sm rounded font-label-sm">Warning</span>
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface text-label-sm rounded font-label-sm">Invalid Range</span>
+<span class="text-on-surface-variant text-body-sm">• Batch #7832</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Out-of-Bounds Tare Weight</h3>
+<p class="text-on-surface-variant text-body-sm mt-1">Okhla Transfer Station: Recorded vehicle tare weight (14,200 kg) exceeds maximum gross capacity for truck class LCV-4.</p>
+</div>
+<div class="text-right shrink-0">
+<span class="text-on-surface-variant text-label-sm block">Logged</span>
+<span class="text-on-surface text-body-sm font-semibold">45m ago</span>
+</div>
+</div>
+<div class="mt-4 pt-4 flex items-center justify-between border-t border-surface-container-high">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface">AI</div>
+<span class="text-body-sm text-on-surface-variant">Suggested fix: Flag for weighbridge recalibration</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-primary text-on-primary text-label-sm rounded-xl hover:bg-primary-container transition-colors" onclick="resolveCard(this)">Recalibrate</button>
+<button class="px-3 py-1.5 bg-surface-container-high text-on-surface text-label-sm rounded-xl hover:bg-surface-container-highest transition-colors" onclick="dismissCard(this)">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Issue Card 3 -->
+<div class="issue-card bg-surface-container-low p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-category="stale" data-search="batch-6510 peenya hub">
+<div class="absolute top-0 left-0 w-2 h-full bg-tertiary"></div>
+<div class="flex items-start justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-label-sm rounded font-label-sm">Moderate</span>
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface text-label-sm rounded font-label-sm">Stale Data</span>
+<span class="text-on-surface-variant text-body-sm">• Batch #6510</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Unsynced Handheld Terminal Feed</h3>
+<p class="text-on-surface-variant text-body-sm mt-1">Peenya Hub terminal #4 has not synced ingress logs for over 72 hours. Potential offline discrepancy.</p>
+</div>
+<div class="text-right shrink-0">
+<span class="text-on-surface-variant text-label-sm block">Logged</span>
+<span class="text-on-surface text-body-sm font-semibold">3h ago</span>
+</div>
+</div>
+<div class="mt-4 pt-4 flex items-center justify-between border-t border-surface-container-high">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface">AI</div>
+<span class="text-body-sm text-on-surface-variant">Suggested fix: Force remote sync ping</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-primary text-on-primary text-label-sm rounded-xl hover:bg-primary-container transition-colors" onclick="resolveCard(this)">Force Sync</button>
+<button class="px-3 py-1.5 bg-surface-container-high text-on-surface text-label-sm rounded-xl hover:bg-surface-container-highest transition-colors" onclick="dismissCard(this)">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Issue Card 4 -->
+<div class="issue-card bg-surface-container-low p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-category="duplicate" data-search="batch-5490 vadodara yard">
+<div class="absolute top-0 left-0 w-2 h-full bg-secondary"></div>
+<div class="flex items-start justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-label-sm rounded font-label-sm">Warning</span>
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface text-label-sm rounded font-label-sm">Duplicate Entry</span>
+<span class="text-on-surface-variant text-body-sm">• Batch #5490</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Double Scan RFID Signature</h3>
+<p class="text-on-surface-variant text-body-sm mt-1">Vadodara Yard: Identical RFID token scanned twice within a 60-second window by different operators.</p>
+</div>
+<div class="text-right shrink-0">
+<span class="text-on-surface-variant text-label-sm block">Logged</span>
+<span class="text-on-surface text-body-sm font-semibold">5h ago</span>
+</div>
+</div>
+<div class="mt-4 pt-4 flex items-center justify-between border-t border-surface-container-high">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface">AI</div>
+<span class="text-body-sm text-on-surface-variant">Suggested fix: Merge records & archive duplicate #5491</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-primary text-on-primary text-label-sm rounded-xl hover:bg-primary-container transition-colors" onclick="resolveCard(this)">Merge Records</button>
+<button class="px-3 py-1.5 bg-surface-container-high text-on-surface text-label-sm rounded-xl hover:bg-surface-container-highest transition-colors" onclick="dismissCard(this)">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Issue Card 5 -->
+<div class="issue-card bg-surface-container-low p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-category="inconsistent" data-search="batch-4102 ahmedabad plant">
+<div class="absolute top-0 left-0 w-2 h-full bg-error"></div>
+<div class="flex items-start justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 bg-error-container text-on-error-container text-label-sm rounded font-label-sm">Critical</span>
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface text-label-sm rounded font-label-sm">Inconsistent Unit</span>
+<span class="text-on-surface-variant text-body-sm">• Batch #4102</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Unit Mismatch (Metric Tons vs Kilograms)</h3>
+<p class="text-on-surface-variant text-body-sm mt-1">Ahmedabad Recycling Plant: Inflow weight recorded as 5,500 instead of 5.5, creating a 1000x valuation discrepancy.</p>
+</div>
+<div class="text-right shrink-0">
+<span class="text-on-surface-variant text-label-sm block">Logged</span>
+<span class="text-on-surface text-body-sm font-semibold">8h ago</span>
+</div>
+</div>
+<div class="mt-4 pt-4 flex items-center justify-between border-t border-surface-container-high">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface">AI</div>
+<span class="text-body-sm text-on-surface-variant">Suggested fix: Convert value to standard Metric Tons</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-primary text-on-primary text-label-sm rounded-xl hover:bg-primary-container transition-colors" onclick="resolveCard(this)">Normalize Unit</button>
+<button class="px-3 py-1.5 bg-surface-container-high text-on-surface text-label-sm rounded-xl hover:bg-surface-container-highest transition-colors" onclick="dismissCard(this)">Dismiss</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Variance Breakdown & Auditable Resolution History -->
+<div class="flex flex-col gap-space-lg">
+<!-- Variance Breakdown Card -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-4">Variance Breakdown</h3>
+<p class="text-on-surface-variant text-body-sm mb-6">Distribution of recorded weight vs physical audit discrepancy across active yards.</p>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-label-md mb-1">
+<span class="text-on-surface">Dharavi Hub</span>
+<span class="text-primary font-bold">+4.8% Variance</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 65%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-md mb-1">
+<span class="text-on-surface">Okhla Transfer Station</span>
+<span class="text-secondary font-bold">-2.1% Variance</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 35%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-md mb-1">
+<span class="text-on-surface">Peenya Facility</span>
+<span class="text-on-surface font-bold">+0.4% Variance</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 15%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-md mb-1">
+<span class="text-on-surface">Ahmedabad Plant</span>
+<span class="text-error font-bold">+12.5% Variance</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 90%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container-high flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant">Average System Variance</span>
+<span class="text-label-lg font-label-lg text-on-surface">3.45%</span>
+</div>
+</div>
+<!-- Auditable Resolution History -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-headline-md font-headline-md text-on-surface">Resolution History</h3>
+<span class="text-label-sm text-on-surface-variant">Audited Trail</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-3 pb-3 border-b border-surface-container-high">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 font-bold text-label-sm">AK</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-label-md text-on-surface">Amit Kumar</span>
+<span class="text-on-surface-variant text-label-sm">• 18m ago</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-0.5">Applied median moisture imputation for Batch #8910. Verified against lab sample.</p>
+</div>
+</div>
+<div class="flex items-start gap-3 pb-3 border-b border-surface-container-high">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center shrink-0 font-bold text-label-sm">SP</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-label-md text-on-surface">Sunita Patel</span>
+<span class="text-on-surface-variant text-label-sm">• 1h ago</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-0.5">Recalibrated weighbridge sensor at Okhla Yard. Cleared 14 flagged discrepancies.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center shrink-0 font-bold text-label-sm">SYS</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-label-md text-on-surface">Automated Agent</span>
+<span class="text-on-surface-variant text-label-sm">• 3h ago</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-0.5">Merged 12 duplicate RFID scans across western distribution zones.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive JavaScript -->
+<script>
+    function filterCategory(category) {
+      // Update button styles
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-on-primary');
+        btn.classList.add('bg-surface-container-high', 'text-on-surface');
+      });
+      event.currentTarget.classList.remove('bg-surface-container-high', 'text-on-surface');
+      event.currentTarget.classList.add('bg-primary', 'text-on-primary');
+
+      // Filter cards
+      const cards = document.querySelectorAll('.issue-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterIssues() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      const cards = document.querySelectorAll('.issue-card');
+      cards.forEach(card => {
+        const text = card.getAttribute('data-search') + ' ' + card.innerText.toLowerCase();
+        if (text.includes(query)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function resolveCard(button) {
+      const card = button.closest('.issue-card');
+      card.style.transition = 'all 0.3s ease';
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(-10px)';
+      setTimeout(() => {
+        card.remove();
+      }, 300);
+    }
+
+    function dismissCard(button) {
+      const card = button.closest('.issue-card');
+      card.style.transition = 'all 0.3s ease';
+      card.style.opacity = '0';
+      card.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        card.remove();
+      }, 300);
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low py-space-xl"><div class="max-w-7xl mx-auto px-gutter text-center text-on-surface-variant text-body-sm">SahiTol Industrial Admin Console • Grounded Operations Platform</div></footer></body></html>

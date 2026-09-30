@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {"colors": {"inverse-primary": "#ffb59c", "secondary-fixed-dim": "#e9c349", "on-background": "#1c1c18", "surface-container-high": "#ebe8e2", "tertiary-fixed": "#eae0de", "surface-container": "#f0eee8", "tertiary-container": "#7a7371", "outline": "#8a726a", "primary-container": "#bf542c", "outline-variant": "#dec0b7", "primary-fixed": "#ffdbcf", "on-primary": "#ffffff", "on-secondary-fixed": "#241a00", "on-tertiary-container": "#fffbff", "on-surface": "#1c1c18", "surface-bright": "#fcf9f3", "on-error-container": "#93000a", "tertiary": "#615a59", "on-secondary": "#ffffff", "surface-container-low": "#f6f3ed", "inverse-surface": "#31312d", "tertiary-fixed-dim": "#cec4c3", "on-tertiary-fixed-variant": "#4b4544", "error": "#ba1a1a", "on-primary-container": "#fffbff", "on-secondary-fixed-variant": "#574500", "surface-dim": "#dcdad4", "secondary-container": "#fed65b", "surface-tint": "#a23e18", "surface-container-lowest": "#ffffff", "background": "#fcf9f3", "on-error": "#ffffff", "inverse-on-surface": "#f3f0ea", "on-surface-variant": "#57423b", "on-tertiary-fixed": "#1f1b1a", "on-tertiary": "#ffffff", "on-primary-fixed": "#390c00", "secondary-fixed": "#ffe088", "primary": "#9f3c16", "surface": "#fcf9f3", "error-container": "#ffdad6", "on-primary-fixed-variant": "#822801", "secondary": "#735c00", "surface-variant": "#e5e2dc", "surface-container-highest": "#e5e2dc", "on-secondary-container": "#745c00", "primary-fixed-dim": "#ffb59c"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"space-xs": "4px", "space-md": "16px", "margin": "16px", "gutter": "16px", "space-xl": "32px", "space-sm": "8px", "space-lg": "24px"}, "fontFamily": {"headline-xl": ["Sora"], "label-lg": ["Plus Jakarta Sans"], "headline-lg": ["Sora"], "body-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-md": ["Sora"], "label-md": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Sora"], "body-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Sora"]}, "fontSize": {"headline-xl": ["36px", {"lineHeight": "44px", "fontWeight": "700"}], "label-lg": ["16px", {"lineHeight": "22px", "fontWeight": "700"}], "headline-lg": ["28px", {"lineHeight": "34px", "fontWeight": "600"}], "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}], "headline-md": ["20px", {"lineHeight": "26px", "fontWeight": "600"}], "label-md": ["14px", {"lineHeight": "18px", "fontWeight": "600"}], "headline-xl-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}], "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}], "headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}]}}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-space-xl flex items-center justify-between"><div class="flex items-center gap-space-md"><span class="text-headline-md text-primary font-headline-md tracking-tight uppercase">SahiTol</span><span class="text-body-sm text-on-surface-variant font-body-sm px-space-sm py-space-xs bg-surface-container rounded-lg">U01 Unit Economics</span></div><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="bg-primary text-on-primary font-bold rounded-lg"><a aria-current="page" class="transition-colors px-space-md py-space-xs bg-primary text-on-primary font-bold rounded-lg" data-path="same-lot-comparison" href="#">Same-Lot Comparison</a><a class="text-body-md text-on-surface-variant hover:text-on-surface transition-colors px-space-md py-space-xs" data-path="unit-economics" href="#">Unit Economics</a><a class="text-body-md text-on-surface-variant hover:text-on-surface transition-colors px-space-md py-space-xs" data-path="yard-ledger" href="#">Yard Ledger</a></nav><div class="flex items-center gap-space-md"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full max-w-7xl mx-auto px-space-xl py-space-xl gap-space-xl">
+<!-- Top Intro & Status Bar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-sm py-space-xs bg-secondary-fixed text-on-secondary-fixed font-label-sm rounded-lg uppercase tracking-wider">Same-Lot Comparison Workspace</span>
+<span class="text-body-sm text-on-surface-variant font-body-sm">Fixture ID: LOT-2024-9082</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Same Material. Different Operating Assumptions.</h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl">Comparing baseline traditional scrap yard processing against optimized SahiTol platform workflow for a standardized 10 kg mixed copper cable lot.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md rounded-lg transition-colors flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span> Reset Scenario
+      </button>
+<button class="px-space-md py-space-sm bg-primary text-on-primary font-label-md rounded-lg transition-colors flex items-center gap-space-xs shadow-sm">
+<span class="material-symbols-outlined text-[18px]">share</span> Export Breakdown
+      </button>
+</div>
+</div>
+<!-- Primary Comparison Grid (Bento Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left Column: Baseline vs Platform Side-by-Side Cards (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- Fixture Overview Banner -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center font-headline-md">
+<span class="material-symbols-outlined text-[24px]">bolt</span>
+</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Stripped Copper Cable (Grade A)</h3>
+<p class="text-body-sm text-on-surface-variant">Batch Weight: <strong class="text-on-surface">10.0 kg</strong> | Market Benchmark: Mumbai Terminal</p>
+</div>
+</div>
+<div class="px-space-md py-space-xs bg-surface rounded-lg text-right">
+<span class="text-label-sm text-on-surface-variant block">Net Variance</span>
+<span class="text-headline-md text-primary font-headline-md">+₹340.50 <span class="text-body-sm font-normal text-on-surface-variant">(+18.4%)</span></span>
+</div>
+</div>
+<!-- Comparison Matrix Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Baseline Card -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col justify-between gap-space-md relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-surface-container px-space-md py-space-xs rounded-bl-xl text-label-sm text-on-surface-variant font-bold">
+            Baseline (Manual)
+          </div>
+<div class="flex flex-col gap-space-sm mt-2">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Current Yard Practice</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="text-headline-xl font-headline-xl text-on-surface">₹1,850</span>
+<span class="text-body-sm text-on-surface-variant">Net Realization</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs pt-space-md border-t border-surface-container-high">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Acquisition Cost</span>
+<span class="font-bold text-on-surface">₹1,200.00</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Transport & Handling</span>
+<span class="font-bold text-on-surface">₹150.00</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Rejection / Loss (4%)</span>
+<span class="font-bold text-error">₹80.00</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Payment Cycle Impact</span>
+<span class="font-bold text-on-surface">7 Days (₹45 Cost)</span>
+</div>
+</div>
+</div>
+<!-- Platform Scenario Card -->
+<div class="bg-primary-container text-on-primary-container rounded-xl p-space-lg flex flex-col justify-between gap-space-md relative overflow-hidden shadow-md">
+<div class="absolute top-0 right-0 bg-primary text-on-primary px-space-md py-space-xs rounded-bl-xl text-label-sm font-bold">
+            SahiTol Optimized
+          </div>
+<div class="flex flex-col gap-space-sm mt-2">
+<span class="text-label-md text-inverse-primary uppercase tracking-wider">Platform Scenario</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="text-headline-xl font-headline-xl text-on-primary">₹2,190</span>
+<span class="text-body-sm text-inverse-primary">Net Realization</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs pt-space-md border-t border-primary/40">
+<div class="flex justify-between text-body-sm">
+<span class="text-inverse-primary">Acquisition Cost</span>
+<span class="font-bold text-on-primary">₹1,150.00 <span class="text-inverse-primary text-xs">(-₹50)</span></span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-inverse-primary">Transport & Handling</span>
+<span class="font-bold text-on-primary">₹110.00 <span class="text-inverse-primary text-xs">(-₹40)</span></span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-inverse-primary">Rejection / Loss (1%)</span>
+<span class="font-bold text-on-primary">₹20.00 <span class="text-inverse-primary text-xs">(-₹60)</span></span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-inverse-primary">Payment Cycle Impact</span>
+<span class="font-bold text-on-primary">Instant (₹0 Cost)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Visual Breakdown Bar Chart Representation -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md">
+<div class="flex justify-between items-center">
+<h4 class="font-headline-md text-on-surface">Unit Economics Waterfall</h4>
+<span class="text-label-sm text-on-surface-variant">Per 10kg Lot Breakdown</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Baseline bar -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Baseline Margin: ₹500 (27%)</span>
+<span class="font-bold text-on-surface">₹1,850 Total</span>
+</div>
+<div class="w-full h-4 bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="bg-tertiary h-full" style="width: 65%" title="Acquisition"></div>
+<div class="bg-outline h-full" style="width: 12%" title="Logistics"></div>
+<div class="bg-error h-full" style="width: 8%" title="Loss"></div>
+<div class="bg-secondary h-full" style="width: 15%" title="Margin"></div>
+</div>
+</div>
+<!-- Platform bar -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Platform Margin: ₹910 (41%)</span>
+<span class="font-bold text-primary">₹2,190 Total</span>
+</div>
+<div class="w-full h-4 bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="bg-tertiary h-full" style="width: 52%" title="Acquisition"></div>
+<div class="bg-outline h-full" style="width: 6%" title="Logistics"></div>
+<div class="bg-error h-full" style="width: 1%" title="Loss"></div>
+<div class="bg-primary h-full" style="width: 41%" title="Margin"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-md text-label-sm text-on-surface-variant pt-space-xs">
+<div class="flex items-center gap-space-xs"><div class="w-3 h-3 bg-tertiary rounded-sm"></div> Acquisition</div>
+<div class="flex items-center gap-space-xs"><div class="w-3 h-3 bg-outline rounded-sm"></div> Logistics</div>
+<div class="flex items-center gap-space-xs"><div class="w-3 h-3 bg-error rounded-sm"></div> Rejection</div>
+<div class="flex items-center gap-space-xs"><div class="w-3 h-3 bg-primary rounded-sm"></div> Net Margin</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Sensitivity Toggles & Parameters (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-on-surface">Operating Assumptions</h3>
+<span class="material-symbols-outlined text-on-surface-variant">tune</span>
+</div>
+<!-- Slider 1: Transport & Handling -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Transport Efficiency</span>
+<span class="font-bold text-on-surface" id="transport-val">-25% Cost</span>
+</div>
+<input class="w-full accent-primary cursor-pointer" max="50" min="0" oninput="document.getElementById('transport-val').innerText = '-' + this.value + '% Cost'" type="range" value="25"/>
+</div>
+<!-- Slider 2: Rejection / Sorting Loss -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Rejection & Grading Accuracy</span>
+<span class="font-bold text-on-surface" id="rejection-val">1.0% (Optimized)</span>
+</div>
+<input class="w-full accent-primary cursor-pointer" max="10" min="1" oninput="document.getElementById('rejection-val').innerText = this.value + '% Loss'" type="range" value="1"/>
+</div>
+<!-- Slider 3: Payment Delay Sensitivity -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Payment Realization Window</span>
+<span class="font-bold text-on-surface" id="payment-val">Instant (0 Days)</span>
+</div>
+<input class="w-full accent-primary cursor-pointer" max="30" min="0" oninput="document.getElementById('payment-val').innerText = this.value + ' Days'" type="range" value="0"/>
+</div>
+<!-- Toggle Switch: Digital Weigh-Slip Verification -->
+<div class="flex items-center justify-between pt-space-sm border-t border-surface-container-high">
+<div class="flex flex-col">
+<span class="text-label-md text-on-surface">Auto Weigh-Slip Calibration</span>
+<span class="text-body-sm text-on-surface-variant">Eliminates tare weight disputes</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Switch: Direct Smelter Dispatch -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-label-md text-on-surface">Direct Smelter Linkage</span>
+<span class="text-body-sm text-on-surface-variant">Bypasses middleman commission</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Source Disclosure & Neutral Bias Box -->
+<div class="bg-surface-container rounded-xl p-space-lg flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<span class="text-label-sm uppercase tracking-wider">Source & Methodology Disclosure</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">
+          Calculations are derived from aggregated scrap yard telemetry across Tier-1 urban recycling hubs (Q3 2024). Baseline rates reflect standard local aggregator margins without digital grading. Platform scenario assumes standardized computer-vision grading and pooled logistics.
+        </p>
+<div class="pt-space-xs flex items-center justify-between text-label-sm text-primary">
+<span>Read Full Methodology Whitepaper</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Disclaimer Footer Banner -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center gap-space-md border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary text-[24px]">verified_user</span>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between w-full gap-space-xs">
+<span class="text-body-sm text-on-surface"><strong>Illustrative calculation fixture.</strong> Actual financial outcomes may vary based on local scrap purity, market rate volatility, and fuel cost indices.</span>
+<span class="text-label-sm text-on-surface-variant whitespace-nowrap">SahiTol Engine v4.2</span>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-space-xl"><div class="max-w-7xl mx-auto px-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant text-body-sm"><p>© 2024 SahiTol Scrap Yard Management System. All rights reserved.</p><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface" href="#">Support</a><a class="hover:text-on-surface" href="#">Weigh-slip API</a><a class="hover:text-on-surface" href="#">Compliance</a></div></div></footer></body></html>

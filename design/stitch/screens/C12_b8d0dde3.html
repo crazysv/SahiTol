@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-container": "#fffbff",
+          "inverse-on-surface": "#f3f0ea",
+          "surface-container-low": "#f6f3ed",
+          "on-error-container": "#93000a",
+          "inverse-surface": "#31312d",
+          "surface-container-high": "#ebe8e2",
+          "surface-container": "#f0eee8",
+          "tertiary-container": "#7a7371",
+          "surface-container-lowest": "#ffffff",
+          "on-secondary-fixed-variant": "#574500",
+          "on-primary": "#ffffff",
+          "surface-bright": "#fcf9f3",
+          "outline": "#8a726a",
+          "tertiary-fixed": "#eae0de",
+          "surface-container-highest": "#e5e2dc",
+          "surface": "#fcf9f3",
+          "on-tertiary": "#ffffff",
+          "secondary-fixed-dim": "#e9c349",
+          "on-primary-fixed": "#390c00",
+          "primary-fixed-dim": "#ffb59c",
+          "on-secondary-fixed": "#241a00",
+          "secondary": "#735c00",
+          "on-tertiary-fixed-variant": "#4b4544",
+          "on-primary-container": "#fffbff",
+          "surface-dim": "#dcdad4",
+          "on-secondary": "#ffffff",
+          "surface-variant": "#e5e2dc",
+          "secondary-container": "#fed65b",
+          "primary-container": "#bf542c",
+          "tertiary-fixed-dim": "#cec4c3",
+          "surface-tint": "#a23e18",
+          "on-error": "#ffffff",
+          "inverse-primary": "#ffb59c",
+          "error": "#ba1a1a",
+          "on-background": "#1c1c18",
+          "outline-variant": "#dec0b7",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed-root": "#1f1b1a",
+          "on-surface-variant": "#57423b",
+          "on-primary-fixed-variant": "#822801",
+          "primary": "#9f3c16",
+          "primary-fixed": "#ffdbcf",
+          "tertiary": "#615a59",
+          "secondary-fixed": "#ffe088",
+          "background": "#fcf9f3",
+          "on-surface": "#1c1c18",
+          "on-secondary-container": "#745c00"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "gutter": "16px",
+          "space-lg": "24px",
+          "space-sm": "8px",
+          "space-xs": "4px",
+          "space-md": "16px",
+          "space-xl": "32px",
+          "margin": "16px"
+        },
+        "fontFamily": {
+          "body-md": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "headline-md": ["Sora"],
+          "headline-lg-mobile": ["Sora"],
+          "headline-lg": ["Sora"],
+          "label-sm": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Sora"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "label-lg": ["Plus Jakarta Sans"],
+          "headline-xl": ["Sora"]
+        },
+        "fontSize": {
+          "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+          "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+          "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+          "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+          "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+          "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],
+          "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+          "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+          "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+          "label-lg": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],
+          "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }]
+        }
+      }
+    }
+  }
+</script><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl pt-safe"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="bg-primary text-on-primary font-headline-md px-space-xs py-1 rounded text-headline-md">सहीTol</div><div class="flex flex-col"><span class="text-label-sm font-headline-md uppercase tracking-wider text-on-surface">SahiTol</span><span class="text-[10px] text-on-surface-variant">Collector App</span></div></div><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1 bg-surface-container-high px-space-sm py-1 rounded-full text-label-sm text-secondary"><span class="w-2 h-2 rounded-full bg-secondary"></span><span>Offline Ready</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full px-gutter pt-16 pb-20 bg-surface flex-1"><div class="flex flex-col w-full pb-20">
+<!-- Top Area: Header & Subtitle -->
+<div class="flex flex-col gap-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<h1 class="font-headline-lg-mobile text-on-surface">मेरी कमाई / My Earnings</h1>
+<span class="px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container text-label-sm flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+        Live Ledger
+      </span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Daily scrap collection ledger, verified weigh-slips and remaining dues.</p>
+</div>
+<!-- Demo mode isolation notice -->
+<div class="bg-surface-container-high rounded-xl p-space-md mb-space-md flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
+<div class="flex flex-col text-body-sm text-on-surface-variant">
+<span class="font-label-md text-on-surface">Demo mode isolation active</span>
+<span>Transactions shown are stored locally on this device. Sync with yard manager to clear dues.</span>
+</div>
+</div>
+<!-- Prominent Earnings Summary Card -->
+<div class="bg-primary-container text-on-primary-container rounded-xl p-space-lg mb-space-md flex flex-col gap-space-md relative overflow-hidden shadow-sm">
+<div class="absolute -right-6 -bottom-6 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[140px]">account_balance_wallet</span>
+</div>
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="text-label-sm uppercase tracking-wider opacity-80">Total Agreed / कुल तय राशि</span>
+<span class="font-headline-xl-mobile mt-1">₹4,850</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-label-sm uppercase tracking-wider opacity-80">Remaining Dues</span>
+<span class="font-headline-md text-secondary-fixed mt-1">₹950</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-md pt-space-sm border-t border-on-primary-container/20">
+<div class="flex flex-col">
+<span class="text-[12px] opacity-75">Acknowledged Paid</span>
+<span class="font-label-lg mt-0.5">₹3,900</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[12px] opacity-75">Saved on Device</span>
+<span class="font-label-lg mt-0.5 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+          2 Slips Pending
+        </span>
+</div>
+</div>
+</div>
+<!-- Month / Date Selector -->
+<div class="flex items-center justify-between bg-surface-container rounded-xl p-space-sm mb-space-md">
+<button class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-on-surface active:scale-95 transition-transform">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="font-label-md text-on-surface">September 2026</span>
+<span class="text-[11px] text-on-surface-variant">सितंबर २०९६</span>
+</div>
+<button class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-on-surface active:scale-95 transition-transform">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-space-xs overflow-x-auto pb-space-xs mb-space-md no-scrollbar">
+<button class="px-space-md py-2 rounded-full bg-primary text-on-primary text-label-sm whitespace-nowrap">All Entries (6)</button>
+<button class="px-space-md py-2 rounded-full bg-surface-container text-on-surface text-label-sm whitespace-nowrap">Dues Remaining (2)</button>
+<button class="px-space-md py-2 rounded-full bg-surface-container text-on-surface text-label-sm whitespace-nowrap">Waiting Sync (1)</button>
+<button class="px-space-md py-2 rounded-full bg-surface-container text-on-surface text-label-sm whitespace-nowrap">Disputed (1)</button>
+</div>
+<!-- Connected Transaction & Material History Ledger -->
+<div class="flex flex-col gap-space-md">
+<!-- Row 1: Fully Paid / Acknowledged -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm shadow-sm">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface">Mixed Cable &amp; Copper</span>
+<span class="text-body-sm text-on-surface-variant">29 Sep, 2026 · 2.5 kg</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-lg text-on-surface">₹450</span>
+<span class="text-[11px] text-secondary font-bold">Acknowledged</span>
+</div>
+</div>
+<div class="bg-surface rounded-lg p-space-sm flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant">Payment Status</span>
+<span class="text-on-surface font-semibold">₹300 paid · ₹150 due</span>
+</div>
+</div>
+<!-- Row 2: Saved on this phone (waiting to sync) -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 bottom-0 w-1 bg-tertiary-container"></div>
+<div class="flex justify-between items-start pl-1">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">smartphone</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-on-surface">Old Newspaper (रद्दी)</span>
+<span class="px-1.5 py-0.5 bg-surface-container-high rounded text-[10px] text-on-surface-variant font-bold">Offline Saved</span>
+</div>
+<span class="text-body-sm text-on-surface-variant">28 Sep, 2026 · 14.0 kg</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-lg text-on-surface">₹280</span>
+<span class="text-[11px] text-tertiary font-bold">Waiting to sync</span>
+</div>
+</div>
+<div class="bg-surface rounded-lg p-space-sm flex justify-between items-center text-body-sm ml-1">
+<span class="text-on-surface-variant">Sync status</span>
+<span class="text-on-surface font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">cloud_off</span>
+          Local device storage only
+        </span>
+</div>
+</div>
+<!-- Row 3: Pending Acknowledgement & Partially Paid -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm shadow-sm">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">deployed_code</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface">Iron Scraps (लोहा)</span>
+<span class="text-body-sm text-on-surface-variant">27 Sep, 2026 · 45.0 kg</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-lg text-on-surface">₹1,800</span>
+<span class="text-[11px] text-primary font-bold">Partially Paid</span>
+</div>
+</div>
+<div class="bg-surface rounded-lg p-space-sm flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant">Pending Acknowledgement</span>
+<span class="text-primary font-semibold">₹1,000 paid · ₹800 due</span>
+</div>
+</div>
+<!-- Row 4: Disputed Entry -->
+<div class="bg-error-container/20 rounded-xl p-space-md flex flex-col gap-space-sm shadow-sm">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-error text-on-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">error</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface">Plastic Bottles (PET)</span>
+<span class="text-body-sm text-on-surface-variant">25 Sep, 2026 · 8.2 kg</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-lg text-on-surface">₹320</span>
+<span class="text-[11px] text-error font-bold">Disputed Weight</span>
+</div>
+</div>
+<div class="bg-surface rounded-lg p-space-sm flex justify-between items-center text-body-sm">
+<span class="text-error font-medium">Yard manager reviewing weight scale discrepancy</span>
+<button class="px-space-sm py-1 bg-surface-container rounded text-label-sm text-on-surface">Details</button>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="mt-space-lg flex gap-space-sm">
+<button class="flex-1 h-12 bg-primary text-on-primary rounded-xl font-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-sm">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+      Sync All Dues &amp; Slips
+    </button>
+<button class="w-12 h-12 bg-surface-container text-on-surface rounded-xl flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]" data-active-classes="bg-primary-container text-on-primary-container font-bold"><div class="flex justify-around items-center h-20 px-gutter"><a class="flex flex-col items-center justify-center gap-space-xs w-14 h-16 text-on-surface-variant transition-all rounded-xl" data-path="home" href="#"><span class="material-symbols-outlined">home</span><span class="text-label-sm">Home</span></a><a class="flex flex-col items-center justify-center gap-space-xs w-14 h-16 text-on-surface-variant transition-all rounded-xl" data-path="material-passport" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="text-label-sm">Timeline</span></a><a class="flex flex-col items-center justify-center gap-space-xs w-14 h-16 text-on-surface-variant transition-all rounded-xl" data-path="earnings-dues" href="#"><span class="material-symbols-outlined">account_balance_wallet</span><span class="text-label-sm">Earnings</span></a><a class="flex flex-col items-center justify-center gap-space-xs w-14 h-16 text-on-surface-variant transition-all rounded-xl" data-path="sync-centre" href="#"><span class="material-symbols-outlined">sync</span><span class="text-label-sm">Sync</span></a><a class="flex flex-col items-center justify-center gap-space-xs w-14 h-16 text-on-surface-variant transition-all rounded-xl" data-path="settings" href="#"><span class="material-symbols-outlined">settings</span><span class="text-label-sm">Settings</span></a></div></nav></body></html>

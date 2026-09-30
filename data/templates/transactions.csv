@@ -1,0 +1,1 @@
+transaction_id,lot_id,collector_pseudonym,facility_id,material_id,final_weight_g,agreed_total_paise,currency,lifecycle_status,handover_status,payment_status,acknowledged_paid_paise,outstanding_paise,occurred_at,source_id,origin_class,source_kind,is_demo,schema_version

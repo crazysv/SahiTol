@@ -1,0 +1,151 @@
+[
+  {
+    "id": "SG-CABLE-01",
+    "material_ids": ["MAT-CAB-01", "MAT-CAB-02"],
+    "route": "GENERAL_RECYCLING",
+    "text_key": "safety.cables.no_burning",
+    "icon_asset_ref": "icons/safety/no_burn_cables.svg",
+    "image_asset_ref": null,
+    "audio_keys": {
+      "en": "audio_sg_cables_en",
+      "hi": "audio_sg_cables_hi",
+      "mr": "audio_sg_cables_mr"
+    },
+    "source_ids": ["SRC-01"],
+    "version": "v1.0",
+    "review_status": "APPROVED"
+  },
+  {
+    "id": "SG-PCB-01",
+    "material_ids": ["MAT-PCB-01", "MAT-PCB-02"],
+    "route": "AUTHORIZED_EWASTE",
+    "text_key": "safety.pcb.no_acid_heating",
+    "icon_asset_ref": "icons/safety/no_acid_pcb.svg",
+    "image_asset_ref": null,
+    "audio_keys": {
+      "en": "audio_sg_pcb_en",
+      "hi": "audio_sg_pcb_hi",
+      "mr": "audio_sg_pcb_mr"
+    },
+    "source_ids": ["SRC-01"],
+    "version": "v1.0",
+    "review_status": "APPROVED"
+  },
+  {
+    "id": "SG-CRT-01",
+    "material_ids": ["MAT-CRT-01"],
+    "route": "HAZARDOUS_DISPOSAL",
+    "text_key": "safety.crt.no_breaking",
+    "icon_asset_ref": "icons/safety/no_break_crt.svg",
+    "image_asset_ref": null,
+    "audio_keys": {
+      "en": "audio_sg_crt_en",
+      "hi": "audio_sg_crt_hi",
+      "mr": "audio_sg_crt_mr"
+    },
+    "source_ids": ["SRC-01"],
+    "version": "v1.0",
+    "review_status": "APPROVED"
+  },
+  {
+    "id": "SG-BATTERY-01",
+    "material_ids": ["MAT-BAT-01"],
+    "route": "BATTERY_ISOLATION",
+    "text_key": "safety.battery.lead_acid",
+    "icon_asset_ref": "icons/safety/isolated_battery.svg",
+    "image_asset_ref": null,
+    "audio_keys": {
+      "en": "audio_sg_battery_lead_en",
+      "hi": "audio_sg_battery_lead_hi",
+      "mr": "audio_sg_battery_lead_mr"
+    },
+    "source_ids": ["SRC-02"],
+    "version": "v1.0",
+    "review_status": "APPROVED"
+  },
+  {
+    "id": "SG-BATTERY-02",
+    "material_ids": ["MAT-BAT-02"],
+    "route": "BATTERY_ISOLATION",
+    "text_key": "safety.battery.li_ion",
+    "icon_asset_ref": "icons/safety/tape_terminals.svg",
+    "image_asset_ref": null,
+    "audio_keys": {
+      "en": "audio_sg_battery_li_ion_en",
+      "hi": "audio_sg_battery_li_ion_hi",
+      "mr": "audio_sg_battery_li_ion_mr"
+    },
+    "source_ids": ["SRC-02"],
+    "version": "v1.0",
+    "review_status": "APPROVED"
+  },
+  {
+    "id": "SG-BATTERY-03",
+    "material_ids": ["MAT-BAT-03", "MAT-BAT-04"],
+    "route": "BATTERY_ISOLATION",
+    "text_key": "safety.battery.unknown",
+    "icon_asset_ref": "icons/safety/isolated_container.svg",
+    "image_asset_ref": null,
+    "audio_keys": {
+      "en": "audio_sg_battery_unk_en",
+      "hi": "audio_sg_battery_unk_hi",
+      "mr": "audio_sg_battery_unk_mr"
+    },
+    "source_ids": ["SRC-02"],
+    "version": "v1.0",
+    "review_status": "APPROVED"
+  },
+  {
+    "id": "SG-DAMAGED-01",
+    "material_ids": [
+      "MAT-PCB-01", "MAT-PCB-02", "MAT-BAT-01", "MAT-BAT-02",
+      "MAT-BAT-03", "MAT-BAT-04", "MAT-CRT-01", "MAT-LCD-01",
+      "MAT-MOT-01", "MAT-MOT-02", "MAT-MIX-01", "MAT-MIX-02",
+      "MAT-UNK-01"
+    ],
+    "route": "HAZARDOUS_DISPOSAL",
+    "text_key": "safety.damaged.stop_handling",
+    "icon_asset_ref": "icons/safety/stop_handling_hazard.svg",
+    "image_asset_ref": null,
+    "audio_keys": {
+      "en": "audio_sg_damaged_hazard_en",
+      "hi": "audio_sg_damaged_hazard_hi",
+      "mr": "audio_sg_damaged_hazard_mr"
+    },
+    "source_ids": ["SRC-01", "SRC-02"],
+    "version": "v1.0",
+    "review_status": "APPROVED"
+  },
+  {
+    "id": "SG-PLASTIC-01",
+    "material_ids": ["MAT-PLA-01", "MAT-PLA-02"],
+    "route": "AUTHORIZED_EWASTE",
+    "text_key": "safety.plastic.no_burning",
+    "icon_asset_ref": "icons/safety/no_burn_plastics.svg",
+    "image_asset_ref": null,
+    "audio_keys": {
+      "en": "audio_sg_plastics_en",
+      "hi": "audio_sg_plastics_hi",
+      "mr": "audio_sg_plastics_mr"
+    },
+    "source_ids": ["SRC-01"],
+    "version": "v1.0",
+    "review_status": "APPROVED"
+  },
+  {
+    "id": "SG-MIXED-01",
+    "material_ids": ["MAT-MIX-01", "MAT-MIX-02", "MAT-OTH-01", "MAT-UNK-01"],
+    "route": "REVIEW_REQUIRED",
+    "text_key": "safety.mixed.no_dismantling",
+    "icon_asset_ref": "icons/safety/no_dismantle_mixed.svg",
+    "image_asset_ref": null,
+    "audio_keys": {
+      "en": "audio_sg_mixed_en",
+      "hi": "audio_sg_mixed_hi",
+      "mr": "audio_sg_mixed_mr"
+    },
+    "source_ids": ["SRC-01"],
+    "version": "v1.0",
+    "review_status": "APPROVED"
+  }
+]

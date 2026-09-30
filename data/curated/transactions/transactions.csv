@@ -1,0 +1,5 @@
+# SahiTol Platform Transactions Export
+"# Statutory Notice: SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling."
+transaction_id,lot_id,collector_pseudonym,facility_id,lifecycle,quoted_total_paise,agreed_total_paise,estimated_weight_g,measured_weight_g,material_id,handover_token,created_at,closed_at,is_demo,non_epr_notice
+tx-f1001-c01-001,lot-20260929-001,col_anon_8f3a9e1b,fac-delhi-001,CLOSED,1526400,1526400,85000,84800,MAT-CAB-01,HND-20260929-4091,2026-09-29T08:30:00Z,2026-09-29T09:15:00Z,True,"SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling."
+tx-f1001-c02-002,lot-20260929-002,col_anon_3b1d7a4c,fac-delhi-001,CLOSED,9425000,9425000,145000,145000,MAT-MET-01,HND-20260929-4092,2026-09-28T11:00:00Z,2026-09-28T11:45:00Z,True,"SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling."

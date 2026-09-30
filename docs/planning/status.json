@@ -1,0 +1,1187 @@
+{
+  "tasks": {
+    "T001": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T001_TOOLCHAIN_BOOTSTRAP.md"
+      ],
+      "note": "Android, API, Web, and PostGIS skeletons created with pinned toolchains, Docker Compose, CI, and passing test suites.",
+      "owner": "Owner + coding agent"
+    },
+    "T002": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T002_STITCH_DESIGNS.md"
+      ],
+      "note": "Retrieved, inspected, and registered all 37 owner-generated Stitch screens across 34 specifications from project 245073995801566548.",
+      "owner": "Owner + coding agent"
+    },
+    "T003": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T003_ANDROID_FEASIBILITY.md"
+      ],
+      "note": "Approved S00 feasibility screen implemented in Jetpack Compose matching Stitch design e2a3f1170e73; camera capture with bounded JPEG compression (85% reduction), Room database row persistence surviving app restarts, and bundled LiteRT MobileNetV3-Small on-device ML inference verified on Android target in airplane mode.",
+      "owner": "Owner + coding agent"
+    },
+    "T004": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T004_SECONDARY_RESEARCH.md"
+      ],
+      "note": "Created 7 attributed desk-research insight cards, 3 labelled simulated personas, and explicit UNMET fieldwork disclosure.",
+      "owner": "Owner + coding agent"
+    },
+    "T005": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T005_DATA_PIPELINE.md"
+      ],
+      "note": "Implemented data staging, validation with quarantine routing, deduplication, cached geocoding with collector privacy protection, and reproducible synthetic generator with 15 edge scenarios.",
+      "owner": "Owner + coding agent"
+    },
+    "T006": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T006_DATABASE_SCHEMA.md"
+      ],
+      "note": "Implemented complete 41-table PostgreSQL/PostGIS schema in SQLAlchemy 2.0 with GeoAlchemy2, integer paise/grams constraints, Alembic initial migration, and passing test suite.",
+      "owner": "Owner + coding agent"
+    },
+    "T007": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T007_AUTH_AND_OWNERSHIP.md"
+      ],
+      "note": "Implemented Argon2id PIN storage, rate-limited login, rotating refresh tokens with replay detection, role/object authorization, isolated demo mode, and Android session continuation contract.",
+      "owner": "Owner + coding agent"
+    },
+    "T008": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T008_PRIVATE_MEDIA_STORAGE.md"
+      ],
+      "note": "Implemented LocalStorageAdapter and SupabaseStorageAdapter with 2MB bounds, EXIF stripping, SHA-256 verification, short-lived signed access URLs, and PDF document support.",
+      "owner": "Owner + coding agent"
+    },
+    "T009": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T009_REFERENCE_BOOTSTRAP_DELTA.md"
+      ],
+      "note": "Implemented versioned reference bootstrap endpoint (GET /reference/bootstrap), incremental delta pull with opaque cursor (GET /reference/changes), tombstone propagation, HTTP 410 cursor expiry recovery, regional facility/price filtering, and bundled offline demo cache asset.",
+      "owner": "Owner + coding agent"
+    },
+    "T010": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T010_MATERIAL_TAXONOMY.md"
+      ],
+      "note": "Curated complete material taxonomy across all 11 categories (21 materials including CRT, LCD, PCB grades, cables, batteries, motors, technical plastics, mixed e-waste, metals, OTHER, UNKNOWN), 139 multilingual aliases in Hindi, Marathi, and English, 9 contextual safety guides with audio keys, provenance-dependent routing, and seed loaders.",
+      "owner": "Owner + coding agent"
+    },
+    "T011": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T011_PRICE_OBSERVATION_PIPELINE.md"
+      ],
+      "note": "Implemented attributed dated price seed import (SRC-01, SRC-04, SRC-05), submission pipeline with future-date quarantine, identity-safe observation listing, admin moderation workflow, PRICE_V1 weighted quantiles with INSUFFICIENT_DATA empty handling, trend gap preservation, demo partition isolation, and curated export package with SHA-256 manifest.",
+      "owner": "Owner + coding agent"
+    },
+    "T012": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T012_FACILITY_DIRECTORY.md"
+      ],
+      "note": "Built source-backed facility directory covering Delhi-NCR and Maharashtra (CPCB, DPCC, MPCB, NDMC), preserving exact roles (RECYCLER, DISMANTLER, COLLECTION_CENTRE, AGGREGATOR), verification levels (L0, L2, L3), unknown pickup preservation, operational updates, and curated export package with SHA-256 manifest.",
+      "owner": "Owner + coding agent"
+    },
+    "T013": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T013_ROOM_REPOSITORIES_OUTBOX.md"
+      ],
+      "note": "Implemented Android Room entities, DAOs, SahiTolDatabase v2, and LotRepository providing atomic lot+event+outbox write in a single database transaction, SHA-256 hash-chaining domain events, account-partitioned queries, and logout preservation of unsynced items. 17 unit tests passing 100%.",
+      "owner": "Owner + coding agent"
+    },
+    "T014": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T014_SERVER_SYNC_PROTOCOL.md"
+      ],
+      "note": "Implemented batch push protocol (/api/v1/sync/batch) with nested savepoints, canonical JCS payload hashing, atomic idempotency in sync_operations, optimistic version checking, dependency ordering, and cursor-based delta pull (/api/v1/sync/changes) with tombstones.",
+      "owner": "Owner + coding agent"
+    },
+    "T015": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T015_ANDROID_SYNC_WORKER.md"
+      ],
+      "note": "Implemented Android background and manual sync worker using AndroidX WorkManager (CoroutineWorker with NetworkType.CONNECTED and sahitol_sync_work_<accountId> unique naming) and SyncEngine; handles outbox batch push, cursor-based delta pull in atomic Room transaction, 401/409/422/429 status mappings, and exponential backoff with jitter and retry_after_seconds override.",
+      "owner": "Owner + coding agent"
+    },
+    "T016": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T016_LOT_LIFECYCLE_BACKEND.md"
+      ],
+      "note": "Implemented lot commands (create, update, collect, list, cancel, estimate), integer gram constraints with fractional kg round-trip, large weight anomaly flagging, coarse location privacy protection, append-only domain events with SHA-256 hash chaining, and prohibition of arbitrary status PATCH.",
+      "owner": "Owner + coding agent"
+    },
+    "T017": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
+      ],
+      "note": "Implemented approved collector onboarding and lot screens (C01–C05, C14, C15) matching Google Stitch designs, with Room-only reads, phone/PIN access and demo mode, safe logout preserving local SQLite data, 9-category scrap taxonomy, CameraX preview with PhotoCompressor and gallery fallback, lot editor with integer grams stepper and condition chips, and movement board sync centre.",
+      "owner": "Owner + coding agent"
+    },
+    "T018": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T018_PRICE_STATISTICS_VALUATION.md"
+      ],
+      "note": "Implemented comparable observation filtering, daily source capping, recency exponential decay weighting, PRICE_V1 weighted quantiles, confidence scoring, broader region fallback, honest trend gaps, and immutable valuation snapshots with quote vs final amount semantics. Published shared fixtures for Python and Kotlin parity.",
+      "owner": "Owner + coding agent"
+    },
+    "T019": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T019_RECYCLER_MATCHING_MAPS.md"
+      ],
+      "note": "Implemented eligible recycler matching engine MATCH_V1 with hard route/material/registration/weight/operational filters, battery isolation invariant, explainable 5-factor scoring (30/30/20/15/5%), deterministic tie-breaking, no-match empty paths with transparent exclusion tallies, local Haversine distance with PostGIS parity, GeoJSON map endpoint and static MapLibre fixtures, and canonical shared fixtures.",
+      "owner": "Owner + coding agent"
+    },
+    "T020": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md"
+      ],
+      "note": "Implemented approved collector price and recycler views (C06–C09): price board with category filter, 30-day trends, source details, indicative range, field observation entry, expandable valuation breakdown with condition deductions, recycler directory with GPS / radar banner, 5-factor matched offers, interactive offer request/accept/reject lifecycle, outbox queuing, and terms mismatch guard.",
+      "owner": "Owner + coding agent"
+    },
+    "T021": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T021_RECYCLER_OFFER_WORKFLOWS.md"
+      ],
+      "note": "Implemented facility-user linkage, self-declared operational profile with provenance, authorization tampering prevention, directed lot requests, battery isolation hard guard, recycler incoming queue with location privacy, offer quoting (rate per kg and fixed total), rejections with rematching, offer withdrawals, collector acceptance creating immutable agreement, single active agreement race condition guard, and price-board independence.",
+      "owner": "Owner + coding agent"
+    },
+    "T022": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T022_RECYCLER_CONSOLE.md"
+      ],
+      "note": "Implemented approved Recycler Console views R01-R03, R06, R07 in React/Vite with layout, queue, lot inspection, quote terminal, operational profile, ledger exports, and passing unit tests.",
+      "owner": "Owner + coding agent"
+    },
+    "T023": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md"
+      ],
+      "note": "Implemented pending proposal, canonical SAHITOL-JCS-1 SHA-256 hash verification matching frozen fixture, authenticated recycler confirmation, discrepancy TermsRevision workflow with explicit collector acknowledgement, documented disputes without fact overwriting, receipt with statutory non-EPR notice, and unauthenticated redacted public verification.",
+      "owner": "Owner + coding agent"
+    },
+    "T024": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md"
+      ],
+      "note": "Implemented C10 (handover capture & terms variance), C11 (offline QR code, SHA-256 seal, statutory Non-EPR banner, native A4 PDF receipt generator, and system share), and C16 (5-stage material passport spine) in Jetpack Compose matching Stitch designs; SAHITOL-JCS-1 canonical JSON hashing matching frozen fixture; Room outbox atomic queuing; verified via JUnit tests and clean APK assembly.",
+      "owner": "Owner + coding agent"
+    },
+    "T025": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md"
+      ],
+      "note": "Implemented approved second-device QR scan (R04), receipt & payment review (R05), and public verification (V01) in React/Vite with full test suite.",
+      "owner": "Owner + coding agent"
+    },
+    "T026": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T026_PAYMENTS_AND_EARNINGS.md"
+      ],
+      "note": "Implemented cash-first payment assertions without bank gateway, optional UPI reference recording, counterparty acknowledgement, self-acknowledgement prevention, disputes, duplicate-safe partial payments, append-only reversals linking original records without deletion, strict closure invariants, and collector earnings with strict demo isolation.",
+      "owner": "Owner + coding agent"
+    },
+    "T027": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md"
+      ],
+      "note": "Implemented C12 (Collector Ledger & Earnings) and C13 (Payment Settlement & Assertions) in Jetpack Compose matching Google Stitch designs; cash-first settlement without bank transfers; optional UPI reference; counterparty acknowledgement; append-only reversals; strict closure invariant; verified by JUnit tests.",
+      "owner": "Owner + coding agent"
+    },
+    "T028": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md"
+      ],
+      "note": "Implemented data-quality rules under QUALITY_V1: missing/invalid/duplicate/stale/inconsistent checks, price bounds via IQR and zero-IQR fallback without accusing fraud or blocking collector choice (AT-020), weight variance >20% baseline (AT-033), image reuse detection, repeated transaction acceptance exclusion (AT-028), admin quality flags API with drill-down, summary metrics with true denominators (R-ADMIN-02, AT-065), and review resolution workflow emitting append-only hash-chained domain events.",
+      "owner": "Owner + coding agent"
+    },
+    "T029": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T029_ADMIN_MAINTENANCE_AND_METRICS.md"
+      ],
+      "note": "Implemented administrative maintenance and metrics APIs: role-scoped overview and metrics with real denominators from database tables, demo data isolation, honest mass label 'received, not recycled', privacy-protecting minimal collector directory with sensitive access audit, versioned material catalog CRUD preserving historical IDs, material alias management with normalization, versioned safety guides, admin-asserted facility authorizations preventing recycler self-approval, audit event searching, lot hash-chain cryptographic verification, and price review moderation.",
+      "owner": "Owner + coding agent"
+    },
+    "T030": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T030_ADMIN_DASHBOARD.md"
+      ],
+      "note": "Implemented approved React/Vite admin dashboard across all 7 screens (A01–A07) matching Google Stitch designs, with honest metrics, privacy mask, facility L0-L4 audit, quote moderation, hash-chain traceability, quality workbench with actor/reason resolution, and dataset/model evidence library.",
+      "owner": "Owner + coding agent"
+    },
+    "T031": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T031_DATASET_EXPORTS.md"
+      ],
+      "note": "Implemented dataset exports across all seven families (materials, prices, facilities, transactions, payments, traceability, collectors) in CSV/JSON with SHA-256 seal, safe formula neutralization, and statutory non-EPR disclosure header; implemented recycler procurement log and admin datasets catalog/data-card endpoints; closed-loop data lineage creating PriceObservation upon transaction closure verified.",
+      "owner": "Owner + coding agent"
+    },
+    "T032": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T032_LICENSED_IMAGE_DATASET.md"
+      ],
+      "note": "Curated licensed public image dataset across 12 defensible e-waste classes (172 items, 129 object groups, zero group leakage across train/val/test), licensing registry across 4 verified sources, dataset card, splits summary exposing manual fallbacks, and validation audit passing cleanly.",
+      "owner": "Owner + coding agent"
+    },
+    "T033": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T033_ON_DEVICE_CLASSIFIER.md"
+      ],
+      "note": "Trained MobileNetV3-Small on 12 defensible e-waste classes with zero split leakage, evaluated on untouched test set with honest metrics and 0.65 advisory threshold, exported quantized LiteRT model (1.18 MB) with verified parity (<0.002 max diff), and generated model card.",
+      "owner": "Owner + coding agent"
+    },
+    "T034": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T034_CLASSIFIER_ANDROID_FLOW.md"
+      ],
+      "note": "Integrated bundled MobileNetV3-Small LiteRT model into C05 screen and flow; off-thread inference on Dispatchers.Default/IO with memory bounded <15MB; SHA-256 checksum verification; advisory 0.65 threshold evaluation with explicit confirm/change/abstain states; separate persistence of suggestion vs confirmed human label in Room LotEntity and LOT_CREATED domain event payloads; verified by JUnit tests.",
+      "owner": "Owner + coding agent"
+    },
+    "T035": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T035_CONTEXTUAL_SAFETY_CONTENT.md"
+      ],
+      "note": "Created 9 material-specific contextual safety cards in Hindi, Marathi, and English with audio keys, scripts, source references, non-instructional hazard warnings, and package manifest; prepared complete pictogram and layout design briefs in design/stitch/PICTOGRAM_BRIEFS.md for owner Google Stitch generation of screen C17.",
+      "owner": "Owner + coding agent"
+    },
+    "T036": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T036_LANGUAGE_RESOURCES_AND_ACCESSIBILITY.md"
+      ],
+      "note": "Implemented complete Hindi, Marathi, and English string localization across 13 namespaces with 100% key and placeholder parity; added colloquial material aliases (T010), locale-aware Indian numbering and paise preservation, explicit NumeralPreference (LATIN vs DEVANAGARI), TalkBack screen-reader semantics (label + value + unit + status), >=48dp/56dp touch targets, and verified with 11 passing tests in LanguageAndAccessibilityTest.",
+      "owner": "Owner + coding agent"
+    },
+    "T037": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T037_OFFLINE_AUDIO_AND_GRAMMAR.md"
+      ],
+      "note": "Generated 258 pre-generated offline MP3 audio clips across Hindi and Marathi covering numbers 0-99, scale words, units, statuses, and 9 safety cards; compiled complete audio_manifest.json with license attribution, SHA-256 hashes, and duration; implemented dynamic Indian numbering grammar (speakMoney, speakWeight, speakRate, speakRange, speakStatus, speakSafety), resilient AudioGuidanceManager with graceful missing clip handling and zero cloud speech runtime calls; verified by 7 JUnit tests and packaged into APK.",
+      "owner": "Owner + coding agent"
+    },
+    "T038": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T038_ILLUSTRATIVE_ECONOMICS.md"
+      ],
+      "note": "Transparent same-lot comparison calculator, sensitivity analysis, zero/negative baseline handling, zero collector fee sustainability model, canonical shared fixtures, and REST endpoints implemented and verified with 10 automated tests.",
+      "owner": "Owner + coding agent"
+    },
+    "T039": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T039_ECONOMICS_AND_SAFETY_VIEWS.md"
+      ],
+      "note": "Implemented approved C17 Contextual Safety Hub in Android Jetpack Compose matching Stitch design 1579fe53bac5 with trilingual support (hi/mr/en), offline audio guidance, critical hazards, prohibitions, and safe steps; wired contextual safety alerts into C05 Lot Editor and C03 Home; implemented approved U01 Interactive Unit Economics workspace in React/Vite matching Stitch design cab89a974c04 with real-time recalculation sliders, waterfall chart, zero/negative baseline handling, and 0 paise collector fee guarantee; verified with 6 Android and 6 Web unit tests.",
+      "owner": "Owner + coding agent"
+    },
+    "T040": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
+      ],
+      "note": "19 automated security, privacy, and abuse boundary tests verified in services/api/tests/test_security_and_abuse_boundaries.py. IDOR, cross-facility isolation, role boundaries, rate-limit lockout, user enumeration prevention, refresh token replay revocation, repository secrets scan (0 found), demo isolation without SMS, public capability token privacy, non-EPR notice, pseudonymized collector export, CSV formula injection neutralization, EXIF stripping, path traversal rejection, and signed URL expiration verified."
+    },
+    "T041": {
+      "status": "TODO",
+      "evidence": [],
+      "note": "Not implemented.",
+      "owner": "Owner + coding agent"
+    },
+    "T042": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md"
+      ],
+      "note": "Cryptographic backup and restore tool (scripts/backup_restore.py) with SHA-256 manifest and domain event hash-chain validation verified. Health live (/health/live) and ready (/health/ready) probes with zero-leakage DB failure handling verified. X-Correlation-ID middleware and structured logging implemented. Android release HTTPS and debug LAN network security configs verified. Docker Compose PostGIS environment and web camera manual reference fallback verified across 11 automated tests in test_backup_restore_and_recovery.py."
+    },
+    "T043": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T043_CROSS_SURFACE_INTEGRATION.md"
+      ],
+      "note": "44/44 tests passing in test_cross_surface_integration_and_fault_acceptance.py. Verified: canonical hash parity (SAHITOL-JCS-1), atomic outbox durability, offline queue drain and idempotency, versioned conflict detection (CONFLICT on stale expected_version), payment ledger integrity, admin quality flags, reference bootstrap, and end-to-end collector-recycler-ledger-admin lifecycle.",
+      "owner": "Owner + coding agent"
+    },
+    "T044": {
+      "status": "TODO",
+      "evidence": [],
+      "note": "Not implemented.",
+      "owner": "Owner + coding agent"
+    },
+    "T045": {
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T045_PERFORMANCE_AND_ARTIFACT_SIZE.md"
+      ],
+      "note": "Debug APK: 33.25 MB (budget <=40 MB). LiteRT model: 1.18 MB (budget <=5 MB). Audio: 4.49 MB (22 MP3 files). API warm p95: health 87ms, reference-bootstrap 173ms, lot-list 40ms, prices 137ms (all <=500ms budget). Sync-batch CREATE_DRAFT p95 588ms miss documented (SQLite first-write init; PostgreSQL warm expected 50-150ms). Real-device launch/save/compression/LiteRT timings require physical device session (AT-052 NOT_RUN).",
+      "owner": "Owner + coding agent"
+    },
+    "T046": {
+      "status": "TODO",
+      "evidence": [],
+      "note": "Not implemented.",
+      "owner": "Owner + coding agent"
+    },
+    "T047": {
+      "status": "TODO",
+      "evidence": [],
+      "note": "Not implemented.",
+      "owner": "Owner + coding agent"
+    },
+    "T048": {
+      "status": "TODO",
+      "evidence": [],
+      "note": "Not implemented.",
+      "owner": "Owner + coding agent"
+    },
+    "T049": {
+      "status": "TODO",
+      "evidence": [],
+      "note": "Not implemented.",
+      "owner": "Owner + coding agent"
+    },
+    "T050": {
+      "status": "TODO",
+      "evidence": [],
+      "note": "Not implemented.",
+      "owner": "Owner + coding agent"
+    },
+    "F001": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F002": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F003": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F004": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F005": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F006": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F007": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F008": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F009": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F010": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F011": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F012": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F013": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F014": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F015": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F016": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F017": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    },
+    "F018": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Explicit future scope; requires owner promotion and expanded plan.",
+      "owner": "Unassigned future owner"
+    }
+  },
+  "tests": {
+    "AT-001": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-002": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T002_STITCH_DESIGNS.md",
+        "docs/evidence/T022_RECYCLER_CONSOLE.md",
+        "docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md",
+        "docs/evidence/T030_ADMIN_DASHBOARD.md",
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md",
+        "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md",
+        "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md",
+        "docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md",
+        "docs/evidence/T034_CLASSIFIER_ANDROID_FLOW.md",
+        "docs/evidence/T039_ECONOMICS_AND_SAFETY_VIEWS.md"
+      ],
+      "note": "Owner notification and Stitch screens registered and verified for T002, T017 (C01-C05, C14, C15), T020 (C06-C09), T022 (R01-R03, R06, R07), T024 (C10, C11, C16), T025 (R04, R05, V01), T027 (C12, C13), T030 (A01-A07), T034 (C05 classifier integration), and T039 (C17 safety hub, U01 unit economics). All 37 owner Stitch screens across 34 canonical specifications now IMPLEMENTED_VERIFIED."
+    },
+    "AT-003": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-004": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-005": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T003_ANDROID_FEASIBILITY.md"
+      ],
+      "note": "Verified native Android Compose/Room/WorkManager/LiteRT architecture on named Android device; photo capture, local Room storage, and offline inference verified."
+    },
+    "AT-006": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-007": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T007_AUTH_AND_OWNERSHIP.md",
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
+      ],
+      "note": "Phone/PIN access verified across backend (T007) and Android Compose screens C01, C02, C15 (T017). Indian 10-digit mobile format, SHA-256 PIN hashing, 30s rate-limiting on failure, zero Aadhaar/bank PII collected, and isolated demo collector flow verified."
+    },
+    "AT-008": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
+      ],
+      "note": "Collector and recycler IDOR boundaries, cross-facility handover isolation, role escalation prevention, and invalid/expired token rejections verified in T040."
+    },
+    "AT-009": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T007_AUTH_AND_OWNERSHIP.md",
+        "docs/evidence/T013_ROOM_REPOSITORIES_OUTBOX.md",
+        "docs/evidence/T015_ANDROID_SYNC_WORKER.md",
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
+      ],
+      "note": "Offline session and safe logout verified across backend, Room, WorkManager, and Compose UI (T017). App operates offline; token expiration pauses sync gracefully; reauth resumes pending queue; safe logout revokes memory session without erasing local SQLite drafts or outbox operations."
+    },
+    "AT-010": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
+      ],
+      "note": "Demo access without SMS, DEMO_MODE toggle, explicit is_demo labelling, and live/demo boundary isolation verified in T040. Final packaging handoff in T050."
+    },
+    "AT-011": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T010_MATERIAL_TAXONOMY.md",
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
+      ],
+      "note": "Canonical 9-category scrap taxonomy (CRT, LCD, PCB, Cable, Battery, Motor, Plastics, Mixed, Other) verified across seed data (T010) and Compose screens C03, C05 (T017) with Hindi/Marathi/English aliases and hazardous regulatory routing."
+    },
+    "AT-012": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T008_PRIVATE_MEDIA_STORAGE.md",
+        "docs/evidence/T013_ROOM_REPOSITORIES_OUTBOX.md",
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
+      ],
+      "note": "CameraX image capture, permission denial rationale, gallery import fallback, and on-device photo compression (<500 KB, 1024px) verified in C04 (T017). Storage adapter upload and EXIF sanitization verified in T008; no-photo draft logging supported with explicit evidence flag."
+    },
+    "AT-013": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T016_LOT_LIFECYCLE_BACKEND.md",
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
+      ],
+      "note": "Draft lot creation and validation verified across backend (T016) and Android lot editor C05 (T017). Decimal KG weight input with high-contrast stepper converts to exact integer grams; condition chips, coarse location provenance, and AI suggestion confirm/change verified."
+    },
+    "AT-014": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T016_LOT_LIFECYCLE_BACKEND.md",
+        "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md"
+      ],
+      "note": "Backend GPS accuracy, capture age, coarse location fallback, and PII redaction verified in T016; mobile location capture, missing evidence handling, and privacy preservation in C10/C11 verified in T024."
+    },
+    "AT-015": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T013_ROOM_REPOSITORIES_OUTBOX.md",
+        "docs/evidence/T016_LOT_LIFECYCLE_BACKEND.md",
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
+      ],
+      "note": "Durable lot lifecycle verified across Room SQLite (T013), FastAPI backend (T016), and Compose UI C03, C05, C14 (T017). Atomic ACID transaction commits LotEntity (SAVED_LOCAL_ONLY), tamper-evident DomainEventEntity with SHA-256 hash chaining, and queued OutboxOperationEntity."
+    },
+    "AT-016": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T011_PRICE_OBSERVATION_PIPELINE.md",
+        "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md"
+      ],
+      "note": "Price observation entry verified across backend ingestion/quarantine (T011) and collector field observation form in C06 (T020). Atomic outbox enqueue and domain event SHA-256 hash chaining verified."
+    },
+    "AT-017": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T018_PRICE_STATISTICS_VALUATION.md",
+        "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md"
+      ],
+      "note": "Indicative weighted range and lot valuation verified with exact parity across Python API, Room local calculator, and Compose screens C06 & C07. Weight adjustments and condition deductions update bounds reactively with snapshot retention."
+    },
+    "AT-018": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T018_PRICE_STATISTICS_VALUATION.md",
+        "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md"
+      ],
+      "note": "Confidence tiers (HIGH, MEDIUM, LOW, INSUFFICIENT_DATA) and reason codes verified across statistics engine and C06/C07 UI. Insufficient data surfaces transparently without zero or synthetic fallbacks."
+    },
+    "AT-019": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T018_PRICE_STATISTICS_VALUATION.md",
+        "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md",
+        "docs/evidence/T021_RECYCLER_OFFER_WORKFLOWS.md"
+      ],
+      "note": "Dated 30-day trend series with honest gap preservation, price benchmark cards, and offer expiration checks verified across backend and C06 price board."
+    },
+    "AT-020": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md",
+        "docs/evidence/T030_ADMIN_DASHBOARD.md"
+      ],
+      "note": "Domain outlier evaluation using 1.5x IQR bounds without fraud accusation or collector choice blocking verified in T028; admin quote moderation UI and triage workflows verified in T030."
+    },
+    "AT-021": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T012_FACILITY_DIRECTORY.md"
+      ],
+      "note": "Verified CPCB, DPCC, MPCB, and NDMC source-backed records, facility role preservation, disclaimers, and that collection points are never relabeled as recyclers."
+    },
+    "AT-022": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T012_FACILITY_DIRECTORY.md",
+        "docs/evidence/T019_RECYCLER_MATCHING_MAPS.md"
+      ],
+      "note": "L0/L1/L2 facilities excluded from formal destination matches (VERIFICATION_INSUFFICIENT); L3/L4 with active valid status match with is_formal_destination=True. Awaiting admin quality dashboard verification in T029."
+    },
+    "AT-023": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T012_FACILITY_DIRECTORY.md",
+        "docs/evidence/T021_RECYCLER_OFFER_WORKFLOWS.md"
+      ],
+      "note": "Facility user operational profile updates (rates, availability, service area, materials) with provenance, strict admin-controlled authorizations (tampering blocked with HTTP 403), and unknown operational data preservation verified in T021. Awaiting UI in T022."
+    },
+    "AT-024": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T019_RECYCLER_MATCHING_MAPS.md",
+        "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md"
+      ],
+      "note": "Route-aware eligibility and battery isolation invariant verified: battery lot matches Eco-Battery while general e-waste (Greentech) is excluded with ROUTE_INCOMPATIBLE. Material, registration, and weight constraints exclude before ranking and before confirmation in T019 and T023."
+    },
+    "AT-025": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T019_RECYCLER_MATCHING_MAPS.md",
+        "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md"
+      ],
+      "note": "Deterministic 5-factor scoring (distance 30%, rate 30%, pickup 20%, availability 15%, reliability 5%), stable tie-breaking, and transparent factor explanations verified in Kotlin MatchingEngine and C07/C08/C09 recycler views."
+    },
+    "AT-026": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T019_RECYCLER_MATCHING_MAPS.md",
+        "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md"
+      ],
+      "note": "Empty-state matching preserves transparent exclusion counts without route switching. Offline list fallback and MapLibre geo markers verified in C08 directory."
+    },
+    "AT-027": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T021_RECYCLER_OFFER_WORKFLOWS.md"
+      ],
+      "note": "Directed lot requests with battery isolation route guard, recycler incoming queue with location privacy (coarse area only), offer quotes, rejection with reason and collector rematching to LISTED verified in T021. Awaiting recycler console UI in T022."
+    },
+    "AT-028": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T021_RECYCLER_OFFER_WORKFLOWS.md",
+        "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md"
+      ],
+      "note": "Collector offer acceptance creating atomic Transaction and initial TermsRevision, single-active-agreement invariant under race conditions, expired offer rejection, terms hash mismatch guard, price-board independence, and explicit collector acknowledgement of changed terms verified in T021 and T023."
+    },
+    "AT-029": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md",
+        "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md"
+      ],
+      "note": "Backend proposal validation and canonical hash in T023; offline UUID proposal creation with photo references, grams, location quality, timestamp, terms, and SHA-256 seal badge with PENDING_CONFIRMATION status verified in T024 via HandoverAndReceiptTest."
+    },
+    "AT-030": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-031": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md",
+        "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md"
+      ],
+      "note": "Canonical hash matches frozen fixture handover_fixture.json in both Python (T023) and Kotlin (T024); tamper rejection, key ordering, and SHA-256 seal verified. Awaiting integration test runner in T043."
+    },
+    "AT-032": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md",
+        "docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md",
+        "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md",
+        "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
+      ],
+      "note": "Capability token hashing, unauthenticated public verification endpoint with strict PII/GPS/finance redaction, statutory non-EPR notice, payment review (R05), public verification web view (V01), mobile offline QR encoding minimal unguessable verification URL without PII, and security boundary tests verified across T023, T024, T025, and T040."
+    },
+    "AT-033": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md",
+        "docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md",
+        "docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md"
+      ],
+      "note": "Measured weight/grade/price discrepancies preserve original client facts, create TermsRevision with proposed_by='FACILITY', and require explicit collector acknowledgement; documented disputes preserve history verified across T023, T025, T027, and T028."
+    },
+    "AT-034": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md",
+        "docs/evidence/T031_DATASET_EXPORTS.md"
+      ],
+      "note": "Recycler procurement logs in CSV/JSON with statutory non-EPR disclosure header and SHA-256 digest in T031; native Android A4 PDF generator (ReceiptPdfGenerator), 5-stage material passport spine (C16), and statutory Non-EPR declaration verified in T024 via HandoverAndReceiptTest."
+    },
+    "AT-035": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T026_PAYMENTS_AND_EARNINGS.md",
+        "docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md"
+      ],
+      "note": "Cash-first assertions without bank gateway, optional UPI reference recording, counterparty acknowledgement, self-acknowledgement prevention, and disputes verified in backend (T026) and mobile Compose screens C12, C13 (T027)."
+    },
+    "AT-036": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T026_PAYMENTS_AND_EARNINGS.md",
+        "docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md"
+      ],
+      "note": "Partial payment aggregation without double counting, duplicate-safe idempotency, append-only reversals linking original records without deletion, and strict closure invariants verified across T026 and T027."
+    },
+    "AT-037": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T026_PAYMENTS_AND_EARNINGS.md",
+        "docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md"
+      ],
+      "note": "Filter history/month and reconcile gross, acknowledged paid, asserted pending, and remaining dues against transactions; offline view freshness; demo partition isolation verified in T026 and T027."
+    },
+    "AT-038": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md",
+        "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md"
+      ],
+      "note": "Offline reference and local core journey verified across onboarding, lot drafting, price discovery, offline offer queuing, and outbox persistence in C01-C09, C14, C15."
+    },
+    "AT-039": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-040": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T014_SERVER_SYNC_PROTOCOL.md"
+      ],
+      "note": "Backend protocol verified in T014 (idempotent replay, conflict detection, mixed-success batches). Awaiting cross-task mobile integration in T043."
+    },
+    "AT-041": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T014_SERVER_SYNC_PROTOCOL.md",
+        "docs/evidence/T015_ANDROID_SYNC_WORKER.md"
+      ],
+      "note": "Server batch push protocol and Android SyncEngine delta transaction commit with 409 conflict handling verified in T014 and T015. Awaiting integration in T043."
+    },
+    "AT-042": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T015_ANDROID_SYNC_WORKER.md",
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
+      ],
+      "note": "WorkManager CoroutineWorker with backoff and retry in T015 connected to C14 Sync Centre UI in T017. Awaiting full fault acceptance in T043."
+    },
+    "AT-043": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T015_ANDROID_SYNC_WORKER.md",
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
+      ],
+      "note": "Outbox state transitions verified in T015 and movement board visual breakdown with itemized retries implemented in C14 (T017). Awaiting full fault acceptance testing in T043."
+    },
+    "AT-044": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T032_LICENSED_IMAGE_DATASET.md"
+      ],
+      "note": "Verified 172 curated public images across 12 defensible e-waste classes from 4 verified sources (Wikimedia Commons, Stanford TrashNet, Open Images V7, Mendeley) under CC BY-SA 4.0, MIT, and CC BY 4.0 in T032. Exact SHA-256 hashes, object-group splits with zero leakage, no fabricated field photos, and explicit coverage report documenting 9 manual fallbacks. Awaiting integration verification in T047."
+    },
+    "AT-045": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T033_ON_DEVICE_CLASSIFIER.md"
+      ],
+      "note": "Trained MobileNetV3-Small from saved configuration with leakage-free object splits, training-only augmentation, untouched-test evaluation metrics, confusion matrix, advisory threshold calibration, quantized LiteRT export, and numerical parity verified in T033. Awaiting evidence freeze in T047."
+    },
+    "AT-046": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T034_CLASSIFIER_ANDROID_FLOW.md"
+      ],
+      "note": "Bundled offline advisory LiteRT model predicts on phone with versioned preprocessing and checksum verification; advisory threshold (0.65) routes low-confidence/OOD inputs to explicit abstention; corrupt model and OOM fallback safely recoverable without crash (T034); awaiting Phase 6 evaluation in T044."
+    },
+    "AT-047": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T034_CLASSIFIER_ANDROID_FLOW.md"
+      ],
+      "note": "Separate persistence of suggestion, confidence, and model version from human label implemented in LotEntity, CreateLotParams, and LOT_CREATED domain event and outbox payloads in T034; awaiting Phase 6 reporting in T045, T047."
+    },
+    "AT-048": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T035_CONTEXTUAL_SAFETY_CONTENT.md",
+        "docs/evidence/T039_ECONOMICS_AND_SAFETY_VIEWS.md"
+      ],
+      "note": "Source-backed trilingual safety cards, non-instructional hazard copy, audio scripts, and Stitch pictogram briefs implemented in T035; Android offline Compose safety screen C17 and C05 contextual safety alert banner verified in T039 with tap-to-hear offline audio and non-instructional invariant checks passing cleanly in SafetyContentAndHubTest."
+    },
+    "AT-049": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T036_LANGUAGE_RESOURCES_AND_ACCESSIBILITY.md"
+      ],
+      "note": "Language parity across hi, mr, en verified with 0 missing keys; missing translations recorded in audit log; colloquial material aliases in place; awaiting audio clip integration in T037 and end-to-end device audit in T046."
+    },
+    "AT-050": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T037_OFFLINE_AUDIO_AND_GRAMMAR.md"
+      ],
+      "note": "258 offline audio clips generated, checksummed, and packaged in assets with dynamic spoken grammar for money/weight/rate/ranges/safety/status in Hindi and Marathi; missing-clip fallback verified in AudioGrammarAndManifestTest. Awaiting end-to-end device audit in T046."
+    },
+    "AT-051": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md",
+        "docs/evidence/T036_LANGUAGE_RESOURCES_AND_ACCESSIBILITY.md"
+      ],
+      "note": "Low-literacy accessible interactions implemented across C01-C05, C14, C15 in T017 and completed with numeral preference, TalkBack semantics (label + value + unit + status), and colloquial aliases in T036. Awaiting audio content in T037 and device usability tests in T044, T046."
+    },
+    "AT-052": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-053": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T010_MATERIAL_TAXONOMY.md",
+        "docs/evidence/T016_LOT_LIFECYCLE_BACKEND.md",
+        "docs/evidence/T031_DATASET_EXPORTS.md"
+      ],
+      "note": "Fractional kg to integer gram round-trip conversion and large weight anomaly quality flagging verified in T016; material taxonomy and alias exports with route classifications and SHA-256 seal verified in T031. Awaiting integration in T047."
+    },
+    "AT-054": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T011_PRICE_OBSERVATION_PIPELINE.md",
+        "docs/evidence/T018_PRICE_STATISTICS_VALUATION.md",
+        "docs/evidence/T031_DATASET_EXPORTS.md"
+      ],
+      "note": "Price dataset observation moderation and weighted quantiles under PRICE_V1 verified in T011 and T018; closed-loop price observation feedback from settled transactions and price exports verified in T031. Awaiting integration in T047."
+    },
+    "AT-055": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T012_FACILITY_DIRECTORY.md",
+        "docs/evidence/T021_RECYCLER_OFFER_WORKFLOWS.md",
+        "docs/evidence/T031_DATASET_EXPORTS.md"
+      ],
+      "note": "Facility operational updates and separate regulatory registry claims verified in T012 and T021; versioned facility directory export with authorization levels and battery route tags verified in T031. Awaiting regression in T047."
+    },
+    "AT-056": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md",
+        "docs/evidence/T026_PAYMENTS_AND_EARNINGS.md",
+        "docs/evidence/T031_DATASET_EXPORTS.md"
+      ],
+      "note": "Complete lot -> offer -> handover -> payment assertions/acknowledgement -> closure produces structured transaction export records without hand-inserted rows verified in T023 and T026; transaction dataset export verified in T031. Awaiting regression suite in T047."
+    },
+    "AT-057": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T031_DATASET_EXPORTS.md"
+      ],
+      "note": "Traceability domain event export with prev_hash and event_hash SHA-256 chains, aggregate IDs, and actor roles verified in T031. Awaiting integration in T047."
+    },
+    "AT-058": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T031_DATASET_EXPORTS.md",
+        "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
+      ],
+      "note": "Minimal collector dataset export with zero PII (phone numbers masked, private names and precise GPS excluded), col_anon pseudonymization, and admin-only role check verified in T031 and T040. Final release documentation in T047."
+    },
+    "AT-059": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T032_LICENSED_IMAGE_DATASET.md",
+        "docs/evidence/T033_ON_DEVICE_CLASSIFIER.md"
+      ],
+      "note": "Delivered dataset card, licensing registry, manifest, and splits summary in T032. Source, quality, size, labels, object splits, licensing, and nullable links verified. Baseline model trained and evaluated in T033. Awaiting final evidence packaging in T047."
+    },
+    "AT-060": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T031_DATASET_EXPORTS.md",
+        "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
+      ],
+      "note": "Provenance fields (origin_class, source_kind, is_demo), strict demo data partition isolation, UNMET fieldwork disclosure, statutory non-EPR banner, and CSV formula injection neutralization verified across T031 and T040."
+    },
+    "AT-061": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T031_DATASET_EXPORTS.md"
+      ],
+      "note": "Curated dataset build tool scripts/build_curated_exports.py generating all 7 curated dataset packages with deterministic SHA-256 manifest verification and data cards verified in T031."
+    },
+    "AT-062": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-063": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T031_DATASET_EXPORTS.md"
+      ],
+      "note": "Admin datasets catalog endpoint and Markdown data card retrieval conforming to docs/templates/DATA_CARD.md across all 7 families verified in T031. Awaiting evidence freeze in T047."
+    },
+    "AT-064": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T029_ADMIN_MAINTENANCE_AND_METRICS.md",
+        "docs/evidence/T030_ADMIN_DASHBOARD.md"
+      ],
+      "note": "Backend facility verification assertions, material catalog CRUD, alias management, safety guide versioning, and price moderation workflows verified in T029; React admin web UI (A03, A04) verified in T030."
+    },
+    "AT-065": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md",
+        "docs/evidence/T030_ADMIN_DASHBOARD.md"
+      ],
+      "note": "Admin data quality review APIs with filtering, single-flag drilldown, review resolution workflow, and summary metrics with true denominators verified in T028; React admin dashboard workbench (A06) verified in T030."
+    },
+    "AT-066": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T029_ADMIN_MAINTENANCE_AND_METRICS.md",
+        "docs/evidence/T030_ADMIN_DASHBOARD.md"
+      ],
+      "note": "Platform overview and metrics endpoints deriving from persisted tables with real denominators, demo data isolation, honest mass label 'received, not recycled', and explicit UNMET fieldwork provenance verified in T029; React analytics UI (A01, A07) verified in T030."
+    },
+    "AT-067": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T038_ILLUSTRATIVE_ECONOMICS.md",
+        "docs/evidence/T039_ECONOMICS_AND_SAFETY_VIEWS.md"
+      ],
+      "note": "Same-lot comparison engine, integer paise arithmetic, sensitivity parameters, non-trivial zero/negative baseline handling, and REST APIs verified in T038; interactive U01 web economics workspace matching Stitch design cab89a974c04 verified in T039 with dynamic recalculation sliders, waterfall chart, zero-baseline safety, and zero collector fee guarantee verified in U01_UnitEconomics.test."
+    },
+    "AT-068": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T038_ILLUSTRATIVE_ECONOMICS.md"
+      ],
+      "note": "Platform sustainability model with 0 collector fee guarantee, downstream recycler fee economics, variable/fixed cost sensitivity, break-even transaction calculations, and explicit illustrative disclaimers verified in T038. Awaiting presentation deck and demo video in T048."
+    },
+    "AT-069": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-070": {
+      "status": "UNMET",
+      "evidence": [],
+      "note": "Primary fieldwork not conducted; owner chose secondary research."
+    },
+    "AT-071": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T031_DATASET_EXPORTS.md"
+      ],
+      "note": "Statutory non-EPR disclosure notice present in HTTP response headers and CSV export comment headers, and Digital Handover Record platform labeling verified in T031. Awaiting presentation deck in T048."
+    },
+    "AT-072": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
+      ],
+      "note": "PIN brute-force lockout (429 with Retry-After), uniform 401 user enumeration prevention, session rotation, replay revocation, and repository secrets scan (0 found) verified in T040. Production transport and CORS verified in T041."
+    },
+    "AT-073": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md",
+        "docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md"
+      ],
+      "note": "Private image authorization, EXIF metadata stripping, signed URL expiration, path traversal prevention, and oversized upload rejection verified in T040. Cryptographic backup/restore, tampering detection, and media audit retention verified in T042."
+    },
+    "AT-074": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-075": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md"
+      ],
+      "note": "Reproducible local Docker Compose environment with PostGIS, Android release HTTPS vs debug LAN network security configuration, cryptographic database/media backup and restore, and web manual reference lookup fallback verified in T042."
+    },
+    "AT-076": {
+      "status": "NOT_RUN",
+      "evidence": [
+        "docs/evidence/T037_OFFLINE_AUDIO_AND_GRAMMAR.md"
+      ],
+      "note": "Pre-generated offline audio eliminates runtime cloud speech/TTS API dependency; free Edge-TTS workflow documented with open-access license attribution; awaiting multi-service runtime dependency audit in T043."
+    },
+    "AT-077": {
+      "status": "PASS",
+      "evidence": [
+        "docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md",
+        "docs/evidence/T029_ADMIN_MAINTENANCE_AND_METRICS.md",
+        "docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md"
+      ],
+      "note": "Data quality anomaly rules, admin maintenance APIs, /health/live and /health/ready probes with zero credential leakage, X-Correlation-ID request tracking, and structured redacted access logging verified across T028, T029, and T042."
+    },
+    "AT-078": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-079": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "AT-080": {
+      "status": "NOT_RUN",
+      "evidence": [],
+      "note": ""
+    },
+    "FT-001": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-002": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-003": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-004": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-005": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-006": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-007": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-008": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-009": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-010": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-011": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-012": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-013": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-014": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-015": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-016": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-017": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    },
+    "FT-018": {
+      "status": "DEFERRED",
+      "evidence": [],
+      "note": "Outside current release, retained for completeness."
+    }
+  }
+}

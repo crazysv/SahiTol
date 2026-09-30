@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_blank" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-container": "#fffbff",
+          "inverse-on-surface": "#f3f0ea",
+          "surface-container-low": "#f6f3ed",
+          "on-error-container": "#93000a",
+          "inverse-surface": "#31312d",
+          "surface-container-high": "#ebe8e2",
+          "surface-container": "#f0eee8",
+          "tertiary-container": "#7a7371",
+          "surface-container-lowest": "#ffffff",
+          "on-secondary-fixed-variant": "#574500",
+          "on-primary": "#ffffff",
+          "surface-bright": "#fcf9f3",
+          "outline": "#8a726a",
+          "tertiary-fixed": "#eae0de",
+          "surface-container-highest": "#e5e2dc",
+          "surface": "#fcf9f3",
+          "on-tertiary": "#ffffff",
+          "secondary-fixed-dim": "#e9c349",
+          "on-primary-fixed": "#390c00",
+          "primary-fixed-dim": "#ffb59c",
+          "on-secondary-fixed": "#241a00",
+          "secondary": "#735c00",
+          "on-tertiary-fixed-variant": "#4b4544",
+          "on-primary-container": "#fffbff",
+          "surface-dim": "#dcdad4",
+          "on-secondary": "#ffffff",
+          "surface-variant": "#e5e2dc",
+          "secondary-container": "#fed65b",
+          "primary-container": "#bf542c",
+          "tertiary-fixed-dim": "#cec4c3",
+          "surface-tint": "#a23e18",
+          "on-error": "#ffffff",
+          "inverse-primary": "#ffb59c",
+          "error": "#ba1a1a",
+          "on-background": "#1c1c18",
+          "outline-variant": "#dec0b7",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed-root": "#1f1b1a",
+          "on-surface-variant": "#57423b",
+          "on-primary-fixed-variant": "#822801",
+          "primary": "#9f3c16",
+          "primary-fixed": "#ffdbcf",
+          "tertiary": "#615a59",
+          "secondary-fixed": "#ffe088",
+          "background": "#fcf9f3",
+          "on-surface": "#1c1c18",
+          "on-secondary-container": "#745c00"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "gutter": "16px",
+          "space-lg": "24px",
+          "space-sm": "8px",
+          "space-xs": "4px",
+          "space-md": "16px",
+          "space-xl": "32px",
+          "margin": "16px"
+        },
+        "fontFamily": {
+          "body-md": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "headline-md": ["Sora"],
+          "headline-lg-mobile": ["Sora"],
+          "headline-lg": ["Sora"],
+          "label-sm": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Sora"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "label-lg": ["Plus Jakarta Sans"],
+          "headline-xl": ["Sora"]
+        },
+        "fontSize": {
+          "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+          "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+          "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+          "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+          "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+          "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],
+          "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+          "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+          "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+          "label-lg": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],
+          "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }]
+        }
+      }
+    }
+  }
+</script><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface pt-safe pb-safe flex flex-col min-h-screen"><main class="flex flex-col relative w-full px-gutter bg-surface flex-1"><div class="flex flex-col w-full pb-16">
+<!-- Offline Continuation Badge -->
+<div class="hidden my-2 p-2 bg-tertiary-container text-on-tertiary-container rounded-lg flex items-center justify-center gap-2 text-label-sm shadow-sm transition-all duration-300" id="offline-badge">
+<span class="material-symbols-outlined text-[18px]">signal_wifi_off</span>
+<span>ऑफलाइन मोड सक्रिय — स्थानीय डेटा उपयोग हो रहा है</span>
+</div>
+<!-- Hero Header with conversational warm tone -->
+<div class="my-space-md p-space-lg bg-surface-container rounded-xl shadow-sm flex flex-col gap-space-sm relative overflow-hidden">
+<div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-primary/10 pointer-events-none"></div>
+<div class="flex items-center gap-2 text-primary font-label-md">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span>कबाड़ साथी • सुरक्षित पहचान</span>
+</div>
+<h1 class="font-headline-lg-mobile text-on-surface">नमस्ते जी! अपना फोन नंबर दर्ज करें</h1>
+<p class="font-body-md text-on-surface-variant">बिना किसी झंझट के तुरंत लॉगिन करें या नया खाता बनाएं।</p>
+</div>
+<!-- Main Authentication & Profile Flow Container -->
+<div class="flex flex-col gap-space-lg" id="auth-flow-container">
+<!-- Step 1: Phone Input Card -->
+<div class="flex flex-col gap-space-md p-space-lg bg-surface-container-low rounded-xl shadow-sm" id="step-phone">
+<label class="font-label-lg text-on-surface flex items-center justify-between" for="phone-input">
+<span>मोबाइल नंबर / Mobile Number</span>
+<span class="text-label-sm text-primary">10 अंक</span>
+</label>
+<div class="relative flex items-center">
+<span class="absolute left-4 font-headline-md text-on-surface-variant">+91</span>
+<input class="w-full pl-16 pr-4 py-4 bg-surface-bright text-headline-md text-on-surface rounded-xl focus:outline-none focus:ring-2 focus:ring-primary shadow-inner tracking-widest placeholder:text-outline/40" id="phone-input" maxlength="10" placeholder="98765 43210" type="tel"/>
+</div>
+<button class="w-full h-14 bg-primary text-on-primary font-label-lg rounded-xl flex items-center justify-center gap-2 shadow-md active:scale-[0.99] transition-transform" onclick="proceedToPin()">
+<span>आगे बढ़ें</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<!-- Privacy Reassurance Text -->
+<div class="flex items-center justify-center gap-1.5 pt-2 text-outline text-label-sm text-center">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>आपका डेटा केवल आपके फोन पर सुरक्षित है। कोई आधार/पैन नहीं।</span>
+</div>
+</div>
+<!-- Step 2: PIN Input Card (Initially Hidden) -->
+<div class="hidden flex flex-col gap-space-md p-space-lg bg-surface-container-low rounded-xl shadow-sm transition-all" id="step-pin">
+<div class="flex items-center justify-between">
+<div>
+<span class="text-label-sm text-primary">सुरक्षा पिन</span>
+<h2 class="font-headline-md text-on-surface">4-अंकों का पिन दर्ज करें</h2>
+</div>
+<button class="text-label-sm text-outline underline" onclick="backToPhone()">बदले नंबर</button>
+</div>
+<!-- Wrong PIN Error Banner (Initially Hidden with Shake Cue simulation) -->
+<div class="hidden p-3 bg-error-container text-on-error-container rounded-lg flex items-center gap-2 text-body-sm animate-bounce" id="error-banner">
+<span class="material-symbols-outlined text-[20px]">error</span>
+<span id="error-msg">गलत पिन! कृपया दोबारा कोशिश करें।</span>
+</div>
+<!-- PIN 4-box representation with large numeric input -->
+<div class="relative flex justify-center py-2">
+<input class="absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer" id="pin-input" inputmode="numeric" maxlength="4" oninput="handlePinInput(this)" pattern="[0-9]*" type="password"/>
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-surface-bright rounded-xl flex items-center justify-center font-headline-lg text-on-surface shadow-sm" id="pin-box-0">-</div>
+<div class="w-14 h-14 bg-surface-bright rounded-xl flex items-center justify-center font-headline-lg text-on-surface shadow-sm" id="pin-box-1">-</div>
+<div class="w-14 h-14 bg-surface-bright rounded-xl flex items-center justify-center font-headline-lg text-on-surface shadow-sm" id="pin-box-2">-</div>
+<div class="w-14 h-14 bg-surface-bright rounded-xl flex items-center justify-center font-headline-lg text-on-surface shadow-sm" id="pin-box-3">-</div>
+</div>
+</div>
+<!-- Throttling Countdown Timer (Initially Hidden) -->
+<div class="hidden text-center text-label-sm text-error font-semibold" id="throttle-timer">
+        30 सेकंड बाद दोबारा कोशिश करें
+      </div>
+<div class="flex gap-3 pt-2">
+<button class="flex-1 h-14 bg-primary text-on-primary font-label-lg rounded-xl flex items-center justify-center gap-2 shadow-md" onclick="verifyPin()">
+<span>लॉगिन करें</span>
+<span class="material-symbols-outlined">check</span>
+</button>
+</div>
+<div class="text-center pt-1">
+<button class="text-label-sm text-primary underline" onclick="triggerReauth()">पिन भूल गए? नया बनाएं</button>
+</div>
+</div>
+<!-- Step 3: Minimal Profile Setup (Initially Hidden) -->
+<div class="hidden flex flex-col gap-space-md p-space-lg bg-surface-container-low rounded-xl shadow-sm" id="step-profile">
+<div>
+<span class="text-label-sm text-primary">अंतिम चरण</span>
+<h2 class="font-headline-md text-on-surface">अपनी पहचान सेट करें</h2>
+</div>
+<!-- Essential Field 1: Alias -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface">उपनाम / नांव (Alias)</label>
+<input class="w-full px-4 py-3 bg-surface-bright font-body-md text-on-surface rounded-xl focus:outline-none focus:ring-2 focus:ring-primary shadow-inner" placeholder="जैसे: राहुल कबाड़वाला" type="text"/>
+</div>
+<!-- Essential Field 2: Language -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface">पसंदीदा भाषा (Language)</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="lang-btn p-3 bg-primary text-on-primary font-label-md rounded-xl text-center shadow-sm" onclick="selectLang(this)" type="button">हिंदी</button>
+<button class="lang-btn p-3 bg-surface-bright text-on-surface font-label-md rounded-xl text-center shadow-sm" onclick="selectLang(this)" type="button">English</button>
+<button class="lang-btn p-3 bg-surface-bright text-on-surface font-label-md rounded-xl text-center shadow-sm" onclick="selectLang(this)" type="button">मराठी</button>
+</div>
+</div>
+<!-- Essential Field 3: General Area -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface">सामान्य क्षेत्र / General Area</label>
+<select class="w-full px-4 py-3 bg-surface-bright font-body-md text-on-surface rounded-xl focus:outline-none focus:ring-2 focus:ring-primary shadow-inner">
+<option>क्षेत्र चुनें (Select Area)...</option>
+<option>उत्तर दिल्ली (North Delhi)</option>
+<option>दक्षिण मुंबई (South Mumbai)</option>
+<option>पूर्वी बेंगलुरु (East Bengaluru)</option>
+<option>अन्य क्षेत्र (Other Area)</option>
+</select>
+</div>
+<button class="w-full h-14 bg-primary text-on-primary font-label-lg rounded-xl flex items-center justify-center gap-2 shadow-md mt-2" onclick="completeProfile()">
+<span>शुरू करें (Let's Go)</span>
+<span class="material-symbols-outlined">done_all</span>
+</button>
+</div>
+</div>
+<!-- Delightful Interactive Script Logic -->
+<script>
+    function proceedToPhone() {
+      // Basic validation simulation
+      const phoneInput = document.getElementById('phone-input');
+      if(phoneInput.value.length < 10) {
+        phoneInput.classList.add('ring-2', 'ring-error');
+        setTimeout(() => phoneInput.classList.remove('ring-error'), 1000);
+        return;
+      }
+      document.getElementById('step-phone').classList.add('hidden');
+      document.getElementById('step-pin').classList.remove('hidden');
+      document.getElementById('pin-input').focus();
+    }
+
+    function backToPhone() {
+      document.getElementById('step-pin').classList.add('hidden');
+      document.getElementById('step-phone').classList.remove('hidden');
+    }
+
+    function handlePinInput(el) {
+      const val = el.value;
+      for(let i=0; i<4; i++) {
+        const box = document.getElementById('pin-box-' + i);
+        if(val[i]) {
+          box.innerText = '•';
+          box.classList.add('bg-primary-fixed', 'text-on-primary-fixed');
+        } else {
+          box.innerText = '-';
+          box.classList.remove('bg-primary-fixed', 'text-on-primary-fixed');
+        }
+      }
+      if(val.length === 4) {
+        verifyPin();
+      }
+    }
+
+    function verifyPin() {
+      const pinVal = document.getElementById('pin-input').value;
+      // Simulate wrong pin for demo if pin is '0000' or similar, else go to profile
+      if(pinVal === '1234') {
+        document.getElementById('step-pin').classList.add('hidden');
+        document.getElementById('step-profile').classList.remove('hidden');
+      } else {
+        // Show wrong PIN banner with shake cue
+        const errorBanner = document.getElementById('error-banner');
+        errorBanner.classList.remove('hidden');
+        const pinContainer = document.getElementById('step-pin');
+        pinContainer.classList.add('animate-pulse');
+        setTimeout(() => pinContainer.classList.remove('animate-pulse'), 500);
+
+        // Test throttle scenario simulation
+        document.getElementById('throttle-timer').classList.remove('hidden');
+        let timeLeft = 30;
+        const timerInterval = setInterval(() => {
+          timeLeft--;
+          document.getElementById('throttle-timer').innerText = timeLeft + ' सेकंड बाद दोबारा कोशिश करें';
+          if(timeLeft <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById('throttle-timer').classList.add('hidden');
+          }
+        }, 1000);
+      }
+    }
+
+    function selectLang(btn) {
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.remove('bg-primary', 'text-on-primary');
+        b.classList.add('bg-surface-bright', 'text-on-surface');
+      });
+      btn.classList.remove('bg-surface-bright', 'text-on-surface');
+      btn.classList.add('bg-primary', 'text-on-primary');
+    }
+
+    function triggerReauth() {
+      alert("पुनः प्रमाणीकरण लिंक आपके नंबर पर भेजा गया है।");
+    }
+
+    function completeProfile() {
+      alert("प्रोफाइल सफलतापूर्वक सहेजा गया! स्वागत है।");
+    }
+
+    // Simulate occasional offline detection for badge demo
+    window.addEventListener('offline', () => {
+      document.getElementById('offline-badge').classList.remove('hidden');
+    });
+  </script>
+</div></main></body></html>

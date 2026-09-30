@@ -1,0 +1,28 @@
+[
+  {
+    "ack_at": "2026-09-29T09:10:00Z",
+    "amount_inr": 15264.0,
+    "amount_paise": 1526400,
+    "asserted_by": "FACILITY",
+    "created_at": "2026-09-29T09:05:00Z",
+    "is_reversal": false,
+    "payment_id": "pay-entry-001",
+    "payment_method": "CASH",
+    "reverses_entry_id": null,
+    "state": "ACKNOWLEDGED",
+    "transaction_id": "tx-f1001-c01-001"
+  },
+  {
+    "ack_at": "2026-09-28T11:40:00Z",
+    "amount_inr": 94250.0,
+    "amount_paise": 9425000,
+    "asserted_by": "FACILITY",
+    "created_at": "2026-09-28T11:35:00Z",
+    "is_reversal": false,
+    "payment_id": "pay-entry-002",
+    "payment_method": "UPI",
+    "reverses_entry_id": null,
+    "state": "ACKNOWLEDGED",
+    "transaction_id": "tx-f1001-c02-002"
+  }
+]

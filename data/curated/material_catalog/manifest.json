@@ -1,0 +1,52 @@
+{
+  "dataset_family": "material_catalog",
+  "schema_version": "v1.0",
+  "data_version": "v1.0-curated",
+  "generated_at": "2026-09-28T21:27:54.938725+00:00",
+  "total_records": 21,
+  "files": [
+    {
+      "filename": "material_catalog.csv",
+      "sha256": "03499126c2710918fa17f8db096f89a996211e9ea5f5a3afd58f20fd8d725e8d",
+      "byte_size": 5456,
+      "row_count": 21
+    },
+    {
+      "filename": "material_catalog.json",
+      "sha256": "534b7e18f780fad7b102cf558bd5c4b5bdf124ae16d6837ed7f81852b9102b6b",
+      "byte_size": 12872,
+      "row_count": 21
+    },
+    {
+      "filename": "material_aliases.json",
+      "sha256": "9f6b940ae4a2f97fa461a55c00be40db28c72091191028bcc83565ddb08b1905",
+      "byte_size": 25047,
+      "row_count": 139
+    },
+    {
+      "filename": "safety_guides.json",
+      "sha256": "597e11b496620bdd6edfc81814593ff1b0dd53e1f3dd327973ca8ab9a64643ec",
+      "byte_size": 4926,
+      "row_count": 9
+    }
+  ],
+  "counts_by_origin_class": {
+    "OFFICIAL": 21
+  },
+  "counts_by_source_kind": {
+    "GOVERNMENT_PUBLICATION": 21
+  },
+  "counts_by_is_demo": {
+    "false": 21
+  },
+  "counts_by_review_status": {
+    "APPROVED": 21
+  },
+  "quarantined_count": 0,
+  "source_ids": [
+    "SRC-01",
+    "SRC-02"
+  ],
+  "validation_status": "VALID",
+  "limitations": "Desk-researched regulatory baseline mapped to CPCB E-Waste Rules 2022 & Battery Waste Rules 2022. Informal street alias verification completed via desk research; field validation with live collectors pending (R-RES-02 explicitly unmet)."
+}

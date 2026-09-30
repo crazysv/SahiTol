@@ -1,0 +1,111 @@
+# render.yaml — SahiTol Render Blueprint
+# Defines two services: FastAPI API and static web frontend.
+# Owner must create a Render account, connect the Git repo, and supply secrets
+# before clicking "Apply" or deploying manually.
+# See docs/DEPLOYMENT.md and docs/11_SECRETS_CHECKLIST.md.
+#
+# Do NOT commit real DATABASE_URL, JWT_SECRET_KEY, PIN_PEPPER, or
+# SUPABASE_SERVICE_ROLE_KEY. Set these via the Render dashboard secrets.
+
+services:
+  # ── FastAPI Backend ─────────────────────────────────────────────────────────
+  - type: web
+    name: sahitol-api
+    runtime: docker
+    dockerfilePath: infra/Dockerfile.api
+    dockerContext: .
+    plan: free          # Review free-plan limits at render.com/docs/free
+    region: singapore   # Choose closest to users (India → Singapore or ap-south-1)
+    numInstances: 1
+
+    # Health check — must match /health/live endpoint implemented in T042
+    healthCheckPath: /health/live
+
+    # Ordered startup: migrate then start server (idempotent, never destructive)
+    startCommand: >-
+      alembic upgrade head &&
+      python scripts/seed_production.py &&
+      uvicorn app.main:app
+      --host 0.0.0.0
+      --port 10000
+      --workers 2
+      --proxy-headers
+      --forwarded-allow-ips='*'
+      --log-level info
+
+    envVars:
+      # ── Database (Supabase PostgreSQL + PostGIS) ───────────────────────────
+      - key: DATABASE_URL
+        sync: false          # Set in dashboard: postgresql+psycopg://...?sslmode=require
+
+      - key: MIGRATION_DATABASE_URL
+        sync: false          # Same or migration-role URL with PostGIS CREATE EXTENSION rights
+
+      # ── Security ──────────────────────────────────────────────────────────
+      - key: JWT_SECRET_KEY
+        generateValue: true  # Render generates a strong random value
+
+      - key: JWT_ALGORITHM
+        value: HS256
+
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "60"
+
+      - key: REFRESH_TOKEN_EXPIRE_DAYS
+        value: "30"
+
+      - key: PIN_PEPPER
+        generateValue: true  # 32-byte random; rotate only with a documented migration
+
+      # ── Storage (Supabase private bucket) ─────────────────────────────────
+      - key: STORAGE_BACKEND
+        value: supabase
+
+      - key: SUPABASE_URL
+        sync: false          # e.g. https://xyzabcdef.supabase.co
+
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false          # Service-role key — never sent to browser or APK
+
+      - key: SUPABASE_STORAGE_BUCKET
+        value: sahitol-media
+
+      - key: LOCAL_MEDIA_ROOT
+        value: /tmp/media    # Ephemeral fallback only; not authoritative in production
+
+      # ── Networking ────────────────────────────────────────────────────────
+      - key: PUBLIC_API_BASE_URL
+        value: https://sahitol-api.onrender.com   # Update after first deploy
+
+      - key: PUBLIC_WEB_BASE_URL
+        value: https://sahitol.pages.dev          # Update after Pages deploy
+
+      - key: CORS_ORIGINS
+        value: https://sahitol.pages.dev,https://sahitol-api.onrender.com
+
+      # ── Demo isolation ────────────────────────────────────────────────────
+      - key: DEMO_MODE
+        value: "true"
+
+      - key: DEMO_TENANT_ID
+        value: demo-tenant-0001
+
+      # ── Runtime ───────────────────────────────────────────────────────────
+      - key: ENVIRONMENT
+        value: production
+
+      - key: DEBUG
+        value: "false"
+
+  # ── React/Vite Web Frontend (Cloudflare Pages recommended; Render static fallback)
+  # Cloudflare Pages deployment is managed via Pages dashboard (connect repo,
+  # set build command and output directory below). This entry is for reference only;
+  # Render does not currently support Pages-style static sites in blueprints.
+  #
+  # Build command:  npm ci && npm run build
+  # Output dir:     dist
+  # Root dir:       apps/web
+  # Env vars:
+  #   VITE_API_BASE_URL = https://sahitol-api.onrender.com
+  #   VITE_APP_TITLE    = SahiTol Console
+  #   VITE_ENABLE_DEMO_LOGIN = true

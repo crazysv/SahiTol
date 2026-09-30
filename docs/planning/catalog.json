@@ -1,0 +1,3271 @@
+{
+  "version": 2,
+  "date": "2026-09-28",
+  "tasks": [
+    {
+      "id": "T001",
+      "phase": 0,
+      "title": "Bootstrap repository and compatible toolchain",
+      "dependencies": [],
+      "reading": [
+        "docs/03_TECHSPEC.md",
+        "docs/09_DECISIONS.md",
+        "docs/11_SECRETS_CHECKLIST.md"
+      ],
+      "output": "Create Android/API/web project skeletons without inventing UI; pin a tested toolchain and dependency locks; add environment examples, PostGIS Compose service, CI lint/test/build jobs and documented commands.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T002",
+      "phase": 0,
+      "title": "Obtain and register owner-generated Stitch designs",
+      "dependencies": [],
+      "reading": [
+        "docs/05_DESIGN_STITCH.md",
+        "docs/04_APPFLOW.md"
+      ],
+      "output": "Present the prepared screen briefs by batch; owner generates screens; read the designated Stitch project through MCP; save screen IDs, revisions and approved state coverage in design/stitch/SCREEN_REGISTRY.md. Repeat this gate for later batches; the initial spike needs S00 only.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T003",
+      "phase": 0,
+      "title": "Prove Android feasibility on a real phone",
+      "dependencies": [
+        "T001",
+        "T002"
+      ],
+      "reading": [
+        "docs/03_TECHSPEC.md",
+        "docs/19_AI_ML.md",
+        "docs/05_DESIGN_STITCH.md"
+      ],
+      "output": "Implement approved S00 diagnostic screen; capture/compress photo, save/read Room row after restart, run a bundled LiteRT baseline prediction in airplane mode, record phone/toolchain/APK evidence. Baseline prediction is not the trained SahiTol classifier. Failure is a visible blocker, never automatic PWA substitution.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T004",
+      "phase": 0,
+      "title": "Complete secondary-research and source register",
+      "dependencies": [],
+      "reading": [
+        "docs/21_RESEARCH_EVIDENCE.md",
+        "docs/22_REGULATORY_SAFETY.md",
+        "docs/PROBLEM_STATEMENT.md"
+      ],
+      "output": "Build 5–7 attributed desk-research insight cards and 2–3 labelled personas; retain source/date/scope/limitations, link insights to requirement IDs; record primary fieldwork as not conducted and check the authenticated official brief/cutoff when available.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T005",
+      "phase": 1,
+      "title": "Build reproducible data import and validation tools",
+      "dependencies": [
+        "T001"
+      ],
+      "reading": [
+        "docs/18_DATA_PROVENANCE.md",
+        "docs/06_SCHEMA.md"
+      ],
+      "output": "Implement PDF/CSV/JSON import staging, pandas cleaning, field-level lineage, cached geocoding with provider policy, validation/quarantine, duplicate detection, reproducible seed and synthetic scripts. Invalid records must remain inspectable and never count as accepted.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T006",
+      "phase": 1,
+      "title": "Implement PostgreSQL/PostGIS schema and migrations",
+      "dependencies": [
+        "T001"
+      ],
+      "reading": [
+        "docs/06_SCHEMA.md",
+        "docs/16_API_CONTRACT.md",
+        "docs/04_APPFLOW.md"
+      ],
+      "output": "Create tables, indexes, route/role constraints, integer money/weight, immutable events, versions and sync results. Test migration on empty DB and upgrade fixtures; verify extension and private DB permissions locally and hosted.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T007",
+      "phase": 1,
+      "title": "Implement phone/PIN authentication and ownership",
+      "dependencies": [
+        "T006"
+      ],
+      "reading": [
+        "docs/16_API_CONTRACT.md",
+        "docs/12_GUARDRAILS.md",
+        "docs/11_SECRETS_CHECKLIST.md"
+      ],
+      "output": "Implement Argon2id PIN storage, rate-limited phone/PIN login, rotating/revocable session flow, COLLECTOR/RECYCLER/ADMIN authorization, device scoping, explicit isolated demo access, online first activation and secure Android session continuation contract.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T008",
+      "phase": 1,
+      "title": "Implement private media storage adapter",
+      "dependencies": [
+        "T006",
+        "T007"
+      ],
+      "reading": [
+        "docs/06_SCHEMA.md",
+        "docs/16_API_CONTRACT.md",
+        "docs/DEPLOYMENT.md"
+      ],
+      "output": "Implement local-volume and Supabase-private-storage adapters; bounded image upload/validation/checksum, short-lived authorized access, missing-upload recovery and PDF storage. No permanent files on the free API host filesystem.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T009",
+      "phase": 1,
+      "title": "Implement versioned reference bootstrap and delta APIs",
+      "dependencies": [
+        "T006",
+        "T007"
+      ],
+      "reading": [
+        "docs/16_API_CONTRACT.md",
+        "docs/17_OFFLINE_SYNC.md"
+      ],
+      "output": "Expose material/alias/safety/price/directory snapshots with versions, policy parameters, source timestamps, tombstones, expiry and opaque cursor; filter by region and role; provide labelled bundled demo cache for first offline launch.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T010",
+      "phase": 1,
+      "title": "Curate material taxonomy and language aliases",
+      "dependencies": [
+        "T004",
+        "T005",
+        "T006"
+      ],
+      "reading": [
+        "docs/18_DATA_PROVENANCE.md",
+        "docs/22_REGULATORY_SAFETY.md",
+        "docs/14_TRANSLATION_AUDIO_AUDIT.md"
+      ],
+      "output": "Seed every PS-named material, battery chemistry and UNKNOWN/OTHER; separate reference catalog from observed lot material; attach route, contextual safety, units, condition and hi/mr/en aliases. Add provenance-dependent routing for plastics/mixed waste.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T011",
+      "phase": 1,
+      "title": "Create attributed price seed and observation pipeline",
+      "dependencies": [
+        "T004",
+        "T005",
+        "T006",
+        "T010"
+      ],
+      "reading": [
+        "docs/18_DATA_PROVENANCE.md",
+        "docs/03_TECHSPEC.md"
+      ],
+      "output": "Import dated public buying/quoted/selling observations, unit/geography/condition/source metadata and licence/usage notes; partition demo series; add authenticated observation entry and review. Never fill missing live prices with synthetic rows.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T012",
+      "phase": 1,
+      "title": "Build Delhi-NCR and Maharashtra facility directory",
+      "dependencies": [
+        "T004",
+        "T005",
+        "T006",
+        "T010"
+      ],
+      "reading": [
+        "docs/18_DATA_PROVENANCE.md",
+        "docs/22_REGULATORY_SAFETY.md"
+      ],
+      "output": "Import small CPCB/DPCC/MPCB subsets; preserve facility role, registry/list date, route registration, validity, material acceptance evidence and field lineage; review geocodes, deduplicate facilities, and mark unknown pickup/rates as unknown.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T013",
+      "phase": 2,
+      "title": "Implement Android Room repositories and durable outbox",
+      "dependencies": [
+        "T003",
+        "T006"
+      ],
+      "reading": [
+        "docs/17_OFFLINE_SYNC.md",
+        "docs/06_SCHEMA.md"
+      ],
+      "output": "Implement local entities, migrations, atomic object+event+outbox write, staged image persistence, cache reads, user partition and logout preservation. Prove process death cannot show a saved record that was lost.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T014",
+      "phase": 2,
+      "title": "Implement server synchronization protocol",
+      "dependencies": [
+        "T006",
+        "T007",
+        "T008",
+        "T009"
+      ],
+      "reading": [
+        "docs/17_OFFLINE_SYNC.md",
+        "docs/16_API_CONTRACT.md"
+      ],
+      "output": "Implement push per-operation responses, dependency ordering, expected versions, payload fingerprints, atomic idempotency storage and pull deltas/tombstones. Prove crash-after-commit retry produces one domain effect.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T015",
+      "phase": 2,
+      "title": "Implement Android background and manual synchronization",
+      "dependencies": [
+        "T013",
+        "T014"
+      ],
+      "reading": [
+        "docs/17_OFFLINE_SYNC.md",
+        "docs/04_APPFLOW.md"
+      ],
+      "output": "Drain durable outbox through unique WorkManager jobs, network constraints/backoff and foreground/manual action; handle 401/409/422/429/5xx, partial media uploads and ACK loss; persist cursors only after local transaction commit.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T016",
+      "phase": 2,
+      "title": "Implement lot and lifecycle backend",
+      "dependencies": [
+        "T006",
+        "T007",
+        "T008",
+        "T010",
+        "T014"
+      ],
+      "reading": [
+        "docs/06_SCHEMA.md",
+        "docs/04_APPFLOW.md",
+        "docs/16_API_CONTRACT.md"
+      ],
+      "output": "Create/update/list/cancel lot commands with owner checks, positive weight and validation, immutable estimates/suggestions, location quality, photos and transition events; prohibit direct arbitrary status PATCH.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T017",
+      "phase": 2,
+      "title": "Implement approved collector onboarding and lot screens",
+      "dependencies": [
+        "T002",
+        "T007",
+        "T009",
+        "T013",
+        "T015",
+        "T016"
+      ],
+      "reading": [
+        "docs/05_DESIGN_STITCH.md",
+        "docs/04_APPFLOW.md",
+        "docs/14_TRANSLATION_AUDIO_AUDIT.md"
+      ],
+      "output": "Implement C01–C05,C14,C15 as approved Compose screens; use Room-only reads, photo permission/import fallback, manual material selection, condition/weight, resumable drafts, local save result, language/session/sync states. Model integration arrives in T034.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T018",
+      "phase": 3,
+      "title": "Implement price statistics and snapshot valuation",
+      "dependencies": [
+        "T011",
+        "T016"
+      ],
+      "reading": [
+        "docs/03_TECHSPEC.md",
+        "docs/06_SCHEMA.md",
+        "docs/16_API_CONTRACT.md"
+      ],
+      "output": "Implement comparable observation filtering, weighted quantiles, confidence, history, sparse/stale/missing handling and per-lot immutable valuation snapshots. Publish shared fixtures for Python/Kotlin parity and preserve quote vs final amount semantics.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T019",
+      "phase": 3,
+      "title": "Implement eligible recycler matching and map data",
+      "dependencies": [
+        "T012",
+        "T018"
+      ],
+      "reading": [
+        "docs/03_TECHSPEC.md",
+        "docs/22_REGULATORY_SAFETY.md",
+        "docs/16_API_CONTRACT.md"
+      ],
+      "output": "Implement hard route/material/status/service/weight filters, PostGIS distance, normalized scoring and explanation, missing-data rules, top candidates and no-match behavior; publish offline parity fixtures and cache policy.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T020",
+      "phase": 3,
+      "title": "Implement approved collector price and recycler views",
+      "dependencies": [
+        "T002",
+        "T017",
+        "T018",
+        "T019",
+        "T021"
+      ],
+      "reading": [
+        "docs/05_DESIGN_STITCH.md",
+        "docs/04_APPFLOW.md"
+      ],
+      "output": "Implement C06–C09: board/trends, source details, observation entry, estimates, quote comparisons, directory/list/details and online map; cache age, no price/no match and permission-denied states; selection offline is intent only.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T021",
+      "phase": 3,
+      "title": "Implement recycler profile and offer workflows",
+      "dependencies": [
+        "T007",
+        "T016",
+        "T019"
+      ],
+      "reading": [
+        "docs/16_API_CONTRACT.md",
+        "docs/04_APPFLOW.md",
+        "docs/06_SCHEMA.md"
+      ],
+      "output": "Implement facility-user linkage, self-declared operational profile, material/rate/pickup updates, incoming requests, offer/reject/expiry, collector acceptance with one active agreement, cancellation and immutable terms.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T022",
+      "phase": 3,
+      "title": "Implement approved recycler console and phone layout",
+      "dependencies": [
+        "T002",
+        "T021"
+      ],
+      "reading": [
+        "docs/05_DESIGN_STITCH.md",
+        "docs/04_APPFLOW.md",
+        "docs/12_GUARDRAILS.md"
+      ],
+      "output": "Implement R01–R03,R06,R07 responsive React/Vite views for authorized facility users; incoming/lot evidence/offer/profile/history interactions; R07 export wiring is completed in T031; work on borrowed second Android phone without a separate recycler APK.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T023",
+      "phase": 4,
+      "title": "Implement handover proposals and confirmations",
+      "dependencies": [
+        "T014",
+        "T021"
+      ],
+      "reading": [
+        "docs/04_APPFLOW.md",
+        "docs/16_API_CONTRACT.md",
+        "docs/17_OFFLINE_SYNC.md"
+      ],
+      "output": "Implement pending proposal, canonical payload/hash/event chain, authenticated recycler confirmation, collector acknowledgement of changes, duplicate-safe outcome, disputes and immutable revision links; create minimal public verification response.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T024",
+      "phase": 4,
+      "title": "Implement approved offline QR and collector receipt",
+      "dependencies": [
+        "T002",
+        "T017",
+        "T023"
+      ],
+      "reading": [
+        "docs/05_DESIGN_STITCH.md",
+        "docs/17_OFFLINE_SYNC.md",
+        "docs/16_API_CONTRACT.md"
+      ],
+      "output": "Implement C10,C11,C16: local pending handover with photo/weight/location/time, SHA-256 and QR, Android PdfDocument, share and passport timeline. Clearly distinguish pending local hash check from server-confirmed record and protect PII.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T025",
+      "phase": 4,
+      "title": "Implement approved second-phone QR confirmation",
+      "dependencies": [
+        "T002",
+        "T022",
+        "T023"
+      ],
+      "reading": [
+        "docs/05_DESIGN_STITCH.md",
+        "docs/04_APPFLOW.md",
+        "docs/16_API_CONTRACT.md"
+      ],
+      "output": "Implement R04,R05,V01 in responsive web; HTTPS camera scan plus reference-entry fallback, unknown-unsynced QR state, review/confirm measured terms, pending collector acknowledgement, public redacted verification and replay/conflict tests.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T026",
+      "phase": 4,
+      "title": "Implement payment assertions and earnings projections",
+      "dependencies": [
+        "T023"
+      ],
+      "reading": [
+        "docs/06_SCHEMA.md",
+        "docs/04_APPFLOW.md",
+        "docs/16_API_CONTRACT.md"
+      ],
+      "output": "Record cash/UPI/other payment assertions with actor/time and acknowledgement/dispute; partial amounts and append-only reversals; derive gross/paid/pending totals without double counting; close only at confirmed receipt and acknowledged settled payment.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T027",
+      "phase": 4,
+      "title": "Implement approved ledger and payment screens",
+      "dependencies": [
+        "T002",
+        "T024",
+        "T026"
+      ],
+      "reading": [
+        "docs/05_DESIGN_STITCH.md",
+        "docs/04_APPFLOW.md"
+      ],
+      "output": "Implement C12,C13 and R05 payment/history portions; monthly/filter summaries, transaction detail, offline pending payment assertion, dues and disagreement; no implication that the app executes or bank-verifies money transfer.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T028",
+      "phase": 5,
+      "title": "Implement data-quality and anomaly rules",
+      "dependencies": [
+        "T018",
+        "T019",
+        "T023",
+        "T026"
+      ],
+      "reading": [
+        "docs/03_TECHSPEC.md",
+        "docs/18_DATA_PROVENANCE.md",
+        "docs/MONITORING.md"
+      ],
+      "output": "Implement missing/invalid/duplicate/stale/inconsistent checks, price bounds, weight variance, image reuse and repeated events; record severity/reason/reviewer/resolution; no fraud accusation or destructive auto-correction.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T029",
+      "phase": 5,
+      "title": "Implement admin maintenance and metrics APIs",
+      "dependencies": [
+        "T028"
+      ],
+      "reading": [
+        "docs/16_API_CONTRACT.md",
+        "docs/06_SCHEMA.md",
+        "docs/MONITORING.md"
+      ],
+      "output": "Implement admin directory review, material/alias/safety maintenance, price moderation, collector minimal view, event search, source/quality filters and aggregate metrics from persisted events; exclude demo data from real-impact totals.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T030",
+      "phase": 5,
+      "title": "Implement approved admin/data-quality dashboard",
+      "dependencies": [
+        "T002",
+        "T029"
+      ],
+      "reading": [
+        "docs/05_DESIGN_STITCH.md",
+        "docs/04_APPFLOW.md",
+        "docs/18_DATA_PROVENANCE.md"
+      ],
+      "output": "Implement A01–A07: overview, collectors, facility verification, price/material/safety source editors, traceability search, quality queue and secondary-research evidence links. All counts/drill-downs come from APIs.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T031",
+      "phase": 5,
+      "title": "Implement seven dataset exports and data lineage",
+      "dependencies": [
+        "T010",
+        "T011",
+        "T012",
+        "T023",
+        "T026",
+        "T029",
+        "T002",
+        "T022",
+        "T030"
+      ],
+      "reading": [
+        "docs/18_DATA_PROVENANCE.md",
+        "docs/16_API_CONTRACT.md",
+        "docs/06_SCHEMA.md"
+      ],
+      "output": "Export all seven families as versioned CSV/JSON with provenance, safe redaction and manifests; produce handover PDF/CSV procurement logs labelled platform records; transaction outcomes feed reviewed price observations exactly once. Wire approved R07/A07 export downloads and manifest/data-card views end to end; verify actual files and permissions.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T032",
+      "phase": 5,
+      "title": "Curate licensed public image dataset",
+      "dependencies": [
+        "T004",
+        "T005",
+        "T010"
+      ],
+      "reading": [
+        "docs/19_AI_ML.md",
+        "docs/18_DATA_PROVENANCE.md"
+      ],
+      "output": "Select exact licensed datasets, save licence evidence and hashes, audit class relevance, deduplicate and group physical objects/source sequences into deterministic splits; document class gaps and no field-image claims.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T033",
+      "phase": 5,
+      "title": "Train evaluate and export on-device model",
+      "dependencies": [
+        "T032"
+      ],
+      "reading": [
+        "docs/19_AI_ML.md",
+        "docs/20_TEST_ACCEPTANCE.md"
+      ],
+      "output": "Train Keras MobileNetV3-Small, record seeded configuration, validation threshold, untouched-test metrics/confusion matrix, quantized LiteRT export parity and model card. Record failure honestly; no invented accuracy or borrowed benchmark results.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T034",
+      "phase": 5,
+      "title": "Integrate classifier into approved Android flow",
+      "dependencies": [
+        "T002",
+        "T017",
+        "T033"
+      ],
+      "reading": [
+        "docs/19_AI_ML.md",
+        "docs/05_DESIGN_STITCH.md"
+      ],
+      "output": "Bundle model/labels/preprocessing/threshold/checksum, run off main thread, show real confidence and confirm/change/abstain; preserve suggestion and correction; test airplane mode, unsupported class, corrupt model and low-memory fallback.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T035",
+      "phase": 5,
+      "title": "Create contextual safety content and review path",
+      "dependencies": [
+        "T004",
+        "T010"
+      ],
+      "reading": [
+        "docs/22_REGULATORY_SAFETY.md",
+        "docs/14_TRANSLATION_AUDIO_AUDIT.md"
+      ],
+      "output": "Write short source-backed hi/mr/en material-specific safety cards and pictogram briefs for owner Stitch generation; version content, review hazards/routes and provide non-instructional battery/CRT warnings; no unlicensed image assets.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T036",
+      "phase": 5,
+      "title": "Complete language resources and accessible interaction",
+      "dependencies": [
+        "T017",
+        "T020",
+        "T024",
+        "T027",
+        "T035"
+      ],
+      "reading": [
+        "docs/14_TRANSLATION_AUDIO_AUDIT.md",
+        "docs/05_DESIGN_STITCH.md"
+      ],
+      "output": "Implement all collector hi/mr/en strings, material aliases, accessibility labels, plurals/currency/units and numeral preference; preserve chosen language offline/restart; no hardcoded English critical errors.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T037",
+      "phase": 5,
+      "title": "Generate and wire offline Hindi/Marathi audio",
+      "dependencies": [
+        "T035",
+        "T036",
+        "T005"
+      ],
+      "reading": [
+        "docs/14_TRANSLATION_AUDIO_AUDIT.md",
+        "docs/19_AI_ML.md"
+      ],
+      "output": "Use free licensed voice workflow for bundled prompts and number/unit grammar; inventory rights/text/checksum/duration; wire tap-to-hear dynamic ranges, rupees/paise, per-kg, pending/success/safety; verify no runtime cloud call. T005 supplies shared licence/source-review tooling; image-dataset work is not an audio dependency.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T038",
+      "phase": 5,
+      "title": "Implement illustrative economics model",
+      "dependencies": [
+        "T004",
+        "T011",
+        "T026"
+      ],
+      "reading": [
+        "docs/23_UNIT_ECONOMICS.md",
+        "docs/16_API_CONTRACT.md"
+      ],
+      "output": "Create transparent current/platform same-lot calculator and attributed assumptions; acquisition/transport/handling/rejections/time/payment-delay sensitivity, negative/zero baseline behavior and hypothetical downstream fee/cost sustainability; keep separate from realized earnings.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T039",
+      "phase": 5,
+      "title": "Implement approved economics and safety views",
+      "dependencies": [
+        "T002",
+        "T030",
+        "T035",
+        "T037",
+        "T038"
+      ],
+      "reading": [
+        "docs/05_DESIGN_STITCH.md",
+        "docs/23_UNIT_ECONOMICS.md",
+        "docs/04_APPFLOW.md"
+      ],
+      "output": "Implement C17 safety hub/context cards and U01 interactive web economics, linked from admin/collector help where approved; clear illustrative labels and source drill-down; sliders/inputs update results; no preset claimed uplift.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T040",
+      "phase": 6,
+      "title": "Verify security privacy and abuse boundaries",
+      "dependencies": [
+        "T025",
+        "T027",
+        "T030",
+        "T031"
+      ],
+      "reading": [
+        "docs/12_GUARDRAILS.md",
+        "docs/11_SECRETS_CHECKLIST.md",
+        "docs/20_TEST_ACCEPTANCE.md"
+      ],
+      "output": "Run owner/role/IDOR/replay/rate-limit/input/file-access tests; validate demo isolation, redacted QR/exports, no client secrets, token expiry/offline behavior, image EXIF removal, retention and backup controls; document residual limitations.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T041",
+      "phase": 6,
+      "title": "Deploy hosted API database storage and web",
+      "dependencies": [
+        "T007",
+        "T008",
+        "T025",
+        "T030",
+        "T039",
+        "T040"
+      ],
+      "reading": [
+        "docs/DEPLOYMENT.md",
+        "docs/11_SECRETS_CHECKLIST.md",
+        "docs/25_RELEASE_CHECKLIST.md"
+      ],
+      "output": "Prepare reproducible Render/Supabase/Pages configuration, verify current free-plan terms and account settings, apply migrations, private storage/CORS/TLS, release API URL and health check; validate over cellular/outside LAN. Publishing requires the owner's existing or explicit deployment authorization.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T042",
+      "phase": 6,
+      "title": "Prove local demo fallback and restore",
+      "dependencies": [
+        "T024",
+        "T027",
+        "T031",
+        "T040"
+      ],
+      "reading": [
+        "docs/DEPLOYMENT.md",
+        "docs/13_RECOVERY.md",
+        "docs/MONITORING.md"
+      ],
+      "output": "Run same contracts with Docker PostgreSQL/PostGIS and media volume, real-phone LAN debug networking, localhost/HTTPS QR fallback; backup and restore database+media+manifests; test without internet. Do not expose debug cleartext in release.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T043",
+      "phase": 6,
+      "title": "Run cross-surface integration and fault acceptance",
+      "dependencies": [
+        "T015",
+        "T025",
+        "T027",
+        "T030",
+        "T031",
+        "T034",
+        "T037",
+        "T039",
+        "T040"
+      ],
+      "reading": [
+        "docs/20_TEST_ACCEPTANCE.md",
+        "docs/17_OFFLINE_SYNC.md"
+      ],
+      "output": "Run deterministic domain tests, price/match/hash parity, offline crash/retry/media/conflict/auth/device-clock cases and complete collector→recycler→ledger→admin journeys. Store logs and case IDs, fix failures and rerun affected checks.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T044",
+      "phase": 6,
+      "title": "Perform real-device and two-device usability tests",
+      "dependencies": [
+        "T041",
+        "T042",
+        "T043"
+      ],
+      "reading": [
+        "docs/20_TEST_ACCEPTANCE.md",
+        "docs/24_DEMO_PRESENTATION.md"
+      ],
+      "output": "Owner uses real collector phone plus borrowed second Android browser; test camera/GPS/denial/restart/airplane mode/background/manual sync/QR, Hindi/Marathi and representative scenario usability. Identify tests as owner scenario tests, not collector fieldwork.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T045",
+      "phase": 6,
+      "title": "Measure entry-level performance and artifact size",
+      "dependencies": [
+        "T034",
+        "T037",
+        "T043"
+      ],
+      "reading": [
+        "docs/03_TECHSPEC.md",
+        "docs/19_AI_ML.md",
+        "docs/20_TEST_ACCEPTANCE.md"
+      ],
+      "output": "Measure cold/cached launch, local save, compression, LiteRT latency, memory and APK including model/audio on named device; record p50/p95 and regressions, optimize lazy maps/assets without dropping required content.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T046",
+      "phase": 6,
+      "title": "Audit all translations and audio on device",
+      "dependencies": [
+        "T036",
+        "T037",
+        "T039",
+        "T044"
+      ],
+      "reading": [
+        "docs/14_TRANSLATION_AUDIO_AUDIT.md",
+        "docs/20_TEST_ACCEPTANCE.md"
+      ],
+      "output": "Check key parity, Devanagari rendering, large text/TalkBack, numeric/range pronunciation, all error/pending/review states and offline audio; native-speaker review where available remains explicitly unverified until performed.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T047",
+      "phase": 7,
+      "title": "Freeze dataset and model evidence package",
+      "dependencies": [
+        "T031",
+        "T033",
+        "T044",
+        "T045",
+        "T046"
+      ],
+      "reading": [
+        "docs/18_DATA_PROVENANCE.md",
+        "docs/19_AI_ML.md",
+        "docs/21_RESEARCH_EVIDENCE.md"
+      ],
+      "output": "Produce release manifests, source/licence ledger, seven data cards, model card with actual results, data lifecycle demonstration, limitations and desk-research cards; distinguish facts/assumptions/demo rows and still-unmet primary fieldwork.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T048",
+      "phase": 7,
+      "title": "Prepare PPT and presenter handoff",
+      "dependencies": [
+        "T044",
+        "T047"
+      ],
+      "reading": [
+        "docs/24_DEMO_PRESENTATION.md",
+        "docs/21_RESEARCH_EVIDENCE.md",
+        "docs/23_UNIT_ECONOMICS.md"
+      ],
+      "output": "Create final deck using verified implementation/screens and evidence; fill required organizer template, timing, five-presenter handoff, Q&A and honest limitations; remove stale statistics, EPR/credit/competitor overclaims.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T049",
+      "phase": 7,
+      "title": "Record and validate demo video",
+      "dependencies": [
+        "T044",
+        "T045",
+        "T046",
+        "T048"
+      ],
+      "reading": [
+        "docs/24_DEMO_PRESENTATION.md",
+        "docs/25_RELEASE_CHECKLIST.md"
+      ],
+      "output": "Record actual end-to-end demo with airplane mode, second-phone confirmation, two language audio, data quality and economics; publish/share link only with authorization; test link permissions outside owner account and retain local backup.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "T050",
+      "phase": 7,
+      "title": "Package release and submission handoff",
+      "dependencies": [
+        "T041",
+        "T042",
+        "T043",
+        "T044",
+        "T045",
+        "T046",
+        "T047",
+        "T048",
+        "T049"
+      ],
+      "reading": [
+        "docs/25_RELEASE_CHECKLIST.md",
+        "docs/DEPLOYMENT.md",
+        "docs/08_TRACKER.md"
+      ],
+      "output": "Produce installable signed APK, checksum/version/API URL, prototype web link, GitHub repository, PPT and video link; verify all RELEASE evidence and no missing tasks. Check official portal fields/cutoff and obtain final submission authorization if not already given; record actual submission result separately.",
+      "scope": "RELEASE"
+    },
+    {
+      "id": "F001",
+      "phase": 8,
+      "title": "Assisted collector and aggregator accounts",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Explicit delegation/consent, actor versus beneficial owner, safe phone-less onboarding, separate permissions and offline ownership tests; no admin impersonation shortcut.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F002",
+      "phase": 8,
+      "title": "Multi-collector batching and pickup operations",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Batch membership/weights/provenance and collector-level proceeds reconcile; operational capacity and actual pickup success recorded; no double counting.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F003",
+      "phase": 8,
+      "title": "Predictive prices and automated public feeds",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Licensed sustained comparable observations, temporal holdout against statistical baseline, uncertainty/drift monitoring and a permitted refresh pipeline; keep indicative labels.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F004",
+      "phase": 8,
+      "title": "Consented active learning and broader classifier",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "New consent/rights policy, reviewed correction labels, expanded relevant classes, leakage-safe evaluation and version rollback; current release remains public-images-only.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F005",
+      "phase": 8,
+      "title": "Learned recycler ranking and advanced risk detection",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Enough quality outcome labels, temporal evaluation/fairness/reason codes, human review and safety hard filters; do not learn to override route eligibility or accuse fraud.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F006",
+      "phase": 8,
+      "title": "Voice input and multilingual assistant",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Free/licensed offline ASR where viable, hi/mr noisy-environment tests, explicit confirmation of money/material values and manual fallback; no arbitrary autonomous transaction agent.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F007",
+      "phase": 8,
+      "title": "Pickup route optimization",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Consented operational locations, realistic vehicle/capacity/time windows, permitted map data and measured routing baseline; no continuous collector tracking by default.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F008",
+      "phase": 8,
+      "title": "ERP GST PRO brand and CPCB adapters",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Documented official/partner API contracts, credentials and legal role, validated field mapping/sandbox evidence, access/audit controls; no claim of integration or certificate issuance before verification.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F009",
+      "phase": 8,
+      "title": "Downstream processing and material mass balance",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Recycler processing evidence, batch splits/merges/yield reconciliation and independently supported downstream outcomes before calling received mass recycled.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F010",
+      "phase": 8,
+      "title": "Ed25519 server-signed records",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Canonical payload parity, secure signing keys/rotation/revocation/trusted public-key distribution and verification fixtures; signature still does not prove physical facts.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F011",
+      "phase": 8,
+      "title": "Recovery indicator and environmental estimates",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Exact peer-reviewed composition/LCA sources, material/device-specific uncertainty and defensible model validation; no invented official formula, exact metal yield or unsupported CO2 savings. Owner must explicitly promote this optional idea.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F012",
+      "phase": 8,
+      "title": "Supervised real-world pilot and partnerships",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Consented real collectors/facilities, review safety/privacy/retention/support, actual partnership evidence and measured feedback; historical 5–10/20–30 counts are planning suggestions.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F013",
+      "phase": 8,
+      "title": "More regions languages and material routes",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Region/language source and review coverage, safe route-specific authorization and model/material validation; preserve e-waste focus until explicit expansion.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F014",
+      "phase": 8,
+      "title": "Aggregated sector and government insights",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Adequate representative data, aggregation/privacy controls and sample/denominator limitations for supply/capacity gaps, volatility/material flows/safety; no prototype national statistics.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F015",
+      "phase": 8,
+      "title": "Advanced dispute review and support workflow",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Evidence submission/reviewer permissions/appeal/resolution timeline, immutable original quote/final terms and policy; basic pending/disputed states already required in release.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F016",
+      "phase": 8,
+      "title": "Optional payments messaging and monetization",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Separate owner approval, lawful provider terms, fee transparency, webhook idempotency and reconciled settlement; SMS/WhatsApp/email/real UPI/paid SaaS not release dependencies.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F017",
+      "phase": 8,
+      "title": "Collector identity sharing and partner services",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Minimal revocable identity QR/consent-scoped history sharing; verified partner eligibility rules before any credit/welfare claim; never public financial profiles or guaranteed access.",
+      "scope": "FUTURE"
+    },
+    {
+      "id": "F018",
+      "phase": 8,
+      "title": "Production operations and scale",
+      "dependencies": [
+        "T050"
+      ],
+      "reading": [
+        "docs/26_FUTURE_BACKLOG.md"
+      ],
+      "output": "Measured bottleneck/load and security requirements justify queues/caching/infra, incident support and disaster recovery; no speculative Kubernetes/microservices or blockchain requirement.",
+      "scope": "FUTURE"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "R-GOV-01",
+      "scope": "RELEASE",
+      "title": "Consistent SahiTol identity and latest scope",
+      "tasks": [
+        "T001",
+        "T048"
+      ],
+      "spec": "docs/09_DECISIONS.md",
+      "source": [
+        "P:2535-2569",
+        "P:2632-2658"
+      ],
+      "test": "AT-001",
+      "acceptance": "Inspect app, package metadata, repository and deck: SahiTol is the product name, the SIH title is retained only as the problem title, and no superseded stack or selected feature is silently substituted."
+    },
+    {
+      "id": "R-GOV-02",
+      "scope": "RELEASE",
+      "title": "Owner-generated Stitch frontend gate",
+      "tasks": [
+        "T002",
+        "T017",
+        "T020",
+        "T022",
+        "T024",
+        "T025",
+        "T027",
+        "T030",
+        "T034",
+        "T039"
+      ],
+      "spec": "docs/05_DESIGN_STITCH.md",
+      "source": [
+        "CURRENT_REQUEST"
+      ],
+      "test": "AT-002",
+      "acceptance": "For each implemented screen/state find owner notification plus Stitch project/screen/revision and approval; a missing design leaves that UI waiting and never produces an invented replacement."
+    },
+    {
+      "id": "R-GOV-03",
+      "scope": "RELEASE",
+      "title": "Traceable continuous agent execution",
+      "tasks": [
+        "T001",
+        "T050"
+      ],
+      "spec": "docs/13_RECOVERY.md",
+      "source": [
+        "CURRENT_REQUEST"
+      ],
+      "test": "AT-003",
+      "acceptance": "In a fresh session invoke session-start then session-continue: agent reconstructs state, reads task specs, selects an eligible task, preserves blockers and updates status/evidence before progressing without routine next-task permission."
+    },
+    {
+      "id": "R-GOV-04",
+      "scope": "RELEASE",
+      "title": "Deadline and all four deliverables",
+      "tasks": [
+        "T048",
+        "T049",
+        "T050"
+      ],
+      "spec": "docs/25_RELEASE_CHECKLIST.md",
+      "source": [
+        "P:2592-2615",
+        "P:2634-2647"
+      ],
+      "test": "AT-004",
+      "acceptance": "Release handoff contains tested PPT, accessible demo video link, installable APK/prototype link and GitHub repo; portal cutoff/format and actual submission status are explicitly recorded."
+    },
+    {
+      "id": "R-ARC-01",
+      "scope": "RELEASE",
+      "title": "Native Android architecture and feasibility",
+      "tasks": [
+        "T001",
+        "T003"
+      ],
+      "spec": "docs/03_TECHSPEC.md",
+      "source": [
+        "P:1970-1975",
+        "P:2602-2607"
+      ],
+      "test": "AT-005",
+      "acceptance": "Approved feasibility screen on a named real Android phone captures photo, persists Room data through restart and performs offline LiteRT inference; Kotlin/Compose/Room/WorkManager remain the collector implementation."
+    },
+    {
+      "id": "R-ARC-02",
+      "scope": "RELEASE",
+      "title": "Frozen API web database and storage stack",
+      "tasks": [
+        "T001",
+        "T006",
+        "T008"
+      ],
+      "spec": "docs/03_TECHSPEC.md",
+      "source": [
+        "P:2061-2286",
+        "P:2295-2316",
+        "P:2636-2646"
+      ],
+      "test": "AT-006",
+      "acceptance": "Build and inspect API/web/database configuration: FastAPI, React/Vite, PostgreSQL/PostGIS, local volume and hosted private storage work through the documented contracts with dependency locks."
+    },
+    {
+      "id": "R-AUTH-01",
+      "scope": "RELEASE",
+      "title": "Minimal profile and phone/PIN access",
+      "tasks": [
+        "T007",
+        "T017"
+      ],
+      "spec": "docs/16_API_CONTRACT.md",
+      "source": [
+        "E:5964-5979",
+        "P:1959-1973",
+        "P:2494-2495"
+      ],
+      "test": "AT-007",
+      "acceptance": "Register/login with phone and PIN; store no plaintext PIN; profile uses ID/alias/language/general area, asks for no Aadhaar/PAN/bank details and shows recoverable auth errors."
+    },
+    {
+      "id": "R-AUTH-02",
+      "scope": "RELEASE",
+      "title": "Role and object authorization",
+      "tasks": [
+        "T007",
+        "T040"
+      ],
+      "spec": "docs/12_GUARDRAILS.md",
+      "source": [
+        "E:2610-2638",
+        "E:6813-6857"
+      ],
+      "test": "AT-008",
+      "acceptance": "Collector A cannot read/mutate B's lots; recycler A cannot confirm B's facility handover; collector cannot become admin by editing payload; invalid/expired tokens are rejected server-side."
+    },
+    {
+      "id": "R-AUTH-03",
+      "scope": "RELEASE",
+      "title": "Offline session and safe logout",
+      "tasks": [
+        "T007",
+        "T013",
+        "T015",
+        "T017"
+      ],
+      "spec": "docs/17_OFFLINE_SYNC.md",
+      "source": [
+        "P:1611-1626",
+        "E:1285-1320"
+      ],
+      "test": "AT-009",
+      "acceptance": "After successful activation disconnect and restart: local profile/drafts remain usable; expired token pauses authenticated sync; reauth resumes same operations; logout cannot silently discard pending data or expose it to another user."
+    },
+    {
+      "id": "R-AUTH-04",
+      "scope": "RELEASE",
+      "title": "Isolated demo access without SMS",
+      "tasks": [
+        "T007",
+        "T040",
+        "T050"
+      ],
+      "spec": "docs/12_GUARDRAILS.md",
+      "source": [
+        "P:2005-2014",
+        "P:2646-2647"
+      ],
+      "test": "AT-010",
+      "acceptance": "Bundled demo profile and demo OTP/bypass are explicitly labelled and isolated; public demo credentials cannot access non-demo users, verification controls or unrestricted admin actions."
+    },
+    {
+      "id": "R-LOT-01",
+      "scope": "RELEASE",
+      "title": "Complete material taxonomy and aliases",
+      "tasks": [
+        "T010",
+        "T017"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "E:509-537",
+        "E:2928-2959",
+        "E:6030-6049"
+      ],
+      "test": "AT-011",
+      "acceptance": "Create draft lots for CRT,LCD,PCB,cable,battery,motor/magnet,mixed plastics,mixed electronics and UNKNOWN; hi/mr/en local aliases resolve to stable IDs, not hardcoded price values."
+    },
+    {
+      "id": "R-LOT-02",
+      "scope": "RELEASE",
+      "title": "Camera image import compression and privacy",
+      "tasks": [
+        "T008",
+        "T013",
+        "T017"
+      ],
+      "spec": "docs/06_SCHEMA.md",
+      "source": [
+        "E:2664-2675",
+        "P:2305-2310"
+      ],
+      "test": "AT-012",
+      "acceptance": "Take/import a photo, deny camera permission, retry capture and restart; saved image remains linked, upload validates type/size and strips EXIF; no-photo draft is allowed but evidence completeness is explicit."
+    },
+    {
+      "id": "R-LOT-03",
+      "scope": "RELEASE",
+      "title": "Weight condition description and validation",
+      "tasks": [
+        "T016",
+        "T017"
+      ],
+      "spec": "docs/04_APPFLOW.md",
+      "source": [
+        "E:487-505",
+        "E:5981-6023"
+      ],
+      "test": "AT-013",
+      "acceptance": "Save a draft then complete category/condition/description/positive finite weight; reject zero/negative/overflow values on submit; fractional kg round-trips as grams; suspicious large weight requires review without invented domain cap."
+    },
+    {
+      "id": "R-LOT-04",
+      "scope": "RELEASE",
+      "title": "Collection and handover location/time provenance",
+      "tasks": [
+        "T016",
+        "T024"
+      ],
+      "spec": "docs/06_SCHEMA.md",
+      "source": [
+        "E:1003-1035",
+        "E:1854-1871"
+      ],
+      "test": "AT-014",
+      "acceptance": "Record timestamps and GPS accuracy/capture age when permitted; denial uses labelled coarse/manual location or missing-data state; never fabricate coordinates or expose a home address in public records."
+    },
+    {
+      "id": "R-LOT-05",
+      "scope": "RELEASE",
+      "title": "Durable draft lot lifecycle and cancellation",
+      "tasks": [
+        "T013",
+        "T016",
+        "T017"
+      ],
+      "spec": "docs/04_APPFLOW.md",
+      "source": [
+        "E:403-461",
+        "E:1792-1820"
+      ],
+      "test": "AT-015",
+      "acceptance": "Create/edit/reopen/cancel a lot with stable UUID and legal transitions; restart preserves drafts; attempts to mutate confirmed historical terms or jump CLOSED→COLLECTED fail and are auditable."
+    },
+    {
+      "id": "R-PRICE-01",
+      "scope": "RELEASE",
+      "title": "Price observations and in-app entry",
+      "tasks": [
+        "T011",
+        "T020"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "E:627-648",
+        "P:2491-2492"
+      ],
+      "test": "AT-016",
+      "acceptance": "Enter an observation with material/subcategory, region, date, unit, price kind and source; edit via revision, moderate and export it; unknown dates or unsupported conversions are quarantined."
+    },
+    {
+      "id": "R-PRICE-02",
+      "scope": "RELEASE",
+      "title": "Indicative weighted range and lot valuation",
+      "tasks": [
+        "T018",
+        "T020"
+      ],
+      "spec": "docs/03_TECHSPEC.md",
+      "source": [
+        "E:652-676",
+        "E:2457-2488",
+        "E:6076-6105"
+      ],
+      "test": "AT-017",
+      "acceptance": "A known comparable observation fixture yields specified weighted median/Q1/Q3 and estimate bounds in API and Android; weight changes recompute estimate; screen labels result indicative and retains snapshot/version."
+    },
+    {
+      "id": "R-PRICE-03",
+      "scope": "RELEASE",
+      "title": "Source confidence freshness and empty prices",
+      "tasks": [
+        "T018",
+        "T020"
+      ],
+      "spec": "docs/03_TECHSPEC.md",
+      "source": [
+        "E:568-597",
+        "E:710-728"
+      ],
+      "test": "AT-018",
+      "acceptance": "Recent/few/stale/no-data fixtures show correct count, sources, timestamp, confidence and reason; no-data is INSUFFICIENT, never zero or a hidden synthetic fallback."
+    },
+    {
+      "id": "R-PRICE-04",
+      "scope": "RELEASE",
+      "title": "History trends and actual offer comparison",
+      "tasks": [
+        "T018",
+        "T020",
+        "T021"
+      ],
+      "spec": "docs/03_TECHSPEC.md",
+      "source": [
+        "E:5352-5361",
+        "E:3810-3822"
+      ],
+      "test": "AT-019",
+      "acceptance": "View dated trend buckets and multiple offers in consistent units/regions; missing history displays a gap, no fabricated points; expired/noncomparable rates are labelled and do not become an agreed price."
+    },
+    {
+      "id": "R-PRICE-05",
+      "scope": "RELEASE",
+      "title": "Quote anomaly review",
+      "tasks": [
+        "T028",
+        "T030"
+      ],
+      "spec": "docs/03_TECHSPEC.md",
+      "source": [
+        "E:682-706",
+        "E:6639-6658"
+      ],
+      "test": "AT-020",
+      "acceptance": "Known low/high quotes trigger configured review reasons only when enough comparable data exists; alert says review, does not accuse fraud or block collector choice without a separate eligibility violation."
+    },
+    {
+      "id": "R-REC-01",
+      "scope": "RELEASE",
+      "title": "Source-backed Delhi-NCR Maharashtra directory",
+      "tasks": [
+        "T012"
+      ],
+      "spec": "docs/22_REGULATORY_SAFETY.md",
+      "source": [
+        "P:2526-2541",
+        "P:2646-2647"
+      ],
+      "test": "AT-021",
+      "acceptance": "Import CPCB plus DPCC and MPCB records with facility role/source document/page/date/registration and lineage; do not relabel a collection point as a recycler or claim that a list import creates a partnership."
+    },
+    {
+      "id": "R-REC-02",
+      "scope": "RELEASE",
+      "title": "Verification levels and expiry",
+      "tasks": [
+        "T012",
+        "T019",
+        "T029"
+      ],
+      "spec": "docs/22_REGULATORY_SAFETY.md",
+      "source": [
+        "E:782-805",
+        "E:5816-5849"
+      ],
+      "test": "AT-022",
+      "acceptance": "L0/L1/L2 never become verified formal destinations; stale/expired/revoked/unproven route authorization removes strong badge and matching eligibility even if original source was official."
+    },
+    {
+      "id": "R-REC-03",
+      "scope": "RELEASE",
+      "title": "Facility materials rates pickup and service area",
+      "tasks": [
+        "T012",
+        "T021",
+        "T022"
+      ],
+      "spec": "docs/06_SCHEMA.md",
+      "source": [
+        "E:732-778",
+        "E:5936-5949"
+      ],
+      "test": "AT-023",
+      "acceptance": "Facility user updates rates/availability/service area with provenance while authorization fields stay admin-controlled; unknown operational data stays unknown; acceptance/minimum-weight terms are visible."
+    },
+    {
+      "id": "R-REC-04",
+      "scope": "RELEASE",
+      "title": "Route-aware eligibility",
+      "tasks": [
+        "T019",
+        "T023"
+      ],
+      "spec": "docs/22_REGULATORY_SAFETY.md",
+      "source": [
+        "E:249-280",
+        "E:830-859"
+      ],
+      "test": "AT-024",
+      "acceptance": "Battery lot cannot match a facility evidenced only for e-waste; incompatible material, unverified current registration or unsupported service/weight constraints exclude before ranking and before confirmation."
+    },
+    {
+      "id": "R-REC-05",
+      "scope": "RELEASE",
+      "title": "Explainable ranking with geography",
+      "tasks": [
+        "T019",
+        "T020"
+      ],
+      "spec": "docs/03_TECHSPEC.md",
+      "source": [
+        "E:2518-2540",
+        "P:2297-2301"
+      ],
+      "test": "AT-025",
+      "acceptance": "Run fixed candidates: deterministic score and tie-break, PostGIS distance online, cached local parity within tolerance; expose contributions and unknowns; never invent pickup, price or reliability."
+    },
+    {
+      "id": "R-REC-06",
+      "scope": "RELEASE",
+      "title": "Offline list online map and no-match path",
+      "tasks": [
+        "T019",
+        "T020"
+      ],
+      "spec": "docs/05_DESIGN_STITCH.md",
+      "source": [
+        "P:1995-2003",
+        "E:3792-3806"
+      ],
+      "test": "AT-026",
+      "acceptance": "With network/maps/GPS unavailable directory list works with cached age and distance when possible; no-match can save/widen geography, never switch battery route; online MapLibre includes attribution and permitted tiles."
+    },
+    {
+      "id": "R-OFFER-01",
+      "scope": "RELEASE",
+      "title": "Recycler inbound offer accept reject workflow",
+      "tasks": [
+        "T021",
+        "T022"
+      ],
+      "spec": "docs/04_APPFLOW.md",
+      "source": [
+        "E:3046-3055",
+        "E:5936-5949"
+      ],
+      "test": "AT-027",
+      "acceptance": "Collector submits lot, linked recycler sees evidence and quotes/accepts/rejects; collector selects one live offer; rejected/expired requests preserve history and can return to another compatible match."
+    },
+    {
+      "id": "R-OFFER-02",
+      "scope": "RELEASE",
+      "title": "Immutable agreed terms and offer races",
+      "tasks": [
+        "T021",
+        "T023"
+      ],
+      "spec": "docs/04_APPFLOW.md",
+      "source": [
+        "E:5485-5487",
+        "E:7600-7605"
+      ],
+      "test": "AT-028",
+      "acceptance": "Two simultaneous acceptances leave one active agreement; cached expired offer cannot silently bind; later price-board refresh does not modify accepted terms; material/weight/price changes require explicit acknowledgement."
+    },
+    {
+      "id": "R-HAND-01",
+      "scope": "RELEASE",
+      "title": "Offline pending handover evidence",
+      "tasks": [
+        "T023",
+        "T024"
+      ],
+      "spec": "docs/17_OFFLINE_SYNC.md",
+      "source": [
+        "P:2489-2490",
+        "E:5120-5169"
+      ],
+      "test": "AT-029",
+      "acceptance": "In airplane mode create UUID proposal with photo references, grams, location quality, time, parties/terms and hash; restart shows PENDING_CONFIRMATION and sync pending, never recycler-confirmed."
+    },
+    {
+      "id": "R-HAND-02",
+      "scope": "RELEASE",
+      "title": "Two-device recycler confirmation",
+      "tasks": [
+        "T025",
+        "T044"
+      ],
+      "spec": "docs/04_APPFLOW.md",
+      "source": [
+        "P:2612-2629",
+        "P:2641-2644"
+      ],
+      "test": "AT-030",
+      "acceptance": "Borrowed second Android browser scans collector QR over HTTPS, identifies the correct facility/lot, submits authorized confirmation and collector sees it after pull; unsynced reference explains waiting and supports retry/manual reference."
+    },
+    {
+      "id": "R-HAND-03",
+      "scope": "RELEASE",
+      "title": "Canonical hash and append-only event chain",
+      "tasks": [
+        "T023",
+        "T024",
+        "T043"
+      ],
+      "spec": "docs/17_OFFLINE_SYNC.md",
+      "source": [
+        "E:1081-1109",
+        "P:2139-2149"
+      ],
+      "test": "AT-031",
+      "acceptance": "Same frozen JSON fixture hashes identically in Python/Kotlin/web; one altered byte invalidates expected digest; original proposal and confirmation events remain linked and unchanged; UI never describes bare SHA-256 as a signature."
+    },
+    {
+      "id": "R-HAND-04",
+      "scope": "RELEASE",
+      "title": "Public verification and privacy",
+      "tasks": [
+        "T023",
+        "T025",
+        "T040"
+      ],
+      "spec": "docs/16_API_CONTRACT.md",
+      "source": [
+        "E:1039-1077",
+        "E:2642-2662"
+      ],
+      "test": "AT-032",
+      "acceptance": "An unguessable receipt link shows current redacted status and record/hash comparison; public visitor cannot fetch phone/GPS/photos/payment details; QR possession alone cannot authorize confirmation."
+    },
+    {
+      "id": "R-HAND-05",
+      "scope": "RELEASE",
+      "title": "Weight grade price disagreement",
+      "tasks": [
+        "T023",
+        "T025",
+        "T027",
+        "T028"
+      ],
+      "spec": "docs/04_APPFLOW.md",
+      "source": [
+        "E:3826-3898"
+      ],
+      "test": "AT-033",
+      "acceptance": "Different measured weight/grade/price retains estimate and AI suggestion, sets pending acknowledgement/review and variance reason; neither party overwrites original facts; collector agreement or documented dispute is recorded."
+    },
+    {
+      "id": "R-HAND-06",
+      "scope": "RELEASE",
+      "title": "Receipt PDF passport and procurement exports",
+      "tasks": [
+        "T024",
+        "T025",
+        "T031"
+      ],
+      "spec": "docs/16_API_CONTRACT.md",
+      "source": [
+        "E:970-1035",
+        "P:2305-2310"
+      ],
+      "test": "AT-034",
+      "acceptance": "Export offline pending PDF and server confirmed PDF/CSV; identifiers/status/hash/provenance agree with timeline; record is called Digital Handover Record and includes non-EPR boundary, never an official manifest claim."
+    },
+    {
+      "id": "R-PAY-01",
+      "scope": "RELEASE",
+      "title": "Cash optional UPI and payment recording",
+      "tasks": [
+        "T026",
+        "T027"
+      ],
+      "spec": "docs/04_APPFLOW.md",
+      "source": [
+        "E:1143-1167",
+        "E:6232-6249"
+      ],
+      "test": "AT-035",
+      "acceptance": "Record cash without bank account/gateway; optional UPI/other records an assertion and reference, not transfer; both sides see actor/time/acknowledgement and can dispute."
+    },
+    {
+      "id": "R-PAY-02",
+      "scope": "RELEASE",
+      "title": "Partial dues reversals and closure",
+      "tasks": [
+        "T026",
+        "T027"
+      ],
+      "spec": "docs/06_SCHEMA.md",
+      "source": [
+        "E:1113-1139",
+        "E:9548-9572"
+      ],
+      "test": "AT-036",
+      "acceptance": "Two partial receipts sum once, duplicate operation does not increase paid total, overpayment is reviewed, reversal links original; RECEIVED with pending dues cannot become CLOSED; disagreement remains visible."
+    },
+    {
+      "id": "R-PAY-03",
+      "scope": "RELEASE",
+      "title": "Collector earnings and transaction history",
+      "tasks": [
+        "T026",
+        "T027"
+      ],
+      "spec": "docs/04_APPFLOW.md",
+      "source": [
+        "E:1113-1139",
+        "E:6206-6230"
+      ],
+      "test": "AT-037",
+      "acceptance": "Filter history/month and reconcile gross, acknowledged paid, asserted pending and remaining dues against transactions; offline view shows freshness; no demo earnings or estimates contaminate real settled totals."
+    },
+    {
+      "id": "R-OFF-01",
+      "scope": "RELEASE",
+      "title": "Offline reference and local core journey",
+      "tasks": [
+        "T009",
+        "T013",
+        "T017",
+        "T020"
+      ],
+      "spec": "docs/17_OFFLINE_SYNC.md",
+      "source": [
+        "E:1285-1320",
+        "E:1586-1602"
+      ],
+      "test": "AT-038",
+      "acceptance": "After bootstrap, airplane mode still allows material/safety/price/directory/history reads and photo/category/weight/lot/pending handover writes; fresh install offers clearly labelled demo reference or activation requirement, never an empty misleading success state."
+    },
+    {
+      "id": "R-OFF-02",
+      "scope": "RELEASE",
+      "title": "Atomic durable outbox and image survival",
+      "tasks": [
+        "T013",
+        "T043"
+      ],
+      "spec": "docs/17_OFFLINE_SYNC.md",
+      "source": [
+        "E:1627-1655",
+        "P:2123-2137"
+      ],
+      "test": "AT-039",
+      "acceptance": "Kill process during/after local save and media staging; either fully recover object+event+outbox+file or report unsaved failure; never drop a pending record through migration, cleanup or storage pressure."
+    },
+    {
+      "id": "R-OFF-03",
+      "scope": "RELEASE",
+      "title": "Idempotency and partial batch acknowledgement",
+      "tasks": [
+        "T014",
+        "T043"
+      ],
+      "spec": "docs/17_OFFLINE_SYNC.md",
+      "source": [
+        "E:1659-1677",
+        "E:6320-6345"
+      ],
+      "test": "AT-040",
+      "acceptance": "Resend an operation after server commit/ACK loss and in mixed-success batches; each accepted effect occurs once, different payload with reused ID conflicts, successful siblings stay acknowledged."
+    },
+    {
+      "id": "R-OFF-04",
+      "scope": "RELEASE",
+      "title": "Versioned conflicts and dependency order",
+      "tasks": [
+        "T014",
+        "T015",
+        "T043"
+      ],
+      "spec": "docs/17_OFFLINE_SYNC.md",
+      "source": [
+        "E:1683-1717",
+        "E:9031-9053"
+      ],
+      "test": "AT-041",
+      "acceptance": "Out-of-order lot/media/handover operations wait on parents; concurrent changes return current server version without erasing local proposal; reference tombstones update caches while historical receipts retain snapshots."
+    },
+    {
+      "id": "R-OFF-05",
+      "scope": "RELEASE",
+      "title": "WorkManager retries foreground sync and auth pause",
+      "tasks": [
+        "T015",
+        "T017",
+        "T043"
+      ],
+      "spec": "docs/17_OFFLINE_SYNC.md",
+      "source": [
+        "P:1472-1483",
+        "P:2123-2137"
+      ],
+      "test": "AT-042",
+      "acceptance": "With intermittent network/reboot/background restriction sync resumes durably or via manual button; 401 pauses for auth, 409 review, 422 repair, 429 backoff and 5xx retry without busy loop or lost records."
+    },
+    {
+      "id": "R-OFF-06",
+      "scope": "RELEASE",
+      "title": "Visible queue and recoverable failure states",
+      "tasks": [
+        "T015",
+        "T017",
+        "T043"
+      ],
+      "spec": "docs/05_DESIGN_STITCH.md",
+      "source": [
+        "E:7607-7609"
+      ],
+      "test": "AT-043",
+      "acceptance": "Collector can distinguish local/sending/synced/needs-login/conflict/rejected, inspect queue count/last sync, retry safely and retain a support reference; no generic green success on HTTP failure."
+    },
+    {
+      "id": "R-ML-01",
+      "scope": "RELEASE",
+      "title": "Licensed suitable public dataset only",
+      "tasks": [
+        "T032",
+        "T047"
+      ],
+      "spec": "docs/19_AI_ML.md",
+      "source": [
+        "P:2628-2629",
+        "E:1987-2008"
+      ],
+      "test": "AT-044",
+      "acceptance": "Every training image has permitted-use evidence, source/license/hash/class/object-group/split; no fabricated field images; class coverage report exposes generic datasets that do not cover actual e-waste taxonomy."
+    },
+    {
+      "id": "R-ML-02",
+      "scope": "RELEASE",
+      "title": "Reproducible leakage-free training and evaluation",
+      "tasks": [
+        "T033",
+        "T047"
+      ],
+      "spec": "docs/19_AI_ML.md",
+      "source": [
+        "E:2398-2449",
+        "E:6676-6710"
+      ],
+      "test": "AT-045",
+      "acceptance": "Train from saved configuration with object-group splits and training-only augmentation; report actual untouched-test macro/per-class F1, confusion matrix, counts/limits, calibration threshold and quantization parity."
+    },
+    {
+      "id": "R-ML-03",
+      "scope": "RELEASE",
+      "title": "Bundled offline advisory classifier",
+      "tasks": [
+        "T034",
+        "T044"
+      ],
+      "spec": "docs/19_AI_ML.md",
+      "source": [
+        "P:2639-2642",
+        "E:2351-2394"
+      ],
+      "test": "AT-046",
+      "acceptance": "Real SahiTol model predicts offline on phone with versioned preprocessing; user confirms/changes; low-confidence/OOD/corrupt-model fallback stays usable; no automatic certification, pricing or route determination."
+    },
+    {
+      "id": "R-ML-04",
+      "scope": "RELEASE",
+      "title": "Correction data and measured model constraints",
+      "tasks": [
+        "T034",
+        "T045",
+        "T047"
+      ],
+      "spec": "docs/19_AI_ML.md",
+      "source": [
+        "E:2402-2419",
+        "E:3328-3342"
+      ],
+      "test": "AT-047",
+      "acceptance": "Persist suggestion/confidence/model version separately from human label; report correction/abstention denominators and inference/APK/memory on actual device; no training reuse without documented rights/purpose."
+    },
+    {
+      "id": "R-SAFE-01",
+      "scope": "RELEASE",
+      "title": "Contextual pictorial safety guidance",
+      "tasks": [
+        "T035",
+        "T039"
+      ],
+      "spec": "docs/22_REGULATORY_SAFETY.md",
+      "source": [
+        "E:1171-1197",
+        "E:6251-6267"
+      ],
+      "test": "AT-048",
+      "acceptance": "PCB/cable/CRT/battery selection opens appropriate short pictorial warning in both languages offline; content is sourced/versioned and avoids instructions for unsafe processing."
+    },
+    {
+      "id": "R-LANG-01",
+      "scope": "RELEASE",
+      "title": "Complete Hindi Marathi and English fallback",
+      "tasks": [
+        "T036",
+        "T046"
+      ],
+      "spec": "docs/14_TRANSLATION_AUDIO_AUDIT.md",
+      "source": [
+        "E:1201-1231",
+        "P:2636-2643"
+      ],
+      "test": "AT-049",
+      "acceptance": "All collector critical keys, labels, validation/denial/conflict/payment states and dynamic material terms work in hi/mr; language persists; unavailable translation is reported in audit, not hidden by English fallback."
+    },
+    {
+      "id": "R-LANG-02",
+      "scope": "RELEASE",
+      "title": "Offline audio prompts and spoken prices",
+      "tasks": [
+        "T037",
+        "T046"
+      ],
+      "spec": "docs/14_TRANSLATION_AUDIO_AUDIT.md",
+      "source": [
+        "P:1949-1950",
+        "P:2618-2621",
+        "E:5356-5361"
+      ],
+      "test": "AT-050",
+      "acceptance": "In airplane mode tap Hindi and Marathi audio for changing price ranges, decimals, rupees/paise/per-kg and safety/pending/success; spoken value exactly matches visible value; asset licences and missing-clip behavior are recorded."
+    },
+    {
+      "id": "R-UX-01",
+      "scope": "RELEASE",
+      "title": "Low-literacy accessible approved interactions",
+      "tasks": [
+        "T017",
+        "T036",
+        "T044",
+        "T046"
+      ],
+      "spec": "docs/05_DESIGN_STITCH.md",
+      "source": [
+        "E:3057-3117",
+        "E:5519-5527"
+      ],
+      "test": "AT-051",
+      "acceptance": "Core screens use approved icons/photos, short labels and tap-to-hear, primary 56dp mobile targets, no color-only status, at most three primary inputs per step; large text/TalkBack/numeric input and explicit numeral preference remain usable."
+    },
+    {
+      "id": "R-UX-02",
+      "scope": "RELEASE",
+      "title": "Entry-level Android performance",
+      "tasks": [
+        "T045"
+      ],
+      "spec": "docs/03_TECHSPEC.md",
+      "source": [
+        "E:3121-3135",
+        "E:7279-7300",
+        "P:2309-2310"
+      ],
+      "test": "AT-052",
+      "acceptance": "Record named device, APK/model/audio sizes, memory and launch/save/compression/API/model timings against documented budgets; any miss stays visible with remediation, no borrowed benchmarks."
+    },
+    {
+      "id": "R-DATA-01",
+      "scope": "RELEASE",
+      "title": "Material dataset reference and observations",
+      "tasks": [
+        "T010",
+        "T016",
+        "T031",
+        "T047"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "E:1970-1983",
+        "E:5351-5365"
+      ],
+      "test": "AT-053",
+      "acceptance": "Export material observations with category/subcategory/description/image/weight/condition/source/value linked to lots while catalog remains distinct; new lot produces an observation through normal workflow."
+    },
+    {
+      "id": "R-DATA-02",
+      "scope": "RELEASE",
+      "title": "Price dataset lifecycle and feedback",
+      "tasks": [
+        "T011",
+        "T018",
+        "T031",
+        "T047"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "E:1905-1922",
+        "E:5491-5498"
+      ],
+      "test": "AT-054",
+      "acceptance": "Import→validate→review→aggregate→display→confirmed-transaction feedback→history/export works; one eligible transaction adds one sourced price observation; disputes/demo records do not contaminate real summaries."
+    },
+    {
+      "id": "R-DATA-03",
+      "scope": "RELEASE",
+      "title": "Recycler dataset lifecycle",
+      "tasks": [
+        "T012",
+        "T021",
+        "T029",
+        "T031",
+        "T047"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "E:1926-1945",
+        "E:6533-6541"
+      ],
+      "test": "AT-055",
+      "acceptance": "Import facility, review source/current status, update operational data, refresh/expire verification and export versions; original registry claim and later operational update remain separately attributable."
+    },
+    {
+      "id": "R-DATA-04",
+      "scope": "RELEASE",
+      "title": "Transaction dataset generated by workflow",
+      "tasks": [
+        "T026",
+        "T031",
+        "T047"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "E:1949-1967"
+      ],
+      "test": "AT-056",
+      "acceptance": "A demonstrated lot→offer→handover→payment produces a transaction export with party IDs, original/final weights/values, locations/times and separate payment/lifecycle status without hand-inserting completion rows."
+    },
+    {
+      "id": "R-DATA-05",
+      "scope": "RELEASE",
+      "title": "Traceability dataset generated by events",
+      "tasks": [
+        "T023",
+        "T031",
+        "T047"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "E:1854-1884"
+      ],
+      "test": "AT-057",
+      "acceptance": "Export collection through confirmed receipt/status events with evidence refs, weights, times, location quality, reference and confirmation; verify chain and correction lineage without mutable-history loss."
+    },
+    {
+      "id": "R-DATA-06",
+      "scope": "RELEASE",
+      "title": "Minimal collector dataset and anonymization",
+      "tasks": [
+        "T007",
+        "T031",
+        "T040",
+        "T047"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "E:1888-1901"
+      ],
+      "test": "AT-058",
+      "acceptance": "Export collector ID/language/general area/history/totals with PII redacted by purpose; onboarding and transactions generate it; public export excludes phone, exact home location and credentials."
+    },
+    {
+      "id": "R-DATA-07",
+      "scope": "RELEASE",
+      "title": "AI training dataset card and tabular links",
+      "tasks": [
+        "T032",
+        "T033",
+        "T047"
+      ],
+      "spec": "docs/19_AI_ML.md",
+      "source": [
+        "E:1987-2008",
+        "E:6527-6541"
+      ],
+      "test": "AT-059",
+      "acceptance": "Deliver training manifest/card with source, quality, size, labels, object splits and licensing plus nullable weight/price/location/transaction links where actually observed; absent measurements remain null, never inferred truth."
+    },
+    {
+      "id": "R-DATA-08",
+      "scope": "RELEASE",
+      "title": "Provenance and demo isolation everywhere",
+      "tasks": [
+        "T005",
+        "T029",
+        "T031",
+        "T040"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "P:2646-2647",
+        "E:2678-2705"
+      ],
+      "test": "AT-060",
+      "acceptance": "Display and export origin_class/source_kind/is_demo/date/version; public commercial data is not OFFICIAL; app-generated demo data is not real trade; mixed datasets disclose breakdown and synthetic lineage propagates."
+    },
+    {
+      "id": "R-DATA-09",
+      "scope": "RELEASE",
+      "title": "Import cleaning geocoding and validation tools",
+      "tasks": [
+        "T005",
+        "T012",
+        "T031"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "P:2312-2313",
+        "E:4022-4048"
+      ],
+      "test": "AT-061",
+      "acceptance": "Rerun imports deterministically with checksums, preserve original documents and extraction locators, quarantine malformed rows, cache permitted geocodes and report accuracy; never silently discard or invent values."
+    },
+    {
+      "id": "R-DATA-10",
+      "scope": "RELEASE",
+      "title": "Synthetic generator and edge-case scenarios",
+      "tasks": [
+        "T005",
+        "T043"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "E:2219-2272"
+      ],
+      "test": "AT-062",
+      "acceptance": "Seeded generator produces labelled valid workflow fixtures and separate invalid/retry/duplicate/mismatch/stale/reject/cancel scenarios; re-running does not duplicate seed identities or label generated records official."
+    },
+    {
+      "id": "R-DATA-11",
+      "scope": "RELEASE",
+      "title": "Seven data cards and versioned exports",
+      "tasks": [
+        "T031",
+        "T047"
+      ],
+      "spec": "docs/18_DATA_PROVENANCE.md",
+      "source": [
+        "E:3944-4018",
+        "E:5365-5367"
+      ],
+      "test": "AT-063",
+      "acceptance": "For all seven families deliver schema/version/count/source/license/validation/update/use/limitations and export checksum; counts reconcile with stored rows and demo filters; no completed card contains invented values."
+    },
+    {
+      "id": "R-ADMIN-01",
+      "scope": "RELEASE",
+      "title": "Admin CRUD source and verification workflow",
+      "tasks": [
+        "T029",
+        "T030"
+      ],
+      "spec": "docs/16_API_CONTRACT.md",
+      "source": [
+        "E:3057-3065",
+        "E:5951-5960"
+      ],
+      "test": "AT-064",
+      "acceptance": "Admin can review facilities, materials/aliases/safety, prices and source revisions; ordinary recycler cannot approve itself; edits are audited and sync to caches without rewriting old receipts."
+    },
+    {
+      "id": "R-ADMIN-02",
+      "scope": "RELEASE",
+      "title": "Data quality review dashboard",
+      "tasks": [
+        "T028",
+        "T030"
+      ],
+      "spec": "docs/MONITORING.md",
+      "source": [
+        "E:3570-3594",
+        "E:4022-4066",
+        "P:2644-2645"
+      ],
+      "test": "AT-065",
+      "acceptance": "Dashboard calculates missing/invalid/stale/duplicate/inconsistent/source coverage and demo fractions; drill into a flag and resolve with actor/reason; all percentages have denominators and real query evidence."
+    },
+    {
+      "id": "R-ADMIN-03",
+      "scope": "RELEASE",
+      "title": "Analytics and correct impact metrics",
+      "tasks": [
+        "T029",
+        "T030"
+      ],
+      "spec": "docs/MONITORING.md",
+      "source": [
+        "E:3260-3342",
+        "E:5628-5636"
+      ],
+      "test": "AT-066",
+      "acceptance": "Metrics derive from events with time/region/provenance filters: activity/quotes/matches/dues/disputes/sync/model quality and verified received grams; exclude demo and never equate received material with proven recycling or CO2 savings."
+    },
+    {
+      "id": "R-ECON-01",
+      "scope": "RELEASE",
+      "title": "Illustrative unit-economics screen",
+      "tasks": [
+        "T038",
+        "T039"
+      ],
+      "spec": "docs/23_UNIT_ECONOMICS.md",
+      "source": [
+        "P:2614-2619",
+        "P:2645-2646",
+        "E:3183-3218"
+      ],
+      "test": "AT-067",
+      "acceptance": "Change source-linked same-lot input assumptions and observe recalculated current/platform net, delta and valid percentage; show negative/no-benefit cases and explicit illustrative label separate from actual ledger."
+    },
+    {
+      "id": "R-ECON-02",
+      "scope": "RELEASE",
+      "title": "Platform sustainability without collector fees",
+      "tasks": [
+        "T038",
+        "T048"
+      ],
+      "spec": "docs/23_UNIT_ECONOMICS.md",
+      "source": [
+        "E:3222-3257",
+        "E:9597-9603"
+      ],
+      "test": "AT-068",
+      "acceptance": "Show hypothetical downstream fee revenue minus variable/fixed operating costs and break-even sensitivity; no fee actually charged, credit eligibility or guaranteed uplift implied."
+    },
+    {
+      "id": "R-RES-01",
+      "scope": "RELEASE",
+      "title": "Honest secondary research and personas",
+      "tasks": [
+        "T004",
+        "T047",
+        "T048"
+      ],
+      "spec": "docs/21_RESEARCH_EVIDENCE.md",
+      "source": [
+        "P:2517-2521",
+        "P:2646-2647"
+      ],
+      "test": "AT-069",
+      "acceptance": "Research package identifies each published source, its scope and design inference; personas/scenarios are labelled simulated; deck says no primary interviews completed and never invents participants or quotes."
+    },
+    {
+      "id": "R-RES-02",
+      "scope": "EXTERNAL_GAP",
+      "title": "Two working collector/aggregator field research",
+      "tasks": [
+        "T004",
+        "T047",
+        "T048",
+        "T050"
+      ],
+      "spec": "docs/21_RESEARCH_EVIDENCE.md",
+      "source": [
+        "E:5367-5369",
+        "P:2538-2540",
+        "P:2647-2647"
+      ],
+      "test": "AT-070",
+      "acceptance": "This remains UNMET while desk research is the owner choice. Only actual consented engagement with at least two working participants and evidence could satisfy it; documentation or synthetic scenarios cannot mark it passed."
+    },
+    {
+      "id": "R-REG-01",
+      "scope": "RELEASE",
+      "title": "Receipt terminology and no false authorization",
+      "tasks": [
+        "T023",
+        "T024",
+        "T031",
+        "T048"
+      ],
+      "spec": "docs/22_REGULATORY_SAFETY.md",
+      "source": [
+        "E:186-245",
+        "E:6176-6204",
+        "P:2651-2653"
+      ],
+      "test": "AT-071",
+      "acceptance": "App/PDF/CSV/deck call the artifact a platform Digital Handover Record; collector identity is not a licence; no official EPR certificate, government endorsement or established CPCB integration is claimed."
+    },
+    {
+      "id": "R-SEC-01",
+      "scope": "RELEASE",
+      "title": "PIN abuse secrets and transport safety",
+      "tasks": [
+        "T007",
+        "T040",
+        "T041"
+      ],
+      "spec": "docs/12_GUARDRAILS.md",
+      "source": [
+        "E:2610-2638",
+        "P:2301-2301"
+      ],
+      "test": "AT-072",
+      "acceptance": "Rate-limit PIN attempts, restrict role grants, rotate/revoke sessions, verify release HTTPS and restrictive CORS; APK/web/repo/log/QR contain no server key, PIN or private database credentials."
+    },
+    {
+      "id": "R-SEC-02",
+      "scope": "RELEASE",
+      "title": "Privacy media access retention and audit",
+      "tasks": [
+        "T008",
+        "T040",
+        "T042"
+      ],
+      "spec": "docs/12_GUARDRAILS.md",
+      "source": [
+        "E:2642-2675",
+        "E:6833-6857"
+      ],
+      "test": "AT-073",
+      "acceptance": "Private images require authorization; signed URLs expire; uploads cannot traverse filesystem; exports redact PII; retention/deletion policy preserves justified audit and pending data while clearing obsolete access safely."
+    },
+    {
+      "id": "R-OPS-01",
+      "scope": "RELEASE",
+      "title": "Hosted remote judge access",
+      "tasks": [
+        "T041",
+        "T044",
+        "T050"
+      ],
+      "spec": "docs/DEPLOYMENT.md",
+      "source": [
+        "P:2610-2611",
+        "P:2638-2638"
+      ],
+      "test": "AT-074",
+      "acceptance": "Install release APK and open web console outside developer Wi-Fi; HTTPS API, PostGIS, private storage and QR work; cold start has recoverable UI; persistent photos survive API redeploy."
+    },
+    {
+      "id": "R-OPS-02",
+      "scope": "RELEASE",
+      "title": "Reproducible local fallback and recovery",
+      "tasks": [
+        "T042"
+      ],
+      "spec": "docs/DEPLOYMENT.md",
+      "source": [
+        "P:2478-2479",
+        "P:2301-2301"
+      ],
+      "test": "AT-075",
+      "acceptance": "Fresh local Compose environment runs same schema and fixture journey; Android debug LAN configuration works; database/media restore rehearsed; browser scan fallback handles insecure local camera context without weakening release TLS."
+    },
+    {
+      "id": "R-OPS-03",
+      "scope": "RELEASE",
+      "title": "No required paid runtime dependency",
+      "tasks": [
+        "T001",
+        "T037",
+        "T041"
+      ],
+      "spec": "docs/11_SECRETS_CHECKLIST.md",
+      "source": [
+        "P:1764-1806",
+        "E:1519-1537"
+      ],
+      "test": "AT-076",
+      "acceptance": "Audit dependency/service/config list and execute core with cloud speech/maps/AI unavailable; no mandatory SMS, LLM, payment gateway, custom domain or billing upgrade is required; current free-plan/account limitations documented."
+    },
+    {
+      "id": "R-OPS-04",
+      "scope": "RELEASE",
+      "title": "Monitoring and diagnostics",
+      "tasks": [
+        "T028",
+        "T029",
+        "T042"
+      ],
+      "spec": "docs/MONITORING.md",
+      "source": [
+        "E:3282-3342",
+        "E:7607-7609"
+      ],
+      "test": "AT-077",
+      "acceptance": "Health and redacted structured logs expose failed sync/conflicts/media/DB errors with correlation IDs; dashboard denominators and last refresh distinguish outage from empty data; actionable local recovery steps work."
+    },
+    {
+      "id": "R-QA-01",
+      "scope": "RELEASE",
+      "title": "Critical end-to-end and adversarial acceptance",
+      "tasks": [
+        "T043",
+        "T044"
+      ],
+      "spec": "docs/20_TEST_ACCEPTANCE.md",
+      "source": [
+        "E:7217-7277",
+        "P:733-788"
+      ],
+      "test": "AT-078",
+      "acceptance": "Pass online and airplane-mode lot→price→match→pending QR→sync→second-phone confirmation→payment→ledger→admin plus duplicate/crash/denial/stale/conflict/auth tests with actual logs and device evidence."
+    },
+    {
+      "id": "R-QA-02",
+      "scope": "RELEASE",
+      "title": "Live scenario demonstration and backup",
+      "tasks": [
+        "T044",
+        "T049"
+      ],
+      "spec": "docs/24_DEMO_PRESENTATION.md",
+      "source": [
+        "E:5367-5369",
+        "E:7176-7213"
+      ],
+      "test": "AT-079",
+      "acceptance": "A person actually performs the complete journey on devices, records failures and fixes, and produces playable demo/backups; no unexecuted script or prefilled database is represented as live usability evidence."
+    },
+    {
+      "id": "R-DOC-01",
+      "scope": "RELEASE",
+      "title": "Outsider documentation and presenter readiness",
+      "tasks": [
+        "T047",
+        "T048",
+        "T050"
+      ],
+      "spec": "docs/00_README.md",
+      "source": [
+        "CURRENT_REQUEST",
+        "P:2585-2605"
+      ],
+      "test": "AT-080",
+      "acceptance": "New reader follows README to scope/architecture/decisions/data/run/demo; presenters can explain sources, offline pending vs confirmed, price limits, model limits, battery route and unmet fieldwork without relying on chat history."
+    },
+    {
+      "id": "R-FUT-01",
+      "scope": "FUTURE",
+      "title": "Assisted collector and aggregator accounts",
+      "tasks": [
+        "F001"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:1257-1284"
+      ],
+      "test": "FT-001",
+      "acceptance": "Explicit delegation/consent, actor versus beneficial owner, safe phone-less onboarding, separate permissions and offline ownership tests; no admin impersonation shortcut."
+    },
+    {
+      "id": "R-FUT-02",
+      "scope": "FUTURE",
+      "title": "Multi-collector batching and pickup operations",
+      "tasks": [
+        "F002"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:5920-5934"
+      ],
+      "test": "FT-002",
+      "acceptance": "Batch membership/weights/provenance and collector-level proceeds reconcile; operational capacity and actual pickup success recorded; no double counting."
+    },
+    {
+      "id": "R-FUT-03",
+      "scope": "FUTURE",
+      "title": "Predictive prices and automated public feeds",
+      "tasks": [
+        "F003"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:2490-2516",
+        "E:4669-4701"
+      ],
+      "test": "FT-003",
+      "acceptance": "Licensed sustained comparable observations, temporal holdout against statistical baseline, uncertainty/drift monitoring and a permitted refresh pipeline; keep indicative labels."
+    },
+    {
+      "id": "R-FUT-04",
+      "scope": "FUTURE",
+      "title": "Consented active learning and broader classifier",
+      "tasks": [
+        "F004"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:2278-2455",
+        "E:7154-7162"
+      ],
+      "test": "FT-004",
+      "acceptance": "New consent/rights policy, reviewed correction labels, expanded relevant classes, leakage-safe evaluation and version rollback; current release remains public-images-only."
+    },
+    {
+      "id": "R-FUT-05",
+      "scope": "FUTURE",
+      "title": "Learned recycler ranking and advanced risk detection",
+      "tasks": [
+        "F005"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:2544-2608"
+      ],
+      "test": "FT-005",
+      "acceptance": "Enough quality outcome labels, temporal evaluation/fairness/reason codes, human review and safety hard filters; do not learn to override route eligibility or accuse fraud."
+    },
+    {
+      "id": "R-FUT-06",
+      "scope": "FUTURE",
+      "title": "Voice input and multilingual assistant",
+      "tasks": [
+        "F006"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:2963-2989",
+        "E:6631-6637"
+      ],
+      "test": "FT-006",
+      "acceptance": "Free/licensed offline ASR where viable, hi/mr noisy-environment tests, explicit confirmation of money/material values and manual fallback; no arbitrary autonomous transaction agent."
+    },
+    {
+      "id": "R-FUT-07",
+      "scope": "FUTURE",
+      "title": "Pickup route optimization",
+      "tasks": [
+        "F007"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:4692-4701",
+        "E:4931-4934"
+      ],
+      "test": "FT-007",
+      "acceptance": "Consented operational locations, realistic vehicle/capacity/time windows, permitted map data and measured routing baseline; no continuous collector tracking by default."
+    },
+    {
+      "id": "R-FUT-08",
+      "scope": "FUTURE",
+      "title": "ERP GST PRO brand and CPCB adapters",
+      "tasks": [
+        "F008"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:4703-4716",
+        "E:7709-7711"
+      ],
+      "test": "FT-008",
+      "acceptance": "Documented official/partner API contracts, credentials and legal role, validated field mapping/sandbox evidence, access/audit controls; no claim of integration or certificate issuance before verification."
+    },
+    {
+      "id": "R-FUT-09",
+      "scope": "FUTURE",
+      "title": "Downstream processing and material mass balance",
+      "tasks": [
+        "F009"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:4753-4774",
+        "E:530-536"
+      ],
+      "test": "FT-009",
+      "acceptance": "Recycler processing evidence, batch splits/merges/yield reconciliation and independently supported downstream outcomes before calling received mass recycled."
+    },
+    {
+      "id": "R-FUT-10",
+      "scope": "FUTURE",
+      "title": "Ed25519 server-signed records",
+      "tasks": [
+        "F010"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:6196-6196",
+        "E:8551-8553"
+      ],
+      "test": "FT-010",
+      "acceptance": "Canonical payload parity, secure signing keys/rotation/revocation/trusted public-key distribution and verification fixtures; signature still does not prove physical facts."
+    },
+    {
+      "id": "R-FUT-11",
+      "scope": "FUTURE",
+      "title": "Recovery indicator and environmental estimates",
+      "tasks": [
+        "F011"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:5474-5474",
+        "E:7632-7632",
+        "E:9246-9246"
+      ],
+      "test": "FT-011",
+      "acceptance": "Exact peer-reviewed composition/LCA sources, material/device-specific uncertainty and defensible model validation; no invented official formula, exact metal yield or unsupported CO2 savings. Owner must explicitly promote this optional idea."
+    },
+    {
+      "id": "R-FUT-12",
+      "scope": "FUTURE",
+      "title": "Supervised real-world pilot and partnerships",
+      "tasks": [
+        "F012"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:3346-3396",
+        "E:4669-4691"
+      ],
+      "test": "FT-012",
+      "acceptance": "Consented real collectors/facilities, review safety/privacy/retention/support, actual partnership evidence and measured feedback; historical 5–10/20–30 counts are planning suggestions."
+    },
+    {
+      "id": "R-FUT-13",
+      "scope": "FUTURE",
+      "title": "More regions languages and material routes",
+      "tasks": [
+        "F013"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:4683-4691",
+        "E:4776-4790"
+      ],
+      "test": "FT-013",
+      "acceptance": "Region/language source and review coverage, safe route-specific authorization and model/material validation; preserve e-waste focus until explicit expansion."
+    },
+    {
+      "id": "R-FUT-14",
+      "scope": "FUTURE",
+      "title": "Aggregated sector and government insights",
+      "tasks": [
+        "F014"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:4718-4774"
+      ],
+      "test": "FT-014",
+      "acceptance": "Adequate representative data, aggregation/privacy controls and sample/denominator limitations for supply/capacity gaps, volatility/material flows/safety; no prototype national statistics."
+    },
+    {
+      "id": "R-FUT-15",
+      "scope": "FUTURE",
+      "title": "Advanced dispute review and support workflow",
+      "tasks": [
+        "F015"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:3876-3898"
+      ],
+      "test": "FT-015",
+      "acceptance": "Evidence submission/reviewer permissions/appeal/resolution timeline, immutable original quote/final terms and policy; basic pending/disputed states already required in release."
+    },
+    {
+      "id": "R-FUT-16",
+      "scope": "FUTURE",
+      "title": "Optional payments messaging and monetization",
+      "tasks": [
+        "F016"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:3222-3257",
+        "E:4917-4939",
+        "E:7017-7027"
+      ],
+      "test": "FT-016",
+      "acceptance": "Separate owner approval, lawful provider terms, fee transparency, webhook idempotency and reconciled settlement; SMS/WhatsApp/email/real UPI/paid SaaS not release dependencies."
+    },
+    {
+      "id": "R-FUT-17",
+      "scope": "FUTURE",
+      "title": "Collector identity sharing and partner services",
+      "tasks": [
+        "F017"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:7866-7866",
+        "E:5576-5576",
+        "E:9462-9462"
+      ],
+      "test": "FT-017",
+      "acceptance": "Minimal revocable identity QR/consent-scoped history sharing; verified partner eligibility rules before any credit/welfare claim; never public financial profiles or guaranteed access."
+    },
+    {
+      "id": "R-FUT-18",
+      "scope": "FUTURE",
+      "title": "Production operations and scale",
+      "tasks": [
+        "F018"
+      ],
+      "spec": "docs/26_FUTURE_BACKLOG.md",
+      "source": [
+        "E:4917-4939",
+        "E:7607-7609"
+      ],
+      "test": "FT-018",
+      "acceptance": "Measured bottleneck/load and security requirements justify queues/caching/infra, incident support and disaster recovery; no speculative Kubernetes/microservices or blockchain requirement."
+    }
+  ],
+  "tests": [
+    {
+      "id": "AT-001",
+      "requirement": "R-GOV-01",
+      "acceptance": "Inspect app, package metadata, repository and deck: SahiTol is the product name, the SIH title is retained only as the problem title, and no superseded stack or selected feature is silently substituted.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-002",
+      "requirement": "R-GOV-02",
+      "acceptance": "For each implemented screen/state find owner notification plus Stitch project/screen/revision and approval; a missing design leaves that UI waiting and never produces an invented replacement.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-003",
+      "requirement": "R-GOV-03",
+      "acceptance": "In a fresh session invoke session-start then session-continue: agent reconstructs state, reads task specs, selects an eligible task, preserves blockers and updates status/evidence before progressing without routine next-task permission.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-004",
+      "requirement": "R-GOV-04",
+      "acceptance": "Release handoff contains tested PPT, accessible demo video link, installable APK/prototype link and GitHub repo; portal cutoff/format and actual submission status are explicitly recorded.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-005",
+      "requirement": "R-ARC-01",
+      "acceptance": "Approved feasibility screen on a named real Android phone captures photo, persists Room data through restart and performs offline LiteRT inference; Kotlin/Compose/Room/WorkManager remain the collector implementation.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-006",
+      "requirement": "R-ARC-02",
+      "acceptance": "Build and inspect API/web/database configuration: FastAPI, React/Vite, PostgreSQL/PostGIS, local volume and hosted private storage work through the documented contracts with dependency locks.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-007",
+      "requirement": "R-AUTH-01",
+      "acceptance": "Register/login with phone and PIN; store no plaintext PIN; profile uses ID/alias/language/general area, asks for no Aadhaar/PAN/bank details and shows recoverable auth errors.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-008",
+      "requirement": "R-AUTH-02",
+      "acceptance": "Collector A cannot read/mutate B's lots; recycler A cannot confirm B's facility handover; collector cannot become admin by editing payload; invalid/expired tokens are rejected server-side.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-009",
+      "requirement": "R-AUTH-03",
+      "acceptance": "After successful activation disconnect and restart: local profile/drafts remain usable; expired token pauses authenticated sync; reauth resumes same operations; logout cannot silently discard pending data or expose it to another user.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-010",
+      "requirement": "R-AUTH-04",
+      "acceptance": "Bundled demo profile and demo OTP/bypass are explicitly labelled and isolated; public demo credentials cannot access non-demo users, verification controls or unrestricted admin actions.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-011",
+      "requirement": "R-LOT-01",
+      "acceptance": "Create draft lots for CRT,LCD,PCB,cable,battery,motor/magnet,mixed plastics,mixed electronics and UNKNOWN; hi/mr/en local aliases resolve to stable IDs, not hardcoded price values.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-012",
+      "requirement": "R-LOT-02",
+      "acceptance": "Take/import a photo, deny camera permission, retry capture and restart; saved image remains linked, upload validates type/size and strips EXIF; no-photo draft is allowed but evidence completeness is explicit.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-013",
+      "requirement": "R-LOT-03",
+      "acceptance": "Save a draft then complete category/condition/description/positive finite weight; reject zero/negative/overflow values on submit; fractional kg round-trips as grams; suspicious large weight requires review without invented domain cap.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-014",
+      "requirement": "R-LOT-04",
+      "acceptance": "Record timestamps and GPS accuracy/capture age when permitted; denial uses labelled coarse/manual location or missing-data state; never fabricate coordinates or expose a home address in public records.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-015",
+      "requirement": "R-LOT-05",
+      "acceptance": "Create/edit/reopen/cancel a lot with stable UUID and legal transitions; restart preserves drafts; attempts to mutate confirmed historical terms or jump CLOSED→COLLECTED fail and are auditable.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-016",
+      "requirement": "R-PRICE-01",
+      "acceptance": "Enter an observation with material/subcategory, region, date, unit, price kind and source; edit via revision, moderate and export it; unknown dates or unsupported conversions are quarantined.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-017",
+      "requirement": "R-PRICE-02",
+      "acceptance": "A known comparable observation fixture yields specified weighted median/Q1/Q3 and estimate bounds in API and Android; weight changes recompute estimate; screen labels result indicative and retains snapshot/version.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-018",
+      "requirement": "R-PRICE-03",
+      "acceptance": "Recent/few/stale/no-data fixtures show correct count, sources, timestamp, confidence and reason; no-data is INSUFFICIENT, never zero or a hidden synthetic fallback.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-019",
+      "requirement": "R-PRICE-04",
+      "acceptance": "View dated trend buckets and multiple offers in consistent units/regions; missing history displays a gap, no fabricated points; expired/noncomparable rates are labelled and do not become an agreed price.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-020",
+      "requirement": "R-PRICE-05",
+      "acceptance": "Known low/high quotes trigger configured review reasons only when enough comparable data exists; alert says review, does not accuse fraud or block collector choice without a separate eligibility violation.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-021",
+      "requirement": "R-REC-01",
+      "acceptance": "Import CPCB plus DPCC and MPCB records with facility role/source document/page/date/registration and lineage; do not relabel a collection point as a recycler or claim that a list import creates a partnership.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-022",
+      "requirement": "R-REC-02",
+      "acceptance": "L0/L1/L2 never become verified formal destinations; stale/expired/revoked/unproven route authorization removes strong badge and matching eligibility even if original source was official.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-023",
+      "requirement": "R-REC-03",
+      "acceptance": "Facility user updates rates/availability/service area with provenance while authorization fields stay admin-controlled; unknown operational data stays unknown; acceptance/minimum-weight terms are visible.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-024",
+      "requirement": "R-REC-04",
+      "acceptance": "Battery lot cannot match a facility evidenced only for e-waste; incompatible material, unverified current registration or unsupported service/weight constraints exclude before ranking and before confirmation.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-025",
+      "requirement": "R-REC-05",
+      "acceptance": "Run fixed candidates: deterministic score and tie-break, PostGIS distance online, cached local parity within tolerance; expose contributions and unknowns; never invent pickup, price or reliability.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-026",
+      "requirement": "R-REC-06",
+      "acceptance": "With network/maps/GPS unavailable directory list works with cached age and distance when possible; no-match can save/widen geography, never switch battery route; online MapLibre includes attribution and permitted tiles.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-027",
+      "requirement": "R-OFFER-01",
+      "acceptance": "Collector submits lot, linked recycler sees evidence and quotes/accepts/rejects; collector selects one live offer; rejected/expired requests preserve history and can return to another compatible match.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-028",
+      "requirement": "R-OFFER-02",
+      "acceptance": "Two simultaneous acceptances leave one active agreement; cached expired offer cannot silently bind; later price-board refresh does not modify accepted terms; material/weight/price changes require explicit acknowledgement.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-029",
+      "requirement": "R-HAND-01",
+      "acceptance": "In airplane mode create UUID proposal with photo references, grams, location quality, time, parties/terms and hash; restart shows PENDING_CONFIRMATION and sync pending, never recycler-confirmed.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-030",
+      "requirement": "R-HAND-02",
+      "acceptance": "Borrowed second Android browser scans collector QR over HTTPS, identifies the correct facility/lot, submits authorized confirmation and collector sees it after pull; unsynced reference explains waiting and supports retry/manual reference.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-031",
+      "requirement": "R-HAND-03",
+      "acceptance": "Same frozen JSON fixture hashes identically in Python/Kotlin/web; one altered byte invalidates expected digest; original proposal and confirmation events remain linked and unchanged; UI never describes bare SHA-256 as a signature.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-032",
+      "requirement": "R-HAND-04",
+      "acceptance": "An unguessable receipt link shows current redacted status and record/hash comparison; public visitor cannot fetch phone/GPS/photos/payment details; QR possession alone cannot authorize confirmation.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-033",
+      "requirement": "R-HAND-05",
+      "acceptance": "Different measured weight/grade/price retains estimate and AI suggestion, sets pending acknowledgement/review and variance reason; neither party overwrites original facts; collector agreement or documented dispute is recorded.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-034",
+      "requirement": "R-HAND-06",
+      "acceptance": "Export offline pending PDF and server confirmed PDF/CSV; identifiers/status/hash/provenance agree with timeline; record is called Digital Handover Record and includes non-EPR boundary, never an official manifest claim.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-035",
+      "requirement": "R-PAY-01",
+      "acceptance": "Record cash without bank account/gateway; optional UPI/other records an assertion and reference, not transfer; both sides see actor/time/acknowledgement and can dispute.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-036",
+      "requirement": "R-PAY-02",
+      "acceptance": "Two partial receipts sum once, duplicate operation does not increase paid total, overpayment is reviewed, reversal links original; RECEIVED with pending dues cannot become CLOSED; disagreement remains visible.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-037",
+      "requirement": "R-PAY-03",
+      "acceptance": "Filter history/month and reconcile gross, acknowledged paid, asserted pending and remaining dues against transactions; offline view shows freshness; no demo earnings or estimates contaminate real settled totals.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-038",
+      "requirement": "R-OFF-01",
+      "acceptance": "After bootstrap, airplane mode still allows material/safety/price/directory/history reads and photo/category/weight/lot/pending handover writes; fresh install offers clearly labelled demo reference or activation requirement, never an empty misleading success state.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-039",
+      "requirement": "R-OFF-02",
+      "acceptance": "Kill process during/after local save and media staging; either fully recover object+event+outbox+file or report unsaved failure; never drop a pending record through migration, cleanup or storage pressure.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-040",
+      "requirement": "R-OFF-03",
+      "acceptance": "Resend an operation after server commit/ACK loss and in mixed-success batches; each accepted effect occurs once, different payload with reused ID conflicts, successful siblings stay acknowledged.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-041",
+      "requirement": "R-OFF-04",
+      "acceptance": "Out-of-order lot/media/handover operations wait on parents; concurrent changes return current server version without erasing local proposal; reference tombstones update caches while historical receipts retain snapshots.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-042",
+      "requirement": "R-OFF-05",
+      "acceptance": "With intermittent network/reboot/background restriction sync resumes durably or via manual button; 401 pauses for auth, 409 review, 422 repair, 429 backoff and 5xx retry without busy loop or lost records.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-043",
+      "requirement": "R-OFF-06",
+      "acceptance": "Collector can distinguish local/sending/synced/needs-login/conflict/rejected, inspect queue count/last sync, retry safely and retain a support reference; no generic green success on HTTP failure.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-044",
+      "requirement": "R-ML-01",
+      "acceptance": "Every training image has permitted-use evidence, source/license/hash/class/object-group/split; no fabricated field images; class coverage report exposes generic datasets that do not cover actual e-waste taxonomy.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-045",
+      "requirement": "R-ML-02",
+      "acceptance": "Train from saved configuration with object-group splits and training-only augmentation; report actual untouched-test macro/per-class F1, confusion matrix, counts/limits, calibration threshold and quantization parity.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-046",
+      "requirement": "R-ML-03",
+      "acceptance": "Real SahiTol model predicts offline on phone with versioned preprocessing; user confirms/changes; low-confidence/OOD/corrupt-model fallback stays usable; no automatic certification, pricing or route determination.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-047",
+      "requirement": "R-ML-04",
+      "acceptance": "Persist suggestion/confidence/model version separately from human label; report correction/abstention denominators and inference/APK/memory on actual device; no training reuse without documented rights/purpose.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-048",
+      "requirement": "R-SAFE-01",
+      "acceptance": "PCB/cable/CRT/battery selection opens appropriate short pictorial warning in both languages offline; content is sourced/versioned and avoids instructions for unsafe processing.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-049",
+      "requirement": "R-LANG-01",
+      "acceptance": "All collector critical keys, labels, validation/denial/conflict/payment states and dynamic material terms work in hi/mr; language persists; unavailable translation is reported in audit, not hidden by English fallback.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-050",
+      "requirement": "R-LANG-02",
+      "acceptance": "In airplane mode tap Hindi and Marathi audio for changing price ranges, decimals, rupees/paise/per-kg and safety/pending/success; spoken value exactly matches visible value; asset licences and missing-clip behavior are recorded.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-051",
+      "requirement": "R-UX-01",
+      "acceptance": "Core screens use approved icons/photos, short labels and tap-to-hear, primary 56dp mobile targets, no color-only status, at most three primary inputs per step; large text/TalkBack/numeric input and explicit numeral preference remain usable.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-052",
+      "requirement": "R-UX-02",
+      "acceptance": "Record named device, APK/model/audio sizes, memory and launch/save/compression/API/model timings against documented budgets; any miss stays visible with remediation, no borrowed benchmarks.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-053",
+      "requirement": "R-DATA-01",
+      "acceptance": "Export material observations with category/subcategory/description/image/weight/condition/source/value linked to lots while catalog remains distinct; new lot produces an observation through normal workflow.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-054",
+      "requirement": "R-DATA-02",
+      "acceptance": "Import→validate→review→aggregate→display→confirmed-transaction feedback→history/export works; one eligible transaction adds one sourced price observation; disputes/demo records do not contaminate real summaries.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-055",
+      "requirement": "R-DATA-03",
+      "acceptance": "Import facility, review source/current status, update operational data, refresh/expire verification and export versions; original registry claim and later operational update remain separately attributable.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-056",
+      "requirement": "R-DATA-04",
+      "acceptance": "A demonstrated lot→offer→handover→payment produces a transaction export with party IDs, original/final weights/values, locations/times and separate payment/lifecycle status without hand-inserting completion rows.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-057",
+      "requirement": "R-DATA-05",
+      "acceptance": "Export collection through confirmed receipt/status events with evidence refs, weights, times, location quality, reference and confirmation; verify chain and correction lineage without mutable-history loss.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-058",
+      "requirement": "R-DATA-06",
+      "acceptance": "Export collector ID/language/general area/history/totals with PII redacted by purpose; onboarding and transactions generate it; public export excludes phone, exact home location and credentials.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-059",
+      "requirement": "R-DATA-07",
+      "acceptance": "Deliver training manifest/card with source, quality, size, labels, object splits and licensing plus nullable weight/price/location/transaction links where actually observed; absent measurements remain null, never inferred truth.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-060",
+      "requirement": "R-DATA-08",
+      "acceptance": "Display and export origin_class/source_kind/is_demo/date/version; public commercial data is not OFFICIAL; app-generated demo data is not real trade; mixed datasets disclose breakdown and synthetic lineage propagates.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-061",
+      "requirement": "R-DATA-09",
+      "acceptance": "Rerun imports deterministically with checksums, preserve original documents and extraction locators, quarantine malformed rows, cache permitted geocodes and report accuracy; never silently discard or invent values.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-062",
+      "requirement": "R-DATA-10",
+      "acceptance": "Seeded generator produces labelled valid workflow fixtures and separate invalid/retry/duplicate/mismatch/stale/reject/cancel scenarios; re-running does not duplicate seed identities or label generated records official.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-063",
+      "requirement": "R-DATA-11",
+      "acceptance": "For all seven families deliver schema/version/count/source/license/validation/update/use/limitations and export checksum; counts reconcile with stored rows and demo filters; no completed card contains invented values.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-064",
+      "requirement": "R-ADMIN-01",
+      "acceptance": "Admin can review facilities, materials/aliases/safety, prices and source revisions; ordinary recycler cannot approve itself; edits are audited and sync to caches without rewriting old receipts.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-065",
+      "requirement": "R-ADMIN-02",
+      "acceptance": "Dashboard calculates missing/invalid/stale/duplicate/inconsistent/source coverage and demo fractions; drill into a flag and resolve with actor/reason; all percentages have denominators and real query evidence.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-066",
+      "requirement": "R-ADMIN-03",
+      "acceptance": "Metrics derive from events with time/region/provenance filters: activity/quotes/matches/dues/disputes/sync/model quality and verified received grams; exclude demo and never equate received material with proven recycling or CO2 savings.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-067",
+      "requirement": "R-ECON-01",
+      "acceptance": "Change source-linked same-lot input assumptions and observe recalculated current/platform net, delta and valid percentage; show negative/no-benefit cases and explicit illustrative label separate from actual ledger.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-068",
+      "requirement": "R-ECON-02",
+      "acceptance": "Show hypothetical downstream fee revenue minus variable/fixed operating costs and break-even sensitivity; no fee actually charged, credit eligibility or guaranteed uplift implied.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-069",
+      "requirement": "R-RES-01",
+      "acceptance": "Research package identifies each published source, its scope and design inference; personas/scenarios are labelled simulated; deck says no primary interviews completed and never invents participants or quotes.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-070",
+      "requirement": "R-RES-02",
+      "acceptance": "This remains UNMET while desk research is the owner choice. Only actual consented engagement with at least two working participants and evidence could satisfy it; documentation or synthetic scenarios cannot mark it passed.",
+      "kind": "external obligation"
+    },
+    {
+      "id": "AT-071",
+      "requirement": "R-REG-01",
+      "acceptance": "App/PDF/CSV/deck call the artifact a platform Digital Handover Record; collector identity is not a licence; no official EPR certificate, government endorsement or established CPCB integration is claimed.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-072",
+      "requirement": "R-SEC-01",
+      "acceptance": "Rate-limit PIN attempts, restrict role grants, rotate/revoke sessions, verify release HTTPS and restrictive CORS; APK/web/repo/log/QR contain no server key, PIN or private database credentials.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-073",
+      "requirement": "R-SEC-02",
+      "acceptance": "Private images require authorization; signed URLs expire; uploads cannot traverse filesystem; exports redact PII; retention/deletion policy preserves justified audit and pending data while clearing obsolete access safely.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-074",
+      "requirement": "R-OPS-01",
+      "acceptance": "Install release APK and open web console outside developer Wi-Fi; HTTPS API, PostGIS, private storage and QR work; cold start has recoverable UI; persistent photos survive API redeploy.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-075",
+      "requirement": "R-OPS-02",
+      "acceptance": "Fresh local Compose environment runs same schema and fixture journey; Android debug LAN configuration works; database/media restore rehearsed; browser scan fallback handles insecure local camera context without weakening release TLS.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-076",
+      "requirement": "R-OPS-03",
+      "acceptance": "Audit dependency/service/config list and execute core with cloud speech/maps/AI unavailable; no mandatory SMS, LLM, payment gateway, custom domain or billing upgrade is required; current free-plan/account limitations documented.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-077",
+      "requirement": "R-OPS-04",
+      "acceptance": "Health and redacted structured logs expose failed sync/conflicts/media/DB errors with correlation IDs; dashboard denominators and last refresh distinguish outage from empty data; actionable local recovery steps work.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-078",
+      "requirement": "R-QA-01",
+      "acceptance": "Pass online and airplane-mode lot→price→match→pending QR→sync→second-phone confirmation→payment→ledger→admin plus duplicate/crash/denial/stale/conflict/auth tests with actual logs and device evidence.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-079",
+      "requirement": "R-QA-02",
+      "acceptance": "A person actually performs the complete journey on devices, records failures and fixes, and produces playable demo/backups; no unexecuted script or prefilled database is represented as live usability evidence.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "AT-080",
+      "requirement": "R-DOC-01",
+      "acceptance": "New reader follows README to scope/architecture/decisions/data/run/demo; presenters can explain sources, offline pending vs confirmed, price limits, model limits, battery route and unmet fieldwork without relying on chat history.",
+      "kind": "acceptance"
+    },
+    {
+      "id": "FT-001",
+      "requirement": "R-FUT-01",
+      "acceptance": "Explicit delegation/consent, actor versus beneficial owner, safe phone-less onboarding, separate permissions and offline ownership tests; no admin impersonation shortcut.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-002",
+      "requirement": "R-FUT-02",
+      "acceptance": "Batch membership/weights/provenance and collector-level proceeds reconcile; operational capacity and actual pickup success recorded; no double counting.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-003",
+      "requirement": "R-FUT-03",
+      "acceptance": "Licensed sustained comparable observations, temporal holdout against statistical baseline, uncertainty/drift monitoring and a permitted refresh pipeline; keep indicative labels.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-004",
+      "requirement": "R-FUT-04",
+      "acceptance": "New consent/rights policy, reviewed correction labels, expanded relevant classes, leakage-safe evaluation and version rollback; current release remains public-images-only.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-005",
+      "requirement": "R-FUT-05",
+      "acceptance": "Enough quality outcome labels, temporal evaluation/fairness/reason codes, human review and safety hard filters; do not learn to override route eligibility or accuse fraud.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-006",
+      "requirement": "R-FUT-06",
+      "acceptance": "Free/licensed offline ASR where viable, hi/mr noisy-environment tests, explicit confirmation of money/material values and manual fallback; no arbitrary autonomous transaction agent.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-007",
+      "requirement": "R-FUT-07",
+      "acceptance": "Consented operational locations, realistic vehicle/capacity/time windows, permitted map data and measured routing baseline; no continuous collector tracking by default.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-008",
+      "requirement": "R-FUT-08",
+      "acceptance": "Documented official/partner API contracts, credentials and legal role, validated field mapping/sandbox evidence, access/audit controls; no claim of integration or certificate issuance before verification.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-009",
+      "requirement": "R-FUT-09",
+      "acceptance": "Recycler processing evidence, batch splits/merges/yield reconciliation and independently supported downstream outcomes before calling received mass recycled.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-010",
+      "requirement": "R-FUT-10",
+      "acceptance": "Canonical payload parity, secure signing keys/rotation/revocation/trusted public-key distribution and verification fixtures; signature still does not prove physical facts.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-011",
+      "requirement": "R-FUT-11",
+      "acceptance": "Exact peer-reviewed composition/LCA sources, material/device-specific uncertainty and defensible model validation; no invented official formula, exact metal yield or unsupported CO2 savings. Owner must explicitly promote this optional idea.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-012",
+      "requirement": "R-FUT-12",
+      "acceptance": "Consented real collectors/facilities, review safety/privacy/retention/support, actual partnership evidence and measured feedback; historical 5–10/20–30 counts are planning suggestions.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-013",
+      "requirement": "R-FUT-13",
+      "acceptance": "Region/language source and review coverage, safe route-specific authorization and model/material validation; preserve e-waste focus until explicit expansion.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-014",
+      "requirement": "R-FUT-14",
+      "acceptance": "Adequate representative data, aggregation/privacy controls and sample/denominator limitations for supply/capacity gaps, volatility/material flows/safety; no prototype national statistics.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-015",
+      "requirement": "R-FUT-15",
+      "acceptance": "Evidence submission/reviewer permissions/appeal/resolution timeline, immutable original quote/final terms and policy; basic pending/disputed states already required in release.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-016",
+      "requirement": "R-FUT-16",
+      "acceptance": "Separate owner approval, lawful provider terms, fee transparency, webhook idempotency and reconciled settlement; SMS/WhatsApp/email/real UPI/paid SaaS not release dependencies.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-017",
+      "requirement": "R-FUT-17",
+      "acceptance": "Minimal revocable identity QR/consent-scoped history sharing; verified partner eligibility rules before any credit/welfare claim; never public financial profiles or guaranteed access.",
+      "kind": "future acceptance"
+    },
+    {
+      "id": "FT-018",
+      "requirement": "R-FUT-18",
+      "acceptance": "Measured bottleneck/load and security requirements justify queues/caching/infra, incident support and disaster recovery; no speculative Kubernetes/microservices or blockchain requirement.",
+      "kind": "future acceptance"
+    }
+  ]
+}

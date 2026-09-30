@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {  "darkMode": "class",  "theme": {    "extend": {      "colors": {        "primary-fixed-dim": "#ffb59c",        "on-error": "#ffffff",        "on-secondary-fixed-variant": "#574500",        "error": "#ba1a1a",        "inverse-surface": "#31312d",        "primary-fixed": "#ffdbcf",        "surface-container": "#f0eee8",        "background": "#fcf9f3",        "on-surface": "#1c1c18",        "on-secondary-fixed": "#241a00",        "on-tertiary-fixed-variant": "#4b4544",        "tertiary-container": "#7a7371",        "on-tertiary-container": "#fffbff",        "surface-container-low": "#f6f3ed",        "on-secondary-container": "#745c00",        "tertiary-fixed": "#eae0de",        "surface-bright": "#fcf9f3",        "on-primary": "#ffffff",        "secondary-fixed-dim": "#e9c349",        "on-tertiary": "#ffffff",        "outline-variant": "#dec0b7",        "on-tertiary-fixed": "#1f1b1a",        "on-surface-variant": "#57423b",        "primary": "#9f3c16",        "surface-dim": "#dcdad4",        "error-container": "#ffdad6",        "surface-variant": "#e5e2dc",        "primary-container": "#bf542c",        "on-secondary": "#ffffff",        "on-background": "#1c1c18",        "on-error-container": "#93000a",        "surface": "#fcf9f3",        "secondary-container": "#fed65b",        "secondary": "#735c00",        "on-primary-container": "#fffbff",        "on-primary-fixed-variant": "#822801",        "outline": "#8a726a",        "surface-tint": "#a23e18",        "surface-container-highest": "#e5e2dc",        "tertiary": "#615a59",        "surface-container-high": "#ebe8e2",        "secondary-fixed": "#ffe088",        "inverse-primary": "#ffb59c",        "tertiary-fixed-dim": "#cec4c3",        "surface-container-lowest": "#ffffff",        "inverse-on-surface": "#f3f0ea",        "on-primary-fixed": "#390c00"      },      "borderRadius": {        "DEFAULT": "0.125rem",        "lg": "0.25rem",        "xl": "0.5rem",        "full": "0.75rem"      },      "spacing": {        "space-sm": "8px",        "gutter": "16px",        "space-md": "16px",        "space-xs": "4px",        "margin": "16px",        "space-lg": "24px",        "space-xl": "32px"      },      "fontFamily": {        "headline-xl-mobile": ["Sora"],        "body-lg": ["Plus Jakarta Sans"],        "label-md": ["Plus Jakarta Sans"],        "label-lg": ["Plus Jakarta Sans"],        "body-sm": ["Plus Jakarta Sans"],        "headline-lg-mobile": ["Sora"],        "label-sm": ["Plus Jakarta Sans"],        "headline-lg": ["Sora"],        "headline-md": ["Sora"],        "headline-xl": ["Sora"],        "body-md": ["Plus Jakarta Sans"]      },      "fontSize": {        "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],        "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],        "label-lg": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],        "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],        "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],        "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],        "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]      }    }  }};</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-lg"><span class="text-headline-md font-headline-md text-primary">SahiTol</span><nav class="hidden lg:flex items-center gap-space-sm" data-active-classes="bg-primary text-on-primary font-bold rounded-xl"><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="overview" href="#">Overview</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="collectors" href="#">Collectors</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="facilities" href="#">Facilities</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="catalog-prices" href="#">Catalog & Prices</a><a aria-current="page" class="px-3 py-2 transition-colors bg-primary text-on-primary font-bold rounded-xl" data-path="traceability" href="#">Traceability</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="quality-review" href="#">Quality Review</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="research-evidence" href="#">Research & Evidence</a></nav></div><div class="flex items-center gap-space-md"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full pb-24">
+<!-- Top Banner / Header Segment -->
+<div class="w-full bg-surface-container-low px-gutter py-space-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-0.5 bg-primary/10 text-primary rounded text-label-sm uppercase tracking-wider font-label-sm">Immutable Ledger v4.2</span>
+<span class="text-on-surface-variant text-body-sm">• Hash Chain Verified</span>
+</div>
+<h1 class="text-headline-xl text-on-surface">Traceability & Transaction Audit</h1>
+<p class="text-body-md text-on-surface-variant max-w-2xl">Search and inspect end-to-end material lineages from field collection to final smelting or recycling facilities with absolute cryptographic integrity.</p>
+</div>
+<div class="flex items-center gap-space-md w-full md:w-auto">
+<button class="flex-1 md:flex-none px-4 py-3 bg-surface-container-high hover:bg-surface-dim text-on-surface rounded-xl font-label-md flex items-center justify-center gap-space-sm transition-colors">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+        Verify Chain State
+      </button>
+<button class="flex-1 md:flex-none px-5 py-3 bg-primary hover:bg-primary-container text-on-primary rounded-xl font-label-md flex items-center justify-center gap-space-sm shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+        Export Audit Report
+      </button>
+</div>
+</div>
+<!-- Search & Filter Control Bar -->
+<div class="max-w-7xl mx-auto w-full px-gutter -mt-6 z-10">
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-xl flex flex-col lg:flex-row items-stretch lg:items-center gap-space-md">
+<div class="flex-1 relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant text-[22px]">search</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low rounded-xl text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-primary text-body-md" id="traceSearchInput" placeholder="Search by Lot ID, RFID tag, Hash, or Collector ID (e.g., LOT-8942-IN)..." type="text" value="LOT-8942-IN"/>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<select class="px-4 py-3.5 bg-surface-container-low text-on-surface rounded-xl font-label-md focus:outline-none focus:ring-2 focus:ring-primary">
+<option>All Material Types</option>
+<option selected="">Copper Scrap (Heavy)</option>
+<option>Aluminium Extrusion</option>
+<option>HDPE Rigid Plastic</option>
+<option>Corrugated Paper</option>
+</select>
+<select class="px-4 py-3.5 bg-surface-container-low text-on-surface rounded-xl font-label-md focus:outline-none focus:ring-2 focus:ring-primary">
+<option>All Statuses</option>
+<option selected="">Completed & Settled</option>
+<option>Dispute Flagged</option>
+<option>In Transit</option>
+</select>
+<button class="px-6 py-3.5 bg-primary text-on-primary font-label-md rounded-xl hover:bg-primary-container transition-colors flex items-center justify-center gap-space-xs" id="searchBtn">
+<span>Inspect Lot</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Workspace / Split View -->
+<div class="max-w-7xl mx-auto w-full px-gutter mt-space-xl grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Left Column: Lot Overview & Hash Integrity Report (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Lot Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded font-label-sm">Verified Lot</span>
+<span class="text-body-sm text-on-surface-variant font-mono">#SHA-992184</span>
+</div>
+<div>
+<h2 class="text-headline-md text-on-surface">LOT-8942-IN</h2>
+<p class="text-body-sm text-on-surface-variant">Clean Industrial Copper Wire</p>
+</div>
+<div class="grid grid-cols-2 gap-space-md pt-2">
+<div class="bg-surface-container-low p-3 rounded-xl">
+<span class="text-label-sm text-on-surface-variant block">Recorded Weight</span>
+<span class="text-headline-md text-on-surface">1,420 kg</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-xl">
+<span class="text-label-sm text-on-surface-variant block">Total Valuation</span>
+<span class="text-headline-md text-primary">₹9,94,000</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 pt-2 border-t border-surface-container">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Origin Collector:</span>
+<span class="font-bold text-on-surface">Ramesh Kumar (COL-402)</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Intake Facility:</span>
+<span class="font-bold text-on-surface">Okhla Yard Alpha</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Creation Timestamp:</span>
+<span class="font-mono text-on-surface">2023-10-24 08:30 IST</span>
+</div>
+</div>
+</div>
+<!-- Hash-Chain Integrity Verification Report -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">gpp_good</span>
+<h3 class="text-headline-md text-on-surface">Hash-Chain Status</h3>
+</div>
+<span class="px-2 py-0.5 bg-green-100 text-green-800 rounded text-label-sm font-bold">100% Intact</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Cryptographic verification passed across all 5 ledger transitions. No anomalies or retroactive edits detected.</p>
+<div class="bg-surface-container-low p-3 rounded-xl font-mono text-xs text-on-surface-variant break-all">
+          Root Hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        </div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Block Depth</span>
+<span class="font-bold text-on-surface">5 Blocks</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Consensus Algorithm</span>
+<span class="font-bold text-on-surface">SHA-256 Merkle Tree</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Last Audited</span>
+<span class="font-bold text-on-surface">Today, 14:20 IST</span>
+</div>
+</div>
+</div>
+<!-- Dispute & Revision Summary -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[24px]">history_edu</span>
+<h3 class="text-headline-md text-on-surface">Revisions & Notes</h3>
+</div>
+<span class="px-2 py-0.5 bg-amber-100 text-secondary-container-dark rounded text-label-sm font-bold">1 Note</span>
+</div>
+<div class="bg-surface-container-low p-3.5 rounded-xl flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="text-label-sm text-primary font-bold">Revision #1 (Weight Adj)</span>
+<span class="text-xs text-on-surface-variant">Oct 24, 09:15</span>
+</div>
+<p class="text-body-sm text-on-surface">Moisture deduction applied: -15kg verified by yard manager (YM-12). Signed with biometric key.</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Event Chain Timeline (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-space-lg">
+<div>
+<h3 class="text-headline-lg text-on-surface">Event Chain Lineage</h3>
+<p class="text-body-sm text-on-surface-variant">Chronological progression through collection, offer, handover, receipt, and payment.</p>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-xl">
+<button class="px-3 py-1.5 bg-surface text-on-surface rounded font-label-sm shadow-sm">Timeline View</button>
+<button class="px-3 py-1.5 text-on-surface-variant rounded font-label-sm hover:text-on-surface">Raw JSON</button>
+</div>
+</div>
+<!-- Timeline Container -->
+<div class="relative pl-6 space-y-8 before:absolute before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-surface-container-high">
+<!-- Event 1: Collection -->
+<div class="relative flex items-start gap-space-md group">
+<div class="absolute -left-6 top-1.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-on-primary text-[12px]">inventory_2</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-space-md rounded-xl hover:bg-surface-container transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+<span class="text-label-lg text-on-surface">1. Field Collection Event</span>
+<span class="text-xs font-mono text-on-surface-variant">2023-10-24 08:30:12 IST</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-3">Material weighed using portable scale #PS-402 at source point (Sector 18 Market, Noida).</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2 border-t border-surface-container">
+<div>
+<span class="text-xs text-on-surface-variant block">Collector</span>
+<span class="text-body-sm font-bold text-on-surface">Ramesh Kumar</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant block">Initial Weight</span>
+<span class="text-body-sm font-bold text-on-surface">1,435 kg</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant block">Device Sig</span>
+<span class="text-xs font-mono text-primary truncate block">sig_99a8f...</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Event 2: Offer -->
+<div class="relative flex items-start gap-space-md group">
+<div class="absolute -left-6 top-1.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-on-primary text-[12px]">local_offer</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-space-md rounded-xl hover:bg-surface-container transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+<span class="text-label-lg text-on-surface">2. Dynamic Pricing Offer Generated</span>
+<span class="text-xs font-mono text-on-surface-variant">2023-10-24 08:45:00 IST</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-3">Market grade assessment applied based on LME Copper Index for grade #2 bare bright wire.</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2 border-t border-surface-container">
+<div>
+<span class="text-xs text-on-surface-variant block">Base Rate</span>
+<span class="text-body-sm font-bold text-on-surface">₹700 / kg</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant block">Quality Premium</span>
+<span class="text-body-sm font-bold text-on-surface">+₹0 / kg</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant block">Total Offer</span>
+<span class="text-body-sm font-bold text-primary">₹10,04,500</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Event 3: Handover -->
+<div class="relative flex items-start gap-space-md group">
+<div class="absolute -left-6 top-1.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-on-primary text-[12px]">handshake</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-space-md rounded-xl hover:bg-surface-container transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+<span class="text-label-lg text-on-surface">3. Yard Handover & Intake Scan</span>
+<span class="text-xs font-mono text-on-surface-variant">2023-10-24 10:15:40 IST</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-3">Physical delivery at Okhla Yard Alpha. Dual-verification weighbridge scan completed.</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2 border-t border-surface-container">
+<div>
+<span class="text-xs text-on-surface-variant block">Yard Manager</span>
+<span class="text-body-sm font-bold text-on-surface">Anil Sharma</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant block">Weighbridge #</span>
+<span class="text-body-sm font-bold text-on-surface">WB-04</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant block">Status</span>
+<span class="text-xs font-bold text-green-700">Verified Match</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Event 4: Receipt -->
+<div class="relative flex items-start gap-space-md group">
+<div class="absolute -left-6 top-1.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-on-primary text-[12px]">receipt_long</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-space-md rounded-xl hover:bg-surface-container transition-colors">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+<span class="text-label-lg text-on-surface">4. Official Receipt Generation</span>
+<span class="text-xs font-mono text-on-surface-variant">2023-10-24 10:30:05 IST</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-3">Tax invoice and formal weight receipt #REC-2023-991 issued to seller entity.</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2 border-t border-surface-container">
+<div>
+<span class="text-xs text-on-surface-variant block">Receipt ID</span>
+<span class="text-body-sm font-bold text-on-surface">REC-991</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant block">GSTIN / Tax Ref</span>
+<span class="text-body-sm font-bold text-on-surface">07AABCS1429B1Z</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant block">Document Hash</span>
+<span class="text-xs font-mono text-primary truncate block">f84bc1...</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Event 5: Payment -->
+<div class="relative flex items-start gap-space-md group">
+<div class="absolute -left-6 top-1.5 w-5 h-5 rounded-full bg-green-600 flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-on-primary text-[12px]">payments</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-space-md rounded-xl hover:bg-surface-container transition-colors border-l-4 border-green-600">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+<span class="text-label-lg text-on-surface">5. Instant Settlement & Payment Disbursal</span>
+<span class="text-xs font-mono text-on-surface-variant">2023-10-24 10:35:22 IST</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-3">Direct bank transfer completed via UPI/IMPS gateway. Immutable settlement confirmation stored on chain.</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2 border-t border-surface-container">
+<div>
+<span class="text-xs text-on-surface-variant block">Disbursed Amount</span>
+<span class="text-body-sm font-bold text-green-700">₹9,94,000</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant block">Transaction UTR</span>
+<span class="text-body-sm font-bold text-on-surface">UTR304928194</span>
+</div>
+<div>
+<span class="text-xs text-on-surface-variant block">Payment Gateway</span>
+<span class="text-body-sm font-bold text-on-surface">ICICI Corporate API</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple interaction mockup for search button
+  document.getElementById('searchBtn').addEventListener('click', function() {
+    const inputVal = document.getElementById('traceSearchInput').value;
+    const btn = this;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">progress_activity</span><span>Verifying...</span>';
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      alert('Traceability chain successfully verified for: ' + inputVal);
+    }, 600);
+  });
+</script></main><footer class="w-full bg-surface-container-low py-space-xl"><div class="max-w-7xl mx-auto px-gutter text-center text-on-surface-variant text-body-sm">SahiTol Industrial Admin Console • Grounded Operations Platform</div></footer></body></html>

@@ -1,0 +1,134 @@
+{
+  "dataset_name": "SahiTol Curated Public E-Waste Image Dataset",
+  "dataset_version": "v1.0",
+  "total_images": 172,
+  "split_counts": {
+    "TRAIN": 115,
+    "VAL": 19,
+    "TEST": 38
+  },
+  "split_percentages": {
+    "TRAIN": 66.86,
+    "VAL": 11.05,
+    "TEST": 22.09
+  },
+  "per_class_breakdown": {
+    "MAT-PCB-01": {
+      "category_code": "PCB",
+      "total": 20,
+      "train": 14,
+      "val": 2,
+      "test": 4,
+      "objects_count": 15
+    },
+    "MAT-PCB-02": {
+      "category_code": "PCB",
+      "total": 16,
+      "train": 10,
+      "val": 2,
+      "test": 4,
+      "objects_count": 12
+    },
+    "MAT-CRT-01": {
+      "category_code": "CRT",
+      "total": 16,
+      "train": 10,
+      "val": 2,
+      "test": 4,
+      "objects_count": 12
+    },
+    "MAT-LCD-01": {
+      "category_code": "LCD",
+      "total": 16,
+      "train": 10,
+      "val": 2,
+      "test": 4,
+      "objects_count": 12
+    },
+    "MAT-BAT-01": {
+      "category_code": "BATTERY",
+      "total": 16,
+      "train": 10,
+      "val": 2,
+      "test": 4,
+      "objects_count": 12
+    },
+    "MAT-BAT-02": {
+      "category_code": "BATTERY",
+      "total": 16,
+      "train": 10,
+      "val": 2,
+      "test": 4,
+      "objects_count": 12
+    },
+    "MAT-CAB-01": {
+      "category_code": "CABLES",
+      "total": 16,
+      "train": 10,
+      "val": 2,
+      "test": 4,
+      "objects_count": 12
+    },
+    "MAT-MOT-01": {
+      "category_code": "MOTORS",
+      "total": 12,
+      "train": 9,
+      "val": 1,
+      "test": 2,
+      "objects_count": 9
+    },
+    "MAT-PLA-01": {
+      "category_code": "PLASTICS",
+      "total": 12,
+      "train": 9,
+      "val": 1,
+      "test": 2,
+      "objects_count": 9
+    },
+    "MAT-MET-01": {
+      "category_code": "METALS",
+      "total": 12,
+      "train": 9,
+      "val": 1,
+      "test": 2,
+      "objects_count": 9
+    },
+    "MAT-MIX-01": {
+      "category_code": "MIXED_ELECTRONICS",
+      "total": 12,
+      "train": 9,
+      "val": 1,
+      "test": 2,
+      "objects_count": 9
+    },
+    "MAT-UNK-01": {
+      "category_code": "UNKNOWN",
+      "total": 8,
+      "train": 5,
+      "val": 1,
+      "test": 2,
+      "objects_count": 6
+    }
+  },
+  "leakage_audit": {
+    "physical_object_groups_total": 129,
+    "groups_overlapping_splits": 0,
+    "leakage_free": true
+  },
+  "coverage_limitations": {
+    "classes_covered": 12,
+    "classes_excluded_from_classifier": [
+      "MAT-BAT-03 (Other Battery Chemistries)",
+      "MAT-BAT-04 (Unknown Chemistry Battery)",
+      "MAT-MOT-02 (Fridge/AC Compressor & Magnets)",
+      "MAT-PLA-02 (General Mixed Plastics)",
+      "MAT-CAB-02 (Aluminum Wiring)",
+      "MAT-MET-02 (Scrap Aluminum)",
+      "MAT-MET-03 (Iron & Steel Scrap)",
+      "MAT-MIX-02 (Small Household Appliances)",
+      "MAT-OTH-01 (Other Miscellaneous Recyclables)"
+    ],
+    "field_image_claims": "NONE (Explicit UNMET obligation for primary field photography per R-RES-02 / desk-only decision)",
+    "safe_fallback_path": "Manual category selection with contextual pictorial safety cards available for all 21 taxonomy materials."
+  }
+}

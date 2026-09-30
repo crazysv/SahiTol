@@ -1,0 +1,3 @@
+transaction_id,lot_id,collector_pseudonym,facility_id,material_id,final_weight_g,agreed_total_paise,currency,lifecycle_status,handover_status,payment_status,acknowledged_paid_paise,outstanding_paise,occurred_at,source_id,origin_class,source_kind,is_demo,schema_version
+DEMO-TX-001,DEMO-LOT-001,DEMO-COL-001,DEMO-FAC-001,MAT-PCB-01,12500,425000,INR,COMPLETED,CONFIRMED,SETTLED_CASH,425000,0,2026-09-28T09:15:00+00:00,SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+DEMO-TX-002,DEMO-LOT-002,DEMO-COL-002,DEMO-FAC-002,MAT-CAB-01,24000,900000,INR,COMPLETED,CONFIRMED,SETTLED_CASH,900000,0,2026-09-28T09:30:00+00:00,SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0

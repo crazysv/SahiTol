@@ -1,0 +1,46 @@
+# Secrets and local environments
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.pem
+*.key
+local.properties
+*.p12
+*.pfx
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+
+# Android / Gradle
+.gradle/
+.idea/
+**/build/
+
+# Web / Vite
+**/dist/
+
+# Private runtime data
+# (reviewed public manifests/fixtures remain tracked under data/curated/)
+data/private/
+data/raw-private/
+backups/
+media_storage/
+runtime-media/
+
+# Generated archives and dumps
+docs.zip
+*.dump
+*.log
+*.sql.gz
+
+# OS files
+.DS_Store
+Thumbs.db

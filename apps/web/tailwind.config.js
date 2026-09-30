@@ -1,0 +1,86 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: "#9f3c16",
+        "primary-container": "#bf542c",
+        "on-primary": "#ffffff",
+        "on-primary-container": "#fffbff",
+        "primary-fixed": "#ffdbcf",
+        "primary-fixed-dim": "#ffb59c",
+        "on-primary-fixed": "#390c00",
+        "on-primary-fixed-variant": "#822801",
+        "inverse-primary": "#ffb59c",
+
+        secondary: "#735c00",
+        "secondary-container": "#fed65b",
+        "on-secondary": "#ffffff",
+        "on-secondary-container": "#745c00",
+        "secondary-fixed": "#ffe088",
+        "secondary-fixed-dim": "#e9c349",
+        "on-secondary-fixed": "#241a00",
+        "on-secondary-fixed-variant": "#574500",
+
+        tertiary: "#615a59",
+        "tertiary-container": "#7a7371",
+        "on-tertiary": "#ffffff",
+        "on-tertiary-container": "#fffbff",
+        "tertiary-fixed": "#eae0de",
+        "tertiary-fixed-dim": "#cec4c3",
+        "on-tertiary-fixed": "#1f1b1a",
+        "on-tertiary-fixed-variant": "#4b4544",
+
+        surface: "#fcf9f3",
+        "surface-dim": "#dcdad4",
+        "surface-bright": "#fcf9f3",
+        "surface-variant": "#e5e2dc",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f6f3ed",
+        "surface-container": "#f0eee8",
+        "surface-container-high": "#ebe8e2",
+        "surface-container-highest": "#e5e2dc",
+        "on-surface": "#1c1c18",
+        "on-surface-variant": "#57423b",
+        "inverse-surface": "#31312d",
+        "inverse-on-surface": "#f3f0ea",
+        "surface-tint": "#a23e18",
+
+        outline: "#8a726a",
+        "outline-variant": "#dec0b7",
+
+        error: "#ba1a1a",
+        "error-container": "#ffdad6",
+        "on-error": "#ffffff",
+        "on-error-container": "#93000a",
+
+        background: "#fcf9f3",
+        "on-background": "#1c1c18",
+      },
+      fontFamily: {
+        headline: ["Sora", "sans-serif"],
+        body: ["Plus Jakarta Sans", "sans-serif"],
+      },
+      borderRadius: {
+        DEFAULT: "0.125rem",
+        lg: "0.25rem",
+        xl: "0.5rem",
+        full: "0.75rem",
+      },
+      spacing: {
+        "space-xs": "4px",
+        "space-sm": "8px",
+        "space-md": "16px",
+        "space-lg": "24px",
+        "space-xl": "32px",
+        gutter: "16px",
+        margin: "16px",
+      },
+    },
+  },
+  plugins: [],
+}

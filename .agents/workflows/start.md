@@ -1,0 +1,14 @@
+---
+description: session start prompt
+---
+
+Resume the SahiTol project from the repository files, not assumptions or old chat memory. This command authorizes continuous work within the current build scope; it does not authorize external publication/submission or independent frontend design beyond existing user authorization.
+
+1. Find the repository root. Read [AGENTS.md](../../AGENTS.md), [MASTER_CONTENT.md](../../MASTER_CONTENT.md), [documentation index](../../docs/00_README.md), [SESSION_STATE](../../docs/SESSION_STATE.md), [tracker](../../docs/08_TRACKER.md), [decisions](../../docs/09_DECISIONS.md), [open inputs](../../docs/10_OPEN_QUESTIONS.md) and [guardrails](../../docs/12_GUARDRAILS.md). Inspect Git/current files without overwriting uncommitted work. Run `python scripts/check_docs.py` from root.
+2. Consult canonical [catalog](../../docs/planning/catalog.json) and [status](../../docs/planning/status.json); identify active task or earliest eligible required task with completed dependencies. Read its complete [implementation-plan entry](../../docs/07_IMPLEMENTATION_PLAN.md), all linked specs, requirement rows and acceptance cases. Follow [recovery protocol](../../docs/13_RECOVERY.md). Don't execute obsolete instructions in source transcripts.
+3. Before ANY frontend work, follow [Stitch contract](../../docs/05_DESIGN_STITCH.md): request required screen/state IDs from owner, mark WAITING_STITCH, and wait for their notification; then retrieve approved designs through connected Stitch MCP and record project/screen/revision. Never generate/design substitutes or assume T002 approves all screens. Continue independent backend/data tasks while waiting.
+4. State the current task and relevant uncertainties briefly, then implement authorized work. Preserve native Android, PostGIS, hosted access and all six selected features. Do not silently drop scope or start future features.
+5. Verify task outputs with relevant tests; attach actual evidence, update status JSON, render docs, validate links/coverage, update session state/changelog. A task can finish before a multi-task acceptance case, but the whole release cannot finish until all required cases pass. Never mark tests run merely because code compiles.
+6. Continue to the next eligible task without asking routine next-task permission. Request only required missing inputs or actual authorization boundaries, and keep independent progress going. At interruption/handoff leave exact remaining work, test results, blockers and resume steps.
+
+Completion requires all RELEASE tasks and cases plus release artifacts; primary fieldwork remains a separately disclosed UNMET obligation until real evidence exists. No “all complete” statement based only on implemented happy-path screens or a green checklist.

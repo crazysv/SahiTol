@@ -1,0 +1,20 @@
+[
+  {
+    "coarse_area": "Mayapuri Phase II",
+    "collector_pseudonym": "col_anon_8f3a9e1b",
+    "created_at": "2026-09-20T06:00:00Z",
+    "language_preference": "hi",
+    "lifetime_lots": 14,
+    "privacy_standard": "ZERO_PII_STRICT",
+    "total_collected_grams": 482000
+  },
+  {
+    "coarse_area": "Dharavi Sector 5",
+    "collector_pseudonym": "col_anon_3b1d7a4c",
+    "created_at": "2026-09-18T04:30:00Z",
+    "language_preference": "mr",
+    "lifetime_lots": 28,
+    "privacy_standard": "ZERO_PII_STRICT",
+    "total_collected_grams": 1240000
+  }
+]

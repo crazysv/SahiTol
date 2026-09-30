@@ -1,0 +1,3 @@
+# Dataset card template
+
+Family/name/version; purpose and linked requirements; constituent files/relational keys; schema/data dictionary; producer and collection mechanism; source/field lineage/licence/rights; real counts by origin/demo/status/region/material; validation/quarantine/duplicate results; update cadence/owner; exact generation/transformation command; file checksums; privacy/redaction; allowed use/redistribution; known gaps/bias/staleness; demonstrated application use; related acceptance evidence. Unknown values remain explicitly unknown. Create one completed card for each of seven families during T047.

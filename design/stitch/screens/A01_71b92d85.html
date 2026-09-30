@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {  "darkMode": "class",  "theme": {    "extend": {      "colors": {        "primary-fixed-dim": "#ffb59c",        "on-error": "#ffffff",        "on-secondary-fixed-variant": "#574500",        "error": "#ba1a1a",        "inverse-surface": "#31312d",        "primary-fixed": "#ffdbcf",        "surface-container": "#f0eee8",        "background": "#fcf9f3",        "on-surface": "#1c1c18",        "on-secondary-fixed": "#241a00",        "on-tertiary-fixed-variant": "#4b4544",        "tertiary-container": "#7a7371",        "on-tertiary-container": "#fffbff",        "surface-container-low": "#f6f3ed",        "on-secondary-container": "#745c00",        "tertiary-fixed": "#eae0de",        "surface-bright": "#fcf9f3",        "on-primary": "#ffffff",        "secondary-fixed-dim": "#e9c349",        "on-tertiary": "#ffffff",        "outline-variant": "#dec0b7",        "on-tertiary-fixed": "#1f1b1a",        "on-surface-variant": "#57423b",        "primary": "#9f3c16",        "surface-dim": "#dcdad4",        "error-container": "#ffdad6",        "surface-variant": "#e5e2dc",        "primary-container": "#bf542c",        "on-secondary": "#ffffff",        "on-background": "#1c1c18",        "on-error-container": "#93000a",        "surface": "#fcf9f3",        "secondary-container": "#fed65b",        "secondary": "#735c00",        "on-primary-container": "#fffbff",        "on-primary-fixed-variant": "#822801",        "outline": "#8a726a",        "surface-tint": "#a23e18",        "surface-container-highest": "#e5e2dc",        "tertiary": "#615a59",        "surface-container-high": "#ebe8e2",        "secondary-fixed": "#ffe088",        "inverse-primary": "#ffb59c",        "tertiary-fixed-dim": "#cec4c3",        "surface-container-lowest": "#ffffff",        "inverse-on-surface": "#f3f0ea",        "on-primary-fixed": "#390c00"      },      "borderRadius": {        "DEFAULT": "0.125rem",        "lg": "0.25rem",        "xl": "0.5rem",        "full": "0.75rem"      },      "spacing": {        "space-sm": "8px",        "gutter": "16px",        "space-md": "16px",        "space-xs": "4px",        "margin": "16px",        "space-lg": "24px",        "space-xl": "32px"      },      "fontFamily": {        "headline-xl-mobile": ["Sora"],        "body-lg": ["Plus Jakarta Sans"],        "label-md": ["Plus Jakarta Sans"],        "label-lg": ["Plus Jakarta Sans"],        "body-sm": ["Plus Jakarta Sans"],        "headline-lg-mobile": ["Sora"],        "label-sm": ["Plus Jakarta Sans"],        "headline-lg": ["Sora"],        "headline-md": ["Sora"],        "headline-xl": ["Sora"],        "body-md": ["Plus Jakarta Sans"]      },      "fontSize": {        "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],        "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],        "label-lg": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],        "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],        "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],        "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],        "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]      }    }  }};</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-lg"><span class="text-headline-md font-headline-md text-primary">SahiTol</span><nav class="hidden lg:flex items-center gap-space-sm" data-active-classes="bg-primary text-on-primary font-bold rounded-xl"><a aria-current="page" class="px-3 py-2 transition-colors bg-primary text-on-primary font-bold rounded-xl" data-path="overview" href="#">Overview</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="collectors" href="#">Collectors</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="facilities" href="#">Facilities</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="catalog-prices" href="#">Catalog & Prices</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="traceability" href="#">Traceability</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="quality-review" href="#">Quality Review</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="research-evidence" href="#">Research & Evidence</a></nav></div><div class="flex items-center gap-space-md"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Bar / Sub-header for System Pulse -->
+<div class="w-full bg-surface-container-low px-gutter py-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-3 h-3 rounded-full bg-primary animate-ping"></div>
+<span class="text-headline-md font-headline-md text-on-surface">System Pulse Overview</span>
+<span class="text-body-sm px-2.5 py-1 bg-surface-container-high text-on-surface-variant rounded-xl">Updated 29 Sep • 18:20</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-4 py-2 bg-primary text-on-primary text-label-md rounded-xl hover:bg-primary-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">refresh</span> Sync Ledger
+      </button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface text-label-md rounded-xl hover:bg-surface-dim transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">filter_alt</span> Provenance Filter
+      </button>
+</div>
+</div>
+<!-- Main Content Flow -->
+<div class="max-w-7xl mx-auto w-full px-gutter py-space-xl flex flex-col gap-space-xl">
+<!-- Hero Metric Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Card 1: Material Recorded -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex justify-between items-start mb-space-md">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Material Recorded</span>
+<span class="p-2 bg-primary-fixed text-on-primary-fixed-variant rounded-xl material-symbols-outlined">scale</span>
+</div>
+<div>
+<div class="text-headline-xl font-headline-xl text-on-surface mb-space-xs">142,850 <span class="text-body-lg text-on-surface-variant font-normal">kg</span></div>
+<div class="flex items-center gap-1 text-body-sm text-primary font-semibold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +12.4% vs last week
+          </div>
+</div>
+</div>
+<!-- Card 2: Received -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary-fixed/20 rounded-bl-full pointer-events-none"></div>
+<div class="flex justify-between items-start mb-space-md">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Received YTD</span>
+<span class="p-2 bg-secondary-fixed text-on-secondary-fixed-variant rounded-xl material-symbols-outlined">inventory_2</span>
+</div>
+<div>
+<div class="text-headline-xl font-headline-xl text-on-surface mb-space-xs">1,280 <span class="text-body-lg text-on-surface-variant font-normal">tons</span></div>
+<div class="flex items-center gap-1 text-body-sm text-on-surface-variant font-semibold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> 98.2% verified origin
+          </div>
+</div>
+</div>
+<!-- Card 3: Pending Review -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute top-0 right-0 w-24 h-24 bg-error-container/30 rounded-bl-full pointer-events-none"></div>
+<div class="flex justify-between items-start mb-space-md">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Pending Review</span>
+<span class="p-2 bg-error-container text-on-error-container rounded-xl material-symbols-outlined">pending_actions</span>
+</div>
+<div>
+<div class="text-headline-xl font-headline-xl text-on-surface mb-space-xs">34 <span class="text-body-lg text-on-surface-variant font-normal">batches</span></div>
+<div class="flex items-center gap-1 text-body-sm text-error font-semibold">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Requires QA action
+          </div>
+</div>
+</div>
+<!-- Card 4: Open Disputes -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute top-0 right-0 w-24 h-24 bg-tertiary-fixed/30 rounded-bl-full pointer-events-none"></div>
+<div class="flex justify-between items-start mb-space-md">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Open Disputes</span>
+<span class="p-2 bg-tertiary-fixed text-on-tertiary-fixed rounded-xl material-symbols-outlined">gavel</span>
+</div>
+<div>
+<div class="text-headline-xl font-headline-xl text-on-surface mb-space-xs">07 <span class="text-body-lg text-on-surface-variant font-normal">cases</span></div>
+<div class="flex items-center gap-1 text-body-sm text-tertiary font-semibold">
+<span class="material-symbols-outlined text-[16px]">warning</span> Avg resolution 4.2h
+          </div>
+</div>
+</div>
+</div>
+<!-- Asymmetric Section: System Health & Quality Queues -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-xl">
+<!-- Left 2 Cols: Material Flow & Freshness Visualizer -->
+<div class="lg:col-span-2 bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-lg">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Material Influx vs Processing</h2>
+<p class="text-body-sm text-on-surface-variant">Real-time tonnage tracking across Northern & Western regional hubs</p>
+</div>
+<div class="flex gap-space-xs">
+<span class="px-3 py-1 bg-surface-container-high text-label-sm rounded-xl">24H</span>
+<span class="px-3 py-1 bg-primary text-on-primary text-label-sm rounded-xl">7D</span>
+<span class="px-3 py-1 bg-surface-container-high text-label-sm rounded-xl">30D</span>
+</div>
+</div>
+<!-- Mock Chart / Visual Grid -->
+<div class="h-64 w-full flex items-end justify-between gap-space-xs pt-space-xl pb-space-sm px-space-xs bg-surface-container-low rounded-xl relative overflow-hidden">
+<!-- Background Gridlines -->
+<div class="absolute inset-0 flex flex-col justify-between p-space-md pointer-events-none opacity-20">
+<div class="w-full h-[1px] bg-on-surface"></div>
+<div class="w-full h-[1px] bg-on-surface"></div>
+<div class="w-full h-[1px] bg-on-surface"></div>
+<div class="w-full h-[1px] bg-on-surface"></div>
+</div>
+<!-- Bars -->
+<div class="w-full bg-primary/20 hover:bg-primary transition-all rounded-t-lg relative group h-[40%]">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Mon: 12t</div>
+</div>
+<div class="w-full bg-primary/40 hover:bg-primary transition-all rounded-t-lg relative group h-[65%]"></div>
+<div class="w-full bg-primary/30 hover:bg-primary transition-all rounded-t-lg relative group h-[55%]"></div>
+<div class="w-full bg-primary/80 hover:bg-primary transition-all rounded-t-lg relative group h-[85%]"></div>
+<div class="w-full bg-primary/60 hover:bg-primary transition-all rounded-t-lg relative group h-[70%]"></div>
+<div class="w-full bg-primary hover:bg-primary-container transition-all rounded-t-lg relative group h-[95%]"></div>
+<div class="w-full bg-primary/50 hover:bg-primary transition-all rounded-t-lg relative group h-[60%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-space-md mt-space-lg pt-space-lg border-t border-surface-container-high">
+<div>
+<span class="text-body-sm text-on-surface-variant block">Sync Latency</span>
+<span class="text-headline-md font-headline-md text-on-surface">140ms</span>
+</div>
+<div>
+<span class="text-body-sm text-on-surface-variant block">Ledger Integrity</span>
+<span class="text-headline-md font-headline-md text-primary">99.9%</span>
+</div>
+<div>
+<span class="text-body-sm text-on-surface-variant block">Active Nodes</span>
+<span class="text-headline-md font-headline-md text-on-surface">42 Yards</span>
+</div>
+</div>
+</div>
+<!-- Right Col: Quality Review Queue -->
+<div class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-lg">
+<h3 class="text-headline-md font-headline-md text-on-surface">Quality Queues</h3>
+<span class="text-label-sm text-primary font-bold">View All</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Queue Item 1 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-fixed">
+                  AL
+                </div>
+<div>
+<h4 class="text-label-md text-on-surface">Aluminium Scrap #402</h4>
+<p class="text-body-sm text-on-surface-variant">Batch from Delhi Yard • 1.4t</p>
+</div>
+</div>
+<button class="px-3 py-1.5 bg-surface text-on-surface text-label-sm rounded-xl hover:bg-primary hover:text-on-primary transition-colors">Inspect</button>
+</div>
+<!-- Queue Item 2 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center font-bold">
+                  PL
+                </div>
+<div>
+<h4 class="text-label-md text-on-surface">PET Flakes Grade A</h4>
+<p class="text-body-sm text-on-surface-variant">Batch from Mumbai Yard • 3.8t</p>
+</div>
+</div>
+<button class="px-3 py-1.5 bg-surface text-on-surface text-label-sm rounded-xl hover:bg-primary hover:text-on-primary transition-colors">Inspect</button>
+</div>
+<!-- Queue Item 3 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold">
+                  CU
+                </div>
+<div>
+<h4 class="text-label-md text-on-surface">Copper Wire Millberry</h4>
+<p class="text-body-sm text-on-surface-variant">Batch from Surat Yard • 850kg</p>
+</div>
+</div>
+<button class="px-3 py-1.5 bg-surface text-on-surface text-label-sm rounded-xl hover:bg-primary hover:text-on-primary transition-colors">Inspect</button>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-surface-container-high flex items-center justify-between text-body-sm text-on-surface-variant">
+<span>Auto-refresh active</span>
+<span class="flex items-center gap-1 text-primary"><span class="w-2 h-2 rounded-full bg-primary"></span> Live Feed</span>
+</div>
+</div>
+</div>
+<!-- Bottom Wide Section: Facility & Provenance Map Snapshot -->
+<div class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-space-lg gap-space-md">
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Provenance & Regional Distribution</h3>
+<p class="text-body-sm text-on-surface-variant">Traceability verification across industrial feeder nodes</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="text-body-sm font-semibold text-on-surface">Filter By:</span>
+<select class="bg-surface-container-high text-on-surface px-3 py-2 rounded-xl text-label-md outline-none">
+<option>All Materials</option>
+<option>Ferrous & Non-Ferrous</option>
+<option>Polymers & Plastics</option>
+</select>
+</div>
+</div>
+<!-- Map Mock Container -->
+<div class="w-full h-80 rounded-xl bg-cover bg-center relative overflow-hidden flex items-end p-space-lg shadow-inner" data-location="Industrial Scrap Corridors, India" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAo1EW-z-qu6f972IBbB4jlHrmPRKGTKu2OcgvdMKprqwcLR2nniksiimk-0nweMqfTBW1swQnuNiREavfjw8k5G7yFswJny9P3G-Mk0t2cvpFuBrvvZjGKy2rXTcSB9Np6qdT6z0_4Y2ZAUoOVST8su51cOiAqJyAcqVE-QbvpY707o9wtye0UGseq_JlnscOGfcT2VyEiBBk1lhmuaa3p1091yE4G5gH_vRylDi-5LTf5mBwySzs')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest/80 via-transparent to-transparent" data-alt="A detailed digital map illustration of industrial collection routes across India with warm terracotta and brass coordinate markers indicating scrap yard hubs and material transit lines on a high contrast cream surface."></div>
+<div class="relative z-10 bg-surface/90 backdrop-blur-md p-space-md rounded-xl flex items-center gap-space-lg shadow-md">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-label-md text-on-surface">North Hub (Delhi-NCR)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-label-md text-on-surface">West Hub (Gujarat/Mumbai)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary"></span>
+<span class="text-label-md text-on-surface">South Hub (Chennai)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-space-xl"><div class="max-w-7xl mx-auto px-gutter text-center text-on-surface-variant text-body-sm">SahiTol Industrial Admin Console • Grounded Operations Platform</div></footer></body></html>

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "PCB",
+    "code": "PCB",
+    "label_key": "category.pcb.title",
+    "display_order": 1,
+    "active": true
+  },
+  {
+    "id": "BATTERY",
+    "code": "BATTERY",
+    "label_key": "category.battery.title",
+    "display_order": 2,
+    "active": true
+  },
+  {
+    "id": "CRT",
+    "code": "CRT",
+    "label_key": "category.crt.title",
+    "display_order": 3,
+    "active": true
+  },
+  {
+    "id": "LCD",
+    "code": "LCD",
+    "label_key": "category.lcd.title",
+    "display_order": 4,
+    "active": true
+  },
+  {
+    "id": "CABLES",
+    "code": "CABLES",
+    "label_key": "category.cables.title",
+    "display_order": 5,
+    "active": true
+  },
+  {
+    "id": "MOTORS",
+    "code": "MOTORS",
+    "label_key": "category.motors.title",
+    "display_order": 6,
+    "active": true
+  },
+  {
+    "id": "PLASTICS",
+    "code": "PLASTICS",
+    "label_key": "category.plastics.title",
+    "display_order": 7,
+    "active": true
+  },
+  {
+    "id": "METALS",
+    "code": "METALS",
+    "label_key": "category.metals.title",
+    "display_order": 8,
+    "active": true
+  },
+  {
+    "id": "MIXED_ELECTRONICS",
+    "code": "MIXED_ELECTRONICS",
+    "label_key": "category.mixed_electronics.title",
+    "display_order": 9,
+    "active": true
+  },
+  {
+    "id": "OTHER",
+    "code": "OTHER",
+    "label_key": "category.other.title",
+    "display_order": 10,
+    "active": true
+  },
+  {
+    "id": "UNKNOWN",
+    "code": "UNKNOWN",
+    "label_key": "category.unknown.title",
+    "display_order": 11,
+    "active": true
+  }
+]

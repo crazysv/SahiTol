@@ -1,0 +1,69 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: sahitol_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sahitol
+      POSTGRES_PASSWORD: sahitol_secret
+      POSTGRES_DB: sahitol_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init_postgis.sql:/docker-entrypoint-initdb.d/init_postgis.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sahitol -d sahitol_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sahitol_net
+
+  api:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.api
+    container_name: sahitol_api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+psycopg://sahitol:sahitol_secret@postgres:5432/sahitol_db
+      MIGRATION_DATABASE_URL: postgresql+psycopg://sahitol:sahitol_secret@postgres:5432/sahitol_db
+      JWT_SECRET_KEY: dev-docker-jwt-secret-key-minimum-32-chars!
+      PIN_PEPPER: dev-docker-pin-pepper-bytes
+      STORAGE_BACKEND: local
+      LOCAL_MEDIA_ROOT: /data/media
+      PUBLIC_API_BASE_URL: http://localhost:8000
+      PUBLIC_WEB_BASE_URL: http://localhost:5173
+      CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+      DEMO_MODE: "true"
+    ports:
+      - "8000:8000"
+    volumes:
+      - media_data:/data/media
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - sahitol_net
+
+  web:
+    build:
+      context: ../apps/web
+      dockerfile: ../../infra/Dockerfile.web
+    container_name: sahitol_web
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+    networks:
+      - sahitol_net
+
+volumes:
+  postgres_data:
+  media_data:
+
+networks:
+  sahitol_net:
+    driver: bridge

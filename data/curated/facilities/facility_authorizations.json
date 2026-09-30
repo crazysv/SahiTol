@@ -1,0 +1,98 @@
+[
+  {
+    "facility_id": "fac-dl-01",
+    "route": "AUTHORIZED_EWASTE",
+    "registration_reference": "DPCC/EW/REC-2023/042",
+    "registration_status": "VALID",
+    "valid_from": "2023-01-01T00:00:00Z",
+    "valid_until": "2027-12-31T00:00:00Z",
+    "last_verified_at": "2026-08-15T10:00:00Z",
+    "verification_level": "L3",
+    "source_id": "SRC-05",
+    "is_demo": false
+  },
+  {
+    "facility_id": "fac-dl-02",
+    "route": "BATTERY_ISOLATION",
+    "registration_reference": "CPCB/BWM/CC-DL-019",
+    "registration_status": "VALID",
+    "valid_from": "2023-07-01T00:00:00Z",
+    "valid_until": "2028-06-30T00:00:00Z",
+    "last_verified_at": "2026-08-20T11:00:00Z",
+    "verification_level": "L3",
+    "source_id": "SRC-02",
+    "is_demo": false
+  },
+  {
+    "facility_id": "fac-dl-03",
+    "route": "GENERAL_RECYCLING",
+    "registration_reference": "NDMC/E-DEPO/2022-08",
+    "registration_status": "EXPIRED",
+    "valid_from": "2022-04-01T00:00:00Z",
+    "valid_until": "2025-03-31T00:00:00Z",
+    "last_verified_at": "2025-03-31T00:00:00Z",
+    "verification_level": "L2",
+    "source_id": "SRC-06",
+    "is_demo": false
+  },
+  {
+    "facility_id": "fac-dl-04",
+    "route": "AUTHORIZED_EWASTE",
+    "registration_reference": "DPCC/DISM/2024/011",
+    "registration_status": "VALID",
+    "valid_from": "2024-09-01T00:00:00Z",
+    "valid_until": "2027-08-31T00:00:00Z",
+    "last_verified_at": "2026-09-10T14:30:00Z",
+    "verification_level": "L3",
+    "source_id": "SRC-05",
+    "is_demo": false
+  },
+  {
+    "facility_id": "fac-mh-01",
+    "route": "AUTHORIZED_EWASTE",
+    "registration_reference": "MPCB/EW/REC-098/2023",
+    "registration_status": "VALID",
+    "valid_from": "2023-12-01T00:00:00Z",
+    "valid_until": "2028-11-30T00:00:00Z",
+    "last_verified_at": "2026-08-25T16:00:00Z",
+    "verification_level": "L3",
+    "source_id": "SRC-04",
+    "is_demo": false
+  },
+  {
+    "facility_id": "fac-mh-02",
+    "route": "BATTERY_ISOLATION",
+    "registration_reference": "MPCB/BW/REC-2023-014",
+    "registration_status": "VALID",
+    "valid_from": "2023-05-01T00:00:00Z",
+    "valid_until": "2027-04-30T00:00:00Z",
+    "last_verified_at": "2026-09-01T09:00:00Z",
+    "verification_level": "L3",
+    "source_id": "SRC-02",
+    "is_demo": false
+  },
+  {
+    "facility_id": "fac-mh-03",
+    "route": "AUTHORIZED_EWASTE",
+    "registration_reference": "MPCB/AGG-PUNE/2024/007",
+    "registration_status": "VALID",
+    "valid_from": "2024-11-01T00:00:00Z",
+    "valid_until": "2026-10-31T00:00:00Z",
+    "last_verified_at": "2026-07-20T12:00:00Z",
+    "verification_level": "L2",
+    "source_id": "SRC-04",
+    "is_demo": false
+  },
+  {
+    "facility_id": "fac-sim-01",
+    "route": "AUTHORIZED_EWASTE",
+    "registration_reference": "SIM-DEMO-REG-001",
+    "registration_status": "VALID",
+    "valid_from": "2026-01-01T00:00:00Z",
+    "valid_until": "2030-01-01T00:00:00Z",
+    "last_verified_at": "2026-09-01T00:00:00Z",
+    "verification_level": "L0",
+    "source_id": "SRC-01",
+    "is_demo": true
+  }
+]

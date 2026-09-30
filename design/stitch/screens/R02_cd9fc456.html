@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {"colors": {"secondary-container": "#fed65b", "surface-variant": "#e5e2dc", "primary": "#9f3c16", "surface-container-highest": "#e5e2dc", "surface-container-high": "#ebe8e2", "surface-container-low": "#f6f3ed", "tertiary-container": "#7a7371", "surface-container-lowest": "#ffffff", "on-tertiary": "#ffffff", "outline": "#8a726a", "on-surface-variant": "#57423b", "tertiary-fixed": "#eae0de", "surface-container": "#f0eee8", "on-secondary-container": "#745c00", "on-tertiary-fixed-variant": "#4b4544", "on-primary-container": "#fffbff", "on-error": "#ffffff", "on-primary-fixed": "#390c00", "on-primary": "#ffffff", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#574500", "on-tertiary-fixed": "#1f1b1a", "secondary-fixed-dim": "#e9c349", "secondary-fixed": "#ffe088", "inverse-primary": "#ffb59c", "primary-fixed-dim": "#ffb59c", "on-secondary-fixed": "#241a00", "tertiary-fixed-dim": "#cec4c3", "error": "#ba1a1a", "primary-container": "#bf542c", "surface-tint": "#a23e18", "on-surface": "#1c1c18", "outline-variant": "#dec0b7", "background": "#fcf9f3", "inverse-on-surface": "#f3f0ea", "error-container": "#ffdad6", "on-background": "#1c1c18", "tertiary": "#615a59", "primary-fixed": "#ffdbcf", "on-secondary": "#ffffff", "surface-dim": "#dcdad4", "on-tertiary-container": "#fffbff", "surface": "#fcf9f3", "on-primary-fixed-variant": "#822801", "surface-bright": "#fcf9f3", "secondary": "#735c00", "inverse-surface": "#31312d"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"space-lg": "24px", "space-md": "16px", "space-xs": "4px", "space-sm": "8px", "space-xl": "32px", "gutter": "16px", "margin": "16px"}, "fontFamily": {"headline-lg-mobile": ["Sora"], "label-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-md": ["Sora"], "headline-xl-mobile": ["Sora"], "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Sora"], "headline-xl": ["Sora"], "body-lg": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"]}, "fontSize": {"headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}], "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}], "label-md": ["14px", {"lineHeight": "18px", "fontWeight": "600"}], "headline-md": ["20px", {"lineHeight": "26px", "fontWeight": "600"}], "headline-xl-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}], "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "headline-lg": ["28px", {"lineHeight": "34px", "fontWeight": "600"}], "headline-xl": ["36px", {"lineHeight": "44px", "fontWeight": "700"}], "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}], "label-lg": ["16px", {"lineHeight": "22px", "fontWeight": "700"}], "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]}}}};</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-primary text-headline-md">scale</span><div><h1 class="text-label-lg font-headline font-bold text-on-surface">SahiTol Recycler</h1><p class="text-label-sm text-on-surface-variant">Yard #402 - Okhla Industrial</p></div></div><nav class="hidden md:flex items-center gap-space-sm" data-active-classes="bg-primary text-on-primary font-bold rounded-lg"><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="inbox" href="#">Inbox</a><a aria-current="page" class="px-space-md py-space-sm transition-colors bg-primary text-on-primary font-bold rounded-lg" data-path="incoming-lot" href="#">Incoming Lot</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="quote-terminal" href="#">Quote Terminal</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="operational-profile" href="#">Operational Profile</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="history-and-exports" href="#">History & Exports</a></nav><div class="flex items-center gap-space-md"><button class="relative p-space-sm rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-on-surface-variant text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><nav class="md:hidden flex overflow-x-auto px-gutter py-space-sm gap-space-sm bg-surface-container-low border-t border-surface-variant" data-active-classes="bg-primary text-on-primary font-bold rounded-lg"><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="inbox" href="#">Inbox</a><a aria-current="page" class="whitespace-nowrap px-space-md py-space-xs bg-primary text-on-primary font-bold rounded-lg" data-path="incoming-lot" href="#">Incoming Lot</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="quote-terminal" href="#">Quote Terminal</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="operational-profile" href="#">Operational Profile</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="history-and-exports" href="#">History & Exports</a></nav></header><main class="w-full pt-24 pb-space-xl max-w-7xl mx-auto px-gutter bg-surface"><div class="flex flex-col w-full gap-space-xl">
+<!-- Top Context & Navigation Breadcrumbs -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-sm text-on-surface-variant font-body">
+<span class="hover:text-primary cursor-pointer">Inbox</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="hover:text-primary cursor-pointer">Incoming Lot</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">ST-24A7</span>
+</div>
+<h2 class="text-headline-xl font-headline text-on-surface">Lot Inspection Workspace: ST-24A7</h2>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="px-space-md py-space-sm bg-secondary-container text-on-secondary-container rounded-lg text-label-md flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+        Route Authorized
+      </div>
+<div class="px-space-md py-space-sm bg-surface-container-high text-on-surface-variant rounded-lg text-label-md">
+        Yard #402 Okhla
+      </div>
+</div>
+</div>
+<!-- Main Asymmetric Workspace Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left Column: Large Inspection Photo View & Scale Metrics (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- Photo View Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-md shadow-sm relative overflow-hidden group">
+<div class="flex items-center justify-between z-10">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary">photo_camera</span>
+<span class="text-label-lg font-headline text-on-surface">Live Scale Capture</span>
+</div>
+<span class="px-space-sm py-space-xs bg-surface-container-highest text-on-surface-variant rounded text-label-sm">High Res • Timestamp: Today 14:00</span>
+</div>
+<!-- Image Container -->
+<div class="relative w-full h-80 rounded-lg overflow-hidden bg-surface-container">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="High-resolution overhead inspection photograph of sorted electrical copper and aluminum cables placed on a digital industrial platform scale at an Okhla recycling yard. The lighting is bright industrial fluorescent with stark contrast, showing weathered multicolored wire insulation, stripped copper strands, and dust particles. Aesthetic features warm cream and terracotta color grading with crisp textures." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPESIVk7WY_aydL3O4NCs6_PjYwSRoF1Bnx2h1EhFBAOQYVEXqYYVV7-qAHjAi7XQ4iBTAzuJnb9JB7AtYyJnhVxxMCvFpRRcEax9HxqCYeKu_jNLcuJnDfJMOEPsT6zJPu0Y6lCetwO33lnDD1t_zWkOC7hweq89UH6E5qknLeb4nmj8aWqrW7hVQUT2hn64_RGpdI4wlDHTmdFikWILxE1Xfd-1OUcqC0H7Y-cJFAWL45hIJe74')"></div>
+<div class="absolute bottom-3 left-3 px-space-md py-space-xs bg-surface/90 backdrop-blur-md rounded-lg flex items-center gap-space-sm text-sm font-headline text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-green-600 animate-pulse"></span>
+            Digital Platform Scale #4 Connected
+          </div>
+</div>
+<div class="grid grid-cols-3 gap-space-md pt-space-xs">
+<div class="bg-surface-container p-space-md rounded-lg">
+<span class="text-label-sm text-on-surface-variant block">Condition Scan</span>
+<span class="text-headline-md text-on-surface font-headline">Good Grade A</span>
+</div>
+<div class="bg-surface-container p-space-md rounded-lg">
+<span class="text-label-sm text-on-surface-variant block">Impurities</span>
+<span class="text-headline-md text-on-surface font-headline">< 1.2% Est.</span>
+</div>
+<div class="bg-surface-container p-space-md rounded-lg">
+<span class="text-label-sm text-on-surface-variant block">Moisture Index</span>
+<span class="text-headline-md text-on-surface font-headline">Dry / Optimal</span>
+</div>
+</div>
+</div>
+<!-- Provenance & Collector Details -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary">badge</span>
+<h3 class="text-headline-md font-headline text-on-surface">Originating Collector Provenance</h3>
+</div>
+<span class="text-xs text-outline">Privacy Protected Link</span>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md bg-surface-container p-space-md rounded-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline text-headline-md">
+              R
+            </div>
+<div>
+<div class="text-label-lg text-on-surface font-headline">Ramesh Kumar</div>
+<div class="text-body-sm text-on-surface-variant">Collector ID #409 • Okhla Hub Zone</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto">
+<div class="px-space-md py-space-sm bg-surface-container-high rounded-lg text-label-sm text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+              Trusted Tier 2
+            </div>
+<button class="px-space-md py-space-sm bg-surface-container-highest hover:bg-surface-variant text-on-surface text-label-sm rounded-lg transition-colors">
+              History
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Weight Comparison, Material Route & Action Terminal (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- Weight Comparison Block -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary">balance</span>
+<h3 class="text-headline-md font-headline text-on-surface">Weight Verification</h3>
+</div>
+<span class="px-space-sm py-space-xs bg-green-100 text-green-800 rounded text-label-sm font-bold">Match Within Tolerance</span>
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col">
+<span class="text-label-sm text-on-surface-variant">Declared Weight</span>
+<span class="text-headline-xl font-headline text-on-surface mt-space-xs">2.40 <span class="text-body-md text-on-surface-variant">kg</span></span>
+<span class="text-xs text-outline mt-1">Source: Mobile App Entry</span>
+</div>
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col border-2 border-primary/20">
+<span class="text-label-sm text-primary font-bold">Measured Weight</span>
+<span class="text-headline-xl font-headline text-primary mt-space-xs">2.50 <span class="text-body-md text-on-surface-variant">kg</span></span>
+<span class="text-xs text-primary/80 mt-1">+0.10 kg Variance (+4.1%)</span>
+</div>
+</div>
+<div class="w-full bg-surface-container p-space-md rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-on-surface-variant">info</span>
+<span class="text-body-sm text-on-surface">Standard Tare Offset Applied (-0.05kg)</span>
+</div>
+<span class="text-label-sm text-primary font-bold">Active</span>
+</div>
+</div>
+<!-- Material Route Compatibility Check -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary">route</span>
+<h3 class="text-headline-md font-headline text-on-surface">Route Compatibility</h3>
+</div>
+<span class="text-label-sm text-on-surface-variant">Code: CABLE-A</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between p-space-md bg-surface-container rounded-lg">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-primary">category</span>
+<div>
+<div class="text-label-md text-on-surface font-headline">Cable - Standard Grade A</div>
+<div class="text-body-sm text-on-surface-variant">Recycling Stream #4 (Copper/PVC Mix)</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-green-700">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-space-md bg-surface-container rounded-lg">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-primary">factory</span>
+<div>
+<div class="text-label-md text-on-surface font-headline">Destination Facility</div>
+<div class="text-body-sm text-on-surface-variant">Okhla Secondary Processing Unit B</div>
+</div>
+</div>
+<span class="text-label-sm text-on-secondary-container bg-secondary-container px-space-sm py-space-xs rounded">Authorized</span>
+</div>
+</div>
+</div>
+<!-- Action Terminal Block -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md shadow-sm">
+<h3 class="text-headline-md font-headline text-on-surface">Inspection Determination</h3>
+<p class="text-body-sm text-on-surface-variant">Confirm lot integrity to advance to the quote terminal or flag discrepancies for yard supervisor intervention.</p>
+<div class="flex flex-col sm:flex-row gap-space-md pt-space-xs">
+<button class="flex-1 min-h-[48px] bg-primary hover:bg-primary-container text-on-primary font-headline text-label-lg rounded-lg flex items-center justify-center gap-space-sm transition-colors shadow-sm">
+<span class="material-symbols-outlined">receipt_long</span>
+            Proceed to Quotation
+          </button>
+<button class="flex-1 min-h-[48px] bg-surface-container hover:bg-surface-container-high text-on-surface font-headline text-label-lg rounded-lg flex items-center justify-center gap-space-sm transition-colors">
+<span class="material-symbols-outlined">flag</span>
+            Request Review
+          </button>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-space-lg border-t border-surface-variant"><div class="max-w-7xl mx-auto px-gutter text-center text-on-surface-variant text-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm"><span>© 2024 SahiTol Technologies Inc. All rights reserved.</span><span class="text-xs text-outline">Terminal Status: Online (Latency: 24ms)</span></div></footer></body></html>

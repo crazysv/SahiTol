@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {"colors": {"secondary-container": "#fed65b", "surface-variant": "#e5e2dc", "primary": "#9f3c16", "surface-container-highest": "#e5e2dc", "surface-container-high": "#ebe8e2", "surface-container-low": "#f6f3ed", "tertiary-container": "#7a7371", "surface-container-lowest": "#ffffff", "on-tertiary": "#ffffff", "outline": "#8a726a", "on-surface-variant": "#57423b", "tertiary-fixed": "#eae0de", "surface-container": "#f0eee8", "on-secondary-container": "#745c00", "on-tertiary-fixed-variant": "#4b4544", "on-primary-container": "#fffbff", "on-error": "#ffffff", "on-primary-fixed": "#390c00", "on-primary": "#ffffff", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#574500", "on-tertiary-fixed": "#1f1b1a", "secondary-fixed-dim": "#e9c349", "secondary-fixed": "#ffe088", "inverse-primary": "#ffb59c", "primary-fixed-dim": "#ffb59c", "on-secondary-fixed": "#241a00", "tertiary-fixed-dim": "#cec4c3", "error": "#ba1a1a", "primary-container": "#bf542c", "surface-tint": "#a23e18", "on-surface": "#1c1c18", "outline-variant": "#dec0b7", "background": "#fcf9f3", "inverse-on-surface": "#f3f0ea", "error-container": "#ffdad6", "on-background": "#1c1c18", "tertiary": "#615a59", "primary-fixed": "#ffdbcf", "on-secondary": "#ffffff", "surface-dim": "#dcdad4", "on-tertiary-container": "#fffbff", "surface": "#fcf9f3", "on-primary-fixed-variant": "#822801", "surface-bright": "#fcf9f3", "secondary": "#735c00", "inverse-surface": "#31312d"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"space-lg": "24px", "space-md": "16px", "space-xs": "4px", "space-sm": "8px", "space-xl": "32px", "gutter": "16px", "margin": "16px"}, "fontFamily": {"headline-lg-mobile": ["Sora"], "label-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-md": ["Sora"], "headline-xl-mobile": ["Sora"], "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Sora"], "headline-xl": ["Sora"], "body-lg": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"]}, "fontSize": {"headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}], "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}], "label-md": ["14px", {"lineHeight": "18px", "fontWeight": "600"}], "headline-md": ["20px", {"lineHeight": "26px", "fontWeight": "600"}], "headline-xl-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}], "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "headline-lg": ["28px", {"lineHeight": "34px", "fontWeight": "600"}], "headline-xl": ["36px", {"lineHeight": "44px", "fontWeight": "700"}], "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}], "label-lg": ["16px", {"lineHeight": "22px", "fontWeight": "700"}], "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]}}}};</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;family=Sora:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-surface font-body text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-primary text-headline-md">scale</span><div><h1 class="text-label-lg font-headline font-bold text-on-surface">SahiTol Recycler</h1><p class="text-label-sm text-on-surface-variant">Yard #402 - Okhla Industrial</p></div></div><nav class="hidden md:flex items-center gap-space-sm" data-active-classes="bg-primary text-on-primary font-bold rounded-lg"><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="inbox" href="#">Inbox</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="incoming-lot" href="#">Incoming Lot</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="quote-terminal" href="#">Quote Terminal</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="operational-profile" href="#">Operational Profile</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="history-and-exports" href="#">History &amp; Exports</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="qr-scan-reference-entry" href="#">QR Scan</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="receipt-and-payment-review" href="#">Receipt &amp; Payment</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="public-verification" href="#">Public Verification</a></nav><div class="flex items-center gap-space-md"><button class="relative p-space-sm rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-on-surface-variant text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><nav class="md:hidden flex overflow-x-auto px-gutter py-space-sm gap-space-sm bg-surface-container-low border-t border-surface-variant" data-active-classes="bg-primary text-on-primary font-bold rounded-lg"><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="inbox" href="#">Inbox</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="incoming-lot" href="#">Incoming Lot</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="quote-terminal" href="#">Quote Terminal</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="operational-profile" href="#">Operational Profile</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="history-and-exports" href="#">History &amp; Exports</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="qr-scan-reference-entry" href="#">QR Scan</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="receipt-and-payment-review" href="#">Receipt &amp; Payment</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="public-verification" href="#">Public Verification</a></nav></header><main class="w-full pt-16 pb-space-xl max-w-7xl mx-auto px-gutter bg-surface"><div class="flex flex-col w-full gap-space-xl">
+<!-- Top Identity Block -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-space-md pb-space-lg border-b border-surface-variant">
+<div>
+<div class="flex items-center gap-space-sm mb-space-xs">
+<span class="px-space-sm py-space-xs bg-primary-fixed text-on-primary-fixed font-label-sm rounded uppercase tracking-wider">Workspace // QR-04</span>
+<span class="text-xs text-on-surface-variant">System Time: 14:22:08 IST</span>
+</div>
+<h1 class="text-headline-xl font-headline text-on-surface">Scan Handover Record</h1>
+<p class="text-body-lg text-on-surface-variant mt-space-xs">Use the collector's QR to open the handover record and verify material weights instantly.</p>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="bg-surface-container-high px-space-md py-space-sm rounded-xl flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">wifi</span>
+<span class="text-label-md text-on-surface">Terminal Online (Sync OK)</span>
+</div>
+</div>
+</div>
+<!-- Main Grid: Scanner & Manual Fallback / Verification -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left Column: Camera Viewport & Manual Reference Entry -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- Camera Scanning Area -->
+<div class="bg-surface-container-low rounded-xl p-space-lg relative overflow-hidden flex flex-col items-center justify-center min-h-[380px] shadow-sm">
+<!-- Viewport Camera Simulation / Background -->
+<div class="absolute inset-0 bg-cover bg-center opacity-85" data-alt="Industrial metal scrap yard with stacked copper cables, iron sheets, and weighing scales under bright natural daylight, shot with high contrast and documentary clarity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBoVfrOUeLJkPk3BiTioHA6mG-V9jvGAglF52vgW9j-K_UC227dUrU5TJY61sBLYuegtVNS56gwmo1TUqLFS6EsOPVEUwav_6HSWoN1YB9ES_1j8aykw6BQEgj_5_7k-F4mTFlNhzGGaWylVAVN6g-chW0ftJ9l78wrupGHVAJMnvxDnn_2RKy_qM_WbTym1RsiM88EgL5gpPSUkQceMNBFovL1fBwKAHOS9BQoZY58KbGdq2q4g9Q')"></div>
+<!-- Gradient scrim -->
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 via-on-surface/20 to-transparent"></div>
+<!-- Restrained Scan Frame (Industrial Style) -->
+<div class="relative z-10 w-72 h-72 border-2 border-surface-bright/80 rounded-lg flex items-center justify-center backdrop-blur-[2px]">
+<!-- Corner reticles -->
+<div class="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-secondary-container"></div>
+<div class="absolute top-0 right-0 w-6 h-6 border-t-4 border-r-4 border-secondary-container"></div>
+<div class="absolute bottom-0 left-0 w-6 h-6 border-b-4 border-l-4 border-secondary-container"></div>
+<div class="absolute bottom-0 right-0 w-6 h-6 border-b-4 border-r-4 border-secondary-container"></div>
+<!-- Crosshair Center -->
+<div class="w-3 h-3 bg-secondary-container rounded-full animate-ping opacity-75 absolute"></div>
+<div class="w-2 h-2 bg-secondary-container rounded-full absolute"></div>
+<span class="absolute -bottom-10 text-on-primary font-label-md bg-on-surface/60 px-space-md py-space-xs rounded-full">Align QR inside frame</span>
+</div>
+<!-- Camera Permission Recovery State (Overlay toggleable for demo) -->
+<div class="absolute inset-0 bg-surface/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-space-xl text-center hidden" id="cam-permission-state">
+<span class="material-symbols-outlined text-primary text-[48px] mb-space-md">videocam_off</span>
+<h3 class="text-headline-md font-headline text-on-surface mb-space-xs">Camera Access Required</h3>
+<p class="text-body-md text-on-surface-variant max-w-sm mb-space-lg">Browser permissions are blocked or unavailable. Please enable camera access or use manual reference entry below.</p>
+<button class="px-space-lg py-space-md bg-primary text-on-primary font-label-lg rounded-xl hover:bg-primary-container transition-colors flex items-center gap-space-sm" onclick="toggleCameraPermission()">
+<span class="material-symbols-outlined">settings</span> Grant Permission / Retry
+          </button>
+</div>
+<!-- Bottom Controls inside viewfinder -->
+<div class="absolute bottom-space-md z-10 flex items-center gap-space-md">
+<button class="px-space-md py-space-sm bg-surface-bright/90 text-on-surface font-label-md rounded-lg hover:bg-surface-bright transition-colors shadow" onclick="simulateScanSuccess()">
+            Simulate Successful Scan
+          </button>
+<button class="px-space-md py-space-sm bg-surface-container-highest/90 text-on-surface font-label-md rounded-lg hover:bg-surface-container-highest transition-colors shadow" onclick="toggleCameraPermission()">
+            Simulate Cam Error
+          </button>
+</div>
+</div>
+<!-- Manual Reference Entry Fallback -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm">
+<label class="block text-label-lg text-on-surface mb-space-xs" for="manual-ref">Enter reference manually</label>
+<p class="text-body-sm text-on-surface-variant mb-space-md">Type the 6-character alpha-numeric code printed on the physical weigh-slip or collector ledger.</p>
+<div class="flex gap-space-md">
+<div class="relative flex-1">
+<span class="absolute inset-y-0 left-0 pl-space-md flex items-center pointer-events-none text-outline font-headline font-bold">#</span>
+<input class="w-full pl-8 pr-space-md py-space-md bg-surface border-2 border-outline rounded-xl text-headline-md text-on-surface uppercase tracking-widest focus:outline-none focus:border-primary transition-colors" id="manual-ref" placeholder="e.g. ST-24A7" type="text"/>
+</div>
+<button class="px-space-xl py-space-md bg-primary text-on-primary font-label-lg rounded-xl hover:bg-primary-container transition-colors flex items-center justify-center min-w-[120px]" onclick="lookupReference()">
+            Lookup
+          </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Validation, Trust States & Recognized Record Preview -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- Active Preview / Recognized Record Card -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm border-2 border-primary/40 relative overflow-hidden" id="record-preview-card">
+<div class="absolute top-0 right-0 bg-primary text-on-primary px-space-md py-space-xs text-label-sm rounded-bl-xl font-bold">Verified Handover</div>
+<div class="flex items-center gap-space-md mb-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[24px]">bolt</span>
+</div>
+<div>
+<div class="text-label-sm text-outline">Reference ST-24A7</div>
+<h3 class="text-headline-md font-headline text-on-surface">Mixed Copper Cable</h3>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-md my-space-md p-space-md bg-surface rounded-lg">
+<div>
+<span class="text-label-sm text-outline block">Net Weight</span>
+<span class="text-headline-lg font-headline text-on-surface">2.5 <span class="text-sm font-normal">kg</span></span>
+</div>
+<div>
+<span class="text-label-sm text-outline block">Est. Payout</span>
+<span class="text-headline-lg font-headline text-primary">₹1,425</span>
+</div>
+</div>
+<!-- Trust States & Integrity Status -->
+<div class="space-y-space-sm mt-space-md pt-space-md border-t border-surface-variant">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span> Record Integrity Hash
+            </span>
+<span class="font-mono text-xs bg-surface-container px-space-sm py-space-xs rounded text-on-surface">sha256:9f42...a18c</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">cloud_sync</span> Sync Status
+            </span>
+<span class="text-label-sm text-on-secondary-container bg-secondary-container px-space-sm py-space-xs rounded">Synchronized</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">domain</span> Origin Facility
+            </span>
+<span class="text-label-sm text-on-surface">Okhla Hub #02</span>
+</div>
+</div>
+<div class="mt-space-lg flex gap-space-md">
+<button class="flex-1 py-space-md bg-primary text-on-primary font-label-lg rounded-xl hover:bg-primary-container transition-colors text-center">
+            Proceed to Weigh-In
+          </button>
+<button class="px-space-md py-space-md bg-surface-container-high text-on-surface font-label-lg rounded-xl hover:bg-surface-container transition-colors">
+            Reject
+          </button>
+</div>
+</div>
+<!-- Demonstration States Toggle Panel (For reviewer inspection of edge cases) -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm">
+<h4 class="text-label-lg text-on-surface mb-space-sm">Simulate Trust &amp; Validation States</h4>
+<p class="text-body-sm text-on-surface-variant mb-space-md">Test different error and security triggers in the SahiTol verification pipeline.</p>
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="p-space-sm bg-surface hover:bg-surface-container-high rounded-lg text-left border border-outline/30 transition-colors" onclick="setTrustState('unsynced')">
+<span class="text-label-sm text-on-surface block">Not Synchronized</span>
+<span class="text-xs text-on-surface-variant">Local offline storage</span>
+</button>
+<button class="p-space-sm bg-surface hover:bg-surface-container-high rounded-lg text-left border border-outline/30 transition-colors" onclick="setTrustState('wrong-facility')">
+<span class="text-label-sm text-on-surface block">Wrong Facility</span>
+<span class="text-xs text-on-surface-variant">Bound to Yard #104</span>
+</button>
+<button class="p-space-sm bg-surface hover:bg-surface-container-high rounded-lg text-left border border-outline/30 transition-colors" onclick="setTrustState('auth-required')">
+<span class="text-label-sm text-on-surface block">Auth Required</span>
+<span class="text-xs text-on-surface-variant">Manager PIN needed</span>
+</button>
+<button class="p-space-sm bg-surface hover:bg-surface-container-high rounded-lg text-left border border-outline/30 transition-colors" onclick="setTrustState('valid')">
+<span class="text-label-sm text-on-surface block">Fully Valid</span>
+<span class="text-xs text-primary font-bold">Standard ST-24A7</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Dynamic State Script -->
+<script>
+    function toggleCameraPermission() {
+      const permDiv = document.getElementById('cam-permission-state');
+      permDiv.classList.toggle('hidden');
+    }
+
+    function simulateScanSuccess() {
+      document.getElementById('manual-ref').value = 'ST-24A7';
+      const card = document.getElementById('record-preview-card');
+      card.style.transform = 'scale(1.02)';
+      setTimeout(() => card.style.transform = 'scale(1)', 200);
+    }
+
+    function lookupReference() {
+      const val = document.getElementById('manual-ref').value;
+      if(!val) {
+        alert('Please enter a reference code.');
+        return;
+      }
+      simulateScanSuccess();
+    }
+
+    function setTrustState(state) {
+      const card = document.getElementById('record-preview-card');
+      if (state === 'unsynced') {
+        card.innerHTML = `
+          <div class="absolute top-0 right-0 bg-tertiary text-on-tertiary px-space-md py-space-xs text-label-sm rounded-bl-xl font-bold">Local Cache Only</div>
+          <div class="flex items-center gap-space-md mb-space-md">
+            <div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-tertiary">
+              <span class="material-symbols-outlined text-[24px]">cloud_off</span>
+            </div>
+            <div>
+              <div class="text-label-sm text-outline">Reference ST-88B1</div>
+              <h3 class="text-headline-md font-headline text-on-surface">Aluminum Extrusion</h3>
+            </div>
+          </div>
+          <div class="p-space-md bg-amber-50 border border-amber-200 rounded-lg my-space-md">
+            <p class="text-body-sm text-amber-900 font-medium">Not synchronized yet. This record was created offline on collector device #12. Weights are stored locally pending master ledger sync.</p>
+          </div>
+          <div class="flex gap-space-md">
+            <button class="flex-1 py-space-md bg-tertiary text-on-tertiary font-label-lg rounded-xl hover:bg-tertiary-container transition-colors text-center">
+              Force Sync & Verify
+            </button>
+          </div>
+        `;
+      } else if (state === 'wrong-facility') {
+        card.innerHTML = `
+          <div class="absolute top-0 right-0 bg-error text-on-error px-space-md py-space-xs text-label-sm rounded-bl-xl font-bold">Facility Mismatch</div>
+          <div class="flex items-center gap-space-md mb-space-md">
+            <div class="w-12 h-12 rounded-xl bg-error-container flex items-center justify-center text-on-error-container">
+              <span class="material-symbols-outlined text-[24px]">block</span>
+            </div>
+            <div>
+              <div class="text-label-sm text-outline">Reference ST-99X2</div>
+              <h3 class="text-headline-md font-headline text-on-surface">HDPE Plastic Granules</h3>
+            </div>
+          </div>
+          <div class="p-space-md bg-error-container/40 border border-error/30 rounded-lg my-space-md">
+            <p class="text-body-sm text-on-error-container font-medium">Wrong facility block. This handover QR is assigned exclusively to Yard #102 (Dwarka). Cannot process at Okhla Yard #402.</p>
+          </div>
+          <div class="flex gap-space-md">
+            <button class="flex-1 py-space-md bg-surface-container-high text-on-surface font-label-lg rounded-xl hover:bg-surface-container transition-colors text-center">
+              Reassign / Transfer Ticket
+            </button>
+          </div>
+        `;
+      } else if (state === 'auth-required') {
+        card.innerHTML = `
+          <div class="absolute top-0 right-0 bg-secondary text-on-secondary px-space-md py-space-xs text-label-sm rounded-bl-xl font-bold">High Value Lot</div>
+          <div class="flex items-center gap-space-md mb-space-md">
+            <div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container">
+              <span class="material-symbols-outlined text-[24px]">lock</span>
+            </div>
+            <div>
+              <div class="text-label-sm text-outline">Reference ST-55R9</div>
+              <h3 class="text-headline-md font-headline text-on-surface">Pure Silver Scrap / Coated</h3>
+            </div>
+          </div>
+          <div class="p-space-md bg-surface rounded-lg my-space-md space-y-space-sm">
+            <p class="text-body-sm text-on-surface-variant">Authentication required. Lot valuation exceeds threshold (₹50,000). Yard Supervisor PIN override required to unlock record.</p>
+            <input type="password" placeholder="Enter Supervisor PIN" class="w-full px-space-md py-space-sm bg-surface-container border border-outline rounded-lg text-on-surface" />
+          </div>
+          <div class="flex gap-space-md">
+            <button class="flex-1 py-space-md bg-primary text-on-primary font-label-lg rounded-xl hover:bg-primary-container transition-colors text-center">
+              Authenticate & Unlock
+            </button>
+          </div>
+        `;
+      } else {
+        // Reset back to default valid
+        location.reload();
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low py-space-lg border-t border-surface-variant"><div class="max-w-7xl mx-auto px-gutter text-center text-on-surface-variant text-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm"><span>© 2024 SahiTol Technologies Inc. All rights reserved.</span><span class="text-xs text-outline">Terminal Status: Online (Latency: 24ms)</span></div></footer></body></html>

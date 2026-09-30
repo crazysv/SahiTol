@@ -1,0 +1,5 @@
+# SahiTol Payment Assertions Export
+"# Statutory Notice: SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling."
+payment_id,transaction_id,amount_paise,amount_inr,payment_method,state,asserted_by,created_at,ack_at,is_reversal,reverses_entry_id
+pay-entry-001,tx-f1001-c01-001,1526400,15264.0,CASH,ACKNOWLEDGED,FACILITY,2026-09-29T09:05:00Z,2026-09-29T09:10:00Z,False,
+pay-entry-002,tx-f1001-c02-002,9425000,94250.0,UPI,ACKNOWLEDGED,FACILITY,2026-09-28T11:35:00Z,2026-09-28T11:40:00Z,False,

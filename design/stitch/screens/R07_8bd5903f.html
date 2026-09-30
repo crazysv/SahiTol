@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {"colors": {"secondary-container": "#fed65b", "surface-variant": "#e5e2dc", "primary": "#9f3c16", "surface-container-highest": "#e5e2dc", "surface-container-high": "#ebe8e2", "surface-container-low": "#f6f3ed", "tertiary-container": "#7a7371", "surface-container-lowest": "#ffffff", "on-tertiary": "#ffffff", "outline": "#8a726a", "on-surface-variant": "#57423b", "tertiary-fixed": "#eae0de", "surface-container": "#f0eee8", "on-secondary-container": "#745c00", "on-tertiary-fixed-variant": "#4b4544", "on-primary-container": "#fffbff", "on-error": "#ffffff", "on-primary-fixed": "#390c00", "on-primary": "#ffffff", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#574500", "on-tertiary-fixed": "#1f1b1a", "secondary-fixed-dim": "#e9c349", "secondary-fixed": "#ffe088", "inverse-primary": "#ffb59c", "primary-fixed-dim": "#ffb59c", "on-secondary-fixed": "#241a00", "tertiary-fixed-dim": "#cec4c3", "error": "#ba1a1a", "primary-container": "#bf542c", "surface-tint": "#a23e18", "on-surface": "#1c1c18", "outline-variant": "#dec0b7", "background": "#fcf9f3", "inverse-on-surface": "#f3f0ea", "error-container": "#ffdad6", "on-background": "#1c1c18", "tertiary": "#615a59", "primary-fixed": "#ffdbcf", "on-secondary": "#ffffff", "surface-dim": "#dcdad4", "on-tertiary-container": "#fffbff", "surface": "#fcf9f3", "on-primary-fixed-variant": "#822801", "surface-bright": "#fcf9f3", "secondary": "#735c00", "inverse-surface": "#31312d"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"space-lg": "24px", "space-md": "16px", "space-xs": "4px", "space-sm": "8px", "space-xl": "32px", "gutter": "16px", "margin": "16px"}, "fontFamily": {"headline-lg-mobile": ["Sora"], "label-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-md": ["Sora"], "headline-xl-mobile": ["Sora"], "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Sora"], "headline-xl": ["Sora"], "body-lg": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"]}, "fontSize": {"headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}], "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}], "label-md": ["14px", {"lineHeight": "18px", "fontWeight": "600"}], "headline-md": ["20px", {"lineHeight": "26px", "fontWeight": "600"}], "headline-xl-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}], "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "headline-lg": ["28px", {"lineHeight": "34px", "fontWeight": "600"}], "headline-xl": ["36px", {"lineHeight": "44px", "fontWeight": "700"}], "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}], "label-lg": ["16px", {"lineHeight": "22px", "fontWeight": "700"}], "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]}}}};</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;family=Sora:wght@100..900&amp;display=swap" rel="stylesheet"/></head><body class="bg-surface font-body text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-primary text-headline-md">scale</span><div><h1 class="text-label-lg font-headline font-bold text-on-surface">SahiTol Recycler</h1><p class="text-label-sm text-on-surface-variant">Yard #402 - Okhla Industrial</p></div></div><nav class="hidden md:flex items-center gap-space-sm" data-active-classes="bg-primary text-on-primary font-bold rounded-lg"><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="inbox" href="#">Inbox</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="incoming-lot" href="#">Incoming Lot</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="quote-terminal" href="#">Quote Terminal</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="operational-profile" href="#">Operational Profile</a><a class="px-space-md py-space-sm text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg" data-path="history-and-exports" href="#">History &amp; Exports</a></nav><div class="flex items-center gap-space-md"><button class="relative p-space-sm rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-on-surface-variant text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><nav class="md:hidden flex overflow-x-auto px-gutter py-space-sm gap-space-sm bg-surface-container-low border-t border-surface-variant" data-active-classes="bg-primary text-on-primary font-bold rounded-lg"><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="inbox" href="#">Inbox</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="incoming-lot" href="#">Incoming Lot</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="quote-terminal" href="#">Quote Terminal</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="operational-profile" href="#">Operational Profile</a><a class="whitespace-nowrap px-space-md py-space-xs text-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg" data-path="history-and-exports" href="#">History &amp; Exports</a></nav></header><main class="w-full pt-24 pb-space-xl max-w-7xl mx-auto px-gutter bg-surface"><div class="flex flex-col w-full">
+<!-- Top Section / Header intro -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg mb-space-xl">
+<div>
+<div class="flex items-center gap-space-sm mb-space-xs">
+<span class="px-space-sm py-space-xs bg-primary-fixed text-on-primary-fixed text-label-sm rounded-lg uppercase tracking-wider">Audit Trail &amp; Ledger</span>
+<span class="text-xs text-outline font-mono">ID: VERMA-HIST-2024</span>
+</div>
+<h2 class="text-headline-xl text-on-surface font-headline tracking-tight">Procurement History &amp; Exports</h2>
+<p class="text-body-md text-on-surface-variant mt-space-xs max-w-2xl">
+        Comprehensive registry of historical material intake, verified offers, site handovers, and receipts for Verma Electricals Yard #402. Immutable transaction logs secured with SHA-256 integrity hashing.
+      </p>
+</div>
+<div class="flex items-center gap-space-md">
+<button class="flex items-center gap-space-sm bg-primary text-on-primary px-space-lg py-space-md rounded-lg font-label-md hover:bg-primary-container transition-colors shadow-sm" onclick="document.getElementById('exportModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[20px]">download</span>
+        Export Ledger
+      </button>
+<button class="flex items-center gap-space-sm bg-surface-container-high text-on-surface px-space-md py-space-md rounded-lg font-label-md hover:bg-surface-container-highest transition-colors" onclick="triggerVerification()">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+        Verify Hashes
+      </button>
+</div>
+</div>
+<!-- Stats Overview Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md mb-space-xl">
+<!-- Stat 1 -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">Total Intake Volume</span>
+<span class="material-symbols-outlined text-primary p-space-sm bg-primary-fixed rounded-lg">scale</span>
+</div>
+<div>
+<div class="text-headline-lg font-headline text-on-surface">142,580 kg</div>
+<div class="flex items-center gap-space-xs mt-space-xs text-xs text-on-surface-variant">
+<span class="text-primary font-bold">+12.4%</span> vs previous month
+        </div>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">Successful Handovers</span>
+<span class="material-symbols-outlined text-secondary p-space-sm bg-secondary-fixed rounded-lg">local_shipping</span>
+</div>
+<div>
+<div class="text-headline-lg font-headline text-on-surface">318 Lots</div>
+<div class="flex items-center gap-space-xs mt-space-xs text-xs text-on-surface-variant">
+<span class="text-secondary font-bold">99.1%</span> completion rate
+        </div>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">Total Disbursed Value</span>
+<span class="material-symbols-outlined text-primary p-space-sm bg-primary-fixed rounded-lg">payments</span>
+</div>
+<div>
+<div class="text-headline-lg font-headline text-on-surface">₹48,25,900</div>
+<div class="flex items-center gap-space-xs mt-space-xs text-xs text-on-surface-variant">
+<span class="text-outline font-mono">All verified via RTGS</span>
+</div>
+</div>
+</div>
+<!-- Stat 4 -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">Active Disputes</span>
+<span class="material-symbols-outlined text-error p-space-sm bg-error-container rounded-lg">warning</span>
+</div>
+<div>
+<div class="text-headline-lg font-headline text-error">2 Lots</div>
+<div class="flex items-center gap-space-xs mt-space-xs text-xs text-on-surface-variant">
+<span class="text-error font-bold">Requires review</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Filters & Controls Section -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm mb-space-lg">
+<div class="flex flex-col lg:flex-row gap-space-md items-center justify-between">
+<!-- Search input -->
+<div class="relative w-full lg:w-96">
+<span class="absolute inset-y-0 left-0 flex items-center pl-space-md pointer-events-none material-symbols-outlined text-outline">search</span>
+<input class="w-full bg-surface-container-lowest text-on-surface pl-12 pr-space-md py-space-md rounded-lg text-body-md focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="searchInput" onkeyup="filterTable()" placeholder="Search by Reference ID, Collector, or Material..." type="text"/>
+</div>
+<!-- Filter Dropdowns -->
+<div class="flex flex-wrap items-center gap-space-md w-full lg:w-auto">
+<!-- Date Range Filter -->
+<select class="bg-surface-container-lowest text-on-surface px-space-md py-space-md rounded-lg text-label-md focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="dateFilter" onchange="filterTable()">
+<option value="">All Time Range</option>
+<option value="today">Today</option>
+<option value="last7">Last 7 Days</option>
+<option value="last30">Last 30 Days</option>
+</select>
+<!-- Material Category Filter -->
+<select class="bg-surface-container-lowest text-on-surface px-space-md py-space-md rounded-lg text-label-md focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="categoryFilter" onchange="filterTable()">
+<option value="">All Categories</option>
+<option value="Copper">Copper Scrap</option>
+<option value="Aluminium">Aluminium Extrusion</option>
+<option value="Brass">Brass Turnings</option>
+<option value="Steel">Stainless Steel</option>
+<option value="Polymer">Industrial Polymers</option>
+</select>
+<!-- Status Filter -->
+<select class="bg-surface-container-lowest text-on-surface px-space-md py-space-md rounded-lg text-label-md focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="statusFilter" onchange="filterTable()">
+<option value="">All Statuses</option>
+<option value="Received">Received</option>
+<option value="Accepted">Accepted</option>
+<option value="Handover">Handover Recorded</option>
+<option value="Offer Sent">Offer Sent</option>
+<option value="Disputed">Disputed</option>
+</select>
+<button class="px-space-md py-space-md bg-surface-container-high text-on-surface rounded-lg text-label-md hover:bg-surface-container-highest transition-colors" onclick="resetFilters()">
+          Reset
+        </button>
+</div>
+</div>
+</div>
+<!-- Data Display: Desktop Table & Mobile Cards -->
+<div class="bg-surface-container-low rounded-xl shadow-sm overflow-hidden mb-space-xl">
+<!-- Desktop Table View -->
+<div class="hidden md:block overflow-x-auto">
+<table class="w-full text-left border-collapse" id="procurementTable">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant text-label-sm uppercase tracking-wider">
+<th class="py-space-md px-space-lg font-label-lg">Ref ID / Date</th>
+<th class="py-space-md px-space-lg font-label-lg">Material &amp; Category</th>
+<th class="py-space-md px-space-lg font-label-lg">Weight / Value</th>
+<th class="py-space-md px-space-lg font-label-lg">Status Sequence</th>
+<th class="py-space-md px-space-lg font-label-lg">Collector / Yard</th>
+<th class="py-space-md px-space-lg font-label-lg text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant/30 text-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high/50 transition-colors" data-category="Copper" data-date="2024-10-24" data-status="Received">
+<td class="py-space-md px-space-lg">
+<div class="font-bold font-mono text-primary">#LOT-88421</div>
+<div class="text-xs text-on-surface-variant">24 Oct 2024, 14:30</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-bold">Heavy Copper Wire (Grade A)</div>
+<span class="inline-block mt-space-xs px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm rounded">Copper</span>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-bold">1,250 kg</div>
+<div class="text-xs text-on-surface-variant">₹8,75,000 (₹700/kg)</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-primary inline-block"></span>
+<span class="font-label-md text-primary">Received</span>
+</div>
+<div class="text-xs text-outline mt-0.5">Hash: 8f4c...3e1a</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-medium">M/s Sharma &amp; Sons</div>
+<div class="text-xs text-on-surface-variant">Okhla Yard #402</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="px-space-md py-space-xs bg-surface-container-high text-on-surface rounded hover:bg-primary hover:text-on-primary transition-colors text-label-sm" onclick="openDetailModal('LOT-88421', 'Heavy Copper Wire (Grade A)', '1,250 kg', '₹8,75,000', 'Received', 'M/s Sharma &amp; Sons', '24 Oct 2024, 14:30', 'SHA-256: 8f4c2b9a1e3f3e1a77b2d4c8e9f1a2b3')">
+                View Receipt
+              </button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high/50 transition-colors" data-category="Aluminium" data-date="2024-10-23" data-status="Accepted">
+<td class="py-space-md px-space-lg">
+<div class="font-bold font-mono text-primary">#LOT-88419</div>
+<div class="text-xs text-on-surface-variant">23 Oct 2024, 11:15</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-bold">Aluminium Extrusion Scrap</div>
+<span class="inline-block mt-space-xs px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm rounded">Aluminium</span>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-bold">3,400 kg</div>
+<div class="text-xs text-on-surface-variant">₹6,80,000 (₹200/kg)</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-secondary inline-block"></span>
+<span class="font-label-md text-secondary">Accepted</span>
+</div>
+<div class="text-xs text-outline mt-0.5">Hash: 3b2a...9c8f</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-medium">Apex Scrap Traders</div>
+<div class="text-xs text-on-surface-variant">Okhla Yard #402</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="px-space-md py-space-xs bg-surface-container-high text-on-surface rounded hover:bg-primary hover:text-on-primary transition-colors text-label-sm" onclick="openDetailModal('LOT-88419', 'Aluminium Extrusion Scrap', '3,400 kg', '₹6,80,000', 'Accepted', 'Apex Scrap Traders', '23 Oct 2024, 11:15', 'SHA-256: 3b2a1f8e9c8f7d6e5a4b3c2d1e0f9a8b')">
+                View Receipt
+              </button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high/50 transition-colors" data-category="Brass" data-date="2024-10-22" data-status="Disputed">
+<td class="py-space-md px-space-lg">
+<div class="font-bold font-mono text-primary">#LOT-88410</div>
+<div class="text-xs text-on-surface-variant">22 Oct 2024, 09:45</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-bold">Brass Honey Turnings</div>
+<span class="inline-block mt-space-xs px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm rounded">Brass</span>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-bold">850 kg</div>
+<div class="text-xs text-on-surface-variant">₹3,40,000 (₹400/kg)</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-error inline-block"></span>
+<span class="font-label-md text-error">Disputed</span>
+</div>
+<div class="text-xs text-outline mt-0.5">Hash: 11a4...4f2b</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-medium">National Metal Works</div>
+<div class="text-xs text-on-surface-variant">Okhla Yard #402</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="px-space-md py-space-xs bg-error-container text-on-error-container rounded hover:bg-error hover:text-on-error transition-colors text-label-sm" onclick="openDetailModal('LOT-88410', 'Brass Honey Turnings', '850 kg', '₹3,40,000', 'Disputed', 'National Metal Works', '22 Oct 2024, 09:45', 'SHA-256: 11a4b7c8d9e01f2a3b4c5d6e7f8a9b0c')">
+                Resolve Dispute
+              </button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high/50 transition-colors" data-category="Steel" data-date="2024-10-21" data-status="Handover">
+<td class="py-space-md px-space-lg">
+<div class="font-bold font-mono text-primary">#LOT-88402</div>
+<div class="text-xs text-on-surface-variant">21 Oct 2024, 16:20</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-bold">SS 304 Industrial Scrap</div>
+<span class="inline-block mt-space-xs px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm rounded">Steel</span>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-bold">5,100 kg</div>
+<div class="text-xs text-on-surface-variant">₹7,65,000 (₹150/kg)</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-tertiary inline-block"></span>
+<span class="font-label-md text-on-surface-variant">Handover Recorded</span>
+</div>
+<div class="text-xs text-outline mt-0.5">Hash: 9e8d...1a2b</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-medium">Verma &amp; Co. Logistics</div>
+<div class="text-xs text-on-surface-variant">Okhla Yard #402</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="px-space-md py-space-xs bg-surface-container-high text-on-surface rounded hover:bg-primary hover:text-on-primary transition-colors text-label-sm" onclick="openDetailModal('LOT-88402', 'SS 304 Industrial Scrap', '5,100 kg', '₹7,65,000', 'Handover Recorded', 'Verma &amp; Co. Logistics', '21 Oct 2024, 16:20', 'SHA-256: 9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b')">
+                View Receipt
+              </button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-high/50 transition-colors" data-category="Polymer" data-date="2024-10-20" data-status="Offer Sent">
+<td class="py-space-md px-space-lg">
+<div class="font-bold font-mono text-primary">#LOT-88395</div>
+<div class="text-xs text-on-surface-variant">20 Oct 2024, 10:00</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-bold">HDPE Mixed Regrind Granules</div>
+<span class="inline-block mt-space-xs px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm rounded">Polymer</span>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-bold">2,200 kg</div>
+<div class="text-xs text-on-surface-variant">₹1,98,000 (₹90/kg)</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-outline inline-block"></span>
+<span class="font-label-md text-on-surface-variant">Offer Sent</span>
+</div>
+<div class="text-xs text-outline mt-0.5">Hash: 4c3b...8e7f</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="font-medium">EcoGreen Polymers</div>
+<div class="text-xs text-on-surface-variant">Okhla Yard #402</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="px-space-md py-space-xs bg-surface-container-high text-on-surface rounded hover:bg-primary hover:text-on-primary transition-colors text-label-sm" onclick="openDetailModal('LOT-88395', 'HDPE Mixed Regrind Granules', '2,200 kg', '₹1,98,000', 'Offer Sent', 'EcoGreen Polymers', '20 Oct 2024, 10:00', 'SHA-256: 4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f')">
+                View Details
+              </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Mobile Card Fallback View -->
+<div class="md:hidden flex flex-col gap-space-md p-space-md" id="mobileCardContainer">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm" data-category="Copper" data-date="2024-10-24" data-status="Received">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-mono font-bold text-primary">#LOT-88421</span>
+<span class="px-space-sm py-0.5 bg-primary-fixed text-on-primary-fixed text-label-sm rounded">Received</span>
+</div>
+<div class="font-headline font-bold text-on-surface text-lg">Heavy Copper Wire (Grade A)</div>
+<div class="text-sm text-on-surface-variant mt-1">Collector: M/s Sharma &amp; Sons</div>
+<div class="flex justify-between items-center mt-space-md pt-space-sm border-t border-surface-variant/40">
+<div>
+<div class="text-xs text-outline">1,250 kg</div>
+<div class="font-bold text-on-surface">₹8,75,000</div>
+</div>
+<button class="px-space-md py-space-xs bg-primary text-on-primary rounded-lg text-label-sm" onclick="openDetailModal('LOT-88421', 'Heavy Copper Wire (Grade A)', '1,250 kg', '₹8,75,000', 'Received', 'M/s Sharma &amp; Sons', '24 Oct 2024, 14:30', 'SHA-256: 8f4c2b9a1e3f3e1a')">
+            Details
+          </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm" data-category="Aluminium" data-date="2024-10-23" data-status="Accepted">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-mono font-bold text-primary">#LOT-88419</span>
+<span class="px-space-sm py-0.5 bg-secondary-fixed text-on-secondary-fixed text-label-sm rounded">Accepted</span>
+</div>
+<div class="font-headline font-bold text-on-surface text-lg">Aluminium Extrusion Scrap</div>
+<div class="text-sm text-on-surface-variant mt-1">Collector: Apex Scrap Traders</div>
+<div class="flex justify-between items-center mt-space-md pt-space-sm border-t border-surface-variant/40">
+<div>
+<div class="text-xs text-outline">3,400 kg</div>
+<div class="font-bold text-on-surface">₹6,80,000</div>
+</div>
+<button class="px-space-md py-space-xs bg-primary text-on-primary rounded-lg text-label-sm" onclick="openDetailModal('LOT-88419', 'Aluminium Extrusion Scrap', '3,400 kg', '₹6,80,000', 'Accepted', 'Apex Scrap Traders', '23 Oct 2024, 11:15', 'SHA-256: 3b2a1f8e9c8f7d6e')">
+            Details
+          </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm" data-category="Brass" data-date="2024-10-22" data-status="Disputed">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-mono font-bold text-primary">#LOT-88410</span>
+<span class="px-space-sm py-0.5 bg-error-container text-on-error-container text-label-sm rounded">Disputed</span>
+</div>
+<div class="font-headline font-bold text-on-surface text-lg">Brass Honey Turnings</div>
+<div class="text-sm text-on-surface-variant mt-1">Collector: National Metal Works</div>
+<div class="flex justify-between items-center mt-space-md pt-space-sm border-t border-surface-variant/40">
+<div>
+<div class="text-xs text-outline">850 kg</div>
+<div class="font-bold text-on-surface">₹3,40,000</div>
+</div>
+<button class="px-space-md py-space-xs bg-error text-on-error rounded-lg text-label-sm" onclick="openDetailModal('LOT-88410', 'Brass Honey Turnings', '850 kg', '₹3,40,000', 'Disputed', 'National Metal Works', '22 Oct 2024, 09:45', 'SHA-256: 11a4b7c8d9e01f2a')">
+            Resolve
+          </button>
+</div>
+</div>
+</div>
+<!-- Table Pagination / Footer info -->
+<div class="bg-surface-container px-space-lg py-space-md flex flex-col sm:flex-row items-center justify-between gap-space-md text-sm text-on-surface-variant">
+<div>Showing <span class="font-bold text-on-surface">5</span> of <span class="font-bold text-on-surface">318</span> historical records</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-space-xs bg-surface-container-lowest rounded border border-surface-variant/50 text-on-surface disabled:opacity-50" disabled="">Previous</button>
+<button class="px-space-md py-space-xs bg-primary text-on-primary rounded font-bold">1</button>
+<button class="px-space-md py-space-xs bg-surface-container-lowest rounded border border-surface-variant/50 text-on-surface">2</button>
+<button class="px-space-md py-space-xs bg-surface-container-lowest rounded border border-surface-variant/50 text-on-surface">3</button>
+<span class="px-space-xs">...</span>
+<button class="px-space-md py-space-xs bg-surface-container-lowest rounded border border-surface-variant/50 text-on-surface">64</button>
+<button class="px-space-md py-space-xs bg-surface-container-lowest rounded border border-surface-variant/50 text-on-surface">Next</button>
+</div>
+</div>
+</div>
+<!-- Export Options & Integrity Hashing Banner -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg mb-space-xl">
+<!-- Export Scope Box -->
+<div class="lg:col-span-2 bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between"><div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary">database</span>
+<h3 class="text-headline-md font-headline text-on-surface">Procurement Export Generator (T031)</h3>
+</div>
+<span class="px-space-sm py-0.5 bg-primary-fixed text-on-primary-fixed text-xs font-mono rounded">Provenance v2.4-stable</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-space-lg">
+          Generate certified audit reports for accounting, tax filing, or compliance checks with full scope summary, data governance labels, and immutable cryptographic ledger signatures.
+        </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md mb-space-lg">
+<div>
+<label class="block text-label-md text-on-surface mb-space-xs">Export Scope &amp; Summary</label>
+<select class="w-full bg-surface-container-lowest text-on-surface p-space-md rounded-lg text-body-md focus:outline-none focus:ring-2 focus:ring-primary">
+<option>Current Filtered View (5 records | Date: Oct 2024)</option>
+<option>All October 2024 Records (318 lots)</option>
+<option>Q3 Financial Audit Ledger (Redacted)</option>
+<option>Disputed Lots Only (2 records)</option>
+</select>
+<span class="text-xs text-outline mt-1 block">Privacy Notice: Personal PII redacted per data governance policy.</span>
+</div>
+<div>
+<label class="block text-label-md text-on-surface mb-space-xs">File Format &amp; Governance</label>
+<select class="w-full bg-surface-container-lowest text-on-surface p-space-md rounded-lg text-body-md focus:outline-none focus:ring-2 focus:ring-primary" id="exportFormatSelect">
+<option value="pdf">Certified PDF Report (Operational record, no legal certificate)</option>
+<option value="csv">Structured CSV Ledger Data (Raw operational feed)</option>
+<option value="xlsx">Excel Workbook (.XLSX with SHA verification)</option>
+</select>
+<span class="text-xs text-secondary mt-1 block font-medium">Governance: Internal operational use only.</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md mb-space-lg bg-surface-container-lowest p-space-md rounded-lg">
+<label class="flex items-center gap-space-sm cursor-pointer">
+<input checked="" class="w-5 h-5 text-primary rounded border-outline focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm text-on-surface">Include SHA-256 integrity hash verification block</span>
+</label>
+<div class="flex items-center gap-space-xs text-xs text-secondary font-bold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Filter Context Preserved
+</div>
+</div>
+<!-- Export State Simulation Panel -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg border border-surface-variant/40 space-y-space-sm">
+<div class="flex items-center justify-between text-xs text-on-surface-variant">
+<span>Export State: <strong class="text-primary">Ready (v2.4)</strong></span>
+<span>Filename: <code class="font-mono">verma_procurement_oct2024.csv</code></span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-sm py-1 bg-surface-container-high text-on-surface rounded text-xs hover:bg-surface-container-highest transition-colors" onclick="alert('Simulating Export Failure &amp; Retry state: Network timeout. Filter context preserved.')">Test Failure State</button>
+<button class="px-space-sm py-1 bg-surface-container-high text-on-surface rounded text-xs hover:bg-surface-container-highest transition-colors" onclick="alert('Simulating Access Denied state: Insufficient permissions for full PII export.')">Test Access Denied</button>
+<button class="px-space-sm py-1 bg-surface-container-high text-on-surface rounded text-xs hover:bg-surface-container-highest transition-colors" onclick="alert('Simulating Empty Export state: No records match current filters.')">Test Empty Export</button>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-surface-variant/40 flex items-center justify-end gap-space-md">
+<button class="px-space-lg py-space-md bg-surface-container-high text-on-surface rounded-lg font-label-md hover:bg-surface-container-highest transition-colors" onclick="triggerExport('preview')">
+          Preview Document
+        </button>
+<button class="flex items-center gap-space-sm px-space-lg py-space-md bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary-container transition-colors" onclick="triggerExport('download')">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+          Download Export
+        </button>
+</div></div>
+<!-- Integrity Hashing Note Card -->
+<div class="bg-surface-container rounded-xl p-space-lg shadow-sm flex flex-col justify-between border-l-4 border-primary">
+<div>
+<div class="flex items-center gap-space-sm mb-space-md">
+<span class="material-symbols-outlined text-primary">security</span>
+<h4 class="text-headline-md font-headline text-on-surface">Cryptographic Integrity</h4>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">
+          Every weigh-slip, offer acknowledgement, and site handover receipt logged in Verma Electricals Yard #402 is secured with decentralized cryptographic hashing.
+        </p>
+<div class="mt-space-md bg-surface-container-lowest p-space-md rounded-lg font-mono text-xs text-outline break-all">
+          Root Hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        </div>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-surface-variant/30 text-xs text-on-surface-variant flex items-center justify-between">
+<span>Status: Verified OK</span>
+<span class="text-primary font-bold">Block #14092</span>
+</div>
+</div>
+</div>
+<!-- Detail / Receipt Modal (Hidden by default) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-on-surface/50 backdrop-blur-sm hidden" id="detailModal">
+<div class="bg-surface-container-lowest w-full max-w-2xl rounded-xl p-space-lg shadow-2xl mx-space-md border border-surface-variant">
+<div class="flex items-center justify-between pb-space-md border-b border-surface-variant/40 mb-space-md">
+<div>
+<span class="text-label-sm font-mono text-primary uppercase" id="modalRefId">#LOT-00000</span>
+<h3 class="text-headline-lg font-headline text-on-surface" id="modalTitle">Material Receipt Details</h3>
+</div>
+<button class="p-space-xs rounded-full hover:bg-surface-container-high transition-colors" onclick="closeDetailModal()">
+<span class="material-symbols-outlined text-on-surface">close</span>
+</button>
+</div>
+<div class="space-y-space-md mb-space-lg">
+<div class="grid grid-cols-2 gap-space-md bg-surface-container-low p-space-md rounded-lg">
+<div>
+<span class="text-xs text-outline block">Material Category &amp; Item</span>
+<span class="font-bold text-on-surface text-body-md" id="modalMaterial">Copper Scrap</span>
+</div>
+<div>
+<span class="text-xs text-outline block">Total Verified Weight</span>
+<span class="font-bold text-on-surface text-body-md" id="modalWeight">1,250 kg</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-md bg-surface-container-low p-space-md rounded-lg">
+<div>
+<span class="text-xs text-outline block">Total Disbursed Value</span>
+<span class="font-bold text-primary text-body-md" id="modalValue">₹8,75,000</span>
+</div>
+<div>
+<span class="text-xs text-outline block">Current Status</span>
+<span class="font-bold text-on-surface text-body-md" id="modalStatus">Received</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg">
+<span class="text-xs text-outline block mb-1">Collector / Vendor Info</span>
+<span class="font-medium text-on-surface text-body-md" id="modalCollector">M/s Sharma &amp; Sons</span>
+<span class="text-xs text-on-surface-variant block mt-1" id="modalTimestamp">Timestamp: 24 Oct 2024, 14:30</span>
+</div>
+<div class="bg-surface-container p-space-md rounded-lg">
+<span class="text-xs text-outline block mb-1">Cryptographic Ledger Signature</span>
+<span class="font-mono text-xs text-on-surface break-all" id="modalHash">SHA-256: 8f4c2b9a1e3f3e1a77b2d4c8e9f1a2b3</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-md pt-space-md border-t border-surface-variant/40">
+<button class="px-space-lg py-space-md bg-surface-container-high text-on-surface rounded-lg font-label-md hover:bg-surface-container-highest transition-colors" onclick="closeDetailModal()">
+          Close
+        </button>
+<button class="flex items-center gap-space-sm px-space-lg py-space-md bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary-container transition-colors" onclick="alert('Printing verified weigh-slip &amp; receipt...'); closeDetailModal();">
+<span class="material-symbols-outlined text-[20px]">print</span>
+          Print Slip
+        </button>
+</div>
+</div>
+</div>
+<!-- Export Modal -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-on-surface/50 backdrop-blur-sm hidden" id="exportModal">
+<div class="bg-surface-container-lowest w-full max-w-md rounded-xl p-space-lg shadow-2xl mx-space-md">
+<div class="flex items-center justify-between pb-space-md border-b border-surface-variant/40 mb-space-md">
+<h3 class="text-headline-md font-headline text-on-surface">Export Processing</h3>
+<button class="p-space-xs rounded-full hover:bg-surface-container-high transition-colors" onclick="document.getElementById('exportModal').classList.add('hidden')">
+<span class="material-symbols-outlined text-on-surface">close</span>
+</button>
+</div>
+<div class="text-center py-space-lg">
+<span class="material-symbols-outlined text-primary text-[48px] animate-bounce mb-space-md">downloading</span>
+<h4 class="text-headline-md font-headline text-on-surface mb-space-xs">Preparing Procurement Ledger</h4>
+<p class="text-body-sm text-on-surface-variant">Compiling records and attaching cryptographic hash proofs...</p>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-surface-variant/40 flex justify-center">
+<button class="w-full py-space-md bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary-container transition-colors" onclick="document.getElementById('exportModal').classList.add('hidden'); alert('Export successfully downloaded!');">
+          Done
+        </button>
+</div>
+</div>
+</div>
+<!-- Client-side Interaction Script -->
+<script>
+    function filterTable() {
+      const searchInput = document.getElementById('searchInput').value.toLowerCase();
+      const dateFilter = document.getElementById('dateFilter').value;
+      const categoryFilter = document.getElementById('categoryFilter').value;
+      const statusFilter = document.getElementById('statusFilter').value;
+
+      // Filter desktop rows
+      const tableRows = document.querySelectorAll('#procurementTable tbody tr');
+      tableRows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        const cat = row.getAttribute('data-category');
+        const stat = row.getAttribute('data-status');
+
+        let matchesSearch = text.includes(searchInput);
+        let matchesCat = !categoryFilter || cat === categoryFilter;
+        let matchesStat = !statusFilter || stat === statusFilter;
+
+        if (matchesSearch && matchesCat && matchesStat) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      // Filter mobile cards
+      const mobileCards = document.querySelectorAll('#mobileCardContainer > div');
+      mobileCards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        const cat = card.getAttribute('data-category');
+        const stat = card.getAttribute('data-status');
+
+        let matchesSearch = text.includes(searchInput);
+        let matchesCat = !categoryFilter || cat === categoryFilter;
+        let matchesStat = !statusFilter || stat === statusFilter;
+
+        if (matchesSearch && matchesCat && matchesStat) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('dateFilter').value = '';
+      document.getElementById('categoryFilter').value = '';
+      document.getElementById('statusFilter').value = '';
+      filterTable();
+    }
+
+    function openDetailModal(refId, title, weight, value, status, collector, timestamp, hash) {
+      document.getElementById('modalRefId').innerText = '#' + refId;
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalMaterial').innerText = title;
+      document.getElementById('modalWeight').innerText = weight;
+      document.getElementById('modalValue').innerText = value;
+      document.getElementById('modalStatus').innerText = status;
+      document.getElementById('modalCollector').innerText = collector;
+      document.getElementById('modalTimestamp').innerText = 'Timestamp: ' + timestamp;
+      document.getElementById('modalHash').innerText = hash;
+      document.getElementById('detailModal').classList.remove('hidden');
+    }
+
+    function closeDetailModal() {
+      document.getElementById('detailModal').classList.add('hidden');
+    }
+
+    function triggerVerification() {
+      alert('Cryptographic ledger verification complete! All 318 records match active SHA-256 state.');
+    }
+
+    function triggerExport(mode) {
+      if (mode === 'preview') {
+        alert('Opening formatted print preview of procurement ledger...');
+      } else {
+        document.getElementById('exportModal').classList.remove('hidden');
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low py-space-lg border-t border-surface-variant"><div class="max-w-7xl mx-auto px-gutter text-center text-on-surface-variant text-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm"><span>© 2024 SahiTol Technologies Inc. All rights reserved.</span><span class="text-xs text-outline">Terminal Status: Online (Latency: 24ms)</span></div></footer></body></html>

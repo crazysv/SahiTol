@@ -1,0 +1,194 @@
+[
+  {
+    "facility_id": "fac-dl-01",
+    "material_id": "MAT-PCB-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-01",
+    "material_id": "MAT-PCB-02",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-01",
+    "material_id": "MAT-LCD-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-01",
+    "material_id": "MAT-CAB-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-01",
+    "material_id": "MAT-PLA-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-01",
+    "material_id": "MAT-MET-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-02",
+    "material_id": "MAT-BAT-01",
+    "route": "BATTERY_ISOLATION",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-02",
+    "material_id": "MAT-BAT-02",
+    "route": "BATTERY_ISOLATION",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-02",
+    "material_id": "MAT-BAT-03",
+    "route": "BATTERY_ISOLATION",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-02",
+    "material_id": "MAT-BAT-04",
+    "route": "BATTERY_ISOLATION",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-03",
+    "material_id": "MAT-MIX-01",
+    "route": "GENERAL_RECYCLING",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-03",
+    "material_id": "MAT-MIX-02",
+    "route": "GENERAL_RECYCLING",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-03",
+    "material_id": "MAT-MET-03",
+    "route": "GENERAL_RECYCLING",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-04",
+    "material_id": "MAT-PCB-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-04",
+    "material_id": "MAT-PCB-02",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-04",
+    "material_id": "MAT-CRT-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-04",
+    "material_id": "MAT-CAB-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-dl-04",
+    "material_id": "MAT-MOT-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-01",
+    "material_id": "MAT-PCB-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-01",
+    "material_id": "MAT-PCB-02",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-01",
+    "material_id": "MAT-LCD-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-01",
+    "material_id": "MAT-CAB-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-01",
+    "material_id": "MAT-MOT-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-01",
+    "material_id": "MAT-PLA-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-02",
+    "material_id": "MAT-BAT-01",
+    "route": "BATTERY_ISOLATION",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-02",
+    "material_id": "MAT-BAT-02",
+    "route": "BATTERY_ISOLATION",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-03",
+    "material_id": "MAT-PCB-02",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-03",
+    "material_id": "MAT-MIX-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-03",
+    "material_id": "MAT-CAB-02",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-mh-03",
+    "material_id": "MAT-MET-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-sim-01",
+    "material_id": "MAT-PCB-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  },
+  {
+    "facility_id": "fac-sim-01",
+    "material_id": "MAT-BAT-01",
+    "route": "AUTHORIZED_EWASTE",
+    "accepted": true
+  }
+]

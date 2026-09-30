@@ -1,0 +1,39 @@
+{
+  "dataset_family": "material_catalog",
+  "schema_version": "v1.0",
+  "data_version": "v1.0-demo",
+  "generated_at": "2026-09-28T20:32:38.033666+00:00",
+  "total_records": 10,
+  "files": [
+    {
+      "filename": "material_catalog.csv",
+      "sha256": "e6f46bfb63624e359ebe082d7464a2364f1fce592ba0f5776ce57670fc3e1a93",
+      "byte_size": 2868,
+      "row_count": 10
+    },
+    {
+      "filename": "material_catalog.json",
+      "sha256": "f0cf2bb897720205a729bec0666db02984519ef4a1193de20c78eea1e2dad22a",
+      "byte_size": 6296,
+      "row_count": 10
+    }
+  ],
+  "counts_by_origin_class": {
+    "SYNTHETIC": 10
+  },
+  "counts_by_source_kind": {
+    "SYNTHETIC_GENERATOR": 10
+  },
+  "counts_by_is_demo": {
+    "true": 10
+  },
+  "counts_by_review_status": {
+    "NOT_REVIEWED": 10
+  },
+  "quarantined_count": 0,
+  "source_ids": [
+    "SRC-SYNTHETIC-GEN-01"
+  ],
+  "validation_status": "VALID",
+  "limitations": "Purely synthetic demonstration fixtures; disjoint from real entities."
+}

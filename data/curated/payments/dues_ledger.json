@@ -1,0 +1,18 @@
+[
+  {
+    "acknowledged_paid_paise": 1526400,
+    "disputed_paise": 0,
+    "gross_due_paise": 1526400,
+    "is_settled": true,
+    "remaining_due_paise": 0,
+    "transaction_id": "tx-f1001-c01-001"
+  },
+  {
+    "acknowledged_paid_paise": 9425000,
+    "disputed_paise": 0,
+    "gross_due_paise": 9425000,
+    "is_settled": true,
+    "remaining_due_paise": 0,
+    "transaction_id": "tx-f1001-c02-002"
+  }
+]

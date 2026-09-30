@@ -1,0 +1,49 @@
+{
+  "counts_by_is_demo": {
+    "true": 4
+  },
+  "counts_by_origin_class": {
+    "PLATFORM_GENERATED": 4
+  },
+  "counts_by_source_kind": {
+    "USER_SELF_DECLARED": 4
+  },
+  "data_version": "v1.0-curated",
+  "dataset_family": "payments",
+  "files": [
+    {
+      "byte_size": 589,
+      "filename": "payment_assertions.csv",
+      "row_count": 2,
+      "sha256": "f908e040b065ff88e2d3ef51bb9d38dcb4e92914fff95d2f72d2baefae4dc749"
+    },
+    {
+      "byte_size": 764,
+      "filename": "payment_assertions.json",
+      "row_count": 2,
+      "sha256": "456ad44d78c4f1c0ee203775749d27b7e1007653969a82eea1ed45643913f22b"
+    },
+    {
+      "byte_size": 218,
+      "filename": "dues_ledger.csv",
+      "row_count": 2,
+      "sha256": "cfb2e30900cb3d321225522bcae009e9095f25706cd4026f3b998b0772344a7c"
+    },
+    {
+      "byte_size": 421,
+      "filename": "dues_ledger.json",
+      "row_count": 2,
+      "sha256": "15e1666b1d436ec62b1ee0b7e4ceda3732532dc405de9769c3f11e26a5421e50"
+    }
+  ],
+  "generated_at": "2026-09-29T18:46:38.360785+00:00",
+  "limitations": "Cash-first payment assertions without bank settlement claims or bank API dependencies.",
+  "quarantined_count": 0,
+  "schema_version": "v1.0",
+  "source_ids": [
+    "SRC-SAHITOL-PAYMENTS"
+  ],
+  "statutory_notice": "SahiTol Digital Handover Record is a verification of physical scrap receipt, not a statutory EPR certificate. Received mass does not prove recycling.",
+  "total_records": 8,
+  "validation_status": "VALID"
+}

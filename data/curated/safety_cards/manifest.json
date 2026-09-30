@@ -1,0 +1,34 @@
+{
+  "dataset_family": "safety_cards",
+  "schema_version": "v1.0",
+  "data_version": "v1.0-curated",
+  "generated_at": "2026-09-29T16:20:00+00:00",
+  "total_records": 9,
+  "files": [
+    {
+      "filename": "safety_cards.json",
+      "sha256": "ad8ab056427edbaf6b42d87f65f84388a684e025db53f8b8b838052caf29a3c3",
+      "byte_size": 47494,
+      "card_count": 9
+    }
+  ],
+  "languages_supported": ["en", "hi", "mr"],
+  "hazard_levels": {
+    "CRITICAL": 5,
+    "HIGH": 4
+  },
+  "routes_covered": [
+    "GENERAL_RECYCLING",
+    "AUTHORIZED_EWASTE",
+    "BATTERY_ISOLATION",
+    "HAZARDOUS_DISPOSAL",
+    "REVIEW_REQUIRED"
+  ],
+  "source_ids": ["SRC-01", "SRC-02"],
+  "scientific_review": "DESK_REVIEWED_CPCB_WHO",
+  "translation_review": "DRAFT_PENDING_NATIVE_AUDIT",
+  "non_instructional_compliance": "VERIFIED_NO_DISASSEMBLY_RECIPES",
+  "offline_asset_bundle": "apps/android/app/src/main/assets/safety/",
+  "validation_status": "VALID",
+  "limitations": "Desk-researched regulatory safety guidance based on CPCB E-Waste Rules 2022 and Battery Waste Rules 2022. Provides non-instructional hazard warnings and safe channelization guidance; explicitly does not provide informal chemical extraction tutorials or hazardous processing procedures. Hindi and Marathi translations pending live native speaker field validation (T046)."
+}

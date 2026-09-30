@@ -1,0 +1,100 @@
+[
+  {
+    "cohort_key": "MAT-PCB-01:DELHI_NCR",
+    "material_id": "MAT-PCB-01",
+    "region_id": "DELHI_NCR",
+    "policy_version": "PRICE_V1",
+    "q1_rate": 40000,
+    "median_rate": 42000,
+    "q3_rate": 44000,
+    "count": 3,
+    "independent_sources": 2,
+    "confidence": "MEDIUM",
+    "reason_codes": [],
+    "source_ids": [
+      "SRC-01",
+      "SRC-04"
+    ],
+    "as_of": "2026-09-28T21:41:31.204736+00:00",
+    "is_demo": false
+  },
+  {
+    "cohort_key": "MAT-BAT-01:DELHI_NCR",
+    "material_id": "MAT-BAT-01",
+    "region_id": "DELHI_NCR",
+    "policy_version": "PRICE_V1",
+    "q1_rate": 8000,
+    "median_rate": 8200,
+    "q3_rate": 8500,
+    "count": 3,
+    "independent_sources": 2,
+    "confidence": "MEDIUM",
+    "reason_codes": [],
+    "source_ids": [
+      "SRC-02",
+      "SRC-04"
+    ],
+    "as_of": "2026-09-28T21:41:31.204736+00:00",
+    "is_demo": false
+  },
+  {
+    "cohort_key": "MAT-CAB-01:DELHI_NCR",
+    "material_id": "MAT-CAB-01",
+    "region_id": "DELHI_NCR",
+    "policy_version": "PRICE_V1",
+    "q1_rate": 45000,
+    "median_rate": 45000,
+    "q3_rate": 47000,
+    "count": 2,
+    "independent_sources": 1,
+    "confidence": "LOW",
+    "reason_codes": [
+      "SMALL_SAMPLE_SIZE"
+    ],
+    "source_ids": [
+      "SRC-04"
+    ],
+    "as_of": "2026-09-28T21:41:31.204736+00:00",
+    "is_demo": false
+  },
+  {
+    "cohort_key": "MAT-PCB-01:MAHARASHTRA",
+    "material_id": "MAT-PCB-01",
+    "region_id": "MAHARASHTRA",
+    "policy_version": "PRICE_V1",
+    "q1_rate": 43000,
+    "median_rate": 43000,
+    "q3_rate": 45000,
+    "count": 2,
+    "independent_sources": 1,
+    "confidence": "LOW",
+    "reason_codes": [
+      "SMALL_SAMPLE_SIZE"
+    ],
+    "source_ids": [
+      "SRC-05"
+    ],
+    "as_of": "2026-09-28T21:41:31.204736+00:00",
+    "is_demo": false
+  },
+  {
+    "cohort_key": "MAT-BAT-01:MAHARASHTRA",
+    "material_id": "MAT-BAT-01",
+    "region_id": "MAHARASHTRA",
+    "policy_version": "PRICE_V1",
+    "q1_rate": 8300,
+    "median_rate": 8300,
+    "q3_rate": 8300,
+    "count": 1,
+    "independent_sources": 1,
+    "confidence": "LOW",
+    "reason_codes": [
+      "SMALL_SAMPLE_SIZE"
+    ],
+    "source_ids": [
+      "SRC-05"
+    ],
+    "as_of": "2026-09-28T21:41:31.204736+00:00",
+    "is_demo": false
+  }
+]

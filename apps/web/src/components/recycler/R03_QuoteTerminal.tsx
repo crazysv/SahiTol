@@ -1,0 +1,268 @@
+import React, { useState } from 'react';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+
+export default function R03_QuoteTerminal() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const lotRef = searchParams.get('ref') || 'ST-24A7';
+  const weight = parseFloat(searchParams.get('weight') || '84.8');
+
+  const [pricingModel, setPricingModel] = useState<'RATE_PER_KG' | 'FIXED_TOTAL'>('RATE_PER_KG');
+  const [ratePerKg, setRatePerKg] = useState(180);
+  const [fixedTotal, setFixedTotal] = useState(Math.round(weight * 180));
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [quoteDispatched, setQuoteDispatched] = useState(false);
+
+  const calculatedTotal = pricingModel === 'RATE_PER_KG' ? Math.round(weight * ratePerKg) : fixedTotal;
+
+  const handleDispatchQuote = () => {
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setQuoteDispatched(true);
+    }, 400);
+  };
+
+  return (
+    <div className="space-y-space-lg max-w-4xl mx-auto">
+      {/* Header bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md pb-space-sm border-b border-surface-container-high">
+        <div>
+          <div className="flex items-center gap-2 text-xs text-on-surface-variant mb-1">
+            <Link to="/recycler" className="hover:underline flex items-center gap-1">
+              <span className="material-symbols-outlined text-[16px]">arrow_back</span> Back to Inbox
+            </Link>
+            <span>/</span>
+            <span>Commercial Quote</span>
+          </div>
+          <h2 className="text-2xl lg:text-3xl font-headline font-bold text-on-surface">
+            Commercial Offer Terminal: <span className="text-primary font-mono">{lotRef}</span>
+          </h2>
+          <p className="text-xs text-on-surface-variant mt-0.5">
+            Incoming Yard #402 • Verified Weight: <span className="font-bold text-on-surface font-mono">{weight} kg</span>
+          </p>
+        </div>
+
+        <div className="bg-surface-container-high p-space-md rounded-lg text-right">
+          <span className="text-xs text-on-surface-variant block font-medium">Offer Validity Window</span>
+          <span className="text-sm font-headline font-bold text-primary flex items-center gap-1 mt-0.5 justify-end">
+            <span className="material-symbols-outlined text-[18px]">schedule</span>
+            4 Hours from Dispatch
+          </span>
+        </div>
+      </div>
+
+      {quoteDispatched ? (
+        <div className="bg-emerald-50 border border-emerald-300 rounded-xl p-space-xl text-center space-y-space-md">
+          <div className="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
+            <span className="material-symbols-outlined text-4xl">check_circle</span>
+          </div>
+          <h3 className="text-2xl font-headline font-bold text-emerald-900">
+            Quote Successfully Dispatched!
+          </h3>
+          <p className="text-sm text-emerald-800 max-w-md mx-auto">
+            Commercial offer of <span className="font-bold font-mono">₹{calculatedTotal.toLocaleString('en-IN')}</span> has been transmitted to collector Ramesh Kumar's phone. Terms locked with cryptographic SHA-256 fingerprint.
+          </p>
+          <div className="pt-space-md flex justify-center gap-space-md">
+            <Link
+              to="/recycler"
+              className="px-space-lg py-2.5 bg-primary text-on-primary font-headline font-bold text-sm rounded-lg hover:bg-primary-container transition-colors shadow-sm"
+            >
+              Return to Inbox
+            </Link>
+            <Link
+              to="/recycler/history"
+              className="px-space-lg py-2.5 bg-surface-container-high text-on-surface font-headline font-semibold text-sm rounded-lg hover:bg-surface-container-highest transition-colors"
+            >
+              View Active Bids
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* Material & Lot Summary Card */}
+          <div className="bg-surface-container-low rounded-xl p-space-lg shadow-sm border border-surface-container-high">
+            <div className="flex items-center justify-between mb-space-md">
+              <h3 className="text-base font-headline font-bold text-on-surface flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
+                Material Lot Payload
+              </h3>
+              <span className="text-xs font-mono text-on-surface-variant">LOT-{lotRef}</span>
+            </div>
+
+            <div className="overflow-x-auto rounded-lg border border-surface-container-high">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-surface-container-high text-xs text-on-surface-variant font-headline uppercase">
+                  <tr>
+                    <th className="p-space-md">Material Grade</th>
+                    <th className="p-space-md">Purity Spec</th>
+                    <th className="p-space-md">Scale Certified Weight</th>
+                    <th className="p-space-md text-right">Computed Baseline</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-surface-container-lowest divide-y divide-surface-container-high">
+                  <tr>
+                    <td className="p-space-md font-headline font-bold text-on-surface">
+                      Insulated Copper Wire
+                    </td>
+                    <td className="p-space-md text-on-surface-variant text-xs">
+                      55% Recovery (Standard Grade)
+                    </td>
+                    <td className="p-space-md font-mono text-on-surface font-bold">
+                      {weight.toFixed(2)} kg
+                    </td>
+                    <td className="p-space-md text-right font-mono font-bold text-primary">
+                      ₹{calculatedTotal.toLocaleString('en-IN')}.00
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Pricing Model Selector */}
+          <div className="bg-surface-container-low rounded-xl p-space-lg shadow-sm border border-surface-container-high space-y-space-md">
+            <h3 className="text-base font-headline font-bold text-on-surface flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary text-[20px]">payments</span>
+              Select Commercial Pricing Model
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+              {/* Option 1: Variable Rate Model */}
+              <label
+                onClick={() => setPricingModel('RATE_PER_KG')}
+                className={`relative flex flex-col p-space-lg rounded-xl border-2 cursor-pointer transition-all ${
+                  pricingModel === 'RATE_PER_KG'
+                    ? 'bg-surface-container-lowest border-primary shadow-md'
+                    : 'bg-surface-container-high/40 border-surface-container-high hover:border-outline'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-space-sm">
+                  <span className="text-sm font-headline font-bold text-on-surface">
+                    Rate per Kilogram (RATE_PER_KG)
+                  </span>
+                  <input
+                    type="radio"
+                    name="pricing_model"
+                    checked={pricingModel === 'RATE_PER_KG'}
+                    onChange={() => setPricingModel('RATE_PER_KG')}
+                    className="w-4 h-4 accent-primary"
+                  />
+                </div>
+                <p className="text-xs text-on-surface-variant mb-space-md">
+                  Calculated dynamically from verified scale mass multiplied by your agreed unit rate.
+                </p>
+
+                <div className="mt-auto space-y-2 pt-space-xs border-t border-surface-variant">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-semibold text-on-surface-variant">Offer Rate (₹/kg):</span>
+                    <input
+                      type="number"
+                      value={ratePerKg}
+                      onChange={(e) => setRatePerKg(parseFloat(e.target.value) || 0)}
+                      className="w-24 p-1.5 text-right font-mono font-bold text-sm bg-surface-container-lowest border border-outline-variant rounded"
+                    />
+                  </div>
+                  <div className="flex justify-between items-baseline text-xs">
+                    <span className="text-on-surface-variant">Total Quote:</span>
+                    <span className="text-base font-mono font-bold text-primary">
+                      ₹{Math.round(weight * ratePerKg).toLocaleString('en-IN')}
+                    </span>
+                  </div>
+                </div>
+              </label>
+
+              {/* Option 2: Fixed Total Lot Model */}
+              <label
+                onClick={() => setPricingModel('FIXED_TOTAL')}
+                className={`relative flex flex-col p-space-lg rounded-xl border-2 cursor-pointer transition-all ${
+                  pricingModel === 'FIXED_TOTAL'
+                    ? 'bg-surface-container-lowest border-primary shadow-md'
+                    : 'bg-surface-container-high/40 border-surface-container-high hover:border-outline'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-space-sm">
+                  <span className="text-sm font-headline font-bold text-on-surface">
+                    Fixed Total Sum (FIXED_TOTAL)
+                  </span>
+                  <input
+                    type="radio"
+                    name="pricing_model"
+                    checked={pricingModel === 'FIXED_TOTAL'}
+                    onChange={() => setPricingModel('FIXED_TOTAL')}
+                    className="w-4 h-4 accent-primary"
+                  />
+                </div>
+                <p className="text-xs text-on-surface-variant mb-space-md">
+                  Lump-sum commercial commitment locked for the entire verified lot payload regardless of tare variations.
+                </p>
+
+                <div className="mt-auto space-y-2 pt-space-xs border-t border-surface-variant">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-semibold text-on-surface-variant">Lump Sum (₹):</span>
+                    <input
+                      type="number"
+                      value={fixedTotal}
+                      onChange={(e) => setFixedTotal(parseFloat(e.target.value) || 0)}
+                      className="w-32 p-1.5 text-right font-mono font-bold text-sm bg-surface-container-lowest border border-outline-variant rounded"
+                    />
+                  </div>
+                  <div className="flex justify-between items-baseline text-xs">
+                    <span className="text-on-surface-variant">Fixed Quote:</span>
+                    <span className="text-base font-mono font-bold text-on-surface">
+                      ₹{fixedTotal.toLocaleString('en-IN')}
+                    </span>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          {/* Statutory Integrity Note */}
+          <div className="p-space-md bg-surface-container rounded-lg border border-surface-container-high text-xs text-on-surface-variant space-y-1">
+            <div className="flex items-center gap-1.5 font-headline font-bold text-on-surface">
+              <span className="material-symbols-outlined text-[16px] text-primary">security</span>
+              SahiTol Platform Integrity & Statutory Notice
+            </div>
+            <p>
+              Digital Handover Record is an audit log of physical scrap custody, not a statutory EPR certificate. 
+              Zero deductions apply to the collector (Collector Platform Fee = 0 paise).
+            </p>
+          </div>
+
+          {/* Action Terminal Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-sm">
+            <button
+              onClick={() => navigate('/recycler')}
+              className="w-full sm:w-auto px-space-lg py-2.5 bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-semibold text-sm rounded-xl transition-colors"
+            >
+              Cancel & Return
+            </button>
+
+            <div className="flex items-center gap-space-sm w-full sm:w-auto">
+              <button
+                onClick={() => {
+                  if (confirm('Are you sure you want to reject this lot? It will be rematched back to LISTED status.')) {
+                    navigate('/recycler');
+                  }
+                }}
+                className="w-full sm:w-auto px-space-md py-2.5 border border-error text-error hover:bg-error/10 font-semibold text-sm rounded-xl transition-colors"
+              >
+                Reject Lot
+              </button>
+
+              <button
+                onClick={handleDispatchQuote}
+                disabled={isSubmitting}
+                className="w-full sm:w-auto px-space-xl py-2.5 bg-primary hover:bg-primary-container text-on-primary font-headline font-bold text-sm rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+              >
+                <span className="material-symbols-outlined text-[18px]">send</span>
+                <span>{isSubmitting ? 'Transmitting...' : `Dispatch Quote (₹${calculatedTotal.toLocaleString('en-IN')})`}</span>
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}

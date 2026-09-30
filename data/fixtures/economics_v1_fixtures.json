@@ -1,0 +1,227 @@
+{
+  "policy_version": "ECONOMICS_V1",
+  "description": "Shared test fixtures for SahiTol ECONOMICS_V1 same-lot comparison, sensitivity analysis, and platform sustainability. Shared between Python API and Android Kotlin implementations.",
+  "same_lot_fixtures": [
+    {
+      "name": "techspec_baseline_10kg",
+      "description": "docs/23_UNIT_ECONOMICS.md line 15: 10kg, acquisition ₹1,000; current rate ₹150/kg, transport ₹100, handling ₹50 -> current net ₹350. Platform assumed rate ₹160/kg, transport ₹80, handling ₹50 -> net ₹470, delta ₹120, 34.29%.",
+      "inputs": {
+        "material_id": "MAT-PCB-01",
+        "weight_g": 10000,
+        "acquisition_cost_paise": 100000,
+        "current_rate_paise_per_kg": 15000,
+        "current_transport_paise": 10000,
+        "current_handling_paise": 5000,
+        "current_rejection_loss_paise": 0,
+        "current_other_cost_paise": 0,
+        "current_time_hours": 3.0,
+        "current_time_value_paise_per_hour": 0,
+        "platform_rate_paise_per_kg": 16000,
+        "platform_transport_paise": 8000,
+        "platform_handling_paise": 5000,
+        "platform_rejection_loss_paise": 0,
+        "platform_other_cost_paise": 0,
+        "platform_time_hours": 1.5,
+        "platform_time_value_paise_per_hour": 0
+      },
+      "expected": {
+        "current_gross_paise": 150000,
+        "current_total_costs_paise": 115000,
+        "current_net_paise": 35000,
+        "platform_gross_paise": 160000,
+        "platform_total_costs_paise": 113000,
+        "platform_net_paise": 47000,
+        "delta_paise": 12000,
+        "delta_percent": 34.29,
+        "delta_percent_display": "+34.29%",
+        "is_platform_favorable": true
+      }
+    },
+    {
+      "name": "fractional_kg_rounding",
+      "description": "7,350g lot at current 14,250 paise/kg and platform 15,750 paise/kg with paise rounding",
+      "inputs": {
+        "material_id": "MAT-CAB-01",
+        "weight_g": 7350,
+        "acquisition_cost_paise": 70000,
+        "current_rate_paise_per_kg": 14250,
+        "current_transport_paise": 5000,
+        "current_handling_paise": 2500,
+        "current_rejection_loss_paise": 0,
+        "current_other_cost_paise": 0,
+        "current_time_hours": 2.0,
+        "current_time_value_paise_per_hour": 0,
+        "platform_rate_paise_per_kg": 15750,
+        "platform_transport_paise": 4000,
+        "platform_handling_paise": 2500,
+        "platform_rejection_loss_paise": 0,
+        "platform_other_cost_paise": 0,
+        "platform_time_hours": 1.0,
+        "platform_time_value_paise_per_hour": 0
+      },
+      "expected": {
+        "current_gross_paise": 104738,
+        "current_total_costs_paise": 77500,
+        "current_net_paise": 27238,
+        "platform_gross_paise": 115763,
+        "platform_total_costs_paise": 76500,
+        "platform_net_paise": 39263,
+        "delta_paise": 12025,
+        "delta_percent": 44.15,
+        "delta_percent_display": "+44.15%",
+        "is_platform_favorable": true
+      }
+    },
+    {
+      "name": "negative_platform_benefit",
+      "description": "Remote collector with high platform transport cost where baseline informal sale is higher net",
+      "inputs": {
+        "material_id": "MAT-PLA-01",
+        "weight_g": 50000,
+        "acquisition_cost_paise": 100000,
+        "current_rate_paise_per_kg": 2500,
+        "current_transport_paise": 3000,
+        "current_handling_paise": 2000,
+        "current_rejection_loss_paise": 0,
+        "current_other_cost_paise": 0,
+        "current_time_hours": 1.0,
+        "current_time_value_paise_per_hour": 0,
+        "platform_rate_paise_per_kg": 2700,
+        "platform_transport_paise": 25000,
+        "platform_handling_paise": 2000,
+        "platform_rejection_loss_paise": 0,
+        "platform_other_cost_paise": 0,
+        "platform_time_hours": 3.0,
+        "platform_time_value_paise_per_hour": 0
+      },
+      "expected": {
+        "current_gross_paise": 125000,
+        "current_total_costs_paise": 105000,
+        "current_net_paise": 20000,
+        "platform_gross_paise": 135000,
+        "platform_total_costs_paise": 127000,
+        "platform_net_paise": 8000,
+        "delta_paise": -12000,
+        "delta_percent": -60.0,
+        "delta_percent_display": "-60.00%",
+        "is_platform_favorable": false
+      }
+    },
+    {
+      "name": "zero_baseline_scenario",
+      "description": "Current baseline has zero net profit; delta_percent must be null / not meaningful",
+      "inputs": {
+        "material_id": "MAT-OTH-01",
+        "weight_g": 10000,
+        "acquisition_cost_paise": 50000,
+        "current_rate_paise_per_kg": 5000,
+        "current_transport_paise": 0,
+        "current_handling_paise": 0,
+        "current_rejection_loss_paise": 0,
+        "current_other_cost_paise": 0,
+        "current_time_hours": 0.0,
+        "current_time_value_paise_per_hour": 0,
+        "platform_rate_paise_per_kg": 6000,
+        "platform_transport_paise": 0,
+        "platform_handling_paise": 0,
+        "platform_rejection_loss_paise": 0,
+        "platform_other_cost_paise": 0,
+        "platform_time_hours": 0.0,
+        "platform_time_value_paise_per_hour": 0
+      },
+      "expected": {
+        "current_gross_paise": 50000,
+        "current_total_costs_paise": 50000,
+        "current_net_paise": 0,
+        "platform_gross_paise": 60000,
+        "platform_total_costs_paise": 50000,
+        "platform_net_paise": 10000,
+        "delta_paise": 10000,
+        "delta_percent": null,
+        "delta_percent_display": "not meaningful for zero/negative baseline",
+        "is_platform_favorable": true
+      }
+    },
+    {
+      "name": "negative_baseline_scenario",
+      "description": "Current baseline is operated at a loss (negative net); delta_percent must be null / not meaningful",
+      "inputs": {
+        "material_id": "MAT-PCB-02",
+        "weight_g": 5000,
+        "acquisition_cost_paise": 80000,
+        "current_rate_paise_per_kg": 10000,
+        "current_transport_paise": 5000,
+        "current_handling_paise": 2000,
+        "current_rejection_loss_paise": 0,
+        "current_other_cost_paise": 0,
+        "current_time_hours": 0.0,
+        "current_time_value_paise_per_hour": 0,
+        "platform_rate_paise_per_kg": 15000,
+        "platform_transport_paise": 3000,
+        "platform_handling_paise": 2000,
+        "platform_rejection_loss_paise": 0,
+        "platform_other_cost_paise": 0,
+        "platform_time_hours": 0.0,
+        "platform_time_value_paise_per_hour": 0
+      },
+      "expected": {
+        "current_gross_paise": 50000,
+        "current_total_costs_paise": 87000,
+        "current_net_paise": -37000,
+        "platform_gross_paise": 75000,
+        "platform_total_costs_paise": 85000,
+        "platform_net_paise": -10000,
+        "delta_paise": 27000,
+        "delta_percent": null,
+        "delta_percent_display": "not meaningful for zero/negative baseline",
+        "is_platform_favorable": true
+      }
+    }
+  ],
+  "sustainability_fixtures": [
+    {
+      "name": "finite_break_even",
+      "inputs": {
+        "monthly_completed_transactions": 500,
+        "fee_model": "FIXED_PER_TRANSACTION",
+        "assumed_fee_per_transaction_paise": 10000,
+        "variable_cost_per_transaction_paise": 2000,
+        "fixed_monthly_hosting_paise": 500000,
+        "fixed_monthly_verification_support_paise": 1000000,
+        "fixed_monthly_administration_paise": 500000
+      },
+      "expected": {
+        "collector_fee_paise": 0,
+        "contribution_per_transaction_paise": 8000,
+        "total_monthly_fixed_costs_paise": 2000000,
+        "total_monthly_revenue_paise": 5000000,
+        "monthly_operating_result_paise": 2000000,
+        "is_operating_positive": true,
+        "break_even_transaction_count": 250,
+        "break_even_status": "FINITE"
+      }
+    },
+    {
+      "name": "no_finite_break_even",
+      "inputs": {
+        "monthly_completed_transactions": 100,
+        "fee_model": "FIXED_PER_TRANSACTION",
+        "assumed_fee_per_transaction_paise": 1500,
+        "variable_cost_per_transaction_paise": 2000,
+        "fixed_monthly_hosting_paise": 500000,
+        "fixed_monthly_verification_support_paise": 500000,
+        "fixed_monthly_administration_paise": 500000
+      },
+      "expected": {
+        "collector_fee_paise": 0,
+        "contribution_per_transaction_paise": -500,
+        "total_monthly_fixed_costs_paise": 1500000,
+        "total_monthly_revenue_paise": 150000,
+        "monthly_operating_result_paise": -1550000,
+        "is_operating_positive": false,
+        "break_even_transaction_count": null,
+        "break_even_status": "NO_FINITE_BREAK_EVEN"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+facility_id,name,facility_type,region_id,public_address,latitude,longitude,location_quality,route,registration_reference,registration_status,valid_until,last_verified_at,verification_level,materials_accepted,pickup_available,service_area,source_id,origin_class,source_kind,is_demo,schema_version

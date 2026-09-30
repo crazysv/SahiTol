@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-container": "#fffbff",
+          "inverse-on-surface": "#f3f0ea",
+          "surface-container-low": "#f6f3ed",
+          "on-error-container": "#93000a",
+          "inverse-surface": "#31312d",
+          "surface-container-high": "#ebe8e2",
+          "surface-container": "#f0eee8",
+          "tertiary-container": "#7a7371",
+          "surface-container-lowest": "#ffffff",
+          "on-secondary-fixed-variant": "#574500",
+          "on-primary": "#ffffff",
+          "surface-bright": "#fcf9f3",
+          "outline": "#8a726a",
+          "tertiary-fixed": "#eae0de",
+          "surface-container-highest": "#e5e2dc",
+          "surface": "#fcf9f3",
+          "on-tertiary": "#ffffff",
+          "secondary-fixed-dim": "#e9c349",
+          "on-primary-fixed": "#390c00",
+          "primary-fixed-dim": "#ffb59c",
+          "on-secondary-fixed": "#241a00",
+          "secondary": "#735c00",
+          "on-tertiary-fixed-variant": "#4b4544",
+          "on-primary-container": "#fffbff",
+          "surface-dim": "#dcdad4",
+          "on-secondary": "#ffffff",
+          "surface-variant": "#e5e2dc",
+          "secondary-container": "#fed65b",
+          "primary-container": "#bf542c",
+          "tertiary-fixed-dim": "#cec4c3",
+          "surface-tint": "#a23e18",
+          "on-error": "#ffffff",
+          "inverse-primary": "#ffb59c",
+          "error": "#ba1a1a",
+          "on-background": "#1c1c18",
+          "outline-variant": "#dec0b7",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed-root": "#1f1b1a",
+          "on-surface-variant": "#57423b",
+          "on-primary-fixed-variant": "#822801",
+          "primary": "#9f3c16",
+          "primary-fixed": "#ffdbcf",
+          "tertiary": "#615a59",
+          "secondary-fixed": "#ffe088",
+          "background": "#fcf9f3",
+          "on-surface": "#1c1c18",
+          "on-secondary-container": "#745c00"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "gutter": "16px",
+          "space-lg": "24px",
+          "space-sm": "8px",
+          "space-xs": "4px",
+          "space-md": "16px",
+          "space-xl": "32px",
+          "margin": "16px"
+        },
+        "fontFamily": {
+          "body-md": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "headline-md": ["Sora"],
+          "headline-lg-mobile": ["Sora"],
+          "headline-lg": ["Sora"],
+          "label-sm": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Sora"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "label-lg": ["Plus Jakarta Sans"],
+          "headline-xl": ["Sora"]
+        },
+        "fontSize": {
+          "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+          "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+          "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+          "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+          "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+          "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],
+          "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+          "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+          "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+          "label-lg": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],
+          "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }]
+        }
+      }
+    }
+  }
+</script><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl pt-safe"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><button class="w-10 h-10 flex items-center justify-center text-on-surface" onclick="history.back()"><span class="material-symbols-outlined">arrow_back_ios_new</span></button><h1 class="text-headline-md font-headline-md tracking-tight uppercase text-on-surface">Material Editor</h1></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full px-gutter pt-16 pb-20 bg-surface flex-1"><div class="flex flex-col w-full pb-20">
+<!-- Top Photo Context -->
+<div class="relative w-full h-48 rounded-xl overflow-hidden bg-surface-container mb-space-md shadow-sm">
+<div class="bg-cover bg-center w-full h-full" data-alt="Close up photograph of a salvaged electronic component lot on a rustic wooden table, featuring tangled copper cables, green printed circuit boards, and a small electric motor, captured under bright daylight with warm earthy tones of terracotta and brass." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRXm7g7PL8izBCka2RzYH2cG0X7ZVZiPRZ_0Ygn8-2_EVD8yTHLlkSzEO3KCY5OWXO62DtOLkFBYzwR2Rx0CYu0X2AmVEuk036YG0ePAEsyatPBSUllHfsI5IhBF_3Xd-vQEN-TqgfZS3bkELY96f6kpr90-VjXaxyodL8AkQ-ctMxHvcIljDw3lO4BEhjtTRM6DPfwgVHjFPh0kAFB1uHm6AOVRyUSgH6bUaYrRKtktun5r0eGzA')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 via-transparent to-transparent flex flex-col justify-end p-space-md">
+<div class="flex items-center justify-between text-surface">
+<span class="text-label-sm uppercase tracking-wider bg-primary px-space-sm py-space-xs rounded font-label-sm text-on-primary">Lot #SCRP-8842</span>
+<span class="text-body-sm flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px]">schedule</span> 10:42 AM</span>
+</div>
+</div>
+</div>
+<!-- Advisory ID Section -->
+<div class="bg-surface-container-high rounded-xl p-space-md mb-space-lg shadow-sm">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div>
+<h2 class="text-label-md font-headline-md text-on-surface">SahiTol AI Suggestion</h2>
+<p class="text-body-sm text-on-surface-variant mt-0.5">Copper PCB • <span class="font-bold text-primary">88% confidence</span></p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-3 py-2 bg-primary text-on-primary text-label-sm rounded-lg font-label-sm shadow-sm active:scale-95 transition-transform" onclick="confirmAiId()">Confirm</button>
+<button class="px-3 py-2 bg-surface text-on-surface text-label-sm rounded-lg font-label-sm active:scale-95 transition-transform" onclick="toggleManualId()">Change</button>
+</div>
+</div>
+</div>
+<!-- SECTION 1: WHAT IS IT? -->
+<div class="mb-space-xl">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="text-headline-md font-headline-md text-on-surface uppercase tracking-tight">1. What is it? / सामग्री क्या है?</h3>
+<span class="text-label-sm text-on-surface-variant">Tap to select</span>
+</div>
+<div class="grid grid-cols-3 gap-space-sm">
+<!-- Material Tile -->
+<button class="material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all text-center group active:scale-95" onclick="selectMaterial(this)">
+<span class="material-symbols-outlined text-[28px] text-primary mb-space-xs group-hover:scale-110 transition-transform">tv</span>
+<span class="text-label-md font-label-md text-on-surface">CRT</span>
+<span class="text-[10px] text-on-surface-variant">सीआरटी</span>
+</button>
+<button class="material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all text-center group active:scale-95" onclick="selectMaterial(this)">
+<span class="material-symbols-outlined text-[28px] text-primary mb-space-xs group-hover:scale-110 transition-transform">monitor</span>
+<span class="text-label-md font-label-md text-on-surface">LCD</span>
+<span class="text-[10px] text-on-surface-variant">एलसीडी</span>
+</button>
+<button class="material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-primary text-on-primary shadow-sm transition-all text-center group active:scale-95 ring-2 ring-primary" onclick="selectMaterial(this)">
+<span class="material-symbols-outlined text-[28px] mb-space-xs group-hover:scale-110 transition-transform">developer_board</span>
+<span class="text-label-md font-label-md">PCB</span>
+<span class="text-[10px] opacity-80">पीसीबी</span>
+</button>
+<button class="material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all text-center group active:scale-95" onclick="selectMaterial(this)">
+<span class="material-symbols-outlined text-[28px] text-primary mb-space-xs group-hover:scale-110 transition-transform">power</span>
+<span class="text-label-md font-label-md text-on-surface">Cable</span>
+<span class="text-[10px] text-on-surface-variant">तार</span>
+</button>
+<button class="material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all text-center group active:scale-95" onclick="selectMaterial(this)">
+<span class="material-symbols-outlined text-[28px] text-primary mb-space-xs group-hover:scale-110 transition-transform">battery_charging_full</span>
+<span class="text-label-md font-label-md text-on-surface">Battery</span>
+<span class="text-[10px] text-on-surface-variant">बैटरी</span>
+</button>
+<button class="material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all text-center group active:scale-95" onclick="selectMaterial(this)">
+<span class="material-symbols-outlined text-[28px] text-primary mb-space-xs group-hover:scale-110 transition-transform">settings_input_component</span>
+<span class="text-label-md font-label-md text-on-surface">Motor</span>
+<span class="text-[10px] text-on-surface-variant">मोटर</span>
+</button>
+<button class="material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all text-center group active:scale-95" onclick="selectMaterial(this)">
+<span class="material-symbols-outlined text-[28px] text-primary mb-space-xs group-hover:scale-110 transition-transform">category</span>
+<span class="text-label-md font-label-md text-on-surface">Plastics</span>
+<span class="text-[10px] text-on-surface-variant">प्लास्टिक</span>
+</button>
+<button class="material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all text-center group active:scale-95" onclick="selectMaterial(this)">
+<span class="material-symbols-outlined text-[28px] text-primary mb-space-xs group-hover:scale-110 transition-transform">devices</span>
+<span class="text-label-md font-label-md text-on-surface">Mixed</span>
+<span class="text-[10px] text-on-surface-variant">मिक्स</span>
+</button>
+<button class="material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all text-center group active:scale-95" onclick="selectMaterial(this)">
+<span class="material-symbols-outlined text-[28px] text-tertiary mb-space-xs group-hover:scale-110 transition-transform">help</span>
+<span class="text-label-md font-label-md text-on-surface">UNKNOWN</span>
+<span class="text-[10px] text-on-surface-variant">अज्ञात</span>
+</button>
+</div>
+</div>
+<!-- SECTION 2: WEIGHT -->
+<div class="mb-space-xl">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="text-headline-md font-headline-md text-on-surface uppercase tracking-tight">2. Weight / वजन</h3>
+<span class="text-label-sm text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">bolt</span> Live scale sync
+      </span>
+</div>
+<div class="bg-surface-container rounded-xl p-space-lg shadow-sm relative overflow-hidden">
+<div class="flex items-baseline justify-between">
+<div class="flex items-baseline gap-space-xs w-full">
+<input class="w-full bg-transparent text-headline-xl font-headline-xl text-on-surface outline-none tracking-tight" id="weight-input" inputmode="decimal" oninput="validateWeight(this)" placeholder="0.00" type="text" value="14.25"/>
+<span class="text-headline-lg font-headline-lg text-primary shrink-0">KG</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-space-md pt-space-md border-t border-surface-variant/40">
+<div class="flex items-center gap-space-sm">
+<button class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-on-surface active:scale-95 font-bold" onclick="adjustWeight(-1)">-1kg</button>
+<button class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-on-surface active:scale-95 font-bold" onclick="adjustWeight(-0.1)">-100g</button>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-on-surface active:scale-95 font-bold" onclick="adjustWeight(0.1)">+100g</button>
+<button class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-on-surface active:scale-95 font-bold" onclick="adjustWeight(1)">+1kg</button>
+</div>
+</div>
+<p class="text-error text-body-sm mt-space-sm hidden" id="weight-error">कृपया वैध वजन दर्ज करें (Please enter a valid weight)</p>
+</div>
+</div>
+<!-- SECTION 3: CONDITION -->
+<div class="mb-space-xl">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="text-headline-md font-headline-md text-on-surface uppercase tracking-tight">3. Condition / स्थिति</h3>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="condition-btn flex items-center gap-space-md p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all active:scale-95 text-left" onclick="selectCondition(this)">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</div>
+<div>
+<span class="text-label-md font-label-md text-on-surface block">Clean</span>
+<span class="text-body-sm text-on-surface-variant">साफ-सुथरा</span>
+</div>
+</button>
+<button class="condition-btn flex items-center gap-space-md p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all active:scale-95 text-left" onclick="selectCondition(this)">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined">broken_image</span>
+</div>
+<div>
+<span class="text-label-md font-label-md text-on-surface block">Damaged</span>
+<span class="text-body-sm text-on-surface-variant">टूटा-फूटा</span>
+</div>
+</button>
+<button class="condition-btn flex items-center gap-space-md p-space-md rounded-xl bg-primary text-on-primary shadow-sm transition-all active:scale-95 text-left ring-2 ring-primary" onclick="selectCondition(this)">
+<div class="w-10 h-10 rounded-full bg-surface text-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined">fact_check</span>
+</div>
+<div>
+<span class="text-label-md font-label-md block">Sorted</span>
+<span class="text-body-sm opacity-80">छाँटा हुआ</span>
+</div>
+</button>
+<button class="condition-btn flex items-center gap-space-md p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all active:scale-95 text-left" onclick="selectCondition(this)">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined">layers</span>
+</div>
+<div>
+<span class="text-label-md font-label-md text-on-surface block">Mixed</span>
+<span class="text-body-sm text-on-surface-variant">मिक्स</span>
+</div>
+</button>
+</div>
+</div>
+<!-- COMPACT EVIDENCE STRIP AT BOTTOM -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm shadow-sm">
+<div class="flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary">pin_drop</span>
+<span id="location-status-text">Sector 4, Yard Gate B</span>
+</div>
+<button class="text-primary font-label-sm hover:underline" onclick="toggleLocationModal()">Change</button>
+</div>
+<div class="flex items-center justify-between pt-space-xs border-t border-surface-variant/30 text-body-sm text-on-surface-variant">
+<span class="text-[12px]">GPS उपलब्ध नहीं - मोटा स्थान चुनें (Coarse Location Active)</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+</div>
+<!-- ACTION BUTTON -->
+<div class="mt-space-lg">
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-label-lg flex items-center justify-center gap-space-sm shadow-md active:scale-98 transition-transform" onclick="saveLot()">
+<span class="material-symbols-outlined">check_circle</span>
+<span>Save Lot &amp; Print Tag / लॉट सेव करें</span>
+</button>
+</div>
+<!-- Script for interactivity -->
+<script>
+    function selectMaterial(btn) {
+      document.querySelectorAll('.material-tile').forEach(el => {
+        el.className = "material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all text-center group active:scale-95";
+        const icon = el.querySelector('.material-symbols-outlined');
+        icon.className = "material-symbols-outlined text-[28px] text-primary mb-space-xs group-hover:scale-110 transition-transform";
+        const title = el.querySelector('.text-label-md');
+        title.className = "text-label-md font-label-md text-on-surface";
+        const sub = el.querySelector('span:last-child');
+        sub.className = "text-[10px] text-on-surface-variant";
+      });
+      btn.className = "material-tile flex flex-col items-center justify-center p-space-md rounded-xl bg-primary text-on-primary shadow-sm transition-all text-center group active:scale-95 ring-2 ring-primary";
+      const icon = btn.querySelector('.material-symbols-outlined');
+      icon.className = "material-symbols-outlined text-[28px] mb-space-xs group-hover:scale-110 transition-transform";
+      const title = btn.querySelector('.text-label-md');
+      title.className = "text-label-md font-label-md";
+      const sub = btn.querySelector('span:last-child');
+      sub.className = "text-[10px] opacity-80";
+    }
+
+    function selectCondition(btn) {
+      document.querySelectorAll('.condition-btn').forEach(el => {
+        el.className = "condition-btn flex items-center gap-space-md p-space-md rounded-xl bg-surface-container hover:bg-surface-container-highest transition-all active:scale-95 text-left";
+        const iconDiv = el.querySelector('div');
+        iconDiv.className = "w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary shrink-0 shadow-sm";
+        const title = el.querySelector('.text-label-md');
+        title.className = "text-label-md font-label-md text-on-surface block";
+        const sub = el.querySelector('.text-body-sm');
+        sub.className = "text-body-sm text-on-surface-variant";
+      });
+      btn.className = "condition-btn flex items-center gap-space-md p-space-md rounded-xl bg-primary text-on-primary shadow-sm transition-all active:scale-95 text-left ring-2 ring-primary";
+      const iconDiv = btn.querySelector('div');
+      iconDiv.className = "w-10 h-10 rounded-full bg-surface text-primary flex items-center justify-center shrink-0 shadow-sm";
+      const title = btn.querySelector('.text-label-md');
+      title.className = "text-label-md font-label-md block";
+      const sub = btn.querySelector('.text-body-sm');
+      sub.className = "text-body-sm opacity-80";
+    }
+
+    function adjustWeight(amount) {
+      const input = document.getElementById('weight-input');
+      let val = parseFloat(input.value) || 0;
+      val = Math.max(0, val + amount);
+      input.value = val.toFixed(2);
+      validateWeight(input);
+    }
+
+    function validateWeight(input) {
+      const err = document.getElementById('weight-error');
+      const val = parseFloat(input.value);
+      if (isNaN(val) || val <= 0) {
+        err.classList.remove('hidden');
+      } else {
+        err.classList.add('hidden');
+      }
+    }
+
+    function confirmAiId() {
+      alert("AI Suggestion Confirmed!");
+    }
+
+    function toggleManualId() {
+      alert("Manual override activated. Select category from grid below.");
+    }
+
+    function toggleLocationModal() {
+      const zones = ["Sector 1, Yard Main", "Sector 2, Sorting Shed", "Sector 3, Weighbridge", "Sector 4, Yard Gate B"];
+      let current = document.getElementById('location-status-text').innerText;
+      let nextIdx = (zones.indexOf(current) + 1) % zones.length;
+      document.getElementById('location-status-text').innerText = zones[nextIdx];
+    }
+
+    function saveLot() {
+      alert("Lot successfully saved and queued for sync!");
+    }
+  </script>
+</div></main></body></html>

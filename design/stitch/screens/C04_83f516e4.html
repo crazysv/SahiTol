@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-container": "#fffbff",
+          "inverse-on-surface": "#f3f0ea",
+          "surface-container-low": "#f6f3ed",
+          "on-error-container": "#93000a",
+          "inverse-surface": "#31312d",
+          "surface-container-high": "#ebe8e2",
+          "surface-container": "#f0eee8",
+          "tertiary-container": "#7a7371",
+          "surface-container-lowest": "#ffffff",
+          "on-secondary-fixed-variant": "#574500",
+          "on-primary": "#ffffff",
+          "surface-bright": "#fcf9f3",
+          "outline": "#8a726a",
+          "tertiary-fixed": "#eae0de",
+          "surface-container-highest": "#e5e2dc",
+          "surface": "#fcf9f3",
+          "on-tertiary": "#ffffff",
+          "secondary-fixed-dim": "#e9c349",
+          "on-primary-fixed": "#390c00",
+          "primary-fixed-dim": "#ffb59c",
+          "on-secondary-fixed": "#241a00",
+          "secondary": "#735c00",
+          "on-tertiary-fixed-variant": "#4b4544",
+          "on-primary-container": "#fffbff",
+          "surface-dim": "#dcdad4",
+          "on-secondary": "#ffffff",
+          "surface-variant": "#e5e2dc",
+          "secondary-container": "#fed65b",
+          "primary-container": "#bf542c",
+          "tertiary-fixed-dim": "#cec4c3",
+          "surface-tint": "#a23e18",
+          "on-error": "#ffffff",
+          "inverse-primary": "#ffb59c",
+          "error": "#ba1a1a",
+          "on-background": "#1c1c18",
+          "outline-variant": "#dec0b7",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed-root": "#1f1b1a",
+          "on-surface-variant": "#57423b",
+          "on-primary-fixed-variant": "#822801",
+          "primary": "#9f3c16",
+          "primary-fixed": "#ffdbcf",
+          "tertiary": "#615a59",
+          "secondary-fixed": "#ffe088",
+          "background": "#fcf9f3",
+          "on-surface": "#1c1c18",
+          "on-secondary-container": "#745c00"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "gutter": "16px",
+          "space-lg": "24px",
+          "space-sm": "8px",
+          "space-xs": "4px",
+          "space-md": "16px",
+          "space-xl": "32px",
+          "margin": "16px"
+        },
+        "fontFamily": {
+          "body-md": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "headline-md": ["Sora"],
+          "headline-lg-mobile": ["Sora"],
+          "headline-lg": ["Sora"],
+          "label-sm": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Sora"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "label-lg": ["Plus Jakarta Sans"],
+          "headline-xl": ["Sora"]
+        },
+        "fontSize": {
+          "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+          "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+          "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+          "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+          "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+          "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],
+          "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+          "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+          "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+          "label-lg": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],
+          "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }]
+        }
+      }
+    }
+  }
+</script><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl pt-safe"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><button class="w-10 h-10 flex items-center justify-center text-on-surface" onclick="history.back()"><span class="material-symbols-outlined">arrow_back_ios_new</span></button><h1 class="text-headline-md font-headline-md tracking-tight uppercase text-on-surface">Photo</h1></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full px-gutter pt-16 pb-20 bg-surface flex-1"><div class="flex flex-col w-full pb-20">
+<!-- Top Notification / Status Banner (Robust State: Camera permission warning) -->
+<div class="w-full bg-error-container text-on-error-container p-4 rounded-xl mb-4 flex items-start gap-3 shadow-sm transition-all duration-300" id="permission-banner">
+<span class="material-symbols-outlined text-[24px] mt-0.5" style="font-variation-settings: 'FILL' 1;">warning</span>
+<div class="flex-1">
+<h2 class="text-label-lg font-label-lg mb-1">कैमरा अनुमति आवश्यक है</h2>
+<p class="text-body-sm font-body-sm opacity-90 mb-3">क कबाड़ की पहचान के लिए कैमरा चालू करें। Settings में जाकर अनुमति दें।</p>
+<button class="bg-on-error-container text-on-error px-4 py-2 rounded-lg text-label-md font-label-md flex items-center gap-2 active:scale-95 transition-transform" onclick="grantPermission()">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+        Settings में चालू करें
+      </button>
+</div>
+<button class="text-on-error-container opacity-70 hover:opacity-100" onclick="dismissBanner()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Viewfinder / Capture Zone -->
+<div class="relative w-full aspect-[3/4] bg-surface-container-high rounded-xl overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-outline-variant shadow-sm transition-all" id="viewfinder-container">
+<!-- Live Camera Simulation / Placeholder state -->
+<div class="absolute inset-0 bg-surface-container-highest flex flex-col items-center justify-center" id="camera-feed">
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(#9f3c16_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<span class="material-symbols-outlined text-primary text-[64px] mb-2 animate-pulse" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+<p class="text-headline-md font-headline-md text-on-surface text-center px-6">मटीरियल को फ्रेम में रखें</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">हाई-कंट्रास्ट मीटरिंग सक्रिय है</p>
+<!-- High contrast alignment guides -->
+<div class="absolute inset-8 border border-primary/40 rounded-lg pointer-events-none flex flex-col justify-between p-2">
+<div class="flex justify-between">
+<span class="w-4 h-4 border-t-2 border-l-2 border-primary"></span>
+<span class="w-4 h-4 border-t-2 border-r-2 border-primary"></span>
+</div>
+<div class="flex justify-between">
+<span class="w-4 h-4 border-b-2 border-l-2 border-primary"></span>
+<span class="w-4 h-4 border-b-2 border-r-2 border-primary"></span>
+</div>
+</div>
+</div>
+<!-- Captured Photo Preview (Initially hidden) -->
+<div class="absolute inset-0 bg-surface hidden flex-col items-center justify-center" id="photo-preview">
+<img class="w-full h-full object-cover" data-alt="A brightly lit close-up photograph of assorted scrap metal and copper wires piled high on a worn wooden sorting table inside a bustling scrap yard in daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsMvvMYKEL09RAZ5UWGV5TsvarWneYhjIXASFOP_Q1YqXefTimez-Khx0fSu3iCeg7X537indhZ2NeajLJq-WcBzx_ILR2wn04OJLf9sCFmwQqYBEWGgVx0eSQihyiLDXhIgnuDlDHYamCj_RI31-U73JkkgiDWeGrVcs_9TLqje9DjsD6DFpcvIcRqN0tUcEe1I9I8ZcJY_UDRlSLUTKIyKisMZzca3dBtxDG7_MjtfbysvUJdyY"/>
+<div class="absolute bottom-4 left-4 right-4 bg-surface/90 backdrop-blur-md p-3 rounded-xl flex items-center justify-between border border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[24px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="text-label-md font-label-md text-on-surface">फोटो सुरक्षित है</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Batch #SCRAP-8842</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-high text-on-surface px-3 py-2 rounded-lg text-label-sm font-label-sm flex items-center gap-1 active:scale-95 transition-transform" onclick="retakePhoto()">
+<span class="material-symbols-outlined text-[16px]">replay</span>
+            फिर से (Retake)
+          </button>
+<button class="bg-error-container text-on-error-container px-3 py-2 rounded-lg text-label-sm font-label-sm flex items-center gap-1 active:scale-95 transition-transform" onclick="removePhoto()">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+            हटाएं (Remove)
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Controls Section -->
+<div class="mt-6 flex flex-col gap-4">
+<!-- Primary Action: Capture -->
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl text-headline-md font-headline-md flex items-center justify-center gap-3 shadow-md active:scale-98 transition-transform" id="capture-btn" onclick="capturePhoto()">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">camera</span>
+      फोटो खींचें (Capture)
+    </button>
+<!-- Secondary Actions Row -->
+<div class="grid grid-cols-2 gap-3">
+<button class="h-12 bg-surface-container text-on-surface border-2 border-outline-variant rounded-xl text-label-lg font-label-lg flex items-center justify-center gap-2 active:scale-98 transition-transform" onclick="importPhoto()">
+<span class="material-symbols-outlined text-[20px]">photo_library</span>
+        गैलरी से लें (Import)
+      </button>
+<button class="h-12 bg-surface-container text-on-surface border-2 border-outline-variant rounded-xl text-label-lg font-label-lg flex items-center justify-center gap-2 active:scale-98 transition-transform" id="flash-btn" onclick="toggleFlash()">
+<span class="material-symbols-outlined text-[20px]" id="flash-icon">flash_on</span>
+        फ्लैश (Flash)
+      </button>
+</div>
+<!-- Draft / Skip Option -->
+<div class="mt-2 pt-4 border-t border-surface-container-high flex flex-col items-center">
+<button class="w-full py-3 text-on-surface-variant text-label-md font-label-md flex items-center justify-center gap-2 active:opacity-70 transition-opacity" onclick="continueWithoutPhoto()">
+<span>बिना फोटो के आगे बढ़ें / Continue without photo</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<p class="text-body-sm font-body-sm text-outline text-center mt-1">आप बाद में भी वजन पर्ची में फोटो जोड़ सकते हैं।</p>
+</div>
+</div>
+<script>
+    function dismissBanner() {
+      const banner = document.getElementById('permission-banner');
+      banner.style.opacity = '0';
+      setTimeout(() => banner.remove(), 300);
+    }
+
+    function grantPermission() {
+      const banner = document.getElementById('permission-banner');
+      banner.classList.remove('bg-error-container', 'text-on-error-container');
+      banner.classList.add('bg-secondary-container', 'text-on-secondary-container');
+      banner.innerHTML = `
+        <span class="material-symbols-outlined text-[24px] mt-0.5" style="font-variation-settings: 'FILL' 1;">verified</span>
+        <div class="flex-1">
+          <h2 class="text-label-lg font-label-lg mb-1">कैमरा अनुमति मिल गई!</h2>
+          <p class="text-body-sm font-body-sm opacity-90">अब आप स्पष्ट तस्वीरें ले सकते हैं।</p>
+        </div>
+      `;
+      setTimeout(() => banner.remove(), 2500);
+    }
+
+    function capturePhoto() {
+      const feed = document.getElementById('camera-feed');
+      const preview = document.getElementById('photo-preview');
+      const captureBtn = document.getElementById('capture-btn');
+      
+      feed.classList.add('hidden');
+      preview.classList.remove('hidden');
+      preview.classList.add('flex');
+      
+      // Update UI state for captured mode
+      captureBtn.classList.add('opacity-50', 'pointer-events-none');
+    }
+
+    function retakePhoto() {
+      const feed = document.getElementById('camera-feed');
+      const preview = document.getElementById('photo-preview');
+      const captureBtn = document.getElementById('capture-btn');
+      
+      preview.classList.add('hidden');
+      preview.classList.remove('flex');
+      feed.classList.remove('hidden');
+      
+      captureBtn.classList.remove('opacity-50', 'pointer-events-none');
+    }
+
+    function removePhoto() {
+      retakePhoto();
+      // Show toast or subtle notification
+    }
+
+    function toggleFlash() {
+      const flashIcon = document.getElementById('flash-icon');
+      if (flashIcon.innerText === 'flash_on') {
+        flashIcon.innerText = 'flash_off';
+        flashIcon.style.fontVariationSettings = "'FILL' 0";
+      } else {
+        flashIcon.innerText = 'flash_on';
+        flashIcon.style.fontVariationSettings = "'FILL' 1";
+      }
+    }
+
+    function continueWithoutPhoto() {
+      alert('आगे बढ़ रहे हैं: बिना फोटो के ड्राफ्ट तैयार किया जा रहा है।');
+    }
+  </script>
+</div></main></body></html>

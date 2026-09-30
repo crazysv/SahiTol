@@ -1,0 +1,4 @@
+collector_pseudonym,alias,preferred_language,general_region_id,created_at,active_lot_count,source_id,origin_class,source_kind,is_demo,schema_version
+DEMO-COL-001,Rajesh,hi,DELHI_NCR,2026-09-27T10:00:00+00:00,2,SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+DEMO-COL-002,Santosh,mr,MAHARASHTRA,2026-09-26T10:00:00+00:00,1,SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0
+DEMO-COL-003,Anil,en,DELHI_NCR,2026-09-25T10:00:00+00:00,0,SRC-SYNTHETIC-GEN-01,SYNTHETIC,SYNTHETIC_GENERATOR,True,v1.0

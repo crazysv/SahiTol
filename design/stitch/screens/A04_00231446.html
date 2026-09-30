@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {  "darkMode": "class",  "theme": {    "extend": {      "colors": {        "primary-fixed-dim": "#ffb59c",        "on-error": "#ffffff",        "on-secondary-fixed-variant": "#574500",        "error": "#ba1a1a",        "inverse-surface": "#31312d",        "primary-fixed": "#ffdbcf",        "surface-container": "#f0eee8",        "background": "#fcf9f3",        "on-surface": "#1c1c18",        "on-secondary-fixed": "#241a00",        "on-tertiary-fixed-variant": "#4b4544",        "tertiary-container": "#7a7371",        "on-tertiary-container": "#fffbff",        "surface-container-low": "#f6f3ed",        "on-secondary-container": "#745c00",        "tertiary-fixed": "#eae0de",        "surface-bright": "#fcf9f3",        "on-primary": "#ffffff",        "secondary-fixed-dim": "#e9c349",        "on-tertiary": "#ffffff",        "outline-variant": "#dec0b7",        "on-tertiary-fixed": "#1f1b1a",        "on-surface-variant": "#57423b",        "primary": "#9f3c16",        "surface-dim": "#dcdad4",        "error-container": "#ffdad6",        "surface-variant": "#e5e2dc",        "primary-container": "#bf542c",        "on-secondary": "#ffffff",        "on-background": "#1c1c18",        "on-error-container": "#93000a",        "surface": "#fcf9f3",        "secondary-container": "#fed65b",        "secondary": "#735c00",        "on-primary-container": "#fffbff",        "on-primary-fixed-variant": "#822801",        "outline": "#8a726a",        "surface-tint": "#a23e18",        "surface-container-highest": "#e5e2dc",        "tertiary": "#615a59",        "surface-container-high": "#ebe8e2",        "secondary-fixed": "#ffe088",        "inverse-primary": "#ffb59c",        "tertiary-fixed-dim": "#cec4c3",        "surface-container-lowest": "#ffffff",        "inverse-on-surface": "#f3f0ea",        "on-primary-fixed": "#390c00"      },      "borderRadius": {        "DEFAULT": "0.125rem",        "lg": "0.25rem",        "xl": "0.5rem",        "full": "0.75rem"      },      "spacing": {        "space-sm": "8px",        "gutter": "16px",        "space-md": "16px",        "space-xs": "4px",        "margin": "16px",        "space-lg": "24px",        "space-xl": "32px"      },      "fontFamily": {        "headline-xl-mobile": ["Sora"],        "body-lg": ["Plus Jakarta Sans"],        "label-md": ["Plus Jakarta Sans"],        "label-lg": ["Plus Jakarta Sans"],        "body-sm": ["Plus Jakarta Sans"],        "headline-lg-mobile": ["Sora"],        "label-sm": ["Plus Jakarta Sans"],        "headline-lg": ["Sora"],        "headline-md": ["Sora"],        "headline-xl": ["Sora"],        "body-md": ["Plus Jakarta Sans"]      },      "fontSize": {        "headline-xl-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],        "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],        "label-lg": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],        "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],        "headline-lg": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],        "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],        "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]      }    }  }};</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-lg"><span class="text-headline-md font-headline-md text-primary">SahiTol</span><nav class="hidden lg:flex items-center gap-space-sm" data-active-classes="bg-primary text-on-primary font-bold rounded-xl"><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="overview" href="#">Overview</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="collectors" href="#">Collectors</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="facilities" href="#">Facilities</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="catalog-prices" href="#">Catalog & Prices</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="traceability" href="#">Traceability</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="quality-review" href="#">Quality Review</a><a class="px-3 py-2 text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-xl" data-path="research-evidence" href="#">Research & Evidence</a></nav></div><div class="flex items-center gap-space-md"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Bar / Subheader Navigation for Workshop -->
+<div class="w-full bg-surface-container-low py-space-md border-b-0">
+<div class="max-w-7xl mx-auto px-gutter flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div>
+<span class="text-label-sm uppercase tracking-wider text-primary font-bold">Reference-Data Workshop</span>
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Material Catalog & Safety Governance</h1>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-4 py-2 rounded-xl text-label-md font-bold transition-all bg-primary text-on-primary shadow-sm" id="btn-catalog" onclick="switchTab('catalog')">Catalog Revisions</button>
+<button class="px-4 py-2 rounded-xl text-label-md font-bold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container" id="btn-aliases" onclick="switchTab('aliases')">Alias Resolution</button>
+<button class="px-4 py-2 rounded-xl text-label-md font-bold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container" id="btn-prices" onclick="switchTab('prices')">Price Moderation</button>
+<button class="px-4 py-2 rounded-xl text-label-md font-bold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container" id="btn-safety" onclick="switchTab('safety')">Safety & Lang</button>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="max-w-7xl mx-auto px-gutter py-space-xl w-full">
+<!-- TAB 1: CATALOG REVISIONS -->
+<div class="space-y-space-xl" id="tab-catalog">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<!-- Left Column: Catalog Stats & Visualizer -->
+<div class="lg:col-span-1 space-y-space-lg">
+<div class="bg-surface-container p-space-lg rounded-xl shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="text-label-md text-on-surface-variant">Active Revision</span>
+<span class="px-2.5 py-1 bg-primary text-on-primary text-label-sm rounded-full">v4.8.2-IND</span>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="text-headline-xl text-on-surface font-bold">1,428</span>
+<span class="text-body-sm text-on-surface-variant">Standardized Items</span>
+</div>
+<!-- Mini Chart / Breakdown -->
+<div class="space-y-space-xs pt-space-sm">
+<div class="flex justify-between text-label-sm text-on-surface-variant">
+<span>Ferrous Metals (38%)</span>
+<span>542 items</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="bg-primary h-full" style="width: 38%"></div>
+<div class="bg-secondary h-full" style="width: 25%"></div>
+<div class="bg-tertiary h-full" style="width: 37%"></div>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant pt-1">
+<span>Plastics & Polymers (25%)</span>
+<span>357 items</span>
+</div>
+</div>
+</div>
+<!-- Quick Action Card -->
+<div class="bg-primary-fixed p-space-lg rounded-xl shadow-sm space-y-space-md text-on-primary-fixed">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+<h3 class="text-headline-md font-headline-md">Publish Patch</h3>
+</div>
+<p class="text-body-sm">Push localized price grade changes and synonym mappings to 42 active collection yards instantly.</p>
+<button class="w-full py-3 bg-primary text-on-primary font-bold rounded-xl text-label-md shadow-sm hover:opacity-95 transition-opacity">Deploy Revision v4.8.3</button>
+</div>
+</div>
+<!-- Right Column: Revisions & Material Ledger Table -->
+<div class="lg:col-span-2 space-y-space-lg">
+<div class="bg-surface-container p-space-lg rounded-xl shadow-sm space-y-space-lg">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md">
+<h2 class="text-headline-md text-on-surface">Recent Material Sub-Categories</h2>
+<div class="flex items-center gap-space-sm">
+<input class="bg-surface px-3 py-2 rounded-xl text-body-sm text-on-surface outline-none focus:ring-2 focus:ring-primary w-64 shadow-inner" placeholder="Search material ID or name..." type="text"/>
+<button class="px-4 py-2 bg-secondary-container text-on-secondary-container font-bold rounded-xl text-label-md">Filter</button>
+</div>
+</div>
+<!-- Ledger Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-container-high text-label-sm text-on-surface-variant uppercase tracking-wider">
+<th class="py-3 px-3">Code / ID</th>
+<th class="py-3 px-3">Material Description</th>
+<th class="py-3 px-3">Base Grade</th>
+<th class="py-3 px-3">Current Benchmark</th>
+<th class="py-3 px-3 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="text-body-sm text-on-surface divide-y divide-surface-container-high">
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-3 px-3 font-mono text-primary font-bold">FE-CR-801</td>
+<td class="py-3 px-3">Heavy Melting Scrap (HMS 1&2)</td>
+<td class="py-3 px-3"><span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded text-label-sm">Grade A</span></td>
+<td class="py-3 px-3 font-semibold">₹34.50 / kg</td>
+<td class="py-3 px-3 text-right">
+<button class="px-3 py-1 bg-surface text-on-surface hover:bg-surface-container rounded-lg text-label-sm font-bold">Edit</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-3 px-3 font-mono text-primary font-bold">PL-HD-204</td>
+<td class="py-3 px-3">HDPE Blow Molding Regrind (Blue)</td>
+<td class="py-3 px-3"><span class="px-2 py-0.5 bg-surface-container-highest text-on-surface rounded text-label-sm">Grade B+</span></td>
+<td class="py-3 px-3 font-semibold">₹52.00 / kg</td>
+<td class="py-3 px-3 text-right">
+<button class="px-3 py-1 bg-surface text-on-surface hover:bg-surface-container rounded-lg text-label-sm font-bold">Edit</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-3 px-3 font-mono text-primary font-bold">AL-EXT-99</td>
+<td class="py-3 px-3">Aluminium Extrusion Scrap (6063)</td>
+<td class="py-3 px-3"><span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded text-label-sm">Grade A</span></td>
+<td class="py-3 px-3 font-semibold">₹185.00 / kg</td>
+<td class="py-3 px-3 text-right">
+<button class="px-3 py-1 bg-surface text-on-surface hover:bg-surface-container rounded-lg text-label-sm font-bold">Edit</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-3 px-3 font-mono text-primary font-bold">PC-CB-412</td>
+<td class="py-3 px-3">Corrugated Cardboard (OCC 95/5)</td>
+<td class="py-3 px-3"><span class="px-2 py-0.5 bg-surface-container-highest text-on-surface rounded text-label-sm">Standard</span></td>
+<td class="py-3 px-3 font-semibold">₹14.20 / kg</td>
+<td class="py-3 px-3 text-right">
+<button class="px-3 py-1 bg-surface text-on-surface hover:bg-surface-container rounded-lg text-label-sm font-bold">Edit</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 2: ALIAS MANAGEMENT & AMBIGUITY RESOLUTION -->
+<div class="hidden space-y-space-xl" id="tab-aliases">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<!-- Alert Box for Ambiguities -->
+<div class="bg-error-container text-on-error-container p-space-lg rounded-xl shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[24px]">warning</span>
+<h3 class="text-headline-md font-headline-md">Ambiguity Queue (14)</h3>
+</div>
+<p class="text-body-sm">Unmatched local slang or overlapping colloquial names reported by field collectors require canonical mapping.</p>
+<div class="p-3 bg-surface text-on-surface rounded-xl space-y-1">
+<span class="text-label-sm text-primary font-bold">Pending Term: "Kaccha Loha"</span>
+<p class="text-body-sm text-on-surface-variant">Reported 45 times this week across Delhi & Meerut yards.</p>
+</div>
+</div>
+<!-- Alias Resolution Workbench -->
+<div class="lg:col-span-2 bg-surface-container p-space-lg rounded-xl shadow-sm space-y-space-lg">
+<h2 class="text-headline-md text-on-surface">Resolve Local Alias Map</h2>
+<div class="space-y-space-md">
+<div class="p-space-md bg-surface rounded-xl space-y-space-sm">
+<div class="flex justify-between items-center">
+<span class="text-label-lg font-bold text-on-surface">"Kaccha Loha" <span class="text-body-sm text-on-surface-variant font-normal">(Slang / Regional)</span></span>
+<span class="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-sm">High Frequency</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Collector entered this for mixed light iron and structural scrap.</p>
+<div class="pt-space-sm flex flex-col sm:flex-row items-center gap-space-md">
+<div class="flex-1 w-full">
+<label class="text-label-sm text-on-surface-variant mb-1 block">Map to Canonical Standard Item:</label>
+<select class="w-full bg-surface-container px-3 py-2 rounded-xl text-body-sm text-on-surface outline-none border-0">
+<option>FE-MS-102: Mild Steel Scrap (Light)</option>
+<option>FE-CR-801: Heavy Melting Scrap (HMS 1&2)</option>
+<option>FE-TR-303: Turning & Borings (Cast Iron)</option>
+</select>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto pt-4 sm:pt-0">
+<button class="flex-1 sm:flex-none px-4 py-2 bg-primary text-on-primary font-bold rounded-xl text-label-md">Approve Map</button>
+<button class="flex-1 sm:flex-none px-4 py-2 bg-surface-container-high text-on-surface font-bold rounded-xl text-label-md">Reject</button>
+</div>
+</div>
+</div>
+<div class="p-space-md bg-surface rounded-xl space-y-space-sm">
+<div class="flex justify-between items-center">
+<span class="text-label-lg font-bold text-on-surface">"Chhara Bottle" <span class="text-body-sm text-on-surface-variant font-normal">(PET / Glass overlap)</span></span>
+<span class="px-2.5 py-1 bg-error-container text-on-error-container rounded-full text-label-sm">Ambiguous</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Refers to glass soda bottles or clear PET depending on vendor district.</p>
+<div class="pt-space-sm flex flex-col sm:flex-row items-center gap-space-md">
+<div class="flex-1 w-full">
+<label class="text-label-sm text-on-surface-variant mb-1 block">Map to Canonical Standard Item:</label>
+<select class="w-full bg-surface-container px-3 py-2 rounded-xl text-body-sm text-on-surface outline-none border-0">
+<option>GL-CL-101: Clear Glass Cullet</option>
+<option>PL-PET-501: Post-Consumer Clear PET Bottles</option>
+</select>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto pt-4 sm:pt-0">
+<button class="flex-1 sm:flex-none px-4 py-2 bg-primary text-on-primary font-bold rounded-xl text-label-md">Approve Map</button>
+<button class="flex-1 sm:flex-none px-4 py-2 bg-surface-container-high text-on-surface font-bold rounded-xl text-label-md">Reject</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 3: PRICE OBSERVATION MODERATION -->
+<div class="hidden space-y-space-xl" id="tab-prices">
+<div class="bg-surface-container p-space-lg rounded-xl shadow-sm space-y-space-lg">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-space-md">
+<div>
+<h2 class="text-headline-md text-on-surface">Price Observation Moderation</h2>
+<p class="text-body-sm text-on-surface-variant">Review crowdsourced yard rates reported by field agents against regional caps.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-xl text-label-sm font-bold">Pending: 8</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface rounded-xl text-label-sm">Approved Today: 34</span>
+</div>
+</div>
+<!-- Moderation Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- Card 1 -->
+<div class="bg-surface p-space-md rounded-xl space-y-space-md shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-label-sm text-primary font-bold">Yard #104 - Okhla</span>
+<h4 class="text-label-lg text-on-surface">Copper Wire (Bright)</h4>
+</div>
+<span class="px-2 py-1 bg-error-container text-on-error-container text-label-sm rounded">Outlier (+18%)</span>
+</div>
+<div class="space-y-1 text-body-sm">
+<div class="flex justify-between"><span class="text-on-surface-variant">Reported Rate:</span><span class="font-bold text-on-surface">₹740 / kg</span></div>
+<div class="flex justify-between"><span class="text-on-surface-variant">Benchmark Median:</span><span class="font-semibold text-on-surface">₹625 / kg</span></div>
+<div class="flex justify-between"><span class="text-on-surface-variant">Agent ID:</span><span class="font-mono text-on-surface">AG-8821</span></div>
+</div>
+<div class="flex items-center gap-space-sm pt-2">
+<button class="flex-1 py-2 bg-primary text-on-primary font-bold rounded-xl text-label-sm">Approve</button>
+<button class="flex-1 py-2 bg-error-container text-on-error-container font-bold rounded-xl text-label-sm">Reject</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface p-space-md rounded-xl space-y-space-md shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-label-sm text-primary font-bold">Yard #211 - Peenya</span>
+<h4 class="text-label-lg text-on-surface">LDPE Film (Natural)</h4>
+</div>
+<span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed-variant text-label-sm rounded">In Range</span>
+</div>
+<div class="space-y-1 text-body-sm">
+<div class="flex justify-between"><span class="text-on-surface-variant">Reported Rate:</span><span class="font-bold text-on-surface">₹48 / kg</span></div>
+<div class="flex justify-between"><span class="text-on-surface-variant">Benchmark Median:</span><span class="font-semibold text-on-surface">₹46 / kg</span></div>
+<div class="flex justify-between"><span class="text-on-surface-variant">Agent ID:</span><span class="font-mono text-on-surface">AG-3104</span></div>
+</div>
+<div class="flex items-center gap-space-sm pt-2">
+<button class="flex-1 py-2 bg-primary text-on-primary font-bold rounded-xl text-label-sm">Approve</button>
+<button class="flex-1 py-2 bg-surface-container-high text-on-surface font-bold rounded-xl text-label-sm">Reject</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface p-space-md rounded-xl space-y-space-md shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-label-sm text-primary font-bold">Yard #059 - Howrah</span>
+<h4 class="text-label-lg text-on-surface">Battery Scrap (Exide Lead)</h4>
+</div>
+<span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed-variant text-label-sm rounded">In Range</span>
+</div>
+<div class="space-y-1 text-body-sm">
+<div class="flex justify-between"><span class="text-on-surface-variant">Reported Rate:</span><span class="font-bold text-on-surface">₹112 / kg</span></div>
+<div class="flex justify-between"><span class="text-on-surface-variant">Benchmark Median:</span><span class="font-semibold text-on-surface">₹110 / kg</span></div>
+<div class="flex justify-between"><span class="text-on-surface-variant">Agent ID:</span><span class="font-mono text-on-surface">AG-9912</span></div>
+</div>
+<div class="flex items-center gap-space-sm pt-2">
+<button class="flex-1 py-2 bg-primary text-on-primary font-bold rounded-xl text-label-sm">Approve</button>
+<button class="flex-1 py-2 bg-surface-container-high text-on-surface font-bold rounded-xl text-label-sm">Reject</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 4: SAFETY CONTENT GUIDELINES & MULTILINGUAL GAPS -->
+<div class="hidden space-y-space-xl" id="tab-safety">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
+<!-- Safety Guidelines Checklist -->
+<div class="bg-surface-container p-space-lg rounded-xl shadow-sm space-y-space-lg">
+<div class="flex items-center justify-between">
+<h2 class="text-headline-md text-on-surface">Safety Handling Guidelines</h2>
+<span class="px-2.5 py-1 bg-primary text-on-primary rounded-full text-label-sm">Mandatory Review</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Hazardous material advisories displayed to collectors when logging restricted or electronic scrap.</p>
+<div class="space-y-space-md">
+<div class="p-space-md bg-surface rounded-xl space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-lg font-bold text-on-surface">Lithium-Ion Battery Puncture Protocol</span>
+<span class="px-2 py-0.5 bg-error-container text-on-error-container text-label-sm rounded">High Risk</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Requires sand bucket immersion guidelines and fire suppression warning banner in regional dialects.</p>
+<div class="flex items-center justify-between pt-2">
+<span class="text-label-sm text-on-surface-variant">Last Audited: Oct 2023</span>
+<button class="px-3 py-1 bg-surface-container-high text-on-surface rounded-lg text-label-sm font-bold">Edit Guidelines</button>
+</div>
+</div>
+<div class="p-space-md bg-surface rounded-xl space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-lg font-bold text-on-surface">E-Waste Capacitor PCB Handling</span>
+<span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant text-label-sm rounded">Medium Risk</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Glove and mask requirements when sorting circuit boards containing heavy solder residue.</p>
+<div class="flex items-center justify-between pt-2">
+<span class="text-label-sm text-on-surface-variant">Last Audited: Nov 2023</span>
+<button class="px-3 py-1 bg-surface-container-high text-on-surface rounded-lg text-label-sm font-bold">Edit Guidelines</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Multilingual Translation Gap Highlights -->
+<div class="bg-surface-container p-space-lg rounded-xl shadow-sm space-y-space-lg">
+<div class="flex items-center justify-between">
+<h2 class="text-headline-md text-on-surface">Translation Gap Highlights</h2>
+<span class="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-sm">88% Coverage</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Identified missing vernacular terminology in regional app packages.</p>
+<div class="space-y-space-md">
+<div class="p-space-md bg-surface rounded-xl space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-lg font-bold text-on-surface">Bengali (bn-IN)</span>
+<span class="text-primary font-bold text-body-sm">76% Translated</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 76%"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant pt-1">Missing definitions for 42 specialized battery and alloy grades.</p>
+<button class="mt-2 px-3 py-1.5 bg-primary text-on-primary text-label-sm font-bold rounded-lg">Assign Translator</button>
+</div>
+<div class="p-space-md bg-surface rounded-xl space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-lg font-bold text-on-surface">Kannada (kn-IN)</span>
+<span class="text-primary font-bold text-body-sm">82% Translated</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 82%"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant pt-1">Missing definitions for industrial plastic regrind categories.</p>
+<button class="mt-2 px-3 py-1.5 bg-primary text-on-primary text-label-sm font-bold rounded-lg">Assign Translator</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Client-side Tab Switching Script -->
+<script>
+    function switchTab(tabId) {
+      const tabs = ['catalog', 'aliases', 'prices', 'safety'];
+      tabs.forEach(t => {
+        const el = document.getElementById('tab-' + t);
+        const btn = document.getElementById('btn-' + t);
+        if (t === tabId) {
+          el.classList.remove('hidden');
+          btn.className = "px-4 py-2 rounded-xl text-label-md font-bold transition-all bg-primary text-on-primary shadow-sm";
+        } else {
+          el.classList.add('hidden');
+          btn.className = "px-4 py-2 rounded-xl text-label-md font-bold transition-all bg-surface-container-high text-on-surface hover:bg-surface-container";
+        }
+      });
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low py-space-xl"><div class="max-w-7xl mx-auto px-gutter text-center text-on-surface-variant text-body-sm">SahiTol Industrial Admin Console • Grounded Operations Platform</div></footer></body></html>

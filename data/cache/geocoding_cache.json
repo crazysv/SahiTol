@@ -1,0 +1,13 @@
+{
+  "plot 42 mayapuri industrial area phase ii new delhi": {
+    "latitude": null,
+    "longitude": null,
+    "location_quality": "UNKNOWN",
+    "accuracy_m": null,
+    "provider": "LOCAL_CACHE",
+    "cached_at": "2026-09-28T20:32:55.131930+00:00",
+    "region_id": "DELHI_NCR",
+    "in_bounds": false,
+    "notes": "Unresolved address; coordinates remain explicitly null"
+  }
+}

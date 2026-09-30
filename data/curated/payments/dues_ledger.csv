@@ -1,0 +1,4 @@
+# SahiTol Dues Ledger Export
+transaction_id,gross_due_paise,acknowledged_paid_paise,remaining_due_paise,disputed_paise,is_settled
+tx-f1001-c01-001,1526400,1526400,0,0,True
+tx-f1001-c02-002,9425000,9425000,0,0,True

@@ -1,0 +1,39 @@
+{
+  "dataset_family": "transactions",
+  "schema_version": "v1.0",
+  "data_version": "v1.0-demo",
+  "generated_at": "2026-09-28T20:32:38.129239+00:00",
+  "total_records": 2,
+  "files": [
+    {
+      "filename": "transactions.csv",
+      "sha256": "80d64e5c8ed24fcf039f863c87337d708cb8ed2b07a7d94914eeb02eea97d3aa",
+      "byte_size": 688,
+      "row_count": 2
+    },
+    {
+      "filename": "transactions.json",
+      "sha256": "6feacf43a76cc409dd06956642abda5a4d03b35b34b334b635ef6ece6de9c3b3",
+      "byte_size": 1375,
+      "row_count": 2
+    }
+  ],
+  "counts_by_origin_class": {
+    "SYNTHETIC": 2
+  },
+  "counts_by_source_kind": {
+    "SYNTHETIC_GENERATOR": 2
+  },
+  "counts_by_is_demo": {
+    "true": 2
+  },
+  "counts_by_review_status": {
+    "NOT_REVIEWED": 2
+  },
+  "quarantined_count": 0,
+  "source_ids": [
+    "SRC-SYNTHETIC-GEN-01"
+  ],
+  "validation_status": "VALID",
+  "limitations": "Purely synthetic demonstration fixtures; disjoint from real entities."
+}

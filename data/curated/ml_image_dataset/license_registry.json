@@ -1,0 +1,73 @@
+[
+  {
+    "source_id": "SRC-IMG-WIKIMEDIA",
+    "dataset_name": "Wikimedia Commons E-Waste & Electronics Category",
+    "publisher": "Wikimedia Foundation & Community Contributors",
+    "upstream_url": "https://commons.wikimedia.org/wiki/Category:Electronic_waste",
+    "license_name": "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "permitted_uses": [
+      "commercial",
+      "reproduction",
+      "modification",
+      "distribution"
+    ],
+    "attribution_required": true,
+    "copyleft": true,
+    "reviewed_date": "2026-09-28",
+    "notes": "Curated collection of e-waste recycling, circuit boards, CRT monitors, and lead-acid batteries photographed by verified contributors with explicit licensing."
+  },
+  {
+    "source_id": "SRC-IMG-TRASHNET",
+    "dataset_name": "TrashNet Dataset",
+    "publisher": "Gary Thung & Mindy Yang (Stanford University CS229)",
+    "upstream_url": "https://github.com/garythung/trashnet",
+    "license_name": "MIT License / Educational Research (CC BY 4.0 compatible)",
+    "license_url": "https://github.com/garythung/trashnet/blob/master/LICENSE",
+    "permitted_uses": [
+      "academic_research",
+      "reproduction",
+      "modification"
+    ],
+    "attribution_required": true,
+    "copyleft": false,
+    "reviewed_date": "2026-09-28",
+    "notes": "Broad waste classification baseline (glass, paper, cardboard, plastic, metal, trash). Used strictly as baseline non-e-waste negative and general plastic/metal reference; never mislabeled as e-waste PCB/CRT."
+  },
+  {
+    "source_id": "SRC-IMG-OPENIMAGES",
+    "dataset_name": "Google Open Images Dataset V7 (E-Waste Subset)",
+    "publisher": "Google LLC",
+    "upstream_url": "https://storage.googleapis.com/openimages/web/index.html",
+    "license_name": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "permitted_uses": [
+      "commercial",
+      "reproduction",
+      "modification",
+      "distribution"
+    ],
+    "attribution_required": true,
+    "copyleft": false,
+    "reviewed_date": "2026-09-28",
+    "notes": "Verified bounding-box subset for Computer Monitor, Mobile Phone, Battery, Printed Circuit Board, Cable, and Electric Motor."
+  },
+  {
+    "source_id": "SRC-IMG-MENDELEY",
+    "dataset_name": "Mendeley E-Waste Object Detection Dataset",
+    "publisher": "Dr. R. Kannan, Dr. P. Senthil Kumar et al. (Mendeley Data)",
+    "upstream_url": "https://data.mendeley.com/datasets/2t47vxd544/1",
+    "license_name": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "permitted_uses": [
+      "commercial",
+      "academic_research",
+      "reproduction",
+      "modification"
+    ],
+    "attribution_required": true,
+    "copyleft": false,
+    "reviewed_date": "2026-09-28",
+    "notes": "Open-access peer-reviewed dataset of electronic waste items, motherboards, disassembled electronics, and power adapters in indoor sorting contexts."
+  }
+]
