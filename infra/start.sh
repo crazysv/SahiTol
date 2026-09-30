@@ -1,5 +1,7 @@
-﻿#!/bin/sh
+#!/bin/sh
 set -e
+# /app contains the FastAPI package; /scripts needs it on the path
+export PYTHONPATH=/app
 echo "==> Running Alembic migrations..."
 alembic upgrade head
 echo "==> Running production seed (idempotent)..."
@@ -10,5 +12,5 @@ exec uvicorn app.main:app \
   --port 10000 \
   --workers 2 \
   --proxy-headers \
-  --forwarded-allow-ips='*' \
+  "--forwarded-allow-ips=*" \
   --log-level info
