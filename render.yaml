@@ -72,7 +72,8 @@ services:
         value: https://sahitol.pages.dev          # Update after Pages deploy
 
       - key: CORS_ORIGINS
-        value: https://sahitol.pages.dev,https://sahitol-api.onrender.com
+        # pydantic-settings v2 JSON-parses List[str] env vars; must be a JSON array string
+        value: '["https://sahitol.pages.dev","https://sahitol-api.onrender.com"]'
 
       # ── Demo isolation ────────────────────────────────────────────────────
       - key: DEMO_MODE
