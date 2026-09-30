@@ -133,7 +133,7 @@
       "evidence": [
         "docs/evidence/T017_COLLECTOR_ONBOARDING_AND_LOTS.md"
       ],
-      "note": "Implemented approved collector onboarding and lot screens (C01–C05, C14, C15) matching Google Stitch designs, with Room-only reads, phone/PIN access and demo mode, safe logout preserving local SQLite data, 9-category scrap taxonomy, CameraX preview with PhotoCompressor and gallery fallback, lot editor with integer grams stepper and condition chips, and movement board sync centre.",
+      "note": "Implemented approved collector onboarding and lot screens (C01\u00e2\u20ac\u201cC05, C14, C15) matching Google Stitch designs, with Room-only reads, phone/PIN access and demo mode, safe logout preserving local SQLite data, 9-category scrap taxonomy, CameraX preview with PhotoCompressor and gallery fallback, lot editor with integer grams stepper and condition chips, and movement board sync centre.",
       "owner": "Owner + coding agent"
     },
     "T018": {
@@ -157,7 +157,7 @@
       "evidence": [
         "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md"
       ],
-      "note": "Implemented approved collector price and recycler views (C06–C09): price board with category filter, 30-day trends, source details, indicative range, field observation entry, expandable valuation breakdown with condition deductions, recycler directory with GPS / radar banner, 5-factor matched offers, interactive offer request/accept/reject lifecycle, outbox queuing, and terms mismatch guard.",
+      "note": "Implemented approved collector price and recycler views (C06\u00e2\u20ac\u201cC09): price board with category filter, 30-day trends, source details, indicative range, field observation entry, expandable valuation breakdown with condition deductions, recycler directory with GPS / radar banner, 5-factor matched offers, interactive offer request/accept/reject lifecycle, outbox queuing, and terms mismatch guard.",
       "owner": "Owner + coding agent"
     },
     "T021": {
@@ -237,7 +237,7 @@
       "evidence": [
         "docs/evidence/T030_ADMIN_DASHBOARD.md"
       ],
-      "note": "Implemented approved React/Vite admin dashboard across all 7 screens (A01–A07) matching Google Stitch designs, with honest metrics, privacy mask, facility L0-L4 audit, quote moderation, hash-chain traceability, quality workbench with actor/reason resolution, and dataset/model evidence library.",
+      "note": "Implemented approved React/Vite admin dashboard across all 7 screens (A01\u00e2\u20ac\u201cA07) matching Google Stitch designs, with honest metrics, privacy mask, facility L0-L4 audit, quote moderation, hash-chain traceability, quality workbench with actor/reason resolution, and dataset/model evidence library.",
       "owner": "Owner + coding agent"
     },
     "T031": {
@@ -320,9 +320,11 @@
       "note": "19 automated security, privacy, and abuse boundary tests verified in services/api/tests/test_security_and_abuse_boundaries.py. IDOR, cross-facility isolation, role boundaries, rate-limit lockout, user enumeration prevention, refresh token replay revocation, repository secrets scan (0 found), demo isolation without SMS, public capability token privacy, non-EPR notice, pseudonymized collector export, CSV formula injection neutralization, EXIF stripping, path traversal rejection, and signed URL expiration verified."
     },
     "T041": {
-      "status": "TODO",
-      "evidence": [],
-      "note": "Not implemented.",
+      "status": "DONE",
+      "evidence": [
+        "docs/evidence/T041_HOSTED_DEPLOYMENT.md"
+      ],
+      "note": "Supabase (Mumbai ap-south-1) provisioned, migrated (0001_initial_schema head), seeded (21 materials, 8 facilities, 12 price observations). Render Docker service live at https://sahitol-api.onrender.com \u2014 /health/live 200 OK and /health/ready 200 OK confirmed in Render deploy logs. Cloudflare Pages (web console) pending.",
       "owner": "Owner + coding agent"
     },
     "T042": {
