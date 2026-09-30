@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-09-30 -- T048-T050 DONE: Release Phase Complete
+
+T048 DONE: 10-slide deck script, one-page fact sheet (all numbers from T041-T047 evidence), five presenter role cards, Q&A crib. docs/evidence/T048_PPT_PRESENTER_HANDOFF.md
+
+T049 DONE: 14-segment shot list (A-N, 4-min target), 15-item pre-recording checklist, ADB commands, 12-item post-validation checklist. Physical recording is owner action. docs/evidence/T049_DEMO_VIDEO_SHOTLIST.md
+
+T050 DONE: Software gates verified (318+44+73 tests, 6 must-haves, 7 data cards, SHA-256 manifest). README updated to implemented state. APK SHA-256 recorded. Portal submission checklist documented. Remaining owner actions: sign APK, record video, build PPT, confirm GitHub visibility, submit to portal. docs/evidence/T050_RELEASE_HANDOFF.md
+
+Final commit: 24992df. check_docs.py: PASS 0 errors, 2949 links, 34 screens, 98 requirements.
 ## 2026-09-30 -- T046 DONE: Translation and Audio Audit
 
 Completed full automated and manual audit of Hindi/Marathi translations and offline audio, fulfilling T046 output requirements for R-LANG-01, R-LANG-02, AT-049, AT-050:
