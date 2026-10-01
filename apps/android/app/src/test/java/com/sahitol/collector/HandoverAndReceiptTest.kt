@@ -91,7 +91,10 @@ class HandoverAndReceiptTest {
         assertNotEquals("CONFIRMED", proposal.status)
         assertEquals(64, proposal.canonicalHash.length)
         assertTrue(proposal.referenceCode.startsWith("ST-"))
-        assertTrue(proposal.verificationUrl.startsWith("https://sahitol.in/v/"))
+        assertTrue(proposal.verificationUrl.startsWith("https://sahitol.pages.dev/recycler/scan?"))
+        assertTrue(proposal.verificationUrl.contains("ref=${proposal.referenceCode}"))
+        assertTrue(proposal.verificationUrl.contains("weight=2.3"))
+        assertFalse(proposal.verificationUrl.contains("414"))
 
         // Outbox operation verification
         assertEquals(1, fakeOutboxDao.enqueuedOps.size)

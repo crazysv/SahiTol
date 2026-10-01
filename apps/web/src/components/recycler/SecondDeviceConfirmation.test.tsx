@@ -30,6 +30,7 @@ describe('Second-Device QR Confirmation & Public Verification Views (T025)', () 
     const lookupBtn = screen.getByRole('button', { name: /Lookup/i });
     fireEvent.click(lookupBtn);
     expect(screen.getByText('ST-9999')).toBeDefined();
+    expect(screen.getByText(/server lookup required/i)).toBeDefined();
   });
 
   it('renders R05_ReceiptReview with discrepancy calculation, payment mode, and receipt issue', () => {

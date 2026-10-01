@@ -20,10 +20,10 @@ export default function R04_QRScan() {
   const [cameraActive, setCameraActive] = useState(false);
   const [scannedRecord, setScannedRecord] = useState<{
     ref: string;
-    material: string;
-    weight: number;
-    collector: string;
+    material?: string;
+    weight?: number;
     status: string;
+    hash?: string;
   } | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -40,14 +40,31 @@ export default function R04_QRScan() {
   }, []);
 
   const recordFromQr = useCallback((rawValue: string) => {
-    // The QR carries only the public URL/reference; no collector PII is decoded.
-    const ref = rawValue.split('/').filter(Boolean).at(-1)?.toUpperCase() || 'ST-24A7';
+    // The offline QR carries only a reference, material, measured mass and canonical
+    // hash. It never transports PII, GPS, images, or payment details.
+    let ref = rawValue.split('/').filter(Boolean).at(-1)?.toUpperCase() || 'UNKNOWN';
+    let material: string | undefined;
+    let weight: number | undefined;
+    let hash: string | undefined;
+    try {
+      const parsed = new URL(rawValue);
+      ref = parsed.searchParams.get('ref')?.toUpperCase() || ref;
+      material = parsed.searchParams.get('material') || undefined;
+      const parsedWeight = Number(parsed.searchParams.get('weight'));
+      weight = Number.isFinite(parsedWeight) ? parsedWeight : undefined;
+      hash = parsed.searchParams.get('hash') || undefined;
+    } catch {
+      // Legacy QR records contain only an opaque reference and must not acquire
+      // fabricated sample terms.
+    }
     setScannedRecord({
       ref,
-      material: 'Insulated Copper Cable',
-      weight: 84.8,
-      collector: 'Ramesh Kumar (#409)',
-      status: 'Proposal Synced — Pending Recycler Confirmation',
+      material,
+      weight,
+      hash,
+      status: material && weight !== undefined
+        ? 'Offline record decoded — server confirmation pending'
+        : 'Reference scanned — server lookup required',
     });
     stopCamera();
   }, [stopCamera]);
@@ -103,10 +120,7 @@ export default function R04_QRScan() {
     if (!manualRef.trim()) return;
     setScannedRecord({
       ref: manualRef.toUpperCase(),
-      material: 'Copper Transformer Coils',
-      weight: 120.5,
-      collector: 'Verified Collector',
-      status: 'Proposal Synced — Pending Recycler Confirmation',
+      status: 'Reference entered — server lookup required',
     });
   };
 
@@ -226,8 +240,8 @@ export default function R04_QRScan() {
                   <span className="material-symbols-outlined text-primary text-[22px]">qr_code_scanner</span>
                   <span className="text-sm font-headline font-bold text-on-surface">Recognized Proposal</span>
                 </div>
-                <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-[11px] font-bold">
-                  Valid QR
+                <span className="px-2 py-0.5 bg-amber-100 text-amber-800 rounded text-[11px] font-bold">
+                  Pending Server Check
                 </span>
               </div>
 
@@ -236,30 +250,28 @@ export default function R04_QRScan() {
                   <span className="text-xs text-on-surface-variant">Reference ID:</span>
                   <span className="font-mono font-bold text-primary text-base">{scannedRecord.ref}</span>
                 </div>
-                <div className="flex justify-between items-baseline">
-                  <span className="text-xs text-on-surface-variant">Collector:</span>
-                  <span className="text-xs font-semibold text-on-surface">{scannedRecord.collector}</span>
-                </div>
+              <p className="text-[11px] text-on-surface-variant">{scannedRecord.status}</p>
                 <div className="flex justify-between items-baseline">
                   <span className="text-xs text-on-surface-variant">Material Class:</span>
-                  <span className="text-xs font-semibold text-on-surface">{scannedRecord.material}</span>
+                  <span className="text-xs font-semibold text-on-surface">{scannedRecord.material || 'Awaiting server lookup'}</span>
                 </div>
                 <div className="flex justify-between items-baseline">
                   <span className="text-xs text-on-surface-variant">Proposed Weight:</span>
-                  <span className="font-mono font-bold text-on-surface text-sm">{scannedRecord.weight} kg</span>
+                  <span className="font-mono font-bold text-on-surface text-sm">{scannedRecord.weight === undefined ? 'Awaiting server lookup' : `${scannedRecord.weight} kg`}</span>
                 </div>
               </div>
 
               <div className="p-space-sm bg-surface-container rounded-lg text-[11px] text-on-surface-variant flex items-center gap-2">
-                <span className="material-symbols-outlined text-[16px] text-emerald-700">verified</span>
-                <span>SHA-256 hash fingerprint verified against immutable server proposal.</span>
+                <span className="material-symbols-outlined text-[16px] text-amber-700">pending</span>
+                <span>{scannedRecord.hash ? `SHA-256 seal received: ${scannedRecord.hash.slice(0, 12)}… Server verification is still required.` : 'No verified terms are available until server lookup succeeds.'}</span>
               </div>
 
               <button
+                disabled={!scannedRecord.material || scannedRecord.weight === undefined}
                 onClick={() => navigate(`/recycler/receipt?ref=${scannedRecord.ref}&weight=${scannedRecord.weight}`)}
-                className="w-full py-2.5 px-space-lg bg-primary hover:bg-primary-container text-on-primary font-headline font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+                className="w-full py-2.5 px-space-lg bg-primary hover:bg-primary-container disabled:bg-outline disabled:cursor-not-allowed text-on-primary font-headline font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
               >
-                <span>Proceed to Receipt & Settlement Review</span>
+                <span>{scannedRecord.material && scannedRecord.weight !== undefined ? 'Proceed to Receipt & Settlement Review' : 'Awaiting Server Lookup'}</span>
                 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
               </button>
             </div>

@@ -9,6 +9,7 @@ import com.sahitol.collector.domain.canonical.CanonicalJson
 import org.json.JSONArray
 import org.json.JSONObject
 import java.time.Instant
+import java.net.URLEncoder
 import java.util.UUID
 
 data class HandoverProposal(
@@ -110,7 +111,12 @@ class HandoverRepository(
 
         val canonicalUtf8 = CanonicalJson.serialize(payloadMap)
         val canonicalHash = CanonicalJson.sha256Hex(canonicalUtf8)
-        val verificationUrl = "https://sahitol.in/v/$handoverId"
+        // This offline QR deliberately carries only custody-verification data.
+        // It excludes collector PII, GPS, images, and any payment amount.
+        val qrMaterial = URLEncoder.encode(materialName, "UTF-8")
+        val qrWeightKg = (measuredWeightG ?: estimatedWeightG).toDouble() / 1000.0
+        val verificationUrl = "https://sahitol.pages.dev/recycler/scan" +
+            "?ref=$refCode&material=$qrMaterial&weight=$qrWeightKg&hash=$canonicalHash"
 
         val proposal = HandoverProposal(
             handoverId = handoverId,
