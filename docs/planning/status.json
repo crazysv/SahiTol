@@ -193,11 +193,11 @@
       "owner": "Owner + coding agent"
     },
     "T025": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md"
       ],
-      "note": "Implemented approved second-device QR scan (R04), receipt & payment review (R05), and public verification (V01) in React/Vite with full test suite.",
+        "note": "R04 now performs real rear-camera QR decoding and was verified across two connected Android devices; it displays actual QR reference/material/mass/hash data without fabricated sample terms and blocks receipt issue until server verification. Server-backed proposal lookup and authenticated confirmation are still required, so T025 remains IN_PROGRESS.",
       "owner": "Owner + coding agent"
     },
     "T026": {

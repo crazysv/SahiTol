@@ -5,7 +5,7 @@
 - **Phase**: Stage 4 (Collection & Settlement)
 - **Scope**: RELEASE
 - **Date**: 2026-09-29
-- **Status**: DONE
+- **Status**: IN_PROGRESS — device QR decoding verified; server-backed receipt confirmation remains incomplete.
 - **Stitch Project ID**: `245073995801566548` (*SahiTol Collector Frontend*)
 - **Registered Stitch Screens Implemented**:
   - `R04`: QR Scan / Reference Entry (`3fab97e50ca5`)
@@ -51,3 +51,32 @@
   2. Agreed vs measured weight discrepancy, collector acknowledgement checkbox, payment mode selection, and digital receipt issue.
   3. Public verification search, cryptographic hash matching, privacy redaction notices, and disputed record handling.
 - Full web test suite: 10 tests across 3 test files passing.
+
+## Independent two-device verification and correction (2026-10-01)
+
+The collector device (`N7OZPV59XWWKPF4X`) and second Android phone
+(`b33707830407`) were used for a real QR scan. The original R04 implementation
+was only a visual simulation and therefore could not request camera access. It
+was replaced with Chrome's native `BarcodeDetector` and rear-camera stream. The
+first real scan revealed that the UI incorrectly substituted sample material and
+weight values for every scanned record. That behaviour was removed.
+
+After a newly saved collector handover was used, the second phone decoded and
+displayed the actual QR payload:
+
+| Field | Collector record | Second-phone scan |
+|---|---:|---:|
+| Reference | `ST-CFD6` | `ST-CFD6` |
+| Material | Copper Wire / Cable | Copper Wire / Cable |
+| Measured mass | 2.30 kg | 2.3 kg |
+| Canonical hash prefix | `19be39cc1a7d...` | `19be39cc1a7d...` |
+
+The QR omits collector PII, GPS, images, and payment amount. It can identify a
+pending offline proposal, but it cannot prove that the API has verified that
+proposal. The receipt transition is therefore disabled with **Awaiting Server
+Verification**. This prevents an unverified offline payload from issuing a
+Digital Handover Record.
+
+Focused web typecheck, R04/R05/V01 tests (3/3), and production build passed
+after the repair. T025 must remain in progress until a server-backed lookup and
+authenticated confirmation accept this pending proposal end-to-end.

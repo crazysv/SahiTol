@@ -83,4 +83,8 @@ independently reverified with all 19 `test_trade.py` cases passing. T022 then
 passed type checking, production build, and all 6 focused recycler-console tests.
 T023 then independently passed all 13 handover workflow tests. T024 passed 7
 focused Android tests and its C10 handover capture was seen on the collector
-device. Continue with T025 after documentation regeneration and validation.
+device. T025 was exercised across two physical Android devices: actual QR
+decoding and truthful record display work, but server-backed lookup/authenticated
+receipt confirmation is absent. The UI now blocks receipt issue pending that
+verification; T025 is correctly IN_PROGRESS and needs this implementation before
+continuing ordered task closure.

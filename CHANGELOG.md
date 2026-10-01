@@ -1001,3 +1001,12 @@ Canonical JSON and handover-receipt Android tests passed 7/7. The physical
 collector flow also reached C10 Handover Capture with its review controls after
 offer acceptance. No implementation change was needed.
 
+## 2026-10-01 — Real two-device QR audit (T025)
+
+Replaced the simulated web QR interaction with Chrome rear-camera decoding and
+verified it with the collector phone and a second Android device. Corrected a
+second defect that displayed fabricated sample terms after scanning. Scanned
+offline proposals now show only their actual QR values and are explicitly blocked
+from receipt issuance until server verification. T025 is returned to IN_PROGRESS:
+the server-backed lookup and authenticated confirmation remain to be built.
+
