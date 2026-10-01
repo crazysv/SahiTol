@@ -24,8 +24,10 @@ show no invented pickup. The deployed accepted offer `5e53f4de-…` was resumed
 on the collector, C10 created live handover `80a73333-9622-4ec2-af07-6a18fd6b78a0`
 (QR `ST-80A733`), the recycler phone decoded and server-verified the QR, and
 the API returned transaction `cdcd977e-…` as `CONFIRMED` v5 with 14.25 kg and
-₹4,275.00. Continue with denial/discrepancy/recovery variants only; do not
-clear either device or rewrite legacy repair rows.
+₹4,275.00. On 2026-10-02 a physical collector force-stop/relaunch recovered
+that same handover by lot from the deployed API and C11 pulled the confirmed
+receipt; no duplicate proposal was created. Continue with denial/discrepancy
+variants only; do not clear either device or rewrite legacy repair rows.
 
 - **T046 DONE**: String parity 145/145 all locales. Audio 258/258 checksums OK. All AudioGrammarAndManifestTest PASS.
 - **T047 DONE**: 7 data cards, model card (macro-F1 0.0159), frozen SHA-256 manifest (T047_FROZEN_RELEASE_MANIFEST.json).

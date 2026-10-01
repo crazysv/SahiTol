@@ -354,6 +354,7 @@ class FacilityRepository(
         val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again to resume the handover.")
         val response = requestJson("GET", "/api/v1/lots/$lotId/handover", accessToken = token)
             ?: return TradeResult.Failure("Could not retrieve the handover record. Check the connection and retry.")
+        Log.i("SahiTolTrade", "Handover recovery for $lotId returned HTTP ${response.first}")
         if (response.first !in 200..299) return TradeResult.Failure(apiMessage(response.second))
         return parseLiveHandoverStatus(response.second)
     }

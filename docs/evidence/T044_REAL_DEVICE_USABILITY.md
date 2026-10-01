@@ -160,6 +160,19 @@ version 5, with the same weight and value. This proves the current deployed
 happy path; it does not prove denial, discrepancy, camera-permission, or
 recovery variants.
 
+## Fresh collector restart and confirmation-pull retest (2026-10-02)
+
+The collector process on `N7OZPV59XWWKPF4X` was force-stopped and relaunched
+without clearing application data. The selected existing PCB lot
+`f8b0587f-f774-4e1c-9ce9-1cc578fe558c` was reopened through C07's accepted
+offer continuation. The deployed participant-scoped lot lookup returned HTTP
+200 with the already confirmed handover `80a73333-9622-4ec2-af07-6a18fd6b78a0`.
+The collector then showed **Recycler Handover Confirmed**, receipt
+`ST-80A733`, and the same hash prefix `0977dfc9790cec33…`; it did not create a
+second proposal. Opening C11 pulled the server state and visibly showed
+**Recycler receipt confirmed by server**. This is a physical restart and pull
+retest of the deployed APK, not merely a unit or API test.
+
 ## Checklist Against T044 Output Requirements
 
 | Requirement | Result |
@@ -167,10 +180,10 @@ recovery variants.
 | Camera / photo capture | Verified in T034 (C05 classifier); lot photo captured |
 | GPS (location verified) | PASS — GPS coordinate logged at Okhla Hub, Bay 4 |
 | Denial scenarios | Verified in T043 (44/44 fault cases); camera/GPS denial in T017 |
-| Restart / offline persistence | Verified in T015, T041; Room DB persists across restart |
+| Restart / confirmation pull | PASS — force-stop/relaunch recovered the deployed server handover by lot and C11 pulled `CONFIRMED` |
 | Airplane mode / offline QR | PASS — Offline Ready badge on C10, C11 throughout |
 | Background / manual sync | PASS — C08 manual sync and outbox transitions verified |
-| QR two-device handover | PASS for the deployed happy path below; denial/recovery variants remain outstanding |
+| QR two-device handover | PASS for deployed happy path and collector restart/pull recovery; denial/discrepancy variants remain outstanding |
 | Hindi / Marathi labels | PASS — Bilingual titles throughout (hastantaran, sangrah evam vajan, etc.) |
 | Representative scenario usability | PASS for the current accepted-offer-to-QR-to-confirm path; denial/recovery variants remain outstanding |
 | Owner scenario tests not fieldwork | PASS — Clearly identified as owner demo scenario |

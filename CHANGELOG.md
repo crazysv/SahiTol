@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-02 -- T044 collector restart and confirmation-pull recovery
+
+Added the narrow authenticated lookup of the latest handover for a collector's
+lot and durable server-handover storage on Android. After a force-stop and
+relaunch of the physical collector, the selected live PCB lot recovered the
+same confirmed receipt (`ST-80A733`) and C11 pulled the server-confirmed state;
+the app did not create a duplicate proposal. Focused handover API tests and the
+Android unit suite pass. Denial and discrepancy variants remain open.
+
 ## 2026-10-01 -- T044 deployed synthetic recycler offer
 
 After deployment, the isolated demo recycler created a hosted open offer for
