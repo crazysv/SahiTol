@@ -8,15 +8,21 @@
 - **Requirements**: [`R-SEC-02`](../15_REQUIREMENTS.md#r-sec-02), [`R-OPS-02`](../15_REQUIREMENTS.md#r-ops-02), [`R-OPS-04`](../15_REQUIREMENTS.md#r-ops-04)
 - **Acceptance Cases**: [`AT-073`](../20_TEST_ACCEPTANCE.md#at-073), [`AT-075`](../20_TEST_ACCEPTANCE.md#at-075), [`AT-077`](../20_TEST_ACCEPTANCE.md#at-077)
 - **Related Specifications**: [`docs/DEPLOYMENT.md`](../DEPLOYMENT.md), [`docs/13_RECOVERY.md`](../13_RECOVERY.md), [`docs/MONITORING.md`](../MONITORING.md)
-- **Status**: DONE
+- **Status**: IN PROGRESS — automated recovery and configuration evidence is
+  passing; a fresh Docker/PostGIS stack and real-phone LAN run remain unverified.
 
 ---
 
 ## 1. Executive Summary
 
-Task `T042` verifies and operationalizes the complete local reproducible fallback stack, disaster recovery toolchain, Android debug LAN networking vs release HTTPS security policies, web second-device camera fallbacks, and health diagnostics/structured logging.
+Task `T042` implements the local reproducible fallback stack, disaster recovery
+toolchain, Android debug LAN networking versus release HTTPS policies, web
+second-device camera fallback, and health diagnostics. Its automated recovery
+and configuration checks pass, but this evidence does **not** claim a fresh
+Docker/PostGIS recovery or real-phone LAN run until the Docker engine is
+available and those journeys are executed.
 
-Key deliverables and accomplishments:
+Implemented deliverables and automated evidence:
 1. **Cryptographic Backup, Restore, and Disaster Recovery Engine (`scripts/backup_restore.py`, `R-OPS-02`, `AT-075`)**:
    - Authored unified backup and restore tool capable of snapshotting the entire PostgreSQL / SQLite database schema, table records, and local private media assets.
    - Generates cryptographic `backup_manifest.json` sealing:
@@ -42,11 +48,15 @@ Key deliverables and accomplishments:
    - Wired `android:networkSecurityConfig="@xml/network_security_config"` in `AndroidManifest.xml`.
 4. **Web Insecure Context Camera Fallback (`R-OPS-02`, `AT-075`)**:
    - Verified `apps/web/src/components/recycler/R04_QRScan.tsx` provides explicit camera denial detection and manual 6-character reference lookup fallback (`#ST-XXXX`), enabling local testing on non-HTTPS origins without weakening production TLS constraints.
-5. **Local Docker Compose Topology (`infra/docker-compose.yml`, `R-OPS-02`, `AT-075`)**:
+5. **Local Docker Compose Topology (`infra/docker-compose.yml`, `R-OPS-02`, `AT-075` contribution)**:
    - Docker Compose provisions PostgreSQL 16 with PostGIS 3.4 (`postgis/postgis:16-3.4`), FastAPI container, and React/Vite container.
    - Healthcheck configured with `pg_isready -U sahitol -d sahitol_db`.
    - Dedicated persistent named volumes `postgres_data` and `media_data` mounted at `/data/media`.
-   - PostGIS extension initialization verified in `infra/init_postgis.sql`.
+   - PostGIS extension initialization is configured in `infra/init_postgis.sql`.
+   - `docker compose -f infra/docker-compose.yml config --quiet` passed on
+     2026-10-01. The Docker Desktop Linux engine was unavailable, so no
+     containers, migrations, persistent-volume restore, or phone-LAN path were
+     claimed as run.
 6. **Privacy Media Access Retention & Retention Boundaries (`R-SEC-02`, `AT-073`)**:
    - Signed URL expiration (15-minute token TTL) and authorization checks verified in `T008` and `T040`.
    - Backup/restore tool respects media boundaries and preserves immutable audit logs and pending outbox events while verifying cryptographic digests.
@@ -58,8 +68,8 @@ Key deliverables and accomplishments:
 ### 2.1 Test Suite Summary
 - **Test File**: [`services/api/tests/test_backup_restore_and_recovery.py`](../../services/api/tests/test_backup_restore_and_recovery.py)
 - **Framework**: `pytest 9.1.1`, Python 3.10.11
-- **Result**: **11 passed, 0 failed, 1 warning in 1.19s**
-- **Full Backend Suite**: **274 passed out of 274 tests (100% pass rate in 38.23s)**
+- **Result**: **12 passed, 0 failed, 1 warning in 1.00s** (2026-10-01)
+- **Full Backend Suite**: not rerun as part of this verification.
 
 ```text
 ============================= test session starts =============================
@@ -148,8 +158,12 @@ services\api\tests\test_backup_restore_and_recovery.py::test_standalone_offline_
 
 | Acceptance Case | Description | Contributing Tasks | Status |
 |:---|:---|:---|:---:|
-| `AT-073` | Privacy media access retention and audit | `T008`, `T040`, `T042` | **PASS** |
-| `AT-075` | Standalone local demo fallback and restore | `T042` | **PASS** |
-| `AT-077` | Health, structured recovery, and diagnostics | `T028`, `T029`, `T042` | **PASS** |
+| `AT-073` | Privacy media access retention and audit | `T008`, `T040`, `T042` | **NOT_RUN** — cross-task acceptance remains open |
+| `AT-075` | Standalone local demo fallback and restore | `T042` | **NOT_RUN** — fresh Docker/PostGIS and phone-LAN runs remain |
+| `AT-077` | Health, structured recovery, and diagnostics | `T028`, `T029`, `T042` | **NOT_RUN** — whole acceptance not independently completed |
 
-All contributing tasks for `AT-073`, `AT-075`, and `AT-077` are complete. Task `T042` is verified and marked **DONE**.
+The task remains **IN PROGRESS**. Before it can close, start the Docker engine,
+run a clean Compose/PostGIS migration and backup/restore against its persistent
+media volume, then exercise the debug-LAN phone path without weakening release
+TLS. The acceptance cases remain NOT_RUN until their complete cross-task scope
+is independently verified.

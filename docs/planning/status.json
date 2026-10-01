@@ -332,7 +332,7 @@
       "evidence": [
         "docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md"
       ],
-      "note": "Cryptographic backup and restore tool (scripts/backup_restore.py) with SHA-256 manifest and domain event hash-chain validation verified. Health live (/health/live) and ready (/health/ready) probes with zero-leakage DB failure handling verified. X-Correlation-ID middleware and structured logging implemented. Android release HTTPS and debug LAN network security configs verified. Docker Compose PostGIS environment and web camera manual reference fallback verified across 11 automated tests in test_backup_restore_and_recovery.py."
+      "note": "On 2026-10-01, cryptographic backup/restore, health zero-leakage, correlation IDs, HTTPS/debug-LAN configuration and manual QR fallback passed 12 focused automated tests; Compose configuration also validated. The Docker Desktop Linux engine was unavailable, so a fresh PostGIS container/migration/persistent-volume restore and real-phone debug-LAN run remain NOT_RUN. T042 stays IN_PROGRESS."
     },
     "T043": {
       "status": "IN_PROGRESS",

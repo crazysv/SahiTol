@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-01 -- T042 evidence correction
+
+The local backup/restore and configuration suite passes 12/12, and Compose
+configuration validates. A new independent check found Docker Desktop's Linux
+engine unavailable, so no fresh PostGIS container, persistent-volume restore,
+or real-phone debug-LAN rehearsal was performed. T042 and its cross-task
+acceptance cases remain in progress/NOT_RUN rather than DONE/PASS.
+
 ## 2026-10-01 -- T033 LiteRT interpreter verification
 
 Verified the declared TensorFlow 2.15.1 runtime and actual LiteRT interpreter
