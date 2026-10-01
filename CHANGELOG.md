@@ -6,8 +6,9 @@ Docker Desktop recovered and a fresh local PostGIS/API/web stack now builds and
 starts. Compose CORS and port wiring were corrected, and the Node 22 web-image
 lockfile build was repaired. A signed 255-record, volume-media backup was
 verified, deliberately corrupted, restored and retained across restart. The
-phone application leg remains pending Android installation approval and a
-scoped elevated Windows firewall rule; T042 is still in progress.
+phone application leg then passed on CPH2781: a local debug build reached
+demo authentication and the live facility directory over the scoped Wi-Fi
+firewall rule. T042 is now DONE; cross-task acceptance remains open.
 
 ## 2026-10-02 -- T041 public deployment recheck
 

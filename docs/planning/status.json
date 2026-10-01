@@ -328,11 +328,11 @@
       "owner": "Owner + coding agent"
     },
     "T042": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "evidence": [
         "docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md"
       ],
-      "note": "On 2026-10-02, a fresh Docker/PostGIS stack was independently verified: migrations 0001/0002, idempotent seed, live/ready health, PostGIS 3.4, persistent named volumes, a 255-record/one-media-object signed backup, deliberate database/media mutation, full restore and restart persistence. Compose wiring was repaired for pydantic JSON CORS and host 8000-to-container-10000. The debug APK compiles for the current workstation and its debug-only allow-list; Android installation requires owner approval and Windows firewall modification requires elevation, so the required real-phone local-API journey remains NOT_RUN. T042 stays IN_PROGRESS."
+      "note": "Completed 2026-10-02. A fresh Docker/PostGIS stack verified migrations 0001/0002, idempotent seed, live/ready health, PostGIS 3.4, persistent named volumes, signed backup, deliberate database/media mutation, full restore and restart persistence. Compose CORS and port wiring were repaired. CPH2781 then ran the locally addressed debug APK on the same Wi-Fi; local API logs recorded demo authentication 200 and facility-directory 200 twice. A deployed-only lot returned expected local 404, proving the separate data boundary. Cross-task acceptance cases remain NOT_RUN."
     },
     "T043": {
       "status": "IN_PROGRESS",

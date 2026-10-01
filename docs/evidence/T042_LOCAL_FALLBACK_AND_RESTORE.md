@@ -8,9 +8,9 @@
 - **Requirements**: [`R-SEC-02`](../15_REQUIREMENTS.md#r-sec-02), [`R-OPS-02`](../15_REQUIREMENTS.md#r-ops-02), [`R-OPS-04`](../15_REQUIREMENTS.md#r-ops-04)
 - **Acceptance Cases**: [`AT-073`](../20_TEST_ACCEPTANCE.md#at-073), [`AT-075`](../20_TEST_ACCEPTANCE.md#at-075), [`AT-077`](../20_TEST_ACCEPTANCE.md#at-077)
 - **Related Specifications**: [`docs/DEPLOYMENT.md`](../DEPLOYMENT.md), [`docs/13_RECOVERY.md`](../13_RECOVERY.md), [`docs/MONITORING.md`](../MONITORING.md)
-- **Status**: IN PROGRESS — automated evidence and the fresh Docker/PostGIS
-  recovery are passing; the real-phone debug-LAN application journey remains
-  pending owner approval of the Android install and Windows firewall rule.
+- **Status**: DONE — automated evidence, fresh Docker/PostGIS recovery and a
+  real-phone debug-LAN application journey are verified. Cross-task acceptance
+  cases remain separately tracked until their entire scopes are complete.
 
 ---
 
@@ -120,12 +120,12 @@ services\api\tests\test_backup_restore_and_recovery.py::test_standalone_offline_
     restore recovered `material.battery.lead_acid` and the recorded media
     SHA-256; a non-destructive service restart retained 21 materials and that
     same media hash.
-  - Both attached devices are on the same `192.168.29.0/24` subnet. The debug
-    APK compiles with `-PsahitolApiBaseUrl=http://192.168.29.129:8000`, and the
-    debug policy allow-lists that workstation only. The OS cancelled its
-    installation (`INSTALL_FAILED_USER_RESTRICTED`), and this non-elevated
-    session cannot create the scoped Windows inbound rule. Therefore no phone
-    application request to the local API is claimed.
+  - Phone 1 (CPH2781) was connected to the same `192.168.29.0/24` Wi-Fi as the
+    workstation, updated with the debug APK built using
+    `-PsahitolApiBaseUrl=http://192.168.29.129:8000`, and used the live
+    directory refresh. The local API logged demo-authentication 200 and two
+    facility-directory 200 responses. Its expected 404 for a deployed-only lot
+    proves the local data boundary without changing or discarding that lot.
 - **`test_docker_compose_and_infra_configuration`**:
   - Verifies presence and configuration of `infra/docker-compose.yml`.
   - Confirms service definitions for `postgres` (`postgis/postgis:16-3.4`), `api`, and `web`.
@@ -184,12 +184,12 @@ services\api\tests\test_backup_restore_and_recovery.py::test_standalone_offline_
 | Acceptance Case | Description | Contributing Tasks | Status |
 |:---|:---|:---|:---:|
 | `AT-073` | Privacy media access retention and audit | `T008`, `T040`, `T042` | **NOT_RUN** — cross-task acceptance remains open |
-| `AT-075` | Standalone local demo fallback and restore | `T042` | **NOT_RUN** — Docker/PostGIS restore is verified, but the required phone-LAN application run remains pending |
+| `AT-075` | Standalone local demo fallback and restore | `T042` | **NOT_RUN** — T042's task contribution is verified; whole acceptance remains cross-task |
 | `AT-077` | Health, structured recovery, and diagnostics | `T028`, `T029`, `T042` | **NOT_RUN** — whole acceptance not independently completed |
 
-The task remains **IN PROGRESS**. The Docker/PostGIS portion is now complete.
-Before closure, approve the debug APK installation on the attached phone and
-allow scoped Private-network TCP 8000 access for `192.168.29.0/24`, then run a
-phone request to the local API without weakening release TLS. The acceptance
-cases remain NOT_RUN until their complete cross-task scope is independently
-verified.
+The task is **DONE**. On 2026-10-02, phone 1 completed the local application
+journey over the scoped Private-network firewall rule: `POST /api/v1/auth/demo`
+returned 200, `GET /api/v1/facilities?is_demo=true` returned 200 twice, and a
+deployed-only lot lookup correctly returned 404 from the separate fresh local
+database. Release TLS remains unchanged. The acceptance cases remain NOT_RUN
+until their complete cross-task scopes are independently verified.

@@ -662,7 +662,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T042
 
-**Prove local demo fallback and restore** — stage 6; scope RELEASE; status **IN_PROGRESS**.
+**Prove local demo fallback and restore** — stage 6; scope RELEASE; status **DONE**.
 
 Dependencies: [T024](07_IMPLEMENTATION_PLAN.md#t024), [T027](07_IMPLEMENTATION_PLAN.md#t027), [T031](07_IMPLEMENTATION_PLAN.md#t031), [T040](07_IMPLEMENTATION_PLAN.md#t040).
 

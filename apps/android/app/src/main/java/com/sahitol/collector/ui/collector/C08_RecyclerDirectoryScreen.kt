@@ -28,6 +28,7 @@ import com.sahitol.collector.data.repository.TradeResult
 import com.sahitol.collector.data.local.entity.LotEntity
 import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.ui.theme.*
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,6 +50,7 @@ fun C08_RecyclerDirectoryScreen(
 
     var liveFacilities by remember { mutableStateOf<List<RecyclerFacilityItem>>(emptyList()) }
     var directoryMessage by remember { mutableStateOf<String?>(null) }
+    val coroutineScope = rememberCoroutineScope()
     LaunchedEffect(Unit) {
         when (val result = facilityRepository.fetchLiveFacilities()) {
             is TradeResult.Success -> liveFacilities = result.value
@@ -318,8 +320,14 @@ fun C08_RecyclerDirectoryScreen(
 
                         TextButton(onClick = {
                             directoryMessage = null
-                            // A refresh is intentionally live-only: reference cache remains browseable,
-                            // but cannot be used to create a trade.
+                            coroutineScope.launch {
+                                // Reference entries remain browseable offline, but this explicit
+                                // action always refreshes only from the live directory.
+                                when (val result = facilityRepository.fetchLiveFacilities()) {
+                                    is TradeResult.Success -> liveFacilities = result.value
+                                    is TradeResult.Failure -> directoryMessage = result.message
+                                }
+                            }
                         }) {
                             Text("Refresh", fontSize = 12.sp, color = TerracottaPrimary)
                         }
