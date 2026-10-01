@@ -198,9 +198,20 @@ Evidence: C16_material_passport_journey.png
    reached the hosted insert but PostgreSQL rejected its demo user's missing
    `collectors` profile foreign key. Demo login now creates a collector profile
    when an older existing demo user lacks one; the focused authentication suite
-   passes 14/14, including the legacy-profile repair case. This server repair
-   must deploy to Render before the already-queued valid PCB create can be
-   retried on the phone.
+   passes 14/14, including the legacy-profile repair case. Render deployed this
+   repair and `/api/v1/collectors/me` returned the new demo profile.
+8. **2026-10-01 collector-profile foreign-key repair:** A fresh, photo-free PCB
+   lot was saved on the physical device after the client began preserving the
+   selected condition and queuing `CREATE_DRAFT` followed by a UUID-dependent
+   `LIST_LOT`. The local database correctly showed `LISTED`, `Clean`, and the
+   expected dependency before sync. Its real hosted create was still rejected:
+   the sync server used the authenticated *user* UUID for `lots.collector_id`,
+   which references the distinct *collector profile* UUID. The server now
+   resolves that profile and the full sync suite passes 16/16, including a
+   distinct-ID regression assertion. This new server repair requires deployment
+   before a final fresh-lot retry; the rejected create remains visible as
+   `NEEDS_REPAIR` and its dependent listing remains queued, rather than being
+   falsely acknowledged.
 
 ---
 

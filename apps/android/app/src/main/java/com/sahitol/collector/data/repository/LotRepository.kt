@@ -6,6 +6,7 @@ import com.sahitol.collector.data.local.entity.DomainEventEntity
 import com.sahitol.collector.data.local.entity.LotEntity
 import com.sahitol.collector.data.local.entity.OutboxOperationEntity
 import kotlinx.coroutines.flow.Flow
+import org.json.JSONArray
 import org.json.JSONObject
 import java.security.MessageDigest
 import java.util.UUID
@@ -15,6 +16,8 @@ data class CreateLotParams(
     val deviceId: String,
     val materialCode: String,
     val estimatedWeightG: Long,
+    val condition: String? = null,
+    val isDraft: Boolean = false,
     val estimatedLowPaise: Long? = null,
     val estimatedMedianPaise: Long? = null,
     val estimatedHighPaise: Long? = null,
@@ -36,6 +39,8 @@ class LotRepository(private val database: SahiTolDatabase) {
         val lotId = UUID.randomUUID().toString()
         val eventId = UUID.randomUUID().toString()
         val operationId = UUID.randomUUID().toString()
+        val listEventId = UUID.randomUUID().toString()
+        val listOperationId = UUID.randomUUID().toString()
         val timestamp = System.currentTimeMillis()
 
         val lotEntity = LotEntity(
@@ -48,7 +53,7 @@ class LotRepository(private val database: SahiTolDatabase) {
             estimatedMedianPaise = params.estimatedMedianPaise,
             estimatedHighPaise = params.estimatedHighPaise,
             localPhotoPath = params.localPhotoPath,
-            status = "DRAFT",
+            status = if (params.isDraft) "DRAFT" else "LISTED",
             syncStatus = "SAVED_LOCAL_ONLY",
             serverVersion = 0,
             aiSuggestedCode = params.aiSuggestedCode,
@@ -66,6 +71,7 @@ class LotRepository(private val database: SahiTolDatabase) {
             // its material/route eligibility.
             put("material_id", canonicalMaterialId(params.materialCode))
             put("estimated_weight_g", params.estimatedWeightG)
+            if (params.condition != null) put("condition", params.condition)
             if (params.estimatedLowPaise != null) put("estimated_low_paise", params.estimatedLowPaise)
             if (params.estimatedMedianPaise != null) put("estimated_median_paise", params.estimatedMedianPaise)
             if (params.estimatedHighPaise != null) put("estimated_high_paise", params.estimatedHighPaise)
@@ -113,11 +119,50 @@ class LotRepository(private val database: SahiTolDatabase) {
             lastErrorCode = null
         )
 
+        // Saving a lot is an intentional publish action.  Creating and listing
+        // remain separate server commands so offline replay preserves the
+        // server's state machine and version checks.  A draft deliberately has
+        // no dependent publish operation.
+        val listPayloadJson = JSONObject().toString()
+        val listEvent = DomainEventEntity(
+            eventId = listEventId,
+            accountId = params.accountId,
+            entityType = "LOT",
+            entityId = lotId,
+            eventType = "LOT_LISTED",
+            payloadJson = listPayloadJson,
+            prevHash = eventHash,
+            currentHash = sha256("$eventHash:LOT_LISTED:$listPayloadJson"),
+            createdAt = timestamp + 1
+        )
+        val listOutboxOp = OutboxOperationEntity(
+            operationId = listOperationId,
+            accountId = params.accountId,
+            deviceId = params.deviceId,
+            entityType = "LOT",
+            entityId = lotId,
+            command = "LIST_LOT",
+            expectedVersion = 1,
+            payloadJson = listPayloadJson,
+            payloadSha256 = sha256(listPayloadJson),
+            dependsOnJson = JSONArray().put(operationId).toString(),
+            mediaIdsJson = "[]",
+            createdAt = timestamp + 1,
+            attemptCount = 0,
+            nextAttemptAt = timestamp + 1,
+            state = "QUEUED",
+            lastErrorCode = null
+        )
+
         // Execute atomic commit
         database.withTransaction {
             database.lotDao().insertLot(lotEntity)
             database.domainEventDao().insertEvent(domainEvent)
             database.outboxDao().enqueue(outboxOp)
+            if (!params.isDraft) {
+                database.domainEventDao().insertEvent(listEvent)
+                database.outboxDao().enqueue(listOutboxOp)
+            }
         }
 
         return lotEntity

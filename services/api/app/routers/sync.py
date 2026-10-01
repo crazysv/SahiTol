@@ -18,6 +18,7 @@ from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.db.models.audit import SyncChange, SyncOperation
 from app.db.models.auth import User
+from app.db.models.collector import Collector
 from app.db.models.lot import Lot, LotImage, MediaObject
 from app.db.models.material import Material
 from app.db.models.price import PriceObservation
@@ -182,16 +183,27 @@ def execute_domain_operation(
     # 1. LOT ENTITY OPERATIONS
     if entity_type == "LOT":
         if command in ("CREATE_DRAFT", "CREATE"):
+            collector_profile = db.execute(
+                select(Collector).where(Collector.user_id == current_user.id)
+            ).scalar_one_or_none()
+            if not collector_profile and current_user.role != "ADMIN":
+                return "REJECTED", None, None, {
+                    "code": "COLLECTOR_PROFILE_REQUIRED",
+                    "message": "A collector profile is required before creating lots."
+                }
             collector_id_raw = payload.get("collector_id")
             if collector_id_raw:
                 try:
                     collector_uuid = uuid.UUID(str(collector_id_raw))
                 except ValueError:
                     return "REJECTED", None, None, {"code": "INVALID_COLLECTOR_ID", "message": "Invalid collector UUID"}
-                if collector_uuid != current_user.id and current_user.role != "ADMIN":
+                if current_user.role != "ADMIN" and collector_uuid != collector_profile.id:
                     return "REJECTED", None, None, {"code": "FORBIDDEN", "message": "Cannot create lot for another collector"}
             else:
-                collector_uuid = current_user.id
+                # `lots.collector_id` references the profile, while the access
+                # token identifies the user.  These UUIDs are intentionally
+                # distinct in production and must not be interchanged.
+                collector_uuid = collector_profile.id if collector_profile else current_user.id
 
             est_weight = payload.get("estimated_weight_g")
             if est_weight is not None and est_weight <= 0:

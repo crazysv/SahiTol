@@ -153,6 +153,13 @@ terms hashes/versions. A device test caught and fixed main-thread HTTP; the
 hosted demo directory now loads and the existing cable lot honestly shows zero
 offers. Continue T044 with a new compatible server-backed lot, recycler-created
 offer and current two-device journey; do not revive the superseded simulated C09 evidence.
+The old-demo profile bootstrap repair deployed successfully and the hosted
+profile endpoint now returns the physical demo collector. A fresh device PCB
+lot then exposed a second server defect: sync used the user UUID where the lot
+foreign key requires the collector profile UUID. That mapping is repaired and
+the full sync suite passes 16/16; push/deploy it, then create one more fresh
+photo-free PCB lot and verify both CREATE_DRAFT and its dependent LIST_LOT are
+acknowledged before attempting a real recycler request.
 The new-lot outbox contract was then repaired from unsupported `CREATE_LOT` /
 `material_code` / local-path media IDs to `CREATE_DRAFT` / `material_id` / no
 fabricated media IDs. Focused tests pass and an updated APK is on the collector

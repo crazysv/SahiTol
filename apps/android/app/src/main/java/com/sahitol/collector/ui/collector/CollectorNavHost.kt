@@ -236,6 +236,8 @@ fun CollectorNavHost(
                                 deviceId = deviceId ?: "device_android_default",
                                 materialCode = materialCode,
                                 estimatedWeightG = weightGrams,
+                                condition = condition,
+                                isDraft = isDraft,
                                 estimatedLowPaise = null,
                                 estimatedMedianPaise = null,
                                 estimatedHighPaise = null,

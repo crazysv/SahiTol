@@ -100,6 +100,27 @@ class RoomOutboxRepositoryTest {
     }
 
     @Test
+    fun savedLotPublishOperationDependsOnCreate() {
+        val createId = UUID.randomUUID().toString()
+        val publish = OutboxOperationEntity(
+            operationId = UUID.randomUUID().toString(),
+            accountId = "collector_456",
+            deviceId = "device_test_01",
+            entityType = "LOT",
+            entityId = UUID.randomUUID().toString(),
+            command = "LIST_LOT",
+            expectedVersion = 1,
+            payloadJson = "{}",
+            payloadSha256 = LotRepository.sha256("{}"),
+            dependsOnJson = "[\"$createId\"]"
+        )
+
+        assertEquals("LIST_LOT", publish.command)
+        assertEquals(1, publish.expectedVersion)
+        assertEquals("[\"$createId\"]", publish.dependsOnJson)
+    }
+
+    @Test
     fun testUserPartitionContract() {
         val userALots = listOf(
             LotEntity(lotId = "l1", accountId = "user_A", materialCode = "MAT-CAB-01", estimatedWeightG = 1000L),

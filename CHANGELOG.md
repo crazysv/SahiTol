@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-10-01 -- T044 collector-profile lot ownership repair
+
+Corrected server sync to resolve a collector profile from the authenticated
+user before setting `lots.collector_id`; those IDs are distinct and the
+database foreign key rightly rejected the former mapping. The collector app now
+also preserves the selected condition and distinguishes “Save Lot” from “Save
+Draft”: a saved lot atomically queues `CREATE_DRAFT` then a dependent
+`LIST_LOT` publish operation. The complete sync suite passes 16/16 and the
+physical database confirmed the durable dependency before the hosted retry.
+Deployment and one fresh-lot device retry remain required.
+
 ## 2026-10-01 -- T044 live offer-path repair
 
 Removed the collector's fabricated facility/request/offer identifiers from the

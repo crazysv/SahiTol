@@ -10,6 +10,7 @@ from fastapi.testclient import TestClient
 from app.main import app
 from app.db.session import get_db
 from app.db.models.auth import User
+from app.db.models.collector import Collector
 from app.db.models.lot import Lot
 from app.db.models.audit import SyncOperation, SyncChange
 from app.db.models.price import PriceObservation
@@ -35,6 +36,7 @@ def setup_sync_test_database():
 def collector_user():
     """Create and return a test collector user with bearer auth headers."""
     user_id = uuid.uuid4()
+    collector_id = uuid.uuid4()
     with TestingSessionLocal() as session:
         user = User(
             id=user_id,
@@ -45,17 +47,23 @@ def collector_user():
             is_demo=False
         )
         session.add(user)
+        collector = Collector(
+            id=collector_id, user_id=user_id, display_alias="Sync Test Collector",
+            preferred_language="hi", consent_version="v1.0"
+        )
+        session.add(collector)
         session.commit()
 
     token = create_access_token(subject=str(user_id), role="COLLECTOR", is_demo=False)
     headers = {"Authorization": f"Bearer {token}"}
-    return {"id": user_id, "headers": headers}
+    return {"id": user_id, "collector_id": collector_id, "headers": headers}
 
 
 @pytest.fixture
 def other_collector_user():
     """Create a second collector user for permission/replay isolation tests."""
     user_id = uuid.uuid4()
+    collector_id = uuid.uuid4()
     with TestingSessionLocal() as session:
         user = User(
             id=user_id,
@@ -66,11 +74,16 @@ def other_collector_user():
             is_demo=False
         )
         session.add(user)
+        collector = Collector(
+            id=collector_id, user_id=user_id, display_alias="Other Sync Collector",
+            preferred_language="hi", consent_version="v1.0"
+        )
+        session.add(collector)
         session.commit()
 
     token = create_access_token(subject=str(user_id), role="COLLECTOR", is_demo=False)
     headers = {"Authorization": f"Bearer {token}"}
-    return {"id": user_id, "headers": headers}
+    return {"id": user_id, "collector_id": collector_id, "headers": headers}
 
 
 @pytest.fixture
@@ -145,6 +158,7 @@ def test_sync_batch_push_success_and_domain_effects(collector_user):
         assert lot is not None
         assert lot.status == "DRAFT"
         assert lot.estimated_weight_g == 3500
+        assert lot.collector_id == collector_user["collector_id"]
 
         sync_op = session.execute(SyncOperation.__table__.select().where(SyncOperation.operation_id == op_id)).first()
         assert sync_op is not None
