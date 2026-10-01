@@ -35,10 +35,13 @@ services:
       LOCAL_MEDIA_ROOT: /data/media
       PUBLIC_API_BASE_URL: http://localhost:8000
       PUBLIC_WEB_BASE_URL: http://localhost:5173
-      CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+      # pydantic-settings parses list-valued environment variables as JSON.
+      CORS_ORIGINS: '["http://localhost:5173","http://localhost:3000"]'
       DEMO_MODE: "true"
     ports:
-      - "8000:8000"
+      # The API image listens on 10000 (the hosted-runtime port); expose it
+      # locally as 8000 so the documented local API URL remains stable.
+      - "8000:10000"
     volumes:
       - media_data:/data/media
     depends_on:

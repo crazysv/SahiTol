@@ -332,7 +332,7 @@
       "evidence": [
         "docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md"
       ],
-      "note": "On 2026-10-01, cryptographic backup/restore, health zero-leakage, correlation IDs, HTTPS/debug-LAN configuration and manual QR fallback passed 12 focused automated tests; Compose configuration also validated. The Docker Desktop Linux engine was unavailable, so a fresh PostGIS container/migration/persistent-volume restore and real-phone debug-LAN run remain NOT_RUN. T042 stays IN_PROGRESS."
+      "note": "On 2026-10-02, a fresh Docker/PostGIS stack was independently verified: migrations 0001/0002, idempotent seed, live/ready health, PostGIS 3.4, persistent named volumes, a 255-record/one-media-object signed backup, deliberate database/media mutation, full restore and restart persistence. Compose wiring was repaired for pydantic JSON CORS and host 8000-to-container-10000. The debug APK compiles for the current workstation and its debug-only allow-list; Android installation requires owner approval and Windows firewall modification requires elevation, so the required real-phone local-API journey remains NOT_RUN. T042 stays IN_PROGRESS."
     },
     "T043": {
       "status": "IN_PROGRESS",

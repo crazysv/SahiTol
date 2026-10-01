@@ -178,10 +178,14 @@ public Render health/ready return HTTPS 200 and ready reports production databas
 and Supabase storage, but the former check merely constructed an adapter. The
 repair verifies private-bucket metadata and reports `storage_probe=adapter_readiness`.
 Focused recovery/security tests pass 32/32; push and recheck deployed readiness
-before closing T041. T042 is now active: its focused recovery suite passes
-12/12 and Compose config validates, but Docker Desktop's Linux engine is
-unavailable, so a fresh PostGIS restore and real-phone debug-LAN rehearsal are
-still NOT_RUN. Resume those after the engine is healthy.
+before closing T041. T042's focused recovery suite passes 12/12 and its fresh
+Docker/PostGIS stack is now independently verified: migrations, seed,
+live/ready health, PostGIS, signed database/media backup, deliberate mutation,
+restore and restart persistence all passed. Compose CORS and port wiring were
+repaired. Two devices are attached on the workstation subnet; resume T042 by
+approving the debug APK update on the recycler phone and adding the scoped
+elevated Windows Private-network inbound TCP 8000 rule, then run its local-API
+application request. Do not call this phone-LAN leg complete before that.
 T043 then reran cleanly: 44 focused deterministic tests pass, including an
 authorized-recycler match that was tightened from a response-shape check. Its
 real-device/hosted fault acceptance remains NOT_RUN; continue at T044 only

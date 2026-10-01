@@ -4,12 +4,13 @@
 - **Task ID**: `T042`
 - **Phase**: Phase 6 (Security, Resilience and Verification)
 - **Scope**: RELEASE
-- **Date**: 2026-09-30
+- **Date**: 2026-10-02
 - **Requirements**: [`R-SEC-02`](../15_REQUIREMENTS.md#r-sec-02), [`R-OPS-02`](../15_REQUIREMENTS.md#r-ops-02), [`R-OPS-04`](../15_REQUIREMENTS.md#r-ops-04)
 - **Acceptance Cases**: [`AT-073`](../20_TEST_ACCEPTANCE.md#at-073), [`AT-075`](../20_TEST_ACCEPTANCE.md#at-075), [`AT-077`](../20_TEST_ACCEPTANCE.md#at-077)
 - **Related Specifications**: [`docs/DEPLOYMENT.md`](../DEPLOYMENT.md), [`docs/13_RECOVERY.md`](../13_RECOVERY.md), [`docs/MONITORING.md`](../MONITORING.md)
-- **Status**: IN PROGRESS — automated recovery and configuration evidence is
-  passing; a fresh Docker/PostGIS stack and real-phone LAN run remain unverified.
+- **Status**: IN PROGRESS — automated evidence and the fresh Docker/PostGIS
+  recovery are passing; the real-phone debug-LAN application journey remains
+  pending owner approval of the Android install and Windows firewall rule.
 
 ---
 
@@ -53,10 +54,14 @@ Implemented deliverables and automated evidence:
    - Healthcheck configured with `pg_isready -U sahitol -d sahitol_db`.
    - Dedicated persistent named volumes `postgres_data` and `media_data` mounted at `/data/media`.
    - PostGIS extension initialization is configured in `infra/init_postgis.sql`.
-   - `docker compose -f infra/docker-compose.yml config --quiet` passed on
-     2026-10-01. The Docker Desktop Linux engine was unavailable, so no
-     containers, migrations, persistent-volume restore, or phone-LAN path were
-     claimed as run.
+  - On 2026-10-02, Docker Desktop started a fresh named-volume stack: the API
+    applied Alembic migrations 0001 and 0002, performed the idempotent seed,
+    served live/ready health responses, and PostGIS reported version 3.4.
+    A signed backup of 255 records plus a media-volume sentinel was verified,
+    then restored after deliberately changing one database value and deleting
+    that sentinel. The original value and SHA-256 media hash were recovered;
+    an API/Postgres restart retained both. The pending phone-LAN *application*
+    run is not inferred from this host-side evidence.
 6. **Privacy Media Access Retention & Retention Boundaries (`R-SEC-02`, `AT-073`)**:
    - Signed URL expiration (15-minute token TTL) and authorization checks verified in `T008` and `T040`.
    - Backup/restore tool respects media boundaries and preserves immutable audit logs and pending outbox events while verifying cryptographic digests.
@@ -101,6 +106,26 @@ services\api\tests\test_backup_restore_and_recovery.py::test_standalone_offline_
 ## 3. Detailed Verification Results by Requirement
 
 ### 3.1 `R-OPS-02` & `AT-075`: Reproducible Local Fallback and Recovery
+- **Fresh Docker/PostGIS recovery (2026-10-02)**:
+  - `docker compose -f infra/docker-compose.yml build` succeeded for the web
+    and API images. The web lockfile was regenerated with Node 22 so `npm ci`
+    succeeds in its image, and its Docker context now excludes `node_modules`.
+  - Corrected Compose runtime wiring: JSON-formatted `CORS_ORIGINS` for
+    pydantic-settings and host `8000` mapped to the image's listener `10000`.
+    The fresh stack returned live and ready health, 45 public tables, 21
+    materials, 8 facilities and PostGIS 3.4.
+  - The volume-mounted backup contained 255 records and one 29-byte media
+    sentinel. Integrity-only verification passed for 41 tables/255 records/one
+    media object. After changing `MAT-BAT-01` and deleting the sentinel, full
+    restore recovered `material.battery.lead_acid` and the recorded media
+    SHA-256; a non-destructive service restart retained 21 materials and that
+    same media hash.
+  - Both attached devices are on the same `192.168.29.0/24` subnet. The debug
+    APK compiles with `-PsahitolApiBaseUrl=http://192.168.29.129:8000`, and the
+    debug policy allow-lists that workstation only. The OS cancelled its
+    installation (`INSTALL_FAILED_USER_RESTRICTED`), and this non-elevated
+    session cannot create the scoped Windows inbound rule. Therefore no phone
+    application request to the local API is claimed.
 - **`test_docker_compose_and_infra_configuration`**:
   - Verifies presence and configuration of `infra/docker-compose.yml`.
   - Confirms service definitions for `postgres` (`postgis/postgis:16-3.4`), `api`, and `web`.
@@ -159,11 +184,12 @@ services\api\tests\test_backup_restore_and_recovery.py::test_standalone_offline_
 | Acceptance Case | Description | Contributing Tasks | Status |
 |:---|:---|:---|:---:|
 | `AT-073` | Privacy media access retention and audit | `T008`, `T040`, `T042` | **NOT_RUN** — cross-task acceptance remains open |
-| `AT-075` | Standalone local demo fallback and restore | `T042` | **NOT_RUN** — fresh Docker/PostGIS and phone-LAN runs remain |
+| `AT-075` | Standalone local demo fallback and restore | `T042` | **NOT_RUN** — Docker/PostGIS restore is verified, but the required phone-LAN application run remains pending |
 | `AT-077` | Health, structured recovery, and diagnostics | `T028`, `T029`, `T042` | **NOT_RUN** — whole acceptance not independently completed |
 
-The task remains **IN PROGRESS**. Before it can close, start the Docker engine,
-run a clean Compose/PostGIS migration and backup/restore against its persistent
-media volume, then exercise the debug-LAN phone path without weakening release
-TLS. The acceptance cases remain NOT_RUN until their complete cross-task scope
-is independently verified.
+The task remains **IN PROGRESS**. The Docker/PostGIS portion is now complete.
+Before closure, approve the debug APK installation on the attached phone and
+allow scoped Private-network TCP 8000 access for `192.168.29.0/24`, then run a
+phone request to the local API without weakening release TLS. The acceptance
+cases remain NOT_RUN until their complete cross-task scope is independently
+verified.

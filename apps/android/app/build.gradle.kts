@@ -16,7 +16,12 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "0.1.0"
-        buildConfigField("String", "API_BASE_URL", "\"https://sahitol-api.onrender.com\"")
+        // Debug verification can point at the owner workstation without
+        // changing the production default. Example:
+        // -PsahitolApiBaseUrl=http://192.168.29.129:8000
+        val apiBaseUrl = providers.gradleProperty("sahitolApiBaseUrl")
+            .getOrElse("https://sahitol-api.onrender.com")
+        buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
