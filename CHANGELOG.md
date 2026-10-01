@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-01 -- T026 payment actor integrity repair
+
+Independent T026 audit found payment entries stored only an asserting role,
+allowing an administrator to be misclassified and to self-acknowledge an
+assertion. Added server-derived `asserted_by_user_id`, Alembic migration
+`0002_payment_asserting_actor`, correct administrator role derivation, and an
+administrator self-ack rejection. Removed client-controlled payment demo flags;
+transaction provenance now controls payment provenance. Payment/schema tests
+pass 25/25 and offline Alembic DDL was verified.
+
 ## 2026-10-01 -- T025 deployed two-phone verification and receipt repair
 
 Completed the deployed collector-to-recycler flow using both connected Android

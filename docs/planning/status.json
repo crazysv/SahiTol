@@ -205,7 +205,7 @@
       "evidence": [
         "docs/evidence/T026_PAYMENTS_AND_EARNINGS.md"
       ],
-      "note": "Implemented cash-first payment assertions without bank gateway, optional UPI reference recording, counterparty acknowledgement, self-acknowledgement prevention, disputes, duplicate-safe partial payments, append-only reversals linking original records without deletion, strict closure invariants, and collector earnings with strict demo isolation.",
+      "note": "Implemented cash-first payment assertions without bank gateway, optional UPI reference recording, counterparty acknowledgement, self-acknowledgement prevention, disputes, duplicate-safe partial payments, append-only reversals linking original records without deletion, strict closure invariants, and collector earnings with strict demo isolation. Independent audit added server-derived asserting-actor identity, administrator self-ack prevention and transaction-derived demo provenance; payment and schema suites pass 25/25 and Alembic 0002 DDL was verified.",
       "owner": "Owner + coding agent"
     },
     "T027": {

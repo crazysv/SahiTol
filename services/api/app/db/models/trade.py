@@ -140,6 +140,9 @@ class PaymentEntry(Base):
     method: Mapped[str] = mapped_column(String(50), default="CASH", nullable=False)  # CASH, UPI, OTHER
     private_reference: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     asserted_by: Mapped[str] = mapped_column(String(50), nullable=False)  # FACILITY, COLLECTOR
+    # The role is not enough to enforce counterparty acknowledgement when more
+    # than one authorised user exists. Keep the immutable asserting actor too.
+    asserted_by_user_id: Mapped[Optional[uuid.UUID]] = mapped_column(UUID(as_uuid=True), nullable=True, index=True)
     asserted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
     state: Mapped[str] = mapped_column(String(50), default="ASSERTED", nullable=False)  # ASSERTED, ACKNOWLEDGED, DISPUTED, REVERSED
     counterparty_ack_by: Mapped[Optional[uuid.UUID]] = mapped_column(UUID(as_uuid=True), nullable=True)

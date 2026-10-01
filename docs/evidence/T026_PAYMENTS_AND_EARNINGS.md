@@ -4,7 +4,7 @@
 - **Task ID**: T026
 - **Phase**: Stage 4 (Handover, Payments & Verification)
 - **Scope**: RELEASE
-- **Date**: 2026-09-29
+- **Date**: 2026-10-01
 - **Reviewer**: SahiTol Payment & Ledger Working Group
 
 ## Context & Objectives
@@ -15,13 +15,13 @@ Implements cash-first payment assertions without bank account or gateway depende
    - **Cash Without Gateway**: Records cash payment assertions directly between parties without third-party bank gateways or accounts.
    - **UPI Reference Tracking**: Optional UPI or other methods record client assertions and private reference strings (`private_reference`), never performing or assuming direct bank settlement.
    - **Participant Authorization**: Only transaction participants (collector owner, linked facility active members) or administrators can assert payments. Third parties receive HTTP 403 Forbidden.
-   - **State Machine**: Initial state is `ASSERTED`. Derives `asserted_by` (`COLLECTOR` or `FACILITY`).
+   - **State Machine**: Initial state is `ASSERTED`. Derives both `asserted_by` role and immutable `asserted_by_user_id` from the authenticated caller; clients cannot mark a payment as demo.
    - **Append-Only Domain Event**: Emits `PAYMENT_ASSERTED` on aggregate `TRANSACTION` with SHA-256 hash chaining.
 
 2. **Counterparty Acknowledgement & Dispute Workflow (`R-PAY-01`, `AT-035`)**:
    - `POST /payments/{id}/acknowledge` and `POST /api/v1/payments/{id}/acknowledge`:
      - Counterparty verifies received payment. If asserted by `FACILITY`, only the collector can acknowledge. If asserted by `COLLECTOR`, only facility members can acknowledge.
-     - **Self-Acknowledgement Prohibited**: An asserter attempting to acknowledge their own payment receives HTTP 403 Forbidden.
+     - **Self-Acknowledgement Prohibited**: The asserting user, including an administrator, attempting to acknowledge their own payment receives HTTP 403 Forbidden.
      - Transitions state to `ACKNOWLEDGED`, sets `counterparty_ack_by` and `ack_at`. Emits `PAYMENT_ACKNOWLEDGED`.
    - `POST /payments/{id}/dispute` and `POST /api/v1/payments/{id}/dispute`:
      - Participant records dispute with mandatory reason string (e.g. counterfeit notes, unpaid envelope).
@@ -64,7 +64,26 @@ Implements cash-first payment assertions without bank account or gateway depende
 
 ---
 
-## Automated Test Execution Evidence
+## Independent repair and verification (2026-10-01)
+
+Independent audit found that the original entry only retained an actor *role*,
+which was insufficient to display a durable asserting actor or prohibit an
+administrator from acknowledging their own assertion. The repair adds nullable
+`payment_entries.asserted_by_user_id` through Alembic revision
+`0002_payment_asserting_actor` (nullable to preserve immutable legacy rows).
+New assertions always populate the identity; acknowledgement rejects the same
+user before role-based checks. The client `is_demo` request field was also
+removed so payment provenance derives exclusively from the transaction.
+
+Verification after repair:
+
+- `tests/test_payments.py`: **19 passed**, including administrator self-ack
+  rejection and asserting-actor response identity.
+- `tests/test_schema.py`: **6 passed**.
+- Alembic offline PostgreSQL DDL includes `ALTER TABLE payment_entries ADD
+  COLUMN asserted_by_user_id UUID` and its index.
+
+## Earlier Automated Test Execution Evidence
 Ran pytest on `services/api/tests/test_payments.py`:
 ```text
 $env:PYTHONPATH="d:\SahiTol;d:\SahiTol\services\api"; & C:\Python310\python.exe -m pytest services/api/tests/test_payments.py -v

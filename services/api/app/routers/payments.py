@@ -126,12 +126,12 @@ def is_tx_facility_member(user: User, tx: Transaction, db: Session) -> bool:
 
 def derive_asserted_by(user: User, tx: Transaction, db: Session) -> str:
     """Derive actor role (COLLECTOR or FACILITY) for payment assertion."""
+    if user.role == UserRole.ADMIN.value:
+        return "ADMIN"
     if user.role == UserRole.COLLECTOR.value or is_tx_collector(user, tx, db):
         return "COLLECTOR"
     if user.role == UserRole.RECYCLER.value or is_tx_facility_member(user, tx, db):
         return "FACILITY"
-    if user.role == UserRole.ADMIN.value:
-        return "ADMIN"
     return "UNKNOWN"
 
 
@@ -200,7 +200,6 @@ class CreatePaymentAssertionRequest(BaseModel):
     method: str = Field(default="CASH", description="Payment method: CASH, UPI, OTHER")
     private_reference: Optional[str] = Field(None, max_length=100, description="Optional UPI reference or note")
     occurred_at: Optional[datetime] = Field(None, description="Client asserted timestamp (UTC)")
-    is_demo: bool = Field(default=False, description="Synthetic demo flag")
 
 
 class AcknowledgePaymentRequest(BaseModel):
@@ -223,6 +222,7 @@ class PaymentEntryResponse(BaseModel):
     method: str
     private_reference: Optional[str] = None
     asserted_by: str
+    asserted_by_user_id: Optional[uuid.UUID] = None
     asserted_at: datetime
     state: str
     counterparty_ack_by: Optional[uuid.UUID] = None
@@ -350,7 +350,10 @@ def assert_payment(
         asserted_by=asserted_by,
         asserted_at=asserted_at,
         state="ASSERTED",
-        is_demo=tx.is_demo or req.is_demo
+        asserted_by_user_id=current_user.id,
+        # Demo provenance belongs to the transaction, never a client-controlled
+        # payment payload flag.
+        is_demo=tx.is_demo
     )
     db.add(entry)
 
@@ -399,6 +402,12 @@ def acknowledge_payment(
     # If asserted by COLLECTOR -> facility member must acknowledge
     is_col = is_tx_collector(current_user, tx, db)
     is_fac = is_tx_facility_member(current_user, tx, db)
+
+    if entry.asserted_by_user_id is not None and entry.asserted_by_user_id == current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Forbidden: The user who asserted a payment cannot acknowledge it."
+        )
 
     if current_user.role != UserRole.ADMIN.value:
         if entry.asserted_by == "FACILITY" and not is_col:

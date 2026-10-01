@@ -93,4 +93,7 @@ APK and web bundle are retested on both phones. That retest is now complete:
 phones. The R05 placeholder receipt defect discovered during the run was
 corrected, deployed and physically rechecked; it now shows the confirmed server
 record and no second confirmation button. T025 is DONE. AT-032 through AT-034
-remain NOT_RUN until their complete cross-task checks are run. Continue at T026.
+remain NOT_RUN until their complete cross-task checks are run. T026 audit then
+added server-derived payment asserting-actor identity and administrator
+self-ack prevention; payment/schema verification passed 25/25. Continue at
+T027.

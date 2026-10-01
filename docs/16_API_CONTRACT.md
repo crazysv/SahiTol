@@ -68,8 +68,8 @@ Base `/api/v1` for business endpoints; `/health/live` and `/health/ready` are un
 | POST /handovers/{id}/void | Participant under rules | reason,version → void pending record only |
 | GET /handovers/{id}/receipt | Participant | format PDF/JSON → versioned platform record with current state and original hash |
 | GET /verify/{public_token} | Public redacted capability | reference,current state,material summary,hash/version,non-EPR notice only; no confirmation mutation |
-| POST /transactions/{id}/payments | Participant | entry UUID,amount,method,private_reference?,occurred_at → asserted payment |
-| POST /payments/{id}/acknowledge | Counterparty | exact amount/version → acknowledged or dispute required |
+| POST /transactions/{id}/payments | Participant | entry UUID,amount,method,private_reference?,occurred_at → asserted payment; actor identity and demo provenance are server-derived |
+| POST /payments/{id}/acknowledge | Counterparty | exact amount/version → acknowledged or dispute required; asserting user cannot self-acknowledge |
 | POST /payments/{id}/dispute | Counterparty | reason → DISPUTED |
 | POST /payments/{id}/reverse | Authorized reviewed correction | original ID,reason,counterparty workflow → append reversal; no deletion |
 | POST /transactions/{id}/close | Participant/service | only mutually confirmed received+settled+undisputed → CLOSED |

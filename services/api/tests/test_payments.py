@@ -262,6 +262,7 @@ def test_assert_payment_cash_success(payment_environment):
     assert data["amount_paise"] == 382500
     assert data["method"] == "CASH"
     assert data["asserted_by"] == "FACILITY"
+    assert data["asserted_by_user_id"] == str(env["recycler_user_id"])
     assert data["state"] == "ASSERTED"
     assert data["counterparty_ack_by"] is None
     assert data["ack_at"] is None
@@ -456,6 +457,26 @@ def test_acknowledge_payment_self_acknowledgement_prohibited(payment_environment
         headers=env["recycler_headers"]
     )
     assert ack_resp.status_code == 403
+
+
+def test_admin_cannot_acknowledge_its_own_payment_assertion(payment_environment):
+    """Actor identity, not just role, prevents administrator self-acknowledgement."""
+    env = payment_environment
+    payment_id = uuid.uuid4()
+    asserted = client.post(
+        f"/api/v1/transactions/{env['tx_id']}/payments",
+        json={"id": str(payment_id), "amount_paise": 50000, "method": "CASH"},
+        headers=env["admin_headers"],
+    )
+    assert asserted.status_code == 201
+    assert asserted.json()["asserted_by"] == "ADMIN"
+    assert asserted.json()["asserted_by_user_id"] is not None
+
+    acknowledged = client.post(
+        f"/api/v1/payments/{payment_id}/acknowledge",
+        headers=env["admin_headers"],
+    )
+    assert acknowledged.status_code == 403
 
 
 def test_dispute_payment_success(payment_environment):
