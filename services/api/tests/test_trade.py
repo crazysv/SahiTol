@@ -1058,6 +1058,12 @@ def test_transaction_scoping_and_history(collector_user, other_collector_user, r
     resp_col = client.get(f"/api/v1/transactions/{tx_id}", headers=collector_user["headers"])
     assert resp_col.status_code == 200
 
+    # The client can safely recover this transaction from its persisted lot ID
+    # after process recreation; it must not need to invent a transaction ID.
+    resp_col_by_lot = client.get(f"/api/v1/lots/{lot_id}/transaction", headers=collector_user["headers"])
+    assert resp_col_by_lot.status_code == 200
+    assert resp_col_by_lot.json()["id"] == tx_id
+
     # 2. Linked recycler: 200 OK
     resp_rec = client.get(f"/api/v1/transactions/{tx_id}", headers=recycler_setup["headers"])
     assert resp_rec.status_code == 200
@@ -1069,6 +1075,7 @@ def test_transaction_scoping_and_history(collector_user, other_collector_user, r
     # 4. Other collector: 403 Forbidden
     resp_other = client.get(f"/api/v1/transactions/{tx_id}", headers=other_collector_user["headers"])
     assert resp_other.status_code == 403
+    assert client.get(f"/api/v1/lots/{lot_id}/transaction", headers=other_collector_user["headers"]).status_code == 403
 
     # 5. Recycler transactions history
     rec_txs = client.get("/api/v1/recycler/transactions", headers=recycler_setup["headers"]).json()

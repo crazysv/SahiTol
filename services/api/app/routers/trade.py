@@ -1484,6 +1484,83 @@ def accept_offer(
 
 # --- Lot Offers Listing & Transactions ---
 
+@router.get("/lots/{lot_id}/transaction", response_model=TransactionDetailResponse)
+@router.get("/api/v1/lots/{lot_id}/transaction", response_model=TransactionDetailResponse)
+def get_lot_transaction(
+    lot_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Return the accepted transaction for a lot to an authorized participant.
+
+    The collector app knows its persisted lot ID after an offer is accepted, but
+    the accept response can be lost if Android is recreated.  This participant-
+    scoped lookup makes resuming the handover safe without guessing a transaction
+    ID or exposing another collector's commercial terms.
+    """
+    lot = db.query(Lot).filter(Lot.id == lot_id, Lot.deleted_at.is_(None)).first()
+    if not lot:
+        raise HTTPException(status_code=404, detail="Lot not found.")
+
+    if current_user.role == UserRole.COLLECTOR.value and not is_lot_owner(current_user, lot):
+        raise HTTPException(status_code=403, detail="Forbidden: you do not own this lot.")
+
+    tx = (
+        db.query(Transaction)
+        .filter(Transaction.lot_id == lot_id)
+        .order_by(desc(Transaction.created_at))
+        .first()
+    )
+    if not tx:
+        raise HTTPException(status_code=404, detail="No accepted transaction exists for this lot.")
+
+    if current_user.role == UserRole.RECYCLER.value:
+        membership = (
+            db.query(FacilityUser)
+            .filter(
+                FacilityUser.user_id == current_user.id,
+                FacilityUser.facility_id == tx.facility_id,
+                FacilityUser.active == True
+            )
+            .first()
+        )
+        if not membership:
+            raise HTTPException(status_code=403, detail="Forbidden: you are not a participant in this transaction.")
+
+    revisions_summary = [
+        TermsRevisionSummary(
+            id=r.id,
+            final_material_id=r.final_material_id,
+            measured_weight_g=r.measured_weight_g,
+            final_total_paise=r.final_total_paise,
+            currency=r.currency,
+            proposed_by=r.proposed_by,
+            collector_ack_at=r.collector_ack_at,
+            recycler_ack_at=r.recycler_ack_at,
+            terms_hash=r.terms_hash,
+            reason=r.reason
+        )
+        for r in tx.terms_revisions
+    ]
+    return TransactionDetailResponse(
+        id=tx.id,
+        lot_id=tx.lot_id,
+        collector_id=tx.collector_id,
+        facility_id=tx.facility_id,
+        accepted_offer_id=tx.accepted_offer_id,
+        estimated_weight_g=tx.estimated_weight_g,
+        agreed_weight_g=tx.agreed_weight_g,
+        quoted_total_paise=tx.quoted_total_paise,
+        agreed_total_paise=tx.agreed_total_paise,
+        currency=tx.currency,
+        lifecycle=tx.lifecycle,
+        version=tx.version,
+        is_demo=tx.is_demo,
+        created_at=tx.created_at,
+        updated_at=tx.updated_at,
+        revisions=revisions_summary
+    )
+
 @router.get("/lots/{lot_id}/offers", response_model=List[OfferResponse])
 @router.get("/api/v1/lots/{lot_id}/offers", response_model=List[OfferResponse])
 def get_lot_offers(
