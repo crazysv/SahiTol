@@ -42,6 +42,7 @@ export type HandoverDetail = {
   proposal_payload: {
     material_snapshot?: { material_id?: string; condition?: string };
     weight_snapshot?: { estimated_weight_g?: number; measured_weight_g?: number | null };
+    value_snapshot?: { agreed_total_paise?: number; currency?: string };
   };
 };
 

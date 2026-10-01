@@ -1,9 +1,24 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import R04_QRScan from './R04_QRScan';
 import R05_ReceiptReview from './R05_ReceiptReview';
 import V01_PublicVerification from '../verification/V01_PublicVerification';
+
+vi.mock('../../lib/api', async () => {
+  const actual = await vi.importActual<typeof import('../../lib/api')>('../../lib/api');
+  return {
+    ...actual,
+    lookupDemoHandover: vi.fn().mockResolvedValue({
+      id: 'handover-live-1', status: 'CONFIRMED', proposal_hash: 'a'.repeat(64), version: 2,
+      proposal_payload: {
+        material_snapshot: { material_id: 'MAT-CAB-01', condition: 'GOOD' },
+        weight_snapshot: { estimated_weight_g: 2500, measured_weight_g: 2300 },
+        value_snapshot: { agreed_total_paise: 41400, currency: 'INR' },
+      },
+    }),
+  };
+});
 
 describe('Second-Device QR Confirmation & Public Verification Views (T025)', () => {
   it('renders R04_QRScan with viewfinder, manual fallback, and recognized proposal', () => {
@@ -31,33 +46,21 @@ describe('Second-Device QR Confirmation & Public Verification Views (T025)', () 
     fireEvent.click(lookupBtn);
     expect(screen.getByText('ST-9999')).toBeDefined();
     expect(screen.getByText(/server lookup required/i)).toBeDefined();
-    expect((screen.getByRole('button', { name: /Awaiting Server Verification/i }) as HTMLButtonElement).disabled).toBe(true);
+    expect((screen.getByRole('button', { name: /Verify with Server/i }) as HTMLButtonElement).disabled).toBe(true);
   });
 
-  it('renders R05_ReceiptReview with discrepancy calculation, payment mode, and receipt issue', () => {
+  it('renders R05_ReceiptReview only from the confirmed server handover, without a second confirmation action', async () => {
     render(
-      <MemoryRouter initialEntries={['/recycler/receipt?ref=ST-24A7&weight=84.8']}>
+      <MemoryRouter initialEntries={['/recycler/receipt?handover_id=handover-live-1']}>
         <R05_ReceiptReview />
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/Receipt & Settlement Review:/i)).toBeDefined();
-    expect(screen.getByText(/Cryptographic Seal Verified/i)).toBeDefined();
-    expect(screen.getByText(/Insulated Copper Cable/i)).toBeDefined();
-
-    // Agreed vs Measured comparison
-    expect(screen.getByText('85.5 kg')).toBeDefined();
-    expect(screen.getByText('84.8 kg')).toBeDefined();
-    expect(screen.getByText(/Terms Revision — Weight Variance Detected/i)).toBeDefined();
-
-    // Payment mode selection
-    const upiBtn = screen.getByRole('button', { name: /UPI Reference/i });
-    fireEvent.click(upiBtn);
-    expect(screen.getByPlaceholderText(/e.g. 423984102941/i)).toBeDefined();
-
-    // Confirm receipt
-    const confirmBtn = screen.getByRole('button', { name: /Confirm Handover & Issue Digital Receipt/i });
-    fireEvent.click(confirmBtn);
+    await waitFor(() => expect(screen.getByText(/Recycler confirmation recorded/i)).toBeDefined());
+    expect(screen.getByText('MAT-CAB-01')).toBeDefined();
+    expect(screen.getByText('2.30 kg')).toBeDefined();
+    expect(screen.getByText('₹414.00')).toBeDefined();
+    expect(screen.queryByRole('button', { name: /Confirm Handover/i })).toBeNull();
   });
 
   it('renders V01_PublicVerification with independent ledger search, cryptographic proof, and privacy boundary', () => {
