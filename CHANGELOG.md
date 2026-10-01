@@ -17,7 +17,8 @@ classifier locally. It returned 9.0% confidence, showed the documented manual
 selection fallback, and that C05 state survived an ordinary background/return.
 Backing out left no new lot.
 
-These checks complete T044's owner-scenario scope. They do not represent
+These checks complete T044's owner-scenario scope. T044 remains IN_PROGRESS
+until canonical dependencies T041–T043 are complete; this does not represent
 unperformed fieldwork or shared release acceptance cases as complete.
 
 ## 2026-10-02 -- T044 physical revised-terms outcomes

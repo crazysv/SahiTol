@@ -384,12 +384,13 @@ accuracy or a saved training record.
 
 ---
 
-## Verdict: DONE — owner scenario testing
+## Verdict: owner scenario testing complete; task remains IN PROGRESS
 
 The task's owner-device output is complete: fresh server-backed collector and
 recycler flows, current-APK two-phone QR confirmation, camera/GPS denial,
 restart, Aeroplane/background/manual-sync behavior, Hindi/Marathi selector
 persistence, and a low-confidence on-device LiteRT fallback were independently
-observed. This does not close shared release acceptance cases that depend on
-other tasks, and it does not represent owner scenario tests as collector
+observed. T044 cannot be marked DONE until its canonical dependencies T041–T043
+are complete. This does not close shared release acceptance cases that depend
+on other tasks, and it does not represent owner scenario tests as collector
 fieldwork. The two-collector fieldwork obligation remains explicitly UNMET.
