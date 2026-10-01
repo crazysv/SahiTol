@@ -173,7 +173,7 @@
       "evidence": [
         "docs/evidence/T022_RECYCLER_CONSOLE.md"
       ],
-      "note": "Implemented approved Recycler Console views R01-R03, R06, R07 in React/Vite with layout, queue, lot inspection, quote terminal, operational profile, ledger exports, and passing unit tests.",
+      "note": "Implemented approved Recycler Console views R01-R03, R06, R07 in React/Vite with layout, queue, lot inspection, quote terminal, operational profile, ledger exports, and passing unit tests. Independent re-verification on 2026-10-01: typecheck and production build passed; focused RecyclerConsole suite passed 6/6.",
       "owner": "Owner + coding agent"
     },
     "T023": {

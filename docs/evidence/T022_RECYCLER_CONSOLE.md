@@ -69,3 +69,20 @@
 - Test file: [`apps/web/src/components/recycler/RecyclerConsole.test.tsx`](../../apps/web/src/components/recycler/RecyclerConsole.test.tsx)
 - Suite contains 6 comprehensive tests validating navigation, filtering, tolerance calculations, quote dispatch, operational profile updates, and CSV ledger export.
 - Integration tests in [`apps/web/src/App.test.tsx`](../../apps/web/src/App.test.tsx) verify root routing and Stitch system integration.
+
+## Independent re-verification (2026-10-01)
+
+The current web console was rebuilt and its focused recycler suite was rerun:
+
+```text
+npm run typecheck                 # PASS
+npm run build                     # PASS — 97 modules transformed
+npx vitest run src/components/recycler/RecyclerConsole.test.tsx \
+  --pool=forks --maxWorkers=1 --minWorkers=1
+                               # PASS — 1 file, 6 tests
+```
+
+The six focused tests cover layout/navigation, inbox filtering, incoming-lot
+weight tolerance, both quote models, operational-profile updates, and ledger CSV
+export. No T022 implementation defect was found. React Router emitted only its
+upstream v7 future-flag warnings.

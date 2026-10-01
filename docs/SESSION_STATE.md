@@ -79,5 +79,6 @@ Continue ordered independent verification and repair. On 2026-10-01, C07's visib
 offer acceptance was repaired: it now proceeds directly to C10 Handover Capture
 after locally persisting the acceptance. The repair was reverified on collector
 device N7OZPV59XWWKPF4X and the focused Android unit suite passed. T021 was then
-independently reverified with all 19 `test_trade.py` cases passing. Continue with
-T022 after documentation regeneration and validation.
+independently reverified with all 19 `test_trade.py` cases passing. T022 then
+passed type checking, production build, and all 6 focused recycler-console tests.
+Continue with T023 after documentation regeneration and validation.
