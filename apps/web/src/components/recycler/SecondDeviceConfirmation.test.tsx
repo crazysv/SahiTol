@@ -31,6 +31,7 @@ describe('Second-Device QR Confirmation & Public Verification Views (T025)', () 
     fireEvent.click(lookupBtn);
     expect(screen.getByText('ST-9999')).toBeDefined();
     expect(screen.getByText(/server lookup required/i)).toBeDefined();
+    expect((screen.getByRole('button', { name: /Awaiting Server Verification/i }) as HTMLButtonElement).disabled).toBe(true);
   });
 
   it('renders R05_ReceiptReview with discrepancy calculation, payment mode, and receipt issue', () => {

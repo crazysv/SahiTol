@@ -268,11 +268,13 @@ export default function R04_QRScan() {
               </div>
 
               <button
-                disabled={!scannedRecord.material || scannedRecord.weight === undefined}
+                // An offline QR is evidence for lookup, never authority to issue a
+                // receipt. The server must verify the canonical proposal first.
+                disabled
                 onClick={() => navigate(`/recycler/receipt?ref=${scannedRecord.ref}&weight=${scannedRecord.weight}`)}
                 className="w-full py-2.5 px-space-lg bg-primary hover:bg-primary-container disabled:bg-outline disabled:cursor-not-allowed text-on-primary font-headline font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
               >
-                <span>{scannedRecord.material && scannedRecord.weight !== undefined ? 'Proceed to Receipt & Settlement Review' : 'Awaiting Server Lookup'}</span>
+                <span>Awaiting Server Verification</span>
                 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
               </button>
             </div>
