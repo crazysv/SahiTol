@@ -12,6 +12,14 @@ typecheck/production build, Android debug Kotlin compilation, and focused
 `HandoverAndReceiptTest` passed. T025 remains IN_PROGRESS pending deployed
 two-phone retest.
 
+## 2026-10-01 -- T025 hosted demo bootstrap repair
+
+The first real hosted retest exposed an empty-database prerequisite: demo
+collector login returned HTTP 500 without `DELHI_NCR`. Demo login now creates its
+minimal isolated region when absent. The handover verification suite passes
+15/15, including that fresh-reference-data regression case. The fix requires
+deployment before the two-phone flow is resumed.
+
 ## 2026-10-01 -- T003/T041 independent recovery verification
 
 Verified the recovered Render API and Cloudflare web console at HTTP 200. On

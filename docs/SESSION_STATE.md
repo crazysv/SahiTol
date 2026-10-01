@@ -89,4 +89,7 @@ authenticated receipt confirmation are now implemented and locally
 integration-tested (14 API handover tests, web typecheck/build, Android compile
 and focused handover tests). T025 remains IN_PROGRESS until the updated deployed
 APK and web bundle are retested on both phones; AT-032 through AT-034 remain
-NOT_RUN until then.
+NOT_RUN until then. The first hosted attempt found a missing `DELHI_NCR` demo
+region on the empty Render database; demo login now bootstraps that isolated row
+and the focused API suite is 15/15. Deploy this repair, then resume the physical
+two-phone retest.

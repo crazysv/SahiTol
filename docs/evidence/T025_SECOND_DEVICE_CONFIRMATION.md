@@ -111,3 +111,12 @@ Automated verification completed on 2026-10-01:
 T025 remains **IN_PROGRESS** because these checks run locally. The new deployed
 web bundle and APK must still be installed and exercised across the two connected
 phones before AT-032 through AT-034 can be marked PASS.
+
+## Hosted retest blocker and repair (2026-10-01)
+
+The first hosted retest correctly stopped before data creation: `POST
+/api/v1/auth/demo` returned HTTP 500 because the deployed empty database had not
+received the `DELHI_NCR` reference row required by the collector demo profile.
+Demo login now creates that minimal isolated region when absent. A regression test
+starts from missing reference data and passes; the handover API suite is **15
+passed**. This repair must deploy before restarting the physical retest.

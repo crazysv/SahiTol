@@ -298,6 +298,20 @@ def test_demo_offline_import_requires_server_lookup_then_recycler_confirmation()
     assert confirmed.json()["status"] == "CONFIRMED"
 
 
+def test_demo_collector_login_bootstraps_region_on_empty_reference_data():
+    """Hosted demo login cannot depend on a separate reference seeding job."""
+    with TestingSessionLocal() as session:
+        session.query(Region).filter(Region.id == "DELHI_NCR").delete()
+        session.query(User).filter(User.phone_normalized == "demo_collector_fresh_region").delete()
+        session.commit()
+    response = client.post("/api/v1/auth/demo", json={
+        "role": "COLLECTOR", "persona_id": "fresh_region", "device_id": "fresh-db-test",
+    })
+    assert response.status_code == 200
+    with TestingSessionLocal() as session:
+        assert session.query(Region).filter(Region.id == "DELHI_NCR").first() is not None
+
+
 def test_create_handover_proposal_success(handover_environment):
     """Test collector submits valid handover proposal with canonical hash (R-HAND-01, AT-029)."""
     env = handover_environment

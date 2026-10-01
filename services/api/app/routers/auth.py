@@ -10,7 +10,7 @@ from app.config import settings
 from app.db.session import get_db
 from app.db.models.auth import User, AuthSession
 from app.db.models.collector import Collector
-from app.db.models.facility import FacilityUser
+from app.db.models.facility import FacilityUser, Region
 from app.rate_limiter import phone_limiter, ip_limiter
 from app.security import (
     UserRole,
@@ -318,6 +318,12 @@ def demo_login(req: DemoLoginRequest, db: Session = Depends(get_db)):
         db.flush()
 
         if req.role == UserRole.COLLECTOR:
+            # A fresh hosted demo database may not yet have run reference-data
+            # seeding.  The isolated demo identity must bootstrap its own minimal
+            # region instead of failing login on that deployment prerequisite.
+            if not db.query(Region).filter(Region.id == "DELHI_NCR").first():
+                db.add(Region(id="DELHI_NCR", name="Delhi-NCR", state_code="DL", kind="METRO"))
+                db.flush()
             alias_name = persona.replace("_", " ").title()
             collector = Collector(
                 user_id=user.id,
