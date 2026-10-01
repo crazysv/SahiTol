@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-10-01 -- T025 server-backed two-device handover repair
+
+Replaced Android's fabricated outbox-success simulation with an HTTPS demo
+handover import that preserves the frozen payload/hash and delegates to normal
+handover creation. R04 now authenticates the demo recycler, retrieves the
+UUID-scoped proposal, compares the QR SHA-256 seal, and enables confirmation only
+after that check. The bridge is limited to authenticated demo collectors and does
+not grant QR-based receipt authority. API handover suite 14/14, web
+typecheck/production build, Android debug Kotlin compilation, and focused
+`HandoverAndReceiptTest` passed. T025 remains IN_PROGRESS pending deployed
+two-phone retest.
+
 ## 2026-10-01 -- T003/T041 independent recovery verification
 
 Verified the recovered Render API and Cloudflare web console at HTTP 200. On

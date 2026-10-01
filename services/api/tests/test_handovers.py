@@ -263,6 +263,41 @@ def test_verify_hash_utility_matches_documented_handover_fixture():
     assert res_data["is_valid"] is True
 
 
+def test_demo_offline_import_requires_server_lookup_then_recycler_confirmation():
+    """The two-device demo path may bootstrap demo prerequisites, never receipt authority."""
+    collector_login = client.post("/api/v1/auth/demo", json={"role": "COLLECTOR", "persona_id": "santosh", "device_id": "android-test"})
+    assert collector_login.status_code == 200
+    collector_headers = {"Authorization": f"Bearer {collector_login.json()['access_token']}"}
+    handover_id, lot_id, transaction_id = uuid.uuid4(), uuid.uuid4(), uuid.uuid4()
+    payload = {
+        "schema_version": "SAHITOL-HANDOVER-1",
+        "handover_id": str(handover_id), "transaction_id": str(transaction_id), "lot_id": str(lot_id),
+        "collector_id": "offline-demo-account", "facility_id": "1aafb3d0-9ef2-4f34-95ca-0e6f3441e851",
+        "material_snapshot": {"material_id": "MAT-PCB-01", "condition": "INTACT", "regulatory_route": "AUTHORIZED_EWASTE"},
+        "weight_snapshot": {"estimated_weight_g": 2300, "measured_weight_g": 2300},
+        "value_snapshot": {"currency": "INR", "agreed_total_paise": 41400},
+        "occurred_at": datetime.now(timezone.utc).isoformat(), "media": [], "is_demo": True,
+    }
+    proposal_hash = compute_canonical_hash(payload)
+    imported = client.post("/api/v1/demo/handovers/import", headers=collector_headers, json={
+        "id": str(handover_id), "proposal_payload": payload, "proposal_hash": proposal_hash, "expected_version": 0,
+    })
+    assert imported.status_code == 200
+    assert imported.json()["status"] == "PENDING_CONFIRMATION"
+
+    recycler_login = client.post("/api/v1/auth/demo", json={"role": "RECYCLER", "persona_id": "yard_operator", "device_id": "web-test"})
+    assert recycler_login.status_code == 200
+    recycler_headers = {"Authorization": f"Bearer {recycler_login.json()['access_token']}"}
+    lookup = client.get(f"/api/v1/handovers/{handover_id}", headers=recycler_headers)
+    assert lookup.status_code == 200
+    assert lookup.json()["proposal_hash"] == proposal_hash
+    confirmed = client.post(f"/api/v1/handovers/{handover_id}/confirm", headers=recycler_headers, json={
+        "expected_version": lookup.json()["version"], "proposal_hash": proposal_hash,
+    })
+    assert confirmed.status_code == 200
+    assert confirmed.json()["status"] == "CONFIRMED"
+
+
 def test_create_handover_proposal_success(handover_environment):
     """Test collector submits valid handover proposal with canonical hash (R-HAND-01, AT-029)."""
     env = handover_environment

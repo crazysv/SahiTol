@@ -197,7 +197,7 @@
       "evidence": [
         "docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md"
       ],
-        "note": "R04 now performs real rear-camera QR decoding and was verified across two connected Android devices; it displays actual QR reference/material/mass/hash data without fabricated sample terms and blocks receipt issue until server verification. Server-backed proposal lookup and authenticated confirmation are still required, so T025 remains IN_PROGRESS.",
+      "note": "R04 now performs real rear-camera QR decoding and server-backed demo lookup/hash comparison followed by facility-authorized confirmation; SyncWorker no longer fabricates successful handover sync. Local API integration (14 tests), web typecheck/build, and focused Android handover tests pass. T025 remains IN_PROGRESS pending a freshly deployed physical two-phone retest.",
       "owner": "Owner + coding agent"
     },
     "T026": {
@@ -753,7 +753,7 @@
         "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md",
         "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
       ],
-      "note": "The QR scanner correctly decodes the two-device payload without PII, but it has no server-backed public proposal lookup. Full cross-surface public verification remains NOT_RUN pending T025."
+      "note": "Local integration verifies authenticated server lookup and QR hash comparison without PII. Full deployed cross-surface two-device verification remains NOT_RUN pending the physical retest."
     },
     "AT-033": {
       "status": "NOT_RUN",
@@ -762,7 +762,7 @@
         "docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md",
         "docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md"
       ],
-      "note": "Backend and local discrepancy handling are tested, but the real second-device handover cannot yet receive server-backed terms confirmation. Full acceptance remains NOT_RUN pending T025."
+      "note": "Server-backed demo confirmation is integration-tested, but the complete deployed second-device discrepancy flow remains NOT_RUN pending the physical retest."
     },
     "AT-034": {
       "status": "NOT_RUN",
@@ -770,7 +770,7 @@
         "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md",
         "docs/evidence/T031_DATASET_EXPORTS.md"
       ],
-      "note": "The Android receipt and disclaimer are tested, but the required second-device confirmation cannot yet issue a server-verified record. Full acceptance remains NOT_RUN pending T025."
+      "note": "The server now permits authenticated recycler confirmation only after lookup/hash verification; the deployed receipt transition has not yet been physically retested, so full acceptance remains NOT_RUN."
     },
     "AT-035": {
       "status": "PASS",

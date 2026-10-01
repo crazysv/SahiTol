@@ -84,7 +84,9 @@ passed type checking, production build, and all 6 focused recycler-console tests
 T023 then independently passed all 13 handover workflow tests. T024 passed 7
 focused Android tests and its C10 handover capture was seen on the collector
 device. T025 was exercised across two physical Android devices: actual QR
-decoding and truthful record display work, but server-backed lookup/authenticated
-receipt confirmation is absent. The UI now blocks receipt issue pending that
-verification; T025 is correctly IN_PROGRESS and needs this implementation before
-continuing ordered task closure.
+decoding and truthful record display work. The missing server-backed lookup and
+authenticated receipt confirmation are now implemented and locally
+integration-tested (14 API handover tests, web typecheck/build, Android compile
+and focused handover tests). T025 remains IN_PROGRESS until the updated deployed
+APK and web bundle are retested on both phones; AT-032 through AT-034 remain
+NOT_RUN until then.

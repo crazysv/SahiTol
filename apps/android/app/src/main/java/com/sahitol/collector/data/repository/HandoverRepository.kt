@@ -51,6 +51,10 @@ class HandoverRepository(
     private val outboxDao: OutboxDao? = database?.outboxDao(),
     private val domainEventDao: DomainEventDao? = database?.domainEventDao()
 ) {
+    companion object {
+        // Matches the isolated server-side demo recycler.  It is not a live facility ID.
+        const val DEMO_RECYCLER_FACILITY_ID = "1aafb3d0-9ef2-4f34-95ca-0e6f3441e851"
+    }
 
     // In-memory cache for fast local UI preview and offline navigation
     private val proposalsCache = mutableMapOf<String, HandoverProposal>()
@@ -71,6 +75,9 @@ class HandoverRepository(
     ): HandoverProposal {
         val handoverId = UUID.randomUUID().toString()
         val txId = UUID.randomUUID().toString()
+        val serverLotId = runCatching { UUID.fromString(lotId).toString() }.getOrElse {
+            UUID.nameUUIDFromBytes("sahitol-demo-lot:$lotId".toByteArray()).toString()
+        }
         val now = Instant.now().toString()
         val refCode = "ST-" + UUID.randomUUID().toString().take(4).uppercase()
 
@@ -79,7 +86,7 @@ class HandoverRepository(
             "schema_version" to "SAHITOL-HANDOVER-1",
             "handover_id" to handoverId,
             "transaction_id" to txId,
-            "lot_id" to lotId,
+            "lot_id" to serverLotId,
             "collector_id" to collectorId,
             "facility_id" to facilityId,
             "agreed_terms_hash" to null,
@@ -116,12 +123,12 @@ class HandoverRepository(
         val qrMaterial = URLEncoder.encode(materialName, "UTF-8")
         val qrWeightKg = (measuredWeightG ?: estimatedWeightG).toDouble() / 1000.0
         val verificationUrl = "https://sahitol.pages.dev/recycler/scan" +
-            "?ref=$refCode&material=$qrMaterial&weight=$qrWeightKg&hash=$canonicalHash"
+            "?handover_id=$handoverId&ref=$refCode&material=$qrMaterial&weight=$qrWeightKg&hash=$canonicalHash"
 
         val proposal = HandoverProposal(
             handoverId = handoverId,
             transactionId = txId,
-            lotId = lotId,
+            lotId = serverLotId,
             collectorId = collectorId,
             facilityId = facilityId,
             facilityName = facilityName,
@@ -185,7 +192,7 @@ class HandoverRepository(
             handoverId = handoverId,
             lotId = "lot-demo-01",
             collectorId = collectorId,
-            facilityId = "fac-verma-01",
+            facilityId = DEMO_RECYCLER_FACILITY_ID,
             estimatedWeightG = 2500,
             measuredWeightG = 2300,
             totalPayoutInr = 414.0,
@@ -244,7 +251,7 @@ class HandoverRepository(
             handoverId = id,
             lotId = id,
             collectorId = "col_test_santosh",
-            facilityId = "fac-verma-01",
+            facilityId = DEMO_RECYCLER_FACILITY_ID,
             facilityName = "Verma Electricals (Okhla Hub)",
             materialId = "MAT-CAB-01",
             materialName = "Copper Wire / Cable · तांबा केबल",

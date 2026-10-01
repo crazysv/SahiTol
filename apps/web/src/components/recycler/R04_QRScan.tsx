@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { confirmDemoHandover, HandoverDetail, lookupDemoHandover } from '../../lib/api';
 
 type BarcodeDetectorInstance = {
   detect: (source: ImageBitmapSource) => Promise<Array<{ rawValue: string }>>;
@@ -24,7 +25,12 @@ export default function R04_QRScan() {
     weight?: number;
     status: string;
     hash?: string;
+    handoverId?: string;
+    serverRecord?: HandoverDetail;
   } | null>(null);
+  const [lookupError, setLookupError] = useState<string | null>(null);
+  const [isLookingUp, setIsLookingUp] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const scanFrameRef = useRef<number | null>(null);
@@ -46,6 +52,7 @@ export default function R04_QRScan() {
     let material: string | undefined;
     let weight: number | undefined;
     let hash: string | undefined;
+    let handoverId: string | undefined;
     try {
       const parsed = new URL(rawValue);
       ref = parsed.searchParams.get('ref')?.toUpperCase() || ref;
@@ -54,6 +61,7 @@ export default function R04_QRScan() {
       const parsedWeight = rawWeight === null ? Number.NaN : Number(rawWeight);
       weight = Number.isFinite(parsedWeight) ? parsedWeight : undefined;
       hash = parsed.searchParams.get('hash') || undefined;
+      handoverId = parsed.searchParams.get('handover_id') || undefined;
     } catch {
       // Legacy QR records contain only an opaque reference and must not acquire
       // fabricated sample terms.
@@ -63,6 +71,7 @@ export default function R04_QRScan() {
       material,
       weight,
       hash,
+      handoverId,
       status: material && weight !== undefined
         ? 'Offline record decoded — server confirmation pending'
         : 'Reference scanned — server lookup required',
@@ -123,6 +132,40 @@ export default function R04_QRScan() {
       ref: manualRef.toUpperCase(),
       status: 'Reference entered — server lookup required',
     });
+  };
+
+  const verifyWithServer = async () => {
+    if (!scannedRecord?.handoverId) {
+      setLookupError('This older QR has no server handover ID. Ask the collector to sync and generate a new record.');
+      return;
+    }
+    setIsLookingUp(true);
+    setLookupError(null);
+    try {
+      const serverRecord = await lookupDemoHandover(scannedRecord.handoverId);
+      if (scannedRecord.hash && serverRecord.proposal_hash !== scannedRecord.hash) {
+        throw new Error('QR seal does not match the server proposal. Receipt remains blocked.');
+      }
+      setScannedRecord({ ...scannedRecord, serverRecord, status: 'Server proposal verified — ready for recycler confirmation' });
+    } catch (error) {
+      setLookupError(error instanceof Error ? error.message : 'Server lookup failed.');
+    } finally {
+      setIsLookingUp(false);
+    }
+  };
+
+  const confirmVerifiedHandover = async () => {
+    if (!scannedRecord?.serverRecord) return;
+    setIsConfirming(true);
+    setLookupError(null);
+    try {
+      await confirmDemoHandover(scannedRecord.serverRecord);
+      navigate(`/recycler/receipt?handover_id=${encodeURIComponent(scannedRecord.serverRecord.id)}`);
+    } catch (error) {
+      setLookupError(error instanceof Error ? error.message : 'Server confirmation failed.');
+    } finally {
+      setIsConfirming(false);
+    }
   };
 
   return (
@@ -267,16 +310,25 @@ export default function R04_QRScan() {
                 <span>{scannedRecord.hash ? `SHA-256 seal received: ${scannedRecord.hash.slice(0, 12)}… Server verification is still required.` : 'No verified terms are available until server lookup succeeds.'}</span>
               </div>
 
+              {lookupError && <p className="text-[11px] text-error font-semibold">{lookupError}</p>}
+
               <button
-                // An offline QR is evidence for lookup, never authority to issue a
-                // receipt. The server must verify the canonical proposal first.
-                disabled
-                onClick={() => navigate(`/recycler/receipt?ref=${scannedRecord.ref}&weight=${scannedRecord.weight}`)}
+                disabled={isLookingUp || !!scannedRecord.serverRecord || !scannedRecord.handoverId}
+                onClick={verifyWithServer}
                 className="w-full py-2.5 px-space-lg bg-primary hover:bg-primary-container disabled:bg-outline disabled:cursor-not-allowed text-on-primary font-headline font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
               >
-                <span>Awaiting Server Verification</span>
+                <span>{isLookingUp ? 'Verifying with Server…' : scannedRecord.serverRecord ? 'Server Proposal Verified' : 'Verify with Server'}</span>
                 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
               </button>
+              {scannedRecord.serverRecord && (
+                <button
+                  onClick={confirmVerifiedHandover}
+                  disabled={isConfirming}
+                  className="w-full py-2.5 px-space-lg bg-secondary text-on-secondary font-headline font-bold text-xs rounded-xl shadow-md disabled:bg-outline disabled:cursor-not-allowed"
+                >
+                  {isConfirming ? 'Confirming Receipt…' : 'Confirm Receipt on This Device'}
+                </button>
+              )}
             </div>
           ) : (
             <div className="bg-surface-container-low rounded-xl p-space-lg shadow-sm border border-surface-container-high text-center py-12 space-y-2">

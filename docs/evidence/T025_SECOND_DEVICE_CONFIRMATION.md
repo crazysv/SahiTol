@@ -5,7 +5,7 @@
 - **Phase**: Stage 4 (Collection & Settlement)
 - **Scope**: RELEASE
 - **Date**: 2026-09-29
-- **Status**: IN_PROGRESS — device QR decoding verified; server-backed receipt confirmation remains incomplete.
+- **Status**: IN_PROGRESS — local/server integration is verified; the updated deployed APK and web console still need one physical two-phone retest.
 - **Stitch Project ID**: `245073995801566548` (*SahiTol Collector Frontend*)
 - **Registered Stitch Screens Implemented**:
   - `R04`: QR Scan / Reference Entry (`3fab97e50ca5`)
@@ -78,5 +78,36 @@ Verification**. This prevents an unverified offline payload from issuing a
 Digital Handover Record.
 
 Focused web typecheck, R04/R05/V01 tests (3/3), and production build passed
-after the repair. T025 must remain in progress until a server-backed lookup and
-authenticated confirmation accept this pending proposal end-to-end.
+after the repair.
+
+## Server-backed path repair (2026-10-01)
+
+The underlying defect was not camera permission: Android's `SyncWorker` marked
+its outbox successful using a locally fabricated response, while R04 had no
+authenticated API lookup. The repair replaces that behaviour with a limited,
+server-backed demo path:
+
+1. Android includes the UUID handover ID in its privacy-safe QR and posts the
+   immutable proposal/hash only after demo authentication.
+2. `POST /api/v1/demo/handovers/import` accepts only a demo collector, provisions
+   missing labelled demo prerequisites, and calls normal handover creation. It
+   cannot confirm a receipt.
+3. R04 logs in as the demo recycler, fetches the UUID-scoped proposal, compares
+   the QR SHA-256 seal with the server hash, and only then enables the existing
+   facility-authorized confirmation endpoint.
+4. A failing request remains `AUTH_REQUIRED`, `NEEDS_REVIEW`, `NEEDS_REPAIR`, or
+   retryable in Room; unsupported queued commands remain pending rather than
+   becoming false successes.
+
+Automated verification completed on 2026-10-01:
+
+- `services/api/tests/test_handovers.py`: **14 passed**, including offline demo
+  import → authenticated recycler lookup → confirmation.
+- `npm run typecheck` and `npm run build` in `apps/web`: **passed**.
+- `:app:compileDebugKotlin` and
+  `:app:testDebugUnitTest --tests com.sahitol.collector.HandoverAndReceiptTest`:
+  **passed**.
+
+T025 remains **IN_PROGRESS** because these checks run locally. The new deployed
+web bundle and APK must still be installed and exercised across the two connected
+phones before AT-032 through AT-034 can be marked PASS.

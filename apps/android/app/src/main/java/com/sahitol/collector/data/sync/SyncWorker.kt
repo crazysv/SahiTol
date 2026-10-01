@@ -10,6 +10,10 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.sahitol.collector.SahiTolApp
+import com.sahitol.collector.BuildConfig
+import java.net.HttpURLConnection
+import java.net.URL
+import org.json.JSONObject
 
 class SyncWorker(
     context: Context,
@@ -29,47 +33,75 @@ class SyncWorker(
         val syncEngine = SyncEngine(database)
 
         return try {
-            // Build batch payload
-            val payloads = pending.map { op ->
-                SyncOperationPayload(
-                    operationId = op.operationId,
-                    entityType = op.entityType,
-                    entityId = op.entityId,
-                    command = op.command,
-                    expectedVersion = op.expectedVersion,
-                    payloadJson = op.payloadJson
-                )
-            }
-            val request = SyncBatchRequest(
-                deviceId = pending.first().deviceId,
-                operations = payloads
+            val accessToken = if (accountId.startsWith("col_demo_")) demoAccessToken() else null
+            val results = pending.map { operation -> syncOperation(operation, accessToken) }
+            syncEngine.applyBatchResponse(
+                pending,
+                SyncBatchResponse(pending.first().deviceId, results.count { it.outcome in setOf("APPLIED", "ALREADY_APPLIED") }, results)
             )
-
-            // In local/demo test mode, synthesize server outcomes according to contract
-            val results = pending.map { op ->
-                SyncOperationResult(
-                    operationId = op.operationId,
-                    outcome = "APPLIED",
-                    entityId = op.entityId,
-                    serverVersion = op.expectedVersion + 1,
-                    resultJson = "{\"status\":\"APPLIED\"}",
-                    errorJson = null,
-                    retryAfterSeconds = null
-                )
-            }
-            val simulatedResponse = SyncBatchResponse(
-                deviceId = request.deviceId,
-                appliedCount = results.size,
-                results = results
-            )
-
-            syncEngine.applyBatchResponse(pending, simulatedResponse)
 
             Result.success()
         } catch (e: Exception) {
             e.printStackTrace()
             Result.retry()
         }
+    }
+
+    private fun demoAccessToken(): String? {
+        val response = postJson(
+            "/api/v1/auth/demo",
+            JSONObject().put("role", "COLLECTOR").put("persona_id", "santosh").put("device_id", "android-device")
+        ) ?: return null
+        return if (response.first in 200..299) JSONObject(response.second).optString("access_token").ifBlank { null } else null
+    }
+
+    private fun syncOperation(
+        operation: com.sahitol.collector.data.local.entity.OutboxOperationEntity,
+        accessToken: String?
+    ): SyncOperationResult {
+        if (operation.entityType != "HANDOVER_PROPOSAL" || operation.command != "CREATE_HANDOVER_PROPOSAL") {
+            return SyncOperationResult(operation.operationId, "DEPENDENCY_PENDING", operation.entityId, null, null, null, null)
+        }
+        if (accessToken == null) {
+            return SyncOperationResult(operation.operationId, "AUTH_REQUIRED", operation.entityId, null, null, "Demo authentication failed", null)
+        }
+        val request = JSONObject()
+            .put("id", operation.entityId)
+            .put("proposal_payload", JSONObject(operation.payloadJson))
+            .put("proposal_hash", operation.payloadSha256)
+            .put("expected_version", operation.expectedVersion)
+        val response = postJson("/api/v1/demo/handovers/import", request, accessToken)
+            ?: return SyncOperationResult(operation.operationId, "RETRY", operation.entityId, null, null, "Network request failed", null)
+        return when (response.first) {
+            in 200..299 -> {
+                val body = JSONObject(response.second)
+                SyncOperationResult(operation.operationId, "APPLIED", operation.entityId, body.optLong("version", 1), body.toString(), null, null)
+            }
+            401, 403 -> SyncOperationResult(operation.operationId, "AUTH_REQUIRED", operation.entityId, null, null, response.second, null)
+            409 -> SyncOperationResult(operation.operationId, "CONFLICT", operation.entityId, null, null, response.second, null)
+            in 400..499 -> SyncOperationResult(operation.operationId, "REJECTED", operation.entityId, null, null, response.second, null)
+            else -> SyncOperationResult(operation.operationId, "RETRY", operation.entityId, null, null, response.second, null)
+        }
+    }
+
+    private fun postJson(path: String, body: JSONObject, accessToken: String? = null): Pair<Int, String>? = try {
+        val connection = (URL(BuildConfig.API_BASE_URL.trimEnd('/') + path).openConnection() as HttpURLConnection).apply {
+            requestMethod = "POST"
+            connectTimeout = 15_000
+            readTimeout = 20_000
+            doOutput = true
+            setRequestProperty("Content-Type", "application/json")
+            setRequestProperty("Accept", "application/json")
+            accessToken?.let { setRequestProperty("Authorization", "Bearer $it") }
+        }
+        connection.outputStream.bufferedWriter().use { it.write(body.toString()) }
+        val code = connection.responseCode
+        val stream = if (code in 200..299) connection.inputStream else connection.errorStream
+        val text = stream?.bufferedReader()?.use { it.readText() }.orEmpty()
+        connection.disconnect()
+        code to text
+    } catch (_: Exception) {
+        null
     }
 
     companion object {

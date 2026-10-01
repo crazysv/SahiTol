@@ -11,7 +11,7 @@ Acceptance cases: AT-029, AT-030, AT-031, AT-032, AT-033, AT-056.
 import hashlib
 import secrets
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
@@ -23,12 +23,14 @@ from app.db.session import get_db
 from app.db.models.audit import DomainEvent, QualityFlag
 from app.db.models.auth import User
 from app.db.models.collector import Collector
-from app.db.models.facility import Facility, FacilityUser
+from app.db.models.facility import Facility, FacilityUser, Region
 from app.db.models.lot import LocationRecord, Lot
 from app.db.models.material import Material
 from app.db.models.trade import (
     Handover,
     HandoverConfirmation,
+    LotRequest,
+    Offer,
     TermsRevision,
     Transaction,
 )
@@ -37,6 +39,11 @@ from app.domain.quality import POLICY_VERSION, evaluate_weight_variance
 from app.security import UserRole, get_current_user, require_roles
 
 router = APIRouter(tags=["handovers"])
+
+# The only server-created counterparty permitted by the demo import endpoint.
+# It is intentionally a stable UUID so an offline demo proposal can name the
+# facility before it reaches the server.  This is not used for live accounts.
+DEMO_RECYCLER_FACILITY_ID = uuid.UUID("1aafb3d0-9ef2-4f34-95ca-0e6f3441e851")
 
 NON_EPR_STATUTORY_NOTICE = (
     "This Digital Handover Record certifies platform receipt and material transfer only. "
@@ -130,6 +137,15 @@ class CreateHandoverRequest(BaseModel):
     proposal_payload: Dict[str, Any]
     proposal_hash: str = Field(..., min_length=64, max_length=64)
     expected_version: Optional[int] = None
+
+
+class DemoHandoverImportRequest(CreateHandoverRequest):
+    """A demo-only bridge from an offline Android proposal to the real API flow.
+
+    The client payload and hash remain immutable.  The endpoint only provisions
+    the prerequisite *demo* lot/offer/transaction records; it then invokes the
+    same authenticated handover creation path used by non-demo accounts.
+    """
 
 
 class HandoverResponse(BaseModel):
@@ -394,6 +410,145 @@ def create_handover(
         created_at=handover.created_at,
         updated_at=handover.updated_at
     )
+
+
+@router.post("/demo/handovers/import", response_model=HandoverResponse)
+@router.post("/api/v1/demo/handovers/import", response_model=HandoverResponse)
+def import_demo_handover(
+    req: DemoHandoverImportRequest,
+    response: Response,
+    current_user: User = Depends(require_roles(UserRole.COLLECTOR)),
+    db: Session = Depends(get_db),
+):
+    """Synchronize an offline proposal through real handover authorization.
+
+    This is deliberately restricted to a signed-in demo collector.  It creates
+    only missing demo prerequisites and then delegates to :func:`create_handover`;
+    the QR still has no authority to confirm a receipt.
+    """
+    if not current_user.is_demo or not current_user.collector:
+        raise HTTPException(status_code=403, detail="Demo handover import is available only to demo collectors.")
+
+    payload = req.proposal_payload
+    try:
+        lot_id = uuid.UUID(str(payload["lot_id"]))
+        transaction_id = uuid.UUID(str(payload["transaction_id"]))
+        facility_id = uuid.UUID(str(payload["facility_id"]))
+    except (KeyError, ValueError, TypeError):
+        raise HTTPException(status_code=422, detail="Demo proposal must contain UUID lot, transaction, and facility IDs.")
+    if facility_id != DEMO_RECYCLER_FACILITY_ID:
+        raise HTTPException(status_code=422, detail="Demo proposal references an unknown demo facility.")
+    if not bool(payload.get("is_demo")):
+        raise HTTPException(status_code=422, detail="Demo import requires an explicitly demo-labelled proposal.")
+
+    material_id = str(payload.get("material_snapshot", {}).get("material_id", ""))
+    material = db.query(Material).filter(Material.id == material_id, Material.active == True).first()
+    if not material:
+        raise HTTPException(status_code=422, detail="Demo proposal references an unknown active material.")
+    weight = payload.get("weight_snapshot", {}).get("measured_weight_g") or payload.get("weight_snapshot", {}).get("estimated_weight_g")
+    value = payload.get("value_snapshot", {}).get("agreed_total_paise")
+    if not isinstance(weight, int) or weight <= 0 or not isinstance(value, int) or value < 0:
+        raise HTTPException(status_code=422, detail="Demo proposal has invalid weight or agreed value.")
+
+    now = datetime.now(timezone.utc)
+    region = db.query(Region).filter(Region.id == "DELHI_NCR").first()
+    if not region:
+        db.add(Region(id="DELHI_NCR", name="Delhi-NCR", state_code="DL", kind="METRO"))
+        db.flush()
+
+    recycler = db.query(User).filter(User.phone_normalized == "demo_recycler_yard_operator").first()
+    if not recycler:
+        recycler = User(
+            phone_normalized="demo_recycler_yard_operator",
+            pin_hash="demo-only-no-pin-login",
+            role=UserRole.RECYCLER.value,
+            account_state="ACTIVE",
+            is_demo=True,
+            version=1,
+            created_at=now,
+            updated_at=now,
+        )
+        db.add(recycler)
+        db.flush()
+
+    facility = db.query(Facility).filter(Facility.id == facility_id).first()
+    if not facility:
+        facility = Facility(
+            id=facility_id,
+            name="SahiTol Demo Recycler Yard",
+            facility_name="SahiTol Demo Recycler Yard",
+            kind="RECYCLER",
+            address_public="Mayapuri Industrial Area (demo)",
+            district="West Delhi",
+            state="Delhi",
+            region_id="DELHI_NCR",
+            contact_public=None,
+            active=True,
+            version=1,
+            created_at=now,
+            updated_at=now,
+        )
+        db.add(facility)
+    membership = db.query(FacilityUser).filter(
+        FacilityUser.user_id == recycler.id, FacilityUser.facility_id == facility_id
+    ).first()
+    if not membership:
+        db.add(FacilityUser(user_id=recycler.id, facility_id=facility_id, membership_role="OPERATOR", active=True))
+
+    lot = db.query(Lot).filter(Lot.id == lot_id).first()
+    if not lot:
+        lot = Lot(
+            id=lot_id,
+            collector_id=current_user.collector.id,
+            material_id=material_id,
+            regulatory_route=payload.get("material_snapshot", {}).get("regulatory_route") or material.default_route,
+            estimated_weight_g=weight,
+            condition=payload.get("material_snapshot", {}).get("condition"),
+            status="MATCHED",
+            origin_class="DEMO",
+            source_kind="DEMO_SYNTHETIC",
+            is_demo=True,
+            version=1,
+            created_at=now,
+            updated_at=now,
+        )
+        db.add(lot)
+        db.flush()
+    elif lot.collector_id != current_user.collector.id:
+        raise HTTPException(status_code=403, detail="Demo lot belongs to another collector.")
+
+    tx = db.query(Transaction).filter(Transaction.id == transaction_id).first()
+    if not tx:
+        request = LotRequest(
+            lot_id=lot_id, facility_id=facility_id, created_by=current_user.id,
+            state="ACCEPTED", reason="Demo prerequisite", created_at=now,
+        )
+        db.add(request)
+        db.flush()
+        offer = Offer(
+            request_id=request.id, lot_id=lot_id, facility_id=facility_id,
+            rate_paise_per_kg=None, fixed_total_paise=value, price_basis="FIXED_TOTAL",
+            condition=lot.condition or "GOOD", weight_basis_g=weight,
+            expires_at=now + timedelta(days=1), status="ACCEPTED",
+            terms_hash=compute_canonical_hash({"demo": True, "lot_id": str(lot_id), "value": value, "weight": weight}),
+            version=1, created_at=now, updated_at=now,
+        )
+        db.add(offer)
+        db.flush()
+        tx = Transaction(
+            id=transaction_id, lot_id=lot_id, collector_id=current_user.collector.id,
+            facility_id=facility_id, accepted_offer_id=offer.id,
+            estimated_weight_g=weight, agreed_weight_g=weight,
+            quoted_total_paise=value, agreed_total_paise=value,
+            lifecycle="AGREED", is_demo=True, version=1,
+            created_at=now, updated_at=now,
+        )
+        db.add(tx)
+        db.flush()
+    elif tx.collector_id != current_user.collector.id or tx.facility_id != facility_id or tx.lot_id != lot_id:
+        raise HTTPException(status_code=409, detail="Demo transaction conflicts with the proposal linkage.")
+
+    return create_handover(req, response, current_user, db)
 
 
 @router.get("/handovers/{id}", response_model=HandoverDetailResponse)

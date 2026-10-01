@@ -330,7 +330,7 @@ Requirement: [R-HAND-04](15_REQUIREMENTS.md#r-hand-04). Tasks: [T023](07_IMPLEME
 
 Check: An unguessable receipt link shows current redacted status and record/hash comparison; public visitor cannot fetch phone/GPS/photos/payment details; QR possession alone cannot authorize confirmation.
 
-Evidence: [T023_HANDOVER_CONFIRMATIONS.md](../docs/evidence/T023_HANDOVER_CONFIRMATIONS.md), [T025_SECOND_DEVICE_CONFIRMATION.md](../docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md), [T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md](../docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md), [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md). Note: The QR scanner correctly decodes the two-device payload without PII, but it has no server-backed public proposal lookup. Full cross-surface public verification remains NOT_RUN pending T025.
+Evidence: [T023_HANDOVER_CONFIRMATIONS.md](../docs/evidence/T023_HANDOVER_CONFIRMATIONS.md), [T025_SECOND_DEVICE_CONFIRMATION.md](../docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md), [T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md](../docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md), [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md). Note: Local integration verifies authenticated server lookup and QR hash comparison without PII. Full deployed cross-surface two-device verification remains NOT_RUN pending the physical retest.
 
 ## AT-033
 
@@ -340,7 +340,7 @@ Requirement: [R-HAND-05](15_REQUIREMENTS.md#r-hand-05). Tasks: [T023](07_IMPLEME
 
 Check: Different measured weight/grade/price retains estimate and AI suggestion, sets pending acknowledgement/review and variance reason; neither party overwrites original facts; collector agreement or documented dispute is recorded.
 
-Evidence: [T023_HANDOVER_CONFIRMATIONS.md](../docs/evidence/T023_HANDOVER_CONFIRMATIONS.md), [T028_DATA_QUALITY_AND_ANOMALIES.md](../docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md), [T027_COLLECTOR_LEDGER_AND_PAYMENTS.md](../docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md). Note: Backend and local discrepancy handling are tested, but the real second-device handover cannot yet receive server-backed terms confirmation. Full acceptance remains NOT_RUN pending T025.
+Evidence: [T023_HANDOVER_CONFIRMATIONS.md](../docs/evidence/T023_HANDOVER_CONFIRMATIONS.md), [T028_DATA_QUALITY_AND_ANOMALIES.md](../docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md), [T027_COLLECTOR_LEDGER_AND_PAYMENTS.md](../docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md). Note: Server-backed demo confirmation is integration-tested, but the complete deployed second-device discrepancy flow remains NOT_RUN pending the physical retest.
 
 ## AT-034
 
@@ -350,7 +350,7 @@ Requirement: [R-HAND-06](15_REQUIREMENTS.md#r-hand-06). Tasks: [T024](07_IMPLEME
 
 Check: Export offline pending PDF and server confirmed PDF/CSV; identifiers/status/hash/provenance agree with timeline; record is called Digital Handover Record and includes non-EPR boundary, never an official manifest claim.
 
-Evidence: [T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md](../docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md), [T031_DATASET_EXPORTS.md](../docs/evidence/T031_DATASET_EXPORTS.md). Note: The Android receipt and disclaimer are tested, but the required second-device confirmation cannot yet issue a server-verified record. Full acceptance remains NOT_RUN pending T025.
+Evidence: [T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md](../docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md), [T031_DATASET_EXPORTS.md](../docs/evidence/T031_DATASET_EXPORTS.md). Note: The server now permits authenticated recycler confirmation only after lookup/hash verification; the deployed receipt transition has not yet been physically retested, so full acceptance remains NOT_RUN.
 
 ## AT-035
 

@@ -60,6 +60,7 @@ Base `/api/v1` for business endpoints; `/health/live` and `/health/ready` are un
 | POST /offers/{id}/withdraw | Owning facility member | reason + version → WITHDRAWN if not accepted |
 | GET /transactions/{id} | Participant/admin | quoted/final terms,receipt/payment/review states and versions |
 | POST /handovers | Collector participant | immutable client proposal + hash → PENDING_CONFIRMATION; dependency checks |
+| POST /demo/handovers/import | Authenticated demo collector only | provisions missing labelled demo prerequisites, then invokes normal immutable handover creation; never confirms a receipt |
 | GET /handovers/{id} | Participant/admin | proposal + revisions + event verification context |
 | POST /handovers/{id}/confirm | Linked facility member | expected_version,proposal_hash,terms revision,measured material/weight/value → CONFIRMED or PENDING_COLLECTOR_ACK |
 | POST /handovers/{id}/acknowledge-terms | Collector owner | exact terms_hash/version → mutually accepted terms; confirm if recycler already acknowledged |
@@ -121,3 +122,10 @@ Wire create request is `{id, proposal_payload, proposal_hash, expected_version}`
 | 5xx / timeout | Retry same operation with backoff; server may already have committed |
 
 Browser camera requires a secure context; use hosted HTTPS in the two-phone demo. Local LAN HTTP camera access may fail; use reference entry or a deliberate trusted HTTPS development setup instead of falsely treating it as a native scanner bug. Public verification is read-only, rate-limited and reveals minimal information. See [deployment](DEPLOYMENT.md).
+
+The QR handover UUID is an opaque lookup handle, not a bearer credential. R04
+signs in as the isolated demo recycler before reading a detailed proposal,
+compares the QR hash with the server proposal, and only then enables
+facility-authorized confirmation. The demo import endpoint is restricted to
+`is_demo` collectors and uses the same handover creation service after creating
+only labelled demo prerequisites.

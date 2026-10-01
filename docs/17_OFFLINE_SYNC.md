@@ -61,6 +61,16 @@ Offline selection and QR do not manufacture an accepted quote. A proposal create
 
 QR encodes a configured HTTPS verification origin, random handover reference/UUID and payload hash/version, never a name/phone/GPS/PIN/token/photo URL. The backend maps the reference to a minimal public status; detailed evidence requires authorized login. A custom origin or external URL scanned by the web console is rejected rather than fetched. Manual reference input is equivalent and rate-limited.
 
+For the isolated demonstration, a queued `HANDOVER_PROPOSAL` first obtains a
+demo collector token and submits its frozen payload/hash to
+`/demo/handovers/import`. The server creates only missing labelled demo
+prerequisites and invokes normal handover creation. Android acknowledges the
+outbox row only after a 2xx server response; authentication, conflict,
+rejection, and transient failures stay in their corresponding recoverable states.
+R04 obtains a recycler token, fetches the UUID-scoped proposal, compares its
+SHA-256 hash with the QR, and only then permits authenticated confirmation.
+Unsupported queued commands are not fabricated as successful.
+
 Canonical fields and event hashes follow [SAHITOL-JCS-1](06_SCHEMA.md). T023 must create a golden payload and expected byte sequence/digest used by Python, Kotlin and browser tests. PDF uses exactly the stored proposal/confirmed snapshot, with status, source, time, weight, terms and hash. Pending PDF remains pending forever as an artifact; a later confirmed PDF is a new linked version. A matching SHA-256 confirms byte equality with a trusted record, not identity, material composition or physical recycling. Server signatures remain in [future scope](26_FUTURE_BACKLOG.md).
 
 ## Required fault evidence
