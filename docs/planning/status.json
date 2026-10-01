@@ -181,7 +181,7 @@
       "evidence": [
         "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md"
       ],
-      "note": "Implemented pending proposal, canonical SAHITOL-JCS-1 SHA-256 hash verification matching frozen fixture, authenticated recycler confirmation, discrepancy TermsRevision workflow with explicit collector acknowledgement, documented disputes without fact overwriting, receipt with statutory non-EPR notice, and unauthenticated redacted public verification.",
+      "note": "Implemented pending proposal, canonical SAHITOL-JCS-1 SHA-256 hash verification matching frozen fixture, authenticated recycler confirmation, discrepancy TermsRevision workflow with explicit collector acknowledgement, documented disputes without fact overwriting, receipt with statutory non-EPR notice, and unauthenticated redacted public verification. Independent re-verification on 2026-10-01 passed all 13 handover workflow tests.",
       "owner": "Owner + coding agent"
     },
     "T024": {

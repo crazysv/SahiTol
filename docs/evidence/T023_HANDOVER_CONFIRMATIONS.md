@@ -113,3 +113,19 @@ Full API test suite execution (159 passed, 0 failed):
 $env:PYTHONPATH="d:\SahiTol;d:\SahiTol\services\api"; & C:\Python310\python.exe -m pytest services/api/tests -q
 159 passed, 9 warnings in 11.43s
 ```
+
+## Independent re-verification (2026-10-01)
+
+Reran the focused implementation suite against the current codebase:
+
+```text
+$env:PYTHONPATH="D:\SahiTol;D:\SahiTol\services\api"
+C:\Python310\python.exe -m pytest services/api/tests/test_handovers.py -v
+
+13 passed in 0.84 s
+```
+
+This repeats the fixture hash, idempotency, altered-hash, ownership, exact and
+discrepant confirmation, dispute, void, receipt disclaimer, and public-redaction
+checks. The only output was one upstream TestClient deprecation warning. No T023
+defect was found.
