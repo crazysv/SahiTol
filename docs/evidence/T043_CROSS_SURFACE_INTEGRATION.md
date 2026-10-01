@@ -2,8 +2,8 @@
 
 **Task:** T043 — Cross-surface integration and fault acceptance test suite  
 **Status:** IN PROGRESS — deterministic integration coverage passes; the complete
-real-device, hosted fault-acceptance journey remains separate evidence.  
-**Date:** 2026-10-01  
+real-device, hosted fault-acceptance journey remains separate evidence.
+**Date:** 2026-10-01
 **Runner:** Python 3.10.11 / pytest-9.1.1 on Windows (local dev)
 
 ## Test Run Result
