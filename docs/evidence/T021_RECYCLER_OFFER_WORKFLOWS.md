@@ -118,3 +118,19 @@ $env:PYTHONPATH="d:\SahiTol;d:\SahiTol\services\api"; & C:\Python310\python.exe 
 2. **Deterministic Terms Hash**: Canonical representation using SAHITOL-JCS-1 encoding ensures that neither client nor server can alter agreed quantities, rates, or terms without invalidating `terms_hash`.
 3. **Atomic Mutual Binding**: The offer acceptance updates the offer, expires all competing offers, expires pending requests, advances the lot, creates the transaction, and creates the initial terms revision within a single atomic database transaction.
 4. **Read-Only Authorizations**: Authorizations are verified through official DPCC/CPCB/MPCB public records and administrative processes; facility users cannot grant or modify their own route authorizations.
+
+## Independent re-verification (2026-10-01)
+
+The current implementation was exercised independently with:
+
+```text
+$env:PYTHONPATH="D:\SahiTol;D:\SahiTol\services\api"
+C:\Python310\python.exe -m pytest services/api/tests/test_trade.py -v
+```
+
+Result: **19 passed** in 1.68 s (two framework deprecation warnings only). This
+rechecked profile provenance and authorization tampering denial; battery route
+isolation; incoming-request location privacy; rate and fixed-total quoting;
+rejection/rematching; withdrawal; acceptance, expiry, and terms-hash guards; the
+single-active-agreement invariant; price-board immutability; and transaction
+access scoping. No T021 defect was found in this run.

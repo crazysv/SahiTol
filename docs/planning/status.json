@@ -165,7 +165,7 @@
       "evidence": [
         "docs/evidence/T021_RECYCLER_OFFER_WORKFLOWS.md"
       ],
-      "note": "Implemented facility-user linkage, self-declared operational profile with provenance, authorization tampering prevention, directed lot requests, battery isolation hard guard, recycler incoming queue with location privacy, offer quoting (rate per kg and fixed total), rejections with rematching, offer withdrawals, collector acceptance creating immutable agreement, single active agreement race condition guard, and price-board independence.",
+      "note": "Implemented facility-user linkage, self-declared operational profile with provenance, authorization tampering prevention, directed lot requests, battery isolation hard guard, recycler incoming queue with location privacy, offer quoting (rate per kg and fixed total), rejections with rematching, offer withdrawals, collector acceptance creating immutable agreement, single active agreement race condition guard, and price-board independence. Independent re-verification on 2026-10-01 passed all 19 trade workflow tests.",
       "owner": "Owner + coding agent"
     },
     "T022": {

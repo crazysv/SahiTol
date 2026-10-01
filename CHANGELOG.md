@@ -976,3 +976,10 @@ directly to C10 Handover Capture for the selected lot. The focused Android unit
 suite passed (4 tests), and the repaired flow was verified on CPH2781 Android 16:
 the action displayed the handover screen with selected yard and terms.
 
+## 2026-10-01 — Recycler offer workflow re-verification (T021)
+
+Independently reran the complete trade workflow suite: all 19 tests pass. This
+includes regulatory authorization tampering denial, battery isolation, privacy,
+offer lifecycle controls, immutable agreement formation, and the competing-offer
+race invariant. No implementation change was needed.
+
