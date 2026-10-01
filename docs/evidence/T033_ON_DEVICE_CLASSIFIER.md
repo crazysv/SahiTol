@@ -1,5 +1,24 @@
 # Test Evidence: T033 Train, Evaluate, and Export On-Device Model
 
+## 2026-10-01 independent runtime verification
+
+The prior audit listed the TensorFlow interpreter as unavailable. The development
+requirements correctly declare TensorFlow for Windows and the current Python
+3.10 environment has TensorFlow **2.15.1** installed. Independent checks opened
+the bundled LiteRT model with an input tensor of `[1, 224, 224, 3]` and output
+tensor of `[1, 12]`, then ran the complete model suite:
+
+```text
+TF_ENABLE_ONEDNN_OPTS=0 pytest services/api/tests/test_ml_classifier.py -q
+6 passed in 10.78s
+```
+
+This verifies model files, labels/metadata, actual LiteRT interpreter inference
+and latency bound, documented parity metadata, held-out evaluation consistency,
+and model-card guardrails. It does **not** improve the model’s reported quality:
+the card’s macro-F1 is 0.0159 and the 0.65 safety threshold produces 100%
+abstention, so manual selection remains the truthful operational path.
+
 ## Metadata
 - **Task ID**: T033
 - **Phase**: Stage 5 (Dataset Cards & AI Training Pipeline)

@@ -261,7 +261,7 @@
       "evidence": [
         "docs/evidence/T033_ON_DEVICE_CLASSIFIER.md"
       ],
-      "note": "Trained MobileNetV3-Small on 12 defensible e-waste classes with zero split leakage, evaluated on untouched test set with honest metrics and 0.65 advisory threshold, exported quantized LiteRT model (1.18 MB) with verified parity (<0.002 max diff), and generated model card.",
+      "note": "Independently reverified the declared TensorFlow 2.15.1 runtime. The LiteRT interpreter opens the bundled classifier with [1,224,224,3] input and [1,12] output; all six model artifact/interpreter/parity/honesty tests pass in 10.78s. Honest weak evaluation remains: macro-F1 0.0159 and 100% abstention at the 0.65 safety threshold.",
       "owner": "Owner + coding agent"
     },
     "T034": {

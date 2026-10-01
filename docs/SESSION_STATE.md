@@ -113,5 +113,9 @@ admin-maintenance suite passes 10/10. T030 was independently repaired: approved
 A01-A07 layouts now bind their operational values/actions to authenticated admin
 APIs instead of static sample figures; A03 is explicitly evidence-only, not a
 statutory compliance decision. Focused dashboard tests pass 4/4, admin API
-tests pass 10/10, and the web typecheck/production build pass. Continue in
-order at T031.
+tests pass 10/10, and the web typecheck/production build pass. T033's former
+Windows-runtime blocker was independently cleared: TensorFlow 2.15.1 is
+installed, the LiteRT interpreter opens the bundled `[1,224,224,3]` to `[1,12]`
+model, and all six model tests pass. The model remains honestly weak (macro-F1
+0.0159, 100% abstention at threshold 0.65). Continue at the next audit finding,
+T039.
