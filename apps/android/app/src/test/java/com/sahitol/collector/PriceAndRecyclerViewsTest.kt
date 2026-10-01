@@ -7,6 +7,7 @@ import com.sahitol.collector.data.local.entity.OutboxOperationEntity
 import com.sahitol.collector.data.repository.FacilityRepository
 import com.sahitol.collector.data.repository.NewPriceObservation
 import com.sahitol.collector.data.repository.PriceRepository
+import com.sahitol.collector.data.repository.offerTotalInr
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
@@ -100,6 +101,12 @@ class PriceAndRecyclerViewsTest {
         assertEquals(valuation.lowPaise / 100, valuation.lowInr)
         assertEquals(valuation.highPaise / 100, valuation.highInr)
         assertEquals("HIGH", valuation.confidenceTier)
+    }
+
+    @Test
+    fun rateOfferTotal_usesServerWeightBasisWithoutInventingFixedTotal() {
+        assertEquals(4275.0, offerTotalInr("RATE_PER_KG", 30000, 0, 14250), 0.001)
+        assertEquals(1250.0, offerTotalInr("FIXED_TOTAL", 0, 125000, 0), 0.001)
     }
 
     @Test

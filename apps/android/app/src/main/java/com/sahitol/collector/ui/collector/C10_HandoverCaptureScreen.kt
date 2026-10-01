@@ -22,6 +22,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sahitol.collector.data.repository.HandoverProposal
 import com.sahitol.collector.data.repository.HandoverRepository
+import com.sahitol.collector.data.repository.FacilityRepository
+import com.sahitol.collector.data.repository.AcceptedTransaction
+import com.sahitol.collector.data.repository.RecyclerOfferItem
+import com.sahitol.collector.data.repository.TradeResult
+import com.sahitol.collector.data.local.entity.LotEntity
 import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.ui.theme.*
 import kotlinx.coroutines.launch
@@ -38,6 +43,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun C10_HandoverCaptureScreen(
     lotId: String,
+    lot: LotEntity?,
+    facilityRepository: FacilityRepository,
     handoverRepository: HandoverRepository,
     sessionManager: SessionManager,
     onNavigateBack: () -> Unit,
@@ -51,13 +58,61 @@ fun C10_HandoverCaptureScreen(
     val session by sessionManager.session.collectAsState()
     val accountId = session.accountId ?: "col_demo_santosh"
 
+    val lotContext = remember(lot) { lotDisplayContext(lot) }
     var proposal by remember { mutableStateOf(handoverRepository.getHandoverProposal(lotId)) }
-    var termsState by remember { mutableStateOf("PENDING_REVIEW") } // PENDING_REVIEW, ACCEPTED, DISPUTED
+    var agreement by remember { mutableStateOf<AcceptedTransaction?>(null) }
+    var acceptedOffer by remember { mutableStateOf<RecyclerOfferItem?>(null) }
+    var loadingAgreement by remember { mutableStateOf(true) }
+    var agreementError by remember { mutableStateOf<String?>(null) }
+    var termsState by remember { mutableStateOf("AGREED") }
     var showReviewDetails by remember { mutableStateOf(false) }
     var disputeReason by remember { mutableStateOf("") }
     var showDisputeDialog by remember { mutableStateOf(false) }
     var isSaving by remember { mutableStateOf(false) }
     var savedSuccessToast by remember { mutableStateOf(false) }
+
+    LaunchedEffect(lotId, accountId, lotContext.canonicalMaterialId) {
+        loadingAgreement = true
+        agreementError = null
+        when (val txResult = facilityRepository.fetchAcceptedTransaction(lotId, accountId)) {
+            is TradeResult.Failure -> agreementError = txResult.message
+            is TradeResult.Success -> {
+                agreement = txResult.value
+                when (val offersResult = facilityRepository.fetchLiveOffers(lotId, accountId)) {
+                    is TradeResult.Failure -> agreementError = offersResult.message
+                    is TradeResult.Success -> {
+                        val offer = offersResult.value.firstOrNull { it.offerId == txResult.value.acceptedOfferId }
+                        if (offer == null || offer.termsHash.isNullOrBlank()) {
+                            agreementError = "The accepted offer terms could not be recovered. Refresh the offer before creating a handover."
+                        } else {
+                            acceptedOffer = offer
+                            proposal = HandoverProposal(
+                                handoverId = lotId,
+                                transactionId = txResult.value.transactionId,
+                                lotId = txResult.value.lotId,
+                                collectorId = txResult.value.collectorId,
+                                facilityId = txResult.value.facilityId,
+                                facilityName = "Accepted live facility",
+                                materialId = lotContext.canonicalMaterialId ?: "",
+                                materialName = lotContext.materialLabel,
+                                condition = "INTACT",
+                                estimatedWeightG = txResult.value.agreedWeightG,
+                                measuredWeightG = txResult.value.agreedWeightG,
+                                rateInrPerKg = if (txResult.value.agreedWeightG > 0) txResult.value.agreedTotalPaise / 100.0 * 1000 / txResult.value.agreedWeightG else 0.0,
+                                totalPayoutInr = txResult.value.agreedTotalPaise / 100.0,
+                                referenceCode = "Pending server proposal",
+                                status = "AGREED",
+                                canonicalHash = "",
+                                verificationUrl = "",
+                                isDemo = txResult.value.isDemo
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        loadingAgreement = false
+    }
 
     Scaffold(
         topBar = {
@@ -168,6 +223,11 @@ fun C10_HandoverCaptureScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            if (loadingAgreement) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                Text("Loading the accepted server agreement…", fontSize = 12.sp, color = OnSurfaceVariant)
+            }
+            agreementError?.let { Text(it, color = ErrorRed, fontSize = 12.sp) }
             // Material & Yard Card
             Card(
                 shape = RoundedCornerShape(16.dp),
@@ -251,7 +311,7 @@ fun C10_HandoverCaptureScreen(
                             )
                             Spacer(modifier = Modifier.width(6.dp))
                             Text(
-                                text = "Terms Changed / शर्तों में बदलाव",
+                            text = "Agreed Terms / स्वीकृत शर्तें",
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = if (termsState == "DISPUTED") ErrorRed else MustardSecondary
@@ -262,7 +322,7 @@ fun C10_HandoverCaptureScreen(
                             color = (if (termsState == "DISPUTED") ErrorRed else MustardSecondary).copy(alpha = 0.15f)
                         ) {
                             Text(
-                                text = if (termsState == "ACCEPTED") "Accepted" else if (termsState == "DISPUTED") "Disputed" else "Discrepancy Found",
+                                text = if (termsState == "DISPUTED") "Disputed" else "Agreement loaded",
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = if (termsState == "DISPUTED") ErrorRed else MustardSecondary,
@@ -280,9 +340,9 @@ fun C10_HandoverCaptureScreen(
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("Original Estimate", fontSize = 11.sp, color = OnSurfaceVariant)
-                            Text("₹450.00", fontSize = 16.sp, fontWeight = FontWeight.SemiBold, color = OnSurface)
-                            Text("2.5 kg @ ₹180/kg", fontSize = 10.sp, color = OnSurfaceVariant)
+                            Text("Agreed total", fontSize = 11.sp, color = OnSurfaceVariant)
+                            Text("₹%.2f".format(proposal.totalPayoutInr), fontSize = 16.sp, fontWeight = FontWeight.SemiBold, color = OnSurface)
+                            Text("%.2f kg @ ₹%.2f/kg".format(proposal.estimatedWeightG / 1000.0, proposal.rateInrPerKg), fontSize = 10.sp, color = OnSurfaceVariant)
                         }
                         Box(
                             modifier = Modifier
@@ -291,14 +351,14 @@ fun C10_HandoverCaptureScreen(
                                 .background(OutlineVariantColor.copy(alpha = 0.5f))
                         )
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("New Measured Term", fontSize = 11.sp, color = OnSurfaceVariant)
+                            Text("Recorded handover mass", fontSize = 11.sp, color = OnSurfaceVariant)
                             Text(
-                                "₹414.00",
+                                "₹%.2f".format(proposal.totalPayoutInr),
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = if (termsState == "DISPUTED") ErrorRed else TerracottaPrimary
                             )
-                            Text("2.3 kg @ ₹180/kg (-200g tare)", fontSize = 10.sp, color = OnSurfaceVariant)
+                            Text("%.2f kg; no recycler measurement yet".format((proposal.measuredWeightG ?: proposal.estimatedWeightG) / 1000.0), fontSize = 10.sp, color = OnSurfaceVariant)
                         }
                     }
 
@@ -317,7 +377,7 @@ fun C10_HandoverCaptureScreen(
                                     color = OnSurface
                                 )
                                 Text(
-                                    text = "Certified Scale #OKH-04 calibrated Oct 12. Moisture & rubber sleeve deduction: -200 grams. Net metallic copper core: 2.30 kg.",
+                                    text = "This screen records the accepted agreement. A recycler can submit a measured difference only after the server-backed proposal is created.",
                                     fontSize = 10.sp,
                                     color = OnSurfaceVariant
                                 )
@@ -341,16 +401,7 @@ fun C10_HandoverCaptureScreen(
                         }
 
                         Button(
-                            onClick = {
-                                termsState = "ACCEPTED"
-                                coroutineScope.launch {
-                                    proposal = handoverRepository.recordDiscrepancyResponseAtomic(
-                                        handoverId = proposal.handoverId,
-                                        action = "ACCEPT_TERMS",
-                                        collectorId = accountId
-                                    )
-                                }
-                            },
+                            onClick = { termsState = "AGREED" },
                             modifier = Modifier.weight(1f),
                             shape = RoundedCornerShape(8.dp),
                             colors = ButtonDefaults.buttonColors(
@@ -359,20 +410,21 @@ fun C10_HandoverCaptureScreen(
                         ) {
                             Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(14.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text(if (termsState == "ACCEPTED") "Accepted" else "Accept", fontSize = 11.sp)
+                            Text("Agreed", fontSize = 11.sp)
                         }
 
                         OutlinedButton(
-                            onClick = { showDisputeDialog = true },
+                            onClick = { },
                             modifier = Modifier.weight(1f),
                             shape = RoundedCornerShape(8.dp),
+                            enabled = false,
                             colors = ButtonDefaults.outlinedButtonColors(
                                 contentColor = if (termsState == "DISPUTED") ErrorRed else OnSurfaceVariant
                             )
                         ) {
                             Icon(Icons.Default.Close, contentDescription = null, modifier = Modifier.size(14.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text("Dispute", fontSize = 11.sp)
+                            Text("Recycler revision", fontSize = 11.sp)
                         }
                     }
                 }
@@ -409,8 +461,8 @@ fun C10_HandoverCaptureScreen(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(Icons.Default.CheckCircle, contentDescription = null, tint = SuccessGreen, modifier = Modifier.size(24.dp))
                             Spacer(modifier = Modifier.height(4.dp))
-                            Text("Verified Scale Snap: 2.30 kg", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = OnSurface)
-                            Text("Tare calibrated: -0.20 kg insulation tare", fontSize = 10.sp, color = OnSurfaceVariant)
+                            Text("Accepted mass: %.2f kg".format((proposal.measuredWeightG ?: proposal.estimatedWeightG) / 1000.0), fontSize = 12.sp, fontWeight = FontWeight.Bold, color = OnSurface)
+                            Text("Recycler measurement has not been recorded", fontSize = 10.sp, color = OnSurfaceVariant)
                         }
                     }
 
@@ -422,16 +474,16 @@ fun C10_HandoverCaptureScreen(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(Icons.Default.Place, contentDescription = null, tint = TerracottaPrimary, modifier = Modifier.size(14.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text("Okhla Hub, Bay 4 (GPS Accurate)", fontSize = 11.sp, color = OnSurfaceVariant)
+                            Text("Facility: ${proposal.facilityName}", fontSize = 11.sp, color = OnSurfaceVariant)
                         }
-                        Text("Today, 02:45 PM", fontSize = 11.sp, color = OnSurfaceVariant)
+                        Text("Server agreement", fontSize = 11.sp, color = OnSurfaceVariant)
                     }
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Default.CheckCircle, contentDescription = null, tint = PrimaryContainer, modifier = Modifier.size(14.dp))
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
-                            text = "HASH: ${proposal.canonicalHash.take(16)}...",
+                            text = if (proposal.canonicalHash.isBlank()) "Hash will be issued by server" else "HASH: ${proposal.canonicalHash.take(16)}...",
                             fontFamily = FontFamily.Monospace,
                             fontSize = 10.sp,
                             color = OnSurfaceVariant
@@ -445,22 +497,19 @@ fun C10_HandoverCaptureScreen(
                 onClick = {
                     isSaving = true
                     coroutineScope.launch {
-                        proposal = handoverRepository.createProposalAtomic(
-                            lotId = lotId,
-                            collectorId = accountId,
-                            facilityId = proposal.facilityId,
-                            facilityName = proposal.facilityName,
-                            materialId = proposal.materialId,
-                            materialName = proposal.materialName,
-                            condition = proposal.condition,
-                            estimatedWeightG = proposal.estimatedWeightG,
-                            measuredWeightG = proposal.measuredWeightG ?: 2300L,
-                            rateInrPerKg = proposal.rateInrPerKg,
-                            totalPayoutInr = if (termsState == "ACCEPTED") 414.0 else 450.0,
-                            isDemo = true
-                        )
+                        val tx = agreement
+                        val offer = acceptedOffer
+                        val materialId = lotContext.canonicalMaterialId
+                        if (tx == null || offer == null || materialId == null) {
+                            agreementError = "A verified accepted agreement is required before creating a handover."
+                        } else when (val result = facilityRepository.createLiveHandover(tx, offer, materialId, accountId)) {
+                            is TradeResult.Failure -> agreementError = result.message
+                            is TradeResult.Success -> proposal = handoverRepository.cacheServerProposal(
+                                result.value, tx, offer, materialId, lotContext.materialLabel, proposal.facilityName
+                            )
+                        }
                         isSaving = false
-                        savedSuccessToast = true
+                        savedSuccessToast = proposal.handoverId != lotId && proposal.canonicalHash.isNotBlank()
                     }
                 },
                 modifier = Modifier
@@ -468,7 +517,7 @@ fun C10_HandoverCaptureScreen(
                     .height(52.dp),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = TerracottaPrimary),
-                enabled = !isSaving
+                enabled = !isSaving && !loadingAgreement && agreement != null && acceptedOffer != null && lotContext.canonicalMaterialId != null
             ) {
                 Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.width(8.dp))
@@ -496,8 +545,8 @@ fun C10_HandoverCaptureScreen(
                             Icon(Icons.Default.CheckCircle, contentDescription = null, tint = SuccessGreen)
                             Spacer(modifier = Modifier.width(8.dp))
                             Column {
-                                Text("Handover Saved Locally!", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = OnSurface)
-                                Text("Receipt ${proposal.referenceCode} queued for network sync.", fontSize = 11.sp, color = OnSurfaceVariant)
+                                Text("Server Handover Proposal Created", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = OnSurface)
+                                Text("Receipt ${proposal.referenceCode} is ready for recycler confirmation.", fontSize = 11.sp, color = OnSurfaceVariant)
                             }
                         }
 

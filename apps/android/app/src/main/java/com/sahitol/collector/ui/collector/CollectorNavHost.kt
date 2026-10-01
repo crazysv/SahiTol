@@ -471,6 +471,8 @@ fun CollectorNavHost(
             val lotId = backStackEntry.arguments?.getString("lotId") ?: "default_lot"
             C10_HandoverCaptureScreen(
                 lotId = lotId,
+                lot = lots.firstOrNull { it.lotId == lotId },
+                facilityRepository = facilityRepository,
                 handoverRepository = handoverRepository,
                 sessionManager = sessionManager,
                 onNavigateBack = { navController.popBackStack() },

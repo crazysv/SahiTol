@@ -250,22 +250,60 @@ class HandoverRepository(
         return proposalsCache[id] ?: HandoverProposal(
             handoverId = id,
             lotId = id,
-            collectorId = "col_test_santosh",
-            facilityId = DEMO_RECYCLER_FACILITY_ID,
-            facilityName = "Verma Electricals (Okhla Hub)",
-            materialId = "MAT-CAB-01",
-            materialName = "Copper Wire / Cable · तांबा केबल",
-            condition = "GOOD",
-            estimatedWeightG = 2500,
-            measuredWeightG = 2300,
-            rateInrPerKg = 180.0,
-            totalPayoutInr = 414.0,
-            referenceCode = "ST-24A7",
+            transactionId = "",
+            collectorId = "",
+            facilityId = "",
+            facilityName = "Agreement not loaded",
+            materialId = "",
+            materialName = "No handover proposal available",
+            condition = "Not recorded",
+            estimatedWeightG = 0,
+            measuredWeightG = null,
+            rateInrPerKg = 0.0,
+            totalPayoutInr = 0.0,
+            referenceCode = "Not issued",
             status = "PENDING_CONFIRMATION",
-            canonicalHash = "8f9c1042735d4918e72b1d767cca58ac80c59667b59b86f511ebf11b64e3b21",
-            occurredAt = "14 Oct, 02:00 PM",
-            isDemo = true
+            canonicalHash = "",
+            verificationUrl = "",
+            occurredAt = Instant.now().toString(),
+            isDemo = false
         )
+    }
+
+    /** Cache only a proposal that the server accepted and assigned an ID to. */
+    fun cacheServerProposal(
+        result: LiveHandoverResult,
+        agreement: AcceptedTransaction,
+        offer: RecyclerOfferItem,
+        materialId: String,
+        materialName: String,
+        facilityName: String
+    ): HandoverProposal {
+        val reference = "ST-" + result.handoverId.take(6).uppercase()
+        val proposal = HandoverProposal(
+            handoverId = result.handoverId,
+            transactionId = agreement.transactionId,
+            lotId = agreement.lotId,
+            collectorId = agreement.collectorId,
+            facilityId = agreement.facilityId,
+            facilityName = facilityName,
+            materialId = materialId,
+            materialName = materialName,
+            condition = "INTACT",
+            estimatedWeightG = agreement.agreedWeightG,
+            measuredWeightG = agreement.agreedWeightG,
+            rateInrPerKg = if (agreement.agreedWeightG > 0) agreement.agreedTotalPaise / 100.0 * 1000 / agreement.agreedWeightG else 0.0,
+            totalPayoutInr = agreement.agreedTotalPaise / 100.0,
+            referenceCode = reference,
+            status = result.status,
+            canonicalHash = result.proposalHash,
+            verificationUrl = "https://sahitol.pages.dev/recycler/scan?handover_id=${result.handoverId}&ref=$reference&hash=${result.proposalHash}",
+            occurredAt = Instant.now().toString(),
+            isDemo = agreement.isDemo
+        )
+        proposalsCache[result.handoverId] = proposal
+        proposalsCache[agreement.lotId] = proposal
+        return proposal
     }
 
     fun getJourneyTimeline(lotId: String): List<PassportTimelineEvent> {

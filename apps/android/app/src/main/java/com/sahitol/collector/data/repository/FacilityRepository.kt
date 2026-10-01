@@ -11,10 +11,12 @@ import com.sahitol.collector.domain.matching.MatchingEngine
 import com.sahitol.collector.domain.matching.MatchingEngine.LotParameters
 import com.sahitol.collector.domain.matching.MatchingEngine.MatchingCandidate
 import com.sahitol.collector.domain.matching.MatchingEngine.MatchOutcome
+import com.sahitol.collector.domain.canonical.CanonicalJson
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 import java.security.MessageDigest
+import java.time.Instant
 import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -53,6 +55,40 @@ data class RecyclerOfferItem(
     val termsHash: String? = null,
     val version: Int? = null
 )
+
+/** Server-authoritative agreement recovered from a persisted lot ID. */
+data class AcceptedTransaction(
+    val transactionId: String,
+    val lotId: String,
+    val collectorId: String,
+    val facilityId: String,
+    val acceptedOfferId: String,
+    val agreedWeightG: Long,
+    val agreedTotalPaise: Long,
+    val currency: String,
+    val lifecycle: String,
+    val isDemo: Boolean
+)
+
+data class LiveHandoverResult(
+    val handoverId: String,
+    val transactionId: String,
+    val status: String,
+    val proposalHash: String,
+    val publicToken: String?,
+    val version: Int
+)
+
+internal fun offerTotalInr(
+    priceBasis: String,
+    ratePaisePerKg: Int,
+    fixedTotalPaise: Int,
+    weightBasisG: Long
+): Double = when (priceBasis) {
+    "RATE_PER_KG" -> ratePaisePerKg.toDouble() * weightBasisG / 100_000.0
+    "FIXED_TOTAL" -> fixedTotalPaise / 100.0
+    else -> 0.0
+}
 
 sealed interface TradeResult<out T> {
     data class Success<T>(val value: T) : TradeResult<T>
@@ -183,15 +219,21 @@ class FacilityRepository(
         if (!isUuid(lotId)) return TradeResult.Failure("This saved lot has not been synchronized yet.")
         val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again to check offers.")
         val response = requestJson("GET", "/api/v1/lots/$lotId/offers", accessToken = token) ?: return TradeResult.Failure("Could not refresh offers. Check the connection and try again.")
+        Log.i("SahiTolTrade", "Live offer refresh for $lotId returned HTTP ${response.first}")
         if (response.first !in 200..299) return TradeResult.Failure(apiMessage(response.second))
         return try {
             val offers = org.json.JSONArray(response.second)
+            Log.i("SahiTolTrade", "Live offer refresh parsed ${offers.length()} offers for $lotId")
             TradeResult.Success((0 until offers.length()).map { index ->
                 val item = offers.getJSONObject(index)
                 val ratePaise = item.optInt("effective_rate_paise_per_kg", 0)
                 val totalPaise = item.optInt("fixed_total_paise", 0)
+                val weightBasisG = item.optLong("weight_basis_g", 0L)
+                val priceBasis = item.getString("price_basis")
                 RecyclerOfferItem(item.getString("id"), item.getString("facility_id"), "Recycler offer", "Live offer", 0.0,
-                    ratePaise / 100.0, totalPaise / 100.0, item.getString("price_basis"), status = item.getString("status"),
+                    ratePaise / 100.0,
+                    offerTotalInr(priceBasis, ratePaise, totalPaise, weightBasisG),
+                    priceBasis, status = item.getString("status"),
                     termsHash = item.getString("terms_hash"), version = item.getInt("version"))
             })
         } catch (_: Exception) { TradeResult.Failure("The offer list returned an unreadable response.") }
@@ -203,6 +245,89 @@ class FacilityRepository(
         val body = JSONObject().put("terms_hash", offer.termsHash).put("expected_version", offer.version).toString()
         val response = requestJson("POST", "/api/v1/offers/${offer.offerId}/accept", body, token) ?: return TradeResult.Failure("Could not accept the offer. Check the connection and try again.")
         return if (response.first in 200..299) TradeResult.Success(Unit) else TradeResult.Failure(apiMessage(response.second))
+    }
+
+    suspend fun fetchAcceptedTransaction(lotId: String, accountId: String): TradeResult<AcceptedTransaction> {
+        if (!isUuid(lotId)) return TradeResult.Failure("This saved lot has not been synchronized yet.")
+        val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again to resume the accepted offer.")
+        val response = requestJson("GET", "/api/v1/lots/$lotId/transaction", accessToken = token)
+            ?: return TradeResult.Failure("Could not retrieve the accepted agreement. Check the connection and try again.")
+        if (response.first !in 200..299) return TradeResult.Failure(apiMessage(response.second))
+        return try {
+            val item = JSONObject(response.second)
+            TradeResult.Success(
+                AcceptedTransaction(
+                    transactionId = item.getString("id"),
+                    lotId = item.getString("lot_id"),
+                    collectorId = item.getString("collector_id"),
+                    facilityId = item.getString("facility_id"),
+                    acceptedOfferId = item.getString("accepted_offer_id"),
+                    agreedWeightG = item.getLong("agreed_weight_g"),
+                    agreedTotalPaise = item.getLong("agreed_total_paise"),
+                    currency = item.getString("currency"),
+                    lifecycle = item.getString("lifecycle"),
+                    isDemo = item.getBoolean("is_demo")
+                )
+            )
+        } catch (_: Exception) { TradeResult.Failure("The accepted agreement returned an unreadable response.") }
+    }
+
+    suspend fun createLiveHandover(
+        agreement: AcceptedTransaction,
+        offer: RecyclerOfferItem,
+        materialId: String,
+        accountId: String,
+        measuredWeightG: Long = agreement.agreedWeightG
+    ): TradeResult<LiveHandoverResult> {
+        if (agreement.lifecycle !in setOf("AGREED", "IN_TRANSIT")) {
+            return TradeResult.Failure("This agreement is not eligible for a handover proposal.")
+        }
+        val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again before creating the handover.")
+        val handoverId = UUID.randomUUID().toString()
+        val now = Instant.now().toString()
+        val payload = mapOf(
+            "schema_version" to "SAHITOL-HANDOVER-1",
+            "handover_id" to handoverId,
+            "transaction_id" to agreement.transactionId,
+            "lot_id" to agreement.lotId,
+            "collector_id" to agreement.collectorId,
+            "facility_id" to agreement.facilityId,
+            "agreed_terms_hash" to offer.termsHash,
+            "material_snapshot" to mapOf(
+                "material_id" to materialId,
+                "condition" to "INTACT",
+                "regulatory_route" to if (materialId.contains("BAT")) "HAZARDOUS_BATTERY" else "AUTHORIZED_EWASTE"
+            ),
+            "weight_snapshot" to mapOf(
+                "estimated_weight_g" to agreement.agreedWeightG,
+                "measured_weight_g" to measuredWeightG
+            ),
+            "value_snapshot" to mapOf(
+                "currency" to agreement.currency,
+                "agreed_total_paise" to agreement.agreedTotalPaise
+            ),
+            "occurred_at" to now,
+            "media" to emptyList<String>(),
+            "is_demo" to agreement.isDemo
+        )
+        val canonicalPayload = CanonicalJson.serialize(payload)
+        val proposalHash = CanonicalJson.sha256Hex(canonicalPayload)
+        val body = JSONObject()
+            .put("id", handoverId)
+            .put("proposal_payload", JSONObject(canonicalPayload))
+            .put("proposal_hash", proposalHash)
+            .toString()
+        val response = requestJson("POST", "/api/v1/handovers", body, token)
+            ?: return TradeResult.Failure("Could not create the handover proposal. Check the connection and try again.")
+        if (response.first !in 200..299) return TradeResult.Failure(apiMessage(response.second))
+        return try {
+            val item = JSONObject(response.second)
+            TradeResult.Success(LiveHandoverResult(
+                handoverId = item.getString("id"), transactionId = item.getString("transaction_id"),
+                status = item.getString("status"), proposalHash = item.getString("proposal_hash"),
+                publicToken = item.optString("public_token").ifBlank { null }, version = item.getInt("version")
+            ))
+        } catch (_: Exception) { TradeResult.Failure("The handover response returned an unreadable response.") }
     }
 
     private suspend fun collectorDemoToken(accountId: String): String? {

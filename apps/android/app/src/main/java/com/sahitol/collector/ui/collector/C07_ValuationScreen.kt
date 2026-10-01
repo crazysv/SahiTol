@@ -67,7 +67,10 @@ fun C07_ValuationScreen(
 
     LaunchedEffect(lotId, accountId) {
         when (val result = facilityRepository.fetchLiveOffers(lotId, accountId)) {
-            is com.sahitol.collector.data.repository.TradeResult.Success -> offers = result.value
+            is com.sahitol.collector.data.repository.TradeResult.Success -> {
+                offers = result.value
+                result.value.firstOrNull { it.status == "ACCEPTED" }?.let { acceptedOfferName = it.facilityName }
+            }
             is com.sahitol.collector.data.repository.TradeResult.Failure -> offerMessage = result.message
         }
     }
@@ -423,7 +426,8 @@ fun C07_ValuationScreen(
                                 is com.sahitol.collector.data.repository.TradeResult.Failure -> offerMessage = result.message
                             }
                         }
-                    }
+                    },
+                    onContinueHandover = { if (lotContext.isConcreteLot) onNavigateHandover(lotId) }
                 )
             }
 
@@ -457,14 +461,12 @@ fun C07_ValuationScreen(
                                     color = SuccessGreen
                                 )
                                 Text(
-                                    text = "Weigh-slip generated for $acceptedOfferName.",
+                                    text = "Accepted by $acceptedOfferName. Continue to create the server-backed handover proposal.",
                                     fontSize = 12.sp,
                                     color = OnSurfaceVariant
                                 )
                             }
-                            IconButton(onClick = { acceptedOfferName = null }) {
-                                Icon(Icons.Default.Close, contentDescription = "Dismiss", tint = OnSurfaceVariant)
-                            }
+                            TextButton(onClick = { if (lotContext.isConcreteLot) onNavigateHandover(lotId) }) { Text("Continue") }
                         }
                     }
                 }
@@ -520,7 +522,8 @@ fun C07_ValuationScreen(
 @Composable
 fun RecyclerOfferCard(
     offer: RecyclerOfferItem,
-    onAccept: () -> Unit
+    onAccept: () -> Unit,
+    onContinueHandover: () -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -621,7 +624,14 @@ fun RecyclerOfferCard(
                 }
             }
 
-            if (!offer.isOfflinePending) {
+            if (offer.status == "ACCEPTED") {
+                Button(
+                    onClick = onContinueHandover,
+                    modifier = Modifier.fillMaxWidth().height(44.dp),
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen)
+                ) { Text("Continue Handover / आगे बढ़ें", fontSize = 13.sp) }
+            } else if (!offer.isOfflinePending && offer.status == "OPEN") {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

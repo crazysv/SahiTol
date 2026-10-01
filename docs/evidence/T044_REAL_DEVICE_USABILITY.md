@@ -257,6 +257,21 @@ Evidence: C16_material_passport_journey.png
     handset disconnected from USB before its C07 offer refresh could be
     observed, so this is deliberately not counted as handset acceptance or QR
     evidence.
+14. **2026-10-01 acceptance recovery and handover repair:** The deployed
+    collector demo account now exposes a participant-scoped
+    `GET /api/v1/lots/{lot_id}/transaction` recovery path. Hosted readback for
+    the selected PCB lot returned transaction
+    `cdcd977e-14f7-4547-bbe8-01a5e27e1789`, accepted offer
+    `5e53f4de-…`, lifecycle `AGREED`, 14,250 g, and 427,500 paise. The API
+    trade suite passed 19 tests including owner/non-owner scoping. Android C07
+    now presents an explicit continuation for an `ACCEPTED` offer, and C10 no
+    longer fabricates the cable/₹414 sample: it loads the accepted transaction
+    and offer terms and only enables QR-record generation after the server
+    accepts a canonical proposal tied to those IDs. The current APK compiled,
+    all 83 Android unit tests passed, and it was installed over
+    `N7OZPV59XWWKPF4X` without clearing data. The actual server-backed C10
+    proposal and second-device confirmation still require a fresh physical
+    tap-through; this item is not counted as completed QR evidence.
 
 ---
 
