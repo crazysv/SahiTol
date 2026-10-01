@@ -562,31 +562,20 @@ fun C13_PaymentSettlementScreen(
                                             )
                                         }
 
-                                        // Optional Acknowledge CTA if pending
+                                        // A collector can record an assertion offline, but only the
+                                        // authenticated recycler may acknowledge it on the server.
                                         if (payment.state == PaymentState.ASSERTED) {
                                             Row(
                                                 horizontalArrangement = Arrangement.spacedBy(6.dp),
                                                 modifier = Modifier.padding(top = 4.dp)
                                             ) {
-                                                Button(
-                                                    onClick = {
-                                                        coroutineScope.launch {
-                                                            paymentRepository.acknowledgePaymentAtomic(
-                                                                tx.transactionId,
-                                                                payment.id,
-                                                                "usr_suresh_01",
-                                                                "Suresh Kumar (Recycler)"
-                                                            )
-                                                            statusMessage = "Payment acknowledged successfully"
-                                                        }
-                                                    },
-                                                    colors = ButtonDefaults.buttonColors(containerColor = TerracottaPrimary),
-                                                    shape = RoundedCornerShape(6.dp),
-                                                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
-                                                    modifier = Modifier.height(28.dp)
-                                                ) {
-                                                    Text("Acknowledge", fontSize = 10.sp, fontWeight = FontWeight.Bold)
-                                                }
+                                                Text(
+                                                    text = "Waiting for recycler acknowledgement",
+                                                    fontSize = 10.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = OnSurfaceVariant,
+                                                    modifier = Modifier.padding(vertical = 6.dp)
+                                                )
 
                                                 OutlinedButton(
                                                     onClick = {

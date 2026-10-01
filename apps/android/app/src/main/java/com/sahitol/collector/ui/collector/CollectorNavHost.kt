@@ -105,6 +105,10 @@ fun CollectorNavHost(
         operations = lotRepository.getPendingOutboxOperations(session.accountId, 100)
     }
 
+    LaunchedEffect(session.accountId) {
+        paymentRepository.loadPersistedPayments(session.accountId)
+    }
+
     NavHost(
         navController = navController,
         startDestination = startDestination

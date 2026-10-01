@@ -1,10 +1,12 @@
 package com.sahitol.collector.data.repository
 
+import androidx.room.withTransaction
 import com.sahitol.collector.data.local.SahiTolDatabase
 import com.sahitol.collector.data.local.dao.DomainEventDao
 import com.sahitol.collector.data.local.dao.OutboxDao
 import com.sahitol.collector.data.local.entity.DomainEventEntity
 import com.sahitol.collector.data.local.entity.OutboxOperationEntity
+import com.sahitol.collector.data.local.entity.PaymentEntryEntity
 import com.sahitol.collector.domain.canonical.CanonicalJson
 import com.sahitol.collector.domain.payment.CollectorLedgerSummary
 import com.sahitol.collector.domain.payment.PaymentEntry
@@ -21,7 +23,8 @@ import java.util.UUID
 class PaymentRepository(
     private val database: SahiTolDatabase? = null,
     private val outboxDao: OutboxDao? = database?.outboxDao(),
-    private val domainEventDao: DomainEventDao? = database?.domainEventDao()
+    private val domainEventDao: DomainEventDao? = database?.domainEventDao(),
+    private val paymentEntryDao: com.sahitol.collector.data.local.dao.PaymentEntryDao? = database?.paymentEntryDao()
 ) {
     private val _transactions = MutableStateFlow<List<TransactionSummary>>(createDefaultSeedTransactions())
     val transactions: StateFlow<List<TransactionSummary>> = _transactions.asStateFlow()
@@ -167,6 +170,32 @@ class PaymentRepository(
         return _transactions.value.find { it.transactionId == transactionId }
     }
 
+    /** Rehydrates saved payment assertions after process death without claiming sync. */
+    suspend fun loadPersistedPayments(accountId: String) {
+        val saved = paymentEntryDao?.getForAccount(accountId).orEmpty()
+        if (saved.isEmpty()) return
+        val byTransaction = saved.groupBy { it.transactionId }
+        _transactions.value = _transactions.value.map { tx ->
+            val persisted = byTransaction[tx.transactionId].orEmpty()
+            persisted.forEach { row ->
+                if (tx.payments.none { it.id == row.paymentId }) {
+                    tx.payments.add(
+                        PaymentEntry(
+                            id = row.paymentId, transactionId = row.transactionId,
+                            amountPaise = row.amountPaise, method = PaymentMethod.valueOf(row.method),
+                            privateReference = row.privateReference, assertedByRole = row.assertedByRole,
+                            assertedByName = row.assertedByName, assertedAt = row.assertedAt,
+                            state = PaymentState.valueOf(row.state), counterpartyAckBy = row.counterpartyAckBy,
+                            ackAt = row.ackAt, reversalOf = row.reversalOf, reason = row.reason,
+                            isDemo = row.isDemo, syncState = row.syncState
+                        )
+                    )
+                }
+            }
+            tx
+        }
+    }
+
     /**
      * Atomically assert a payment (Cash or UPI) without bank gateway execution (R-PAY-01).
      * Enqueues ASSERT_PAYMENT to Room Outbox and records PAYMENT_ASSERTED domain event.
@@ -226,8 +255,6 @@ class PaymentRepository(
             state = "QUEUED",
             createdAt = System.currentTimeMillis()
         )
-        outboxDao?.enqueue(outboxOp)
-
         val domainEvent = DomainEventEntity(
             eventId = UUID.randomUUID().toString(),
             accountId = "col_demo_santosh",
@@ -239,7 +266,24 @@ class PaymentRepository(
             currentHash = payloadHash,
             createdAt = System.currentTimeMillis()
         )
-        domainEventDao?.insertEvent(domainEvent)
+        val durableEntry = PaymentEntryEntity(
+            paymentId = paymentEntry.id, accountId = "col_demo_santosh", transactionId = transactionId,
+            amountPaise = amountPaise, method = method.name, privateReference = reference,
+            assertedByRole = assertedByRole, assertedByName = assertedByName,
+            assertedAt = paymentEntry.assertedAt, state = paymentEntry.state.name,
+            counterpartyAckBy = null, ackAt = null, reversalOf = null, reason = null,
+            isDemo = isDemo, syncState = paymentEntry.syncState
+        )
+        if (database != null) database.withTransaction {
+            paymentEntryDao?.insert(durableEntry)
+            outboxDao?.enqueue(outboxOp)
+            domainEventDao?.insertEvent(domainEvent)
+        } else {
+            // Test-only repositories may inject DAOs without a Room database.
+            paymentEntryDao?.insert(durableEntry)
+            outboxDao?.enqueue(outboxOp)
+            domainEventDao?.insertEvent(domainEvent)
+        }
 
         // Update in-memory state
         tx.payments.add(paymentEntry)
@@ -257,6 +301,10 @@ class PaymentRepository(
         ackByUserId: String = "usr_suresh_01",
         ackByName: String = "Suresh Kumar (Recycler)"
     ): PaymentEntry {
+        throw UnsupportedOperationException(
+            "Counterparty acknowledgement must arrive from the authenticated recycler server; it cannot be recorded on the collector device."
+        )
+        /*
         val tx = _transactions.value.find { it.transactionId == transactionId }
             ?: throw IllegalArgumentException("Transaction $transactionId not found")
         val payment = tx.payments.find { it.id == paymentId }
@@ -306,6 +354,7 @@ class PaymentRepository(
 
         _transactions.value = _transactions.value.map { if (it.transactionId == transactionId) tx else it }
         return payment
+        */
     }
 
     /**

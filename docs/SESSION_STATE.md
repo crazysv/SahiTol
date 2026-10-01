@@ -96,4 +96,11 @@ record and no second confirmation button. T025 is DONE. AT-032 through AT-034
 remain NOT_RUN until their complete cross-task checks are run. T026 audit then
 added server-derived payment asserting-actor identity and administrator
 self-ack prevention; payment/schema verification passed 25/25. Continue at
-T027.
+T027. That audit found in-memory payment assertions, destructive Room migration,
+and a fabricated local recycler acknowledgement. The repair adds durable Room
+payment storage and safe migration, keeps asserted payments as dues until server
+acknowledgement, and removes the collector-side acknowledgement action. Focused
+Android payment tests pass 6/6, including process-restart rehydration; continue
+at T028 after documentation validation. The updated APK was installed over the
+collector device without clearing data and relaunched without a Room migration
+failure.

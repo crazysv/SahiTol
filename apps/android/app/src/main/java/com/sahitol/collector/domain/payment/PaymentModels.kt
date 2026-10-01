@@ -74,7 +74,9 @@ data class TransactionSummary(
         get() = payments.filter { it.state == PaymentState.DISPUTED }.sumOf { it.amountPaise }
 
     val remainingDuesPaise: Long
-        get() = maxOf(0L, grossAgreedPaise - acknowledgedPaidPaise - assertedPendingPaise)
+        // An assertion records a claim only. It does not reduce a collector's
+        // due until the counterparty acknowledgement is received from server.
+        get() = maxOf(0L, grossAgreedPaise - acknowledgedPaidPaise)
 
     val remainingDuesInr: Double
         get() = remainingDuesPaise / 100.0

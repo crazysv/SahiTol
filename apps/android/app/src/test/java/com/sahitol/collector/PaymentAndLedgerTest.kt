@@ -2,8 +2,10 @@ package com.sahitol.collector
 
 import com.sahitol.collector.data.local.dao.DomainEventDao
 import com.sahitol.collector.data.local.dao.OutboxDao
+import com.sahitol.collector.data.local.dao.PaymentEntryDao
 import com.sahitol.collector.data.local.entity.DomainEventEntity
 import com.sahitol.collector.data.local.entity.OutboxOperationEntity
+import com.sahitol.collector.data.local.entity.PaymentEntryEntity
 import com.sahitol.collector.data.repository.PaymentRepository
 import com.sahitol.collector.domain.payment.PaymentMethod
 import com.sahitol.collector.domain.payment.PaymentState
@@ -19,6 +21,15 @@ class PaymentAndLedgerTest {
     private lateinit var fakeOutboxDao: FakeOutboxDao
     private lateinit var fakeDomainEventDao: FakeDomainEventDao
     private lateinit var paymentRepository: PaymentRepository
+
+    private class FakePaymentEntryDao : PaymentEntryDao {
+        val entries = mutableListOf<PaymentEntryEntity>()
+        override suspend fun insert(entry: PaymentEntryEntity) { entries.add(entry) }
+        override suspend fun update(entry: PaymentEntryEntity) {
+            entries.replaceAll { if (it.paymentId == entry.paymentId) entry else it }
+        }
+        override suspend fun getForAccount(accountId: String) = entries.filter { it.accountId == accountId }
+    }
 
     private class FakeOutboxDao : OutboxDao {
         val inserted = mutableListOf<OutboxOperationEntity>()
@@ -108,33 +119,27 @@ class PaymentAndLedgerTest {
         assertEquals(1, fakeDomainEventDao.events.size)
         assertEquals("PAYMENT_ASSERTED", fakeDomainEventDao.events[0].eventType)
 
-        // Remaining dues should now reflect asserted payment (450 - 300 - 150 = 0)
+        // An assertion is not a settlement. Dues remain until recycler acknowledgement.
         val updatedTx = paymentRepository.getTransaction("tx_cable_01")!!
-        assertEquals(0L, updatedTx.remainingDuesPaise)
+        assertEquals(initialRemainingDues, updatedTx.remainingDuesPaise)
         assertEquals(15000L, updatedTx.assertedPendingPaise)
 
-        // 2. Recycler counterparty acknowledges payment
-        val ackPayment = paymentRepository.acknowledgePaymentAtomic(
+        // 2. Collector device cannot fabricate recycler acknowledgement.
+        try {
+            paymentRepository.acknowledgePaymentAtomic(
             transactionId = tx.transactionId,
             paymentId = payment.id,
             ackByUserId = "usr_recycler_suresh",
             ackByName = "Suresh Kumar (Recycler)"
-        )
+            )
+            fail("Collector device must not fabricate recycler acknowledgement")
+        } catch (_: UnsupportedOperationException) { }
 
-        assertEquals(PaymentState.ACKNOWLEDGED, ackPayment.state)
-        assertEquals("usr_recycler_suresh", ackPayment.counterpartyAckBy)
-        assertNotNull(ackPayment.ackAt)
-
-        // Verify outbox queued ACKNOWLEDGE_PAYMENT
-        assertEquals(2, fakeOutboxDao.inserted.size)
-        assertEquals("ACKNOWLEDGE_PAYMENT", fakeOutboxDao.inserted[1].command)
-
-        // Transaction now has 0 remaining dues and 450 acknowledged paid
         val finalTx = paymentRepository.getTransaction("tx_cable_01")!!
-        assertEquals(45000L, finalTx.acknowledgedPaidPaise)
-        assertEquals(0L, finalTx.assertedPendingPaise)
-        assertEquals(0L, finalTx.remainingDuesPaise)
-        assertTrue(finalTx.isSettled)
+        assertEquals(30000L, finalTx.acknowledgedPaidPaise)
+        assertEquals(15000L, finalTx.assertedPendingPaise)
+        assertEquals(15000L, finalTx.remainingDuesPaise)
+        assertFalse(finalTx.isSettled)
     }
 
     @Test
@@ -156,13 +161,28 @@ class PaymentAndLedgerTest {
     }
 
     @Test
+    fun test_savedPaymentRehydratesAfterRepositoryRestart() = runBlocking {
+        val store = FakePaymentEntryDao()
+        val writer = PaymentRepository(paymentEntryDao = store)
+        val saved = writer.assertPaymentAtomic("tx_cable_01", 15000L, PaymentMethod.CASH)
+        assertEquals(1, store.entries.size)
+
+        val restarted = PaymentRepository(paymentEntryDao = store)
+        restarted.loadPersistedPayments("col_demo_santosh")
+        val rehydrated = restarted.getTransaction("tx_cable_01")!!.payments.single { it.id == saved.id }
+        assertEquals(PaymentState.ASSERTED, rehydrated.state)
+        assertEquals(15000L, rehydrated.amountPaise)
+        assertEquals("SAVED_LOCAL_ONLY", rehydrated.syncState)
+    }
+
+    @Test
     fun test_partialPaymentsAndReversalsAndStrictClosure_R_PAY_02_AT_036() = runBlocking {
         // R-PAY-02 / AT-036: Two partial receipts sum once without double counting,
         // reversal links original record without deletion, transaction cannot close with pending dues
         val tx = paymentRepository.getTransaction("tx_iron_03")!!
         assertEquals(1800.0, tx.grossAgreedInr, 0.01) // ₹1,800 total
         assertEquals(1000.0, tx.assertedPendingInr, 0.01) // ₹1,000 pending
-        assertEquals(800.0, tx.remainingDuesInr, 0.01) // ₹800 dues
+        assertEquals(1800.0, tx.remainingDuesInr, 0.01) // assertion is not settlement
 
         // Attempting to close transaction with pending dues MUST fail
         try {
@@ -207,7 +227,7 @@ class PaymentAndLedgerTest {
         // Sum of all 4 transactions:
         // tx1: ₹450 gross, ₹300 acknowledged paid, ₹0 asserted pending, ₹150 remaining dues
         // tx2: ₹280 gross, ₹0 acknowledged paid, ₹0 asserted pending, ₹280 remaining dues (offline saved)
-        // tx3: ₹1,800 gross, ₹0 acknowledged paid, ₹1,000 asserted pending, ₹800 remaining dues
+        // tx3: ₹1,800 gross, ₹0 acknowledged paid, ₹1,000 asserted pending, ₹1,800 remaining dues
         // tx4: ₹320 gross, ₹0 acknowledged paid, ₹0 asserted pending, ₹320 remaining dues (disputed)
         // Total Gross: 450 + 280 + 1800 + 320 = ₹2,850 (285,000 paise)
         val expectedTotalAgreedPaise = 45000L + 28000L + 180000L + 32000L
@@ -220,9 +240,9 @@ class PaymentAndLedgerTest {
         assertEquals(100000L, summary.assertedPendingPaise)
         assertEquals(1000.0, summary.assertedPendingInr, 0.01)
 
-        val expectedRemainingDues = 15000L + 28000L + 80000L + 32000L // 155,000 paise = ₹1,550
+        val expectedRemainingDues = 15000L + 28000L + 180000L + 32000L // 255,000 paise = ₹2,550
         assertEquals(expectedRemainingDues, summary.remainingDuesPaise)
-        assertEquals(1550.0, summary.remainingDuesInr, 0.01)
+        assertEquals(2550.0, summary.remainingDuesInr, 0.01)
 
         // Saved on device count: tx2 is offline saved, tx3 has offline saved payment
         assertEquals(2, summary.savedOnDevicePendingSlips)

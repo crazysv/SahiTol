@@ -21,6 +21,7 @@ node_modules/
 
 # Android / Gradle
 .gradle/
+.kotlin/
 .idea/
 **/build/
 

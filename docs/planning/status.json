@@ -213,7 +213,7 @@
       "evidence": [
         "docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md"
       ],
-      "note": "Implemented C12 (Collector Ledger & Earnings) and C13 (Payment Settlement & Assertions) in Jetpack Compose matching Google Stitch designs; cash-first settlement without bank transfers; optional UPI reference; counterparty acknowledgement; append-only reversals; strict closure invariant; verified by JUnit tests.",
+      "note": "Implemented C12 (Collector Ledger & Earnings) and C13 (Payment Settlement & Assertions) in Jetpack Compose matching Google Stitch designs. Independent audit repaired in-memory payment loss and destructive Room migration: assertions now have durable account-partitioned local storage, atomic outbox/event writes and restart rehydration. Collector UI cannot fabricate recycler acknowledgement; pending assertions remain dues until authenticated server acknowledgement. Focused Android payment suite passes 6/6 and debug assembly passes.",
       "owner": "Owner + coding agent"
     },
     "T028": {

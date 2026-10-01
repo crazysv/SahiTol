@@ -4,7 +4,7 @@
 - **Task ID**: `T027`
 - **Phase**: Stage 4 (Offline Handover, Payments & Verification)
 - **Scope**: RELEASE
-- **Date**: 2026-09-30
+- **Date**: 2026-10-01
 - **Environment**:
   - OpenJDK 17.0.20.1 LTS (Microsoft), Gradle 8.10.2, AGP 8.7.0, Kotlin 2.0.20
   - Jetpack Compose BOM 2024.09.02, Material 3 1.3.0
@@ -18,7 +18,7 @@
 | Requirement | Test ID | Scope | Verification Status | Implementation & Evidence Notes |
 |---|---|---|---|---|
 | **R-GOV-02** | **AT-002** | RELEASE | Verified (T027) | Strict adherence to mandatory Google Stitch frontend gate: both screens (`C12`, `C13`) built faithful to approved Stitch revisions in project `245073995801566548` (`b8d0dde3a3bf`, `fa4f9d475fed`) without autonomous UI generation. Registered as `IMPLEMENTED_VERIFIED` in [SCREEN_REGISTRY.md](../../design/stitch/SCREEN_REGISTRY.md). |
-| **R-PAY-01** | **AT-035** | RELEASE | Verified (T027) | In-app settlement recording without automated bank account or payment gateway integration. Collector asserts cash or optional UPI reference with actor/time/note metadata. Recycler counterparty acknowledgement enqueues `ACKNOWLEDGE_PAYMENT` to Room outbox with SHA-256 event chaining. Verified by `PaymentAndLedgerTest.test_cashPaymentAssertionAndAcknowledgement_R_PAY_01_AT_035` and `test_upiPaymentAssertionWithReference_R_PAY_01`. |
+| **R-PAY-01** | **AT-035** | RELEASE | Contributing evidence | In-app cash/UPI assertions are stored locally with actor/time/note metadata and queued to sync. The collector screen cannot fabricate a recycler acknowledgement; it visibly waits for the authenticated server-side counterparty action. |
 | **R-PAY-02** | **AT-036** | RELEASE | Verified (T027) | Partial payment aggregation and append-only reversals without double counting. Two partial payments sum once. Append-only reversal (`REVERSE_PAYMENT`) links original payment record via `reversal_of` without overwriting or deleting historical facts. Strict closure invariant enforced: transaction cannot transition to `CLOSED` while remaining dues > 0 or unresolved disputes exist. Verified by `PaymentAndLedgerTest.test_partialPaymentsAndReversalsAndStrictClosure_R_PAY_02_AT_036`. |
 | **R-PAY-03** | **AT-037** | RELEASE | Verified (T027) | Monthly ledger filtering and exact mathematical reconciliation of gross agreed (₹2,850), acknowledged paid (₹300), asserted pending (₹1,000), and remaining dues (₹1,550). Offline storage freshness badges ("Saved on Device", "Local device storage only"). Demo partition isolation guarantees synthetic demo earnings do not contaminate real settled totals. Verified by `PaymentAndLedgerTest.test_collectorEarningsAndMonthlyReconciliation_R_PAY_03_AT_037`. |
 | **R-HAND-05** | **AT-033** | RELEASE | Verified (T027) | Weight, grade, and payment dispute handling preserves original physical transaction facts and scale telemetry. Records explicit dispute reason without fact overwriting. Disputed items flagged and isolated from settled totals. Verified by `PaymentAndLedgerTest.test_weightDiscrepancyAndDisputePreservation_R_HAND_05_AT_033`. |
@@ -44,7 +44,7 @@ CollectorNavHost (Navigation Controller)
 2. **`PaymentRepository.kt` (`com.sahitol.collector.data.repository`)**:
    - Holds seed and live transaction records matching owner Stitch screens (`tx_cable_01`, `tx_paper_02`, `tx_iron_03`, `tx_plastic_04`).
    - `assertPaymentAtomic`: Enqueues `ASSERT_PAYMENT` to Room SQLite `OutboxOperationEntity` and emits `PAYMENT_ASSERTED` to `DomainEventEntity` with SHA-256 hash chaining.
-   - `acknowledgePaymentAtomic`: Enqueues `ACKNOWLEDGE_PAYMENT` to outbox and emits `PAYMENT_ACKNOWLEDGED`.
+   - Counterparty acknowledgement is not available as a collector-side action: it must arrive through the authenticated recycler/server path.
    - `disputePaymentAtomic`: Enqueues `DISPUTE_PAYMENT` to outbox without overwriting history.
    - `reversePaymentAtomic`: Appends offsetting reversal record linking `reversalOf` without deleting original entry.
    - `closeTransactionAtomic`: Enforces strict closure invariant (0 dues, 0 disputes).
@@ -68,14 +68,36 @@ CollectorNavHost (Navigation Controller)
    - Material Identity Header Card: "Cable / तांबा तार", "Delhi Central Yard #4", "Ref: ST-24A7", Measured Weight: 2.5 kg, Agreed Rate: ₹180 / kg.
    - Agreed Amount & Dues Breakdown Card (Terracotta): Agreed Total: ₹450, Remaining Due: ₹150, visual progress bar (66% paid vs 34% pending).
    - Event-Oriented Payment History Stream: Step timeline with recorded cash handover, digital acknowledgment, and adjustment reversal items.
-   - Interactive dialogs for recording cash/UPI payment assertions and logging disputes.
+   - Interactive dialogs for recording cash/UPI payment assertions and logging disputes; asserted payment remains a due until authenticated counterparty acknowledgement.
    - Statutory non-EPR disclosure and cash-first assertion notice.
 
 ---
 
 ## 2. Test Execution & Evidence
 
-### Unit Tests
+### Independent repair and verification (2026-10-01)
+
+Independent audit found two material defects: `PaymentRepository` held assertions
+only in memory, and the app used destructive Room migration. The repair adds a
+durable account-partitioned `payment_entries` Room table, an atomic local
+payment/outbox/event write, and non-destructive `3→4` migration. An assertion
+no longer reduces remaining dues; only an acknowledged payment does. The local
+collector UI no longer offers an **Acknowledge** control with a fabricated
+recycler identity; it states that recycler acknowledgement is pending server
+sync.
+
+Focused `PaymentAndLedgerTest` was rerun with Gradle `--rerun-tasks`: **6/6
+passed**. `:app:assembleDebug` also completed. The warning-only deprecated icon
+notice remains unrelated to payment behaviour.
+
+The updated debug APK was installed with `adb install -r` over the existing
+collector app on `N7OZPV59XWWKPF4X`; no app data was cleared. After force-stop
+and relaunch, the app opened without a Room migration failure and its database
+was present at 135,168 bytes. Device-shell SQLite inspection is unavailable, so
+the table contents are covered by the focused rehydration test rather than an
+unverifiable shell claim.
+
+### Earlier Unit Tests
 Executed via `./gradlew.bat testDebugUnitTest`:
 ```text
 PaymentAndLedgerTest:

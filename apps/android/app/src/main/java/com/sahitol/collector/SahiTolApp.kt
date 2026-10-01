@@ -2,6 +2,8 @@ package com.sahitol.collector
 
 import android.app.Application
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.sahitol.collector.data.local.SahiTolDatabase
 import com.sahitol.collector.data.repository.LotRepository
 import com.sahitol.collector.data.session.SessionManager
@@ -44,7 +46,7 @@ class SahiTolApp : Application() {
             applicationContext,
             SahiTolDatabase::class.java,
             "sahitol.db"
-        ).fallbackToDestructiveMigration().build()
+        ).addMigrations(MIGRATION_3_4).build()
 
         lotRepository = LotRepository(database)
         priceRepository = com.sahitol.collector.data.repository.PriceRepository(database, applicationContext)
@@ -64,6 +66,20 @@ class SahiTolApp : Application() {
     }
 
     companion object {
+        private val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("""CREATE TABLE IF NOT EXISTS payment_entries (
+                    paymentId TEXT NOT NULL PRIMARY KEY, accountId TEXT NOT NULL,
+                    transactionId TEXT NOT NULL, amountPaise INTEGER NOT NULL,
+                    method TEXT NOT NULL, privateReference TEXT, assertedByRole TEXT NOT NULL,
+                    assertedByName TEXT NOT NULL, assertedAt TEXT NOT NULL, state TEXT NOT NULL,
+                    counterpartyAckBy TEXT, ackAt TEXT, reversalOf TEXT, reason TEXT,
+                    isDemo INTEGER NOT NULL, syncState TEXT NOT NULL, createdAt INTEGER NOT NULL,
+                    updatedAt INTEGER NOT NULL)""")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_payment_entries_accountId ON payment_entries (accountId)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_payment_entries_transactionId ON payment_entries (transactionId)")
+            }
+        }
         lateinit var instance: SahiTolApp
             private set
     }

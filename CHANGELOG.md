@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-10-01 -- T027 durable offline payment repair
+
+Replaced in-memory-only collector payment assertions with account-partitioned
+Room `payment_entries` storage and an atomic local payment/outbox/event write.
+Replaced destructive Room migration with a non-destructive 3→4 migration. An
+asserted payment no longer reduces dues before an authenticated recycler/server
+acknowledgement, and C13 no longer offers a collector-side acknowledgement that
+could impersonate a recycler. Focused Android payment tests pass 6/6, including
+restart rehydration, and debug assembly passed.
+The APK was installed over the existing collector application without clearing
+data and relaunched successfully through the Room migration.
+
 ## 2026-10-01 -- T026 payment actor integrity repair
 
 Independent T026 audit found payment entries stored only an asserting role,
