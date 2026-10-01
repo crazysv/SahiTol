@@ -161,3 +161,22 @@ No Devanagari clipping or layout overflow observed on 1080x2372 at 480dpi.
 ## Verdict: DONE
 
 All automated audit checks PASS (string parity, audio integrity, numeric grammar, 258 clip checksums). Manual Devanagari spot-checks and on-device rendering PASS. Honest gaps above are explicitly documented per spec. Native-speaker review and TalkBack remain NOT_REVIEWED/NOT_RUN and are tracked separately -- these do not block T046 DONE per task output scope: "native-speaker review where available remains explicitly unverified until performed."
+
+## 2026-10-01 independent device re-verification
+
+On connected device `N7OZPV59XWWKPF4X` (CPH2781, Android 16), C15 was used to
+switch the active interface between Hindi and Marathi. Both states rendered
+their Devanagari settings copy at default font scale with no observed clipping
+in the captured UI hierarchy. The Marathi state showed locale-specific wording
+for numeric-display guidance, rather than reproducing the Hindi string.
+
+The focused Gradle suites were rerun:
+
+```text
+AudioGrammarAndManifestTest: 8 tests, 0 failures, 0 errors
+LanguageAndAccessibilityTest: 11 tests, 0 failures, 0 errors
+```
+
+This confirms asset/grammar and automated accessibility contracts. It does not
+replace native-speaker listening review, headphone intelligibility, large-font
+testing, or on-device TalkBack; those remain `NOT_REVIEWED`/`NOT_RUN`.

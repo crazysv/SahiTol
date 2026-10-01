@@ -46,12 +46,21 @@ The debug APK now contains a scoped layout correction for approved collector scr
 
 T001 verification setup is repaired: the API's pinned test dependency set and repository-root import path now collect all 318 API tests under Python 3.10. T006's SQLite geometry test double now returns EWKB-compatible values, and the schema/facility/lot/matching verification subset passes 45 tests. Continue in catalog order with T007.
 
+## 2026-10-01 device performance recheck
+
+On CPH2781 Android 16, the debug APK is 35.60 MB; photo compression was 37 ms,
+Room diagnostic write/read 26 ms, and LiteRT airplane-mode inference 61.42 ms.
+Five activity launches gave 1.974 s p50 and 2.205 s p95, so the 2 s p95 target
+is currently missed. Memory was 122,791 KB total PSS. The release APK and an
+actual production-photo upload remain unmeasured.
+
 ## Known gaps (immutable disclosures)
 
 - R-RES-02 primary field research UNMET (owner desk-only decision, explicitly disclosed in all artifacts).
 - Model macro-F1 0.0159, 100% abstention at threshold 0.65 -- safe, full manual fallback implemented.
 - Native-speaker review Hindi/Marathi NOT_REVIEWED -- explicitly tracked.
 - TalkBack on-device NOT_RUN -- explicitly tracked.
+- On-device C15 Hindi/Marathi switch rechecked at default font scale on 2026-10-01; headphone listening, large-font, and TalkBack remain NOT_RUN.
 - Render free tier cold-start: ~30 s wake time after inactivity.
 - Release APK signing: owner action (keystore not in repo).
 

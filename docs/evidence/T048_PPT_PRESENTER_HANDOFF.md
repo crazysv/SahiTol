@@ -23,7 +23,7 @@
 | Fact | Value | Evidence source |
 |------|-------|-----------------|
 | **Platform** | Native Android (Kotlin/Compose/Room/WorkManager/LiteRT) + FastAPI + PostgreSQL/PostGIS + React/Vite | docs/03_TECHSPEC.md |
-| **APK size (debug)** | 33.25 MB (release est. ~23–26 MB) | T045 evidence |
+| **APK size (debug)** | 35.60 MB; no signed release APK measured yet | T045 evidence |
 | **LiteRT model** | 1.18 MB, MobileNetV3-Small, dynamic range quantized | T047 manifest, model_card.md |
 | **Model SHA-256** | `35d0ad7cdd7f8c3d5f20ecda408b87d7f091a8b997f30793554ce416f790eb23` | T047 manifest |
 | **Model accuracy** | Macro-F1 0.0159; 100% abstention at threshold 0.65 | model_card.md Section 4 |
@@ -31,7 +31,7 @@
 | **Inference latency** | p50 7.57 ms, p95 8.3 ms (device N7OZPV59XWWKPF4X) | model_card.md Section 5 |
 | **Audio clips** | 258 MP3 (129 hi + 129 mr), offline, no cloud call | T046 evidence, audio_manifest.json |
 | **String parity** | 145/145 keys across en/hi/mr, zero mismatches | T046 evidence |
-| **Backend tests** | 318 passing, 0 failing | T041 evidence |
+| **Backend verification** | 318 tests collect; 306 non-ML tests and 11 ML asset/metadata tests pass locally. Windows TensorFlow interpreter test remains unverified locally; on-device LiteRT inference is verified. | T001, T033, T045 evidence |
 | **Web tests** | 44 integration tests passing | T043 evidence |
 | **Android unit tests** | All testDebugUnitTest pass (73 tests) | T046 Gradle run |
 | **API URL** | https://sahitol-api.onrender.com (Render free tier; cold start ~30 s) | T041 evidence |
@@ -193,7 +193,7 @@ Cash recorded / dues tracked      Price observation derived
 | Abstention rate at threshold 0.65 | 100% |
 | Inference latency (p50 / p95) | 7.57 ms / 8.3 ms |
 | Model size | 1.18 MB |
-| APK size (debug) | 33.25 MB |
+| APK size (debug) | 35.60 MB (debug; signed release size not yet measured) |
 
 **Why 100% abstention is SAFE, not a failure:**  
 - When confidence < 0.65, the app routes the collector directly to manual selection.  
@@ -251,7 +251,7 @@ Cash recorded / dues tracked      Price observation derived
 - ✅ Native Android app: offline lot capture, LiteRT classifier, bilingual audio, QR handover, ledger  
 - ✅ FastAPI backend live at https://sahitol-api.onrender.com  
 - ✅ React/Vite recycler + admin console live at https://sahitol.pages.dev  
-- ✅ 318 backend tests, 44 integration tests, 73 Android unit tests — all passing  
+- ✅ 306 non-ML backend tests, 11 ML asset/metadata tests, 24 web tests, and Android unit tests pass in the latest local checks; do not claim the Windows TensorFlow interpreter test as passed.
 - ✅ 258 pre-generated audio clips (hi + mr), zero cloud calls  
 - ✅ 7 dataset families with data cards and provenance manifests  
 

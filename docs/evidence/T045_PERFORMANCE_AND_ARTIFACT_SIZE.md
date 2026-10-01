@@ -2,8 +2,8 @@
 
 **Task:** T045 — Measure entry-level performance and artifact size  
 **Status:** DONE  
-**Date:** 2026-09-30  
-**Device/Environment:** Windows 11 development machine (Intel Core i7, 16GB RAM) — in-process FastAPI TestClient against SQLite; APK measured from `app/build/outputs/apk/debug/`.
+**Date:** 2026-09-30 (updated with independent device measurements on 2026-10-01)
+**Device/Environment:** Windows 11 development machine (Intel Core i7, 16GB RAM) — in-process FastAPI TestClient against SQLite; and connected Android device `N7OZPV59XWWKPF4X` (`CPH2781`, Android 16, 1080x2372).
 
 > **Note:** Full R-UX-02 acceptance (AT-052) requires measurement on a named entry-level Android device (e.g. Redmi/Moto Go, 2GB RAM). This document records all statically measurable artifact sizes and local API warm-path timings. Real-device launch, save, compression, and LiteRT latency require a connected physical device and are documented here with the applicable budget thresholds.
 
@@ -13,12 +13,13 @@
 
 | Artifact | Measured | Budget | Status |
 |---|---|---|---|
-| Debug APK (`app-debug.apk`) | **33.25 MB** | ≤40 MB (tunable goal) | ✅ PASS |
+| Debug APK (`app-debug.apk`) | **35.60 MB** | ≤40 MB (tunable goal) | ✅ PASS |
 | LiteRT model (`classifier.tflite`) | **1.18 MB** | ≤5 MB (tunable goal) | ✅ PASS |
-| Audio assets (all MP3, 22 files) | **4.49 MB** | Not budgeted separately | — |
-| Total bundled assets | **5.94 MB** (265 files) | Included in APK budget | ✅ OK |
+| Audio assets (all MP3, 258 files) | **4.70 MB** | Not budgeted separately | — |
+| Total bundled model + audio assets | **5.94 MB** (259 files) | Included in APK budget | ✅ OK |
 
-**Release APK estimate:** Debug APK is 33.25 MB; release APK (minified, R8/ProGuard) is typically 20–30% smaller → estimated **~23–26 MB**, well within the 40 MB tunable goal.
+**Release APK:** no signed release artifact exists yet. Its size must be measured
+after signing; a debug-to-release size estimate is not release evidence.
 
 ### Asset breakdown
 
@@ -48,20 +49,21 @@ These are in-process measurements with no network latency and no PostgreSQL over
 
 ---
 
-## 3. Real-Device Budgets (AT-052 — Requires Physical Device)
+## 3. Real-Device Budgets (AT-052)
 
 The following budgets from `docs/03_TECHSPEC.md` require real-device measurement with a named handset:
 
 | Metric | Budget | Device Tested | Measured | Status |
 |---|---|---|---|---|
-| Cold first screen launch | ≤2 s | — (device required) | — | NOT_RUN |
-| Local structured save after image processing | ≤1 s | — | — | NOT_RUN |
-| Typical photo compression (85% JPEG) | ≤2 s | — | — | NOT_RUN |
-| LiteRT inference latency (CPU path) | ≤500 ms | — | — | NOT_RUN |
-| Peak memory usage (no OOM/ANR) | Record only | — | — | NOT_RUN |
+| Cold activity launch | ≤2 s target | CPH2781 / Android 16 | five runs: 2033, 2205, 1854, 1974, 1890 ms; p50 1974 ms, p95 2205 ms | p50 PASS; p95 MISS |
+| Local structured save after image processing | ≤1 s | CPH2781 / Android 16 | Room diagnostic write/read 26 ms | PASS (diagnostic path) |
+| Typical photo compression (85% JPEG) | ≤2 s | CPH2781 / Android 16 | 800x600 simulated photo → 19 KB JPEG in 37 ms | PASS |
+| LiteRT inference latency (CPU path) | ≤500 ms | CPH2781 / Android 16 | 61.42 ms in airplane mode | PASS |
+| Peak memory usage (no OOM/ANR) | Record only | CPH2781 / Android 16 | 122,791 KB total PSS; 262,708 KB total RSS; 598 KB swap PSS | RECORDED |
 | Photo upload size | ≤150 KB (aim), ≤2 MB (hard limit) | — | — | NOT_RUN |
 
-These six sub-cases of AT-052 require a real connected device session. The Android app implements:
+The remaining photo-upload-size measurement still requires an actual captured
+production-path photo. The Android app implements:
 - Camera capture with bounded JPEG compression (`PhotoCaptureManager.kt`) — verified in T003
 - LiteRT inference on CPU path (`ClassifierManager.kt`, `MobileNetV3ClassifierModel.kt`) — verified in T034
 - Room database writes off-UI thread (`OutboxDao.kt`, `LotRepository.kt`)
@@ -86,12 +88,15 @@ These six sub-cases of AT-052 require a real connected device session. The Andro
 
 ## 5. Constraints Verified
 
-- ✅ Debug APK (33.25 MB) within 40 MB tunable goal
+- ✅ Debug APK (35.60 MB) within 40 MB tunable goal
 - ✅ LiteRT model (1.18 MB) within 5 MB tunable goal
 - ✅ All 5 measured API endpoints at or below ≤500 ms p95 warm budget, except sync batch first-write (noted and visible)
 - ✅ Inference off UI thread enforced in code
 - ✅ Photo compression hard bounds enforced in code (2 MB, 20 MP)
-- ⚠️ Real-device launch/save/compression/memory measurements pending physical device session (AT-052 NOT_RUN)
+- ⚠️ Device launch p95 was 2.205 s, 205 ms above the 2 s target. This is an
+  observed result on the named Android 16 handset, not an assertion about all
+  entry-level devices.
+- ⚠️ Actual production photo-upload size remains NOT_RUN.
 - ⚠️ Correction data denominators (AT-047) awaiting T047 dataset freeze
 
 ---
@@ -100,4 +105,11 @@ These six sub-cases of AT-052 require a real connected device session. The Andro
 
 **Sync batch p95 miss (588 ms):** Cause is SQLite in-process first-write initialization in test harness, not production code. Production PostgreSQL deployment uses pre-warmed psycopg connections; expected warm p95 is 50–150 ms. No code change needed; documented here.
 
-**Release APK size estimate:** 33.25 MB debug → estimated ~23–26 MB release after R8 shrinking. If release APK exceeds 40 MB after model/audio bundling, remediation is: (a) lazy-download non-critical audio via WorkManager, or (b) host model externally with offline fallback — both options consistent with offline-first constraint.
+**Launch p95 miss (2.205 s):** measure app first-screen readiness separately
+from `am start -W` activity time before optimizing. Candidate work, if the
+owner promotes it, is to profile startup work and defer noncritical
+initialisation. Do not remove required bundled model/audio merely to improve a
+startup number.
+
+**Release APK size:** measure the signed release APK once it exists. The
+required bundled model and offline Hindi/Marathi audio must remain available.

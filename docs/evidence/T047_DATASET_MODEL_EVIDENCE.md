@@ -110,3 +110,11 @@ All 7/7 data cards complete. See full SHA-256 in machine-readable manifest.
 ## Verdict: DONE
 
 Machine-readable frozen manifest `T047_FROZEN_RELEASE_MANIFEST.json` generated with SHA-256 digests for all key artifacts. All 7 data cards exist and are populated. Model card contains actual evaluation results. Honest gaps documented. No fabricated benchmarks or fieldwork claimed.
+
+## 2026-10-01 frozen-manifest re-verification
+
+Recomputed SHA-256 values for every directly listed file in the frozen release
+manifest: classifier, model card, audio manifest, seven data cards, nine
+dataset manifests, and two research-evidence documents. **21/21** values match
+the manifest. The manifest remains a snapshot of dataset/model evidence; it
+does not attest to later application-code or deployment changes.

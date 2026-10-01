@@ -355,7 +355,7 @@
       "evidence": [
         "docs/evidence/T045_PERFORMANCE_AND_ARTIFACT_SIZE.md"
       ],
-      "note": "Debug APK: 33.25 MB (budget <=40 MB). LiteRT model: 1.18 MB (budget <=5 MB). Audio: 4.49 MB (22 MP3 files). API warm p95: health 87ms, reference-bootstrap 173ms, lot-list 40ms, prices 137ms (all <=500ms budget). Sync-batch CREATE_DRAFT p95 588ms miss documented (SQLite first-write init; PostgreSQL warm expected 50-150ms). Real-device launch/save/compression/LiteRT timings require physical device session (AT-052 NOT_RUN).",
+      "note": "Independent device re-verification on CPH2781 Android 16: debug APK 35.60 MB (within 40 MB goal), LiteRT model 1.18 MB, audio 258 MP3 files / 4.70 MB; Room diagnostic write/read 26 ms, JPEG compression 37 ms, LiteRT inference in airplane mode 61.42 ms, and total PSS 122,791 KB. Five activity launches had p50 1.974 s and p95 2.205 s: the p95 misses the 2 s goal and is explicitly recorded. Actual production photo-upload size and signed release APK remain unmeasured.",
       "owner": "Owner + coding agent"
     },
     "T046": {
