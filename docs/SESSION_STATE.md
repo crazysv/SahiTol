@@ -153,3 +153,8 @@ terms hashes/versions. A device test caught and fixed main-thread HTTP; the
 hosted demo directory now loads and the existing cable lot honestly shows zero
 offers. Continue T044 with a new compatible server-backed lot, recycler-created
 offer and current two-device journey; do not revive the superseded simulated C09 evidence.
+The new-lot outbox contract was then repaired from unsupported `CREATE_LOT` /
+`material_code` / local-path media IDs to `CREATE_DRAFT` / `material_id` / no
+fabricated media IDs. Focused tests pass and an updated APK is on the collector
+device; continue the fresh PCB lot creation and manual sync before attempting
+the recycler offer.

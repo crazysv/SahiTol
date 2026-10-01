@@ -61,7 +61,10 @@ class LotRepository(private val database: SahiTolDatabase) {
         // Construct canonical payload
         val payloadObj = JSONObject().apply {
             put("lot_id", lotId)
-            put("material_code", params.materialCode)
+            // The sync API owns canonical material IDs. `material_code` is a
+            // local UI label and would otherwise create a server lot without
+            // its material/route eligibility.
+            put("material_id", params.materialCode)
             put("estimated_weight_g", params.estimatedWeightG)
             if (params.estimatedLowPaise != null) put("estimated_low_paise", params.estimatedLowPaise)
             if (params.estimatedMedianPaise != null) put("estimated_median_paise", params.estimatedMedianPaise)
@@ -94,12 +97,15 @@ class LotRepository(private val database: SahiTolDatabase) {
             deviceId = params.deviceId,
             entityType = "LOT",
             entityId = lotId,
-            command = "CREATE_LOT",
+            command = "CREATE_DRAFT",
             expectedVersion = 0,
             payloadJson = payloadJson,
             payloadSha256 = payloadSha256,
             dependsOnJson = "[]",
-            mediaIdsJson = if (params.localPhotoPath != null) "[\"${params.localPhotoPath}\"]" else "[]",
+            // Local paths are not server media UUIDs. Keep the staged file
+            // locally; a future media upload operation may reference it only
+            // after obtaining a server media ID.
+            mediaIdsJson = "[]",
             createdAt = timestamp,
             attemptCount = 0,
             nextAttemptAt = timestamp,

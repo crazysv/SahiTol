@@ -74,10 +74,10 @@ class RoomOutboxRepositoryTest {
             deviceId = "device_test_01",
             entityType = "LOT",
             entityId = "lot_abc",
-            command = "CREATE_LOT",
+            command = "CREATE_DRAFT",
             expectedVersion = 0,
-            payloadJson = "{\"material_code\":\"MAT-CAB-01\"}",
-            payloadSha256 = LotRepository.sha256("{\"material_code\":\"MAT-CAB-01\"}"),
+            payloadJson = "{\"material_id\":\"MAT-CAB-01\"}",
+            payloadSha256 = LotRepository.sha256("{\"material_id\":\"MAT-CAB-01\"}"),
             dependsOnJson = "[]",
             mediaIdsJson = "[]",
             state = "QUEUED",
@@ -87,7 +87,7 @@ class RoomOutboxRepositoryTest {
         assertEquals("QUEUED", op.state)
         assertEquals(0, op.attemptCount)
         assertEquals("collector_456", op.accountId)
-        assertEquals("CREATE_LOT", op.command)
+        assertEquals("CREATE_DRAFT", op.command)
         assertNull(op.lastErrorCode)
     }
 

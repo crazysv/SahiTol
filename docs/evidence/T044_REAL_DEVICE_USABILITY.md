@@ -186,6 +186,14 @@ Evidence: C16_material_passport_journey.png
    accepted by that facility's current material list, so a valid request/offer
    cannot be manufactured from it. A new compatible, server-backed lot and a
    recycler-created offer remain required for the final two-party run.
+6. **2026-10-01 lot-sync contract repair:** Following the PCB `Lot not found`
+   response, the client contract was inspected end-to-end. New lots had used
+   unsupported `CREATE_LOT`, a UI-only `material_code` field, and a local file
+   path in the server-media UUID list. The repaired outbox emits `CREATE_DRAFT`,
+   canonical `material_id`, and no fabricated media ID; the focused Room/outbox
+   and sync tests pass. The fixed APK is installed and a fresh photo-free PCB
+   lot is being created for the server-backed retest; its completion is not yet
+   claimed.
 
 ---
 

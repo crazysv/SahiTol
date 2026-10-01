@@ -11,6 +11,14 @@ zero real offers for the current incompatible cable lot and the live hosted
 facility. Earlier simulated C09 evidence was marked superseded, and T044
 remains in progress until a fresh two-party run is completed.
 
+## 2026-10-01 -- T044 server-lot outbox repair
+
+Corrected the local lot outbox to match the sync API's real create contract:
+`CREATE_DRAFT`, canonical `material_id`, and no local filesystem path in a
+media UUID list. Focused Room/outbox and sync tests pass. This was found by the
+honest hosted `Lot not found` result on a legacy local PCB lot; the updated APK
+is being exercised with a new compatible lot.
+
 ## 2026-10-01 -- T044 physical manual-sync repair
 
 Physical C14 testing on the cellular-connected collector device found that
