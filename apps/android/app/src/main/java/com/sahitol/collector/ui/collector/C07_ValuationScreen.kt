@@ -39,6 +39,7 @@ fun C07_ValuationScreen(
     sessionManager: SessionManager,
     onNavigateBack: () -> Unit,
     onNavigateDirectory: (String) -> Unit,
+    onNavigateHandover: (String) -> Unit,
     onNavigateHome: () -> Unit,
     onNavigateSync: () -> Unit,
     onNavigateSettings: () -> Unit
@@ -397,6 +398,11 @@ fun C07_ValuationScreen(
                         coroutineScope.launch {
                             facilityRepository.respondToOfferAtomic(offer.offerId, "ACCEPT_OFFER", accountId)
                             acceptedOfferName = offer.facilityName
+                            // The acceptance must lead to the next actionable
+                            // state. Previously the success banner was appended
+                            // after the offer list, often off-screen, so tapping
+                            // Accept appeared to do nothing.
+                            onNavigateHandover(lotId)
                         }
                     }
                 )

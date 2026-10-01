@@ -967,3 +967,12 @@ Built one requirement/task/acceptance catalog with generated roadmap, implementa
 
 This entry records documentation work only. No application, actual dataset import, trained model, audio, screen generation, device test, deployment, PPT/video or submission has been completed. Current implementation progress is in the generated tracker; validation results are in the documentation audit.
 
+## 2026-10-01 — Visible collector offer acceptance continuation (T020 repair)
+
+Fixed the collector C07 **Accept Offer** action. It already persisted a local
+`ACCEPT_OFFER` operation, but placed its confirmation after the offer list, which
+could leave the user with no visible result. A successful acceptance now routes
+directly to C10 Handover Capture for the selected lot. The focused Android unit
+suite passed (4 tests), and the repaired flow was verified on CPH2781 Android 16:
+the action displayed the handover screen with selected yard and terms.
+

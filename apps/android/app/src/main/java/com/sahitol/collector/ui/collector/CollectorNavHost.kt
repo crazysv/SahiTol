@@ -356,6 +356,9 @@ fun CollectorNavHost(
                 onNavigateDirectory = { targetLotId ->
                     navController.navigate(Screen.RecyclerDirectory.createRoute(targetLotId))
                 },
+                onNavigateHandover = { targetLotId ->
+                    navController.navigate(Screen.HandoverCapture.createRoute(targetLotId))
+                },
                 onNavigateHome = {
                     navController.navigate(Screen.Home.route) {
                         popUpTo(Screen.Home.route) { inclusive = true }

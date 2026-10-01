@@ -157,7 +157,7 @@
       "evidence": [
         "docs/evidence/T020_COLLECTOR_PRICE_AND_RECYCLER_VIEWS.md"
       ],
-      "note": "Implemented approved collector price and recycler views (C06├óΓé¼ΓÇ£C09): price board with category filter, 30-day trends, source details, indicative range, field observation entry, expandable valuation breakdown with condition deductions, recycler directory with GPS / radar banner, 5-factor matched offers, interactive offer request/accept/reject lifecycle, outbox queuing, and terms mismatch guard.",
+      "note": "Implemented approved collector price and recycler views (C06-C09): price board with category filter, 30-day trends, source details, indicative range, field observation entry, expandable valuation breakdown with condition deductions, recycler directory with GPS / radar banner, 5-factor matched offers, interactive offer request/accept/reject lifecycle, outbox queuing, and terms mismatch guard. On 2026-10-01, C07 acceptance was repaired to navigate immediately to C10 after its atomic local acceptance; physical-device verification passed.",
       "owner": "Owner + coding agent"
     },
     "T021": {

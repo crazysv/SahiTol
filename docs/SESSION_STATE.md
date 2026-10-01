@@ -75,4 +75,8 @@ actual production-photo upload remain unmeasured.
 
 ## Next action
 
-No further agent tasks eligible. All release work is complete agent-side. Owner to perform physical recording, PPT assembly, APK signing, and portal submission.
+Continue ordered independent verification and repair. On 2026-10-01, C07's visible
+offer acceptance was repaired: it now proceeds directly to C10 Handover Capture
+after locally persisting the acceptance. The repair was reverified on collector
+device N7OZPV59XWWKPF4X and the focused Android unit suite passed. Continue with
+the next ordered task after documentation regeneration and validation.

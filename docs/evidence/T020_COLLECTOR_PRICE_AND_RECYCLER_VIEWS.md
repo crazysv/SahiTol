@@ -109,3 +109,35 @@ BUILD SUCCESSFUL
    - Validates atomic persistence of `CREATE_PRICE_OBSERVATION` into Room outbox with SHA-256 fingerprint.
 9. `facilityRepository_directoryAndOfferResponses`:
    - Validates directory filtering, offer generation, and atomic `ACCEPT_OFFER` outbox persistence.
+
+---
+
+## 3. Acceptance continuation repair and device verification (2026-10-01)
+
+The original C07 acceptance action persisted `ACCEPT_OFFER` locally, but displayed
+its confirmation after the offer list. On a physical device that location was often
+outside the viewport, so the action could appear to do nothing. This was reported
+during the two-device handover check and reproduced on the collector device.
+
+`C07_ValuationScreen` now routes the accepted lot directly to C10 Handover Capture
+after the atomic repository operation completes. `CollectorNavHost` supplies that
+explicit navigation callback.
+
+Verification performed on collector device `N7OZPV59XWWKPF4X` (CPH2781, Android 16)
+with the updated debug APK installed at 12:14 IST:
+
+1. Opened C07 Valuation & Offers for the seeded Copper Wire / Cable lot.
+2. Tapped the visible **Accept Offer / स्वीकार करें** control for Verma Electricals.
+3. Confirmed immediate navigation to **Handover Capture / हस्तांतरण** (C10), with
+   the lot reference, selected yard, offline-ready state, revised measured term,
+   and Review / Accept / Dispute controls visible.
+
+The focused Android unit suite also passed after the repair:
+
+```text
+./gradlew.bat --no-daemon :app:testDebugUnitTest \
+  --tests "com.sahitol.collector.PriceAndRecyclerViewsTest" :app:assembleDebug
+
+4 tests completed, 0 failed
+BUILD SUCCESSFUL
+```
