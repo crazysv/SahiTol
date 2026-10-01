@@ -726,7 +726,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T046
 
-**Audit all translations and audio on device** — stage 6; scope RELEASE; status **IN_PROGRESS**.
+**Audit all translations and audio on device** — stage 6; scope RELEASE; status **DONE**.
 
 Dependencies: [T036](07_IMPLEMENTATION_PLAN.md#t036), [T037](07_IMPLEMENTATION_PLAN.md#t037), [T039](07_IMPLEMENTATION_PLAN.md#t039), [T044](07_IMPLEMENTATION_PLAN.md#t044).
 

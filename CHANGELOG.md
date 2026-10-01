@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-02 -- T046 focused accessibility and audio rerun
+
+Completed T046 after its device-test dependency closed. Current Android debug
+JUnit XML reports AudioGrammarAndManifestTest 8/8 and
+LanguageAndAccessibilityTest 11/11, both with zero failures/errors. String,
+audio, grammar and bilingual-rendering evidence remains valid. Native-speaker,
+headphone, large-text and on-device TalkBack reviews remain explicitly
+unverified rather than being represented as complete.
+
 ## 2026-10-02 -- T041 hosted-account verification and T044 closure
 
 Owner-provided Render dashboard evidence confirms `sahitol-api` is live on the

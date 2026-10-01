@@ -180,3 +180,11 @@ LanguageAndAccessibilityTest: 11 tests, 0 failures, 0 errors
 This confirms asset/grammar and automated accessibility contracts. It does not
 replace native-speaker listening review, headphone intelligibility, large-font
 testing, or on-device TalkBack; those remain `NOT_REVIEWED`/`NOT_RUN`.
+
+## 2026-10-02 focused rerun
+
+The focused debug-unit suites were rerun from the current Android workspace.
+The generated JUnit XML reports `AudioGrammarAndManifestTest`: **8 tests, 0
+failures, 0 errors**, and `LanguageAndAccessibilityTest`: **11 tests, 0
+failures, 0 errors**. This reconfirms the automated contracts without changing
+the explicit human-review and on-device accessibility gaps above.

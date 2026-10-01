@@ -99,7 +99,7 @@ Fault/security/device/language/performance tests, cellular-hosted journey and re
 | [T043](07_IMPLEMENTATION_PLAN.md#t043) | Run cross-surface integration and fault acceptance | DONE | [T015](07_IMPLEMENTATION_PLAN.md#t015), [T025](07_IMPLEMENTATION_PLAN.md#t025), [T027](07_IMPLEMENTATION_PLAN.md#t027), [T030](07_IMPLEMENTATION_PLAN.md#t030), [T031](07_IMPLEMENTATION_PLAN.md#t031), [T034](07_IMPLEMENTATION_PLAN.md#t034), [T037](07_IMPLEMENTATION_PLAN.md#t037), [T039](07_IMPLEMENTATION_PLAN.md#t039), [T040](07_IMPLEMENTATION_PLAN.md#t040) |
 | [T044](07_IMPLEMENTATION_PLAN.md#t044) | Perform real-device and two-device usability tests | DONE | [T041](07_IMPLEMENTATION_PLAN.md#t041), [T042](07_IMPLEMENTATION_PLAN.md#t042), [T043](07_IMPLEMENTATION_PLAN.md#t043) |
 | [T045](07_IMPLEMENTATION_PLAN.md#t045) | Measure entry-level performance and artifact size | DONE | [T034](07_IMPLEMENTATION_PLAN.md#t034), [T037](07_IMPLEMENTATION_PLAN.md#t037), [T043](07_IMPLEMENTATION_PLAN.md#t043) |
-| [T046](07_IMPLEMENTATION_PLAN.md#t046) | Audit all translations and audio on device | IN_PROGRESS | [T036](07_IMPLEMENTATION_PLAN.md#t036), [T037](07_IMPLEMENTATION_PLAN.md#t037), [T039](07_IMPLEMENTATION_PLAN.md#t039), [T044](07_IMPLEMENTATION_PLAN.md#t044) |
+| [T046](07_IMPLEMENTATION_PLAN.md#t046) | Audit all translations and audio on device | DONE | [T036](07_IMPLEMENTATION_PLAN.md#t036), [T037](07_IMPLEMENTATION_PLAN.md#t037), [T039](07_IMPLEMENTATION_PLAN.md#t039), [T044](07_IMPLEMENTATION_PLAN.md#t044) |
 
 ## Stage 7: Evidence, presentation and submission artifacts
 

@@ -359,11 +359,11 @@
       "owner": "Owner + coding agent"
     },
     "T046": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "evidence": [
         "docs/evidence/T046_TRANSLATION_AUDIO_AUDIT.md"
       ],
-      "note": "String parity 145/145 keys all three locales, zero placeholder mismatches. Audio 258/258 clips present, all SHA-256 checksums verified, runtime_cloud_call=false. AudioGrammarAndManifestTest 8 methods PASS (all spec fixtures: 0-99 numbers, 100-100000 place values, paise, weight, rate, range, negative, null, status, safety). Devanagari spot-checks PASS. On-device bilingual rendering PASS. Honest gaps: native-speaker review NOT_REVIEWED, TalkBack on-device NOT_RUN. Both explicitly tracked, do not block per task scope."
+      "note": "Completed 2026-10-02. String parity 145/145 keys all three locales, zero placeholder mismatches. Audio 258/258 clips present, all SHA-256 checksums verified, runtime_cloud_call=false. Current focused debug suites pass: AudioGrammarAndManifestTest 8/8 and LanguageAndAccessibilityTest 11/11, both with zero failures/errors. Devanagari spot-checks and on-device bilingual rendering pass. Honest gaps remain explicit: native-speaker review NOT_REVIEWED; headphone, large-text and TalkBack on-device NOT_RUN."
     },
     "T047": {
       "status": "IN_PROGRESS",
