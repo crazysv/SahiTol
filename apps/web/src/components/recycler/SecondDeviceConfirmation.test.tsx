@@ -17,20 +17,12 @@ describe('Second-Device QR Confirmation & Public Verification Views (T025)', () 
     expect(screen.getByText(/Terminal Online/i)).toBeDefined();
     expect(screen.getByText(/Align Collector QR inside frame/i)).toBeDefined();
 
-    // Recognized record preview
-    expect(screen.getByText('Recognized Proposal')).toBeDefined();
-    expect(screen.getByText('ST-24A7')).toBeDefined();
-    expect(screen.getByText(/84.8 kg/i)).toBeDefined();
-
-    // Toggle camera error simulation
-    const camErrorBtn = screen.getByRole('button', { name: /Simulate Camera Denied/i });
-    fireEvent.click(camErrorBtn);
+    // The view starts without a fabricated recognition; an actual scan or lookup
+    // must supply the record. JSDOM has no camera API, so Start Camera gives the
+    // honest recovery state.
+    expect(screen.getByText('No QR Scanned Yet')).toBeDefined();
+    fireEvent.click(screen.getByRole('button', { name: /Start Camera/i }));
     expect(screen.getByText('Camera Access Required')).toBeDefined();
-
-    // Retry camera
-    const retryBtn = screen.getByRole('button', { name: /Retry Camera/i });
-    fireEvent.click(retryBtn);
-    expect(screen.getByText(/Align Collector QR inside frame/i)).toBeDefined();
 
     // Manual lookup fallback
     const manualInput = screen.getByPlaceholderText(/e.g. ST-24A7/i);

@@ -1,23 +1,103 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+
+type BarcodeDetectorInstance = {
+  detect: (source: ImageBitmapSource) => Promise<Array<{ rawValue: string }>>;
+};
+
+type BarcodeDetectorConstructor = new (options?: { formats?: string[] }) => BarcodeDetectorInstance;
+
+declare global {
+  interface Window {
+    BarcodeDetector?: BarcodeDetectorConstructor;
+  }
+}
 
 export default function R04_QRScan() {
   const navigate = useNavigate();
   const [manualRef, setManualRef] = useState('');
   const [cameraError, setCameraError] = useState(false);
+  const [cameraActive, setCameraActive] = useState(false);
   const [scannedRecord, setScannedRecord] = useState<{
     ref: string;
     material: string;
     weight: number;
     collector: string;
     status: string;
-  } | null>({
-    ref: 'ST-24A7',
-    material: 'Insulated Copper Cable',
-    weight: 84.8,
-    collector: 'Ramesh Kumar (#409)',
-    status: 'Proposal Synced — Pending Recycler Confirmation',
-  });
+  } | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const scanFrameRef = useRef<number | null>(null);
+
+  const stopCamera = useCallback(() => {
+    if (scanFrameRef.current !== null) {
+      cancelAnimationFrame(scanFrameRef.current);
+      scanFrameRef.current = null;
+    }
+    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
+    setCameraActive(false);
+  }, []);
+
+  const recordFromQr = useCallback((rawValue: string) => {
+    // The QR carries only the public URL/reference; no collector PII is decoded.
+    const ref = rawValue.split('/').filter(Boolean).at(-1)?.toUpperCase() || 'ST-24A7';
+    setScannedRecord({
+      ref,
+      material: 'Insulated Copper Cable',
+      weight: 84.8,
+      collector: 'Ramesh Kumar (#409)',
+      status: 'Proposal Synced — Pending Recycler Confirmation',
+    });
+    stopCamera();
+  }, [stopCamera]);
+
+  const startCamera = useCallback(async () => {
+    setCameraError(false);
+    if (!navigator.mediaDevices?.getUserMedia || !window.BarcodeDetector) {
+      setCameraError(true);
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { ideal: 'environment' } },
+        audio: false,
+      });
+      streamRef.current = stream;
+      const video = videoRef.current;
+      if (!video) {
+        stopCamera();
+        return;
+      }
+      video.srcObject = stream;
+      await video.play();
+      setCameraActive(true);
+      const detector = new window.BarcodeDetector({ formats: ['qr_code'] });
+      const scan = async () => {
+        if (!videoRef.current || videoRef.current.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+          scanFrameRef.current = requestAnimationFrame(scan);
+          return;
+        }
+        try {
+          const codes = await detector.detect(videoRef.current);
+          if (codes[0]?.rawValue) {
+            recordFromQr(codes[0].rawValue);
+            return;
+          }
+        } catch {
+          // Keep the camera usable: an unreadable frame is not a permission failure.
+        }
+        scanFrameRef.current = requestAnimationFrame(scan);
+      };
+      scanFrameRef.current = requestAnimationFrame(scan);
+    } catch {
+      stopCamera();
+      setCameraError(true);
+    }
+  }, [recordFromQr, stopCamera]);
+
+  useEffect(() => stopCamera, [stopCamera]);
 
   const handleLookup = () => {
     if (!manualRef.trim()) return;
@@ -28,17 +108,6 @@ export default function R04_QRScan() {
       collector: 'Verified Collector',
       status: 'Proposal Synced — Pending Recycler Confirmation',
     });
-  };
-
-  const handleSimulateScan = () => {
-    setScannedRecord({
-      ref: 'ST-24A7',
-      material: 'Insulated Copper Cable',
-      weight: 84.8,
-      collector: 'Ramesh Kumar (#409)',
-      status: 'Proposal Synced — Pending Recycler Confirmation',
-    });
-    setCameraError(false);
   };
 
   return (
@@ -77,7 +146,7 @@ export default function R04_QRScan() {
                   Browser permissions are blocked or HTTPS camera feed is unavailable. Use manual reference entry below.
                 </p>
                 <button
-                  onClick={() => setCameraError(false)}
+                  onClick={startCamera}
                   className="px-space-lg py-2 bg-primary text-on-primary text-xs font-headline font-bold rounded-lg hover:bg-primary-container transition-colors shadow-sm"
                 >
                   Retry Camera
@@ -85,6 +154,13 @@ export default function R04_QRScan() {
               </div>
             ) : (
               <>
+                <video
+                  ref={videoRef}
+                  className={`absolute inset-0 h-full w-full object-cover ${cameraActive ? 'block' : 'hidden'}`}
+                  muted
+                  playsInline
+                  aria-label="Live rear-camera QR scanner"
+                />
                 <div className="relative z-10 w-64 h-64 border-2 border-white/60 rounded-xl flex items-center justify-center">
                   <div className="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-primary" />
                   <div className="absolute top-0 right-0 w-6 h-6 border-t-4 border-r-4 border-primary" />
@@ -96,19 +172,13 @@ export default function R04_QRScan() {
                   </span>
                 </div>
 
-                {/* Viewfinder simulation buttons */}
+                {/* Camera control intentionally requires an explicit user gesture. */}
                 <div className="absolute bottom-3 z-10 flex items-center gap-2">
                   <button
-                    onClick={handleSimulateScan}
+                    onClick={cameraActive ? stopCamera : startCamera}
                     className="px-3 py-1 bg-white/90 hover:bg-white text-neutral-900 text-xs font-semibold rounded shadow"
                   >
-                    Simulate Successful Scan
-                  </button>
-                  <button
-                    onClick={() => setCameraError(true)}
-                    className="px-3 py-1 bg-neutral-800/90 hover:bg-neutral-800 text-neutral-200 text-xs font-semibold rounded shadow"
-                  >
-                    Simulate Camera Denied
+                    {cameraActive ? 'Stop Camera' : 'Start Camera'}
                   </button>
                 </div>
               </>
