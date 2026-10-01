@@ -22,6 +22,14 @@ class RoomOutboxRepositoryTest {
     }
 
     @Test
+    fun presentationMaterialCodesMapToCuratedCatalogIds() {
+        assertEquals("MAT-PCB-01", LotRepository.canonicalMaterialId("PCB"))
+        assertEquals("MAT-CAB-01", LotRepository.canonicalMaterialId("CABLE"))
+        assertEquals("MAT-BAT-01", LotRepository.canonicalMaterialId("BATTERY"))
+        assertEquals("MAT-PCB-02", LotRepository.canonicalMaterialId("MAT-PCB-02"))
+    }
+
+    @Test
     fun testDomainEventHashChainProgression() {
         val genesis = "0000000000000000000000000000000000000000000000000000000000000000"
         val payload1 = "{\"lot_id\":\"lot_1\",\"status\":\"DRAFT\"}"

@@ -64,7 +64,7 @@ class LotRepository(private val database: SahiTolDatabase) {
             // The sync API owns canonical material IDs. `material_code` is a
             // local UI label and would otherwise create a server lot without
             // its material/route eligibility.
-            put("material_id", params.materialCode)
+            put("material_id", canonicalMaterialId(params.materialCode))
             put("estimated_weight_g", params.estimatedWeightG)
             if (params.estimatedLowPaise != null) put("estimated_low_paise", params.estimatedLowPaise)
             if (params.estimatedMedianPaise != null) put("estimated_median_paise", params.estimatedMedianPaise)
@@ -175,6 +175,20 @@ class LotRepository(private val database: SahiTolDatabase) {
     }
 
     companion object {
+        /** Maps presentation-category codes to the curated API catalog IDs. */
+        internal fun canonicalMaterialId(code: String): String = when (code.uppercase()) {
+            "PCB" -> "MAT-PCB-01"
+            "CABLE" -> "MAT-CAB-01"
+            "BATTERY" -> "MAT-BAT-01"
+            "CRT" -> "MAT-CRT-01"
+            "LCD" -> "MAT-LCD-01"
+            "MOTOR" -> "MAT-MOT-01"
+            "PLASTICS" -> "MAT-PLA-01"
+            "MIXED" -> "MAT-MIX-01"
+            "OTHER" -> "MAT-UNK-01"
+            else -> code
+        }
+
         fun sha256(input: String): String {
             val bytes = MessageDigest.getInstance("SHA-256").digest(input.toByteArray(Charsets.UTF_8))
             return bytes.joinToString("") { "%02x".format(it) }

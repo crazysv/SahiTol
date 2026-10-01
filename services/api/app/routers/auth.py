@@ -320,28 +320,29 @@ def demo_login(req: DemoLoginRequest, db: Session = Depends(get_db)):
         db.add(user)
         db.flush()
 
-        if req.role == UserRole.COLLECTOR:
-            # A fresh hosted demo database may not yet have run reference-data
-            # seeding.  The isolated demo identity must bootstrap its own minimal
-            # region instead of failing login on that deployment prerequisite.
-            if not db.query(Region).filter(Region.id == "DELHI_NCR").first():
-                db.add(Region(id="DELHI_NCR", name="Delhi-NCR", state_code="DL", kind="METRO"))
-                db.flush()
-            alias_name = persona.replace("_", " ").title()
-            collector = Collector(
-                user_id=user.id,
-                display_alias=f"Demo {alias_name}",
-                preferred_language="hi",
-                region_id="DELHI_NCR",
-                general_area="Mayapuri Scrap Yard (Demo)",
-                consent_version="v1.0",
-                version=1,
-                created_at=now,
-                updated_at=now
-            )
-            db.add(collector)
         db.commit()
         db.refresh(user)
+
+    # Older hosted demo databases can contain a demo user created before its
+    # collector profile migration. Ensure the role's required profile exists
+    # on every demo login, not only during initial user creation.
+    if req.role == UserRole.COLLECTOR and not db.query(Collector).filter(Collector.user_id == user.id).first():
+        now = datetime.now(timezone.utc)
+        if not db.query(Region).filter(Region.id == "DELHI_NCR").first():
+            db.add(Region(id="DELHI_NCR", name="Delhi-NCR", state_code="DL", kind="METRO"))
+            db.flush()
+        db.add(Collector(
+            user_id=user.id,
+            display_alias=f"Demo {persona.replace('_', ' ').title()}",
+            preferred_language="hi",
+            region_id="DELHI_NCR",
+            general_area="Mayapuri Scrap Yard (Demo)",
+            consent_version="v1.0",
+            version=1,
+            created_at=now,
+            updated_at=now
+        ))
+        db.commit()
 
     device_id = req.device_id or "demo-device"
     return _build_token_response(user, device_id, db)

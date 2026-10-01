@@ -19,6 +19,15 @@ media UUID list. Focused Room/outbox and sync tests pass. This was found by the
 honest hosted `Lot not found` result on a legacy local PCB lot; the updated APK
 is being exercised with a new compatible lot.
 
+## 2026-10-01 -- T044 demo collector-profile bootstrap repair
+
+Made demo login repair a missing collector profile for an existing demo user,
+instead of only creating one on the first login. This was found by a real
+hosted Postgres foreign-key rejection after the corrected fresh PCB lot reached
+the API. The focused authentication suite passes 14/14, including the legacy
+profile repair case. Deployment is still required before the phone retries its
+queued lot.
+
 ## 2026-10-01 -- T044 physical manual-sync repair
 
 Physical C14 testing on the cellular-connected collector device found that

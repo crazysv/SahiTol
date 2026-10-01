@@ -158,3 +158,7 @@ The new-lot outbox contract was then repaired from unsupported `CREATE_LOT` /
 fabricated media IDs. Focused tests pass and an updated APK is on the collector
 device; continue the fresh PCB lot creation and manual sync before attempting
 the recycler offer.
+The fresh corrected PCB lot reached hosted Postgres but the pre-existing demo
+user had no `collectors` profile. Demo login now repairs this legacy bootstrap
+state; its 14 focused auth tests pass. Push/deploy the server repair, then tap
+manual sync to retry the already-queued valid PCB lot.

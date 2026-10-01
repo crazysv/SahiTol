@@ -194,6 +194,13 @@ Evidence: C16_material_passport_journey.png
    and sync tests pass. The fixed APK is installed and a fresh photo-free PCB
    lot is being created for the server-backed retest; its completion is not yet
    claimed.
+7. **2026-10-01 hosted profile bootstrap repair:** The corrected fresh PCB lot
+   reached the hosted insert but PostgreSQL rejected its demo user's missing
+   `collectors` profile foreign key. Demo login now creates a collector profile
+   when an older existing demo user lacks one; the focused authentication suite
+   passes 14/14, including the legacy-profile repair case. This server repair
+   must deploy to Render before the already-queued valid PCB create can be
+   retried on the phone.
 
 ---
 

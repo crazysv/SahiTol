@@ -3,6 +3,7 @@ Covers T007 requirements: R-AUTH-01, R-AUTH-02, R-AUTH-03, R-AUTH-04, R-DATA-06,
 Acceptance cases: AT-007, AT-008, AT-009, AT-010, AT-058, AT-072.
 """
 import pytest
+import uuid
 from datetime import datetime, timedelta, timezone
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -307,6 +308,26 @@ def test_demo_login_isolated_and_labelled():
     # Decode access token to verify is_demo claim
     claims = decode_token(data["access_token"])
     assert claims["is_demo"] is True
+
+
+def test_demo_login_repairs_legacy_collector_without_profile():
+    """A pre-existing hosted demo user must regain its required collector profile."""
+    persona = "legacy_profile_repair"
+    first = client.post("/auth/demo", json={"role": "COLLECTOR", "persona_id": persona})
+    assert first.status_code == 200
+    user_id = uuid.UUID(decode_token(first.json()["access_token"])["sub"])
+    db = TestingSessionLocal()
+    user = db.query(User).filter(User.id == user_id).first()
+    assert user is not None
+    db.query(Collector).filter(Collector.user_id == user.id).delete()
+    db.commit()
+    db.close()
+
+    repaired = client.post("/auth/demo", json={"role": "COLLECTOR", "persona_id": persona})
+    assert repaired.status_code == 200
+    db = TestingSessionLocal()
+    assert db.query(Collector).filter(Collector.user_id == user_id).first() is not None
+    db.close()
 
 
 def test_demo_disabled_when_flag_off(monkeypatch):
