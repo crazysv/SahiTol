@@ -50,7 +50,8 @@ export default function R04_QRScan() {
       const parsed = new URL(rawValue);
       ref = parsed.searchParams.get('ref')?.toUpperCase() || ref;
       material = parsed.searchParams.get('material') || undefined;
-      const parsedWeight = Number(parsed.searchParams.get('weight'));
+      const rawWeight = parsed.searchParams.get('weight');
+      const parsedWeight = rawWeight === null ? Number.NaN : Number(rawWeight);
       weight = Number.isFinite(parsedWeight) ? parsedWeight : undefined;
       hash = parsed.searchParams.get('hash') || undefined;
     } catch {
