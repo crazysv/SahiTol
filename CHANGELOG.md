@@ -1238,3 +1238,14 @@ offline proposals now show only their actual QR values and are explicitly blocke
 from receipt issuance until server verification. T025 is returned to IN_PROGRESS:
 the server-backed lookup and authenticated confirmation remain to be built.
 
+# 2026-10-01 — T044 deployed two-device happy-path verification
+
+- Re-ran the current Android collector APK through the live accepted PCB offer.
+- Created handover `80a73333-9622-4ec2-af07-6a18fd6b78a0`, displayed QR
+  `ST-80A733`, decoded it on the second phone, completed server verification,
+  and confirmed receipt.
+- Independent API check returned transaction `cdcd977e-14f7-4547-bbe8-01a5e27e1789`
+  as `CONFIRMED` v5 with 14.25 kg and ₹4,275.00.
+- T044 remains in progress for denial/discrepancy/recovery variants and the
+  explicitly unmet fieldwork obligation.
+

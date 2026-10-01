@@ -1,6 +1,6 @@
 # Current handoff
 
-Handoff date: 2026-10-01 (Asia/Kolkata). Phase: **T044 repair and real-device verification in progress; continue the recycler offer and two-device QR path.**
+Handoff date: 2026-10-01 (Asia/Kolkata). Phase: **T044 repair and real-device verification in progress; happy-path two-device QR confirmation complete, denial/recovery checks remain.**
 
 Scope and progression: [master](../MASTER_CONTENT.md), [tracker](08_TRACKER.md), [implementation plan](07_IMPLEMENTATION_PLAN.md). Authoritative statuses live in [status.json](planning/status.json).
 
@@ -16,17 +16,16 @@ console and API health endpoint returned HTTP 200.
 
 ## Phase completion summary
 
-**Do not treat the release as complete. T044 remains in progress and its
-two-device evidence is still outstanding.**
+**Do not treat the release as complete. T044 remains in progress because
+denial/discrepancy/recovery variants and fieldwork are still outstanding.**
 
-Latest T044 checkpoint: C07/C08 now render the actual selected synchronized
-PCB and show no invented pickup. The pending live PCB request has no offer yet.
-The local API repair gives only the designated `yard_operator` demo recycler a
-membership in the existing synthetic demo facility (34 focused auth/trade tests
-pass). It deployed and created open offer `5e53f4de-…` for the pending PCB
-request with server terms version 1. The collector USB connection dropped before
-C07 could read it; reconnect both handsets, refresh C07, then continue the
-two-device acceptance/QR test.
+Latest T044 checkpoint: C07/C08 render the actual selected synchronized PCB and
+show no invented pickup. The deployed accepted offer `5e53f4de-…` was resumed
+on the collector, C10 created live handover `80a73333-9622-4ec2-af07-6a18fd6b78a0`
+(QR `ST-80A733`), the recycler phone decoded and server-verified the QR, and
+the API returned transaction `cdcd977e-…` as `CONFIRMED` v5 with 14.25 kg and
+₹4,275.00. Continue with denial/discrepancy/recovery variants only; do not
+clear either device or rewrite legacy repair rows.
 
 - **T046 DONE**: String parity 145/145 all locales. Audio 258/258 checksums OK. All AudioGrammarAndManifestTest PASS.
 - **T047 DONE**: 7 data cards, model card (macro-F1 0.0159), frozen SHA-256 manifest (T047_FROZEN_RELEASE_MANIFEST.json).

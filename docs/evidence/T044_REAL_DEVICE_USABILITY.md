@@ -6,8 +6,9 @@
 **Device:** Android `N7OZPV59XWWKPF4X`, 1080x2372, 480 dpi  
 **Build:** SahiTol collector APK (debug), installed via `adb install`  
 **Note:** These are owner scenario demonstration tests. The original C11 QR
-screen-only observation was partially simulated and is not sufficient proof by
-itself; deployed two-phone confirmation is recorded separately in T025.
+screen-only observation was partially simulated; the fresh current-APK flow
+below is the independent deployed happy-path retest. Deployed two-phone
+confirmation is also recorded separately in T025.
 Fieldwork obligation remains explicitly UNMET per project constraints.
 
 ---
@@ -143,6 +144,22 @@ Evidence: C16_material_passport_journey.png
 
 ---
 
+## Fresh deployed two-device happy-path retest (2026-10-01)
+
+The current debug APK on collector `N7OZPV59XWWKPF4X` resumed the synchronized
+PCB lot `f8b0587f-f774-4e1c-9ce9-1cc578fe558c`, recovered the accepted server
+offer `5e53f4de-b6b9-4adf-9451-da7cdb47cb6a`, and created a live handover. The
+collector displayed QR reference `ST-80A733`; QR decoding on recycler
+`b33707830407` produced handover `80a73333-9622-4ec2-af07-6a18fd6b78a0` and
+hash `0977dfc9790cec338fd81620eb9311c68a6621b44a80a3fc14ce7df5fe86fbfc`.
+The recycler screen reported server proposal verification, then displayed
+“Recycler confirmation recorded” with material `MAT-PCB-01`, intact condition,
+14.25 kg received mass, and ₹4,275.00 agreed value. Independent API inspection
+returned transaction `cdcd977e-14f7-4547-bbe8-01a5e27e1789` as `CONFIRMED`,
+version 5, with the same weight and value. This proves the current deployed
+happy path; it does not prove denial, discrepancy, camera-permission, or
+recovery variants.
+
 ## Checklist Against T044 Output Requirements
 
 | Requirement | Result |
@@ -153,9 +170,9 @@ Evidence: C16_material_passport_journey.png
 | Restart / offline persistence | Verified in T015, T041; Room DB persists across restart |
 | Airplane mode / offline QR | PASS — Offline Ready badge on C10, C11 throughout |
 | Background / manual sync | PASS — C08 manual sync and outbox transitions verified |
-| QR two-device handover | Partial — T025 contains deployed two-device confirmation; this task still needs a fresh current-APK flow |
+| QR two-device handover | PASS for the deployed happy path below; denial/recovery variants remain outstanding |
 | Hindi / Marathi labels | PASS — Bilingual titles throughout (hastantaran, sangrah evam vajan, etc.) |
-| Representative scenario usability | Partial — lot/valuation/device persistence observed; old offer-to-QR path was simulated and is superseded |
+| Representative scenario usability | PASS for the current accepted-offer-to-QR-to-confirm path; denial/recovery variants remain outstanding |
 | Owner scenario tests not fieldwork | PASS — Clearly identified as owner demo scenario |
 | Fieldwork obligation | UNMET — explicitly tracked; two-collector fieldwork remains outstanding |
 
