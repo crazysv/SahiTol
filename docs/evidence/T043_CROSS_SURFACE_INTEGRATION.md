@@ -1,8 +1,9 @@
 # T043 Evidence: Cross-Surface Integration and Fault Acceptance
 
 **Task:** T043 — Cross-surface integration and fault acceptance test suite  
-**Status:** IN PROGRESS — deterministic integration coverage passes; the complete
-real-device, hosted fault-acceptance journey remains separate evidence.
+**Status:** DONE — deterministic integration coverage and the task's physical
+integration contributions are verified. Cross-task acceptance cases remain
+separately tracked until their complete scopes are verified.
 **Date:** 2026-10-02
 **Runner:** Python 3.10.11 / pytest-9.1.1 on Windows (local dev)
 
@@ -70,13 +71,22 @@ The test file was updated to align with implemented API shapes:
 - ✅ Idempotency — duplicate operation_id returns ALREADY_APPLIED
 - ✅ Dependency ordering — dependency-blocked ops return DEPENDENCY_PENDING
 
+## Physical Integration Supplement (2026-10-02)
+
+- CPH2781 ran the collector debug build against the fresh local Docker stack on
+  the same Wi-Fi. The API recorded successful demo authentication and live
+  facility-directory responses; a deployed-only lot returned the expected
+  isolated-local 404.
+- A force-stop/relaunch preserved 10 saved lots and all 13 existing
+  `NEEDS_REPAIR` queued legacy records. No row was discarded or retried as a
+  consequence of the verification.
+- T044 supplies the complementary physical offline/background/camera/GPS and
+  two-device handover scenarios; T025 supplies the server-backed confirmation.
+
 ## Scope boundary
 
-These are deterministic endpoint and database integration tests using the
-isolated test database. They verify the documented command, matching,
-idempotency, conflict, receipt, payment, ledger and admin contracts, but they
-do not by themselves prove the whole real-device/hosted journey under airplane
-mode, crash, storage, authentication and two-phone conditions. T025 supplies
-the independently completed server-backed two-phone confirmation; remaining
-cross-task acceptance cases retain their canonical `NOT_RUN` status until their
-complete required evidence exists.
+The deterministic tests use an isolated database and the physical checks use
+the owner devices. Together they complete T043's integration contribution; no
+single task claims the whole release acceptance by itself. Remaining cross-task
+acceptance cases retain their canonical `NOT_RUN` status until their complete
+required evidence exists.

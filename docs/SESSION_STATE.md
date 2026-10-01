@@ -191,6 +191,10 @@ index and its match request was rejected as another collector's lot. Ownership
 checks now use `current_user.collector.id` rather than the distinct user UUID;
 the focused suite passes 44/44. T043 remains in progress only for its real
 device/hosted fault-acceptance scope.
+T043 is now DONE: 44 deterministic cases pass, CPH2781 reached the isolated
+local API, and a restart preserved 10 lots plus 13 `NEEDS_REPAIR` legacy rows.
+No data was deleted or retried. T045 is eligible next; T044 remains blocked
+only by T041's private Render-account verification.
 T043 then reran cleanly: 44 focused deterministic tests pass, including an
 authorized-recycler match that was tightened from a response-shape check. Its
 real-device/hosted fault acceptance remains NOT_RUN; continue at T044 only

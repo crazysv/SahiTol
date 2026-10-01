@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-02 -- T043 physical integration completion
+
+Completed T043 with its 44 deterministic checks, CPH2781 local API journey and
+restart-preservation check. The owner device retained 10 lots and 13
+quarantined legacy records; no data was discarded. Cross-task acceptance
+remains explicitly open.
+
 ## 2026-10-02 -- T043 collector ownership repair
 
 Corrected lot ownership checks to use the collector-profile UUID rather than

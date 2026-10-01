@@ -678,7 +678,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T043
 
-**Run cross-surface integration and fault acceptance** — stage 6; scope RELEASE; status **IN_PROGRESS**.
+**Run cross-surface integration and fault acceptance** — stage 6; scope RELEASE; status **DONE**.
 
 Dependencies: [T015](07_IMPLEMENTATION_PLAN.md#t015), [T025](07_IMPLEMENTATION_PLAN.md#t025), [T027](07_IMPLEMENTATION_PLAN.md#t027), [T030](07_IMPLEMENTATION_PLAN.md#t030), [T031](07_IMPLEMENTATION_PLAN.md#t031), [T034](07_IMPLEMENTATION_PLAN.md#t034), [T037](07_IMPLEMENTATION_PLAN.md#t037), [T039](07_IMPLEMENTATION_PLAN.md#t039), [T040](07_IMPLEMENTATION_PLAN.md#t040).
 

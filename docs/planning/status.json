@@ -335,11 +335,11 @@
       "note": "Completed 2026-10-02. A fresh Docker/PostGIS stack verified migrations 0001/0002, idempotent seed, live/ready health, PostGIS 3.4, persistent named volumes, signed backup, deliberate database/media mutation, full restore and restart persistence. Compose CORS and port wiring were repaired. CPH2781 then ran the locally addressed debug APK on the same Wi-Fi; local API logs recorded demo authentication 200 and facility-directory 200 twice. A deployed-only lot returned expected local 404, proving the separate data boundary. Cross-task acceptance cases remain NOT_RUN."
     },
     "T043": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "evidence": [
         "docs/evidence/T043_CROSS_SURFACE_INTEGRATION.md"
       ],
-      "note": "On 2026-10-02, all 44 deterministic cross-surface tests pass after repairing collector-profile ownership comparisons in lot listing, editing and matching. Sync-created lots now appear in their owner's index and can be matched by that owner. T025's deployed two-phone confirmation is DONE. T043 remains IN_PROGRESS because isolated test-database coverage does not prove the complete real-device/hosted fault journey required by its acceptance cases.",
+      "note": "Completed 2026-10-02. All 44 deterministic cross-surface tests pass after repairing collector-profile ownership comparisons in lot listing, editing and matching. CPH2781 completed the local phone/API path and restart-preservation check; T025 supplies server-backed two-phone confirmation and T044 supplies offline/background/permission scenarios. Cross-task acceptance cases remain NOT_RUN until their full scopes are verified.",
       "owner": "Owner + coding agent"
     },
     "T044": {
