@@ -1,6 +1,6 @@
 # Current handoff
 
-Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T045 performance/artifact measurement complete; continue remaining release evidence in canonical task order.**
+Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T041 hosted deployment and T044 owner-device testing complete; continue remaining release evidence in canonical task order.**
 
 Scope and progression: [master](../MASTER_CONTENT.md), [tracker](08_TRACKER.md), [implementation plan](07_IMPLEMENTATION_PLAN.md). Authoritative statuses live in [status.json](planning/status.json).
 
@@ -16,9 +16,8 @@ console and API health endpoint returned HTTP 200.
 
 ## Phase completion summary
 
-**Do not treat the release as complete. T044's owner-device scenario testing is
-complete, but its canonical dependencies T041–T043 and shared release
-acceptance remain outstanding.**
+**Do not treat the release as complete. T041–T045 are complete, but shared
+release acceptance and the remaining release-evidence tasks are outstanding.**
 
 Latest T044 checkpoint: C07/C08 render the actual selected synchronized PCB and
 show no invented pickup. The deployed accepted offer `5e53f4de-…` was resumed
@@ -49,8 +48,10 @@ left the collector at 10 lots, with no test lot saved.
 
 T041 public recheck on 2026-10-02 passed: Render live/health/ready and Pages
 all returned HTTPS 200; readiness reports the deployed `adapter_readiness`
-storage probe. Private Render plan/spend/account settings cannot be read from
-this workspace, so T041 remains IN_PROGRESS rather than inferring them.
+storage probe. Owner-supplied dashboard evidence then confirmed that the live
+service is Free in Oregon (US West), auto-deploys `main`, and uses
+`/health/live`; workspace Billing is Hobby with no card and $0.00 projected
+charges. Free-tier spin-down remains a documented constraint.
 
 The T044 changed-terms/dispute path is now also live-device verified. Isolated
 handover `ST-50BF6E` was revised by the authorized recycler from 14.25 kg /

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-02 -- T041 hosted-account verification and T044 closure
+
+Owner-provided Render dashboard evidence confirms `sahitol-api` is live on the
+Free plan in Oregon (US West), auto-deploys `main`, and uses `/health/live`.
+Workspace Billing is Hobby with no payment card, $0.00 unbilled/projected
+charges and $0.00 credit. This closes the private-account verification boundary
+without exposing secrets. With T041–T043 complete, the already-evidenced T044
+owner-device and two-device scenarios are now formally complete. Free-tier
+inactivity spin-down remains visible in the deployment evidence.
+
 ## 2026-10-02 -- T045 production-photo size verification
 
 Completed T045's named-device measurements on CPH2781 Android 16. The real

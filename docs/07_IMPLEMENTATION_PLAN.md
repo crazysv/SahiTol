@@ -646,7 +646,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T041
 
-**Deploy hosted API database storage and web** — stage 6; scope RELEASE; status **IN_PROGRESS**.
+**Deploy hosted API database storage and web** — stage 6; scope RELEASE; status **DONE**.
 
 Dependencies: [T007](07_IMPLEMENTATION_PLAN.md#t007), [T008](07_IMPLEMENTATION_PLAN.md#t008), [T025](07_IMPLEMENTATION_PLAN.md#t025), [T030](07_IMPLEMENTATION_PLAN.md#t030), [T039](07_IMPLEMENTATION_PLAN.md#t039), [T040](07_IMPLEMENTATION_PLAN.md#t040).
 
@@ -694,7 +694,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T044
 
-**Perform real-device and two-device usability tests** — stage 6; scope RELEASE; status **IN_PROGRESS**.
+**Perform real-device and two-device usability tests** — stage 6; scope RELEASE; status **DONE**.
 
 Dependencies: [T041](07_IMPLEMENTATION_PLAN.md#t041), [T042](07_IMPLEMENTATION_PLAN.md#t042), [T043](07_IMPLEMENTATION_PLAN.md#t043).
 

@@ -13,8 +13,9 @@
 
 - **Service:** sahitol-api
 - **URL:** https://sahitol-api.onrender.com
+- **Region:** Oregon (US West)
 - **Runtime:** Docker (infra/Dockerfile.api)
-- **Deploy commit:** a12fdf2 (2026-09-30)
+- **Current dashboard deploy:** a858c41 (2026-10-02), Live
 - **Startup:** infra/start.sh migrate then seed (idempotent) then uvicorn 2 workers
 
 ### Health Check Evidence (Render deploy logs)
@@ -83,6 +84,19 @@ availability ([Render free-service documentation](https://render.com/docs/free),
 available in this workspace, so the actual service plan, spend limits and
 account settings remain **UNVERIFIED**, rather than inferred from the public
 endpoint.
+
+### 2026-10-02 owner dashboard verification
+
+The owner supplied Render dashboard screenshots after the public checks. They
+show the service is **Live**, uses the **Free** instance plan, deploys `main`
+automatically, and has `/health/live` configured as its health-check path. The
+service settings confirm the Oregon (US West) region and Docker build path.
+
+The owner also supplied the workspace Billing Information view: **Hobby** plan,
+**no card on file**, $0.00 unbilled/projected October charges, and $0.00 credit
+balance. These screenshots complete the previously private plan/spend/account
+verification boundary. The free-service inactivity spin-down warning remains a
+documented operational constraint, not a hidden availability guarantee.
 
 ## Cloudflare Pages (Web Console)
 
