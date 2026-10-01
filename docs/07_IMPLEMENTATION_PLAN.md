@@ -758,7 +758,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T048
 
-**Prepare PPT and presenter handoff** — stage 7; scope RELEASE; status **IN_PROGRESS**.
+**Prepare PPT and presenter handoff** — stage 7; scope RELEASE; status **DONE**.
 
 Dependencies: [T044](07_IMPLEMENTATION_PLAN.md#t044), [T047](07_IMPLEMENTATION_PLAN.md#t047).
 

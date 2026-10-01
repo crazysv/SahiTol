@@ -9,6 +9,11 @@
 - API: https://sahitol-api.onrender.com  
 - Web console: https://sahitol.pages.dev  
 
+**Actual deck:** `deliverables/SahiTol_Release_Evidence_Deck.pptx` (10 slides,
+created and render-checked 2026-10-02). No organizer-specific template was
+provided, so this is a standard 16:9 evidence deck rather than a claim of
+template compliance.
+
 ---
 
 > [!IMPORTANT]
@@ -383,3 +388,12 @@ Cash recorded / dues tracked      Price observation derived
 ## Verdict: DONE
 
 One-page fact sheet, 10-slide script with speaker notes, five presenter role cards, and slide production instructions produced. All numbers are from verified evidence files (T041–T047). Honest limitations stated throughout. No fabricated fieldwork, borrowed accuracy, or unsupported uplift claims.
+
+## 2026-10-02 actual deck export and verification
+
+Created `deliverables/SahiTol_Release_Evidence_Deck.pptx` from the verified
+facts above. It contains all ten scripted topics, speaker notes with evidence
+boundaries, and visible source footnotes. The finalizer reports a structurally
+valid 10-slide PPTX, zero layout findings, and successful first-party import;
+every rendered slide was visually inspected for clipping and overlap. The
+export SHA-256 is `e67a112a1c30a93227ac872f891e6be3b5b1c908030f78a0ade8a6a166211f02`.

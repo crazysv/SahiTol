@@ -374,11 +374,11 @@
       "note": "Completed 2026-10-02. Independent SHA-256 recomputation matched all 21 files named by the frozen manifest: classifier.tflite, model card, Android audio manifest, seven data cards, nine dataset manifests and two research-evidence documents. Model macro-F1 0.0159 and 100pct abstention are honestly documented. R-RES-02 fieldwork remains UNMET, native-speaker review NOT_REVIEWED, and the licence-review limitation remains visible."
     },
     "T048": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "evidence": [
         "docs/evidence/T048_PPT_PRESENTER_HANDOFF.md"
       ],
-      "note": "Complete 10-slide deck script with speaker notes, one-page fact sheet (all numbers evidence-backed from T041-T047), five presenter role cards with hand-off cues and Q&A crib, and slide production instructions for owner. All claims cite evidence. Honest limitations (R-RES-02 UNMET, model macro-F1 0.0159, native-speaker NOT_REVIEWED) stated throughout. Owner builds actual PPT from this script using organizer template."
+      "note": "Completed 2026-10-02. Actual 10-slide PPTX deliverable exists at deliverables/SahiTol_Release_Evidence_Deck.pptx with speaker notes, visible sources, verified T041–T047 claims, and honest limitations (R-RES-02 UNMET, model macro-F1 0.0159, native-speaker NOT_REVIEWED). Finalization reports zero layout findings and successful import; all rendered slides were visually inspected. No organizer-specific template was supplied, so standard 16:9 evidence-deck styling was used."
     },
     "T049": {
       "status": "IN_PROGRESS",

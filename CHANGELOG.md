@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-02 -- T048 actual PowerPoint deliverable
+
+Created and render-checked `deliverables/SahiTol_Release_Evidence_Deck.pptx`.
+The 10-slide deck contains presenter notes, on-slide source footnotes, the
+verified implementation story, and the required limitations. Structural,
+layout, and first-party import checks pass with zero findings. The deck uses a
+standard 16:9 evidence design because no organizer template was supplied.
+
 ## 2026-10-02 -- T047 independent frozen-manifest verification
 
 Completed T047 after independently recomputing every digest named by the
