@@ -366,12 +366,12 @@
       "note": "Completed 2026-10-02. String parity 145/145 keys all three locales, zero placeholder mismatches. Audio 258/258 clips present, all SHA-256 checksums verified, runtime_cloud_call=false. Current focused debug suites pass: AudioGrammarAndManifestTest 8/8 and LanguageAndAccessibilityTest 11/11, both with zero failures/errors. Devanagari spot-checks and on-device bilingual rendering pass. Honest gaps remain explicit: native-speaker review NOT_REVIEWED; headphone, large-text and TalkBack on-device NOT_RUN."
     },
     "T047": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "evidence": [
         "docs/evidence/T047_DATASET_MODEL_EVIDENCE.md",
         "docs/evidence/T047_FROZEN_RELEASE_MANIFEST.json"
       ],
-      "note": "Frozen release manifest generated with SHA-256 digests for classifier.tflite (35d0ad7c...), model_card.md, audio_manifest.json (258 clips), all 7 data cards, and all family manifests. Model macro-F1 0.0159 and 100pct abstention honestly documented. R-RES-02 fieldwork UNMET explicitly declared. Native-speaker review NOT_REVIEWED. All honest gaps documented."
+      "note": "Completed 2026-10-02. Independent SHA-256 recomputation matched all 21 files named by the frozen manifest: classifier.tflite, model card, Android audio manifest, seven data cards, nine dataset manifests and two research-evidence documents. Model macro-F1 0.0159 and 100pct abstention are honestly documented. R-RES-02 fieldwork remains UNMET, native-speaker review NOT_REVIEWED, and the licence-review limitation remains visible."
     },
     "T048": {
       "status": "IN_PROGRESS",

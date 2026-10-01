@@ -1,6 +1,6 @@
 # Current handoff
 
-Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T046 translation/audio audit complete; continue remaining release evidence in canonical task order.**
+Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T047 dataset/model evidence freeze complete; continue remaining release evidence in canonical task order.**
 
 Scope and progression: [master](../MASTER_CONTENT.md), [tracker](08_TRACKER.md), [implementation plan](07_IMPLEMENTATION_PLAN.md). Authoritative statuses live in [status.json](planning/status.json).
 
@@ -16,7 +16,7 @@ console and API health endpoint returned HTTP 200.
 
 ## Phase completion summary
 
-**Do not treat the release as complete. T041–T046 are complete, but shared
+**Do not treat the release as complete. T041–T047 are complete, but shared
 release acceptance and the remaining release-evidence tasks are outstanding.**
 
 Latest T044 checkpoint: C07/C08 render the actual selected synchronized PCB and

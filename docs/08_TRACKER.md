@@ -2,7 +2,7 @@
 
 Generated from [catalog](planning/catalog.json) and [status](planning/status.json). Edit those files, then run `python scripts/render_docs.py` and `python scripts/check_docs.py`. Do not edit this view independently.
 
-**Release tasks: 46/50 DONE. Release acceptance: 28/79 PASS.** Future scope and external gaps are not counted as completed release work.
+**Release tasks: 47/50 DONE. Release acceptance: 28/79 PASS.** Future scope and external gaps are not counted as completed release work.
 
 Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, DONE; FUTURE starts DEFERRED. Allowed test states: NOT_RUN, PASS, FAIL, BLOCKED; external gap starts UNMET; future starts DEFERRED. Notes explain blockers and next action. Evidence paths are repository-relative, no secret-bearing files.
 
@@ -54,7 +54,7 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [T044](07_IMPLEMENTATION_PLAN.md#t044) | Perform real-device and two-device usability tests | RELEASE | DONE | [T044_REAL_DEVICE_USABILITY.md](../docs/evidence/T044_REAL_DEVICE_USABILITY.md) | Completed 2026-10-02 after T041–T043 closed. The fresh current-APK two-device happy path passed: C10 created handover 80a73333-9622-4ec2-af07-6a18fd6b78a0 (QR ST-80A733), recycler verification/confirmation completed, and the deployed API returned CONFIRMED v5 with 14.25 kg and ₹4,275.00. A collector force-stop/relaunch then recovered that same handover by lot without a duplicate and C11 pulled the confirmed receipt. The same handset with both location permissions denied successfully continued photo-free to C05 and visibly used the coarse-location fallback. Camera denial was subsequently retested through Android Settings: C04 showed the system prompt, returned to a usable photo-free path after denial, and permission was restored. Actual Aeroplane mode left C14 usable with records safely queued and was restored. Hindi and Marathi selection both persisted on device. A restored-camera C04/C05 test ran the bundled LiteRT classifier locally; its 9.0% result correctly fell below the 65% threshold and required manual selection, while an ordinary Home/background return preserved the unsaved state. On 2026-10-02, isolated live handover 50bf6e56 (ST-50BF6E) received a recycler revised measurement (13.00 kg / ₹3,900); the collector dispute produced deployed DISPUTED v3 with no confirmation and, after restart, visibly reported joint review required while preserving the original proposal hash. A separate live handover 2eec257b (ST-2EEC25) received the same revised terms, which the physical collector accepted in C11; the deployed record is CONFIRMED v3 and C11 visibly reported the confirmed receipt. Android build/unit suite and focused handover API suite pass. Unrelated legacy repair rows remain untouched. Shared acceptance cases and the external two-collector fieldwork obligation remain open; this owner-scenario task does not claim either. |
 | [T045](07_IMPLEMENTATION_PLAN.md#t045) | Measure entry-level performance and artifact size | RELEASE | DONE | [T045_PERFORMANCE_AND_ARTIFACT_SIZE.md](../docs/evidence/T045_PERFORMANCE_AND_ARTIFACT_SIZE.md) | Independent device re-verification on CPH2781 Android 16: debug APK 35.60 MB (within 40 MB goal), LiteRT model 1.18 MB, audio 258 MP3 files / 4.70 MB; Room diagnostic write/read 26 ms, JPEG compression 37 ms, LiteRT inference in airplane mode 61.42 ms, and total PSS 122,791 KB. Five activity launches had p50 1.974 s and p95 2.205 s: the p95 misses the 2 s goal and is explicitly recorded. A real C04 CameraX capture was 2,721,334 bytes before app compression and 77,572 bytes after PhotoCompressor, below the 150 KB target and 2 MB hard limit. A signed release APK remains an owner-keystore action. |
 | [T046](07_IMPLEMENTATION_PLAN.md#t046) | Audit all translations and audio on device | RELEASE | DONE | [T046_TRANSLATION_AUDIO_AUDIT.md](../docs/evidence/T046_TRANSLATION_AUDIO_AUDIT.md) | Completed 2026-10-02. String parity 145/145 keys all three locales, zero placeholder mismatches. Audio 258/258 clips present, all SHA-256 checksums verified, runtime_cloud_call=false. Current focused debug suites pass: AudioGrammarAndManifestTest 8/8 and LanguageAndAccessibilityTest 11/11, both with zero failures/errors. Devanagari spot-checks and on-device bilingual rendering pass. Honest gaps remain explicit: native-speaker review NOT_REVIEWED; headphone, large-text and TalkBack on-device NOT_RUN. |
-| [T047](07_IMPLEMENTATION_PLAN.md#t047) | Freeze dataset and model evidence package | RELEASE | IN_PROGRESS | [T047_DATASET_MODEL_EVIDENCE.md](../docs/evidence/T047_DATASET_MODEL_EVIDENCE.md), [T047_FROZEN_RELEASE_MANIFEST.json](../docs/evidence/T047_FROZEN_RELEASE_MANIFEST.json) | Frozen release manifest generated with SHA-256 digests for classifier.tflite (35d0ad7c...), model_card.md, audio_manifest.json (258 clips), all 7 data cards, and all family manifests. Model macro-F1 0.0159 and 100pct abstention honestly documented. R-RES-02 fieldwork UNMET explicitly declared. Native-speaker review NOT_REVIEWED. All honest gaps documented. |
+| [T047](07_IMPLEMENTATION_PLAN.md#t047) | Freeze dataset and model evidence package | RELEASE | DONE | [T047_DATASET_MODEL_EVIDENCE.md](../docs/evidence/T047_DATASET_MODEL_EVIDENCE.md), [T047_FROZEN_RELEASE_MANIFEST.json](../docs/evidence/T047_FROZEN_RELEASE_MANIFEST.json) | Completed 2026-10-02. Independent SHA-256 recomputation matched all 21 files named by the frozen manifest: classifier.tflite, model card, Android audio manifest, seven data cards, nine dataset manifests and two research-evidence documents. Model macro-F1 0.0159 and 100pct abstention are honestly documented. R-RES-02 fieldwork remains UNMET, native-speaker review NOT_REVIEWED, and the licence-review limitation remains visible. |
 | [T048](07_IMPLEMENTATION_PLAN.md#t048) | Prepare PPT and presenter handoff | RELEASE | IN_PROGRESS | [T048_PPT_PRESENTER_HANDOFF.md](../docs/evidence/T048_PPT_PRESENTER_HANDOFF.md) | Complete 10-slide deck script with speaker notes, one-page fact sheet (all numbers evidence-backed from T041-T047), five presenter role cards with hand-off cues and Q&A crib, and slide production instructions for owner. All claims cite evidence. Honest limitations (R-RES-02 UNMET, model macro-F1 0.0159, native-speaker NOT_REVIEWED) stated throughout. Owner builds actual PPT from this script using organizer template. |
 | [T049](07_IMPLEMENTATION_PLAN.md#t049) | Record and validate demo video | RELEASE | IN_PROGRESS | [T049_DEMO_VIDEO_SHOTLIST.md](../docs/evidence/T049_DEMO_VIDEO_SHOTLIST.md) | Complete 4-minute shot list (14 segments A-N), pre-recording device checklist (15 items), post-recording validation checklist (12 items), upload/link instructions, and recording setup commands. Physical recording is an owner action requiring device N7OZPV59XWWKPF4X. Video link to be recorded in T050 once owner completes recording. Privacy/security/claim constraints documented (no secrets, no EPR cert claim, no borrowed accuracy, demo labels required). |
 | [T050](07_IMPLEMENTATION_PLAN.md#t050) | Package release and submission handoff | RELEASE | IN_PROGRESS | [T050_RELEASE_HANDOFF.md](../docs/evidence/T050_RELEASE_HANDOFF.md) | All software acceptance gates verified: 318 backend tests, 44 web integration tests, 73 Android unit tests, 6 must-haves, 7 data cards, frozen SHA-256 manifest. README updated from documentation-only to implemented state. Four required deliverables: debug APK exists (33.25 MB, SHA-256 db71f114...), PPT script complete (T048), video shot list complete (T049), GitHub README updated. Remaining owner actions: sign release APK, record video, build PPT from script, confirm GitHub visibility, submit to portal. Portal submission result to be recorded separately. |
@@ -128,33 +128,33 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [R-OFF-04](15_REQUIREMENTS.md#r-off-04) | RELEASE | 3/3 | [AT-041](20_TEST_ACCEPTANCE.md#at-041): NOT_RUN |
 | [R-OFF-05](15_REQUIREMENTS.md#r-off-05) | RELEASE | 3/3 | [AT-042](20_TEST_ACCEPTANCE.md#at-042): NOT_RUN |
 | [R-OFF-06](15_REQUIREMENTS.md#r-off-06) | RELEASE | 3/3 | [AT-043](20_TEST_ACCEPTANCE.md#at-043): NOT_RUN |
-| [R-ML-01](15_REQUIREMENTS.md#r-ml-01) | RELEASE | 1/2 | [AT-044](20_TEST_ACCEPTANCE.md#at-044): NOT_RUN |
-| [R-ML-02](15_REQUIREMENTS.md#r-ml-02) | RELEASE | 1/2 | [AT-045](20_TEST_ACCEPTANCE.md#at-045): NOT_RUN |
+| [R-ML-01](15_REQUIREMENTS.md#r-ml-01) | RELEASE | 2/2 | [AT-044](20_TEST_ACCEPTANCE.md#at-044): NOT_RUN |
+| [R-ML-02](15_REQUIREMENTS.md#r-ml-02) | RELEASE | 2/2 | [AT-045](20_TEST_ACCEPTANCE.md#at-045): NOT_RUN |
 | [R-ML-03](15_REQUIREMENTS.md#r-ml-03) | RELEASE | 2/2 | [AT-046](20_TEST_ACCEPTANCE.md#at-046): NOT_RUN |
-| [R-ML-04](15_REQUIREMENTS.md#r-ml-04) | RELEASE | 2/3 | [AT-047](20_TEST_ACCEPTANCE.md#at-047): NOT_RUN |
+| [R-ML-04](15_REQUIREMENTS.md#r-ml-04) | RELEASE | 3/3 | [AT-047](20_TEST_ACCEPTANCE.md#at-047): NOT_RUN |
 | [R-SAFE-01](15_REQUIREMENTS.md#r-safe-01) | RELEASE | 2/2 | [AT-048](20_TEST_ACCEPTANCE.md#at-048): PASS |
 | [R-LANG-01](15_REQUIREMENTS.md#r-lang-01) | RELEASE | 2/2 | [AT-049](20_TEST_ACCEPTANCE.md#at-049): NOT_RUN |
 | [R-LANG-02](15_REQUIREMENTS.md#r-lang-02) | RELEASE | 2/2 | [AT-050](20_TEST_ACCEPTANCE.md#at-050): NOT_RUN |
 | [R-UX-01](15_REQUIREMENTS.md#r-ux-01) | RELEASE | 4/4 | [AT-051](20_TEST_ACCEPTANCE.md#at-051): NOT_RUN |
 | [R-UX-02](15_REQUIREMENTS.md#r-ux-02) | RELEASE | 1/1 | [AT-052](20_TEST_ACCEPTANCE.md#at-052): NOT_RUN |
-| [R-DATA-01](15_REQUIREMENTS.md#r-data-01) | RELEASE | 3/4 | [AT-053](20_TEST_ACCEPTANCE.md#at-053): NOT_RUN |
-| [R-DATA-02](15_REQUIREMENTS.md#r-data-02) | RELEASE | 3/4 | [AT-054](20_TEST_ACCEPTANCE.md#at-054): NOT_RUN |
-| [R-DATA-03](15_REQUIREMENTS.md#r-data-03) | RELEASE | 4/5 | [AT-055](20_TEST_ACCEPTANCE.md#at-055): NOT_RUN |
-| [R-DATA-04](15_REQUIREMENTS.md#r-data-04) | RELEASE | 2/3 | [AT-056](20_TEST_ACCEPTANCE.md#at-056): NOT_RUN |
-| [R-DATA-05](15_REQUIREMENTS.md#r-data-05) | RELEASE | 2/3 | [AT-057](20_TEST_ACCEPTANCE.md#at-057): NOT_RUN |
-| [R-DATA-06](15_REQUIREMENTS.md#r-data-06) | RELEASE | 3/4 | [AT-058](20_TEST_ACCEPTANCE.md#at-058): NOT_RUN |
-| [R-DATA-07](15_REQUIREMENTS.md#r-data-07) | RELEASE | 2/3 | [AT-059](20_TEST_ACCEPTANCE.md#at-059): NOT_RUN |
+| [R-DATA-01](15_REQUIREMENTS.md#r-data-01) | RELEASE | 4/4 | [AT-053](20_TEST_ACCEPTANCE.md#at-053): NOT_RUN |
+| [R-DATA-02](15_REQUIREMENTS.md#r-data-02) | RELEASE | 4/4 | [AT-054](20_TEST_ACCEPTANCE.md#at-054): NOT_RUN |
+| [R-DATA-03](15_REQUIREMENTS.md#r-data-03) | RELEASE | 5/5 | [AT-055](20_TEST_ACCEPTANCE.md#at-055): NOT_RUN |
+| [R-DATA-04](15_REQUIREMENTS.md#r-data-04) | RELEASE | 3/3 | [AT-056](20_TEST_ACCEPTANCE.md#at-056): NOT_RUN |
+| [R-DATA-05](15_REQUIREMENTS.md#r-data-05) | RELEASE | 3/3 | [AT-057](20_TEST_ACCEPTANCE.md#at-057): NOT_RUN |
+| [R-DATA-06](15_REQUIREMENTS.md#r-data-06) | RELEASE | 4/4 | [AT-058](20_TEST_ACCEPTANCE.md#at-058): NOT_RUN |
+| [R-DATA-07](15_REQUIREMENTS.md#r-data-07) | RELEASE | 3/3 | [AT-059](20_TEST_ACCEPTANCE.md#at-059): NOT_RUN |
 | [R-DATA-08](15_REQUIREMENTS.md#r-data-08) | RELEASE | 4/4 | [AT-060](20_TEST_ACCEPTANCE.md#at-060): NOT_RUN |
 | [R-DATA-09](15_REQUIREMENTS.md#r-data-09) | RELEASE | 3/3 | [AT-061](20_TEST_ACCEPTANCE.md#at-061): NOT_RUN |
 | [R-DATA-10](15_REQUIREMENTS.md#r-data-10) | RELEASE | 2/2 | [AT-062](20_TEST_ACCEPTANCE.md#at-062): NOT_RUN |
-| [R-DATA-11](15_REQUIREMENTS.md#r-data-11) | RELEASE | 1/2 | [AT-063](20_TEST_ACCEPTANCE.md#at-063): NOT_RUN |
+| [R-DATA-11](15_REQUIREMENTS.md#r-data-11) | RELEASE | 2/2 | [AT-063](20_TEST_ACCEPTANCE.md#at-063): NOT_RUN |
 | [R-ADMIN-01](15_REQUIREMENTS.md#r-admin-01) | RELEASE | 2/2 | [AT-064](20_TEST_ACCEPTANCE.md#at-064): PASS |
 | [R-ADMIN-02](15_REQUIREMENTS.md#r-admin-02) | RELEASE | 2/2 | [AT-065](20_TEST_ACCEPTANCE.md#at-065): PASS |
 | [R-ADMIN-03](15_REQUIREMENTS.md#r-admin-03) | RELEASE | 2/2 | [AT-066](20_TEST_ACCEPTANCE.md#at-066): PASS |
 | [R-ECON-01](15_REQUIREMENTS.md#r-econ-01) | RELEASE | 2/2 | [AT-067](20_TEST_ACCEPTANCE.md#at-067): PASS |
 | [R-ECON-02](15_REQUIREMENTS.md#r-econ-02) | RELEASE | 1/2 | [AT-068](20_TEST_ACCEPTANCE.md#at-068): NOT_RUN |
-| [R-RES-01](15_REQUIREMENTS.md#r-res-01) | RELEASE | 1/3 | [AT-069](20_TEST_ACCEPTANCE.md#at-069): NOT_RUN |
-| [R-RES-02](15_REQUIREMENTS.md#r-res-02) | EXTERNAL_GAP | 1/4 | [AT-070](20_TEST_ACCEPTANCE.md#at-070): UNMET |
+| [R-RES-01](15_REQUIREMENTS.md#r-res-01) | RELEASE | 2/3 | [AT-069](20_TEST_ACCEPTANCE.md#at-069): NOT_RUN |
+| [R-RES-02](15_REQUIREMENTS.md#r-res-02) | EXTERNAL_GAP | 2/4 | [AT-070](20_TEST_ACCEPTANCE.md#at-070): UNMET |
 | [R-REG-01](15_REQUIREMENTS.md#r-reg-01) | RELEASE | 3/4 | [AT-071](20_TEST_ACCEPTANCE.md#at-071): NOT_RUN |
 | [R-SEC-01](15_REQUIREMENTS.md#r-sec-01) | RELEASE | 3/3 | [AT-072](20_TEST_ACCEPTANCE.md#at-072): NOT_RUN |
 | [R-SEC-02](15_REQUIREMENTS.md#r-sec-02) | RELEASE | 3/3 | [AT-073](20_TEST_ACCEPTANCE.md#at-073): NOT_RUN |
@@ -164,7 +164,7 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [R-OPS-04](15_REQUIREMENTS.md#r-ops-04) | RELEASE | 3/3 | [AT-077](20_TEST_ACCEPTANCE.md#at-077): NOT_RUN |
 | [R-QA-01](15_REQUIREMENTS.md#r-qa-01) | RELEASE | 2/2 | [AT-078](20_TEST_ACCEPTANCE.md#at-078): NOT_RUN |
 | [R-QA-02](15_REQUIREMENTS.md#r-qa-02) | RELEASE | 1/2 | [AT-079](20_TEST_ACCEPTANCE.md#at-079): NOT_RUN |
-| [R-DOC-01](15_REQUIREMENTS.md#r-doc-01) | RELEASE | 0/3 | [AT-080](20_TEST_ACCEPTANCE.md#at-080): NOT_RUN |
+| [R-DOC-01](15_REQUIREMENTS.md#r-doc-01) | RELEASE | 1/3 | [AT-080](20_TEST_ACCEPTANCE.md#at-080): NOT_RUN |
 | [R-FUT-01](15_REQUIREMENTS.md#r-fut-01) | FUTURE | 0/1 | [FT-001](20_TEST_ACCEPTANCE.md#ft-001): DEFERRED |
 | [R-FUT-02](15_REQUIREMENTS.md#r-fut-02) | FUTURE | 0/1 | [FT-002](20_TEST_ACCEPTANCE.md#ft-002): DEFERRED |
 | [R-FUT-03](15_REQUIREMENTS.md#r-fut-03) | FUTURE | 0/1 | [FT-003](20_TEST_ACCEPTANCE.md#ft-003): DEFERRED |

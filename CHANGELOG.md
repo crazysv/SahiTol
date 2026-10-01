@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-02 -- T047 independent frozen-manifest verification
+
+Completed T047 after independently recomputing every digest named by the
+release manifest. All 21 artifacts matched: model, model card, audio manifest,
+seven data cards, nine family manifests and two research documents. The freeze
+continues to disclose low model performance, unreviewed licence detail,
+unreviewed native language, and the unmet fieldwork obligation.
+
 ## 2026-10-02 -- T046 focused accessibility and audio rerun
 
 Completed T046 after its device-test dependency closed. Current Android debug

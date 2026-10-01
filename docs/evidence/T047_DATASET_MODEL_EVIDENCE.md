@@ -118,3 +118,12 @@ manifest: classifier, model card, audio manifest, seven data cards, nine
 dataset manifests, and two research-evidence documents. **21/21** values match
 the manifest. The manifest remains a snapshot of dataset/model evidence; it
 does not attest to later application-code or deployment changes.
+
+## 2026-10-02 independent manifest verification
+
+Recomputed each digest named by the frozen manifest from the current working
+tree. **21/21** artifacts matched: the classifier, model card, Android audio
+manifest, all seven data cards, all nine dataset manifests, and both research
+evidence documents. This check confirms the integrity of the declared freeze;
+it does not convert the documented low model performance, unreviewed licences,
+or unmet fieldwork obligation into a pass claim.

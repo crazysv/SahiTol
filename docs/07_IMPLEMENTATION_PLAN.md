@@ -742,7 +742,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T047
 
-**Freeze dataset and model evidence package** — stage 7; scope RELEASE; status **IN_PROGRESS**.
+**Freeze dataset and model evidence package** — stage 7; scope RELEASE; status **DONE**.
 
 Dependencies: [T031](07_IMPLEMENTATION_PLAN.md#t031), [T033](07_IMPLEMENTATION_PLAN.md#t033), [T044](07_IMPLEMENTATION_PLAN.md#t044), [T045](07_IMPLEMENTATION_PLAN.md#t045), [T046](07_IMPLEMENTATION_PLAN.md#t046).
 
