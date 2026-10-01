@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-10-01 -- T025 deployed two-phone verification and receipt repair
+
+Completed the deployed collector-to-recycler flow using both connected Android
+phones. The recycler decoded collector record `ST-5F1B`, verified its QR hash
+against the hosted API and recorded authenticated confirmation; the server
+returned `CONFIRMED`. The run exposed R05 rendering static `ST-24A7` sample
+terms after confirmation. Commit `1fe2b1b` replaced that view with a read-only,
+server-backed receipt and removed the duplicate confirmation action. The hosted
+bundle was rechecked on the recycler device and showed `MAT-CAB-01`, 2.50 kg
+proposed, 2.30 kg received, ₹414.00 and the actual SHA-256 seal. Focused web
+test 3/3, typecheck and production build passed. T025 is DONE; AT-032 through
+AT-034 remain NOT_RUN because their broader cross-task checks were not all run.
+
 ## 2026-10-01 -- T025 server-backed two-device handover repair
 
 Replaced Android's fabricated outbox-success simulation with an HTTPS demo

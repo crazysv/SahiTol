@@ -5,7 +5,7 @@
 - **Phase**: Stage 4 (Collection & Settlement)
 - **Scope**: RELEASE
 - **Date**: 2026-09-29
-- **Status**: IN_PROGRESS — local/server integration is verified; the updated deployed APK and web console still need one physical two-phone retest.
+- **Status**: DONE — deployed collector APK and web console were exercised across two connected Android phones on 2026-10-01.
 - **Stitch Project ID**: `245073995801566548` (*SahiTol Collector Frontend*)
 - **Registered Stitch Screens Implemented**:
   - `R04`: QR Scan / Reference Entry (`3fab97e50ca5`)
@@ -108,9 +108,9 @@ Automated verification completed on 2026-10-01:
   `:app:testDebugUnitTest --tests com.sahitol.collector.HandoverAndReceiptTest`:
   **passed**.
 
-T025 remains **IN_PROGRESS** because these checks run locally. The new deployed
-web bundle and APK must still be installed and exercised across the two connected
-phones before AT-032 through AT-034 can be marked PASS.
+At this stage T025 remained **IN_PROGRESS** because these checks were local. The
+deployed two-phone result below completed the task. AT-032 through AT-034 are
+cross-task cases and are not promoted solely by this contributor task.
 
 ## Hosted retest blocker and repair (2026-10-01)
 
@@ -121,5 +121,22 @@ The next hosted retry exposed a second PostgreSQL-only condition: the old demo
 identity exceeded the 20-character internal phone column. Demo login now creates
 the minimal isolated region when absent and uses a deterministic short internal
 identity. Regression coverage includes both conditions; the focused handover API
-suite is **16 passed**. This repair must deploy before restarting the physical
+suite is **16 passed**. This repair was deployed before restarting the physical
 retest.
+
+## Deployed two-phone retest — PASS (2026-10-01)
+
+Both connected Android devices completed the hosted flow. Collector
+`N7OZPV59XWWKPF4X` generated `ST-5F1B` for `MAT-CAB-01`: 2.50 kg proposed,
+2.30 kg measured, ₹414.00 agreed value and hash `cd3bf7e4ca64…b9a9`. Recycler
+`b33707830407` decoded the offline QR, displayed its actual material/mass/hash,
+completed **Verify with Server**, and recorded authenticated confirmation. A
+direct hosted read returned `CONFIRMED`, version 2, matching payload/hash and a
+recycler confirmation timestamp.
+
+The first deployed R05 view then exposed unrelated static `ST-24A7` terms. It
+was repaired in commit `1fe2b1b`; the hosted bundle was reloaded on the same
+recycler device and showed the actual UUID, `MAT-CAB-01`, 2.50 kg proposed,
+2.30 kg received, ₹414.00 and the complete SHA-256 seal. It contains no second
+confirmation action. Focused `SecondDeviceConfirmation.test.tsx` passed 3/3;
+web typecheck and production build passed. T025 is DONE.

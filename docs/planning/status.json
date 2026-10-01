@@ -193,11 +193,11 @@
       "owner": "Owner + coding agent"
     },
     "T025": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "evidence": [
         "docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md"
       ],
-      "note": "R04 now performs real rear-camera QR decoding and server-backed demo lookup/hash comparison followed by facility-authorized confirmation; SyncWorker no longer fabricates successful handover sync. Hosted retesting found and repaired missing demo-region bootstrap and a PostgreSQL demo-ID column limit (16 API tests now pass). T025 remains IN_PROGRESS pending deployment and a freshly deployed physical two-phone retest.",
+      "note": "Deployed two-phone retest passed: collector QR ST-5F1B was decoded on the recycler phone, server hash verification and authenticated confirmation completed, and the server returned CONFIRMED. A post-confirmation R05 placeholder-data defect was repaired and physically rechecked on the same recycler phone; it now shows only the confirmed server record and has no duplicate confirm action. Cross-task AT-032 through AT-034 remain NOT_RUN until their complete acceptance checks are run.",
       "owner": "Owner + coding agent"
     },
     "T026": {

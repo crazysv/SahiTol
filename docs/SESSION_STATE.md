@@ -1,6 +1,6 @@
 # Current handoff
 
-Handoff date: 2026-09-30 (Asia/Kolkata). Phase: **Phase 7 complete -- all RELEASE tasks DONE**.
+Handoff date: 2026-10-01 (Asia/Kolkata). Phase: **T025 repaired and physically reverified; continue ordered verification from T026**.
 
 Scope and progression: [master](../MASTER_CONTENT.md), [tracker](08_TRACKER.md), [implementation plan](07_IMPLEMENTATION_PLAN.md). Authoritative statuses live in [status.json](planning/status.json).
 
@@ -88,9 +88,9 @@ decoding and truthful record display work. The missing server-backed lookup and
 authenticated receipt confirmation are now implemented and locally
 integration-tested (14 API handover tests, web typecheck/build, Android compile
 and focused handover tests). T025 remains IN_PROGRESS until the updated deployed
-APK and web bundle are retested on both phones; AT-032 through AT-034 remain
-NOT_RUN until then. Hosted retesting found a missing `DELHI_NCR` demo region on
-the empty Render database and a PostgreSQL-only 20-character internal demo-ID
-limit; demo login now bootstraps the isolated row and uses a short deterministic
-identity. The focused API suite is 16/16. Deploy this repair, then resume the
-physical two-phone retest.
+APK and web bundle are retested on both phones. That retest is now complete:
+`ST-5F1B` was QR-decoded, server-verified and recycler-confirmed across both
+phones. The R05 placeholder receipt defect discovered during the run was
+corrected, deployed and physically rechecked; it now shows the confirmed server
+record and no second confirmation button. T025 is DONE. AT-032 through AT-034
+remain NOT_RUN until their complete cross-task checks are run. Continue at T026.

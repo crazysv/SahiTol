@@ -2,7 +2,7 @@
 
 Generated from [catalog](planning/catalog.json) and [status](planning/status.json). Edit those files, then run `python scripts/render_docs.py` and `python scripts/check_docs.py`. Do not edit this view independently.
 
-**Release tasks: 38/50 DONE. Release acceptance: 28/79 PASS.** Future scope and external gaps are not counted as completed release work.
+**Release tasks: 39/50 DONE. Release acceptance: 28/79 PASS.** Future scope and external gaps are not counted as completed release work.
 
 Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, DONE; FUTURE starts DEFERRED. Allowed test states: NOT_RUN, PASS, FAIL, BLOCKED; external gap starts UNMET; future starts DEFERRED. Notes explain blockers and next action. Evidence paths are repository-relative, no secret-bearing files.
 
@@ -32,7 +32,7 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [T022](07_IMPLEMENTATION_PLAN.md#t022) | Implement approved recycler console and phone layout | RELEASE | DONE | [T022_RECYCLER_CONSOLE.md](../docs/evidence/T022_RECYCLER_CONSOLE.md) | Implemented approved Recycler Console views R01-R03, R06, R07 in React/Vite with layout, queue, lot inspection, quote terminal, operational profile, ledger exports, and passing unit tests. Independent re-verification on 2026-10-01: typecheck and production build passed; focused RecyclerConsole suite passed 6/6. |
 | [T023](07_IMPLEMENTATION_PLAN.md#t023) | Implement handover proposals and confirmations | RELEASE | DONE | [T023_HANDOVER_CONFIRMATIONS.md](../docs/evidence/T023_HANDOVER_CONFIRMATIONS.md) | Implemented pending proposal, canonical SAHITOL-JCS-1 SHA-256 hash verification matching frozen fixture, authenticated recycler confirmation, discrepancy TermsRevision workflow with explicit collector acknowledgement, documented disputes without fact overwriting, receipt with statutory non-EPR notice, and unauthenticated redacted public verification. Independent re-verification on 2026-10-01 passed all 13 handover workflow tests. |
 | [T024](07_IMPLEMENTATION_PLAN.md#t024) | Implement approved offline QR and collector receipt | RELEASE | DONE | [T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md](../docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md) | Implemented C10 (handover capture & terms variance), C11 (offline QR code, SHA-256 seal, statutory Non-EPR banner, native A4 PDF receipt generator, and system share), and C16 (5-stage material passport spine) in Jetpack Compose matching Stitch designs; SAHITOL-JCS-1 canonical JSON hashing matching frozen fixture; Room outbox atomic queuing; verified via JUnit tests and clean APK assembly. Independent re-verification on 2026-10-01 passed 7 focused Android tests and confirmed C10 on the collector device. |
-| [T025](07_IMPLEMENTATION_PLAN.md#t025) | Implement approved second-phone QR confirmation | RELEASE | IN_PROGRESS | [T025_SECOND_DEVICE_CONFIRMATION.md](../docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md) | R04 now performs real rear-camera QR decoding and server-backed demo lookup/hash comparison followed by facility-authorized confirmation; SyncWorker no longer fabricates successful handover sync. Hosted retesting found and repaired missing demo-region bootstrap and a PostgreSQL demo-ID column limit (16 API tests now pass). T025 remains IN_PROGRESS pending deployment and a freshly deployed physical two-phone retest. |
+| [T025](07_IMPLEMENTATION_PLAN.md#t025) | Implement approved second-phone QR confirmation | RELEASE | DONE | [T025_SECOND_DEVICE_CONFIRMATION.md](../docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md) | Deployed two-phone retest passed: collector QR ST-5F1B was decoded on the recycler phone, server hash verification and authenticated confirmation completed, and the server returned CONFIRMED. A post-confirmation R05 placeholder-data defect was repaired and physically rechecked on the same recycler phone; it now shows only the confirmed server record and has no duplicate confirm action. Cross-task AT-032 through AT-034 remain NOT_RUN until their complete acceptance checks are run. |
 | [T026](07_IMPLEMENTATION_PLAN.md#t026) | Implement payment assertions and earnings projections | RELEASE | DONE | [T026_PAYMENTS_AND_EARNINGS.md](../docs/evidence/T026_PAYMENTS_AND_EARNINGS.md) | Implemented cash-first payment assertions without bank gateway, optional UPI reference recording, counterparty acknowledgement, self-acknowledgement prevention, disputes, duplicate-safe partial payments, append-only reversals linking original records without deletion, strict closure invariants, and collector earnings with strict demo isolation. |
 | [T027](07_IMPLEMENTATION_PLAN.md#t027) | Implement approved ledger and payment screens | RELEASE | DONE | [T027_COLLECTOR_LEDGER_AND_PAYMENTS.md](../docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md) | Implemented C12 (Collector Ledger & Earnings) and C13 (Payment Settlement & Assertions) in Jetpack Compose matching Google Stitch designs; cash-first settlement without bank transfers; optional UPI reference; counterparty acknowledgement; append-only reversals; strict closure invariant; verified by JUnit tests. |
 | [T028](07_IMPLEMENTATION_PLAN.md#t028) | Implement data-quality and anomaly rules | RELEASE | DONE | [T028_DATA_QUALITY_AND_ANOMALIES.md](../docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md) | Implemented data-quality rules under QUALITY_V1: missing/invalid/duplicate/stale/inconsistent checks, price bounds via IQR and zero-IQR fallback without accusing fraud or blocking collector choice (AT-020), weight variance >20% baseline (AT-033), image reuse detection, repeated transaction acceptance exclusion (AT-028), admin quality flags API with drill-down, summary metrics with true denominators (R-ADMIN-02, AT-065), and review resolution workflow emitting append-only hash-chained domain events. |
@@ -86,7 +86,7 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | Requirement | Scope | Task completion | Acceptance |
 |---|---|---|---|
 | [R-GOV-01](15_REQUIREMENTS.md#r-gov-01) | RELEASE | 1/2 | [AT-001](20_TEST_ACCEPTANCE.md#at-001): NOT_RUN |
-| [R-GOV-02](15_REQUIREMENTS.md#r-gov-02) | RELEASE | 9/10 | [AT-002](20_TEST_ACCEPTANCE.md#at-002): NOT_RUN |
+| [R-GOV-02](15_REQUIREMENTS.md#r-gov-02) | RELEASE | 10/10 | [AT-002](20_TEST_ACCEPTANCE.md#at-002): NOT_RUN |
 | [R-GOV-03](15_REQUIREMENTS.md#r-gov-03) | RELEASE | 1/2 | [AT-003](20_TEST_ACCEPTANCE.md#at-003): NOT_RUN |
 | [R-GOV-04](15_REQUIREMENTS.md#r-gov-04) | RELEASE | 0/3 | [AT-004](20_TEST_ACCEPTANCE.md#at-004): NOT_RUN |
 | [R-ARC-01](15_REQUIREMENTS.md#r-arc-01) | RELEASE | 2/2 | [AT-005](20_TEST_ACCEPTANCE.md#at-005): PASS |
@@ -114,11 +114,11 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [R-OFFER-01](15_REQUIREMENTS.md#r-offer-01) | RELEASE | 2/2 | [AT-027](20_TEST_ACCEPTANCE.md#at-027): NOT_RUN |
 | [R-OFFER-02](15_REQUIREMENTS.md#r-offer-02) | RELEASE | 2/2 | [AT-028](20_TEST_ACCEPTANCE.md#at-028): PASS |
 | [R-HAND-01](15_REQUIREMENTS.md#r-hand-01) | RELEASE | 2/2 | [AT-029](20_TEST_ACCEPTANCE.md#at-029): PASS |
-| [R-HAND-02](15_REQUIREMENTS.md#r-hand-02) | RELEASE | 0/2 | [AT-030](20_TEST_ACCEPTANCE.md#at-030): NOT_RUN |
+| [R-HAND-02](15_REQUIREMENTS.md#r-hand-02) | RELEASE | 1/2 | [AT-030](20_TEST_ACCEPTANCE.md#at-030): NOT_RUN |
 | [R-HAND-03](15_REQUIREMENTS.md#r-hand-03) | RELEASE | 2/3 | [AT-031](20_TEST_ACCEPTANCE.md#at-031): NOT_RUN |
-| [R-HAND-04](15_REQUIREMENTS.md#r-hand-04) | RELEASE | 1/3 | [AT-032](20_TEST_ACCEPTANCE.md#at-032): NOT_RUN |
-| [R-HAND-05](15_REQUIREMENTS.md#r-hand-05) | RELEASE | 3/4 | [AT-033](20_TEST_ACCEPTANCE.md#at-033): NOT_RUN |
-| [R-HAND-06](15_REQUIREMENTS.md#r-hand-06) | RELEASE | 2/3 | [AT-034](20_TEST_ACCEPTANCE.md#at-034): NOT_RUN |
+| [R-HAND-04](15_REQUIREMENTS.md#r-hand-04) | RELEASE | 2/3 | [AT-032](20_TEST_ACCEPTANCE.md#at-032): NOT_RUN |
+| [R-HAND-05](15_REQUIREMENTS.md#r-hand-05) | RELEASE | 4/4 | [AT-033](20_TEST_ACCEPTANCE.md#at-033): NOT_RUN |
+| [R-HAND-06](15_REQUIREMENTS.md#r-hand-06) | RELEASE | 3/3 | [AT-034](20_TEST_ACCEPTANCE.md#at-034): NOT_RUN |
 | [R-PAY-01](15_REQUIREMENTS.md#r-pay-01) | RELEASE | 2/2 | [AT-035](20_TEST_ACCEPTANCE.md#at-035): PASS |
 | [R-PAY-02](15_REQUIREMENTS.md#r-pay-02) | RELEASE | 2/2 | [AT-036](20_TEST_ACCEPTANCE.md#at-036): PASS |
 | [R-PAY-03](15_REQUIREMENTS.md#r-pay-03) | RELEASE | 2/2 | [AT-037](20_TEST_ACCEPTANCE.md#at-037): PASS |

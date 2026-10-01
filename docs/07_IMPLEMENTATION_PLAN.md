@@ -390,7 +390,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T025
 
-**Implement approved second-phone QR confirmation** — stage 4; scope RELEASE; status **IN_PROGRESS**.
+**Implement approved second-phone QR confirmation** — stage 4; scope RELEASE; status **DONE**.
 
 Dependencies: [T002](07_IMPLEMENTATION_PLAN.md#t002), [T022](07_IMPLEMENTATION_PLAN.md#t022), [T023](07_IMPLEMENTATION_PLAN.md#t023).
 

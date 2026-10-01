@@ -64,7 +64,7 @@ Two phones confirm one synced proposal; revisions, payment acknowledgements, PDF
 |---|---|---|---|
 | [T023](07_IMPLEMENTATION_PLAN.md#t023) | Implement handover proposals and confirmations | DONE | [T014](07_IMPLEMENTATION_PLAN.md#t014), [T021](07_IMPLEMENTATION_PLAN.md#t021) |
 | [T024](07_IMPLEMENTATION_PLAN.md#t024) | Implement approved offline QR and collector receipt | DONE | [T002](07_IMPLEMENTATION_PLAN.md#t002), [T017](07_IMPLEMENTATION_PLAN.md#t017), [T023](07_IMPLEMENTATION_PLAN.md#t023) |
-| [T025](07_IMPLEMENTATION_PLAN.md#t025) | Implement approved second-phone QR confirmation | IN_PROGRESS | [T002](07_IMPLEMENTATION_PLAN.md#t002), [T022](07_IMPLEMENTATION_PLAN.md#t022), [T023](07_IMPLEMENTATION_PLAN.md#t023) |
+| [T025](07_IMPLEMENTATION_PLAN.md#t025) | Implement approved second-phone QR confirmation | DONE | [T002](07_IMPLEMENTATION_PLAN.md#t002), [T022](07_IMPLEMENTATION_PLAN.md#t022), [T023](07_IMPLEMENTATION_PLAN.md#t023) |
 | [T026](07_IMPLEMENTATION_PLAN.md#t026) | Implement payment assertions and earnings projections | DONE | [T023](07_IMPLEMENTATION_PLAN.md#t023) |
 | [T027](07_IMPLEMENTATION_PLAN.md#t027) | Implement approved ledger and payment screens | DONE | [T002](07_IMPLEMENTATION_PLAN.md#t002), [T024](07_IMPLEMENTATION_PLAN.md#t024), [T026](07_IMPLEMENTATION_PLAN.md#t026) |
 
