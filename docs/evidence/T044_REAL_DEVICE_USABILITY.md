@@ -218,17 +218,33 @@ on terms revision `98c49491-5f7f-4464-bbde-9d5f919cd513`. The same C11 screen
 then visibly said **Recycler receipt confirmed / रसीद की पुष्टि हुई** and
 “Revised terms acknowledged; recycler receipt confirmed by server.”
 
+## Camera-denial and Aeroplane-mode retest (2026-10-02)
+
+Camera access was revoked through the handset's Android Settings interface (the
+package manager then reported `CAMERA: granted=false`). In C04, selecting
+**Grant Permission** displayed Android's camera permission prompt; selecting
+**Don't allow** returned to a usable C04 state with the bilingual
+camera-required explanation and **Skip** still available. Selecting Skip reached
+C05 as **Manual Entry (No Photo)** without creating or saving a test lot. Camera
+access was restored through Settings immediately after the check.
+
+The handset's actual Aeroplane-mode quick-setting was enabled (the SIM tile
+reported unavailable) and C14 remained usable, visibly reporting records safe
+and queued. Aeroplane mode was restored to Off after the observation. This is
+offline-state evidence only: no queued legacy repair row was manually retried
+or altered during the check.
+
 ## Checklist Against T044 Output Requirements
 
 | Requirement | Result |
 |-------------|--------|
-| Camera / photo capture | Verified in T034 (C05 classifier); lot photo captured |
+| Camera / photo capture | PASS — camera capture verified in T034 and C04 denial / photo-free continuation now physically retested |
 | GPS (location verified/denied) | PASS — prior coordinate evidence and a fresh denied-permission coarse-location fallback retest |
-| Denial scenarios | GPS denial PASS on physical device; camera denial remains NOT_RUN (ADB cannot revoke it on this handset) |
+| Denial scenarios | PASS — GPS and camera denial both physically retested; camera permission restored after the test |
 | Restart / confirmation pull | PASS — force-stop/relaunch recovered the deployed server handover by lot and C11 pulled `CONFIRMED` |
-| Airplane mode / offline QR | PASS — Offline Ready badge on C10, C11 throughout |
+| Airplane mode / offline QR | PASS — actual Aeroplane-mode C14 offline-safe queued state observed; Offline Ready badge remains visible on C10/C11 |
 | Background / manual sync | PASS — C08 manual sync and outbox transitions verified |
-| QR two-device handover | PASS for deployed happy path, restart/pull recovery, and both live changed-terms accept and dispute branches; camera denial remains outstanding |
+| QR two-device handover | PASS for deployed happy path, restart/pull recovery, and both live changed-terms accept and dispute branches |
 | Hindi / Marathi labels | PASS — Bilingual titles throughout (hastantaran, sangrah evam vajan, etc.) |
 | Representative scenario usability | PASS for the current accepted-offer-to-QR-to-confirm path; denial/recovery variants remain outstanding |
 | Owner scenario tests not fieldwork | PASS — Clearly identified as owner demo scenario |

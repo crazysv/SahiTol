@@ -31,9 +31,11 @@ variants only; do not clear either device or rewrite legacy repair rows.
 
 GPS-denial is now physically covered: both Android location permissions were
 denied, C04 allowed photo-free continuation, and C05 showed the coarse-location
-fallback without blocking material/weight/condition entry. Camera denial still
-requires a Settings change made on the phone because its ADB shell cannot
-revoke the granted permission.
+fallback without blocking material/weight/condition entry. Camera denial is
+also physically covered: permission was revoked through Android Settings, C04
+showed the system prompt and returned to its usable bilingual photo-free path
+after Don't allow; camera permission was restored. Actual Aeroplane mode also
+left C14 usable with records safely queued, and was restored immediately.
 
 The T044 changed-terms/dispute path is now also live-device verified. Isolated
 handover `ST-50BF6E` was revised by the authorized recycler from 14.25 kg /

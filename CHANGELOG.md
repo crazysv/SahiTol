@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-02 -- T044 physical permission and offline checks
+
+Re-tested camera denial using Android Settings, rather than the unavailable ADB
+permission-revoke path. C04 displayed the Android prompt, remained usable after
+denial, and continued to C05 without a photo; camera access was restored after
+the check. Real Aeroplane mode also left C14 usable with its records safely
+queued, then was restored. No legacy repair operation was retried or changed.
+
 ## 2026-10-02 -- T044 physical revised-terms outcomes
 
 Connected the approved C11 changed-terms state to the authenticated live
