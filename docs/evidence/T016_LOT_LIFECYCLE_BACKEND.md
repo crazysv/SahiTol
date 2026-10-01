@@ -67,4 +67,16 @@ Implements the material lot lifecycle and valuation backend as specified in `doc
      - `test_estimate_lot_valuation`: Validates indicative valuation range calculation in paise with confidence level and disclaimer.
 
 3. **Test Infrastructure Support (`services/api/tests/test_db.py`)**:
-   - Added SQLite spatial function converter stub `sqlite_as_ewkb` translating EWKT geometry strings into valid EWKB hex representations for seamless GeoAlchemy2 query execution in in-memory test databases.
+   - Uses the T006 SQLite spatial converter, which normalizes EWKT geometry strings to valid hex EWKB for GeoAlchemy2 reads in the in-memory test database.
+
+## 2026-10-01 independent re-verification
+
+The location-bearing lot flows were re-run after the T006 test-double repair:
+
+```text
+PYTHONPATH="services/api:." uv run --python 3.10 --with-requirements services/api/requirements.txt --with pytest==8.3.3 --with pytest-asyncio==0.24.0 --with numpy==1.26.4 --with pandas==2.2.3 --with shapely==2.0.6 pytest services/api/tests/test_lots.py -q
+14 passed in 0.68s
+```
+
+This covers persisted GPS/manual coarse locations in addition to lifecycle,
+ownership, validation, event-chain, and valuation behaviour.

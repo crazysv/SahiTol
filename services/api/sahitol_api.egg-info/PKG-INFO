@@ -2,24 +2,27 @@ Metadata-Version: 2.4
 Name: sahitol-api
 Version: 0.1.0
 Summary: SahiTol core API: offline-first sync, indicative pricing, formal recycler matching and handover verification
-Requires-Python: >=3.10
+Requires-Python: <3.12,>=3.10
 Description-Content-Type: text/markdown
-Requires-Dist: fastapi>=0.115.0
-Requires-Dist: uvicorn[standard]>=0.31.0
-Requires-Dist: pydantic>=2.9.2
-Requires-Dist: pydantic-settings>=2.5.2
-Requires-Dist: sqlalchemy>=2.0.35
-Requires-Dist: alembic>=1.13.3
-Requires-Dist: psycopg[binary]>=3.2.3
-Requires-Dist: geoalchemy2>=0.15.2
-Requires-Dist: pyjwt[crypto]>=2.9.0
-Requires-Dist: argon2-cffi>=23.1.0
-Requires-Dist: httpx>=0.27.2
-Requires-Dist: reportlab>=4.2.5
-Requires-Dist: python-multipart>=0.0.12
+Requires-Dist: fastapi==0.115.0
+Requires-Dist: uvicorn[standard]==0.31.0
+Requires-Dist: pydantic==2.9.2
+Requires-Dist: pydantic-settings==2.5.2
+Requires-Dist: sqlalchemy==2.0.35
+Requires-Dist: alembic==1.13.3
+Requires-Dist: psycopg[binary]==3.2.3
+Requires-Dist: geoalchemy2==0.15.2
+Requires-Dist: pyjwt[crypto]==2.9.0
+Requires-Dist: argon2-cffi==23.1.0
+Requires-Dist: httpx==0.27.2
+Requires-Dist: reportlab==4.2.5
+Requires-Dist: python-multipart==0.0.12
 Provides-Extra: dev
-Requires-Dist: pytest>=8.3.3; extra == "dev"
-Requires-Dist: pytest-asyncio>=0.24.0; extra == "dev"
+Requires-Dist: pytest==8.3.3; extra == "dev"
+Requires-Dist: pytest-asyncio==0.24.0; extra == "dev"
+Requires-Dist: pandas==2.2.3; extra == "dev"
+Requires-Dist: numpy==1.26.4; extra == "dev"
+Requires-Dist: shapely==2.0.6; extra == "dev"
 
 # SahiTol Backend API Service
 
@@ -38,15 +41,17 @@ FastAPI service powering the SahiTol platform: offline sync endpoints, indicativ
    ```bash
    cp .env.example .env
    ```
-2. Install dependencies:
+2. Install runtime dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-3. Run tests:
+3. Install the pinned verification dependencies and run the repository-root test command:
    ```bash
-   pytest
+   pip install -r requirements-dev.txt
+   cd ../..
+   PYTHONPATH="services/api:." pytest services/api/tests
    ```
-4. Start dev server:
+4. Start dev server from `services/api`:
    ```bash
    uvicorn app.main:app --reload --port 8000
    ```

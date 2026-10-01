@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-10-01 -- T006 geometry verification repair
+
+Corrected the SQLite-only PostGIS test double to round-trip location values as
+hex EWKB, matching the GeoAlchemy result contract. The production
+PostgreSQL/PostGIS schema was not changed. Schema, facility, lot, and matching
+tests passed: 45 passed in 8.05s under Python 3.10.
+
+## 2026-10-01 -- T001 verification reproducibility repair
+
+Pinned API package dependencies, added the data/model verification dependency set, and corrected CI/repository-root Python test resolution. The complete API suite now collects all 318 tests under the documented Python 3.10 toolchain; feature failures remain attributed to their implementation tasks.
+
 ## 2026-10-01 -- Android collector layout maintenance
 
 Corrected device-reported layout failures in the approved collector screens C03, C06, C07, C14, and C15. Every affected top bar now reserves the Android 15 status-bar inset; system status/navigation icons use a readable light-surface appearance. Flexible text regions use explicit weights and bounded lines, so the price-feed badge, offer directory action, profile label, sync-operation badges, and long lot details no longer collapse into narrow vertical columns. `:app:assembleDebug` completed successfully and the resulting debug APK was installed and launched on device `N7OZPV59XWWKPF4X`; a final owner visual spot-check remains appropriate before recording the demo video.

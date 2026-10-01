@@ -11,6 +11,11 @@ Scope and progression: [master](../MASTER_CONTENT.md), [tracker](08_TRACKER.md),
 | FastAPI backend | https://sahitol-api.onrender.com | Live -- /health/live 200 OK |
 | Web console | https://sahitol.pages.dev | Live -- Cloudflare Pages, 97 modules |
 
+**2026-10-01 recheck:** the web console returned HTTP 200; the API health URL
+timed out after 15 seconds. Treat API availability as unverified until the
+owner inspects Render service status/logs and restores a successful live health
+response.
+
 ## Phase completion summary
 
 **All 50 assessed RELEASE tasks DONE. T048-T050 completed in this session.**
@@ -38,6 +43,10 @@ check_docs.py: PASS 0 errors, 2949 links, 34 screens, 98 requirements.
 ## 2026-10-01 maintenance update
 
 The debug APK now contains a scoped layout correction for approved collector screens C03, C06, C07, C14, and C15: Android 15 status-bar insets are reserved, light system surfaces receive readable system icons, and flexible rows prevent long content from collapsing into vertical text. `:app:assembleDebug` passed; the APK was installed over the existing application and launched on device `N7OZPV59XWWKPF4X` at 00:22 IST. No data was cleared. The next owner action is a brief on-device visual spot-check of the affected screens before video recording.
+
+## 2026-10-01 audit remediation
+
+T001 verification setup is repaired: the API's pinned test dependency set and repository-root import path now collect all 318 API tests under Python 3.10. T006's SQLite geometry test double now returns EWKB-compatible values, and the schema/facility/lot/matching verification subset passes 45 tests. Continue in catalog order with T007.
 
 ## Known gaps (immutable disclosures)
 

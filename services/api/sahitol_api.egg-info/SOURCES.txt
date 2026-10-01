@@ -55,9 +55,12 @@ sahitol_api.egg-info/requires.txt
 sahitol_api.egg-info/top_level.txt
 tests/test_admin_maintenance.py
 tests/test_auth.py
+tests/test_backup_restore_and_recovery.py
 tests/test_canonical.py
+tests/test_cross_surface_integration_and_fault_acceptance.py
 tests/test_db.py
 tests/test_economics.py
+tests/test_exports_and_lineage.py
 tests/test_facilities.py
 tests/test_handovers.py
 tests/test_health.py
@@ -75,6 +78,7 @@ tests/test_reference.py
 tests/test_safety_content.py
 tests/test_schema.py
 tests/test_security.py
+tests/test_security_and_abuse_boundaries.py
 tests/test_storage.py
 tests/test_sync.py
 tests/test_trade.py

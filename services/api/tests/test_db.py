@@ -41,13 +41,23 @@ test_engine = create_engine(
 
 @event.listens_for(test_engine, "connect")
 def register_sqlite_spatial_stubs(dbapi_connection, connection_record):
-    """Stub spatial functions for in-memory SQLite test database."""
-    def sqlite_as_ewkb(val, *args):
+    """Provide an EWKB-compatible SQLite substitute for PostGIS test queries.
+
+    GeoAlchemy expects a selected ``Geometry`` value to be EWKB.  SQLite has
+    no spatial extension, so persisting the input EWKT text directly made
+    ordinary ORM reads fail before endpoint code could run.  Normalising both
+    writes and ``AsEWKB`` reads to hex EWKB keeps this test double faithful to
+    the production PostGIS contract without making SQLite authoritative.
+    """
+    def sqlite_to_ewkb(val, *args):
         if not val:
             return None
         if isinstance(val, (bytes, memoryview)):
             return val
         s = str(val)
+        # GeoAlchemy's result processor accepts existing hex EWKB directly.
+        if not s.startswith("SRID=") and not s.startswith(("POINT", "POLYGON")):
+            return s
         try:
             srid = 4326
             if s.startswith("SRID="):
@@ -62,8 +72,8 @@ def register_sqlite_spatial_stubs(dbapi_connection, connection_record):
         except Exception:
             return s
 
-    dbapi_connection.create_function("GeomFromEWKT", -1, lambda x, *args: x)
-    dbapi_connection.create_function("AsEWKB", -1, sqlite_as_ewkb)
+    dbapi_connection.create_function("GeomFromEWKT", -1, sqlite_to_ewkb)
+    dbapi_connection.create_function("AsEWKB", -1, sqlite_to_ewkb)
     dbapi_connection.create_function("RecoverGeometryColumn", -1, lambda *a: 1)
     dbapi_connection.create_function("CreateSpatialIndex", -1, lambda *a: 1)
 

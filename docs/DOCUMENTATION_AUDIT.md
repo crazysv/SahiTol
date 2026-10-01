@@ -1,11 +1,11 @@
 # Documentation integrity audit
 
-Run: 2026-09-30T18:54:10+00:00. Result: **PASS**.
+Run: 2026-10-01T06:08:01+00:00. Result: **PASS**.
 
 - 98 requirements: 79 RELEASE, 1 EXTERNAL_GAP, 18 FUTURE.
 - 68 tasks: 50 release and 18 future; 98 acceptance specifications.
 - 34 screen IDs linked to implementation tasks.
-- 550 Markdown files; 2949 local links/anchors checked.
+- 543 Markdown files; 2949 local links/anchors checked.
 - 12,978 archived source lines across 88 contiguous mapped sections; both original SHA-256 hashes verified.
 - Unique IDs, requirement/task/case references, reading paths, dependency acyclicity, protected must-haves, evidence-path/state rules, generated-view freshness and canonical hash fixture checked.
 

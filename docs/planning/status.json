@@ -5,7 +5,7 @@
       "evidence": [
         "docs/evidence/T001_TOOLCHAIN_BOOTSTRAP.md"
       ],
-      "note": "Android, API, Web, and PostGIS skeletons created with pinned toolchains, Docker Compose, CI, and passing test suites.",
+      "note": "Android, API, Web, and PostGIS skeletons created with pinned toolchains, Docker Compose, and CI. On 2026-10-01, API verification dependencies and repository-root test resolution were repaired; the full suite now collects 318 tests under Python 3.10. Functional failures are tracked by owning tasks.",
       "owner": "Owner + coding agent"
     },
     "T002": {
@@ -45,7 +45,7 @@
       "evidence": [
         "docs/evidence/T006_DATABASE_SCHEMA.md"
       ],
-      "note": "Implemented complete 41-table PostgreSQL/PostGIS schema in SQLAlchemy 2.0 with GeoAlchemy2, integer paise/grams constraints, Alembic initial migration, and passing test suite.",
+      "note": "Implemented complete 41-table PostgreSQL/PostGIS schema in SQLAlchemy 2.0 with GeoAlchemy2, integer paise/grams constraints, and Alembic initial migration. On 2026-10-01, repaired the SQLite test double to return EWKB-compatible geometry values; schema, facility, lot, and matching verification then passed 45 tests.",
       "owner": "Owner + coding agent"
     },
     "T007": {
@@ -93,7 +93,7 @@
       "evidence": [
         "docs/evidence/T012_FACILITY_DIRECTORY.md"
       ],
-      "note": "Built source-backed facility directory covering Delhi-NCR and Maharashtra (CPCB, DPCC, MPCB, NDMC), preserving exact roles (RECYCLER, DISMANTLER, COLLECTION_CENTRE, AGGREGATOR), verification levels (L0, L2, L3), unknown pickup preservation, operational updates, and curated export package with SHA-256 manifest.",
+      "note": "Built source-backed facility directory covering Delhi-NCR and Maharashtra (CPCB, DPCC, MPCB, NDMC), preserving exact roles (RECYCLER, DISMANTLER, COLLECTION_CENTRE, AGGREGATOR), verification levels (L0, L2, L3), unknown pickup preservation, operational updates, and curated export package with SHA-256 manifest. Independent re-verification on 2026-10-01 passed all 15 facility tests after the T006 geometry test-double repair.",
       "owner": "Owner + coding agent"
     },
     "T013": {
@@ -101,7 +101,7 @@
       "evidence": [
         "docs/evidence/T013_ROOM_REPOSITORIES_OUTBOX.md"
       ],
-      "note": "Implemented Android Room entities, DAOs, SahiTolDatabase v2, and LotRepository providing atomic lot+event+outbox write in a single database transaction, SHA-256 hash-chaining domain events, account-partitioned queries, and logout preservation of unsynced items. 17 unit tests passing 100%.",
+      "note": "Implemented Android Room entities, DAOs, SahiTolDatabase v2, and LotRepository providing atomic lot+event+outbox write in a single database transaction, SHA-256 hash-chaining domain events, account-partitioned queries, and logout preservation of unsynced items. Independent re-verification on 2026-10-01: RoomOutboxRepositoryTest reported 5 tests, 0 failures, 0 errors.",
       "owner": "Owner + coding agent"
     },
     "T014": {
@@ -117,7 +117,7 @@
       "evidence": [
         "docs/evidence/T015_ANDROID_SYNC_WORKER.md"
       ],
-      "note": "Implemented Android background and manual sync worker using AndroidX WorkManager (CoroutineWorker with NetworkType.CONNECTED and sahitol_sync_work_<accountId> unique naming) and SyncEngine; handles outbox batch push, cursor-based delta pull in atomic Room transaction, 401/409/422/429 status mappings, and exponential backoff with jitter and retry_after_seconds override.",
+      "note": "Implemented Android background and manual sync worker using AndroidX WorkManager (CoroutineWorker with NetworkType.CONNECTED and sahitol_sync_work_<accountId> unique naming) and SyncEngine; handles outbox batch push, cursor-based delta pull in atomic Room transaction, 401/409/422/429 status mappings, and exponential backoff with jitter and retry_after_seconds override. Independent re-verification on 2026-10-01: SyncWorkerTest reported 4 tests, 0 failures, 0 errors.",
       "owner": "Owner + coding agent"
     },
     "T016": {
@@ -125,7 +125,7 @@
       "evidence": [
         "docs/evidence/T016_LOT_LIFECYCLE_BACKEND.md"
       ],
-      "note": "Implemented lot commands (create, update, collect, list, cancel, estimate), integer gram constraints with fractional kg round-trip, large weight anomaly flagging, coarse location privacy protection, append-only domain events with SHA-256 hash chaining, and prohibition of arbitrary status PATCH.",
+      "note": "Implemented lot commands (create, update, collect, list, cancel, estimate), integer gram constraints with fractional kg round-trip, large weight anomaly flagging, coarse location privacy protection, append-only domain events with SHA-256 hash chaining, and prohibition of arbitrary status PATCH. Independent re-verification on 2026-10-01 passed all 14 lot tests after the T006 geometry test-double repair.",
       "owner": "Owner + coding agent"
     },
     "T017": {
@@ -149,7 +149,7 @@
       "evidence": [
         "docs/evidence/T019_RECYCLER_MATCHING_MAPS.md"
       ],
-      "note": "Implemented eligible recycler matching engine MATCH_V1 with hard route/material/registration/weight/operational filters, battery isolation invariant, explainable 5-factor scoring (30/30/20/15/5%), deterministic tie-breaking, no-match empty paths with transparent exclusion tallies, local Haversine distance with PostGIS parity, GeoJSON map endpoint and static MapLibre fixtures, and canonical shared fixtures.",
+      "note": "Implemented eligible recycler matching engine MATCH_V1 with hard route/material/registration/weight/operational filters, battery isolation invariant, explainable 5-factor scoring (30/30/20/15/5%), deterministic tie-breaking, no-match empty paths with transparent exclusion tallies, local Haversine distance with PostGIS parity, GeoJSON map endpoint and static MapLibre fixtures, and canonical shared fixtures. Independent re-verification on 2026-10-01 passed all 10 matching tests after the T006 geometry test-double repair.",
       "owner": "Owner + coding agent"
     },
     "T020": {
@@ -324,7 +324,7 @@
       "evidence": [
         "docs/evidence/T041_HOSTED_DEPLOYMENT.md"
       ],
-      "note": "Supabase (Mumbai ap-south-1) provisioned, migrated (0001_initial_schema head), seeded. Render Docker API live at https://sahitol-api.onrender.com ΓÇö /health/live 200 OK confirmed. Cloudflare Pages web console live at https://sahitol.pages.dev ΓÇö 4 files uploaded, deployment complete.",
+      "note": "Historical deployment evidence records Supabase migration/seed and Render/Cloudflare deployments. Independent recheck on 2026-10-01: https://sahitol.pages.dev returned HTTP 200, but https://sahitol-api.onrender.com/health/live timed out after 15 seconds. Owner Render-account investigation is required before the API is described as live again.",
       "owner": "Owner + coding agent"
     },
     "T042": {

@@ -23,6 +23,22 @@
     ==> Your service is live
     ==> Available at your primary URL https://sahitol-api.onrender.com
 
+### 2026-10-01 live recheck
+
+The historical Render deploy log above is retained as deployment evidence, but
+it is not current availability evidence. An independent request on 2026-10-01
+timed out after 15 seconds:
+
+```text
+Invoke-WebRequest https://sahitol-api.onrender.com/health/live -TimeoutSec 15
+API ERROR: configured HttpClient.Timeout of 15 seconds elapsed
+```
+
+The Cloudflare web URL returned HTTP 200 in the same recheck. Render service
+status, startup logs, environment variables, database connectivity, and any
+free-tier suspension must be inspected in the owner's Render account before
+the API can again be described as live.
+
 ## Cloudflare Pages (Web Console)
 
 - **Project:** sahitol

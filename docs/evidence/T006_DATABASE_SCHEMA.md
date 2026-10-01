@@ -62,3 +62,20 @@ CREATE TABLE payment_entries ( ... CONSTRAINT chk_payment_positive_amount CHECK 
 COMMIT;
 [OK] Exited with code 0.
 ```
+
+## 2026-10-01 verification repair
+
+The prior in-memory SQLite test double returned the EWKT text accepted on a
+PostGIS write. GeoAlchemy correctly expects EWKB when reading a `Geometry`
+column, so any endpoint that selected a saved location failed before its
+application behaviour could be tested. `services/api/tests/test_db.py` now
+normalises both test-double write and read paths to hex EWKB using Shapely.
+This is test-only compatibility code; the production schema remains
+PostgreSQL/PostGIS.
+
+Verified from the repository root with the pinned Python 3.10 dependencies:
+
+```text
+PYTHONPATH="services/api:." uv run --python 3.10 --with-requirements services/api/requirements.txt --with pytest==8.3.3 --with pytest-asyncio==0.24.0 --with numpy==1.26.4 --with pandas==2.2.3 --with shapely pytest services/api/tests/test_schema.py services/api/tests/test_facilities.py services/api/tests/test_lots.py services/api/tests/test_matching.py -q
+45 passed in 8.05s
+```

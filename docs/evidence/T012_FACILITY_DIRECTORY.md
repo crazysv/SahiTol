@@ -93,3 +93,18 @@ services\api\tests\test_storage.py ...                                   [100%]
 
 ======================= 83 passed, 4 warnings in 7.53s ========================
 ```
+
+## 2026-10-01 independent re-verification
+
+The T006 SQLite geometry test-double repair was verified against the facility
+directory itself, rather than relying on its earlier historical output. From
+the repository root with the pinned Python 3.10 dependencies:
+
+```text
+PYTHONPATH="services/api:." uv run --python 3.10 --with-requirements services/api/requirements.txt --with pytest==8.3.3 --with pytest-asyncio==0.24.0 --with numpy==1.26.4 --with pandas==2.2.3 --with shapely==2.0.6 pytest services/api/tests/test_facilities.py -q
+15 passed in 2.39s
+```
+
+This exercises facility location read paths along with role preservation,
+formal-destination filtering, source disclaimers, and operational-update
+separation. No production facility record or provenance claim was changed.

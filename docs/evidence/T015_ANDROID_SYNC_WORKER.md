@@ -119,3 +119,12 @@ The Android debug APK was compiled with the new sync components:
 - Command: `./gradlew assembleDebug`
 - Output: `apps/android/app/build/outputs/apk/debug/app-debug.apk`
 - Status: `BUILD SUCCESSFUL in 27s` (39 actionable tasks)
+
+## 2026-10-01 independent re-verification
+
+```text
+./gradlew --no-daemon :app:testDebugUnitTest --tests "com.sahitol.collector.SyncWorkerTest"
+BUILD SUCCESSFUL in 16s
+```
+
+The generated JUnit result reported 4 tests, 0 failures, and 0 errors.

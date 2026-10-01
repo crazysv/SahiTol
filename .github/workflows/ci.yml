@@ -34,11 +34,10 @@ jobs:
         working-directory: services/api
         run: |
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
       - name: Run pytest suite
-        working-directory: services/api
         run: |
-          pytest
+          PYTHONPATH="$GITHUB_WORKSPACE/services/api:$GITHUB_WORKSPACE" pytest services/api/tests
 
   test-web:
     name: Web Frontend Verification

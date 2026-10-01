@@ -63,6 +63,26 @@
 
 ## Test Results and Verification Log
 
+### 0. Reproducible API verification repair — 2026-10-01
+
+The original API command was not reproducible from `services/api`: shared
+repository fixtures were outside Python's import path and the full suite's
+data/model checks required undeclared verification dependencies. The API
+package now pins its runtime dependencies, declares repository-root test
+resolution, and provides `requirements-dev.txt` for the data/model verifier
+dependencies. CI installs that verification set and runs the tests from the
+repository root with both the API and repository root on `PYTHONPATH`.
+
+Verification on Windows/Python 3.10:
+
+```text
+318 tests collected in 3.67s
+```
+
+This establishes reproducible collection. Functional failures remain recorded
+against their owning implementation tasks rather than being hidden as a T001
+toolchain result.
+
 ### 1. Python API Unit Tests
 Command: `python -m pytest services/api/tests`
 Result: **12 PASSED** in 1.62s

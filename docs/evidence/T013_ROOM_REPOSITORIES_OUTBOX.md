@@ -122,3 +122,17 @@ database.withTransaction {
 - **Debug APK**: `apps/android/app/build/outputs/apk/debug/app-debug.apk`
 - **APK Size**: 29,088,027 bytes (27.7 MB)
 - **Status**: Verified compilable and testable with full Room 2.6.1 SQLite runtime.
+
+## 2026-10-01 independent re-verification
+
+Ran the task's focused unit suite after stopping stale Gradle processes that
+had locked Android analytics state:
+
+```text
+./gradlew --no-daemon :app:testDebugUnitTest --tests "com.sahitol.collector.RoomOutboxRepositoryTest"
+BUILD SUCCESSFUL
+```
+
+The generated JUnit result reported 5 tests, 0 failures, and 0 errors. This
+validates the unit-level outbox/hash-chain/account-partition invariants; it
+does not substitute for the separate on-device process-death scenario.

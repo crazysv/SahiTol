@@ -88,3 +88,17 @@ Full API test suite verification:
 ```text
 ======================= 127 passed, 8 warnings in 9.43s =======================
 ```
+
+## 2026-10-01 independent re-verification
+
+The matching engine's location reads were re-run after the T006 SQLite
+geometry test-double repair:
+
+```text
+PYTHONPATH="services/api:." uv run --python 3.10 --with-requirements services/api/requirements.txt --with pytest==8.3.3 --with pytest-asyncio==0.24.0 --with numpy==1.26.4 --with pandas==2.2.3 --with shapely==2.0.6 pytest services/api/tests/test_matching.py -q
+10 passed in 0.56s
+```
+
+The successful checks include the battery-route hard guard, formal-destination
+filtering, distance/ranking explanations, no-match exclusions, GeoJSON, and
+collector ownership isolation.

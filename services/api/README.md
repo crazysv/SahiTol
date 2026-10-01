@@ -15,15 +15,17 @@ FastAPI service powering the SahiTol platform: offline sync endpoints, indicativ
    ```bash
    cp .env.example .env
    ```
-2. Install dependencies:
+2. Install runtime dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-3. Run tests:
+3. Install the pinned verification dependencies and run the repository-root test command:
    ```bash
-   pytest
+   pip install -r requirements-dev.txt
+   cd ../..
+   PYTHONPATH="services/api:." pytest services/api/tests
    ```
-4. Start dev server:
+4. Start dev server from `services/api`:
    ```bash
    uvicorn app.main:app --reload --port 8000
    ```
