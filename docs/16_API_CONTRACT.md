@@ -17,7 +17,7 @@ Base `/api/v1` for business endpoints; `/health/live` and `/health/ready` are un
 | Method and path | Actor / purpose | Key input → output / safeguards |
 |---|---|---|
 | GET /health/live | Public process liveness | Minimal alive; no DB credentials/config |
-| GET /health/ready | Limited public readiness | Database/storage readiness summary; detailed checks admin-only |
+| GET /health/ready | Limited public readiness | Database/storage readiness summary and non-sensitive `storage_probe` diagnostic (only `adapter_readiness` after a real adapter check); detailed checks admin-only and no endpoint/credential disclosure |
 | POST /auth/register | Collector online activation | phone,PIN,alias?,language,region,consent → profile/session; no arbitrary role |
 | POST /auth/login | Any provisioned role | phone,PIN,device_id → access/session; throttled, generic failure |
 | POST /auth/demo | Isolated demo only | demo profile code → restricted demo account; never production bypass |

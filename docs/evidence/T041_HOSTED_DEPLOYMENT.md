@@ -51,6 +51,22 @@ GET https://sahitol.pages.dev
 HTTP 200
 ```
 
+### 2026-10-01 readiness and cellular-network evidence
+
+The API was rechecked from an external client and returned HTTP 200 for both
+`/health/live` and `/health/ready`. The readiness response reported
+`database: "connected"`, `storage: "connected"`, `environment: "production"`
+and `storage_backend: "supabase"` is exposed by `/health`. An allowed Pages
+origin completed authenticated demo login with the exact CORS origin echoed.
+
+The connected collector handset reports a validated Jio NR cellular network;
+direct handset HTTP retrieval could not be automated because this device image
+does not include a command-line HTTP client and the restricted automation layer
+blocks URL launching. Therefore this is **not** claimed as a complete phone
+cellular journey. After the next deploy, `/health/ready` must additionally show
+`storage_probe: "adapter_readiness"`; that new field proves the API is running
+the repair that actually contacts its configured private-storage bucket.
+
 ## Cloudflare Pages (Web Console)
 
 - **Project:** sahitol

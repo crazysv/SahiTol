@@ -224,6 +224,15 @@ Implemented and verified the comprehensive automated security, privacy, and abus
 - Marked T040 done. AT-072 retains its dependency on T041; media retention and
   backup remain T042 evidence rather than being overstated here.
 
+## 2026-10-01 — T041 hosted-readiness repair in progress
+
+- Found and repaired a false-positive Supabase readiness check: it now probes
+  private-bucket metadata without creating or exposing an object.
+- Added `storage_probe` to the redacted readiness response so deployment of the
+  new check is independently observable.
+- Focused recovery/security checks pass 32/32. Hosted API and Pages currently
+  return HTTPS 200; recheck after deployment remains required.
+
 ## 2026-10-01 — T039 independent repair and verification
 
 - Repaired U01 so its displayed economics agree with the canonical ECONOMICS_V1

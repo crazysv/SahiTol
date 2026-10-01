@@ -30,6 +30,17 @@ class SupabaseStorageAdapter(StorageAdapter):
             "apiKey": self.key,
         }
 
+    def is_healthy(self) -> bool:
+        """Verify that the configured private bucket is reachable and authorized.
+
+        Readiness must not equate adapter construction with a healthy storage
+        service. This metadata request neither creates nor exposes an object.
+        """
+        bucket_url = f"{self.url}/storage/v1/bucket/{self.bucket}"
+        with httpx.Client(timeout=5.0) as client:
+            response = client.get(bucket_url, headers=self.headers)
+        return response.status_code == 200
+
     def save(self, filename: str, data: bytes, content_type: str = "image/jpeg") -> str:
         """Upload file bytes to private bucket."""
         if len(data) > MAX_MEDIA_BYTES:

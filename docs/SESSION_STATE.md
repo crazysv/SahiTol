@@ -130,4 +130,9 @@ export field. Android safety tests pass 6/6, focused U01 tests pass 8/8, and
 web typecheck/build pass. T040 is now independently verified: 23 local
 security-boundary/core tests pass; deployed Render health returned HTTPS 200;
 the configured Pages origin preflight was accepted while evil.example was
-rejected. Retention/backup is still T042 scope. Continue at T041.
+rejected. Retention/backup is still T042 scope. T041 repair is in progress:
+public Render health/ready return HTTPS 200 and ready reports production database
+and Supabase storage, but the former check merely constructed an adapter. The
+repair verifies private-bucket metadata and reports `storage_probe=adapter_readiness`.
+Focused recovery/security tests pass 32/32; push and recheck deployed readiness
+before closing T041.

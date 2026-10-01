@@ -147,8 +147,8 @@ After the Render service first deploys, note its URL (e.g. `https://sahitol-api.
 ### 3.4 Verify health endpoints
 
 ```bash
-curl https://sahitol-api.onrender.com/health/live   # must return {"status":"ok"}
-curl https://sahitol-api.onrender.com/health/ready  # must return {"status":"ok","db":"ok"}
+curl https://sahitol-api.onrender.com/health/live   # must return {"status":"live",...}
+curl https://sahitol-api.onrender.com/health/ready  # must return {"status":"ready","database":"connected","storage":"connected","storage_probe":"adapter_readiness",...}
 curl https://sahitol-api.onrender.com/              # must return app name, version, problem
 ```
 
@@ -199,7 +199,7 @@ Test a credentialed cross-origin request from the browser:
 // Browser console on https://sahitol.pages.dev
 fetch('https://sahitol-api.onrender.com/health/ready', {credentials: 'include'})
   .then(r => r.json()).then(console.log)
-// Must return {"status":"ok","db":"ok"}, not a CORS error
+// Must return status "ready" with database/storage "connected", not a CORS error
 ```
 
 ---

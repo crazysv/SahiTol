@@ -16,6 +16,10 @@ class LocalStorageAdapter(StorageAdapter):
         self.root = Path(root_dir or settings.LOCAL_MEDIA_ROOT).resolve()
         self.root.mkdir(parents=True, exist_ok=True)
 
+    def is_healthy(self) -> bool:
+        """Return whether the configured local media root is usable."""
+        return self.root.is_dir()
+
     def _resolve_safe_path(self, storage_key: str) -> Path:
         """Resolve storage key and verify it resides safely inside the root directory."""
         clean_key = storage_key.strip("/\\")

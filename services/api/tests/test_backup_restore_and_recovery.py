@@ -31,10 +31,46 @@ from app.db.models.facility import Facility, Region
 from app.db.models.lot import Lot, MediaObject
 from app.domain.canonical import compute_canonical_hash
 from app.security import hash_pin
+from app.storage.supabase import SupabaseStorageAdapter
+import app.storage.supabase as supabase_storage_module
 from scripts.backup_restore import create_backup, restore_backup
 from tests.test_db import TestingSessionLocal, override_get_db
 
 client = TestClient(app)
+
+
+def test_supabase_storage_readiness_checks_private_bucket(monkeypatch):
+    """Readiness probes bucket metadata instead of trusting configuration alone."""
+    requested = []
+
+    class Response:
+        def __init__(self, status_code: int):
+            self.status_code = status_code
+
+    class Client:
+        def __init__(self, timeout: float):
+            assert timeout == 5.0
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return False
+
+        def get(self, url, headers):
+            requested.append((url, headers))
+            return Response(200)
+
+    monkeypatch.setattr(supabase_storage_module.httpx, "Client", Client)
+    adapter = SupabaseStorageAdapter(
+        supabase_url="https://project.supabase.co",
+        service_role_key="test-service-key",
+        bucket="private-media",
+    )
+
+    assert adapter.is_healthy() is True
+    assert requested[0][0] == "https://project.supabase.co/storage/v1/bucket/private-media"
+    assert requested[0][1]["Authorization"] == "Bearer test-service-key"
 
 
 @pytest.fixture
@@ -66,6 +102,7 @@ def test_health_ready_probe_success():
     assert data["status"] == "ready"
     assert data["database"] == "connected"
     assert data["storage"] == "connected"
+    assert data["storage_probe"] == "adapter_readiness"
     assert "timestamp" in data
 
 

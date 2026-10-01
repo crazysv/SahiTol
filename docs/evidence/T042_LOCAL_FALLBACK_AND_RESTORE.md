@@ -33,7 +33,7 @@ Key deliverables and accomplishments:
      - Tampering detection: bit-level corruption in database dump or media file is rejected immediately with `ValueError`.
 2. **Health Probes & Redacted Structured Logging (`R-OPS-04`, `AT-077`)**:
    - Implemented `/health/live` (liveness probe) returning process heartbeat and version.
-   - Implemented `/health/ready` (readiness probe) validating database connection (`SELECT 1`) and storage directory availability. If database connectivity fails, returns HTTP 503 Service Unavailable with `{"status": "degraded", "database": "unavailable"}` without leaking database connection strings or passwords.
+   - Implemented `/health/ready` (readiness probe) validating database connection (`SELECT 1`) and actual storage-adapter readiness. Local storage checks its directory; Supabase checks private-bucket metadata without creating or exposing media. If a dependency fails, it returns HTTP 503 without leaking database connection strings or passwords.
    - Added FastAPI HTTP middleware injecting `X-Correlation-ID` / `X-Request-ID` into every request state and response headers.
    - Emits structured JSON access logs capturing `correlation_id`, `method`, `path`, `status`, `duration_ms`, and anonymized client IP (e.g. `192.168.*.*`), strictly excluding/redacting authentication tokens, PINs, and passwords.
 3. **Android Release HTTPS vs Debug LAN Network Security (`R-OPS-02`, `AT-075`)**:

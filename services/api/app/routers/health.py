@@ -45,6 +45,7 @@ def get_health_ready(db: Session = Depends(get_db)):
     """Readiness probe: validates database connectivity and storage readiness without leaking credentials."""
     db_ok = False
     storage_ok = False
+    storage_probe = "not_run"
     errors = []
 
     # 1. Database check
@@ -58,10 +59,16 @@ def get_health_ready(db: Session = Depends(get_db)):
     # 2. Storage check
     try:
         adapter = get_storage_adapter()
-        if hasattr(adapter, "root") and adapter.root.is_dir():
-            storage_ok = True
+        if hasattr(adapter, "is_healthy"):
+            storage_ok = bool(adapter.is_healthy())
+            storage_probe = "adapter_readiness"
+        elif hasattr(adapter, "root"):
+            storage_ok = bool(adapter.root.is_dir())
+            storage_probe = "filesystem"
         else:
-            storage_ok = True  # supabase / other configured storage
+            storage_ok = False
+        if not storage_ok:
+            errors.append("storage unavailable")
     except Exception as e:
         logger.error("Readiness check: storage availability failure: %s", type(e).__name__)
         errors.append("storage unavailable")
@@ -72,6 +79,7 @@ def get_health_ready(db: Session = Depends(get_db)):
         "status": "ready" if is_ready else "degraded",
         "database": "connected" if db_ok else "unavailable",
         "storage": "connected" if storage_ok else "unavailable",
+        "storage_probe": storage_probe,
         "environment": settings.ENVIRONMENT,
         "demo_mode": settings.DEMO_MODE,
         "timestamp": datetime.now(timezone.utc).isoformat()

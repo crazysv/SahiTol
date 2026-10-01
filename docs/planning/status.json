@@ -324,7 +324,7 @@
       "evidence": [
         "docs/evidence/T041_HOSTED_DEPLOYMENT.md"
       ],
-      "note": "Hosted services return HTTP 200, but T041 depends on T025's incomplete server-backed second-device confirmation. T041 remains IN_PROGRESS until that dependency is closed.",
+      "note": "T025 and T040 are now DONE. On 2026-10-01, public Render live/ready health returned HTTPS 200; ready reported connected production database and Supabase storage, and a Pages-origin demo login succeeded with restrictive CORS. A readiness defect was repaired locally: Supabase readiness must contact private-bucket metadata rather than infer success from adapter construction (32 focused recovery/security tests pass). This code must deploy and expose storage_probe=adapter_readiness before hosted storage readiness is verified; full handset cellular journey is still NOT_RUN.",
       "owner": "Owner + coding agent"
     },
     "T042": {
