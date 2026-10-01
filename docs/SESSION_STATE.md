@@ -127,4 +127,7 @@ telemetry and uplift claims with transparent assumptions, link the separate
 ledger, expose accessible controls and Hindi/Marathi return labels, permit
 lower-rate/higher-transport negative scenarios, and compute an actual SHA-256
 export field. Android safety tests pass 6/6, focused U01 tests pass 8/8, and
-web typecheck/build pass. Continue at T040.
+web typecheck/build pass. T040 is now independently verified: 23 local
+security-boundary/core tests pass; deployed Render health returned HTTPS 200;
+the configured Pages origin preflight was accepted while evil.example was
+rejected. Retention/backup is still T042 scope. Continue at T041.

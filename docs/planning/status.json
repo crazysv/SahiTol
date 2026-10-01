@@ -313,11 +313,11 @@
       "owner": "Owner + coding agent"
     },
     "T040": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "evidence": [
         "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
       ],
-      "note": "Security boundary tests pass, but this task depends on T025's incomplete server-backed second-device confirmation. T040 remains IN_PROGRESS until that dependency is closed."
+      "note": "Independently reverified 2026-10-01. Local authorization, demo isolation, public-verification privacy, export sanitization, PIN/replay and media tests pass 23/23. Render health returned HTTPS 200; deployed CORS preflight allowed only sahitol.pages.dev and rejected evil.example. T025 is now DONE, so T040 has no remaining dependency blocker. Retention/backup remains separately evidenced in T042."
     },
     "T041": {
       "status": "IN_PROGRESS",
@@ -1050,7 +1050,7 @@
       "evidence": [
         "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
       ],
-      "note": "PIN brute-force lockout (429 with Retry-After), uniform 401 user enumeration prevention, session rotation, replay revocation, and repository secrets scan (0 found) verified in T040. Production transport and CORS verified in T041."
+      "note": "PIN brute-force lockout (429 with Retry-After), uniform 401 user enumeration prevention, session rotation, replay revocation, and repository secrets scan (0 found) verified locally in T040. On 2026-10-01, deployed Render HTTPS health returned 200 and CORS preflight allowed sahitol.pages.dev but rejected evil.example. This is contributing evidence; acceptance remains NOT_RUN until contributing task T041 is closed."
     },
     "AT-073": {
       "status": "NOT_RUN",

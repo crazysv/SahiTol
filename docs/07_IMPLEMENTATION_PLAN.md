@@ -630,7 +630,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T040
 
-**Verify security privacy and abuse boundaries** — stage 6; scope RELEASE; status **IN_PROGRESS**.
+**Verify security privacy and abuse boundaries** — stage 6; scope RELEASE; status **DONE**.
 
 Dependencies: [T025](07_IMPLEMENTATION_PLAN.md#t025), [T027](07_IMPLEMENTATION_PLAN.md#t027), [T030](07_IMPLEMENTATION_PLAN.md#t030), [T031](07_IMPLEMENTATION_PLAN.md#t031).
 

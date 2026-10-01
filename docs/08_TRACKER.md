@@ -2,7 +2,7 @@
 
 Generated from [catalog](planning/catalog.json) and [status](planning/status.json). Edit those files, then run `python scripts/render_docs.py` and `python scripts/check_docs.py`. Do not edit this view independently.
 
-**Release tasks: 39/50 DONE. Release acceptance: 28/79 PASS.** Future scope and external gaps are not counted as completed release work.
+**Release tasks: 40/50 DONE. Release acceptance: 28/79 PASS.** Future scope and external gaps are not counted as completed release work.
 
 Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, DONE; FUTURE starts DEFERRED. Allowed test states: NOT_RUN, PASS, FAIL, BLOCKED; external gap starts UNMET; future starts DEFERRED. Notes explain blockers and next action. Evidence paths are repository-relative, no secret-bearing files.
 
@@ -47,7 +47,7 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [T037](07_IMPLEMENTATION_PLAN.md#t037) | Generate and wire offline Hindi/Marathi audio | RELEASE | DONE | [T037_OFFLINE_AUDIO_AND_GRAMMAR.md](../docs/evidence/T037_OFFLINE_AUDIO_AND_GRAMMAR.md) | Generated 258 pre-generated offline MP3 audio clips across Hindi and Marathi covering numbers 0-99, scale words, units, statuses, and 9 safety cards; compiled complete audio_manifest.json with license attribution, SHA-256 hashes, and duration; implemented dynamic Indian numbering grammar (speakMoney, speakWeight, speakRate, speakRange, speakStatus, speakSafety), resilient AudioGuidanceManager with graceful missing clip handling and zero cloud speech runtime calls; verified by 7 JUnit tests and packaged into APK. |
 | [T038](07_IMPLEMENTATION_PLAN.md#t038) | Implement illustrative economics model | RELEASE | DONE | [T038_ILLUSTRATIVE_ECONOMICS.md](../docs/evidence/T038_ILLUSTRATIVE_ECONOMICS.md) | Transparent same-lot comparison calculator, sensitivity analysis, zero/negative baseline handling, zero collector fee sustainability model, canonical shared fixtures, and REST endpoints implemented and verified with 10 automated tests. |
 | [T039](07_IMPLEMENTATION_PLAN.md#t039) | Implement approved economics and safety views | RELEASE | DONE | [T039_ECONOMICS_AND_SAFETY_VIEWS.md](../docs/evidence/T039_ECONOMICS_AND_SAFETY_VIEWS.md) | Independently repaired and reverified 2026-10-01. C17 retains the registered Stitch implementation; a physical collector-device run verified C03→C17 navigation, Hindi/Marathi rendering, visible offline state, hazards/prohibitions/steps and audio trigger (human-audible playback quality is not claimed). U01 now uses the canonical ECONOMICS_V1 chosen-demo fixture (₹350 current, ₹470 assumed platform, ₹120 delta), labels assumptions rather than telemetry/market facts, permits lower-rate/higher-transport unfavourable scenarios, separates the actual ledger, has Hindi/Marathi net-return labels and accessible controls, and exports a browser-computed SHA-256 field. Focused checks: Android safety 6/6; web U01 8/8; TypeScript and production build pass. |
-| [T040](07_IMPLEMENTATION_PLAN.md#t040) | Verify security privacy and abuse boundaries | RELEASE | IN_PROGRESS | [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md) | Security boundary tests pass, but this task depends on T025's incomplete server-backed second-device confirmation. T040 remains IN_PROGRESS until that dependency is closed. |
+| [T040](07_IMPLEMENTATION_PLAN.md#t040) | Verify security privacy and abuse boundaries | RELEASE | DONE | [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md) | Independently reverified 2026-10-01. Local authorization, demo isolation, public-verification privacy, export sanitization, PIN/replay and media tests pass 23/23. Render health returned HTTPS 200; deployed CORS preflight allowed only sahitol.pages.dev and rejected evil.example. T025 is now DONE, so T040 has no remaining dependency blocker. Retention/backup remains separately evidenced in T042. |
 | [T041](07_IMPLEMENTATION_PLAN.md#t041) | Deploy hosted API database storage and web | RELEASE | IN_PROGRESS | [T041_HOSTED_DEPLOYMENT.md](../docs/evidence/T041_HOSTED_DEPLOYMENT.md) | Hosted services return HTTP 200, but T041 depends on T025's incomplete server-backed second-device confirmation. T041 remains IN_PROGRESS until that dependency is closed. |
 | [T042](07_IMPLEMENTATION_PLAN.md#t042) | Prove local demo fallback and restore | RELEASE | IN_PROGRESS | [T042_LOCAL_FALLBACK_AND_RESTORE.md](../docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md) | Cryptographic backup and restore tool (scripts/backup_restore.py) with SHA-256 manifest and domain event hash-chain validation verified. Health live (/health/live) and ready (/health/ready) probes with zero-leakage DB failure handling verified. X-Correlation-ID middleware and structured logging implemented. Android release HTTPS and debug LAN network security configs verified. Docker Compose PostGIS environment and web camera manual reference fallback verified across 11 automated tests in test_backup_restore_and_recovery.py. |
 | [T043](07_IMPLEMENTATION_PLAN.md#t043) | Run cross-surface integration and fault acceptance | RELEASE | IN_PROGRESS | [T043_CROSS_SURFACE_INTEGRATION.md](../docs/evidence/T043_CROSS_SURFACE_INTEGRATION.md) | Cross-surface tests pass, but the real second-device confirmation boundary in dependency T025 is incomplete. T043 remains IN_PROGRESS until it can verify that path end-to-end. |
@@ -92,9 +92,9 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [R-ARC-01](15_REQUIREMENTS.md#r-arc-01) | RELEASE | 2/2 | [AT-005](20_TEST_ACCEPTANCE.md#at-005): PASS |
 | [R-ARC-02](15_REQUIREMENTS.md#r-arc-02) | RELEASE | 3/3 | [AT-006](20_TEST_ACCEPTANCE.md#at-006): NOT_RUN |
 | [R-AUTH-01](15_REQUIREMENTS.md#r-auth-01) | RELEASE | 2/2 | [AT-007](20_TEST_ACCEPTANCE.md#at-007): PASS |
-| [R-AUTH-02](15_REQUIREMENTS.md#r-auth-02) | RELEASE | 1/2 | [AT-008](20_TEST_ACCEPTANCE.md#at-008): NOT_RUN |
+| [R-AUTH-02](15_REQUIREMENTS.md#r-auth-02) | RELEASE | 2/2 | [AT-008](20_TEST_ACCEPTANCE.md#at-008): NOT_RUN |
 | [R-AUTH-03](15_REQUIREMENTS.md#r-auth-03) | RELEASE | 4/4 | [AT-009](20_TEST_ACCEPTANCE.md#at-009): PASS |
-| [R-AUTH-04](15_REQUIREMENTS.md#r-auth-04) | RELEASE | 1/3 | [AT-010](20_TEST_ACCEPTANCE.md#at-010): NOT_RUN |
+| [R-AUTH-04](15_REQUIREMENTS.md#r-auth-04) | RELEASE | 2/3 | [AT-010](20_TEST_ACCEPTANCE.md#at-010): NOT_RUN |
 | [R-LOT-01](15_REQUIREMENTS.md#r-lot-01) | RELEASE | 2/2 | [AT-011](20_TEST_ACCEPTANCE.md#at-011): PASS |
 | [R-LOT-02](15_REQUIREMENTS.md#r-lot-02) | RELEASE | 3/3 | [AT-012](20_TEST_ACCEPTANCE.md#at-012): PASS |
 | [R-LOT-03](15_REQUIREMENTS.md#r-lot-03) | RELEASE | 2/2 | [AT-013](20_TEST_ACCEPTANCE.md#at-013): PASS |
@@ -116,7 +116,7 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [R-HAND-01](15_REQUIREMENTS.md#r-hand-01) | RELEASE | 2/2 | [AT-029](20_TEST_ACCEPTANCE.md#at-029): PASS |
 | [R-HAND-02](15_REQUIREMENTS.md#r-hand-02) | RELEASE | 1/2 | [AT-030](20_TEST_ACCEPTANCE.md#at-030): NOT_RUN |
 | [R-HAND-03](15_REQUIREMENTS.md#r-hand-03) | RELEASE | 2/3 | [AT-031](20_TEST_ACCEPTANCE.md#at-031): NOT_RUN |
-| [R-HAND-04](15_REQUIREMENTS.md#r-hand-04) | RELEASE | 2/3 | [AT-032](20_TEST_ACCEPTANCE.md#at-032): NOT_RUN |
+| [R-HAND-04](15_REQUIREMENTS.md#r-hand-04) | RELEASE | 3/3 | [AT-032](20_TEST_ACCEPTANCE.md#at-032): NOT_RUN |
 | [R-HAND-05](15_REQUIREMENTS.md#r-hand-05) | RELEASE | 4/4 | [AT-033](20_TEST_ACCEPTANCE.md#at-033): NOT_RUN |
 | [R-HAND-06](15_REQUIREMENTS.md#r-hand-06) | RELEASE | 3/3 | [AT-034](20_TEST_ACCEPTANCE.md#at-034): NOT_RUN |
 | [R-PAY-01](15_REQUIREMENTS.md#r-pay-01) | RELEASE | 2/2 | [AT-035](20_TEST_ACCEPTANCE.md#at-035): PASS |
@@ -142,9 +142,9 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [R-DATA-03](15_REQUIREMENTS.md#r-data-03) | RELEASE | 4/5 | [AT-055](20_TEST_ACCEPTANCE.md#at-055): NOT_RUN |
 | [R-DATA-04](15_REQUIREMENTS.md#r-data-04) | RELEASE | 2/3 | [AT-056](20_TEST_ACCEPTANCE.md#at-056): NOT_RUN |
 | [R-DATA-05](15_REQUIREMENTS.md#r-data-05) | RELEASE | 2/3 | [AT-057](20_TEST_ACCEPTANCE.md#at-057): NOT_RUN |
-| [R-DATA-06](15_REQUIREMENTS.md#r-data-06) | RELEASE | 2/4 | [AT-058](20_TEST_ACCEPTANCE.md#at-058): NOT_RUN |
+| [R-DATA-06](15_REQUIREMENTS.md#r-data-06) | RELEASE | 3/4 | [AT-058](20_TEST_ACCEPTANCE.md#at-058): NOT_RUN |
 | [R-DATA-07](15_REQUIREMENTS.md#r-data-07) | RELEASE | 2/3 | [AT-059](20_TEST_ACCEPTANCE.md#at-059): NOT_RUN |
-| [R-DATA-08](15_REQUIREMENTS.md#r-data-08) | RELEASE | 3/4 | [AT-060](20_TEST_ACCEPTANCE.md#at-060): NOT_RUN |
+| [R-DATA-08](15_REQUIREMENTS.md#r-data-08) | RELEASE | 4/4 | [AT-060](20_TEST_ACCEPTANCE.md#at-060): NOT_RUN |
 | [R-DATA-09](15_REQUIREMENTS.md#r-data-09) | RELEASE | 3/3 | [AT-061](20_TEST_ACCEPTANCE.md#at-061): NOT_RUN |
 | [R-DATA-10](15_REQUIREMENTS.md#r-data-10) | RELEASE | 1/2 | [AT-062](20_TEST_ACCEPTANCE.md#at-062): NOT_RUN |
 | [R-DATA-11](15_REQUIREMENTS.md#r-data-11) | RELEASE | 1/2 | [AT-063](20_TEST_ACCEPTANCE.md#at-063): NOT_RUN |
@@ -156,8 +156,8 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [R-RES-01](15_REQUIREMENTS.md#r-res-01) | RELEASE | 1/3 | [AT-069](20_TEST_ACCEPTANCE.md#at-069): NOT_RUN |
 | [R-RES-02](15_REQUIREMENTS.md#r-res-02) | EXTERNAL_GAP | 1/4 | [AT-070](20_TEST_ACCEPTANCE.md#at-070): UNMET |
 | [R-REG-01](15_REQUIREMENTS.md#r-reg-01) | RELEASE | 3/4 | [AT-071](20_TEST_ACCEPTANCE.md#at-071): NOT_RUN |
-| [R-SEC-01](15_REQUIREMENTS.md#r-sec-01) | RELEASE | 1/3 | [AT-072](20_TEST_ACCEPTANCE.md#at-072): NOT_RUN |
-| [R-SEC-02](15_REQUIREMENTS.md#r-sec-02) | RELEASE | 1/3 | [AT-073](20_TEST_ACCEPTANCE.md#at-073): NOT_RUN |
+| [R-SEC-01](15_REQUIREMENTS.md#r-sec-01) | RELEASE | 2/3 | [AT-072](20_TEST_ACCEPTANCE.md#at-072): NOT_RUN |
+| [R-SEC-02](15_REQUIREMENTS.md#r-sec-02) | RELEASE | 2/3 | [AT-073](20_TEST_ACCEPTANCE.md#at-073): NOT_RUN |
 | [R-OPS-01](15_REQUIREMENTS.md#r-ops-01) | RELEASE | 0/3 | [AT-074](20_TEST_ACCEPTANCE.md#at-074): NOT_RUN |
 | [R-OPS-02](15_REQUIREMENTS.md#r-ops-02) | RELEASE | 0/1 | [AT-075](20_TEST_ACCEPTANCE.md#at-075): NOT_RUN |
 | [R-OPS-03](15_REQUIREMENTS.md#r-ops-03) | RELEASE | 2/3 | [AT-076](20_TEST_ACCEPTANCE.md#at-076): NOT_RUN |

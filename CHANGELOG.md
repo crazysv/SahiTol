@@ -215,6 +215,15 @@ Implemented and verified the comprehensive automated security, privacy, and abus
   - Android unit tests verified (79 passed out of 79 tests in `testDebugUnitTest`).
   - Authored comprehensive evidence artifact `docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md`.
 
+## 2026-10-01 — T040 independent verification
+
+- Added an automated restrictive-CORS boundary test; security boundary and core
+  security suites pass 23/23.
+- Independently confirmed the deployed Render API's HTTPS health response and
+  CORS behavior: `sahitol.pages.dev` accepted, `evil.example` rejected.
+- Marked T040 done. AT-072 retains its dependency on T041; media retention and
+  backup remain T042 evidence rather than being overstated here.
+
 ## 2026-10-01 — T039 independent repair and verification
 
 - Repaired U01 so its displayed economics agree with the canonical ECONOMICS_V1

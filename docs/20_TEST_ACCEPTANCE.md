@@ -730,7 +730,7 @@ Requirement: [R-SEC-01](15_REQUIREMENTS.md#r-sec-01). Tasks: [T007](07_IMPLEMENT
 
 Check: Rate-limit PIN attempts, restrict role grants, rotate/revoke sessions, verify release HTTPS and restrictive CORS; APK/web/repo/log/QR contain no server key, PIN or private database credentials.
 
-Evidence: [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md). Note: PIN brute-force lockout (429 with Retry-After), uniform 401 user enumeration prevention, session rotation, replay revocation, and repository secrets scan (0 found) verified in T040. Production transport and CORS verified in T041.
+Evidence: [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md). Note: PIN brute-force lockout (429 with Retry-After), uniform 401 user enumeration prevention, session rotation, replay revocation, and repository secrets scan (0 found) verified locally in T040. On 2026-10-01, deployed Render HTTPS health returned 200 and CORS preflight allowed sahitol.pages.dev but rejected evil.example. This is contributing evidence; acceptance remains NOT_RUN until contributing task T041 is closed.
 
 ## AT-073
 

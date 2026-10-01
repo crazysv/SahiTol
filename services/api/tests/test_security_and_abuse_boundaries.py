@@ -210,6 +210,35 @@ def auth_fixture():
 
 
 # ===========================================================================
+# 0. TRANSPORT CORS BOUNDARY (R-SEC-01, AT-072)
+# ===========================================================================
+
+def test_cors_allows_only_configured_origin():
+    """An allowed web origin receives CORS credentials; an arbitrary one does not."""
+    allowed_origin = settings.CORS_ORIGINS[0]
+    allowed = client.options(
+        "/api/v1/auth/demo",
+        headers={
+            "Origin": allowed_origin,
+            "Access-Control-Request-Method": "POST",
+        },
+    )
+    assert allowed.status_code == 200
+    assert allowed.headers["access-control-allow-origin"] == allowed_origin
+    assert allowed.headers["access-control-allow-credentials"] == "true"
+
+    denied = client.options(
+        "/api/v1/auth/demo",
+        headers={
+            "Origin": "https://untrusted.example",
+            "Access-Control-Request-Method": "POST",
+        },
+    )
+    assert denied.status_code == 400
+    assert "access-control-allow-origin" not in denied.headers
+
+
+# ===========================================================================
 # 1. OBJECT-LEVEL AUTHORIZATION & IDOR (R-AUTH-02, AT-008)
 # ===========================================================================
 

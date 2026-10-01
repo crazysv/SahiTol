@@ -8,13 +8,13 @@
 - **Requirements**: [`R-AUTH-02`](../15_REQUIREMENTS.md#r-auth-02), [`R-AUTH-04`](../15_REQUIREMENTS.md#r-auth-04), [`R-HAND-04`](../15_REQUIREMENTS.md#r-hand-04), [`R-DATA-06`](../15_REQUIREMENTS.md#r-data-06), [`R-DATA-08`](../15_REQUIREMENTS.md#r-data-08), [`R-SEC-01`](../15_REQUIREMENTS.md#r-sec-01), [`R-SEC-02`](../15_REQUIREMENTS.md#r-sec-02)
 - **Acceptance Cases**: [`AT-008`](../20_TEST_ACCEPTANCE.md#at-008), [`AT-010`](../20_TEST_ACCEPTANCE.md#at-010), [`AT-032`](../20_TEST_ACCEPTANCE.md#at-032), [`AT-058`](../20_TEST_ACCEPTANCE.md#at-058), [`AT-060`](../20_TEST_ACCEPTANCE.md#at-060), [`AT-072`](../20_TEST_ACCEPTANCE.md#at-072), [`AT-073`](../20_TEST_ACCEPTANCE.md#at-073)
 - **Related Specifications**: [`docs/12_GUARDRAILS.md`](../12_GUARDRAILS.md), [`docs/11_SECRETS_CHECKLIST.md`](../11_SECRETS_CHECKLIST.md), [`docs/20_TEST_ACCEPTANCE.md`](../20_TEST_ACCEPTANCE.md)
-- **Status**: DONE
+- **Status**: DONE — independently reverified on 2026-10-01.
 
 ---
 
 ## 1. Executive Summary
 
-Task `T040` delivers the comprehensive automated verification suite and architectural audit establishing strict security, privacy, and abuse boundaries across the SahiTol platform. All tests are authored and automated in `services/api/tests/test_security_and_abuse_boundaries.py` with 19 passing tests covering 100% of the target requirements.
+Task `T040` delivers the security, privacy and abuse-boundary verification. On 2026-10-01, the API-local boundary suite plus core security tests passed **23/23**, and the live Render HTTPS endpoint and CORS preflight were independently checked. This does not substitute for the separate T042 retention/backup evidence.
 
 The test suite systematically tests:
 1. **Object-Level Authorization & IDOR Boundaries (`R-AUTH-02`, `AT-008`)**:
@@ -42,7 +42,7 @@ The test suite systematically tests:
    - Uniform HTTP 401 error message and response timing are returned for non-existent phone numbers and invalid PINs, eliminating user enumeration vulnerabilities.
    - Replay attacks on refresh tokens immediately trigger token-family revocation, invalidating all associated active sessions.
    - Automated secrets scanner scans the entire codebase (Python, TypeScript, Kotlin, configs, scripts) and confirms zero hardcoded private keys, database passwords, or runtime secrets.
-7. **Media Security, EXIF Stripping, Path Traversal & Signed URLs (`R-SEC-02`, `AT-073`)**:
+7. **Media Security, EXIF Stripping, Path Traversal & Signed URLs (`R-SEC-02`, contributing to `AT-073`)**:
    - Image upload pipeline validates magic bytes and uses Pillow to strip EXIF metadata (specifically GPS coordinates and camera serial numbers) into clean buffers.
    - Local storage adapter enforces path canonicalization (`_resolve_safe_path`), rejecting `../` traversal sequences with `ValueError`.
    - Media downloads enforce authentication and signed token expiry (HTTP 401 on expired tokens).
@@ -55,7 +55,7 @@ The test suite systematically tests:
 ### 2.1 Test Suite Summary
 - **Test File**: [`services/api/tests/test_security_and_abuse_boundaries.py`](../../services/api/tests/test_security_and_abuse_boundaries.py)
 - **Framework**: `pytest 9.1.1`, Python 3.10.11
-- **Result**: **19 passed, 0 failed, 1 warning in 6.60s**
+- **Result**: **23 passed, 0 failed, 1 environment warning in 12.43s**: `test_security_and_abuse_boundaries.py` (20) plus `test_security.py` (3).
 
 ```text
 ============================= test session starts =============================
@@ -87,8 +87,12 @@ services\api\tests\test_security_and_abuse_boundaries.py::test_image_upload_exif
 services\api\tests\test_security_and_abuse_boundaries.py::test_media_download_authorization_and_signed_url_expiry PASSED [ 94%]
 services\api\tests\test_security_and_abuse_boundaries.py::test_oversized_upload_and_invalid_mime_rejection PASSED [100%]
 
-======================== 19 passed, 1 warning in 6.60s ========================
+======================= 23 passed, 1 warning in 12.43s ========================
 ```
+
+### 2.2 Independent deployed transport check
+
+On 2026-10-01, `https://sahitol-api.onrender.com/health/live` returned HTTP 200 over HTTPS with Render/Cloudflare response headers and a correlation ID. A preflight from `https://sahitol.pages.dev` to `/api/v1/auth/demo` returned HTTP 200 with that exact `access-control-allow-origin` and credentials enabled. The same preflight from `https://evil.example` returned HTTP 400 and no allowed-origin header. This verifies the deployed origin restriction at the time checked; it is not a claim that the endpoint will remain continuously available.
 
 ---
 
@@ -219,7 +223,7 @@ In compliance with task `T040` specifications, the following residual limitation
 | `AT-032` | Public verification and privacy | `T023`, `T025`, `T040` | **PASS** |
 | `AT-058` | Minimal collector dataset and anonymization | `T007`, `T031`, `T040`, `T047` | Contributed (`T040` verified) |
 | `AT-060` | Provenance and demo isolation everywhere | `T005`, `T029`, `T031`, `T040` | **PASS** |
-| `AT-072` | PIN abuse secrets and transport safety | `T007`, `T040`, `T041` | Contributed (`T040` verified) |
+| `AT-072` | PIN abuse secrets and transport safety | `T007`, `T040`, `T041` | Contributed — local abuse/secrets tests plus deployed HTTPS and restrictive CORS rechecked 2026-10-01; final acceptance awaits T041. |
 | `AT-073` | Privacy media access retention and audit | `T008`, `T040`, `T042` | Contributed (`T040` verified) |
 
-All 19 test cases pass cleanly with 100% success rate. Task `T040` is verified and marked **DONE**.
+All 23 scoped tests pass cleanly. T040 is verified and marked **DONE**; AT-073 remains dependent on T042's retention/backup evidence.
