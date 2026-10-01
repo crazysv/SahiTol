@@ -10,7 +10,7 @@ from app.config import settings
 from app.db.session import get_db
 from app.db.models.auth import User, AuthSession
 from app.db.models.collector import Collector
-from app.db.models.facility import FacilityUser, Region
+from app.db.models.facility import Facility, FacilityUser, Region
 from app.rate_limiter import phone_limiter, ip_limiter
 from app.security import (
     UserRole,
@@ -28,6 +28,11 @@ from app.security import (
 )
 
 router = APIRouter(tags=["auth"])
+
+# This UUID is deterministically assigned by the curated facilities seed to
+# `fac-sim-01`. It is synthetic, isolated demo data; no live operator is ever
+# attached by this convenience path.
+DEMO_RECYCLER_FACILITY_ID = uuid.uuid5(uuid.NAMESPACE_DNS, "fac-sim-01")
 
 
 # --- Request & Response Schemas ---
@@ -343,6 +348,27 @@ def demo_login(req: DemoLoginRequest, db: Session = Depends(get_db)):
             updated_at=now
         ))
         db.commit()
+
+    # The documented demo journey includes one isolated recycler operator.
+    # Give that identity a membership only in the existing synthetic demo
+    # facility. Never create a membership for a real facility and never grant
+    # other recycler personas a default operating authority.
+    if req.role == UserRole.RECYCLER and persona == "yard_operator":
+        demo_facility = db.query(Facility).filter(
+            Facility.id == DEMO_RECYCLER_FACILITY_ID,
+            Facility.active == True,
+        ).first()
+        if demo_facility and not db.query(FacilityUser).filter(
+            FacilityUser.user_id == user.id,
+            FacilityUser.facility_id == demo_facility.id,
+        ).first():
+            db.add(FacilityUser(
+                user_id=user.id,
+                facility_id=demo_facility.id,
+                membership_role="OPERATOR",
+                active=True,
+            ))
+            db.commit()
 
     device_id = req.device_id or "demo-device"
     return _build_token_response(user, device_id, db)

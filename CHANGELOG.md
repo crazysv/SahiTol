@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-01 -- T044 synthetic demo recycler authority repair
+
+The named demo recycler `yard_operator` now receives only an operator
+membership in the pre-seeded synthetic facility. This closes the local
+authorization gap that prevented any demo offer, without granting a real
+facility role. Auth/trade tests pass 34/34; deployment and live readback remain
+required.
+
 ## 2026-10-01 -- T044 selected-lot handover binding repair
 
 Replaced C07/C08's cable sample data with the actual selected persisted lot;

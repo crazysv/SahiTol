@@ -19,6 +19,13 @@ console and API health endpoint returned HTTP 200.
 **Do not treat the release as complete. T044 remains in progress and its
 two-device evidence is still outstanding.**
 
+Latest T044 checkpoint: C07/C08 now render the actual selected synchronized
+PCB and show no invented pickup. The pending live PCB request has no offer yet.
+The local API repair gives only the designated `yard_operator` demo recycler a
+membership in the existing synthetic demo facility (34 focused auth/trade tests
+pass); push/deploy and read back a live offer next. The second device is not
+currently USB-connected.
+
 - **T046 DONE**: String parity 145/145 all locales. Audio 258/258 checksums OK. All AudioGrammarAndManifestTest PASS.
 - **T047 DONE**: 7 data cards, model card (macro-F1 0.0159), frozen SHA-256 manifest (T047_FROZEN_RELEASE_MANIFEST.json).
 - **T048 DONE**: 10-slide deck script, one-page fact sheet, five presenter role cards with Q&A crib.

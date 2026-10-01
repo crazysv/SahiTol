@@ -239,6 +239,14 @@ Evidence: C16_material_passport_journey.png
     pickup vehicle or a confirmed route before a recycler accepts an offer; it
     explicitly says that acceptance is required. This verifies collector-side
     C07/C08 data binding only, not a recycler response or two-device QR flow.
+12. **2026-10-01 demo recycler authority repair (local verification):** The
+    named `yard_operator` demo recycler identity previously had no
+    `facility_users` membership, so it could not quote on the pending request.
+    Demo authentication now grants that one identity an `OPERATOR` membership
+    only in the existing seeded synthetic `fac-sim-01` facility; it neither
+    creates facilities nor grants any real-facility authority. The auth and
+    trade suites pass 34 tests. This remains local verification until the
+    deployed API is reachable and accepts a live offer.
 
 ---
 

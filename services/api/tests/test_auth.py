@@ -16,7 +16,7 @@ from app.db.base import Base
 from app.db.session import get_db
 from app.db.models.auth import User, AuthSession
 from app.db.models.collector import Collector
-from app.db.models.facility import FacilityUser
+from app.db.models.facility import Facility, FacilityUser, Region
 from app.rate_limiter import phone_limiter, ip_limiter
 from app.security import (
     UserRole,
@@ -329,6 +329,42 @@ def test_demo_login_repairs_legacy_collector_without_profile():
     assert db.query(Collector).filter(Collector.user_id == user_id).first() is not None
     db.close()
 
+
+def test_demo_yard_operator_gets_only_seeded_synthetic_facility_membership():
+    """The recycler demo identity is usable without granting real-facility access."""
+    demo_facility_id = uuid.uuid5(uuid.NAMESPACE_DNS, "fac-sim-01")
+    db = TestingSessionLocal()
+    try:
+        if not db.query(Region).filter(Region.id == "DELHI_NCR").first():
+            db.add(Region(id="DELHI_NCR", name="Delhi-NCR", state_code="DL", kind="METRO"))
+        if not db.query(Facility).filter(Facility.id == demo_facility_id).first():
+            db.add(Facility(
+                id=demo_facility_id,
+                name="Simulated Demonstration Recycling Hub",
+                facility_name="Simulated Demonstration Recycling Hub",
+                kind="RECYCLER",
+                address_public="Demo sandbox",
+                district="Demo",
+                state="Delhi",
+                region_id="DELHI_NCR",
+                active=True,
+            ))
+        db.commit()
+    finally:
+        db.close()
+
+    response = client.post("/auth/demo", json={"role": "RECYCLER", "persona_id": "yard_operator"})
+    assert response.status_code == 200
+    user_id = uuid.UUID(decode_token(response.json()["access_token"])["sub"])
+
+    db = TestingSessionLocal()
+    try:
+        memberships = db.query(FacilityUser).filter(FacilityUser.user_id == user_id).all()
+        assert [(membership.facility_id, membership.membership_role) for membership in memberships] == [
+            (demo_facility_id, "OPERATOR")
+        ]
+    finally:
+        db.close()
 
 def test_demo_disabled_when_flag_off(monkeypatch):
     """Verify demo login is rejected with 403 when DEMO_MODE is False."""
