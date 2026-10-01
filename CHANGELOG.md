@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-01 -- T044 deployed synthetic recycler offer
+
+After deployment, the isolated demo recycler created a hosted open offer for
+the verified PCB request with a server-issued terms hash/version. The collector
+USB connection dropped before offer reception could be observed, so this is
+server-contract evidence only; no handset acceptance or QR result is claimed.
+
 ## 2026-10-01 -- T044 synthetic demo recycler authority repair
 
 The named demo recycler `yard_operator` now receives only an operator

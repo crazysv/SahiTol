@@ -247,6 +247,16 @@ Evidence: C16_material_passport_journey.png
     creates facilities nor grants any real-facility authority. The auth and
     trade suites pass 34 tests. This remains local verification until the
     deployed API is reachable and accepts a live offer.
+13. **2026-10-01 deployed recycler offer verification (server contract):**
+    After the guarded demo membership repair deployed, the authenticated
+    `yard_operator` recycler created offer `5e53f4de-…` against pending request
+    `85cc3a92-…`. The hosted API returned `201 Created`, `OPEN`, the verified
+    PCB lot and synthetic facility UUIDs, `30000` paise/kg, `14250` g, and the
+    server-issued terms hash/version 1. This is a real isolated-demo server
+    transaction and supersedes the previous zero-offer readback. The collector
+    handset disconnected from USB before its C07 offer refresh could be
+    observed, so this is deliberately not counted as handset acceptance or QR
+    evidence.
 
 ---
 

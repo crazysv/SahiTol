@@ -23,8 +23,10 @@ Latest T044 checkpoint: C07/C08 now render the actual selected synchronized
 PCB and show no invented pickup. The pending live PCB request has no offer yet.
 The local API repair gives only the designated `yard_operator` demo recycler a
 membership in the existing synthetic demo facility (34 focused auth/trade tests
-pass); push/deploy and read back a live offer next. The second device is not
-currently USB-connected.
+pass). It deployed and created open offer `5e53f4de-…` for the pending PCB
+request with server terms version 1. The collector USB connection dropped before
+C07 could read it; reconnect both handsets, refresh C07, then continue the
+two-device acceptance/QR test.
 
 - **T046 DONE**: String parity 145/145 all locales. Audio 258/258 checksums OK. All AudioGrammarAndManifestTest PASS.
 - **T047 DONE**: 7 data cards, model card (macro-F1 0.0159), frozen SHA-256 manifest (T047_FROZEN_RELEASE_MANIFEST.json).
