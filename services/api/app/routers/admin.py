@@ -58,7 +58,7 @@ router = APIRouter(tags=["admin"])
 
 class PriceReviewDecisionRequest(BaseModel):
     decision: str  # APPROVE, REJECT
-    reason: Optional[str] = None
+    reason: str = Field(..., min_length=5, description="Mandatory review justification")
 
 
 class PriceReviewItemResponse(BaseModel):
@@ -1564,6 +1564,8 @@ def search_domain_events(
     aggregate_id: Optional[uuid.UUID] = Query(None, description="Filter by aggregate UUID"),
     event_type: Optional[str] = Query(None, description="Filter by event type"),
     actor_id: Optional[uuid.UUID] = Query(None, description="Filter by actor user UUID"),
+    occurred_from: Optional[datetime] = Query(None, description="Inclusive UTC event-time lower bound"),
+    occurred_to: Optional[datetime] = Query(None, description="Inclusive UTC event-time upper bound"),
     limit: int = Query(50, ge=1, le=200),
     offset: int = Query(0, ge=0),
     current_user: User = Depends(require_roles(UserRole.ADMIN)),
@@ -1581,6 +1583,10 @@ def search_domain_events(
         stmt = stmt.where(DomainEvent.event_type == event_type)
     if actor_id:
         stmt = stmt.where(DomainEvent.actor_id == actor_id)
+    if occurred_from:
+        stmt = stmt.where(DomainEvent.received_at_server >= occurred_from)
+    if occurred_to:
+        stmt = stmt.where(DomainEvent.received_at_server <= occurred_to)
 
     stmt = stmt.order_by(DomainEvent.received_at_server.desc()).offset(offset).limit(limit)
     events = db.execute(stmt).scalars().all()
@@ -1726,19 +1732,41 @@ def decide_price_review(
             detail=f"Price observation '{observation_id}' not found"
         )
 
+    previous_status = obs.review_status
     decision = payload.decision.upper()
+    reason = payload.reason.strip()
+    if len(reason) < 5:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="A review justification of at least 5 characters is required."
+        )
     if decision == "APPROVE":
         obs.review_status = "VERIFIED"
         obs.rejection_reason = None
     elif decision == "REJECT":
         obs.review_status = "REJECTED"
-        obs.rejection_reason = payload.reason or "Rejected by administrator review"
+        obs.rejection_reason = reason
     else:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="decision must be 'APPROVE' or 'REJECT'"
         )
 
+    record_admin_event(
+        db=db,
+        aggregate_type="PRICE_OBSERVATION",
+        aggregate_id=obs.id,
+        event_type="PRICE_OBSERVATION_REVIEWED",
+        actor_id=current_user.id,
+        role=current_user.role,
+        payload={
+            "observation_id": str(obs.id),
+            "decision": decision,
+            "reason": reason,
+            "previous_status": previous_status,
+            "next_status": obs.review_status,
+        },
+    )
     db.commit()
     db.refresh(obs)
 

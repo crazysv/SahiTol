@@ -106,4 +106,7 @@ collector device without clearing data and relaunched without a Room migration
 failure. T028 was then independently repaired and reverified: quality baselines
 now use only PRICE_V1-eligible observations, media reuse compares SHA-256 rather
 than upload ID, and large-weight flags use `DQ-LARGE-WEIGHT`; 33 focused
-quality/lot tests pass. Continue in order at T029.
+quality/lot tests pass. T029 was independently repaired and reverified: event
+search now has inclusive UTC date bounds, and price moderation requires a
+justification and emits a hash-chained review event. The dedicated
+admin-maintenance suite passes 10/10. Continue in order at T030.

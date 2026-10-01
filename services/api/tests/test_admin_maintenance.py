@@ -768,7 +768,15 @@ def test_event_search_and_lot_traceability(
     db.commit()
 
     # 1. Search domain events
-    resp_search = client.get("/api/v1/admin/events?aggregate_type=LOT", headers=a_headers)
+    resp_search = client.get(
+        "/api/v1/admin/events",
+        params={
+            "aggregate_type": "LOT",
+            "occurred_from": now.isoformat(),
+            "occurred_to": (now + timedelta(seconds=20)).isoformat(),
+        },
+        headers=a_headers,
+    )
     assert resp_search.status_code == 200
     events_data = resp_search.json()
     assert len(events_data) >= 2
@@ -822,7 +830,7 @@ def test_price_review_moderation_requires_admin_and_updates_status(
     # Recycler rejected
     resp_r = client.post(
         f"/api/v1/admin/price-review/{obs.id}/decision",
-        json={"decision": "APPROVE"},
+        json={"decision": "APPROVE", "reason": "Recycler is not an authorized reviewer"},
         headers=r_headers
     )
     assert resp_r.status_code == 403
@@ -830,7 +838,7 @@ def test_price_review_moderation_requires_admin_and_updates_status(
     # Admin approves
     resp_a = client.post(
         f"/api/v1/admin/price-review/{obs.id}/decision",
-        json={"decision": "APPROVE"},
+        json={"decision": "APPROVE", "reason": "Source and units checked against the submitted evidence"},
         headers=a_headers
     )
     assert resp_a.status_code == 200
@@ -839,3 +847,15 @@ def test_price_review_moderation_requires_admin_and_updates_status(
     # Verify in DB
     db.refresh(obs)
     assert obs.review_status == "VERIFIED"
+    event = db.query(DomainEvent).filter(
+        DomainEvent.aggregate_id == obs.id,
+        DomainEvent.event_type == "PRICE_OBSERVATION_REVIEWED",
+    ).one()
+    assert event.payload_json["decision"] == "APPROVE"
+
+    missing_reason = client.post(
+        f"/api/v1/admin/price-review/{obs.id}/decision",
+        json={"decision": "REJECT"},
+        headers=a_headers,
+    )
+    assert missing_reason.status_code == 422

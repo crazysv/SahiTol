@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-01 -- T029 admin review auditability repair
+
+Added inclusive UTC time bounds to admin event search. Price moderation now
+requires a reviewer justification for approvals as well as rejections and emits
+an append-only `PRICE_OBSERVATION_REVIEWED` event recording the actor, reason
+and state transition. Dedicated admin-maintenance verification passes 10/10.
+
 ## 2026-10-01 -- T028 QUALITY_V1 cohort and media-integrity repair
 
 Independent audit found that the operational price-outlier baseline admitted

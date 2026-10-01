@@ -1,5 +1,31 @@
 # Test Evidence: T029 Implement Admin Maintenance and Metrics APIs
 
+## 2026-10-01 independent repair and verification
+
+The T029 audit confirmed role-scoped maintenance, minimal collector data,
+persisted-table metrics and hash-chained events, then corrected two missing
+audit controls:
+
+1. `GET /api/v1/admin/events` now accepts inclusive `occurred_from` and
+   `occurred_to` UTC filters, alongside its existing aggregate/type/actor
+   filters.
+2. `POST /api/v1/admin/price-review/{id}/decision` now requires a justification
+   for **both** approval and rejection, and commits a
+   `PRICE_OBSERVATION_REVIEWED` append-only event with actor, decision, reason,
+   previous status and resulting status.
+
+Verification after repair:
+
+```text
+pytest services/api/tests/test_admin_maintenance.py -q
+10 passed, 1 warning in 1.41s
+```
+
+The event-search test exercises the date bounds; the price-review test proves a
+non-admin is rejected, an admin approval with reason persists the review event,
+and a missing reason is rejected. The warning is a third-party Starlette
+deprecation; no test failed.
+
 ## Metadata
 - **Task ID**: T029
 - **Phase**: Stage 5 (Data Quality, Anomaly Detection & Admin Governance)

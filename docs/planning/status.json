@@ -229,7 +229,7 @@
       "evidence": [
         "docs/evidence/T029_ADMIN_MAINTENANCE_AND_METRICS.md"
       ],
-      "note": "Implemented administrative maintenance and metrics APIs: role-scoped overview and metrics with real denominators from database tables, demo data isolation, honest mass label 'received, not recycled', privacy-protecting minimal collector directory with sensitive access audit, versioned material catalog CRUD preserving historical IDs, material alias management with normalization, versioned safety guides, admin-asserted facility authorizations preventing recycler self-approval, audit event searching, lot hash-chain cryptographic verification, and price review moderation.",
+      "note": "Independently reverified and repaired the admin maintenance APIs. Domain-event search now supports inclusive event-time bounds. Price moderation now requires a reviewer justification for both decisions and emits an append-only PRICE_OBSERVATION_REVIEWED event carrying actor, decision, prior/next status and reason. Dedicated admin-maintenance tests pass 10/10 after repair.",
       "owner": "Owner + coding agent"
     },
     "T030": {
