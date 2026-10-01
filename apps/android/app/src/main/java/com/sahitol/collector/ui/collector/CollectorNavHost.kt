@@ -368,6 +368,7 @@ fun CollectorNavHost(
             val lotId = backStackEntry.arguments?.getString("lotId") ?: "default_lot"
             C07_ValuationScreen(
                 lotId = lotId,
+                lot = lots.firstOrNull { it.lotId == lotId },
                 priceRepository = priceRepository,
                 facilityRepository = facilityRepository,
                 sessionManager = sessionManager,
@@ -404,6 +405,7 @@ fun CollectorNavHost(
             val lotId = backStackEntry.arguments?.getString("lotId") ?: "default_lot"
             C08_RecyclerDirectoryScreen(
                 lotId = lotId,
+                lot = lots.firstOrNull { it.lotId == lotId },
                 facilityRepository = facilityRepository,
                 sessionManager = sessionManager,
                 onNavigateBack = {

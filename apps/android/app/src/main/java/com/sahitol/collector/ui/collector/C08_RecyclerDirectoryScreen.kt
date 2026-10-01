@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.sahitol.collector.data.repository.FacilityRepository
 import com.sahitol.collector.data.repository.RecyclerFacilityItem
 import com.sahitol.collector.data.repository.TradeResult
+import com.sahitol.collector.data.local.entity.LotEntity
 import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.ui.theme.*
 
@@ -32,6 +33,7 @@ import com.sahitol.collector.ui.theme.*
 @Composable
 fun C08_RecyclerDirectoryScreen(
     lotId: String,
+    lot: LotEntity?,
     facilityRepository: FacilityRepository,
     sessionManager: SessionManager,
     onNavigateBack: () -> Unit,
@@ -40,6 +42,7 @@ fun C08_RecyclerDirectoryScreen(
     onNavigateSync: () -> Unit,
     onNavigateSettings: () -> Unit
 ) {
+    val lotContext = remember(lot) { lotDisplayContext(lot) }
     var searchQuery by remember { mutableStateOf("") }
     var selectedFilter by remember { mutableStateOf("ALL") }
     var selectedArea by remember { mutableStateOf("ALL") }
@@ -52,9 +55,12 @@ fun C08_RecyclerDirectoryScreen(
             is TradeResult.Failure -> directoryMessage = result.message
         }
     }
-    val facilities = remember(selectedArea, searchQuery, liveFacilities) {
+    val facilities = remember(selectedArea, searchQuery, liveFacilities, lotContext) {
         val list = liveFacilities.ifEmpty { facilityRepository.getFacilities(if (selectedArea == "ALL") null else selectedArea) }
-        if (searchQuery.isBlank()) list else list.filter {
+        val eligible = lotContext.canonicalMaterialId?.let { materialId ->
+            list.filter { materialId in it.materialsAccepted }
+        } ?: list
+        if (searchQuery.isBlank()) eligible else eligible.filter {
             it.nameEn.contains(searchQuery, ignoreCase = true) ||
             it.nameLocal.contains(searchQuery, ignoreCase = true) ||
             it.address.contains(searchQuery, ignoreCase = true)
@@ -152,13 +158,13 @@ fun C08_RecyclerDirectoryScreen(
                             Spacer(modifier = Modifier.width(8.dp))
                             Column {
                                 Text(
-                                    text = "Cable · 2.5 kg",
+                                    text = "${lotContext.materialLabel} · ${lotContext.weightLabel}",
                                     fontSize = 15.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = OnSurface
                                 )
                                 Text(
-                                    text = "Eligible destinations for this lot matching grade and purity.",
+                                    text = lotContext.detailLabel,
                                     fontSize = 12.sp,
                                     color = OnSurfaceVariant
                                 )
@@ -167,7 +173,7 @@ fun C08_RecyclerDirectoryScreen(
 
                         SuggestionChip(
                             onClick = {},
-                            label = { Text("Verified Route", fontSize = 11.sp) },
+                            label = { Text(if (lotContext.isConcreteLot) "Matching route" else "Select a lot", fontSize = 11.sp) },
                             colors = SuggestionChipDefaults.suggestionChipColors(
                                 containerColor = SuccessGreen.copy(alpha = 0.12f),
                                 labelColor = SuccessGreen
@@ -329,7 +335,9 @@ fun C08_RecyclerDirectoryScreen(
             items(facilities) { facility ->
                 RecyclerDirectoryCard(
                     facility = facility,
-                    onClick = { onNavigateFacilityProfile(facility.facilityId, lotId) }
+                    materialLabel = lotContext.materialLabel,
+                    enabled = lotContext.isConcreteLot,
+                    onClick = { if (lotContext.isConcreteLot) onNavigateFacilityProfile(facility.facilityId, lotId) }
                 )
             }
 
@@ -411,12 +419,14 @@ fun C08_RecyclerDirectoryScreen(
 @Composable
 fun RecyclerDirectoryCard(
     facility: RecyclerFacilityItem,
+    materialLabel: String,
+    enabled: Boolean,
     onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick),
+            .clickable(enabled = enabled, onClick = onClick),
         shape = RoundedCornerShape(14.dp),
         colors = CardDefaults.cardColors(containerColor = SurfaceContainerLowest),
         border = androidx.compose.foundation.BorderStroke(1.dp, OutlineVariantColor.copy(alpha = 0.35f))
@@ -467,7 +477,7 @@ fun RecyclerDirectoryCard(
             ) {
                 SuggestionChip(
                     onClick = {},
-                    label = { Text("Copper Grade A Accepted", fontSize = 11.sp) },
+                    label = { Text("$materialLabel route", fontSize = 11.sp) },
                     colors = SuggestionChipDefaults.suggestionChipColors(
                         containerColor = SuccessGreen.copy(alpha = 0.10f),
                         labelColor = SuccessGreen
@@ -509,6 +519,7 @@ fun RecyclerDirectoryCard(
 
                 Button(
                     onClick = onClick,
+                    enabled = enabled,
                     shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = TerracottaPrimary),
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)

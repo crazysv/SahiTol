@@ -1,6 +1,6 @@
 # Current handoff
 
-Handoff date: 2026-10-01 (Asia/Kolkata). Phase: **T025 repaired and physically reverified; continue ordered verification from T026**.
+Handoff date: 2026-10-01 (Asia/Kolkata). Phase: **T044 repair and real-device verification in progress; continue the recycler offer and two-device QR path.**
 
 Scope and progression: [master](../MASTER_CONTENT.md), [tracker](08_TRACKER.md), [implementation plan](07_IMPLEMENTATION_PLAN.md). Authoritative statuses live in [status.json](planning/status.json).
 
@@ -16,7 +16,8 @@ console and API health endpoint returned HTTP 200.
 
 ## Phase completion summary
 
-**All 50 assessed RELEASE tasks DONE. T048-T050 completed in this session.**
+**Do not treat the release as complete. T044 remains in progress and its
+two-device evidence is still outstanding.**
 
 - **T046 DONE**: String parity 145/145 all locales. Audio 258/258 checksums OK. All AudioGrammarAndManifestTest PASS.
 - **T047 DONE**: 7 data cards, model card (macro-F1 0.0159), frozen SHA-256 manifest (T047_FROZEN_RELEASE_MANIFEST.json).

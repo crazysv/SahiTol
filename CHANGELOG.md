@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-01 -- T044 selected-lot handover binding repair
+
+Replaced C07/C08's cable sample data with the actual selected persisted lot;
+price-board previews are explicitly non-actionable. The directory now filters
+by the selected material, and the collector UI no longer asserts an unassigned
+pickup vehicle or confirmed route. Focused tests and a connected-device PCB
+retest passed; the recycler response and two-phone QR steps remain open.
+
 ## 2026-10-01 -- T044 real server request setup
 
 Created and read back a pending authenticated collector request for the

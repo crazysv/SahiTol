@@ -26,6 +26,7 @@ import com.sahitol.collector.data.repository.FacilityRepository
 import com.sahitol.collector.data.repository.PriceRepository
 import com.sahitol.collector.data.repository.RecyclerOfferItem
 import com.sahitol.collector.data.repository.ValuationRange
+import com.sahitol.collector.data.local.entity.LotEntity
 import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.ui.theme.*
 import kotlinx.coroutines.launch
@@ -34,6 +35,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun C07_ValuationScreen(
     lotId: String,
+    lot: LotEntity?,
     priceRepository: PriceRepository,
     facilityRepository: FacilityRepository,
     sessionManager: SessionManager,
@@ -48,8 +50,13 @@ fun C07_ValuationScreen(
     val session by sessionManager.session.collectAsState()
     val accountId = session.accountId
 
-    val valuation = remember(lotId) {
-        priceRepository.calculateValuation("MAT-CAB-01", 2500, "GOOD")
+    val lotContext = remember(lot) { lotDisplayContext(lot) }
+    val valuation = remember(lotContext) {
+        priceRepository.calculateValuation(
+            lotContext.canonicalMaterialId ?: lotId,
+            lot?.estimatedWeightG ?: 1000,
+            "UNSPECIFIED"
+        )
     }
 
     var offers by remember { mutableStateOf<List<RecyclerOfferItem>>(emptyList()) }
@@ -166,7 +173,7 @@ fun C07_ValuationScreen(
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Column(modifier = Modifier.weight(1f)) {
                                     Text(
-                                        text = "Copper Cable Lot",
+                                    text = lotContext.materialLabel,
                                         fontSize = 16.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = OnSurface,
@@ -174,7 +181,7 @@ fun C07_ValuationScreen(
                                         overflow = TextOverflow.Ellipsis
                                     )
                                     Text(
-                                        text = "केबल (तांबा) · 2.5 kg · Good Condition",
+                                        text = lotContext.detailLabel,
                                         fontSize = 12.sp,
                                         color = OnSurfaceVariant,
                                         maxLines = 1,
@@ -185,7 +192,7 @@ fun C07_ValuationScreen(
 
                             SuggestionChip(
                                 onClick = {},
-                                label = { Text("Verified", fontSize = 11.sp, maxLines = 1) },
+                                label = { Text(if (lot?.syncStatus == "SYNCED") "Synced" else "Saved locally", fontSize = 11.sp, maxLines = 1) },
                                 colors = SuggestionChipDefaults.suggestionChipColors(
                                     containerColor = SuccessGreen.copy(alpha = 0.12f),
                                     labelColor = SuccessGreen
@@ -345,7 +352,7 @@ fun C07_ValuationScreen(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    Text("Market Grade A Copper Blend", fontSize = 12.sp, color = OnSurfaceVariant)
+                                    Text(lotContext.detailLabel, fontSize = 12.sp, color = OnSurfaceVariant)
                                     Text("₹ ${valuation.baseRateInr} / kg max", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = OnSurface)
                                 }
                                 Row(
@@ -388,7 +395,7 @@ fun C07_ValuationScreen(
                         )
                     }
 
-                    TextButton(onClick = { onNavigateDirectory(lotId) }) {
+                    TextButton(onClick = { if (lotContext.isConcreteLot) onNavigateDirectory(lotId) }) {
                         Text("View Directory", color = TerracottaPrimary, maxLines = 1)
                         Spacer(modifier = Modifier.width(4.dp))
                         Icon(Icons.Default.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp))
@@ -411,7 +418,7 @@ fun C07_ValuationScreen(
                             when (val result = facilityRepository.acceptLiveOffer(offer, accountId)) {
                                 is com.sahitol.collector.data.repository.TradeResult.Success -> {
                                     acceptedOfferName = offer.facilityName
-                                    onNavigateHandover(lotId)
+                                    if (lotContext.isConcreteLot) onNavigateHandover(lotId)
                                 }
                                 is com.sahitol.collector.data.repository.TradeResult.Failure -> offerMessage = result.message
                             }
@@ -494,7 +501,7 @@ fun C07_ValuationScreen(
                                 color = OnSurface
                             )
                             Text(
-                                text = "Standard scrap collection route approved for North zone. Pickup vehicle #UP-14-CZ-8891 assigned for transit.",
+                                    text = "A recycler must accept an offer before a handover route or pickup can be confirmed.",
                                 fontSize = 12.sp,
                                 color = OnSurfaceVariant
                             )

@@ -228,6 +228,17 @@ Evidence: C16_material_passport_journey.png
     This establishes the real server state required for a recycler-created
     offer, but it is deliberately not counted as C08/C09 handset evidence or
     as a two-device test.
+11. **2026-10-01 selected-lot handover binding repair:** A current debug APK
+    was installed over the connected collector handset (`N7OZPV59XWWKPF4X`)
+    without clearing its data. Focused Android tests passed (2 lot-display and
+    4 price/directory tests). Opening the synchronized PCB card now visibly
+    shows `Printed circuit boards · 14.25 kg · Synced`, with a 14.25 kg PCB
+    valuation, rather than the previous hard-coded cable sample. `View
+    Directory` carries that same PCB/weight context and filters the displayed
+    destinations to two PCB-compatible entries. The screen no longer claims a
+    pickup vehicle or a confirmed route before a recycler accepts an offer; it
+    explicitly says that acceptance is required. This verifies collector-side
+    C07/C08 data binding only, not a recycler response or two-device QR flow.
 
 ---
 
