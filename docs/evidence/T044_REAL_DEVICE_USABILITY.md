@@ -221,6 +221,13 @@ Evidence: C16_material_passport_journey.png
    local lot is `SYNCED`, `LISTED`, server version 2. Unrelated invalid material
    and placeholder offer/handover repair rows were not requeued. Focused Android
    recovery, outbox, payment, handover and recycler tests pass.
+10. **2026-10-01 server-backed request setup (not handset evidence):** The
+    authenticated collector API contract created pending request
+    `85cc3a92-…` for the verified PCB lot and the hosted compatible facility
+    `46b915d7-…`; a readback returned one `PENDING` request and zero offers.
+    This establishes the real server state required for a recycler-created
+    offer, but it is deliberately not counted as C08/C09 handset evidence or
+    as a two-device test.
 
 ---
 

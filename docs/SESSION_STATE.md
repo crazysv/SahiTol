@@ -166,6 +166,9 @@ and collector lot `f8b0587f-…` recovered from only the historic
 ACKNOWLEDGED and the local lot is SYNCED/LISTED at v2. Do not requeue unrelated
 NEEDS_REPAIR rows. Continue with a real facility request and recycler-created
 offer when the second handset is available again.
+An authenticated collector API request is now PENDING for that listed PCB lot
+and live PCB-compatible facility; readback has zero offers. This is server
+contract setup only, not claimed as C08/C09 handset or two-device evidence.
 The new-lot outbox contract was then repaired from unsupported `CREATE_LOT` /
 `material_code` / local-path media IDs to `CREATE_DRAFT` / `material_id` / no
 fabricated media IDs. Focused tests pass and an updated APK is on the collector

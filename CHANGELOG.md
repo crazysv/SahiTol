@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-01 -- T044 real server request setup
+
+Created and read back a pending authenticated collector request for the
+physically synchronized PCB lot and the live compatible demo facility. The
+server reports zero offers, as expected before a recycler acts. This is retained
+as contract setup only; it does not substitute for the required C08/C09
+handset evidence or real two-device flow.
+
 ## 2026-10-01 -- T044 deployed collector publish recovery
 
 After Render deployed the collector-profile mapping repair, physically
