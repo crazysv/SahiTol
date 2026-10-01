@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-02 -- T041 public deployment recheck
+
+Render live, health and readiness endpoints and the public Pages site all
+returned HTTPS 200; readiness includes the deployed private-storage adapter
+probe. The private Render dashboard is not available here, so account plan and
+spend configuration remain explicitly unverified.
+
 ## 2026-10-02 -- T044 physical permission and offline checks
 
 Re-tested camera denial using Android Settings, rather than the unavailable ADB

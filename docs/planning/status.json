@@ -324,7 +324,7 @@
       "evidence": [
         "docs/evidence/T041_HOSTED_DEPLOYMENT.md"
       ],
-      "note": "T025 and T040 are now DONE. On 2026-10-01, public Render live/ready health returned HTTPS 200; ready reported connected production database and Supabase storage, and a Pages-origin demo login succeeded with restrictive CORS. A readiness defect was repaired locally: Supabase readiness must contact private-bucket metadata rather than infer success from adapter construction (32 focused recovery/security tests pass). This code must deploy and expose storage_probe=adapter_readiness before hosted storage readiness is verified; full handset cellular journey is still NOT_RUN.",
+      "note": "T025 and T040 are now DONE. On 2026-10-02, public Render live/health/ready probes all returned HTTPS 200; ready reported connected production database and Supabase storage with deployed storage_probe=adapter_readiness, and the public Pages site returned 200. Previous Pages-origin demo login verified restrictive CORS. The physical collector has completed live Jio cellular app journeys, but the private Render dashboard is unavailable to this workspace: actual service plan, spend limits and account settings are UNVERIFIED. T041 remains IN_PROGRESS rather than inferring private account configuration from public endpoints.",
       "owner": "Owner + coding agent"
     },
     "T042": {

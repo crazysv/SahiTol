@@ -47,6 +47,11 @@ photo produced 9.0% confidence below the 65% threshold and required manual
 selection. Its C05 state survived Home/background and reopening; backing out
 left the collector at 10 lots, with no test lot saved.
 
+T041 public recheck on 2026-10-02 passed: Render live/health/ready and Pages
+all returned HTTPS 200; readiness reports the deployed `adapter_readiness`
+storage probe. Private Render plan/spend/account settings cannot be read from
+this workspace, so T041 remains IN_PROGRESS rather than inferring them.
+
 The T044 changed-terms/dispute path is now also live-device verified. Isolated
 handover `ST-50BF6E` was revised by the authorized recycler from 14.25 kg /
 ₹4,275 to 13.00 kg / ₹3,900; C11 pulled the changed terms and the collector

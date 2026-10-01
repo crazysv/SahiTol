@@ -67,6 +67,23 @@ cellular journey. After the next deploy, `/health/ready` must additionally show
 `storage_probe: "adapter_readiness"`; that new field proves the API is running
 the repair that actually contacts its configured private-storage bucket.
 
+### 2026-10-02 public recheck and provider-plan boundary
+
+Independent HTTPS probes returned `200` for `/health/live`, `/health`, and
+`/health/ready`. The current readiness result reported `database: connected`,
+`storage: connected`, and `storage_probe: adapter_readiness`; the public Pages
+site also returned `200`. This verifies the hosted surface and the deployed
+private-storage adapter probe, not the contents of the private bucket.
+
+The official provider documentation was rechecked on 2026-10-02: Render free
+web services can spin down after 15 minutes without traffic and have usage
+limits, so this environment must not be represented as production-grade
+availability ([Render free-service documentation](https://render.com/docs/free),
+[Render FAQ](https://render.com/docs/faq)). The private Render dashboard is not
+available in this workspace, so the actual service plan, spend limits and
+account settings remain **UNVERIFIED**, rather than inferred from the public
+endpoint.
+
 ## Cloudflare Pages (Web Console)
 
 - **Project:** sahitol
