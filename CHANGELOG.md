@@ -8,6 +8,15 @@ denial, and continued to C05 without a photo; camera access was restored after
 the check. Real Aeroplane mode also left C14 usable with its records safely
 queued, then was restored. No legacy repair operation was retried or changed.
 
+C15's Hindi and Marathi controls were also tapped on the physical collector;
+each persisted the correct language code, with Marathi restored after the
+check. This is selector/UI evidence, not a native-speaker review.
+
+With camera access restored, a fresh unsaved C04 photo ran the bundled LiteRT
+classifier locally. It returned 9.0% confidence, showed the documented manual
+selection fallback, and that C05 state survived an ordinary background/return.
+Backing out left no new lot.
+
 ## 2026-10-02 -- T044 physical revised-terms outcomes
 
 Connected the approved C11 changed-terms state to the authenticated live

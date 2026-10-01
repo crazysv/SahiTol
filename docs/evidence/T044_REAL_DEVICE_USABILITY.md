@@ -234,6 +234,22 @@ and queued. Aeroplane mode was restored to Off after the observation. This is
 offline-state evidence only: no queued legacy repair row was manually retried
 or altered during the check.
 
+In C15, both **हिन्दी** and **मराठी** selections were tapped on the physical
+collector. Each updated the app's persisted language preference (`hi`, then
+`mr`); Marathi was restored as the final device setting. This verifies device
+selector persistence and available Devanagari UI labels, not native-speaker
+quality or every audio interaction.
+
+With restored camera permission, C04 captured a new unsaved test photo and
+reached C05. The bundled LiteRT classifier ran on the handset and returned
+**9.0%** confidence, below its visible 65% threshold; it correctly showed the
+low-confidence state and required a human grid selection rather than assigning
+a material automatically. Pressing Home, waiting, and reopening the app
+preserved that unsaved C05 photo/classifier state. Back navigation then removed
+the unsaved test photo; the home count remained 10 lots. This is an actual
+on-device low-confidence/background-recovery check, not a claim of model
+accuracy or a saved training record.
+
 ## Checklist Against T044 Output Requirements
 
 | Requirement | Result |
@@ -243,9 +259,9 @@ or altered during the check.
 | Denial scenarios | PASS — GPS and camera denial both physically retested; camera permission restored after the test |
 | Restart / confirmation pull | PASS — force-stop/relaunch recovered the deployed server handover by lot and C11 pulled `CONFIRMED` |
 | Airplane mode / offline QR | PASS — actual Aeroplane-mode C14 offline-safe queued state observed; Offline Ready badge remains visible on C10/C11 |
-| Background / manual sync | PASS — C08 manual sync and outbox transitions verified |
+| Background / manual sync | PASS — C08/C14 manual sync and outbox transitions verified; an unsaved C05 classifier state survived Home/background and return |
 | QR two-device handover | PASS for deployed happy path, restart/pull recovery, and both live changed-terms accept and dispute branches |
-| Hindi / Marathi labels | PASS — Bilingual titles throughout (hastantaran, sangrah evam vajan, etc.) |
+| Hindi / Marathi labels | PASS — C15 Hindi and Marathi selections persist on device; bilingual/Devanagari labels render throughout |
 | Representative scenario usability | PASS for the current accepted-offer-to-QR-to-confirm path; denial/recovery variants remain outstanding |
 | Owner scenario tests not fieldwork | PASS — Clearly identified as owner demo scenario |
 | Fieldwork obligation | UNMET — explicitly tracked; two-collector fieldwork remains outstanding |

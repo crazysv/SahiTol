@@ -37,6 +37,15 @@ showed the system prompt and returned to its usable bilingual photo-free path
 after Don't allow; camera permission was restored. Actual Aeroplane mode also
 left C14 usable with records safely queued, and was restored immediately.
 
+C15 language selection was physically retested: Hindi and Marathi each changed
+the persisted device setting; Marathi was restored. This proves selector
+persistence and UI availability only, not native-speaker review.
+
+The restored-camera C04/C05 retest also ran LiteRT locally: a fresh unsaved
+photo produced 9.0% confidence below the 65% threshold and required manual
+selection. Its C05 state survived Home/background and reopening; backing out
+left the collector at 10 lots, with no test lot saved.
+
 The T044 changed-terms/dispute path is now also live-device verified. Isolated
 handover `ST-50BF6E` was revised by the authorized recycler from 14.25 kg /
 ₹4,275 to 13.00 kg / ₹3,900; C11 pulled the changed terms and the collector
@@ -44,7 +53,7 @@ recorded a dispute. The hosted record is `DISPUTED` v3 without confirmation,
 and its recovered C11 state says joint review is required. A separate physical
 handover `ST-2EEC25` then exercised **Accept revised terms** for the same
 13.00 kg / ₹3,900 changed terms; the deployed record is `CONFIRMED` v3 and C11
-visibly reports the confirmed recycler receipt. Camera denial remains open.
+visibly reports the confirmed recycler receipt.
 
 - **T046 DONE**: String parity 145/145 all locales. Audio 258/258 checksums OK. All AudioGrammarAndManifestTest PASS.
 - **T047 DONE**: 7 data cards, model card (macro-F1 0.0159), frozen SHA-256 manifest (T047_FROZEN_RELEASE_MANIFEST.json).
