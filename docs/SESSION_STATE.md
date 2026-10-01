@@ -29,6 +29,12 @@ that same handover by lot from the deployed API and C11 pulled the confirmed
 receipt; no duplicate proposal was created. Continue with denial/discrepancy
 variants only; do not clear either device or rewrite legacy repair rows.
 
+GPS-denial is now physically covered: both Android location permissions were
+denied, C04 allowed photo-free continuation, and C05 showed the coarse-location
+fallback without blocking material/weight/condition entry. Camera denial still
+requires a Settings change made on the phone because its ADB shell cannot
+revoke the granted permission.
+
 - **T046 DONE**: String parity 145/145 all locales. Audio 258/258 checksums OK. All AudioGrammarAndManifestTest PASS.
 - **T047 DONE**: 7 data cards, model card (macro-F1 0.0159), frozen SHA-256 manifest (T047_FROZEN_RELEASE_MANIFEST.json).
 - **T048 DONE**: 10-slide deck script, one-page fact sheet, five presenter role cards with Q&A crib.

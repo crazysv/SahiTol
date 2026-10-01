@@ -173,13 +173,25 @@ second proposal. Opening C11 pulled the server state and visibly showed
 **Recycler receipt confirmed by server**. This is a physical restart and pull
 retest of the deployed APK, not merely a unit or API test.
 
+## GPS-denial and photo-free continuation retest (2026-10-02)
+
+On `N7OZPV59XWWKPF4X`, Android reports both fine and coarse location permission
+as denied. From C04, the collector selected **Skip / बिना फोटो आगे बढ़ें** and
+reached C05 without a crash or a forced photo requirement. C05 then visibly
+reported **GPS उपलब्ध नहीं - मोटा स्थान चुनें (Coarse Location Active)** and
+kept the material, weight, condition, and save/draft controls usable. The flow
+was exited without saving a test lot. Camera-denial remains separately
+unverified: this handset prevents ADB from revoking the already granted camera
+permission, so that state needs an owner-side Settings toggle before it can be
+claimed.
+
 ## Checklist Against T044 Output Requirements
 
 | Requirement | Result |
 |-------------|--------|
 | Camera / photo capture | Verified in T034 (C05 classifier); lot photo captured |
-| GPS (location verified) | PASS — GPS coordinate logged at Okhla Hub, Bay 4 |
-| Denial scenarios | Verified in T043 (44/44 fault cases); camera/GPS denial in T017 |
+| GPS (location verified/denied) | PASS — prior coordinate evidence and a fresh denied-permission coarse-location fallback retest |
+| Denial scenarios | GPS denial PASS on physical device; camera denial remains NOT_RUN (ADB cannot revoke it on this handset) |
 | Restart / confirmation pull | PASS — force-stop/relaunch recovered the deployed server handover by lot and C11 pulled `CONFIRMED` |
 | Airplane mode / offline QR | PASS — Offline Ready badge on C10, C11 throughout |
 | Background / manual sync | PASS — C08 manual sync and outbox transitions verified |

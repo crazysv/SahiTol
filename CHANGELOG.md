@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-02 -- T044 GPS-denial physical fallback
+
+With fine and coarse location permission denied on the collector handset, C04
+continued without a photo and C05 displayed the coarse-location fallback while
+remaining usable. No test lot was saved. Camera denial remains unverified
+because this phone disallows ADB permission revocation.
+
 ## 2026-10-02 -- T044 collector restart and confirmation-pull recovery
 
 Added the narrow authenticated lookup of the latest handover for a collector's
