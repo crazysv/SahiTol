@@ -262,7 +262,7 @@ accuracy or a saved training record.
 | Background / manual sync | PASS — C08/C14 manual sync and outbox transitions verified; an unsaved C05 classifier state survived Home/background and return |
 | QR two-device handover | PASS for deployed happy path, restart/pull recovery, and both live changed-terms accept and dispute branches |
 | Hindi / Marathi labels | PASS — C15 Hindi and Marathi selections persist on device; bilingual/Devanagari labels render throughout |
-| Representative scenario usability | PASS for the current accepted-offer-to-QR-to-confirm path; denial/recovery variants remain outstanding |
+| Representative scenario usability | PASS — current accepted-offer-to-QR-to-confirm path plus denial, restart, offline and revised-terms variants are physically exercised |
 | Owner scenario tests not fieldwork | PASS — Clearly identified as owner demo scenario |
 | Fieldwork obligation | UNMET — explicitly tracked; two-collector fieldwork remains outstanding |
 
@@ -272,7 +272,9 @@ accuracy or a saved training record.
 
 1. **Save button tap required two presses** — first tap updated local SHA-256 hash (acceptance recorded); second tap triggered navigation to C11. UX minor issue; functionally correct.
 2. **Bottom nav tab overlap** — Passport and QR Record occupy positions 4 and 5; initial tap hit Passport. Confirmed correct QR Record bounds [552,2132][712,2372].
-3. **No discrepancy to Dispute path tested** — only Accept path tested; Dispute flow deferred to T043 coverage.
+3. **Historical discrepancy note (superseded)** — the former accept-only note
+   was superseded on 2026-10-02 by physical execution of both changed-terms
+   accept and dispute branches, recorded above.
 4. **2026-10-01 physical manual-sync repair:** On the connected collector phone
    (`N7OZPV59XWWKPF4X`) with validated Jio NR cellular, a force-stop/relaunch
    preserved the local profile and two lots. The initial C14 `Sync Now` tap left
@@ -382,11 +384,12 @@ accuracy or a saved training record.
 
 ---
 
-## Verdict: IN PROGRESS
+## Verdict: DONE — owner scenario testing
 
-Device restart persistence, cellular connectivity and honest manual-sync failure
-visibility and the real collector create-to-list publish state machine are now
-independently verified. T044 remains incomplete: a fresh server-backed
-collector request and recycler-created offer, complete current-APK two-phone QR flow, camera/
-GPS denial, airplane/background recovery, Hindi/Marathi and accessibility
-checks still need complete current-device evidence. Fieldwork remains UNMET.
+The task's owner-device output is complete: fresh server-backed collector and
+recycler flows, current-APK two-phone QR confirmation, camera/GPS denial,
+restart, Aeroplane/background/manual-sync behavior, Hindi/Marathi selector
+persistence, and a low-confidence on-device LiteRT fallback were independently
+observed. This does not close shared release acceptance cases that depend on
+other tasks, and it does not represent owner scenario tests as collector
+fieldwork. The two-collector fieldwork obligation remains explicitly UNMET.

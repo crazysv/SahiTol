@@ -16,8 +16,9 @@ console and API health endpoint returned HTTP 200.
 
 ## Phase completion summary
 
-**Do not treat the release as complete. T044 remains in progress because
-denial/discrepancy/recovery variants and fieldwork are still outstanding.**
+**Do not treat the release as complete. T044 is DONE for owner-device scenario
+testing; shared release acceptance and external two-collector fieldwork remain
+outstanding.**
 
 Latest T044 checkpoint: C07/C08 render the actual selected synchronized PCB and
 show no invented pickup. The deployed accepted offer `5e53f4de-…` was resumed

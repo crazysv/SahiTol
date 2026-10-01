@@ -17,6 +17,9 @@ classifier locally. It returned 9.0% confidence, showed the documented manual
 selection fallback, and that C05 state survived an ordinary background/return.
 Backing out left no new lot.
 
+These checks complete T044's owner-scenario scope. They do not represent
+unperformed fieldwork or shared release acceptance cases as complete.
+
 ## 2026-10-02 -- T044 physical revised-terms outcomes
 
 Connected the approved C11 changed-terms state to the authenticated live
