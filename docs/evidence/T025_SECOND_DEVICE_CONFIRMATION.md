@@ -117,6 +117,9 @@ phones before AT-032 through AT-034 can be marked PASS.
 The first hosted retest correctly stopped before data creation: `POST
 /api/v1/auth/demo` returned HTTP 500 because the deployed empty database had not
 received the `DELHI_NCR` reference row required by the collector demo profile.
-Demo login now creates that minimal isolated region when absent. A regression test
-starts from missing reference data and passes; the handover API suite is **15
-passed**. This repair must deploy before restarting the physical retest.
+The next hosted retry exposed a second PostgreSQL-only condition: the old demo
+identity exceeded the 20-character internal phone column. Demo login now creates
+the minimal isolated region when absent and uses a deterministic short internal
+identity. Regression coverage includes both conditions; the focused handover API
+suite is **16 passed**. This repair must deploy before restarting the physical
+retest.

@@ -299,7 +299,10 @@ def demo_login(req: DemoLoginRequest, db: Session = Depends(get_db)):
         )
 
     persona = req.persona_id.strip().lower()
-    demo_phone = f"demo_{req.role.value.lower()}_{persona}"
+    # `phone_normalized` is deliberately capped at 20 characters.  Demo labels
+    # are internal identities, not phone numbers, so keep them deterministic and
+    # safely below that production schema limit on PostgreSQL as well as SQLite.
+    demo_phone = f"d_{req.role.value.lower()[0]}_{persona[:15]}"
 
     user = db.query(User).filter(User.phone_normalized == demo_phone).first()
     if not user:

@@ -456,10 +456,10 @@ def import_demo_handover(
         db.add(Region(id="DELHI_NCR", name="Delhi-NCR", state_code="DL", kind="METRO"))
         db.flush()
 
-    recycler = db.query(User).filter(User.phone_normalized == "demo_recycler_yard_operator").first()
+    recycler = db.query(User).filter(User.phone_normalized == "d_r_yard_operator").first()
     if not recycler:
         recycler = User(
-            phone_normalized="demo_recycler_yard_operator",
+            phone_normalized="d_r_yard_operator",
             pin_hash="demo-only-no-pin-login",
             role=UserRole.RECYCLER.value,
             account_state="ACTIVE",

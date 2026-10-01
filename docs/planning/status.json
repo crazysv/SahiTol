@@ -197,7 +197,7 @@
       "evidence": [
         "docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md"
       ],
-      "note": "R04 now performs real rear-camera QR decoding and server-backed demo lookup/hash comparison followed by facility-authorized confirmation; SyncWorker no longer fabricates successful handover sync. A hosted retest found and repaired missing demo-region bootstrap (15 API tests now pass). T025 remains IN_PROGRESS pending deployment of that repair and a freshly deployed physical two-phone retest.",
+      "note": "R04 now performs real rear-camera QR decoding and server-backed demo lookup/hash comparison followed by facility-authorized confirmation; SyncWorker no longer fabricates successful handover sync. Hosted retesting found and repaired missing demo-region bootstrap and a PostgreSQL demo-ID column limit (16 API tests now pass). T025 remains IN_PROGRESS pending deployment and a freshly deployed physical two-phone retest.",
       "owner": "Owner + coding agent"
     },
     "T026": {

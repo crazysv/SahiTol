@@ -14,11 +14,12 @@ two-phone retest.
 
 ## 2026-10-01 -- T025 hosted demo bootstrap repair
 
-The first real hosted retest exposed an empty-database prerequisite: demo
-collector login returned HTTP 500 without `DELHI_NCR`. Demo login now creates its
-minimal isolated region when absent. The handover verification suite passes
-15/15, including that fresh-reference-data regression case. The fix requires
-deployment before the two-phone flow is resumed.
+The first real hosted retest exposed two PostgreSQL conditions: demo collector
+login lacked `DELHI_NCR` on an empty database, and its legacy internal demo ID
+exceeded the 20-character phone column. Demo login now creates its minimal
+isolated region when absent and uses a deterministic short identity. The handover
+verification suite passes 16/16, including both regression cases. The fix
+requires deployment before the two-phone flow is resumed.
 
 ## 2026-10-01 -- T003/T041 independent recovery verification
 

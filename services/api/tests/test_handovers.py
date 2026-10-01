@@ -312,6 +312,16 @@ def test_demo_collector_login_bootstraps_region_on_empty_reference_data():
         assert session.query(Region).filter(Region.id == "DELHI_NCR").first() is not None
 
 
+def test_demo_identity_fits_production_phone_column_limit():
+    response = client.post("/api/v1/auth/demo", json={
+        "role": "RECYCLER", "persona_id": "yard_operator_with_a_long_suffix", "device_id": "column-limit-test",
+    })
+    assert response.status_code == 200
+    with TestingSessionLocal() as session:
+        user = session.query(User).filter(User.id == uuid.UUID(response.json()["user_id"])).one()
+        assert len(user.phone_normalized) <= 20
+
+
 def test_create_handover_proposal_success(handover_environment):
     """Test collector submits valid handover proposal with canonical hash (R-HAND-01, AT-029)."""
     env = handover_environment
