@@ -11,10 +11,8 @@ Scope and progression: [master](../MASTER_CONTENT.md), [tracker](08_TRACKER.md),
 | FastAPI backend | https://sahitol-api.onrender.com | Live -- /health/live 200 OK |
 | Web console | https://sahitol.pages.dev | Live -- Cloudflare Pages, 97 modules |
 
-**2026-10-01 recheck:** the web console returned HTTP 200; the API health URL
-timed out after 15 seconds. Treat API availability as unverified until the
-owner inspects Render service status/logs and restores a successful live health
-response.
+**2026-10-01 recovery recheck:** after owner intervention, both the web
+console and API health endpoint returned HTTP 200.
 
 ## Phase completion summary
 

@@ -121,3 +121,23 @@
   - Native Android Kotlin/Compose/Room/LiteRT architecture is fully functional, performant, and verified.
   - No automatic PWA substitution is needed or permitted.
   - Task `T003` is complete (`DONE`) and `AT-005` is verified (`PASS`).
+
+## 2026-10-01 independent device re-verification
+
+The originally documented device description is historical evidence. The
+current test used connected physical device `N7OZPV59XWWKPF4X` (`CPH2781`,
+Android 16, 1080x2372) with installed SahiTol version `0.1.0`.
+
+The approved S00 diagnostic was opened from Settings and exercised directly:
+
+- Simulated photo compression produced a 19 KB JPEG from an 800x600 sample
+  (98.9% reduction) in 37 ms.
+- The Room diagnostic write/read completed in 26 ms. After force-stopping and
+  relaunching the app, the screen showed `इस फ़ोन पर सुरक्षित` and the same
+  2.5 kg offline Room record.
+- Airplane mode was enabled with `adb shell cmd connectivity airplane-mode
+  enable`; the bundled LiteRT benchmark completed in 61.42 ms on CPU. Airplane
+  mode was then restored to disabled.
+
+These measurements are specific to this device and run, not general
+performance guarantees.

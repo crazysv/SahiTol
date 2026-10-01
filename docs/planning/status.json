@@ -21,7 +21,7 @@
       "evidence": [
         "docs/evidence/T003_ANDROID_FEASIBILITY.md"
       ],
-      "note": "Approved S00 feasibility screen implemented in Jetpack Compose matching Stitch design e2a3f1170e73; camera capture with bounded JPEG compression (85% reduction), Room database row persistence surviving app restarts, and bundled LiteRT MobileNetV3-Small on-device ML inference verified on Android target in airplane mode.",
+      "note": "Approved S00 feasibility screen implemented in Jetpack Compose matching Stitch design e2a3f1170e73. Independent re-verification on connected CPH2781 Android 16 device on 2026-10-01: 19 KB/37 ms JPEG compression, 26 ms Room write/read surviving force-stop/relaunch, and 61.42 ms LiteRT CPU inference in airplane mode.",
       "owner": "Owner + coding agent"
     },
     "T004": {
@@ -324,7 +324,7 @@
       "evidence": [
         "docs/evidence/T041_HOSTED_DEPLOYMENT.md"
       ],
-      "note": "Historical deployment evidence records Supabase migration/seed and Render/Cloudflare deployments. Independent recheck on 2026-10-01: https://sahitol.pages.dev returned HTTP 200, but https://sahitol-api.onrender.com/health/live timed out after 15 seconds. Owner Render-account investigation is required before the API is described as live again.",
+      "note": "Historical deployment evidence records Supabase migration/seed and Render/Cloudflare deployments. After owner intervention, independent recheck on 2026-10-01 returned HTTP 200 from both https://sahitol-api.onrender.com/health/live and https://sahitol.pages.dev.",
       "owner": "Owner + coding agent"
     },
     "T042": {

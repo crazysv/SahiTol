@@ -39,6 +39,18 @@ status, startup logs, environment variables, database connectivity, and any
 free-tier suspension must be inspected in the owner's Render account before
 the API can again be described as live.
 
+### 2026-10-01 recovery recheck
+
+After owner intervention, both public endpoints were reachable:
+
+```text
+GET https://sahitol-api.onrender.com/health/live
+HTTP 200 {"status":"live","app":"SahiTol API","version":"0.1.0",...}
+
+GET https://sahitol.pages.dev
+HTTP 200
+```
+
 ## Cloudflare Pages (Web Console)
 
 - **Project:** sahitol

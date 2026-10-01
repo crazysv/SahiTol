@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-01 -- T003/T041 independent recovery verification
+
+Verified the recovered Render API and Cloudflare web console at HTTP 200. On
+the connected CPH2781 Android 16 device, verified S00 photo compression (19 KB,
+37 ms), Room persistence across force-stop/relaunch (26 ms write/read), and
+LiteRT CPU inference in airplane mode (61.42 ms).
+
 ## 2026-10-01 -- T006 geometry verification repair
 
 Corrected the SQLite-only PostGIS test double to round-trip location values as
