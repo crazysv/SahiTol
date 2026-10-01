@@ -39,8 +39,10 @@ The T044 changed-terms/dispute path is now also live-device verified. Isolated
 handover `ST-50BF6E` was revised by the authorized recycler from 14.25 kg /
 ₹4,275 to 13.00 kg / ₹3,900; C11 pulled the changed terms and the collector
 recorded a dispute. The hosted record is `DISPUTED` v3 without confirmation,
-and its recovered C11 state says joint review is required. Physical acceptance
-of revised terms and camera denial remain open.
+and its recovered C11 state says joint review is required. A separate physical
+handover `ST-2EEC25` then exercised **Accept revised terms** for the same
+13.00 kg / ₹3,900 changed terms; the deployed record is `CONFIRMED` v3 and C11
+visibly reports the confirmed recycler receipt. Camera denial remains open.
 
 - **T046 DONE**: String parity 145/145 all locales. Audio 258/258 checksums OK. All AudioGrammarAndManifestTest PASS.
 - **T047 DONE**: 7 data cards, model card (macro-F1 0.0159), frozen SHA-256 manifest (T047_FROZEN_RELEASE_MANIFEST.json).

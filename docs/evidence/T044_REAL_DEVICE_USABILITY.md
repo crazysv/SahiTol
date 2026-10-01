@@ -202,8 +202,21 @@ Dispute and submitting the joint re-weigh reason changed the hosted record to
 `DISPUTED` v3 with no `HandoverConfirmation`. After force-stop/reopen, C11
 visibly showed **Handover disputed — joint review required** and the immutable
 original proposal hash remained `579267e5…a0d3`. This is a live dispute path;
-the alternate collector acceptance button is covered by the focused API suite,
-but has not yet been physically tapped in this isolated scenario.
+the alternate collector acceptance action is independently covered below.
+
+## Fresh changed-terms acceptance retest (2026-10-02)
+
+A separate third physical PCB lot `0e7bf102-e91a-482a-998d-f552fee40cd6` was
+created photo-free and synchronized. The collector accepted the live recycler
+offer in C07, C10 generated handover `2eec257b-fc52-4302-8e09-354badb907a3`
+(`ST-2EEC25`), and the authorized recycler recorded 13.00 kg / ₹3,900.00 with
+the reason “T044 physical revised-terms acceptance: recycler scale recorded
+13.00 kg.” C11 on the physical collector displayed the revised terms and
+**Accept revised terms** action. Tapping that action changed the deployed
+handover to `CONFIRMED` v3, with a confirmation and collector acknowledgement
+on terms revision `98c49491-5f7f-4464-bbde-9d5f919cd513`. The same C11 screen
+then visibly said **Recycler receipt confirmed / रसीद की पुष्टि हुई** and
+“Revised terms acknowledged; recycler receipt confirmed by server.”
 
 ## Checklist Against T044 Output Requirements
 
@@ -215,7 +228,7 @@ but has not yet been physically tapped in this isolated scenario.
 | Restart / confirmation pull | PASS — force-stop/relaunch recovered the deployed server handover by lot and C11 pulled `CONFIRMED` |
 | Airplane mode / offline QR | PASS — Offline Ready badge on C10, C11 throughout |
 | Background / manual sync | PASS — C08 manual sync and outbox transitions verified |
-| QR two-device handover | PASS for deployed happy path, restart/pull recovery, and live changed-terms/dispute path; camera denial and physical accept-revised-terms remain outstanding |
+| QR two-device handover | PASS for deployed happy path, restart/pull recovery, and both live changed-terms accept and dispute branches; camera denial remains outstanding |
 | Hindi / Marathi labels | PASS — Bilingual titles throughout (hastantaran, sangrah evam vajan, etc.) |
 | Representative scenario usability | PASS for the current accepted-offer-to-QR-to-confirm path; denial/recovery variants remain outstanding |
 | Owner scenario tests not fieldwork | PASS — Clearly identified as owner demo scenario |

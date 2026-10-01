@@ -1,15 +1,16 @@
 # Changelog
 
-## 2026-10-02 -- T044 live revised-terms and dispute path
+## 2026-10-02 -- T044 physical revised-terms outcomes
 
 Connected the approved C11 changed-terms state to the authenticated live
 acknowledgement and dispute endpoints. The collector now pulls the recycler's
 revised mass/value/reason, requires an explicit choice, and correctly renders a
 disputed record after restart. A physical isolated handover was revised by the
 recycler then disputed by the collector; deployed state is `DISPUTED` v3 with
-no confirmation and the original proposal hash unchanged. API handover tests
-and Android build/unit tests pass. Physical acceptance of revised terms remains
-open.
+no confirmation and the original proposal hash unchanged. A separate physical
+handover was revised to 13.00 kg / ₹3,900 and accepted by the collector on C11;
+the server stored `CONFIRMED` v3 and the receipt confirmation is visible on the
+device. API handover tests and Android build/unit tests pass.
 
 ## 2026-10-02 -- T044 GPS-denial physical fallback
 
