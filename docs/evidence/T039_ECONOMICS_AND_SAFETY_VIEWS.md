@@ -8,7 +8,7 @@
 - **Requirements**: [`R-GOV-02`](../15_REQUIREMENTS.md#r-gov-02), [`R-SAFE-01`](../15_REQUIREMENTS.md#r-safe-01), [`R-ECON-01`](../15_REQUIREMENTS.md#r-econ-01)
 - **Acceptance Cases**: [`AT-002`](../20_TEST_ACCEPTANCE.md#at-002), [`AT-048`](../20_TEST_ACCEPTANCE.md#at-048), [`AT-067`](../20_TEST_ACCEPTANCE.md#at-067)
 - **Related Specifications**: [`docs/05_DESIGN_STITCH.md`](../05_DESIGN_STITCH.md), [`docs/23_UNIT_ECONOMICS.md`](../23_UNIT_ECONOMICS.md), [`docs/04_APPFLOW.md`](../04_APPFLOW.md), [`design/stitch/SCREEN_REGISTRY.md`](../../design/stitch/SCREEN_REGISTRY.md)
-- **Status**: DONE
+- **Status**: DONE — independently repaired and reverified on 2026-10-01.
 
 ---
 
@@ -28,15 +28,15 @@ Key accomplishments:
    - Wired contextual safety alert banners into `C05_LotEditorScreen.kt` upon material selection, and quick-access navigation from `C03_HomeScreen.kt`.
    - Enforced non-instructional hazard policies: no chemical leaching recipes or manual dismantling procedures; only safe handling and intact routing to certified recyclers.
 3. **Interactive Web Unit Economics Workspace (`U01_UnitEconomics.tsx`, `R-ECON-01`, `AT-067`)**:
-   - Standardized 10 kg stripped copper cable lot comparison fixture (`LOT-2024-9082`).
+   - Canonical ECONOMICS_V1 10 kg stripped-copper-cable *chosen demo assumption* (`LOT-2024-9082`): current net ₹350, assumed platform net ₹470, delta ₹120.
    - Side-by-side comparison cards: Baseline (Manual / Current Yard Practice) vs SahiTol Optimized.
    - Unit Economics Waterfall visual stacked bar chart displaying Acquisition, Logistics, Rejection Loss, and Net Margin.
-   - Interactive operating assumption sliders: Transport efficiency (0%–50%), Grading & Rejection loss (1%–10%), Payment delay window (0–30 days).
-   - Toggles: Auto weigh-slip calibration (-₹10 tare disputes), Direct smelter linkage (+₹190 margin).
+   - Interactive operating-assumption sliders: transport change (-50% to 50%), platform-rate adjustment (-30% to 30%), grading/rejection loss (0%–10%), and an explicitly stated ₹1/day optional time-value sensitivity (0–30 days). Lower rate/higher transport can visibly produce a negative result.
+   - The record-quality and platform-rate controls no longer assert an unsourced monetary benefit. The platform-rate control only toggles the documented ₹160/kg fixture assumption.
    - Real-time recalculation of gross, costs, net realization, and net profit variance (+₹ / -₹).
    - Honest baseline handling: when baseline net profit is $\le 0$, percentage comparison is reported as `baseline ≤ 0` / not meaningful, avoiding misleading inverted signs.
-   - Mandatory illustrative disclaimer footer banner, Tier-1 urban telemetry sourcing disclosure, and **0 paise collector transaction fee guarantee** (`R-ECON-02`).
-   - Reset scenario and export breakdown to JSON with SHA-256 integrity seal.
+   - Mandatory illustrative disclaimer, source/assumption disclosure, Hindi/Marathi net-return labels, separate actual-ledger link, and **0 paise collector transaction fee guarantee** (`R-ECON-02`).
+   - Reset scenario and export breakdown to JSON with a browser-computed SHA-256 integrity field.
 
 ---
 
@@ -78,21 +78,19 @@ BUILD SUCCESSFUL in 1m 52s
 29 actionable tasks: 10 executed, 19 up-to-date
 ```
 
-### 3.2 Web Test Suite (`vitest run`)
-Command: `npm test`  
-Result: **ALL 5 TEST FILES PASSED** (24 tests total, 0 failures).
+### 3.2 Focused web verification (`vitest run`, typecheck, production build)
+Command: `npx vitest run src/components/economics/U01_UnitEconomics.test.tsx --pool=threads --maxWorkers=1 --minWorkers=1`; `npm run typecheck`; `npm run build`
+Result: **8/8 U01 tests passed**, TypeScript passed, and the Vite production build passed (98 modules).
 
 ```text
- ✓ src/App.test.tsx (1 test)
- ✓ src/components/recycler/SecondDeviceConfirmation.test.tsx (3 tests)
- ✓ src/components/economics/U01_UnitEconomics.test.tsx (6 tests)
- ✓ src/components/recycler/RecyclerConsole.test.tsx (6 tests)
- ✓ src/components/admin/AdminDashboard.test.tsx (8 tests)
-
- Test Files  5 passed (5)
-      Tests  24 passed (24)
-   Duration  44.16s
+ ✓ src/components/economics/U01_UnitEconomics.test.tsx (8 tests)
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
 ```
+
+### 3.3 Physical Android verification (collector `N7OZPV59XWWKPF4X`)
+
+On 2026-10-01, the installed collector app was opened on the connected device. The Home quick-status row navigated to C17; the default CRT card visibly showed offline availability, Hindi safety content, an audio-guide trigger, hazards, prohibitions and safer steps. Switching to Marathi visibly changed the card, audio-guide label, hazards and prohibitions to Marathi. This verifies navigation and locale rendering on hardware. Audio asset mapping remains covered by the Android unit test; this run did not make a claim about human-audible playback quality.
 
 ---
 
@@ -105,5 +103,5 @@ Result: **ALL 5 TEST FILES PASSED** (24 tests total, 0 failures).
 | `R-ECON-01` | Same-Lot Comparison Calculator | SATISFIED | Interactive U01 screen with editable assumption sliders, waterfall chart, zero-baseline safety, and negative-benefit transparency. Verified in `U01_UnitEconomics.test.tsx`. |
 | `R-ECON-02` | Zero Collector Fee Guarantee | SATISFIED | Displayed prominently in U01 with `collector_fee_paise = 0` invariant. |
 | `AT-002` | Registered Screen Review & Parity | PASS | Both `C17` and `U01` verified against Stitch project `245073995801566548`. |
-| `AT-048` | Pictorial Hazard Warning & Audio Trigger | PASS | Tested in `SafetyContentAndHubTest.kt` and wired into `C05_LotEditorScreen.kt` and `C17_SafetyHubScreen.kt`. |
-| `AT-067` | Same-Lot Recalculation & Source Drill-down | PASS | Tested in `U01_UnitEconomics.test.tsx` verifying sliders, toggles, waterfall bars, and zero-baseline handling. |
+| `AT-048` | Pictorial Hazard Warning & Audio Trigger | PASS | Android invariant tests pass and a physical connected-device run verified C03→C17 navigation, Hindi/Marathi rendering, visible offline state and audio trigger. Human-audible playback quality is not claimed. |
+| `AT-067` | Same-Lot Recalculation & Source Drill-down | PASS | U01 tests verify the canonical ₹350/₹470/₹120 fixture, slider/toggle recalculation, an unfavourable lower-rate/higher-transport case, source/assumption disclosure, ledger separation, reset, and the zero/negative-baseline guard. |

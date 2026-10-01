@@ -215,6 +215,22 @@ Implemented and verified the comprehensive automated security, privacy, and abus
   - Android unit tests verified (79 passed out of 79 tests in `testDebugUnitTest`).
   - Authored comprehensive evidence artifact `docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md`.
 
+## 2026-10-01 — T039 independent repair and verification
+
+- Repaired U01 so its displayed economics agree with the canonical ECONOMICS_V1
+  chosen-demo fixture: current ₹350, assumed platform ₹470, delta ₹120.
+- Removed unsupported claims of Tier-1 telemetry and automatic monetary benefit;
+  inputs are visibly identified as assumptions and actual ledger records remain
+  separately linked.
+- Added accessible control names, Hindi/Marathi net-return labels, lower-rate
+  and higher-transport unfavourable scenarios, and a real browser-computed
+  SHA-256 export field.
+- On collector device `N7OZPV59XWWKPF4X`, verified C03→C17 navigation, Hindi
+  and Marathi rendering, offline indicator, safety content and audio trigger.
+  This does not claim human-audible playback quality.
+- Verification: Android safety tests 6/6; U01 web tests 8/8; web typecheck and
+  production build pass.
+
 ## 2026-09-30 â€” Contextual Safety Hub and Interactive Unit Economics Views (T039 DONE)
 
 Implemented the approved contextual safety views (`C17`) in native Android Jetpack Compose and interactive illustrative unit-economics views (`U01`) in React/Vite conforming strictly to Google Stitch designs `1579fe53bac5` and `cab89a974c04` under project `245073995801566548`, fulfilling requirements `R-GOV-02`, `R-SAFE-01`, and `R-ECON-01`, and passing acceptance cases `AT-002`, `AT-048`, and `AT-067`:

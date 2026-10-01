@@ -8,10 +8,12 @@ interface ScenarioInputs {
   baselineGross: number;
   baselineAcquisition: number;
   baselineTransport: number;
+  baselineHandling: number;
   baselineRejectionPct: number;
   baselinePaymentDays: number;
   // Controls
-  transportEfficiencyPct: number; // 0 to 50
+  transportEfficiencyPct: number; // -50 to 50
+  platformRateAdjustmentPct: number; // -30 to 30
   rejectionPct: number; // 1 to 10
   paymentDelayDays: number; // 0 to 30
   autoWeighCalibration: boolean;
@@ -21,16 +23,20 @@ interface ScenarioInputs {
 const DEFAULT_SCENARIO: ScenarioInputs = {
   materialName: 'Stripped Copper Cable (Grade A)',
   batchWeightKg: 10.0,
-  marketBenchmark: 'Mumbai Terminal (Attributed SRC-01)',
-  baselineGross: 2000,
-  baselineAcquisition: 1200,
-  baselineTransport: 150,
-  baselineRejectionPct: 4,
-  baselinePaymentDays: 7,
-  transportEfficiencyPct: 25,
-  rejectionPct: 1,
+  marketBenchmark: 'Chosen demo assumption — not a market quote',
+  // Canonical ECONOMICS_V1 demo fixture. These are deliberately labelled
+  // assumptions, not observed prices or measured collector earnings.
+  baselineGross: 1500,
+  baselineAcquisition: 1000,
+  baselineTransport: 100,
+  baselineHandling: 50,
+  baselineRejectionPct: 0,
+  baselinePaymentDays: 0,
+  transportEfficiencyPct: 20,
+  platformRateAdjustmentPct: 0,
+  rejectionPct: 0,
   paymentDelayDays: 0,
-  autoWeighCalibration: true,
+  autoWeighCalibration: false,
   directSmelterLinkage: true,
 };
 
@@ -44,23 +50,22 @@ export default function U01_UnitEconomics() {
     return Math.round((scenario.baselineGross * scenario.baselineRejectionPct) / 100);
   }, [scenario.baselineGross, scenario.baselineRejectionPct]);
 
-  const baselinePaymentCost = useMemo(() => {
-    // ₹6.43 per day imputed financing / working capital delay impact
-    return Math.round(scenario.baselinePaymentDays * 6.43);
-  }, [scenario.baselinePaymentDays]);
+  // Explicit ₹1/day sensitivity assumption; not financing or a settlement promise.
+  const baselinePaymentCost = scenario.baselinePaymentDays;
 
   const baselineTotalCosts = useMemo(() => {
     return (
       scenario.baselineAcquisition +
       scenario.baselineTransport +
+      scenario.baselineHandling +
       baselineRejectionCost +
       baselinePaymentCost
     );
-  }, [scenario.baselineAcquisition, scenario.baselineTransport, baselineRejectionCost, baselinePaymentCost]);
+  }, [scenario.baselineAcquisition, scenario.baselineTransport, scenario.baselineHandling, baselineRejectionCost, baselinePaymentCost]);
 
   const baselineNetRealization = useMemo(() => {
-    return scenario.baselineGross - (scenario.baselineTransport + baselineRejectionCost + baselinePaymentCost);
-  }, [scenario.baselineGross, scenario.baselineTransport, baselineRejectionCost, baselinePaymentCost]);
+    return scenario.baselineGross - (scenario.baselineTransport + scenario.baselineHandling + baselineRejectionCost + baselinePaymentCost);
+  }, [scenario.baselineGross, scenario.baselineTransport, scenario.baselineHandling, baselineRejectionCost, baselinePaymentCost]);
 
   const baselineNetProfit = useMemo(() => {
     return scenario.baselineGross - baselineTotalCosts;
@@ -68,37 +73,33 @@ export default function U01_UnitEconomics() {
 
   // Derived Platform Metrics
   const platformGross = useMemo(() => {
-    // Direct smelter linkage adds modest efficiency uplift to gross realization
-    const bonus = scenario.directSmelterLinkage ? 190 : 0;
-    return scenario.baselineGross + bonus;
-  }, [scenario.baselineGross, scenario.directSmelterLinkage]);
+    // The fixture's platform rate is ₹160/kg vs. ₹150/kg. The control removes
+    // that explicitly stated scenario assumption; it is not a promised uplift.
+    const bonus = scenario.directSmelterLinkage ? 100 : 0;
+    return Math.round(scenario.baselineGross * (1 + scenario.platformRateAdjustmentPct / 100)) + bonus;
+  }, [scenario.baselineGross, scenario.platformRateAdjustmentPct, scenario.directSmelterLinkage]);
 
-  const platformAcquisition = useMemo(() => {
-    // SahiTol fair grading reduces arbitrary acquisition penalty
-    return scenario.directSmelterLinkage ? scenario.baselineAcquisition - 50 : scenario.baselineAcquisition;
-  }, [scenario.baselineAcquisition, scenario.directSmelterLinkage]);
+  const platformAcquisition = scenario.baselineAcquisition;
 
   const platformTransport = useMemo(() => {
     const discounted = scenario.baselineTransport * (1 - scenario.transportEfficiencyPct / 100);
-    const calibrationBonus = scenario.autoWeighCalibration ? 10 : 0;
-    return Math.max(0, Math.round(discounted - calibrationBonus));
-  }, [scenario.baselineTransport, scenario.transportEfficiencyPct, scenario.autoWeighCalibration]);
+    // Calibration is informational here; it does not invent a monetary benefit.
+    return Math.max(0, Math.round(discounted));
+  }, [scenario.baselineTransport, scenario.transportEfficiencyPct]);
 
   const platformRejectionCost = useMemo(() => {
     return Math.round((platformGross * scenario.rejectionPct) / 100);
   }, [platformGross, scenario.rejectionPct]);
 
-  const platformPaymentCost = useMemo(() => {
-    return Math.round(scenario.paymentDelayDays * 6.43);
-  }, [scenario.paymentDelayDays]);
+  const platformPaymentCost = scenario.paymentDelayDays;
 
   const platformTotalCosts = useMemo(() => {
-    return platformAcquisition + platformTransport + platformRejectionCost + platformPaymentCost;
-  }, [platformAcquisition, platformTransport, platformRejectionCost, platformPaymentCost]);
+    return platformAcquisition + platformTransport + scenario.baselineHandling + platformRejectionCost + platformPaymentCost;
+  }, [platformAcquisition, platformTransport, scenario.baselineHandling, platformRejectionCost, platformPaymentCost]);
 
   const platformNetRealization = useMemo(() => {
-    return platformGross - (platformTransport + platformRejectionCost + platformPaymentCost);
-  }, [platformGross, platformTransport, platformRejectionCost, platformPaymentCost]);
+    return platformGross - (platformTransport + scenario.baselineHandling + platformRejectionCost + platformPaymentCost);
+  }, [platformGross, platformTransport, scenario.baselineHandling, platformRejectionCost, platformPaymentCost]);
 
   const platformNetProfit = useMemo(() => {
     return platformGross - platformTotalCosts;
@@ -122,18 +123,21 @@ export default function U01_UnitEconomics() {
     setTimeout(() => setExportNotice(null), 3000);
   };
 
-  const handleExport = () => {
+  const handleExport = async () => {
     const data = {
       fixture_id: 'LOT-2024-9082',
       timestamp: new Date().toISOString(),
       formula_version: 'ECONOMICS_V1',
       collector_fee_paise: 0,
-      disclaimer: 'Illustrative calculation fixture. We have not measured income uplift.',
+      disclaimer: 'Editable illustrative calculation based on stated assumptions. We have not measured income uplift.',
+      source_reference: 'docs/23_UNIT_ECONOMICS.md canonical demo fixture',
+      assumptions_note: 'Default rates and costs are chosen demo assumptions, not observed market prices.',
       scenario_inputs: scenario,
       baseline_results: {
         gross: scenario.baselineGross,
         acquisition: scenario.baselineAcquisition,
         transport: scenario.baselineTransport,
+        handling: scenario.baselineHandling,
         rejection_loss: baselineRejectionCost,
         payment_impact: baselinePaymentCost,
         total_costs: baselineTotalCosts,
@@ -143,6 +147,7 @@ export default function U01_UnitEconomics() {
         gross: platformGross,
         acquisition: platformAcquisition,
         transport: platformTransport,
+        handling: scenario.baselineHandling,
         rejection_loss: platformRejectionCost,
         payment_impact: platformPaymentCost,
         total_costs: platformTotalCosts,
@@ -154,7 +159,10 @@ export default function U01_UnitEconomics() {
       },
     };
 
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const canonicalPayload = JSON.stringify(data);
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(canonicalPayload));
+    const integrity_sha256 = Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
+    const blob = new Blob([JSON.stringify({ ...data, integrity_sha256 }, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -162,7 +170,7 @@ export default function U01_UnitEconomics() {
     a.click();
     URL.revokeObjectURL(url);
 
-    setExportNotice('Breakdown exported to JSON (SHA-256 seal attached).');
+    setExportNotice('Breakdown exported to JSON with a SHA-256 integrity seal.');
     setTimeout(() => setExportNotice(null), 3000);
   };
 
@@ -233,8 +241,8 @@ export default function U01_UnitEconomics() {
                 Same Material. Different Operating Assumptions.
               </h1>
               <p className="text-body-md text-on-surface-variant max-w-3xl">
-                Comparing baseline traditional scrap yard processing against optimized SahiTol platform workflow for a
-                standardized {scenario.batchWeightKg} kg mixed copper cable lot.
+                Comparing two editable assumptions for the same {scenario.batchWeightKg} kg copper-cable lot. The default is
+                illustrative, not a market quote or measured income result.
               </p>
             </div>
 
@@ -309,7 +317,7 @@ export default function U01_UnitEconomics() {
                         <span className="text-headline-xl font-headline-xl text-on-surface font-bold">
                           ₹{baselineNetProfit.toLocaleString()}
                         </span>
-                        <span className="text-body-sm text-on-surface-variant">Net Return</span>
+                        <span className="text-body-sm text-on-surface-variant">Net Return / निव्वळ परतावा / निव्वळ परतावा</span>
                       </div>
                     </div>
 
@@ -323,8 +331,12 @@ export default function U01_UnitEconomics() {
                         <span className="font-bold text-on-surface">₹{scenario.baselineAcquisition.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-on-surface-variant">Transport & Handling</span>
+                        <span className="text-on-surface-variant">Transport</span>
                         <span className="font-bold text-on-surface">₹{scenario.baselineTransport.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-on-surface-variant">Handling</span>
+                        <span className="font-bold text-on-surface">₹{scenario.baselineHandling.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-on-surface-variant">Rejection / Loss ({scenario.baselineRejectionPct}%)</span>
@@ -333,7 +345,7 @@ export default function U01_UnitEconomics() {
                       <div className="flex justify-between">
                         <span className="text-on-surface-variant">Payment Delay Cost</span>
                         <span className="font-bold text-on-surface">
-                          {scenario.baselinePaymentDays} Days (₹{baselinePaymentCost})
+                          {scenario.baselinePaymentDays} days (₹{baselinePaymentCost} stated time-value assumption)
                         </span>
                       </div>
                     </div>
@@ -352,7 +364,7 @@ export default function U01_UnitEconomics() {
                         <span className="text-headline-xl font-headline-xl text-on-primary font-bold">
                           ₹{platformNetProfit.toLocaleString()}
                         </span>
-                        <span className="text-body-sm text-inverse-primary">Net Return</span>
+                        <span className="text-body-sm text-inverse-primary">Net Return / निव्वळ परतावा / निव्वळ परतावा</span>
                       </div>
                     </div>
 
@@ -377,13 +389,17 @@ export default function U01_UnitEconomics() {
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-inverse-primary">Transport & Handling</span>
+                        <span className="text-inverse-primary">Transport</span>
                         <span className="font-bold text-on-primary">
                           ₹{platformTransport.toFixed(2)}{' '}
                           <span className="text-inverse-primary text-xs font-normal">
                             (-₹{scenario.baselineTransport - platformTransport})
                           </span>
                         </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-inverse-primary">Handling</span>
+                        <span className="font-bold text-on-primary">₹{scenario.baselineHandling.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-inverse-primary">Rejection / Loss ({scenario.rejectionPct}%)</span>
@@ -397,7 +413,7 @@ export default function U01_UnitEconomics() {
                       <div className="flex justify-between">
                         <span className="text-inverse-primary">Payment Cycle Cost</span>
                         <span className="font-bold text-on-primary">
-                          {scenario.paymentDelayDays === 0 ? 'Instant (₹0 Cost)' : `${scenario.paymentDelayDays} Days (₹${platformPaymentCost})`}
+                          {scenario.paymentDelayDays} days (₹{platformPaymentCost} stated time-value assumption)
                         </span>
                       </div>
                     </div>
@@ -512,7 +528,8 @@ export default function U01_UnitEconomics() {
                     </div>
                     <input
                       type="range"
-                      min="0"
+                      aria-label="Transport efficiency assumption"
+                      min="-50"
                       max="50"
                       value={scenario.transportEfficiencyPct}
                       onChange={(e) =>
@@ -521,8 +538,28 @@ export default function U01_UnitEconomics() {
                       className="w-full accent-primary cursor-pointer"
                     />
                     <div className="flex justify-between text-[11px] text-on-surface-variant">
-                      <span>0% (No pooling)</span>
+                      <span>-50% (higher transport cost)</span>
                       <span>50% (Max pooling)</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-space-xs pt-2">
+                    <div className="flex justify-between text-body-sm">
+                      <span className="text-on-surface-variant font-medium">Platform-rate assumption</span>
+                      <span className="font-bold text-on-surface">{scenario.platformRateAdjustmentPct >= 0 ? '+' : ''}{scenario.platformRateAdjustmentPct}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      aria-label="Platform rate assumption adjustment"
+                      min="-30"
+                      max="30"
+                      value={scenario.platformRateAdjustmentPct}
+                      onChange={(e) => setScenario({ ...scenario, platformRateAdjustmentPct: parseInt(e.target.value) || 0 })}
+                      className="w-full accent-primary cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[11px] text-on-surface-variant">
+                      <span>-30% (lower assumed rate)</span>
+                      <span>+30% (higher assumed rate)</span>
                     </div>
                   </div>
 
@@ -534,28 +571,28 @@ export default function U01_UnitEconomics() {
                     </div>
                     <input
                       type="range"
-                      min="1"
+                      aria-label="Platform rejection-loss assumption"
+                      min="0"
                       max="10"
                       value={scenario.rejectionPct}
-                      onChange={(e) => setScenario({ ...scenario, rejectionPct: parseInt(e.target.value) || 1 })}
+                      onChange={(e) => setScenario({ ...scenario, rejectionPct: parseInt(e.target.value) || 0 })}
                       className="w-full accent-primary cursor-pointer"
                     />
                     <div className="flex justify-between text-[11px] text-on-surface-variant">
-                      <span>1% (Digital verification)</span>
+                      <span>0% (fixture default)</span>
                       <span>10% (High downgrade)</span>
                     </div>
                   </div>
 
-                  {/* Slider 3: Payment Delay Sensitivity */}
+                  {/* Slider 3: Optional time-value sensitivity */}
                   <div className="flex flex-col gap-space-xs pt-2">
                     <div className="flex justify-between text-body-sm">
-                      <span className="text-on-surface-variant font-medium">Payment Realization Window</span>
-                      <span className="font-bold text-on-surface">
-                        {scenario.paymentDelayDays === 0 ? 'Instant (0 Days)' : `${scenario.paymentDelayDays} Days`}
-                      </span>
+                      <span className="text-on-surface-variant font-medium">Optional time-value days</span>
+                      <span className="font-bold text-on-surface">{scenario.paymentDelayDays} days × ₹1 assumption</span>
                     </div>
                     <input
                       type="range"
+                      aria-label="Optional time-value days assumption"
                       min="0"
                       max="30"
                       value={scenario.paymentDelayDays}
@@ -563,8 +600,8 @@ export default function U01_UnitEconomics() {
                       className="w-full accent-primary cursor-pointer"
                     />
                     <div className="flex justify-between text-[11px] text-on-surface-variant">
-                      <span>0 Days (Cash on scale)</span>
-                      <span>30 Days (Credit delay)</span>
+                      <span>0 days (no time-value cost)</span>
+                      <span>30 days (₹30 assumption)</span>
                     </div>
                   </div>
 
@@ -572,11 +609,12 @@ export default function U01_UnitEconomics() {
                   <div className="flex items-center justify-between pt-space-sm border-t border-surface-container-high">
                     <div className="flex flex-col">
                       <span className="text-label-md text-on-surface font-semibold">Auto Weigh-Slip Calibration</span>
-                      <span className="text-body-sm text-on-surface-variant text-xs">Eliminates tare weight disputes (-₹10)</span>
+                      <span className="text-body-sm text-on-surface-variant text-xs">Record-quality control only; no monetary benefit is assumed.</span>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input
                         type="checkbox"
+                        aria-label="Auto weigh-slip calibration record-quality control"
                         checked={scenario.autoWeighCalibration}
                         onChange={(e) => setScenario({ ...scenario, autoWeighCalibration: e.target.checked })}
                         className="sr-only peer"
@@ -589,11 +627,12 @@ export default function U01_UnitEconomics() {
                   <div className="flex items-center justify-between pt-1">
                     <div className="flex flex-col">
                       <span className="text-label-md text-on-surface font-semibold">Direct Smelter Linkage</span>
-                      <span className="text-body-sm text-on-surface-variant text-xs">Bypasses intermediary middleman margin (+₹190)</span>
+                      <span className="text-body-sm text-on-surface-variant text-xs">Toggle the fixture’s ₹160/kg platform-rate assumption; it is not a promise.</span>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input
                         type="checkbox"
+                        aria-label="Use the platform-rate fixture assumption"
                         checked={scenario.directSmelterLinkage}
                         onChange={(e) => setScenario({ ...scenario, directSmelterLinkage: e.target.checked })}
                         className="sr-only peer"
@@ -610,9 +649,9 @@ export default function U01_UnitEconomics() {
                     <span className="text-label-sm uppercase tracking-wider font-bold">Source & Methodology Disclosure</span>
                   </div>
                   <p className="text-body-sm text-on-surface-variant text-xs leading-relaxed">
-                    Calculations are derived from aggregated scrap yard telemetry across Tier-1 urban recycling hubs (Q3 2024).
-                    Baseline rates reflect standard local aggregator margins without digital grading. Platform scenario assumes
-                    standardized computer-vision grading and pooled logistics.
+                    Default values are the canonical ECONOMICS_V1 chosen demo assumptions: 10 kg, ₹1,000 acquisition,
+                    current ₹150/kg with ₹100 transport and ₹50 handling, versus assumed platform ₹160/kg with ₹80 transport
+                    and ₹50 handling. They are not observed prices, telemetry, or realized collector outcomes.
                   </p>
                   <div className="inline-flex items-center gap-2 mt-1 text-xs font-semibold text-emerald-800 bg-emerald-100/80 px-2.5 py-1 rounded-lg w-fit">
                     <span className="material-symbols-outlined text-[16px]">verified</span>
@@ -633,8 +672,10 @@ export default function U01_UnitEconomics() {
                   <code>net = gross − acquisition − transport − handling − rejection_loss − payment_delay_cost</code>
                 </p>
                 <p>
-                  <strong>Baseline Sourcing:</strong> Desk research card RC-03 (Informal Scrap Aggregator Operating Margins 2024),
-                  Delhi-NCR & Mumbai urban benchmarks.
+                  <strong>Inputs & separation:</strong> The displayed defaults are documented chosen demo assumptions in
+                  <code> docs/23_UNIT_ECONOMICS.md</code>. Use the{' '}
+                  <Link to="/recycler/history" className="underline font-semibold">separate procurement ledger</Link>{' '}
+                  for actual recorded handovers; this calculator never imports ledger values.
                 </p>
                 <p>
                   <strong>Zero Collector Fee Guarantee:</strong> In accordance with product requirements (R-ECON-02), no subscription

@@ -118,4 +118,13 @@ Windows-runtime blocker was independently cleared: TensorFlow 2.15.1 is
 installed, the LiteRT interpreter opens the bundled `[1,224,224,3]` to `[1,12]`
 model, and all six model tests pass. The model remains honestly weak (macro-F1
 0.0159, 100% abstention at threshold 0.65). Continue at the next audit finding,
-T039.
+T039. Independent repair completed: the registered C17 screen was opened on
+collector device N7OZPV59XWWKPF4X through the Home safety card, and Hindi plus
+Marathi rendering, offline state, hazard/prohibition/step content and audio
+trigger were observed. Audio audibility itself was not claimed. U01 was repaired
+to use the canonical ECONOMICS_V1 chosen-demo fixture (₹350/₹470/₹120), replace
+telemetry and uplift claims with transparent assumptions, link the separate
+ledger, expose accessible controls and Hindi/Marathi return labels, permit
+lower-rate/higher-transport negative scenarios, and compute an actual SHA-256
+export field. Android safety tests pass 6/6, focused U01 tests pass 8/8, and
+web typecheck/build pass. Continue at T040.

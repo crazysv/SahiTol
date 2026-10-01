@@ -309,7 +309,7 @@
       "evidence": [
         "docs/evidence/T039_ECONOMICS_AND_SAFETY_VIEWS.md"
       ],
-      "note": "Implemented approved C17 Contextual Safety Hub in Android Jetpack Compose matching Stitch design 1579fe53bac5 with trilingual support (hi/mr/en), offline audio guidance, critical hazards, prohibitions, and safe steps; wired contextual safety alerts into C05 Lot Editor and C03 Home; implemented approved U01 Interactive Unit Economics workspace in React/Vite matching Stitch design cab89a974c04 with real-time recalculation sliders, waterfall chart, zero/negative baseline handling, and 0 paise collector fee guarantee; verified with 6 Android and 6 Web unit tests.",
+      "note": "Independently repaired and reverified 2026-10-01. C17 retains the registered Stitch implementation; a physical collector-device run verified C03→C17 navigation, Hindi/Marathi rendering, visible offline state, hazards/prohibitions/steps and audio trigger (human-audible playback quality is not claimed). U01 now uses the canonical ECONOMICS_V1 chosen-demo fixture (₹350 current, ₹470 assumed platform, ₹120 delta), labels assumptions rather than telemetry/market facts, permits lower-rate/higher-transport unfavourable scenarios, separates the actual ledger, has Hindi/Marathi net-return labels and accessible controls, and exports a browser-computed SHA-256 field. Focused checks: Android safety 6/6; web U01 8/8; TypeScript and production build pass.",
       "owner": "Owner + coding agent"
     },
     "T040": {

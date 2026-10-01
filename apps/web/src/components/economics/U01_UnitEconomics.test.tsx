@@ -31,7 +31,17 @@ describe('U01 Unit Economics Screen (T039, R-ECON-01, AT-067)', () => {
     expect(screen.getByText(/Illustrative calculation fixture/i)).toBeDefined();
     expect(screen.getByText(/We have not measured income uplift/i)).toBeDefined();
     expect(screen.getByText(/Zero Collector Fee: SahiTol levies 0 paise transaction fee/i)).toBeDefined();
-    expect(screen.getByText(/ECONOMICS_V1/i)).toBeDefined();
+    expect(screen.getAllByText(/ECONOMICS_V1/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText(/chosen demo assumptions/i)).toBeDefined();
+  });
+
+  it('uses the documented ECONOMICS_V1 fixture rather than an unstated uplift', () => {
+    render(<MemoryRouter><U01_UnitEconomics /></MemoryRouter>);
+
+    expect(screen.getByText('₹350')).toBeDefined();
+    expect(screen.getByText('₹470')).toBeDefined();
+    expect(screen.getByText('+₹120')).toBeDefined();
+    expect(screen.getByText(/₹150\/kg with ₹100 transport and ₹50 handling/i)).toBeDefined();
   });
 
   it('updates platform calculations dynamically when sliders are changed', () => {
@@ -41,8 +51,8 @@ describe('U01 Unit Economics Screen (T039, R-ECON-01, AT-067)', () => {
       </MemoryRouter>
     );
 
-    // Initial transport discount is -25%
-    expect(screen.getByText('-25% Cost')).toBeDefined();
+    // Initial fixture transport discount is -20% (₹100 -> ₹80).
+    expect(screen.getByText('-20% Cost')).toBeDefined();
 
     // Find range input for transport efficiency and change to 50%
     const sliders = screen.getAllByRole('slider');
@@ -69,8 +79,19 @@ describe('U01 Unit Economics Screen (T039, R-ECON-01, AT-067)', () => {
 
     // Toggle off direct smelter linkage
     fireEvent.click(smelterCheckbox);
-    // Both baseline and platform gross waterfall bars now display ₹2000 Gross
-    expect(screen.getAllByText(/₹2000 Gross/i).length).toBe(2);
+    // Disabling the stated platform-rate assumption brings platform gross back to baseline.
+    expect(screen.getAllByText(/₹1500 Gross/i).length).toBe(2);
+  });
+
+  it('permits an unfavourable platform assumption instead of implying a guaranteed benefit', () => {
+    render(<MemoryRouter><U01_UnitEconomics /></MemoryRouter>);
+
+    fireEvent.change(screen.getByRole('slider', { name: /platform rate assumption adjustment/i }), { target: { value: '-30' } });
+    fireEvent.change(screen.getByRole('slider', { name: /transport efficiency assumption/i }), { target: { value: '-50' } });
+    fireEvent.click(screen.getByRole('checkbox', { name: /platform-rate fixture assumption/i }));
+
+    expect(screen.getByText('-₹500')).toBeDefined();
+    expect(screen.getByText(/-142.9%/i)).toBeDefined();
   });
 
   it('switches between same-lot comparison and methodology tabs', () => {
@@ -84,7 +105,7 @@ describe('U01 Unit Economics Screen (T039, R-ECON-01, AT-067)', () => {
     fireEvent.click(methodologyTab);
 
     expect(screen.getByText('Mathematical Modeling & Public Sources')).toBeDefined();
-    expect(screen.getByText(/docs\/23_UNIT_ECONOMICS\.md/i)).toBeDefined();
+    expect(screen.getAllByText(/docs\/23_UNIT_ECONOMICS\.md/i).length).toBeGreaterThanOrEqual(1);
 
     const backButton = screen.getByRole('button', { name: /Back to Same-Lot Calculator/i });
     fireEvent.click(backButton);
@@ -106,7 +127,7 @@ describe('U01 Unit Economics Screen (T039, R-ECON-01, AT-067)', () => {
     const resetButton = screen.getByRole('button', { name: /Reset Scenario/i });
     fireEvent.click(resetButton);
 
-    expect(screen.getByText('-25% Cost')).toBeDefined();
+    expect(screen.getByText('-20% Cost')).toBeDefined();
     expect(screen.getByText(/Scenario restored to standard 10 kg benchmark/i)).toBeDefined();
   });
 });
