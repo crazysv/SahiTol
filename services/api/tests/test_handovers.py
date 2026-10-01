@@ -291,6 +291,10 @@ def test_demo_offline_import_requires_server_lookup_then_recycler_confirmation()
     lookup = client.get(f"/api/v1/handovers/{handover_id}", headers=recycler_headers)
     assert lookup.status_code == 200
     assert lookup.json()["proposal_hash"] == proposal_hash
+    resumed = client.get(f"/api/v1/lots/{lot_id}/handover", headers=collector_headers)
+    assert resumed.status_code == 200
+    assert resumed.json()["id"] == str(handover_id)
+    assert resumed.json()["status"] == "PENDING_CONFIRMATION"
     confirmed = client.post(f"/api/v1/handovers/{handover_id}/confirm", headers=recycler_headers, json={
         "expected_version": lookup.json()["version"], "proposal_hash": proposal_hash,
     })

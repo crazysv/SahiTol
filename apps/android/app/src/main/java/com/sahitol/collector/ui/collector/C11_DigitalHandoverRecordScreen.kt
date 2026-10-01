@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sahitol.collector.data.repository.HandoverProposal
 import com.sahitol.collector.data.repository.HandoverRepository
+import com.sahitol.collector.data.repository.FacilityRepository
+import com.sahitol.collector.data.repository.TradeResult
 import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.domain.pdf.ReceiptPdfGenerator
 import com.sahitol.collector.domain.qr.QrGenerator
@@ -44,6 +46,7 @@ import com.sahitol.collector.ui.theme.*
 @Composable
 fun C11_DigitalHandoverRecordScreen(
     handoverId: String,
+    facilityRepository: FacilityRepository,
     handoverRepository: HandoverRepository,
     sessionManager: SessionManager,
     onNavigateBack: () -> Unit,
@@ -57,8 +60,23 @@ fun C11_DigitalHandoverRecordScreen(
     val session by sessionManager.session.collectAsState()
     val alias = session.alias
 
-    val proposal = remember(handoverId) { handoverRepository.getHandoverProposal(handoverId) }
+    var proposal by remember(handoverId) { mutableStateOf(handoverRepository.getHandoverProposal(handoverId)) }
+    var refreshMessage by remember(handoverId) { mutableStateOf<String?>(null) }
     var pdfGeneratedFile by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(handoverId, session.accountId) {
+        val accountId = session.accountId ?: return@LaunchedEffect
+        when (val result = facilityRepository.fetchLiveHandoverStatus(handoverId, accountId)) {
+            is TradeResult.Success -> {
+                proposal = handoverRepository.updateServerStatus(handoverId, result.value.status)
+                    ?: proposal.copy(status = result.value.status)
+                refreshMessage = if (result.value.status == "CONFIRMED") {
+                    "Recycler receipt confirmed by server."
+                } else null
+            }
+            is TradeResult.Failure -> refreshMessage = result.message
+        }
+    }
 
     val qrBitmap = remember(proposal.verificationUrl) {
         try {
@@ -312,7 +330,19 @@ fun C11_DigitalHandoverRecordScreen(
                     )
 
                     Text(
-                        text = "Show this QR code to the yard manager or recycling facility partner for instant handover confirmation.",
+                        text = when (proposal.status) {
+                            "CONFIRMED" -> "Recycler receipt confirmed / रसीद की पुष्टि हुई"
+                            "PENDING_COLLECTOR_ACK" -> "Recycler revised the terms — your acknowledgement is required"
+                            else -> "Awaiting recycler confirmation / रिसाइकलर की पुष्टि बाकी है"
+                        },
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = if (proposal.status == "CONFIRMED") SuccessGreen else OnSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+
+                    Text(
+                        text = refreshMessage ?: "Show this QR code to the yard manager or recycling facility partner for instant handover confirmation.",
                         fontSize = 11.sp,
                         color = OnSurfaceVariant,
                         textAlign = TextAlign.Center

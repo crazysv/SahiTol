@@ -1,5 +1,6 @@
 package com.sahitol.collector.data.repository
 
+import android.content.Context
 import com.sahitol.collector.data.local.SahiTolDatabase
 import com.sahitol.collector.data.local.dao.DomainEventDao
 import com.sahitol.collector.data.local.dao.OutboxDao
@@ -48,6 +49,7 @@ data class PassportTimelineEvent(
 
 class HandoverRepository(
     private val database: SahiTolDatabase? = null,
+    private val context: Context? = null,
     private val outboxDao: OutboxDao? = database?.outboxDao(),
     private val domainEventDao: DomainEventDao? = database?.domainEventDao()
 ) {
@@ -58,6 +60,9 @@ class HandoverRepository(
 
     // In-memory cache for fast local UI preview and offline navigation
     private val proposalsCache = mutableMapOf<String, HandoverProposal>()
+    private val handoverPreferences by lazy {
+        context?.getSharedPreferences("server_handover_records", Context.MODE_PRIVATE)
+    }
 
     suspend fun createProposalAtomic(
         lotId: String,
@@ -247,7 +252,9 @@ class HandoverRepository(
     }
 
     fun getHandoverProposal(id: String): HandoverProposal {
-        return proposalsCache[id] ?: HandoverProposal(
+        proposalsCache[id]?.let { return it }
+        loadPersistedProposal(id)?.let { return it }
+        return HandoverProposal(
             handoverId = id,
             lotId = id,
             transactionId = "",
@@ -303,8 +310,117 @@ class HandoverRepository(
         )
         proposalsCache[result.handoverId] = proposal
         proposalsCache[agreement.lotId] = proposal
+        persistServerProposal(proposal)
         return proposal
     }
+
+    fun cacheRecoveredServerProposal(
+        handoverId: String,
+        status: String,
+        proposalHash: String,
+        agreement: AcceptedTransaction,
+        materialId: String,
+        materialName: String,
+        facilityName: String
+    ): HandoverProposal {
+        val reference = "ST-" + handoverId.take(6).uppercase()
+        return HandoverProposal(
+            handoverId = handoverId,
+            transactionId = agreement.transactionId,
+            lotId = agreement.lotId,
+            collectorId = agreement.collectorId,
+            facilityId = agreement.facilityId,
+            facilityName = facilityName,
+            materialId = materialId,
+            materialName = materialName,
+            condition = "INTACT",
+            estimatedWeightG = agreement.agreedWeightG,
+            measuredWeightG = agreement.agreedWeightG,
+            rateInrPerKg = if (agreement.agreedWeightG > 0) agreement.agreedTotalPaise / 100.0 * 1000 / agreement.agreedWeightG else 0.0,
+            totalPayoutInr = agreement.agreedTotalPaise / 100.0,
+            referenceCode = reference,
+            status = status,
+            canonicalHash = proposalHash,
+            verificationUrl = "https://sahitol.pages.dev/recycler/scan?handover_id=$handoverId&ref=$reference&hash=$proposalHash",
+            occurredAt = Instant.now().toString(),
+            isDemo = agreement.isDemo
+        ).also {
+            proposalsCache[it.handoverId] = it
+            proposalsCache[it.lotId] = it
+            persistServerProposal(it)
+        }
+    }
+
+    fun updateServerStatus(handoverId: String, status: String): HandoverProposal? {
+        val proposal = getHandoverProposal(handoverId)
+        if (proposal.handoverId != handoverId || proposal.canonicalHash.isBlank()) return null
+        return proposal.copy(status = status).also {
+            proposalsCache[it.handoverId] = it
+            proposalsCache[it.lotId] = it
+            persistServerProposal(it)
+        }
+    }
+
+    /** Server-issued handovers must survive restart so the collector can pull a recycler confirmation. */
+    private fun persistServerProposal(proposal: HandoverProposal) {
+        val preferences = handoverPreferences ?: return
+        val record = JSONObject().apply {
+            put("handoverId", proposal.handoverId)
+            put("transactionId", proposal.transactionId)
+            put("lotId", proposal.lotId)
+            put("collectorId", proposal.collectorId)
+            put("facilityId", proposal.facilityId)
+            put("facilityName", proposal.facilityName)
+            put("materialId", proposal.materialId)
+            put("materialName", proposal.materialName)
+            put("condition", proposal.condition)
+            put("estimatedWeightG", proposal.estimatedWeightG)
+            put("measuredWeightG", proposal.measuredWeightG)
+            put("rateInrPerKg", proposal.rateInrPerKg)
+            put("totalPayoutInr", proposal.totalPayoutInr)
+            put("referenceCode", proposal.referenceCode)
+            put("status", proposal.status)
+            put("canonicalHash", proposal.canonicalHash)
+            put("verificationUrl", proposal.verificationUrl)
+            put("occurredAt", proposal.occurredAt)
+            put("isDemo", proposal.isDemo)
+        }.toString()
+        preferences.edit()
+            .putString("proposal:${proposal.handoverId}", record)
+            .putString("lot:${proposal.lotId}", proposal.handoverId)
+            .apply()
+    }
+
+    private fun loadPersistedProposal(id: String): HandoverProposal? = runCatching {
+        val preferences = handoverPreferences ?: return null
+        val handoverId = preferences.getString("lot:$id", null) ?: id
+        val record = preferences.getString("proposal:$handoverId", null) ?: return null
+        val value = JSONObject(record)
+        HandoverProposal(
+            handoverId = value.getString("handoverId"),
+            transactionId = value.getString("transactionId"),
+            lotId = value.getString("lotId"),
+            collectorId = value.getString("collectorId"),
+            facilityId = value.getString("facilityId"),
+            facilityName = value.getString("facilityName"),
+            materialId = value.getString("materialId"),
+            materialName = value.getString("materialName"),
+            condition = value.getString("condition"),
+            estimatedWeightG = value.getLong("estimatedWeightG"),
+            measuredWeightG = if (value.isNull("measuredWeightG")) null else value.getLong("measuredWeightG"),
+            rateInrPerKg = value.getDouble("rateInrPerKg"),
+            totalPayoutInr = value.getDouble("totalPayoutInr"),
+            referenceCode = value.getString("referenceCode"),
+            status = value.getString("status"),
+            canonicalHash = value.getString("canonicalHash"),
+            verificationUrl = value.getString("verificationUrl"),
+            occurredAt = value.getString("occurredAt"),
+            isDemo = value.getBoolean("isDemo")
+        ).also {
+            proposalsCache[it.handoverId] = it
+            proposalsCache[it.lotId] = it
+        }
+    }.getOrNull()
 
     fun getJourneyTimeline(lotId: String): List<PassportTimelineEvent> {
         return listOf(

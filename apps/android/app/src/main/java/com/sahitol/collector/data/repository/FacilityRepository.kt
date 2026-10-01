@@ -70,6 +70,14 @@ data class AcceptedTransaction(
     val isDemo: Boolean
 )
 
+data class LiveHandoverStatus(
+    val handoverId: String,
+    val status: String,
+    val proposalHash: String,
+    val version: Int,
+    val confirmedAt: String?
+)
+
 data class LiveHandoverResult(
     val handoverId: String,
     val transactionId: String,
@@ -329,6 +337,40 @@ class FacilityRepository(
             ))
         } catch (_: Exception) { TradeResult.Failure("The handover response returned an unreadable response.") }
     }
+
+    /** Pull the authoritative handover state after the recycler acts on the second device. */
+    suspend fun fetchLiveHandoverStatus(handoverId: String, accountId: String): TradeResult<LiveHandoverStatus> {
+        if (!isUuid(handoverId)) return TradeResult.Failure("This handover has not been issued by the server.")
+        val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again to refresh the handover status.")
+        val response = requestJson("GET", "/api/v1/handovers/$handoverId", accessToken = token)
+            ?: return TradeResult.Failure("Could not refresh the handover status. Check the connection and retry.")
+        if (response.first !in 200..299) return TradeResult.Failure(apiMessage(response.second))
+        return parseLiveHandoverStatus(response.second)
+    }
+
+    /** Recover the most recent handover from the durable lot ID after process restart. */
+    suspend fun fetchLiveHandoverForLot(lotId: String, accountId: String): TradeResult<LiveHandoverStatus> {
+        if (!isUuid(lotId)) return TradeResult.Failure("This saved lot has not been synchronized yet.")
+        val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again to resume the handover.")
+        val response = requestJson("GET", "/api/v1/lots/$lotId/handover", accessToken = token)
+            ?: return TradeResult.Failure("Could not retrieve the handover record. Check the connection and retry.")
+        if (response.first !in 200..299) return TradeResult.Failure(apiMessage(response.second))
+        return parseLiveHandoverStatus(response.second)
+    }
+
+    private fun parseLiveHandoverStatus(body: String): TradeResult<LiveHandoverStatus> = try {
+        val item = JSONObject(body)
+        val confirmation = item.optJSONObject("confirmation")
+        TradeResult.Success(
+            LiveHandoverStatus(
+                handoverId = item.getString("id"),
+                status = item.getString("status"),
+                proposalHash = item.getString("proposal_hash"),
+                version = item.getInt("version"),
+                confirmedAt = confirmation?.optString("confirmed_at")?.ifBlank { null }
+            )
+        )
+    } catch (_: Exception) { TradeResult.Failure("The handover status returned an unreadable response.") }
 
     private suspend fun collectorDemoToken(accountId: String): String? {
         if (!accountId.startsWith("col_demo_")) {

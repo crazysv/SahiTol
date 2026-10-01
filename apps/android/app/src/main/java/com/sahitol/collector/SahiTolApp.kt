@@ -51,7 +51,7 @@ class SahiTolApp : Application() {
         lotRepository = LotRepository(database)
         priceRepository = com.sahitol.collector.data.repository.PriceRepository(database, applicationContext)
         facilityRepository = com.sahitol.collector.data.repository.FacilityRepository(database)
-        handoverRepository = com.sahitol.collector.data.repository.HandoverRepository(database)
+        handoverRepository = com.sahitol.collector.data.repository.HandoverRepository(database, applicationContext)
         paymentRepository = com.sahitol.collector.data.repository.PaymentRepository(database)
         sessionManager = SessionManager(applicationContext)
         classifier = LiteRtClassifier(applicationContext)

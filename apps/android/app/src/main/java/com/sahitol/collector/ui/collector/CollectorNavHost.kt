@@ -496,6 +496,7 @@ fun CollectorNavHost(
             val handoverId = backStackEntry.arguments?.getString("handoverId") ?: "default_handover"
             C11_DigitalHandoverRecordScreen(
                 handoverId = handoverId,
+                facilityRepository = facilityRepository,
                 handoverRepository = handoverRepository,
                 sessionManager = sessionManager,
                 onNavigateBack = { navController.popBackStack() },

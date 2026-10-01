@@ -74,10 +74,39 @@ fun C10_HandoverCaptureScreen(
     LaunchedEffect(lotId, accountId, lotContext.canonicalMaterialId) {
         loadingAgreement = true
         agreementError = null
+        val savedRecord = handoverRepository.getHandoverProposal(lotId)
+        val hasSavedServerRecord = savedRecord.handoverId != lotId && savedRecord.canonicalHash.isNotBlank()
+        if (hasSavedServerRecord) proposal = savedRecord
         when (val txResult = facilityRepository.fetchAcceptedTransaction(lotId, accountId)) {
             is TradeResult.Failure -> agreementError = txResult.message
             is TradeResult.Success -> {
                 agreement = txResult.value
+                val materialId = lotContext.canonicalMaterialId
+                if (materialId != null) {
+                    when (val handoverResult = facilityRepository.fetchLiveHandoverForLot(lotId, accountId)) {
+                        is TradeResult.Success -> {
+                            proposal = handoverRepository.cacheRecoveredServerProposal(
+                                handoverResult.value.handoverId,
+                                handoverResult.value.status,
+                                handoverResult.value.proposalHash,
+                                txResult.value,
+                                materialId,
+                                lotContext.materialLabel,
+                                "Accepted live facility"
+                            )
+                            savedSuccessToast = true
+                            loadingAgreement = false
+                            return@LaunchedEffect
+                        }
+                        is TradeResult.Failure -> Unit // No server handover yet; continue with accepted-offer recovery.
+                    }
+                }
+                if (txResult.value.lifecycle == "CONFIRMED" && hasSavedServerRecord) {
+                    proposal = handoverRepository.updateServerStatus(savedRecord.handoverId, "CONFIRMED") ?: savedRecord.copy(status = "CONFIRMED")
+                    savedSuccessToast = true
+                    loadingAgreement = false
+                    return@LaunchedEffect
+                }
                 when (val offersResult = facilityRepository.fetchLiveOffers(lotId, accountId)) {
                     is TradeResult.Failure -> agreementError = offersResult.message
                     is TradeResult.Success -> {
@@ -545,8 +574,18 @@ fun C10_HandoverCaptureScreen(
                             Icon(Icons.Default.CheckCircle, contentDescription = null, tint = SuccessGreen)
                             Spacer(modifier = Modifier.width(8.dp))
                             Column {
-                                Text("Server Handover Proposal Created", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = OnSurface)
-                                Text("Receipt ${proposal.referenceCode} is ready for recycler confirmation.", fontSize = 11.sp, color = OnSurfaceVariant)
+                                Text(
+                                    if (proposal.status == "CONFIRMED") "Recycler Handover Confirmed" else "Server Handover Proposal Created",
+                                    fontSize = 13.sp, fontWeight = FontWeight.Bold, color = OnSurface
+                                )
+                                Text(
+                                    if (proposal.status == "CONFIRMED") {
+                                        "Receipt ${proposal.referenceCode} has been confirmed by the recycler."
+                                    } else {
+                                        "Receipt ${proposal.referenceCode} is ready for recycler confirmation."
+                                    },
+                                    fontSize = 11.sp, color = OnSurfaceVariant
+                                )
                             }
                         }
 

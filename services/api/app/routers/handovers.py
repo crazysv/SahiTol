@@ -551,6 +551,30 @@ def import_demo_handover(
     return create_handover(req, response, current_user, db)
 
 
+@router.get("/lots/{lot_id}/handover", response_model=HandoverDetailResponse)
+@router.get("/api/v1/lots/{lot_id}/handover", response_model=HandoverDetailResponse)
+def get_latest_lot_handover(
+    lot_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Recover the latest authorized handover for a persisted lot after an app restart.
+
+    The client persists a lot ID durably, while a process restart can occur
+    before a server-issued handover ID is cached. This lookup is participant
+    scoped and delegates detail authorization to the canonical handover read.
+    """
+    handover = (
+        db.query(Handover)
+        .filter(Handover.lot_id == lot_id)
+        .order_by(desc(Handover.created_at))
+        .first()
+    )
+    if not handover:
+        raise HTTPException(status_code=404, detail="No handover exists for this lot.")
+    return get_handover(handover.id, current_user, db)
+
+
 @router.get("/handovers/{id}", response_model=HandoverDetailResponse)
 @router.get("/api/v1/handovers/{id}", response_model=HandoverDetailResponse)
 def get_handover(
