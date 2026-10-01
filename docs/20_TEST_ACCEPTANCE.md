@@ -84,7 +84,7 @@ Evidence: [T007_AUTH_AND_OWNERSHIP.md](../docs/evidence/T007_AUTH_AND_OWNERSHIP.
 
 ## AT-008
 
-**Role and object authorization** — RELEASE; status **PASS**.
+**Role and object authorization** — RELEASE; status **NOT_RUN**.
 
 Requirement: [R-AUTH-02](15_REQUIREMENTS.md#r-auth-02). Tasks: [T007](07_IMPLEMENTATION_PLAN.md#t007), [T040](07_IMPLEMENTATION_PLAN.md#t040). Spec: [12_GUARDRAILS](12_GUARDRAILS.md).
 
@@ -324,33 +324,33 @@ Evidence: [T023_HANDOVER_CONFIRMATIONS.md](../docs/evidence/T023_HANDOVER_CONFIR
 
 ## AT-032
 
-**Public verification and privacy** — RELEASE; status **PASS**.
+**Public verification and privacy** — RELEASE; status **NOT_RUN**.
 
 Requirement: [R-HAND-04](15_REQUIREMENTS.md#r-hand-04). Tasks: [T023](07_IMPLEMENTATION_PLAN.md#t023), [T025](07_IMPLEMENTATION_PLAN.md#t025), [T040](07_IMPLEMENTATION_PLAN.md#t040). Spec: [16_API_CONTRACT](16_API_CONTRACT.md).
 
 Check: An unguessable receipt link shows current redacted status and record/hash comparison; public visitor cannot fetch phone/GPS/photos/payment details; QR possession alone cannot authorize confirmation.
 
-Evidence: [T023_HANDOVER_CONFIRMATIONS.md](../docs/evidence/T023_HANDOVER_CONFIRMATIONS.md), [T025_SECOND_DEVICE_CONFIRMATION.md](../docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md), [T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md](../docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md), [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md). Note: Capability token hashing, unauthenticated public verification endpoint with strict PII/GPS/finance redaction, statutory non-EPR notice, payment review (R05), public verification web view (V01), mobile offline QR encoding minimal unguessable verification URL without PII, and security boundary tests verified across T023, T024, T025, and T040.
+Evidence: [T023_HANDOVER_CONFIRMATIONS.md](../docs/evidence/T023_HANDOVER_CONFIRMATIONS.md), [T025_SECOND_DEVICE_CONFIRMATION.md](../docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md), [T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md](../docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md), [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md). Note: The QR scanner correctly decodes the two-device payload without PII, but it has no server-backed public proposal lookup. Full cross-surface public verification remains NOT_RUN pending T025.
 
 ## AT-033
 
-**Weight grade price disagreement** — RELEASE; status **PASS**.
+**Weight grade price disagreement** — RELEASE; status **NOT_RUN**.
 
 Requirement: [R-HAND-05](15_REQUIREMENTS.md#r-hand-05). Tasks: [T023](07_IMPLEMENTATION_PLAN.md#t023), [T025](07_IMPLEMENTATION_PLAN.md#t025), [T027](07_IMPLEMENTATION_PLAN.md#t027), [T028](07_IMPLEMENTATION_PLAN.md#t028). Spec: [04_APPFLOW](04_APPFLOW.md).
 
 Check: Different measured weight/grade/price retains estimate and AI suggestion, sets pending acknowledgement/review and variance reason; neither party overwrites original facts; collector agreement or documented dispute is recorded.
 
-Evidence: [T023_HANDOVER_CONFIRMATIONS.md](../docs/evidence/T023_HANDOVER_CONFIRMATIONS.md), [T028_DATA_QUALITY_AND_ANOMALIES.md](../docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md), [T027_COLLECTOR_LEDGER_AND_PAYMENTS.md](../docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md). Note: Measured weight/grade/price discrepancies preserve original client facts, create TermsRevision with proposed_by='FACILITY', and require explicit collector acknowledgement; documented disputes preserve history verified across T023, T025, T027, and T028.
+Evidence: [T023_HANDOVER_CONFIRMATIONS.md](../docs/evidence/T023_HANDOVER_CONFIRMATIONS.md), [T028_DATA_QUALITY_AND_ANOMALIES.md](../docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md), [T027_COLLECTOR_LEDGER_AND_PAYMENTS.md](../docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md). Note: Backend and local discrepancy handling are tested, but the real second-device handover cannot yet receive server-backed terms confirmation. Full acceptance remains NOT_RUN pending T025.
 
 ## AT-034
 
-**Receipt PDF passport and procurement exports** — RELEASE; status **PASS**.
+**Receipt PDF passport and procurement exports** — RELEASE; status **NOT_RUN**.
 
 Requirement: [R-HAND-06](15_REQUIREMENTS.md#r-hand-06). Tasks: [T024](07_IMPLEMENTATION_PLAN.md#t024), [T025](07_IMPLEMENTATION_PLAN.md#t025), [T031](07_IMPLEMENTATION_PLAN.md#t031). Spec: [16_API_CONTRACT](16_API_CONTRACT.md).
 
 Check: Export offline pending PDF and server confirmed PDF/CSV; identifiers/status/hash/provenance agree with timeline; record is called Digital Handover Record and includes non-EPR boundary, never an official manifest claim.
 
-Evidence: [T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md](../docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md), [T031_DATASET_EXPORTS.md](../docs/evidence/T031_DATASET_EXPORTS.md). Note: Recycler procurement logs in CSV/JSON with statutory non-EPR disclosure header and SHA-256 digest in T031; native Android A4 PDF generator (ReceiptPdfGenerator), 5-stage material passport spine (C16), and statutory Non-EPR declaration verified in T024 via HandoverAndReceiptTest.
+Evidence: [T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md](../docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md), [T031_DATASET_EXPORTS.md](../docs/evidence/T031_DATASET_EXPORTS.md). Note: The Android receipt and disclaimer are tested, but the required second-device confirmation cannot yet issue a server-verified record. Full acceptance remains NOT_RUN pending T025.
 
 ## AT-035
 
@@ -604,7 +604,7 @@ Evidence: [T032_LICENSED_IMAGE_DATASET.md](../docs/evidence/T032_LICENSED_IMAGE_
 
 ## AT-060
 
-**Provenance and demo isolation everywhere** — RELEASE; status **PASS**.
+**Provenance and demo isolation everywhere** — RELEASE; status **NOT_RUN**.
 
 Requirement: [R-DATA-08](15_REQUIREMENTS.md#r-data-08). Tasks: [T005](07_IMPLEMENTATION_PLAN.md#t005), [T029](07_IMPLEMENTATION_PLAN.md#t029), [T031](07_IMPLEMENTATION_PLAN.md#t031), [T040](07_IMPLEMENTATION_PLAN.md#t040). Spec: [18_DATA_PROVENANCE](18_DATA_PROVENANCE.md).
 
@@ -734,7 +734,7 @@ Evidence: [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY
 
 ## AT-073
 
-**Privacy media access retention and audit** — RELEASE; status **PASS**.
+**Privacy media access retention and audit** — RELEASE; status **NOT_RUN**.
 
 Requirement: [R-SEC-02](15_REQUIREMENTS.md#r-sec-02). Tasks: [T008](07_IMPLEMENTATION_PLAN.md#t008), [T040](07_IMPLEMENTATION_PLAN.md#t040), [T042](07_IMPLEMENTATION_PLAN.md#t042). Spec: [12_GUARDRAILS](12_GUARDRAILS.md).
 
@@ -754,7 +754,7 @@ Evidence: None.
 
 ## AT-075
 
-**Reproducible local fallback and recovery** — RELEASE; status **PASS**.
+**Reproducible local fallback and recovery** — RELEASE; status **NOT_RUN**.
 
 Requirement: [R-OPS-02](15_REQUIREMENTS.md#r-ops-02). Tasks: [T042](07_IMPLEMENTATION_PLAN.md#t042). Spec: [DEPLOYMENT](DEPLOYMENT.md).
 
@@ -774,7 +774,7 @@ Evidence: [T037_OFFLINE_AUDIO_AND_GRAMMAR.md](../docs/evidence/T037_OFFLINE_AUDI
 
 ## AT-077
 
-**Monitoring and diagnostics** — RELEASE; status **PASS**.
+**Monitoring and diagnostics** — RELEASE; status **NOT_RUN**.
 
 Requirement: [R-OPS-04](15_REQUIREMENTS.md#r-ops-04). Tasks: [T028](07_IMPLEMENTATION_PLAN.md#t028), [T029](07_IMPLEMENTATION_PLAN.md#t029), [T042](07_IMPLEMENTATION_PLAN.md#t042). Spec: [MONITORING](MONITORING.md).
 

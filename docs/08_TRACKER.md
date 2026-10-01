@@ -2,7 +2,7 @@
 
 Generated from [catalog](planning/catalog.json) and [status](planning/status.json). Edit those files, then run `python scripts/render_docs.py` and `python scripts/check_docs.py`. Do not edit this view independently.
 
-**Release tasks: 49/50 DONE. Release acceptance: 36/79 PASS.** Future scope and external gaps are not counted as completed release work.
+**Release tasks: 38/50 DONE. Release acceptance: 28/79 PASS.** Future scope and external gaps are not counted as completed release work.
 
 Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, DONE; FUTURE starts DEFERRED. Allowed test states: NOT_RUN, PASS, FAIL, BLOCKED; external gap starts UNMET; future starts DEFERRED. Notes explain blockers and next action. Evidence paths are repository-relative, no secret-bearing files.
 
@@ -47,17 +47,17 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [T037](07_IMPLEMENTATION_PLAN.md#t037) | Generate and wire offline Hindi/Marathi audio | RELEASE | DONE | [T037_OFFLINE_AUDIO_AND_GRAMMAR.md](../docs/evidence/T037_OFFLINE_AUDIO_AND_GRAMMAR.md) | Generated 258 pre-generated offline MP3 audio clips across Hindi and Marathi covering numbers 0-99, scale words, units, statuses, and 9 safety cards; compiled complete audio_manifest.json with license attribution, SHA-256 hashes, and duration; implemented dynamic Indian numbering grammar (speakMoney, speakWeight, speakRate, speakRange, speakStatus, speakSafety), resilient AudioGuidanceManager with graceful missing clip handling and zero cloud speech runtime calls; verified by 7 JUnit tests and packaged into APK. |
 | [T038](07_IMPLEMENTATION_PLAN.md#t038) | Implement illustrative economics model | RELEASE | DONE | [T038_ILLUSTRATIVE_ECONOMICS.md](../docs/evidence/T038_ILLUSTRATIVE_ECONOMICS.md) | Transparent same-lot comparison calculator, sensitivity analysis, zero/negative baseline handling, zero collector fee sustainability model, canonical shared fixtures, and REST endpoints implemented and verified with 10 automated tests. |
 | [T039](07_IMPLEMENTATION_PLAN.md#t039) | Implement approved economics and safety views | RELEASE | DONE | [T039_ECONOMICS_AND_SAFETY_VIEWS.md](../docs/evidence/T039_ECONOMICS_AND_SAFETY_VIEWS.md) | Implemented approved C17 Contextual Safety Hub in Android Jetpack Compose matching Stitch design 1579fe53bac5 with trilingual support (hi/mr/en), offline audio guidance, critical hazards, prohibitions, and safe steps; wired contextual safety alerts into C05 Lot Editor and C03 Home; implemented approved U01 Interactive Unit Economics workspace in React/Vite matching Stitch design cab89a974c04 with real-time recalculation sliders, waterfall chart, zero/negative baseline handling, and 0 paise collector fee guarantee; verified with 6 Android and 6 Web unit tests. |
-| [T040](07_IMPLEMENTATION_PLAN.md#t040) | Verify security privacy and abuse boundaries | RELEASE | DONE | [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md) | 19 automated security, privacy, and abuse boundary tests verified in services/api/tests/test_security_and_abuse_boundaries.py. IDOR, cross-facility isolation, role boundaries, rate-limit lockout, user enumeration prevention, refresh token replay revocation, repository secrets scan (0 found), demo isolation without SMS, public capability token privacy, non-EPR notice, pseudonymized collector export, CSV formula injection neutralization, EXIF stripping, path traversal rejection, and signed URL expiration verified. |
-| [T041](07_IMPLEMENTATION_PLAN.md#t041) | Deploy hosted API database storage and web | RELEASE | DONE | [T041_HOSTED_DEPLOYMENT.md](../docs/evidence/T041_HOSTED_DEPLOYMENT.md) | Historical deployment evidence records Supabase migration/seed and Render/Cloudflare deployments. After owner intervention, independent recheck on 2026-10-01 returned HTTP 200 from both https://sahitol-api.onrender.com/health/live and https://sahitol.pages.dev. |
-| [T042](07_IMPLEMENTATION_PLAN.md#t042) | Prove local demo fallback and restore | RELEASE | DONE | [T042_LOCAL_FALLBACK_AND_RESTORE.md](../docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md) | Cryptographic backup and restore tool (scripts/backup_restore.py) with SHA-256 manifest and domain event hash-chain validation verified. Health live (/health/live) and ready (/health/ready) probes with zero-leakage DB failure handling verified. X-Correlation-ID middleware and structured logging implemented. Android release HTTPS and debug LAN network security configs verified. Docker Compose PostGIS environment and web camera manual reference fallback verified across 11 automated tests in test_backup_restore_and_recovery.py. |
-| [T043](07_IMPLEMENTATION_PLAN.md#t043) | Run cross-surface integration and fault acceptance | RELEASE | DONE | [T043_CROSS_SURFACE_INTEGRATION.md](../docs/evidence/T043_CROSS_SURFACE_INTEGRATION.md) | 44/44 tests passing in test_cross_surface_integration_and_fault_acceptance.py. Verified: canonical hash parity (SAHITOL-JCS-1), atomic outbox durability, offline queue drain and idempotency, versioned conflict detection (CONFLICT on stale expected_version), payment ledger integrity, admin quality flags, reference bootstrap, and end-to-end collector-recycler-ledger-admin lifecycle. |
-| [T044](07_IMPLEMENTATION_PLAN.md#t044) | Perform real-device and two-device usability tests | RELEASE | DONE | [T044_REAL_DEVICE_USABILITY.md](../docs/evidence/T044_REAL_DEVICE_USABILITY.md) | Real-device usability tests complete on N7OZPV59XWWKPF4X. Full E2E: S00 launch, C05 lot creation, C06/C07 price/valuation, C08 sync, C09 recycler offer/accept, C10 discrepancy capture+accept, C11 Digital Handover Record with QR (Ref ST-7022) and SHA-256 chain, C16 Material Passport journey spine verified. Bilingual labels (Hindi/English) throughout. Offline Ready badge confirmed on C10, C11. Honest EPR disclaimer in C11 confirmed. Fieldwork obligation UNMET (tracked separately). Screenshots in docs/evidence/ |
-| [T045](07_IMPLEMENTATION_PLAN.md#t045) | Measure entry-level performance and artifact size | RELEASE | DONE | [T045_PERFORMANCE_AND_ARTIFACT_SIZE.md](../docs/evidence/T045_PERFORMANCE_AND_ARTIFACT_SIZE.md) | Independent device re-verification on CPH2781 Android 16: debug APK 35.60 MB (within 40 MB goal), LiteRT model 1.18 MB, audio 258 MP3 files / 4.70 MB; Room diagnostic write/read 26 ms, JPEG compression 37 ms, LiteRT inference in airplane mode 61.42 ms, and total PSS 122,791 KB. Five activity launches had p50 1.974 s and p95 2.205 s: the p95 misses the 2 s goal and is explicitly recorded. Actual production photo-upload size and signed release APK remain unmeasured. |
-| [T046](07_IMPLEMENTATION_PLAN.md#t046) | Audit all translations and audio on device | RELEASE | DONE | [T046_TRANSLATION_AUDIO_AUDIT.md](../docs/evidence/T046_TRANSLATION_AUDIO_AUDIT.md) | String parity 145/145 keys all three locales, zero placeholder mismatches. Audio 258/258 clips present, all SHA-256 checksums verified, runtime_cloud_call=false. AudioGrammarAndManifestTest 8 methods PASS (all spec fixtures: 0-99 numbers, 100-100000 place values, paise, weight, rate, range, negative, null, status, safety). Devanagari spot-checks PASS. On-device bilingual rendering PASS. Honest gaps: native-speaker review NOT_REVIEWED, TalkBack on-device NOT_RUN. Both explicitly tracked, do not block per task scope. |
-| [T047](07_IMPLEMENTATION_PLAN.md#t047) | Freeze dataset and model evidence package | RELEASE | DONE | [T047_DATASET_MODEL_EVIDENCE.md](../docs/evidence/T047_DATASET_MODEL_EVIDENCE.md), [T047_FROZEN_RELEASE_MANIFEST.json](../docs/evidence/T047_FROZEN_RELEASE_MANIFEST.json) | Frozen release manifest generated with SHA-256 digests for classifier.tflite (35d0ad7c...), model_card.md, audio_manifest.json (258 clips), all 7 data cards, and all family manifests. Model macro-F1 0.0159 and 100pct abstention honestly documented. R-RES-02 fieldwork UNMET explicitly declared. Native-speaker review NOT_REVIEWED. All honest gaps documented. |
-| [T048](07_IMPLEMENTATION_PLAN.md#t048) | Prepare PPT and presenter handoff | RELEASE | DONE | [T048_PPT_PRESENTER_HANDOFF.md](../docs/evidence/T048_PPT_PRESENTER_HANDOFF.md) | Complete 10-slide deck script with speaker notes, one-page fact sheet (all numbers evidence-backed from T041-T047), five presenter role cards with hand-off cues and Q&A crib, and slide production instructions for owner. All claims cite evidence. Honest limitations (R-RES-02 UNMET, model macro-F1 0.0159, native-speaker NOT_REVIEWED) stated throughout. Owner builds actual PPT from this script using organizer template. |
-| [T049](07_IMPLEMENTATION_PLAN.md#t049) | Record and validate demo video | RELEASE | DONE | [T049_DEMO_VIDEO_SHOTLIST.md](../docs/evidence/T049_DEMO_VIDEO_SHOTLIST.md) | Complete 4-minute shot list (14 segments A-N), pre-recording device checklist (15 items), post-recording validation checklist (12 items), upload/link instructions, and recording setup commands. Physical recording is an owner action requiring device N7OZPV59XWWKPF4X. Video link to be recorded in T050 once owner completes recording. Privacy/security/claim constraints documented (no secrets, no EPR cert claim, no borrowed accuracy, demo labels required). |
-| [T050](07_IMPLEMENTATION_PLAN.md#t050) | Package release and submission handoff | RELEASE | DONE | [T050_RELEASE_HANDOFF.md](../docs/evidence/T050_RELEASE_HANDOFF.md) | All software acceptance gates verified: 318 backend tests, 44 web integration tests, 73 Android unit tests, 6 must-haves, 7 data cards, frozen SHA-256 manifest. README updated from documentation-only to implemented state. Four required deliverables: debug APK exists (33.25 MB, SHA-256 db71f114...), PPT script complete (T048), video shot list complete (T049), GitHub README updated. Remaining owner actions: sign release APK, record video, build PPT from script, confirm GitHub visibility, submit to portal. Portal submission result to be recorded separately. |
+| [T040](07_IMPLEMENTATION_PLAN.md#t040) | Verify security privacy and abuse boundaries | RELEASE | IN_PROGRESS | [T040_SECURITY_AND_ABUSE_BOUNDARIES.md](../docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md) | Security boundary tests pass, but this task depends on T025's incomplete server-backed second-device confirmation. T040 remains IN_PROGRESS until that dependency is closed. |
+| [T041](07_IMPLEMENTATION_PLAN.md#t041) | Deploy hosted API database storage and web | RELEASE | IN_PROGRESS | [T041_HOSTED_DEPLOYMENT.md](../docs/evidence/T041_HOSTED_DEPLOYMENT.md) | Hosted services return HTTP 200, but T041 depends on T025's incomplete server-backed second-device confirmation. T041 remains IN_PROGRESS until that dependency is closed. |
+| [T042](07_IMPLEMENTATION_PLAN.md#t042) | Prove local demo fallback and restore | RELEASE | IN_PROGRESS | [T042_LOCAL_FALLBACK_AND_RESTORE.md](../docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md) | Cryptographic backup and restore tool (scripts/backup_restore.py) with SHA-256 manifest and domain event hash-chain validation verified. Health live (/health/live) and ready (/health/ready) probes with zero-leakage DB failure handling verified. X-Correlation-ID middleware and structured logging implemented. Android release HTTPS and debug LAN network security configs verified. Docker Compose PostGIS environment and web camera manual reference fallback verified across 11 automated tests in test_backup_restore_and_recovery.py. |
+| [T043](07_IMPLEMENTATION_PLAN.md#t043) | Run cross-surface integration and fault acceptance | RELEASE | IN_PROGRESS | [T043_CROSS_SURFACE_INTEGRATION.md](../docs/evidence/T043_CROSS_SURFACE_INTEGRATION.md) | Cross-surface tests pass, but the real second-device confirmation boundary in dependency T025 is incomplete. T043 remains IN_PROGRESS until it can verify that path end-to-end. |
+| [T044](07_IMPLEMENTATION_PLAN.md#t044) | Perform real-device and two-device usability tests | RELEASE | IN_PROGRESS | [T044_REAL_DEVICE_USABILITY.md](../docs/evidence/T044_REAL_DEVICE_USABILITY.md) | Real-device usability tests complete on N7OZPV59XWWKPF4X. Full E2E: S00 launch, C05 lot creation, C06/C07 price/valuation, C08 sync, C09 recycler offer/accept, C10 discrepancy capture+accept, C11 Digital Handover Record with QR (Ref ST-7022) and SHA-256 chain, C16 Material Passport journey spine verified. Bilingual labels (Hindi/English) throughout. Offline Ready badge confirmed on C10, C11. Honest EPR disclaimer in C11 confirmed. Fieldwork obligation UNMET (tracked separately). Screenshots in docs/evidence/ |
+| [T045](07_IMPLEMENTATION_PLAN.md#t045) | Measure entry-level performance and artifact size | RELEASE | IN_PROGRESS | [T045_PERFORMANCE_AND_ARTIFACT_SIZE.md](../docs/evidence/T045_PERFORMANCE_AND_ARTIFACT_SIZE.md) | Independent device re-verification on CPH2781 Android 16: debug APK 35.60 MB (within 40 MB goal), LiteRT model 1.18 MB, audio 258 MP3 files / 4.70 MB; Room diagnostic write/read 26 ms, JPEG compression 37 ms, LiteRT inference in airplane mode 61.42 ms, and total PSS 122,791 KB. Five activity launches had p50 1.974 s and p95 2.205 s: the p95 misses the 2 s goal and is explicitly recorded. Actual production photo-upload size and signed release APK remain unmeasured. |
+| [T046](07_IMPLEMENTATION_PLAN.md#t046) | Audit all translations and audio on device | RELEASE | IN_PROGRESS | [T046_TRANSLATION_AUDIO_AUDIT.md](../docs/evidence/T046_TRANSLATION_AUDIO_AUDIT.md) | String parity 145/145 keys all three locales, zero placeholder mismatches. Audio 258/258 clips present, all SHA-256 checksums verified, runtime_cloud_call=false. AudioGrammarAndManifestTest 8 methods PASS (all spec fixtures: 0-99 numbers, 100-100000 place values, paise, weight, rate, range, negative, null, status, safety). Devanagari spot-checks PASS. On-device bilingual rendering PASS. Honest gaps: native-speaker review NOT_REVIEWED, TalkBack on-device NOT_RUN. Both explicitly tracked, do not block per task scope. |
+| [T047](07_IMPLEMENTATION_PLAN.md#t047) | Freeze dataset and model evidence package | RELEASE | IN_PROGRESS | [T047_DATASET_MODEL_EVIDENCE.md](../docs/evidence/T047_DATASET_MODEL_EVIDENCE.md), [T047_FROZEN_RELEASE_MANIFEST.json](../docs/evidence/T047_FROZEN_RELEASE_MANIFEST.json) | Frozen release manifest generated with SHA-256 digests for classifier.tflite (35d0ad7c...), model_card.md, audio_manifest.json (258 clips), all 7 data cards, and all family manifests. Model macro-F1 0.0159 and 100pct abstention honestly documented. R-RES-02 fieldwork UNMET explicitly declared. Native-speaker review NOT_REVIEWED. All honest gaps documented. |
+| [T048](07_IMPLEMENTATION_PLAN.md#t048) | Prepare PPT and presenter handoff | RELEASE | IN_PROGRESS | [T048_PPT_PRESENTER_HANDOFF.md](../docs/evidence/T048_PPT_PRESENTER_HANDOFF.md) | Complete 10-slide deck script with speaker notes, one-page fact sheet (all numbers evidence-backed from T041-T047), five presenter role cards with hand-off cues and Q&A crib, and slide production instructions for owner. All claims cite evidence. Honest limitations (R-RES-02 UNMET, model macro-F1 0.0159, native-speaker NOT_REVIEWED) stated throughout. Owner builds actual PPT from this script using organizer template. |
+| [T049](07_IMPLEMENTATION_PLAN.md#t049) | Record and validate demo video | RELEASE | IN_PROGRESS | [T049_DEMO_VIDEO_SHOTLIST.md](../docs/evidence/T049_DEMO_VIDEO_SHOTLIST.md) | Complete 4-minute shot list (14 segments A-N), pre-recording device checklist (15 items), post-recording validation checklist (12 items), upload/link instructions, and recording setup commands. Physical recording is an owner action requiring device N7OZPV59XWWKPF4X. Video link to be recorded in T050 once owner completes recording. Privacy/security/claim constraints documented (no secrets, no EPR cert claim, no borrowed accuracy, demo labels required). |
+| [T050](07_IMPLEMENTATION_PLAN.md#t050) | Package release and submission handoff | RELEASE | IN_PROGRESS | [T050_RELEASE_HANDOFF.md](../docs/evidence/T050_RELEASE_HANDOFF.md) | All software acceptance gates verified: 318 backend tests, 44 web integration tests, 73 Android unit tests, 6 must-haves, 7 data cards, frozen SHA-256 manifest. README updated from documentation-only to implemented state. Four required deliverables: debug APK exists (33.25 MB, SHA-256 db71f114...), PPT script complete (T048), video shot list complete (T049), GitHub README updated. Remaining owner actions: sign release APK, record video, build PPT from script, confirm GitHub visibility, submit to portal. Portal submission result to be recorded separately. |
 | [F001](07_IMPLEMENTATION_PLAN.md#f001) | Assisted collector and aggregator accounts | FUTURE | DEFERRED | None | Explicit future scope; requires owner promotion and expanded plan. |
 | [F002](07_IMPLEMENTATION_PLAN.md#f002) | Multi-collector batching and pickup operations | FUTURE | DEFERRED | None | Explicit future scope; requires owner promotion and expanded plan. |
 | [F003](07_IMPLEMENTATION_PLAN.md#f003) | Predictive prices and automated public feeds | FUTURE | DEFERRED | None | Explicit future scope; requires owner promotion and expanded plan. |
@@ -85,16 +85,16 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 
 | Requirement | Scope | Task completion | Acceptance |
 |---|---|---|---|
-| [R-GOV-01](15_REQUIREMENTS.md#r-gov-01) | RELEASE | 2/2 | [AT-001](20_TEST_ACCEPTANCE.md#at-001): NOT_RUN |
+| [R-GOV-01](15_REQUIREMENTS.md#r-gov-01) | RELEASE | 1/2 | [AT-001](20_TEST_ACCEPTANCE.md#at-001): NOT_RUN |
 | [R-GOV-02](15_REQUIREMENTS.md#r-gov-02) | RELEASE | 9/10 | [AT-002](20_TEST_ACCEPTANCE.md#at-002): NOT_RUN |
-| [R-GOV-03](15_REQUIREMENTS.md#r-gov-03) | RELEASE | 2/2 | [AT-003](20_TEST_ACCEPTANCE.md#at-003): NOT_RUN |
-| [R-GOV-04](15_REQUIREMENTS.md#r-gov-04) | RELEASE | 3/3 | [AT-004](20_TEST_ACCEPTANCE.md#at-004): NOT_RUN |
+| [R-GOV-03](15_REQUIREMENTS.md#r-gov-03) | RELEASE | 1/2 | [AT-003](20_TEST_ACCEPTANCE.md#at-003): NOT_RUN |
+| [R-GOV-04](15_REQUIREMENTS.md#r-gov-04) | RELEASE | 0/3 | [AT-004](20_TEST_ACCEPTANCE.md#at-004): NOT_RUN |
 | [R-ARC-01](15_REQUIREMENTS.md#r-arc-01) | RELEASE | 2/2 | [AT-005](20_TEST_ACCEPTANCE.md#at-005): PASS |
 | [R-ARC-02](15_REQUIREMENTS.md#r-arc-02) | RELEASE | 3/3 | [AT-006](20_TEST_ACCEPTANCE.md#at-006): NOT_RUN |
 | [R-AUTH-01](15_REQUIREMENTS.md#r-auth-01) | RELEASE | 2/2 | [AT-007](20_TEST_ACCEPTANCE.md#at-007): PASS |
-| [R-AUTH-02](15_REQUIREMENTS.md#r-auth-02) | RELEASE | 2/2 | [AT-008](20_TEST_ACCEPTANCE.md#at-008): PASS |
+| [R-AUTH-02](15_REQUIREMENTS.md#r-auth-02) | RELEASE | 1/2 | [AT-008](20_TEST_ACCEPTANCE.md#at-008): NOT_RUN |
 | [R-AUTH-03](15_REQUIREMENTS.md#r-auth-03) | RELEASE | 4/4 | [AT-009](20_TEST_ACCEPTANCE.md#at-009): PASS |
-| [R-AUTH-04](15_REQUIREMENTS.md#r-auth-04) | RELEASE | 3/3 | [AT-010](20_TEST_ACCEPTANCE.md#at-010): NOT_RUN |
+| [R-AUTH-04](15_REQUIREMENTS.md#r-auth-04) | RELEASE | 1/3 | [AT-010](20_TEST_ACCEPTANCE.md#at-010): NOT_RUN |
 | [R-LOT-01](15_REQUIREMENTS.md#r-lot-01) | RELEASE | 2/2 | [AT-011](20_TEST_ACCEPTANCE.md#at-011): PASS |
 | [R-LOT-02](15_REQUIREMENTS.md#r-lot-02) | RELEASE | 3/3 | [AT-012](20_TEST_ACCEPTANCE.md#at-012): PASS |
 | [R-LOT-03](15_REQUIREMENTS.md#r-lot-03) | RELEASE | 2/2 | [AT-013](20_TEST_ACCEPTANCE.md#at-013): PASS |
@@ -114,57 +114,57 @@ Allowed task states: TODO, IN_PROGRESS, WAITING_STITCH, WAITING_INPUT, BLOCKED, 
 | [R-OFFER-01](15_REQUIREMENTS.md#r-offer-01) | RELEASE | 2/2 | [AT-027](20_TEST_ACCEPTANCE.md#at-027): NOT_RUN |
 | [R-OFFER-02](15_REQUIREMENTS.md#r-offer-02) | RELEASE | 2/2 | [AT-028](20_TEST_ACCEPTANCE.md#at-028): PASS |
 | [R-HAND-01](15_REQUIREMENTS.md#r-hand-01) | RELEASE | 2/2 | [AT-029](20_TEST_ACCEPTANCE.md#at-029): PASS |
-| [R-HAND-02](15_REQUIREMENTS.md#r-hand-02) | RELEASE | 1/2 | [AT-030](20_TEST_ACCEPTANCE.md#at-030): NOT_RUN |
-| [R-HAND-03](15_REQUIREMENTS.md#r-hand-03) | RELEASE | 3/3 | [AT-031](20_TEST_ACCEPTANCE.md#at-031): NOT_RUN |
-| [R-HAND-04](15_REQUIREMENTS.md#r-hand-04) | RELEASE | 2/3 | [AT-032](20_TEST_ACCEPTANCE.md#at-032): PASS |
-| [R-HAND-05](15_REQUIREMENTS.md#r-hand-05) | RELEASE | 3/4 | [AT-033](20_TEST_ACCEPTANCE.md#at-033): PASS |
-| [R-HAND-06](15_REQUIREMENTS.md#r-hand-06) | RELEASE | 2/3 | [AT-034](20_TEST_ACCEPTANCE.md#at-034): PASS |
+| [R-HAND-02](15_REQUIREMENTS.md#r-hand-02) | RELEASE | 0/2 | [AT-030](20_TEST_ACCEPTANCE.md#at-030): NOT_RUN |
+| [R-HAND-03](15_REQUIREMENTS.md#r-hand-03) | RELEASE | 2/3 | [AT-031](20_TEST_ACCEPTANCE.md#at-031): NOT_RUN |
+| [R-HAND-04](15_REQUIREMENTS.md#r-hand-04) | RELEASE | 1/3 | [AT-032](20_TEST_ACCEPTANCE.md#at-032): NOT_RUN |
+| [R-HAND-05](15_REQUIREMENTS.md#r-hand-05) | RELEASE | 3/4 | [AT-033](20_TEST_ACCEPTANCE.md#at-033): NOT_RUN |
+| [R-HAND-06](15_REQUIREMENTS.md#r-hand-06) | RELEASE | 2/3 | [AT-034](20_TEST_ACCEPTANCE.md#at-034): NOT_RUN |
 | [R-PAY-01](15_REQUIREMENTS.md#r-pay-01) | RELEASE | 2/2 | [AT-035](20_TEST_ACCEPTANCE.md#at-035): PASS |
 | [R-PAY-02](15_REQUIREMENTS.md#r-pay-02) | RELEASE | 2/2 | [AT-036](20_TEST_ACCEPTANCE.md#at-036): PASS |
 | [R-PAY-03](15_REQUIREMENTS.md#r-pay-03) | RELEASE | 2/2 | [AT-037](20_TEST_ACCEPTANCE.md#at-037): PASS |
 | [R-OFF-01](15_REQUIREMENTS.md#r-off-01) | RELEASE | 4/4 | [AT-038](20_TEST_ACCEPTANCE.md#at-038): PASS |
-| [R-OFF-02](15_REQUIREMENTS.md#r-off-02) | RELEASE | 2/2 | [AT-039](20_TEST_ACCEPTANCE.md#at-039): NOT_RUN |
-| [R-OFF-03](15_REQUIREMENTS.md#r-off-03) | RELEASE | 2/2 | [AT-040](20_TEST_ACCEPTANCE.md#at-040): NOT_RUN |
-| [R-OFF-04](15_REQUIREMENTS.md#r-off-04) | RELEASE | 3/3 | [AT-041](20_TEST_ACCEPTANCE.md#at-041): NOT_RUN |
-| [R-OFF-05](15_REQUIREMENTS.md#r-off-05) | RELEASE | 3/3 | [AT-042](20_TEST_ACCEPTANCE.md#at-042): NOT_RUN |
-| [R-OFF-06](15_REQUIREMENTS.md#r-off-06) | RELEASE | 3/3 | [AT-043](20_TEST_ACCEPTANCE.md#at-043): NOT_RUN |
-| [R-ML-01](15_REQUIREMENTS.md#r-ml-01) | RELEASE | 2/2 | [AT-044](20_TEST_ACCEPTANCE.md#at-044): NOT_RUN |
-| [R-ML-02](15_REQUIREMENTS.md#r-ml-02) | RELEASE | 2/2 | [AT-045](20_TEST_ACCEPTANCE.md#at-045): NOT_RUN |
-| [R-ML-03](15_REQUIREMENTS.md#r-ml-03) | RELEASE | 2/2 | [AT-046](20_TEST_ACCEPTANCE.md#at-046): NOT_RUN |
-| [R-ML-04](15_REQUIREMENTS.md#r-ml-04) | RELEASE | 3/3 | [AT-047](20_TEST_ACCEPTANCE.md#at-047): NOT_RUN |
+| [R-OFF-02](15_REQUIREMENTS.md#r-off-02) | RELEASE | 1/2 | [AT-039](20_TEST_ACCEPTANCE.md#at-039): NOT_RUN |
+| [R-OFF-03](15_REQUIREMENTS.md#r-off-03) | RELEASE | 1/2 | [AT-040](20_TEST_ACCEPTANCE.md#at-040): NOT_RUN |
+| [R-OFF-04](15_REQUIREMENTS.md#r-off-04) | RELEASE | 2/3 | [AT-041](20_TEST_ACCEPTANCE.md#at-041): NOT_RUN |
+| [R-OFF-05](15_REQUIREMENTS.md#r-off-05) | RELEASE | 2/3 | [AT-042](20_TEST_ACCEPTANCE.md#at-042): NOT_RUN |
+| [R-OFF-06](15_REQUIREMENTS.md#r-off-06) | RELEASE | 2/3 | [AT-043](20_TEST_ACCEPTANCE.md#at-043): NOT_RUN |
+| [R-ML-01](15_REQUIREMENTS.md#r-ml-01) | RELEASE | 1/2 | [AT-044](20_TEST_ACCEPTANCE.md#at-044): NOT_RUN |
+| [R-ML-02](15_REQUIREMENTS.md#r-ml-02) | RELEASE | 1/2 | [AT-045](20_TEST_ACCEPTANCE.md#at-045): NOT_RUN |
+| [R-ML-03](15_REQUIREMENTS.md#r-ml-03) | RELEASE | 1/2 | [AT-046](20_TEST_ACCEPTANCE.md#at-046): NOT_RUN |
+| [R-ML-04](15_REQUIREMENTS.md#r-ml-04) | RELEASE | 1/3 | [AT-047](20_TEST_ACCEPTANCE.md#at-047): NOT_RUN |
 | [R-SAFE-01](15_REQUIREMENTS.md#r-safe-01) | RELEASE | 2/2 | [AT-048](20_TEST_ACCEPTANCE.md#at-048): PASS |
-| [R-LANG-01](15_REQUIREMENTS.md#r-lang-01) | RELEASE | 2/2 | [AT-049](20_TEST_ACCEPTANCE.md#at-049): NOT_RUN |
-| [R-LANG-02](15_REQUIREMENTS.md#r-lang-02) | RELEASE | 2/2 | [AT-050](20_TEST_ACCEPTANCE.md#at-050): NOT_RUN |
-| [R-UX-01](15_REQUIREMENTS.md#r-ux-01) | RELEASE | 4/4 | [AT-051](20_TEST_ACCEPTANCE.md#at-051): NOT_RUN |
-| [R-UX-02](15_REQUIREMENTS.md#r-ux-02) | RELEASE | 1/1 | [AT-052](20_TEST_ACCEPTANCE.md#at-052): NOT_RUN |
-| [R-DATA-01](15_REQUIREMENTS.md#r-data-01) | RELEASE | 4/4 | [AT-053](20_TEST_ACCEPTANCE.md#at-053): NOT_RUN |
-| [R-DATA-02](15_REQUIREMENTS.md#r-data-02) | RELEASE | 4/4 | [AT-054](20_TEST_ACCEPTANCE.md#at-054): NOT_RUN |
-| [R-DATA-03](15_REQUIREMENTS.md#r-data-03) | RELEASE | 5/5 | [AT-055](20_TEST_ACCEPTANCE.md#at-055): NOT_RUN |
-| [R-DATA-04](15_REQUIREMENTS.md#r-data-04) | RELEASE | 3/3 | [AT-056](20_TEST_ACCEPTANCE.md#at-056): NOT_RUN |
-| [R-DATA-05](15_REQUIREMENTS.md#r-data-05) | RELEASE | 3/3 | [AT-057](20_TEST_ACCEPTANCE.md#at-057): NOT_RUN |
-| [R-DATA-06](15_REQUIREMENTS.md#r-data-06) | RELEASE | 4/4 | [AT-058](20_TEST_ACCEPTANCE.md#at-058): NOT_RUN |
-| [R-DATA-07](15_REQUIREMENTS.md#r-data-07) | RELEASE | 3/3 | [AT-059](20_TEST_ACCEPTANCE.md#at-059): NOT_RUN |
-| [R-DATA-08](15_REQUIREMENTS.md#r-data-08) | RELEASE | 4/4 | [AT-060](20_TEST_ACCEPTANCE.md#at-060): PASS |
+| [R-LANG-01](15_REQUIREMENTS.md#r-lang-01) | RELEASE | 1/2 | [AT-049](20_TEST_ACCEPTANCE.md#at-049): NOT_RUN |
+| [R-LANG-02](15_REQUIREMENTS.md#r-lang-02) | RELEASE | 1/2 | [AT-050](20_TEST_ACCEPTANCE.md#at-050): NOT_RUN |
+| [R-UX-01](15_REQUIREMENTS.md#r-ux-01) | RELEASE | 2/4 | [AT-051](20_TEST_ACCEPTANCE.md#at-051): NOT_RUN |
+| [R-UX-02](15_REQUIREMENTS.md#r-ux-02) | RELEASE | 0/1 | [AT-052](20_TEST_ACCEPTANCE.md#at-052): NOT_RUN |
+| [R-DATA-01](15_REQUIREMENTS.md#r-data-01) | RELEASE | 3/4 | [AT-053](20_TEST_ACCEPTANCE.md#at-053): NOT_RUN |
+| [R-DATA-02](15_REQUIREMENTS.md#r-data-02) | RELEASE | 3/4 | [AT-054](20_TEST_ACCEPTANCE.md#at-054): NOT_RUN |
+| [R-DATA-03](15_REQUIREMENTS.md#r-data-03) | RELEASE | 4/5 | [AT-055](20_TEST_ACCEPTANCE.md#at-055): NOT_RUN |
+| [R-DATA-04](15_REQUIREMENTS.md#r-data-04) | RELEASE | 2/3 | [AT-056](20_TEST_ACCEPTANCE.md#at-056): NOT_RUN |
+| [R-DATA-05](15_REQUIREMENTS.md#r-data-05) | RELEASE | 2/3 | [AT-057](20_TEST_ACCEPTANCE.md#at-057): NOT_RUN |
+| [R-DATA-06](15_REQUIREMENTS.md#r-data-06) | RELEASE | 2/4 | [AT-058](20_TEST_ACCEPTANCE.md#at-058): NOT_RUN |
+| [R-DATA-07](15_REQUIREMENTS.md#r-data-07) | RELEASE | 2/3 | [AT-059](20_TEST_ACCEPTANCE.md#at-059): NOT_RUN |
+| [R-DATA-08](15_REQUIREMENTS.md#r-data-08) | RELEASE | 3/4 | [AT-060](20_TEST_ACCEPTANCE.md#at-060): NOT_RUN |
 | [R-DATA-09](15_REQUIREMENTS.md#r-data-09) | RELEASE | 3/3 | [AT-061](20_TEST_ACCEPTANCE.md#at-061): NOT_RUN |
-| [R-DATA-10](15_REQUIREMENTS.md#r-data-10) | RELEASE | 2/2 | [AT-062](20_TEST_ACCEPTANCE.md#at-062): NOT_RUN |
-| [R-DATA-11](15_REQUIREMENTS.md#r-data-11) | RELEASE | 2/2 | [AT-063](20_TEST_ACCEPTANCE.md#at-063): NOT_RUN |
+| [R-DATA-10](15_REQUIREMENTS.md#r-data-10) | RELEASE | 1/2 | [AT-062](20_TEST_ACCEPTANCE.md#at-062): NOT_RUN |
+| [R-DATA-11](15_REQUIREMENTS.md#r-data-11) | RELEASE | 1/2 | [AT-063](20_TEST_ACCEPTANCE.md#at-063): NOT_RUN |
 | [R-ADMIN-01](15_REQUIREMENTS.md#r-admin-01) | RELEASE | 2/2 | [AT-064](20_TEST_ACCEPTANCE.md#at-064): PASS |
 | [R-ADMIN-02](15_REQUIREMENTS.md#r-admin-02) | RELEASE | 2/2 | [AT-065](20_TEST_ACCEPTANCE.md#at-065): PASS |
 | [R-ADMIN-03](15_REQUIREMENTS.md#r-admin-03) | RELEASE | 2/2 | [AT-066](20_TEST_ACCEPTANCE.md#at-066): PASS |
 | [R-ECON-01](15_REQUIREMENTS.md#r-econ-01) | RELEASE | 2/2 | [AT-067](20_TEST_ACCEPTANCE.md#at-067): PASS |
-| [R-ECON-02](15_REQUIREMENTS.md#r-econ-02) | RELEASE | 2/2 | [AT-068](20_TEST_ACCEPTANCE.md#at-068): NOT_RUN |
-| [R-RES-01](15_REQUIREMENTS.md#r-res-01) | RELEASE | 3/3 | [AT-069](20_TEST_ACCEPTANCE.md#at-069): NOT_RUN |
-| [R-RES-02](15_REQUIREMENTS.md#r-res-02) | EXTERNAL_GAP | 4/4 | [AT-070](20_TEST_ACCEPTANCE.md#at-070): UNMET |
-| [R-REG-01](15_REQUIREMENTS.md#r-reg-01) | RELEASE | 4/4 | [AT-071](20_TEST_ACCEPTANCE.md#at-071): NOT_RUN |
-| [R-SEC-01](15_REQUIREMENTS.md#r-sec-01) | RELEASE | 3/3 | [AT-072](20_TEST_ACCEPTANCE.md#at-072): NOT_RUN |
-| [R-SEC-02](15_REQUIREMENTS.md#r-sec-02) | RELEASE | 3/3 | [AT-073](20_TEST_ACCEPTANCE.md#at-073): PASS |
-| [R-OPS-01](15_REQUIREMENTS.md#r-ops-01) | RELEASE | 3/3 | [AT-074](20_TEST_ACCEPTANCE.md#at-074): NOT_RUN |
-| [R-OPS-02](15_REQUIREMENTS.md#r-ops-02) | RELEASE | 1/1 | [AT-075](20_TEST_ACCEPTANCE.md#at-075): PASS |
-| [R-OPS-03](15_REQUIREMENTS.md#r-ops-03) | RELEASE | 3/3 | [AT-076](20_TEST_ACCEPTANCE.md#at-076): NOT_RUN |
-| [R-OPS-04](15_REQUIREMENTS.md#r-ops-04) | RELEASE | 3/3 | [AT-077](20_TEST_ACCEPTANCE.md#at-077): PASS |
-| [R-QA-01](15_REQUIREMENTS.md#r-qa-01) | RELEASE | 2/2 | [AT-078](20_TEST_ACCEPTANCE.md#at-078): NOT_RUN |
-| [R-QA-02](15_REQUIREMENTS.md#r-qa-02) | RELEASE | 2/2 | [AT-079](20_TEST_ACCEPTANCE.md#at-079): NOT_RUN |
-| [R-DOC-01](15_REQUIREMENTS.md#r-doc-01) | RELEASE | 3/3 | [AT-080](20_TEST_ACCEPTANCE.md#at-080): NOT_RUN |
+| [R-ECON-02](15_REQUIREMENTS.md#r-econ-02) | RELEASE | 1/2 | [AT-068](20_TEST_ACCEPTANCE.md#at-068): NOT_RUN |
+| [R-RES-01](15_REQUIREMENTS.md#r-res-01) | RELEASE | 1/3 | [AT-069](20_TEST_ACCEPTANCE.md#at-069): NOT_RUN |
+| [R-RES-02](15_REQUIREMENTS.md#r-res-02) | EXTERNAL_GAP | 1/4 | [AT-070](20_TEST_ACCEPTANCE.md#at-070): UNMET |
+| [R-REG-01](15_REQUIREMENTS.md#r-reg-01) | RELEASE | 3/4 | [AT-071](20_TEST_ACCEPTANCE.md#at-071): NOT_RUN |
+| [R-SEC-01](15_REQUIREMENTS.md#r-sec-01) | RELEASE | 1/3 | [AT-072](20_TEST_ACCEPTANCE.md#at-072): NOT_RUN |
+| [R-SEC-02](15_REQUIREMENTS.md#r-sec-02) | RELEASE | 1/3 | [AT-073](20_TEST_ACCEPTANCE.md#at-073): NOT_RUN |
+| [R-OPS-01](15_REQUIREMENTS.md#r-ops-01) | RELEASE | 0/3 | [AT-074](20_TEST_ACCEPTANCE.md#at-074): NOT_RUN |
+| [R-OPS-02](15_REQUIREMENTS.md#r-ops-02) | RELEASE | 0/1 | [AT-075](20_TEST_ACCEPTANCE.md#at-075): NOT_RUN |
+| [R-OPS-03](15_REQUIREMENTS.md#r-ops-03) | RELEASE | 2/3 | [AT-076](20_TEST_ACCEPTANCE.md#at-076): NOT_RUN |
+| [R-OPS-04](15_REQUIREMENTS.md#r-ops-04) | RELEASE | 2/3 | [AT-077](20_TEST_ACCEPTANCE.md#at-077): NOT_RUN |
+| [R-QA-01](15_REQUIREMENTS.md#r-qa-01) | RELEASE | 0/2 | [AT-078](20_TEST_ACCEPTANCE.md#at-078): NOT_RUN |
+| [R-QA-02](15_REQUIREMENTS.md#r-qa-02) | RELEASE | 0/2 | [AT-079](20_TEST_ACCEPTANCE.md#at-079): NOT_RUN |
+| [R-DOC-01](15_REQUIREMENTS.md#r-doc-01) | RELEASE | 0/3 | [AT-080](20_TEST_ACCEPTANCE.md#at-080): NOT_RUN |
 | [R-FUT-01](15_REQUIREMENTS.md#r-fut-01) | FUTURE | 0/1 | [FT-001](20_TEST_ACCEPTANCE.md#ft-001): DEFERRED |
 | [R-FUT-02](15_REQUIREMENTS.md#r-fut-02) | FUTURE | 0/1 | [FT-002](20_TEST_ACCEPTANCE.md#ft-002): DEFERRED |
 | [R-FUT-03](15_REQUIREMENTS.md#r-fut-03) | FUTURE | 0/1 | [FT-003](20_TEST_ACCEPTANCE.md#ft-003): DEFERRED |

@@ -390,7 +390,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T025
 
-**Implement approved second-phone QR confirmation** — stage 4; scope RELEASE; status **DONE**.
+**Implement approved second-phone QR confirmation** — stage 4; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T002](07_IMPLEMENTATION_PLAN.md#t002), [T022](07_IMPLEMENTATION_PLAN.md#t022), [T023](07_IMPLEMENTATION_PLAN.md#t023).
 
@@ -630,7 +630,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T040
 
-**Verify security privacy and abuse boundaries** — stage 6; scope RELEASE; status **DONE**.
+**Verify security privacy and abuse boundaries** — stage 6; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T025](07_IMPLEMENTATION_PLAN.md#t025), [T027](07_IMPLEMENTATION_PLAN.md#t027), [T030](07_IMPLEMENTATION_PLAN.md#t030), [T031](07_IMPLEMENTATION_PLAN.md#t031).
 
@@ -646,7 +646,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T041
 
-**Deploy hosted API database storage and web** — stage 6; scope RELEASE; status **DONE**.
+**Deploy hosted API database storage and web** — stage 6; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T007](07_IMPLEMENTATION_PLAN.md#t007), [T008](07_IMPLEMENTATION_PLAN.md#t008), [T025](07_IMPLEMENTATION_PLAN.md#t025), [T030](07_IMPLEMENTATION_PLAN.md#t030), [T039](07_IMPLEMENTATION_PLAN.md#t039), [T040](07_IMPLEMENTATION_PLAN.md#t040).
 
@@ -662,7 +662,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T042
 
-**Prove local demo fallback and restore** — stage 6; scope RELEASE; status **DONE**.
+**Prove local demo fallback and restore** — stage 6; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T024](07_IMPLEMENTATION_PLAN.md#t024), [T027](07_IMPLEMENTATION_PLAN.md#t027), [T031](07_IMPLEMENTATION_PLAN.md#t031), [T040](07_IMPLEMENTATION_PLAN.md#t040).
 
@@ -678,7 +678,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T043
 
-**Run cross-surface integration and fault acceptance** — stage 6; scope RELEASE; status **DONE**.
+**Run cross-surface integration and fault acceptance** — stage 6; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T015](07_IMPLEMENTATION_PLAN.md#t015), [T025](07_IMPLEMENTATION_PLAN.md#t025), [T027](07_IMPLEMENTATION_PLAN.md#t027), [T030](07_IMPLEMENTATION_PLAN.md#t030), [T031](07_IMPLEMENTATION_PLAN.md#t031), [T034](07_IMPLEMENTATION_PLAN.md#t034), [T037](07_IMPLEMENTATION_PLAN.md#t037), [T039](07_IMPLEMENTATION_PLAN.md#t039), [T040](07_IMPLEMENTATION_PLAN.md#t040).
 
@@ -694,7 +694,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T044
 
-**Perform real-device and two-device usability tests** — stage 6; scope RELEASE; status **DONE**.
+**Perform real-device and two-device usability tests** — stage 6; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T041](07_IMPLEMENTATION_PLAN.md#t041), [T042](07_IMPLEMENTATION_PLAN.md#t042), [T043](07_IMPLEMENTATION_PLAN.md#t043).
 
@@ -710,7 +710,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T045
 
-**Measure entry-level performance and artifact size** — stage 6; scope RELEASE; status **DONE**.
+**Measure entry-level performance and artifact size** — stage 6; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T034](07_IMPLEMENTATION_PLAN.md#t034), [T037](07_IMPLEMENTATION_PLAN.md#t037), [T043](07_IMPLEMENTATION_PLAN.md#t043).
 
@@ -726,7 +726,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T046
 
-**Audit all translations and audio on device** — stage 6; scope RELEASE; status **DONE**.
+**Audit all translations and audio on device** — stage 6; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T036](07_IMPLEMENTATION_PLAN.md#t036), [T037](07_IMPLEMENTATION_PLAN.md#t037), [T039](07_IMPLEMENTATION_PLAN.md#t039), [T044](07_IMPLEMENTATION_PLAN.md#t044).
 
@@ -742,7 +742,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T047
 
-**Freeze dataset and model evidence package** — stage 7; scope RELEASE; status **DONE**.
+**Freeze dataset and model evidence package** — stage 7; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T031](07_IMPLEMENTATION_PLAN.md#t031), [T033](07_IMPLEMENTATION_PLAN.md#t033), [T044](07_IMPLEMENTATION_PLAN.md#t044), [T045](07_IMPLEMENTATION_PLAN.md#t045), [T046](07_IMPLEMENTATION_PLAN.md#t046).
 
@@ -758,7 +758,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T048
 
-**Prepare PPT and presenter handoff** — stage 7; scope RELEASE; status **DONE**.
+**Prepare PPT and presenter handoff** — stage 7; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T044](07_IMPLEMENTATION_PLAN.md#t044), [T047](07_IMPLEMENTATION_PLAN.md#t047).
 
@@ -774,7 +774,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T049
 
-**Record and validate demo video** — stage 7; scope RELEASE; status **DONE**.
+**Record and validate demo video** — stage 7; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T044](07_IMPLEMENTATION_PLAN.md#t044), [T045](07_IMPLEMENTATION_PLAN.md#t045), [T046](07_IMPLEMENTATION_PLAN.md#t046), [T048](07_IMPLEMENTATION_PLAN.md#t048).
 
@@ -790,7 +790,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T050
 
-**Package release and submission handoff** — stage 7; scope RELEASE; status **DONE**.
+**Package release and submission handoff** — stage 7; scope RELEASE; status **IN_PROGRESS**.
 
 Dependencies: [T041](07_IMPLEMENTATION_PLAN.md#t041), [T042](07_IMPLEMENTATION_PLAN.md#t042), [T043](07_IMPLEMENTATION_PLAN.md#t043), [T044](07_IMPLEMENTATION_PLAN.md#t044), [T045](07_IMPLEMENTATION_PLAN.md#t045), [T046](07_IMPLEMENTATION_PLAN.md#t046), [T047](07_IMPLEMENTATION_PLAN.md#t047), [T048](07_IMPLEMENTATION_PLAN.md#t048), [T049](07_IMPLEMENTATION_PLAN.md#t049).
 

@@ -313,37 +313,37 @@
       "owner": "Owner + coding agent"
     },
     "T040": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
       ],
-      "note": "19 automated security, privacy, and abuse boundary tests verified in services/api/tests/test_security_and_abuse_boundaries.py. IDOR, cross-facility isolation, role boundaries, rate-limit lockout, user enumeration prevention, refresh token replay revocation, repository secrets scan (0 found), demo isolation without SMS, public capability token privacy, non-EPR notice, pseudonymized collector export, CSV formula injection neutralization, EXIF stripping, path traversal rejection, and signed URL expiration verified."
+      "note": "Security boundary tests pass, but this task depends on T025's incomplete server-backed second-device confirmation. T040 remains IN_PROGRESS until that dependency is closed."
     },
     "T041": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T041_HOSTED_DEPLOYMENT.md"
       ],
-      "note": "Historical deployment evidence records Supabase migration/seed and Render/Cloudflare deployments. After owner intervention, independent recheck on 2026-10-01 returned HTTP 200 from both https://sahitol-api.onrender.com/health/live and https://sahitol.pages.dev.",
+      "note": "Hosted services return HTTP 200, but T041 depends on T025's incomplete server-backed second-device confirmation. T041 remains IN_PROGRESS until that dependency is closed.",
       "owner": "Owner + coding agent"
     },
     "T042": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md"
       ],
       "note": "Cryptographic backup and restore tool (scripts/backup_restore.py) with SHA-256 manifest and domain event hash-chain validation verified. Health live (/health/live) and ready (/health/ready) probes with zero-leakage DB failure handling verified. X-Correlation-ID middleware and structured logging implemented. Android release HTTPS and debug LAN network security configs verified. Docker Compose PostGIS environment and web camera manual reference fallback verified across 11 automated tests in test_backup_restore_and_recovery.py."
     },
     "T043": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T043_CROSS_SURFACE_INTEGRATION.md"
       ],
-      "note": "44/44 tests passing in test_cross_surface_integration_and_fault_acceptance.py. Verified: canonical hash parity (SAHITOL-JCS-1), atomic outbox durability, offline queue drain and idempotency, versioned conflict detection (CONFLICT on stale expected_version), payment ledger integrity, admin quality flags, reference bootstrap, and end-to-end collector-recycler-ledger-admin lifecycle.",
+      "note": "Cross-surface tests pass, but the real second-device confirmation boundary in dependency T025 is incomplete. T043 remains IN_PROGRESS until it can verify that path end-to-end.",
       "owner": "Owner + coding agent"
     },
     "T044": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T044_REAL_DEVICE_USABILITY.md"
       ],
@@ -351,7 +351,7 @@
       "owner": "Owner + coding agent"
     },
     "T045": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T045_PERFORMANCE_AND_ARTIFACT_SIZE.md"
       ],
@@ -359,14 +359,14 @@
       "owner": "Owner + coding agent"
     },
     "T046": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T046_TRANSLATION_AUDIO_AUDIT.md"
       ],
       "note": "String parity 145/145 keys all three locales, zero placeholder mismatches. Audio 258/258 clips present, all SHA-256 checksums verified, runtime_cloud_call=false. AudioGrammarAndManifestTest 8 methods PASS (all spec fixtures: 0-99 numbers, 100-100000 place values, paise, weight, rate, range, negative, null, status, safety). Devanagari spot-checks PASS. On-device bilingual rendering PASS. Honest gaps: native-speaker review NOT_REVIEWED, TalkBack on-device NOT_RUN. Both explicitly tracked, do not block per task scope."
     },
     "T047": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T047_DATASET_MODEL_EVIDENCE.md",
         "docs/evidence/T047_FROZEN_RELEASE_MANIFEST.json"
@@ -374,21 +374,21 @@
       "note": "Frozen release manifest generated with SHA-256 digests for classifier.tflite (35d0ad7c...), model_card.md, audio_manifest.json (258 clips), all 7 data cards, and all family manifests. Model macro-F1 0.0159 and 100pct abstention honestly documented. R-RES-02 fieldwork UNMET explicitly declared. Native-speaker review NOT_REVIEWED. All honest gaps documented."
     },
     "T048": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T048_PPT_PRESENTER_HANDOFF.md"
       ],
       "note": "Complete 10-slide deck script with speaker notes, one-page fact sheet (all numbers evidence-backed from T041-T047), five presenter role cards with hand-off cues and Q&A crib, and slide production instructions for owner. All claims cite evidence. Honest limitations (R-RES-02 UNMET, model macro-F1 0.0159, native-speaker NOT_REVIEWED) stated throughout. Owner builds actual PPT from this script using organizer template."
     },
     "T049": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T049_DEMO_VIDEO_SHOTLIST.md"
       ],
       "note": "Complete 4-minute shot list (14 segments A-N), pre-recording device checklist (15 items), post-recording validation checklist (12 items), upload/link instructions, and recording setup commands. Physical recording is an owner action requiring device N7OZPV59XWWKPF4X. Video link to be recorded in T050 once owner completes recording. Privacy/security/claim constraints documented (no secrets, no EPR cert claim, no borrowed accuracy, demo labels required)."
     },
     "T050": {
-      "status": "DONE",
+      "status": "IN_PROGRESS",
       "evidence": [
         "docs/evidence/T050_RELEASE_HANDOFF.md"
       ],
@@ -556,7 +556,7 @@
       "note": "Phone/PIN access verified across backend (T007) and Android Compose screens C01, C02, C15 (T017). Indian 10-digit mobile format, SHA-256 PIN hashing, 30s rate-limiting on failure, zero Aadhaar/bank PII collected, and isolated demo collector flow verified."
     },
     "AT-008": {
-      "status": "PASS",
+      "status": "NOT_RUN",
       "evidence": [
         "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
       ],
@@ -746,31 +746,31 @@
       "note": "Canonical hash matches frozen fixture handover_fixture.json in both Python (T023) and Kotlin (T024); tamper rejection, key ordering, and SHA-256 seal verified. Awaiting integration test runner in T043."
     },
     "AT-032": {
-      "status": "PASS",
+      "status": "NOT_RUN",
       "evidence": [
         "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md",
         "docs/evidence/T025_SECOND_DEVICE_CONFIRMATION.md",
         "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md",
         "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
       ],
-      "note": "Capability token hashing, unauthenticated public verification endpoint with strict PII/GPS/finance redaction, statutory non-EPR notice, payment review (R05), public verification web view (V01), mobile offline QR encoding minimal unguessable verification URL without PII, and security boundary tests verified across T023, T024, T025, and T040."
+      "note": "The QR scanner correctly decodes the two-device payload without PII, but it has no server-backed public proposal lookup. Full cross-surface public verification remains NOT_RUN pending T025."
     },
     "AT-033": {
-      "status": "PASS",
+      "status": "NOT_RUN",
       "evidence": [
         "docs/evidence/T023_HANDOVER_CONFIRMATIONS.md",
         "docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md",
         "docs/evidence/T027_COLLECTOR_LEDGER_AND_PAYMENTS.md"
       ],
-      "note": "Measured weight/grade/price discrepancies preserve original client facts, create TermsRevision with proposed_by='FACILITY', and require explicit collector acknowledgement; documented disputes preserve history verified across T023, T025, T027, and T028."
+      "note": "Backend and local discrepancy handling are tested, but the real second-device handover cannot yet receive server-backed terms confirmation. Full acceptance remains NOT_RUN pending T025."
     },
     "AT-034": {
-      "status": "PASS",
+      "status": "NOT_RUN",
       "evidence": [
         "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md",
         "docs/evidence/T031_DATASET_EXPORTS.md"
       ],
-      "note": "Recycler procurement logs in CSV/JSON with statutory non-EPR disclosure header and SHA-256 digest in T031; native Android A4 PDF generator (ReceiptPdfGenerator), 5-stage material passport spine (C16), and statutory Non-EPR declaration verified in T024 via HandoverAndReceiptTest."
+      "note": "The Android receipt and disclaimer are tested, but the required second-device confirmation cannot yet issue a server-verified record. Full acceptance remains NOT_RUN pending T025."
     },
     "AT-035": {
       "status": "PASS",
@@ -963,7 +963,7 @@
       "note": "Delivered dataset card, licensing registry, manifest, and splits summary in T032. Source, quality, size, labels, object splits, licensing, and nullable links verified. Baseline model trained and evaluated in T033. Awaiting final evidence packaging in T047."
     },
     "AT-060": {
-      "status": "PASS",
+      "status": "NOT_RUN",
       "evidence": [
         "docs/evidence/T031_DATASET_EXPORTS.md",
         "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md"
@@ -1053,7 +1053,7 @@
       "note": "PIN brute-force lockout (429 with Retry-After), uniform 401 user enumeration prevention, session rotation, replay revocation, and repository secrets scan (0 found) verified in T040. Production transport and CORS verified in T041."
     },
     "AT-073": {
-      "status": "PASS",
+      "status": "NOT_RUN",
       "evidence": [
         "docs/evidence/T040_SECURITY_AND_ABUSE_BOUNDARIES.md",
         "docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md"
@@ -1066,7 +1066,7 @@
       "note": ""
     },
     "AT-075": {
-      "status": "PASS",
+      "status": "NOT_RUN",
       "evidence": [
         "docs/evidence/T042_LOCAL_FALLBACK_AND_RESTORE.md"
       ],
@@ -1080,7 +1080,7 @@
       "note": "Pre-generated offline audio eliminates runtime cloud speech/TTS API dependency; free Edge-TTS workflow documented with open-access license attribution; awaiting multi-service runtime dependency audit in T043."
     },
     "AT-077": {
-      "status": "PASS",
+      "status": "NOT_RUN",
       "evidence": [
         "docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md",
         "docs/evidence/T029_ADMIN_MAINTENANCE_AND_METRICS.md",
