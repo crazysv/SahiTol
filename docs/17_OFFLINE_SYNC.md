@@ -71,6 +71,13 @@ R04 obtains a recycler token, fetches the UUID-scoped proposal, compares its
 SHA-256 hash with the QR, and only then permits authenticated confirmation.
 Unsupported queued commands are not fabricated as successful.
 
+The C14 manual-sync action replaces a stale manual worker request, waits for the
+actual WorkManager completion state, and reloads the complete account-scoped
+outbox from Room. Valid UUID-backed operations use `/sync/batch`; the dedicated
+demo handover import remains separate. A malformed legacy/demo placeholder is
+not sent as a batch poison pill or shown as synchronized: it becomes
+`NEEDS_REPAIR` with its durable local record retained.
+
 Canonical fields and event hashes follow [SAHITOL-JCS-1](06_SCHEMA.md). T023 must create a golden payload and expected byte sequence/digest used by Python, Kotlin and browser tests. PDF uses exactly the stored proposal/confirmed snapshot, with status, source, time, weight, terms and hash. Pending PDF remains pending forever as an artifact; a later confirmed PDF is a new linked version. A matching SHA-256 confirms byte equality with a trusted record, not identity, material composition or physical recycling. Server signatures remain in [future scope](26_FUTURE_BACKLOG.md).
 
 ## Required fault evidence

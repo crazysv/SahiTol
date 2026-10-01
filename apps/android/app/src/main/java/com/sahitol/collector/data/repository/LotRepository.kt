@@ -137,6 +137,11 @@ class LotRepository(private val database: SahiTolDatabase) {
         return database.outboxDao().getPendingOperations(accountId, limit)
     }
 
+    /** C14 needs acknowledged and repair-required rows too, not only sendable work. */
+    suspend fun getOutboxOperations(accountId: String): List<OutboxOperationEntity> {
+        return database.outboxDao().getOperationsForAccount(accountId)
+    }
+
     /**
      * Verifies the cryptographic integrity of an entity's domain event hash-chain.
      */

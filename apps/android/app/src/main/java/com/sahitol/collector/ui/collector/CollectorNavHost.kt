@@ -19,7 +19,11 @@ import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.data.sync.SyncWorker
 import com.sahitol.collector.domain.classifier.LiteRtClassifier
 import com.sahitol.collector.ui.diagnostic.S00_DiagnosticScreen
+import androidx.work.WorkManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.net.URLDecoder
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -102,7 +106,7 @@ fun CollectorNavHost(
 
     LaunchedEffect(session.accountId, lots) {
         unsyncedCount = lotRepository.getUnsyncedCount(session.accountId)
-        operations = lotRepository.getPendingOutboxOperations(session.accountId, 100)
+        operations = lotRepository.getOutboxOperations(session.accountId)
     }
 
     LaunchedEffect(session.accountId) {
@@ -268,9 +272,20 @@ fun CollectorNavHost(
                     isSyncing = true
                     SyncWorker.enqueueManualSync(context, session.accountId)
                     coroutineScope.launch {
-                        kotlinx.coroutines.delay(1000)
-                        unsyncedCount = lotRepository.getUnsyncedCount(session.accountId)
-                        operations = lotRepository.getPendingOutboxOperations(session.accountId, 100)
+                        // The worker can authenticate and send over cellular for
+                        // several seconds. Refresh from Room until it finishes so
+                        // C14 never presents an old queue as a completed attempt.
+                        for (attempt in 0 until 60) {
+                            delay(500)
+                            unsyncedCount = lotRepository.getUnsyncedCount(session.accountId)
+                            operations = lotRepository.getOutboxOperations(session.accountId)
+                            val workInfos = withContext(Dispatchers.IO) {
+                                WorkManager.getInstance(context)
+                                    .getWorkInfosForUniqueWork(SyncWorker.workName(session.accountId))
+                                    .get()
+                            }
+                            if (workInfos.isNotEmpty() && workInfos.all { it.state.isFinished }) break
+                        }
                         isSyncing = false
                     }
                 },

@@ -347,7 +347,7 @@
       "evidence": [
         "docs/evidence/T044_REAL_DEVICE_USABILITY.md"
       ],
-      "note": "Real-device usability tests complete on N7OZPV59XWWKPF4X. Full E2E: S00 launch, C05 lot creation, C06/C07 price/valuation, C08 sync, C09 recycler offer/accept, C10 discrepancy capture+accept, C11 Digital Handover Record with QR (Ref ST-7022) and SHA-256 chain, C16 Material Passport journey spine verified. Bilingual labels (Hindi/English) throughout. Offline Ready badge confirmed on C10, C11. Honest EPR disclaimer in C11 confirmed. Fieldwork obligation UNMET (tracked separately). Screenshots in docs/evidence/",
+      "note": "T044 remains IN_PROGRESS. On 2026-10-01, N7OZPV59XWWKPF4X preserved its local profile/two lots across force-stop and reported validated Jio NR cellular. A physical C14 Sync Now test found the worker silently left 12 queued demo-placeholder operations; the repair now batch-syncs valid UUID-backed rows, replaces stale manual work, waits for completion and shows legacy malformed rows as NEEDS_REPAIR (10 acknowledged, 12 repair-required on retest). The original QR evidence was partly simulated; T025 separately proves deployed two-phone confirmation. Fresh server-backed offer, full current-APK device fault journey, camera/GPS denial, airplane/background, Hindi/Marathi and accessibility evidence remain NOT_RUN. Fieldwork is UNMET.",
       "owner": "Owner + coding agent"
     },
     "T045": {

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-01 -- T044 physical manual-sync repair
+
+Physical C14 testing on the cellular-connected collector device found that
+manual sync only processed demo handover imports and left all other operations
+queued while the UI displayed stale values. The worker now sends valid
+UUID-backed rows through the normal sync batch, replaces stale manual work, and
+the screen waits for completion then reloads the complete Room outbox. Legacy
+placeholder records now surface as `NEEDS_REPAIR`, not false cloud success.
+Focused Android sync tests pass and the repaired APK was retested on device.
+
 ## 2026-10-01 -- T042 evidence correction
 
 The local backup/restore and configuration suite passes 12/12, and Compose

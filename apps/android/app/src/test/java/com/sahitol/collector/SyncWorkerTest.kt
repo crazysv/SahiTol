@@ -111,6 +111,17 @@ class SyncWorkerTest {
     }
 
     @Test
+    fun testSyncBatchResponseDeserializesHostedApiEnvelope() {
+        val response = SyncBatchResponse.fromJson(
+            """{"data":{"results":[{"operation_id":"op-1","outcome":"APPLIED","entity_id":"lot-1","server_version":2,"result":{"status":"DRAFT"}}]},"meta":{"request_id":"req-1"}}"""
+        )
+
+        assertEquals(1, response.results.size)
+        assertEquals("APPLIED", response.results.single().outcome)
+        assertEquals(2L, response.results.single().serverVersion)
+    }
+
+    @Test
     fun testDeltaChangesResponseDeserialization() {
         val deltaJson = """
         {

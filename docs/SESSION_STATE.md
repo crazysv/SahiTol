@@ -143,3 +143,9 @@ T043 then reran cleanly: 44 focused deterministic tests pass, including an
 authorized-recycler match that was tightened from a response-shape check. Its
 real-device/hosted fault acceptance remains NOT_RUN; continue at T044 only
 after retaining that scope boundary.
+T044 physical retest found C14 manual sync only handled handover imports and
+showed stale queue state. The repair routes valid UUID operations to the normal
+batch endpoint, replaces stale manual work and reloads the full Room outbox;
+on the cellular collector it showed 10 acknowledged and 12 visible
+NEEDS_REPAIR legacy placeholders. Continue T044 by replacing the placeholder
+offer path with a server-backed flow, then retest its current APK journey.

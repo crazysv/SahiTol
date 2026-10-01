@@ -51,9 +51,13 @@ data class SyncBatchResponse(
     companion object {
         fun fromJson(jsonStr: String): SyncBatchResponse {
             val root = JSONObject(jsonStr)
+            // The hosted API returns {data:{results:[...]},meta:{...}}. Keep
+            // support for the legacy flat response so old local fixtures remain
+            // readable, but never discard a valid wrapped server response.
+            val data = root.optJSONObject("data") ?: root
             val devId = root.optString("device_id", "")
-            val applied = root.optInt("applied_count", 0)
-            val resultsArr = root.optJSONArray("results") ?: JSONArray()
+            val applied = data.optInt("applied_count", 0)
+            val resultsArr = data.optJSONArray("results") ?: JSONArray()
             val resList = mutableListOf<SyncOperationResult>()
 
             for (i in 0 until resultsArr.length()) {

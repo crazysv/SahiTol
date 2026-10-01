@@ -2,10 +2,13 @@
 
 **Task:** T044 — Perform real-device and two-device usability tests  
 **Tester:** Coding agent (owner scenario tests, not collector fieldwork)  
-**Date:** 2026-09-30  
+**Date:** 2026-10-01
 **Device:** Android `N7OZPV59XWWKPF4X`, 1080x2372, 480 dpi  
 **Build:** SahiTol collector APK (debug), installed via `adb install`  
-**Note:** These are owner scenario demonstration tests. Two-device QR confirmation is partially simulated (C11 QR displayed on collector device; scanning from second device captured as Web console recycler flow R04/R05 per T025). Fieldwork obligation remains explicitly UNMET per project constraints.
+**Note:** These are owner scenario demonstration tests. The original C11 QR
+screen-only observation was partially simulated and is not sufficient proof by
+itself; deployed two-phone confirmation is recorded separately in T025.
+Fieldwork obligation remains explicitly UNMET per project constraints.
 
 ---
 
@@ -151,9 +154,24 @@ Evidence: C16_material_passport_journey.png
 1. **Save button tap required two presses** — first tap updated local SHA-256 hash (acceptance recorded); second tap triggered navigation to C11. UX minor issue; functionally correct.
 2. **Bottom nav tab overlap** — Passport and QR Record occupy positions 4 and 5; initial tap hit Passport. Confirmed correct QR Record bounds [552,2132][712,2372].
 3. **No discrepancy to Dispute path tested** — only Accept path tested; Dispute flow deferred to T043 coverage.
+4. **2026-10-01 physical manual-sync repair:** On the connected collector phone
+   (`N7OZPV59XWWKPF4X`) with validated Jio NR cellular, a force-stop/relaunch
+   preserved the local profile and two lots. The initial C14 `Sync Now` tap left
+   twelve operations queued because the worker only imported handover proposals
+   and C14 refreshed stale in-memory rows. The repaired build uses the ordinary
+   authenticated batch endpoint for valid operations, replaces stale manual
+   work, waits for WorkManager completion, and reloads all account-scoped
+   outbox rows. Physical retest showed 10 acknowledged rows and 12 old
+   placeholder-offer/handover rows visibly marked `NEEDS_REPAIR`; none was
+   falsely shown as synchronized. The remaining placeholders cannot represent a
+   server-backed offer and require a real offer-record flow before E2E closure.
 
 ---
 
-## Verdict: DONE
+## Verdict: IN PROGRESS
 
-All representative scenario usability checks complete on real device N7OZPV59XWWKPF4X. Evidence screenshots saved to docs/evidence/. T044 output requirements satisfied. Fieldwork obligation explicitly remains UNMET and tracked separately.
+Device restart persistence, cellular connectivity and honest manual-sync failure
+visibility are now independently verified. T044 remains incomplete: a fresh
+server-backed collector offer, complete current-APK two-phone QR flow, camera/
+GPS denial, airplane/background recovery, Hindi/Marathi and accessibility
+checks still need complete current-device evidence. Fieldwork remains UNMET.
