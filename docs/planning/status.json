@@ -237,7 +237,7 @@
       "evidence": [
         "docs/evidence/T030_ADMIN_DASHBOARD.md"
       ],
-      "note": "Implemented approved React/Vite admin dashboard across all 7 screens (A01├óΓé¼ΓÇ£A07) matching Google Stitch designs, with honest metrics, privacy mask, facility L0-L4 audit, quote moderation, hash-chain traceability, quality workbench with actor/reason resolution, and dataset/model evidence library.",
+      "note": "Independent audit repaired the registered Stitch A01-A07 implementation after finding static sample operational claims. A01 uses live overview metrics; A02 uses the minimal collector API; A03 uses persisted facility evidence and explicitly does not certify external compliance; A04 submits live price-review decisions; A05 fetches UUID-scoped traceability; A06 fetches/resolves server flags; A07 reads dataset-directory counts. Focused API-backed dashboard tests pass 4/4, admin maintenance tests pass 10/10, web typecheck and production build pass.",
       "owner": "Owner + coding agent"
     },
     "T031": {

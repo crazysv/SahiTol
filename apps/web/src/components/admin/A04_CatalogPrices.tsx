@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { decidePriceReview, fetchAdminMaterials, fetchPriceReviews } from '../../lib/api';
 
 export default function A04_CatalogPrices() {
   const [activeTab, setActiveTab] = useState<'catalog' | 'aliases' | 'prices' | 'safety'>('catalog');
@@ -42,10 +43,23 @@ export default function A04_CatalogPrices() {
     },
   ]);
 
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [materialsCount, setMaterialsCount] = useState<number | null>(null);
+  useEffect(() => {
+    void fetchPriceReviews().then((rows) => setObservations(rows.map((row) => ({
+      id: row.id, material: row.material_id, code: row.material_id, yard: row.region_id,
+      grossRate: `₹${(row.rate_paise_per_unit / 100).toFixed(2)} / ${row.unit.toLowerCase()}`,
+      referenceRate: 'Review required against eligible cohort', deviation: 'Review pending', status: row.review_status,
+      reviewReason: `Source ${row.source_id}; observed ${new Date(row.observed_at).toLocaleDateString('en-GB')}`,
+    })))).catch((error: unknown) => setLoadError(error instanceof Error ? error.message : 'Unable to load price reviews.'));
+  }, []);
+  useEffect(() => { void fetchAdminMaterials().then((materials) => setMaterialsCount(materials.length)).catch((error: unknown) => setLoadError(error instanceof Error ? error.message : 'Unable to load catalog.')); }, []);
+
   const handleModerate = (id: string, newStatus: 'APPROVED' | 'REJECTED') => {
-    setObservations((prev) =>
-      prev.map((o) => (o.id === id ? { ...o, status: newStatus } : o))
-    );
+    const decision = newStatus === 'APPROVED' ? 'APPROVE' : 'REJECT';
+    void decidePriceReview(id, decision, 'Reviewed by administrator through the approved moderation workflow.').then((result) => {
+      setObservations((prev) => prev.map((observation) => observation.id === id ? { ...observation, status: result.review_status } : observation));
+    }).catch((error: unknown) => setLoadError(error instanceof Error ? error.message : 'Unable to submit moderation decision.'));
   };
 
   const handleDeployPatch = () => {
@@ -105,7 +119,7 @@ export default function A04_CatalogPrices() {
                     </span>
                   </div>
                   <div className="flex items-baseline gap-space-sm">
-                    <span className="text-headline-xl text-on-surface font-bold">1,428</span>
+                    <span className="text-headline-xl text-on-surface font-bold">{materialsCount ?? '—'}</span>
                     <span className="text-body-sm text-on-surface-variant">Standardized Items</span>
                   </div>
                   {/* Mini Breakdown */}

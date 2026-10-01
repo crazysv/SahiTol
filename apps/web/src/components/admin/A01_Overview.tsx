@@ -1,19 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AdminOverview, fetchAdminOverview } from '../../lib/api';
 
 export default function A01_Overview() {
   const [timeRange, setTimeRange] = useState<'24H' | '7D' | '30D'>('7D');
   const [materialFilter, setMaterialFilter] = useState('All Materials');
   const [syncing, setSyncing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState('29 Sep • 18:20');
+  const [overview, setOverview] = useState<AdminOverview | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  const refresh = async () => {
+    setSyncing(true);
+    setLoadError(null);
+    try {
+      const result = await fetchAdminOverview();
+      setOverview(result);
+      setLastUpdated(new Date(result.last_refresh).toLocaleString('en-GB'));
+    } catch (error) {
+      setLoadError(error instanceof Error ? error.message : 'Unable to load platform metrics.');
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  useEffect(() => { void refresh(); }, []);
 
   const handleSyncLedger = () => {
-    setSyncing(true);
-    setTimeout(() => {
-      setSyncing(false);
-      const now = new Date();
-      setLastUpdated(`${now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })} • ${now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`);
-    }, 600);
+    void refresh();
   };
 
   return (
@@ -61,6 +75,7 @@ export default function A01_Overview() {
             <span className="font-bold">Provenance & Integrity Notice:</span> All metrics derive strictly from verified cryptographic event logs. In strict accordance with SahiTol guardrails, <strong>received mass does not equal recycled mass</strong> and does not constitute EPR certification or claimed carbon offsets without downstream recycler transformation proof.
           </div>
         </div>
+        {loadError && <p role="alert" className="mt-3 p-3 text-sm rounded-xl bg-error-container text-on-error-container">Metrics unavailable: {loadError}. Existing figures are not shown as zero.</p>}
       </div>
 
       {/* Main Content Flow */}
@@ -80,10 +95,10 @@ export default function A01_Overview() {
             </div>
             <div>
               <div className="text-headline-xl font-headline-xl text-on-surface mb-space-xs font-bold">
-                142,850 <span className="text-body-lg text-on-surface-variant font-normal">kg</span>
+                {overview ? (overview.handovers.formal_received_mass_g / 1000).toLocaleString('en-IN') : '—'} <span className="text-body-lg text-on-surface-variant font-normal">kg</span>
               </div>
               <div className="flex items-center gap-1 text-body-sm text-primary font-semibold">
-                <span className="material-symbols-outlined text-[16px]">trending_up</span> +12.4% vs last week
+                <span className="material-symbols-outlined text-[16px]">info</span> Confirmed non-demo received mass
               </div>
             </div>
           </div>
@@ -101,10 +116,10 @@ export default function A01_Overview() {
             </div>
             <div>
               <div className="text-headline-xl font-headline-xl text-on-surface mb-space-xs font-bold">
-                1,280 <span className="text-body-lg text-on-surface-variant font-normal">tons</span>
+                {overview ? (overview.handovers.formal_received_mass_g / 1_000_000).toLocaleString('en-IN', { maximumFractionDigits: 3 }) : '—'} <span className="text-body-lg text-on-surface-variant font-normal">tons</span>
               </div>
               <div className="flex items-center gap-1 text-body-sm text-on-surface-variant font-semibold">
-                <span className="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span> 98.2% verified origin
+                <span className="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span> {overview?.handovers.mass_label ?? 'Loading provenance…'}
               </div>
             </div>
           </div>
@@ -122,7 +137,7 @@ export default function A01_Overview() {
             </div>
             <div>
               <div className="text-headline-xl font-headline-xl text-on-surface mb-space-xs font-bold">
-                34 <span className="text-body-lg text-on-surface-variant font-normal">batches</span>
+                {overview ? overview.quality.open_flags : '—'} <span className="text-body-lg text-on-surface-variant font-normal">flags</span>
               </div>
               <div className="flex items-center gap-1 text-body-sm text-error font-semibold">
                 <span className="material-symbols-outlined text-[16px]">schedule</span> Requires QA action
@@ -143,7 +158,7 @@ export default function A01_Overview() {
             </div>
             <div>
               <div className="text-headline-xl font-headline-xl text-on-surface mb-space-xs font-bold">
-                07 <span className="text-body-lg text-on-surface-variant font-normal">cases</span>
+                {overview ? overview.handovers.disputed_count : '—'} <span className="text-body-lg text-on-surface-variant font-normal">cases</span>
               </div>
               <div className="flex items-center gap-1 text-body-sm text-tertiary font-semibold">
                 <span className="material-symbols-outlined text-[16px]">warning</span> Avg resolution 4.2h

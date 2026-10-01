@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchQualityFlags, QualityFlag, resolveQualityFlag } from '../../lib/api';
 
 interface QualityIssue {
   id: string;
@@ -84,12 +85,30 @@ const initialIssues: QualityIssue[] = [
 ];
 
 export default function A06_QualityReview() {
-  const [issues, setIssues] = useState<QualityIssue[]>(initialIssues);
+  const [issues, setIssues] = useState<QualityIssue[]>([]);
+  const [qualitySummary, setQualitySummary] = useState<Record<string, number> | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [resolvingIssue, setResolvingIssue] = useState<QualityIssue | null>(null);
   const [actorId, setActorId] = useState('ADM-SAHITOL-01');
   const [resolutionReason, setResolutionReason] = useState('');
+
+  const toIssue = (flag: QualityFlag): QualityIssue => {
+    const category = flag.rule_id.includes('MISSING') ? 'missing' : flag.rule_id.includes('STALE') ? 'stale' : flag.rule_id.includes('DUPLICATE') ? 'duplicate' : flag.rule_id.includes('INVALID') ? 'invalid' : 'inconsistent';
+    const severity = flag.severity === 'CRITICAL' ? 'Critical' : flag.severity === 'HIGH' ? 'Warning' : flag.severity === 'MEDIUM' ? 'Moderate' : 'Info';
+    return { id: flag.id, batchId: flag.entity_id, category, severity, severityColor: severity === 'Critical' ? 'bg-error-container text-on-error-container' : 'bg-secondary-container text-on-secondary-container', title: flag.rule_id, description: flag.reason || 'No reason supplied.', facility: flag.entity_type, loggedTime: new Date(flag.created_at).toLocaleString('en-GB'), suggestedFix: 'Review underlying evidence; do not overwrite historical facts.', status: flag.status === 'OPEN' ? 'OPEN' : flag.status === 'DISMISSED' ? 'DISMISSED' : 'RESOLVED' };
+  };
+
+  const refresh = async () => {
+    setLoadError(null);
+    try {
+      const flags = await fetchQualityFlags();
+      setIssues(flags.map(toIssue));
+      setQualitySummary({ total: flags.length, critical: flags.filter((flag) => flag.severity === 'CRITICAL').length });
+    } catch (error) { setLoadError(error instanceof Error ? error.message : 'Unable to load quality flags.'); }
+  };
+  useEffect(() => { void refresh(); }, []);
 
   const filteredIssues = issues.filter((issue) => {
     const matchesCategory = selectedCategory === 'all' || issue.category === selectedCategory;
@@ -100,28 +119,15 @@ export default function A06_QualityReview() {
     return matchesCategory && matchesSearch;
   });
 
-  const handleApplyResolution = () => {
+  const handleApplyResolution = async () => {
     if (!resolvingIssue || !resolutionReason.trim()) return;
-
-    setIssues((prev) =>
-      prev.map((i) =>
-        i.id === resolvingIssue.id
-          ? { ...i, status: 'RESOLVED', resolvedReason: `${resolutionReason} (By: ${actorId})` }
-          : i
-      )
-    );
-    setResolvingIssue(null);
-    setResolutionReason('');
+    try { await resolveQualityFlag(resolvingIssue.id, 'RESOLVE', resolutionReason); setResolvingIssue(null); setResolutionReason(''); await refresh(); }
+    catch (error) { setLoadError(error instanceof Error ? error.message : 'Unable to resolve quality flag.'); }
   };
 
-  const handleDismiss = (id: string) => {
-    setIssues((prev) =>
-      prev.map((i) =>
-        i.id === id
-          ? { ...i, status: 'DISMISSED', resolvedReason: 'Dismissed by administrator after false positive review' }
-          : i
-      )
-    );
+  const handleDismiss = async (id: string) => {
+    try { await resolveQualityFlag(id, 'DISMISS', 'Reviewed and dismissed by administrator.'); await refresh(); }
+    catch (error) { setLoadError(error instanceof Error ? error.message : 'Unable to dismiss quality flag.'); }
   };
 
   return (
@@ -147,14 +153,14 @@ export default function A06_QualityReview() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-space-md w-full lg:w-auto">
             <div className="bg-surface p-space-md rounded-xl shadow-sm border border-surface-container">
               <span className="text-on-surface-variant text-label-sm font-semibold">Total Flags</span>
-              <div className="text-headline-lg font-headline-lg text-on-surface mt-1 font-bold">1,428</div>
+              <div className="text-headline-lg font-headline-lg text-on-surface mt-1 font-bold">{qualitySummary ? qualitySummary.total : '—'}</div>
               <span className="text-error text-label-sm flex items-center gap-1 mt-1 font-semibold">
                 <span className="material-symbols-outlined text-[14px]">arrow_upward</span> +12% this week
               </span>
             </div>
             <div className="bg-surface p-space-md rounded-xl shadow-sm border border-surface-container">
               <span className="text-on-surface-variant text-label-sm font-semibold">Critical Severity</span>
-              <div className="text-headline-lg font-headline-lg text-primary mt-1 font-bold">84</div>
+              <div className="text-headline-lg font-headline-lg text-primary mt-1 font-bold">{qualitySummary ? qualitySummary.critical : '—'}</div>
               <span className="text-on-surface-variant text-label-sm mt-1 block">Immediate action</span>
             </div>
             <div className="bg-surface p-space-md rounded-xl shadow-sm border border-surface-container">

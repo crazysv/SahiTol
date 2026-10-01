@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { DatasetDirectory, fetchDatasetDirectory } from '../../lib/api';
 
 export default function A07_EvidenceLinks() {
   const [activeTab, setActiveTab] = useState<'families' | 'research' | 'model' | 'limitations' | 'history'>('families');
   const [exportNotice, setExportNotice] = useState(false);
+  const [directory, setDirectory] = useState<DatasetDirectory | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  useEffect(() => { void fetchDatasetDirectory().then(setDirectory).catch((error: unknown) => setLoadError(error instanceof Error ? error.message : 'Unable to load dataset directory.')); }, []);
 
   const handleExportDataCards = () => {
     setExportNotice(true);
@@ -65,11 +70,11 @@ export default function A07_EvidenceLinks() {
               <span className="text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
                 Active Dataset Families
               </span>
-              <div className="text-headline-xl font-headline-xl text-primary mt-1 font-bold">7 Families</div>
+              <div className="text-headline-xl font-headline-xl text-primary mt-1 font-bold">{directory ? `${directory.datasets.length} Families` : '—'}</div>
             </div>
             <div className="mt-space-lg flex items-center gap-2 text-body-sm text-on-surface-variant">
               <span className="material-symbols-outlined text-primary text-[16px]">verified</span>
-              1.42M Total Annotated Records
+              {directory ? `${directory.datasets.reduce((total, dataset) => total + dataset.row_count, 0).toLocaleString('en-IN')} exported rows` : 'Loading persisted data cards…'}
             </div>
           </div>
 
@@ -115,7 +120,7 @@ export default function A07_EvidenceLinks() {
               <span className="text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
                 Fieldwork Disclosure
               </span>
-              <div className="text-headline-xl font-headline-xl text-amber-800 mt-1 font-bold">UNMET</div>
+              <div className="text-headline-xl font-headline-xl text-amber-800 mt-1 font-bold">{directory?.fieldwork_status.includes('UNMET') ? 'UNMET' : '—'}</div>
             </div>
             <div className="mt-space-lg flex items-center gap-2 text-body-sm text-amber-900 font-medium">
               <span className="material-symbols-outlined text-amber-700 text-[16px]">warning</span>
@@ -160,57 +165,13 @@ export default function A07_EvidenceLinks() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
-              {[
-                {
-                  fam: 'Family 01',
-                  records: '310k Records',
-                  title: 'Ferrous & Heavy Iron Scrap',
-                  desc: 'High-density structural steel, automotive plates, and corroded industrial scrap weights collected across 45 primary aggregation yards in Northern & Western zones.',
-                  fmt: 'JSON / Parquet',
-                },
-                {
-                  fam: 'Family 02',
-                  records: '245k Records',
-                  title: 'Non-Ferrous Alloys (Cu, Al, Brass)',
-                  desc: 'Spectrometer-verified purity grades for copper wire, extruded aluminum profiles, radiator brass, and zinc die-casts under varied lighting and oxidation states.',
-                  fmt: 'JSON / Parquet',
-                },
-                {
-                  fam: 'Family 03',
-                  records: '190k Records',
-                  title: 'Rigid & Flexible Polymers',
-                  desc: 'PET flakes, HDPE containers, LDPE films, and multilayer packaging polymers sorted with near-infrared (NIR) sensor reflectance logs.',
-                  fmt: 'JSON / Parquet',
-                },
-                {
-                  fam: 'Family 04',
-                  records: '180k Records',
-                  title: 'Paper, Corrugated & Cardboard',
-                  desc: 'Old corrugated containers (OCC 95/5), white office ledger, Kraft paper, and newsprint with calibrated moisture deduction curves.',
-                  fmt: 'JSON / Parquet',
-                },
-                {
-                  fam: 'Family 05',
-                  records: '142k Records',
-                  title: 'E-Waste & Circuit Assemblies',
-                  desc: 'High-grade telecommunications and server motherboards, consumer electronics PCBs, CRT and LCD displays, cables, and optical drives.',
-                  fmt: 'JSON / Parquet',
-                },
-                {
-                  fam: 'Family 06',
-                  records: '85k Records',
-                  title: 'Battery Chemistries & Hazardous Units',
-                  desc: 'Sealed lead-acid inverter batteries, Li-ion pouch and cylindrical cells, and button cells requiring mandatory route-isolated hazardous logistics.',
-                  fmt: 'JSON / Parquet',
-                },
-                {
-                  fam: 'Family 07',
-                  records: '72k Records',
-                  title: 'Motors, Compressors & Technical Scrap',
-                  desc: 'Hermetic refrigeration compressors, AC induction motors, copper windings, and laminated stator cores with heavy scrap deduction models.',
-                  fmt: 'JSON / Parquet',
-                },
-              ].map((f, i) => (
+              {(directory?.datasets ?? []).map((dataset, i) => ({
+                  fam: `Family ${String(i + 1).padStart(2, '0')}`,
+                  records: `${dataset.row_count.toLocaleString('en-IN')} rows`,
+                  title: dataset.label,
+                  desc: `Persisted ${dataset.family} data family. Use its server data card and export manifest for current provenance and validation details.`,
+                  fmt: 'CSV / JSON',
+                })).map((f, i) => (
                 <div
                   key={i}
                   className="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow border border-surface-container"

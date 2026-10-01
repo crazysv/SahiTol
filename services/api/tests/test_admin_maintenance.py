@@ -708,6 +708,11 @@ def test_facility_verification_review_asserts_evidence(
     ).first()
     assert ev is not None
 
+    listing = client.get("/api/v1/admin/facilities", headers=a_headers)
+    assert listing.status_code == 200
+    listed = next(row for row in listing.json() if row["id"] == str(facility.id))
+    assert listed["authorizations"][0]["reference"] == "CPCB/EW/REG/2026/042"
+
 
 # =============================================================================
 # 7. Domain Event Search & Traceability (R-ADMIN-05, AT-077)

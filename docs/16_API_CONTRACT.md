@@ -77,6 +77,7 @@ Base `/api/v1` for business endpoints; `/health/live` and `/health/ready` are un
 | GET /sync/changes | Authenticated scope | opaque cursor/limit → entity versions/tombstones + next_cursor/has_more |
 | GET /admin/overview | Admin | selected filters → calculated counts,denominators,as_of |
 | GET /admin/collectors | Admin | minimal profiles/activity; sensitive access audited |
+| GET /admin/facilities | Admin | persisted facility directory with route/evidence assertions; does not certify external compliance |
 | GET/POST /admin/materials | Admin | versioned catalog CRUD through explicit validation |
 | PATCH /admin/materials/{id} | Admin | revision/deactivate; retain historical lot references |
 | POST /admin/material-aliases | Admin | normalized alias/language/material, ambiguity validation |

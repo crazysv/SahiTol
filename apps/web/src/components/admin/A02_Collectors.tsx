@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { AdminCollector, fetchAdminCollectors } from '../../lib/api';
 
 interface CollectorRecord {
   id: string;
@@ -71,12 +72,22 @@ const mockCollectors: CollectorRecord[] = [
 ];
 
 export default function A02_Collectors() {
+  const [collectors, setCollectors] = useState<CollectorRecord[]>([]);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('All');
   const [activeModalRecord, setActiveModalRecord] = useState<CollectorRecord | null>(null);
   const [exportNotice, setExportNotice] = useState(false);
 
-  const filteredCollectors = mockCollectors.filter((c) => {
+  useEffect(() => {
+    void fetchAdminCollectors().then((rows: AdminCollector[]) => setCollectors(rows.map((row) => ({
+      id: row.id, alias: row.display_alias, avatar: row.display_alias.slice(0, 2).toUpperCase(), avatarBg: 'bg-primary-fixed', avatarColor: 'text-on-primary-fixed-variant',
+      region: row.general_area || row.region_id || 'Area not recorded', regionGroup: row.region_id || 'Unspecified', lots: row.lot_count,
+      recentActivity: new Date(row.created_at).toLocaleDateString('en-GB'),
+    })))).catch((error: unknown) => setLoadError(error instanceof Error ? error.message : 'Unable to load collectors.'));
+  }, []);
+
+  const filteredCollectors = collectors.filter((c) => {
     const matchesRegion = selectedRegion === 'All' || c.regionGroup === selectedRegion;
     const matchesSearch =
       c.alias.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -127,14 +138,14 @@ export default function A02_Collectors() {
             <span className="text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
               Active Aliases
             </span>
-            <div className="text-headline-xl font-headline-xl text-on-surface mt-1 font-bold">1,420</div>
+            <div className="text-headline-xl font-headline-xl text-on-surface mt-1 font-bold">{collectors.length || '—'}</div>
             <span className="text-body-sm text-on-surface-variant">Anonymized field units</span>
           </div>
           <div className="p-space-lg bg-surface-container-low rounded-xl border border-surface-container">
             <span className="text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
               Total Lots Logged
             </span>
-            <div className="text-headline-xl font-headline-xl text-primary mt-1 font-bold">38,912</div>
+            <div className="text-headline-xl font-headline-xl text-primary mt-1 font-bold">{collectors.length ? collectors.reduce((total, collector) => total + collector.lots, 0).toLocaleString('en-IN') : '—'}</div>
             <span className="text-body-sm text-on-surface-variant">Verified material batches</span>
           </div>
           <div className="p-space-lg bg-surface-container-low rounded-xl border border-surface-container">

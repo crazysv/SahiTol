@@ -109,4 +109,9 @@ than upload ID, and large-weight flags use `DQ-LARGE-WEIGHT`; 33 focused
 quality/lot tests pass. T029 was independently repaired and reverified: event
 search now has inclusive UTC date bounds, and price moderation requires a
 justification and emits a hash-chained review event. The dedicated
-admin-maintenance suite passes 10/10. Continue in order at T030.
+admin-maintenance suite passes 10/10. T030 was independently repaired: approved
+A01-A07 layouts now bind their operational values/actions to authenticated admin
+APIs instead of static sample figures; A03 is explicitly evidence-only, not a
+statutory compliance decision. Focused dashboard tests pass 4/4, admin API
+tests pass 10/10, and the web typecheck/production build pass. Continue in
+order at T031.

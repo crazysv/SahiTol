@@ -1,5 +1,43 @@
 # Task Evidence: T030 — Implement Approved Admin / Data-Quality Dashboard
 
+## 2026-10-01 independent repair and verification
+
+The audit found that the approved A01-A07 layouts were present but most displayed
+fixed sample operational data. The following data paths now use authenticated
+admin APIs while retaining the registered owner-approved visual structure:
+
+- A01: `/admin/overview`; no fabricated zero on failure.
+- A02: `/admin/collectors` minimal fields only.
+- A03: `/admin/facilities` persisted evidence; compliance language now states
+  that the view is not a statutory determination.
+- A04: `/admin/materials` and `/admin/price-review`, with real moderation
+  decisions.
+- A05: UUID-scoped `/admin/traceability/{lot_id}` lookup before any integrity
+  status is displayed.
+- A06: `/admin/quality-flags` and the server resolution endpoint.
+- A07: `/admin/datasets` row counts and fieldwork disclosure.
+
+The added facility-directory endpoint exposes only directory data and stored
+authorization assertions; it does not represent external registry validation.
+
+```text
+pytest services/api/tests/test_admin_maintenance.py -q
+10 passed, 1 warning in 1.23s
+
+npx vitest run src/components/admin/AdminDashboard.test.tsx --pool=threads --maxWorkers=1 --minWorkers=1
+4 passed
+
+npm run typecheck
+PASS
+npm run build
+PASS (98 modules)
+```
+
+The focused UI tests mock authenticated API responses and prove the screens bind
+to the API rather than the former fixed sample entities. A complete web-suite
+run was not recorded here because its standard worker configuration left
+orphaned Vitest workers; focused tests are run deterministically with one worker.
+
 ## 1. Task Metadata
 - **Task ID**: `T030`
 - **Phase**: 5 (Recycler, Handover & Admin)

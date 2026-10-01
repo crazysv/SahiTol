@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-01 -- T030 server-backed admin dashboard repair
+
+Replaced static operational sample content across registered A01-A07 with
+authenticated admin API paths for overview, collectors, facilities, catalog and
+price review, traceability, quality flags, and dataset manifests. Added the
+read-only facility-evidence directory endpoint and removed unsupported statutory
+compliance assertions from A03. Focused API-backed dashboard tests pass 4/4;
+admin-maintenance tests pass 10/10; web typecheck and production build pass.
+
 ## 2026-10-01 -- T029 admin review auditability repair
 
 Added inclusive UTC time bounds to admin event search. Price moderation now

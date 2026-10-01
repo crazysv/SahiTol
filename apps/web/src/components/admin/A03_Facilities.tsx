@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { AdminFacility, fetchAdminFacilities } from '../../lib/api';
 
 export default function A03_Facilities() {
   const [quarantined, setQuarantined] = useState(false);
   const [showComplianceModal, setShowComplianceModal] = useState(false);
   const [complianceChecking, setComplianceChecking] = useState(false);
   const [complianceResult, setComplianceResult] = useState<string | null>(null);
+  const [facilities, setFacilities] = useState<AdminFacility[]>([]);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const facility = facilities[0];
+
+  useEffect(() => { void fetchAdminFacilities().then(setFacilities).catch((error: unknown) => setLoadError(error instanceof Error ? error.message : 'Unable to load facility evidence.')); }, []);
 
   const handleRunCompliance = () => {
-    setComplianceChecking(true);
-    setComplianceResult(null);
-    setTimeout(() => {
-      setComplianceChecking(false);
-      setComplianceResult('All statutory criteria compliant. DPCC e-waste authorization valid through 2027-12-31.');
-    }, 800);
+    setComplianceChecking(true); setComplianceResult(null);
+    setTimeout(() => { setComplianceChecking(false); setComplianceResult(facility ? 'Review the persisted authorization evidence shown below; this screen does not make a statutory compliance determination.' : 'No facility evidence loaded; compliance cannot be determined.'); }, 300);
   };
 
   return (
@@ -25,7 +27,7 @@ export default function A03_Facilities() {
               Active Workspace
             </span>
             <span className="text-on-surface-variant text-label-sm font-semibold tracking-wider font-mono">
-              FACILITY ID: SHT-FAC-9842
+              FACILITY ID: {facility?.id ?? 'Loading…'}
             </span>
             {quarantined && (
               <span className="px-2 py-0.5 text-xs font-bold bg-error text-on-error rounded uppercase animate-pulse">
@@ -81,6 +83,7 @@ export default function A03_Facilities() {
           </p>
         </div>
       </div>
+      {loadError && <p role="alert" className="p-3 bg-error-container text-on-error-container rounded-xl text-sm">Facility evidence unavailable: {loadError}</p>}
 
       {/* Main Grid Layout: Left Column (Ladder & Scope), Right Column (Facility Dossier) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
@@ -95,7 +98,7 @@ export default function A03_Facilities() {
                 </h2>
               </div>
               <span className="text-label-sm font-semibold px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full">
-                Current Tier: L3 Verified
+                  Current evidence: {facility?.authorizations[0]?.verification_level ?? 'Not loaded'}
               </span>
             </div>
             <p className="text-body-sm text-on-surface-variant">
@@ -257,49 +260,47 @@ export default function A03_Facilities() {
                 <span className="text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">
                   Facility Dossier
                 </span>
-                <h3 className="text-lg font-headline font-bold text-on-surface">
-                  Apex Recyclers & Shredders Pvt Ltd
-                </h3>
+                  <h3 className="text-lg font-headline font-bold text-on-surface">{facility?.name ?? 'No facility selected'}</h3>
               </div>
               <span className="px-2.5 py-1 bg-primary text-on-primary rounded-xl text-xs font-bold">
-                L3 Verified
+                {facility?.authorizations[0]?.status ?? 'Not verified'}
               </span>
             </div>
 
             <div className="space-y-3 text-xs">
               <div className="p-3 bg-surface-container-lowest rounded-xl border border-surface-container space-y-1.5">
                 <div className="flex justify-between">
-                  <span className="text-on-surface-variant font-medium">State PCB Consent No:</span>
-                  <span className="font-mono font-bold text-on-surface">DPCC/WMC/2023/8891</span>
+                  <span className="text-on-surface-variant font-medium">Authority:</span>
+                  <span className="font-mono font-bold text-on-surface">{facility?.authorizations[0]?.authority ?? '—'}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-on-surface-variant font-medium">CPCB EPR Registration:</span>
-                  <span className="font-mono font-bold text-on-surface">CPCB-EPR-DEL-0412</span>
+                  <span className="text-on-surface-variant font-medium">Evidence reference:</span>
+                  <span className="font-mono font-bold text-on-surface">{facility?.authorizations[0]?.reference ?? '—'}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-on-surface-variant font-medium">Consent Validity:</span>
-                  <span className="font-bold text-emerald-800">Valid through 31 Dec 2027</span>
+                  <span className="text-on-surface-variant font-medium">Evidence validity:</span>
+                  <span className="font-bold text-emerald-800">{facility?.authorizations[0]?.valid_until ? new Date(facility.authorizations[0].valid_until).toLocaleDateString('en-GB') : 'Not recorded'}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-on-surface-variant font-medium">Authorized Roles:</span>
-                  <span className="font-bold text-primary">RECYCLER, DISMANTLER</span>
+                  <span className="text-on-surface-variant font-medium">Route:</span>
+                  <span className="font-bold text-primary">{facility?.authorizations[0]?.route ?? 'Not recorded'}</span>
                 </div>
               </div>
 
               <div className="p-3 bg-surface-container-lowest rounded-xl border border-surface-container space-y-2">
-                <span className="font-bold text-on-surface block">Statutory Compliance Check:</span>
+                <span className="font-bold text-on-surface block">Evidence status (not a statutory determination):</span>
                 <div className="space-y-1 text-[11px]">
                   <div className="flex items-center gap-2 text-emerald-800">
                     <span className="material-symbols-outlined text-[16px]">check_circle</span>
-                    E-Waste Management Rules (2022) compliant
+                    Authorization state: {facility?.authorizations[0]?.status ?? 'Not loaded'}
                   </div>
                   <div className="flex items-center gap-2 text-emerald-800">
                     <span className="material-symbols-outlined text-[16px]">check_circle</span>
-                    Hazardous Waste Rules safe storage confirmed
+                    Verification method: {facility?.authorizations[0]?.verification_level ?? 'Not loaded'}
                   </div>
                   <div className="flex items-center gap-2 text-emerald-800">
                     <span className="material-symbols-outlined text-[16px]">check_circle</span>
-                    Battery isolation route actively enforced
+                    Facility is {facility?.active ? 'active' : 'inactive'} in the persisted directory
                   </div>
                 </div>
               </div>
@@ -307,7 +308,7 @@ export default function A03_Facilities() {
 
             <div className="pt-2">
               <button
-                onClick={() => alert('Facility verification renewal logged in tamper-evident event stream.')}
+                onClick={() => setLoadError('Re-verification requires a documented evidence reference and reason; use the server verification workflow.')}
                 className="w-full py-3 bg-primary text-on-primary font-headline font-bold rounded-xl text-label-md hover:bg-primary-container transition shadow-sm"
               >
                 Assert Administrative Re-Verification
@@ -342,11 +343,11 @@ export default function A03_Facilities() {
             ) : (
               <div className="space-y-3">
                 <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900">
-                  <span className="font-bold block mb-1">Audit Check Passed:</span>
+                  <span className="font-bold block mb-1">Evidence review:</span>
                   {complianceResult}
                 </div>
                 <div className="text-[11px] text-on-surface-variant">
-                  Checked parameters: State consent validity, hazardous material limits, and weighbridge calibration date.
+                  This diagnostic reads persisted evidence only; it cannot assert external legal compliance.
                 </div>
               </div>
             )}

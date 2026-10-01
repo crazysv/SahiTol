@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
+import { fetchTraceability, TraceabilityReport } from '../../lib/api';
 
 export default function A05_Traceability() {
-  const [lotSearch, setLotSearch] = useState('LOT-8942-IN');
+  const [lotSearch, setLotSearch] = useState('');
   const [selectedMaterial, setSelectedMaterial] = useState('Copper Scrap (Heavy)');
   const [selectedStatus, setSelectedStatus] = useState('Completed & Settled');
   const [verifying, setVerifying] = useState(false);
   const [verifiedChain, setVerifiedChain] = useState(true);
+  const [report, setReport] = useState<TraceabilityReport | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const handleVerifyChain = () => {
-    setVerifying(true);
-    setTimeout(() => {
-      setVerifying(false);
-      setVerifiedChain(true);
-    }, 700);
+    if (!lotSearch.trim()) { setLoadError('Enter a UUID lot ID to inspect its server trace.'); return; }
+    setVerifying(true); setLoadError(null);
+    void fetchTraceability(lotSearch.trim()).then((result) => { setReport(result); setVerifiedChain(result.is_hash_chain_valid); }).catch((error: unknown) => { setReport(null); setLoadError(error instanceof Error ? error.message : 'Unable to load traceability report.'); }).finally(() => setVerifying(false));
   };
 
   return (
@@ -99,7 +100,7 @@ export default function A05_Traceability() {
             </select>
 
             <button
-              onClick={() => alert(`Inspecting trace records for ${lotSearch}`)}
+            onClick={handleVerifyChain}
               className="px-6 py-3.5 bg-primary text-on-primary font-label-md rounded-xl hover:bg-primary-container transition-colors flex items-center justify-center gap-space-xs font-semibold"
             >
               <span>Inspect Lot</span>
@@ -120,20 +121,20 @@ export default function A05_Traceability() {
               <span className="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded font-label-sm font-bold">
                 Verified Lot
               </span>
-              <span className="text-body-sm text-on-surface-variant font-mono">#SHA-992184</span>
+              <span className="text-body-sm text-on-surface-variant font-mono">{report?.events.at(-1)?.event_hash.slice(0, 12) ?? 'No server trace loaded'}</span>
             </div>
             <div>
               <h2 className="text-headline-md text-on-surface font-bold">{lotSearch}</h2>
-              <p className="text-body-sm text-on-surface-variant">Clean Industrial Copper Wire</p>
+              <p className="text-body-sm text-on-surface-variant">{report?.material_id ?? 'Enter a lot UUID and inspect the server trace.'}</p>
             </div>
             <div className="grid grid-cols-2 gap-space-md pt-2">
               <div className="bg-surface-container-low p-3 rounded-xl border border-surface-container">
                 <span className="text-label-sm text-on-surface-variant block font-medium">Recorded Weight</span>
-                <span className="text-headline-md text-on-surface font-bold">1,420 kg</span>
+                <span className="text-headline-md text-on-surface font-bold">{report ? `${report.events_count} events` : '—'}</span>
               </div>
               <div className="bg-surface-container-low p-3 rounded-xl border border-surface-container">
                 <span className="text-label-sm text-on-surface-variant block font-medium">Total Valuation</span>
-                <span className="text-headline-md text-primary font-bold">₹9,94,000</span>
+                <span className="text-headline-md text-primary font-bold">{report?.lot_status ?? '—'}</span>
               </div>
             </div>
             <div className="flex flex-col gap-2 pt-2 border-t border-surface-container text-xs">
@@ -160,14 +161,14 @@ export default function A05_Traceability() {
                 <h3 className="text-headline-md text-on-surface font-bold">Hash-Chain Status</h3>
               </div>
               <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-label-sm font-bold">
-                100% Intact
+                {report ? (verifiedChain ? 'Verified' : 'Integrity issue') : 'Not checked'}
               </span>
             </div>
             <p className="text-body-sm text-on-surface-variant">
-              Cryptographic verification passed across all 5 ledger transitions. No retro-active alterations detected.
+              {report ? `Server evaluation returned ${report.events_count} event(s).` : 'No trace has been loaded; integrity is not asserted.'}
             </p>
             <div className="bg-surface-container-low p-3 rounded-xl font-mono text-xs text-on-surface-variant break-all border border-surface-container">
-              Root Hash: a09162336537b01b22e1774e142e88a38c2957bda07da4ebefefdf895a9cb3c7
+              Root Hash: {report?.events.at(-1)?.event_hash ?? '—'}
             </div>
             <div className="flex flex-col gap-2 text-xs border-t border-surface-container pt-2">
               <div className="flex items-center justify-between">

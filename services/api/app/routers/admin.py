@@ -323,10 +323,19 @@ class AdminFacilityVerificationResponse(BaseModel):
     verification_level: str
     valid_from: Optional[str]
     valid_until: Optional[str]
-    reviewer_id: uuid.UUID
+    reviewer_id: Optional[uuid.UUID]
     last_verified_at: str
     scope_notes: Optional[str]
     reason: str
+
+
+class AdminFacilitySummaryResponse(BaseModel):
+    id: uuid.UUID
+    name: str
+    kind: str
+    region_id: str
+    active: bool
+    authorizations: List[AdminFacilityVerificationResponse]
 
 
 class DomainEventResponse(BaseModel):
@@ -1470,6 +1479,31 @@ def update_admin_safety_guide(
 # ---------------------------------------------------------
 # Facility Verification Review (R-ADMIN-01, AT-064)
 # ---------------------------------------------------------
+
+@router.get("/api/v1/admin/facilities", response_model=List[AdminFacilitySummaryResponse])
+@router.get("/admin/facilities", response_model=List[AdminFacilitySummaryResponse])
+def list_admin_facilities(
+    current_user: User = Depends(require_roles(UserRole.ADMIN)),
+    db: Session = Depends(get_db),
+):
+    """List persisted facilities and their auditable authorization evidence."""
+    facilities = db.execute(select(Facility).where(Facility.deleted_at.is_(None)).order_by(Facility.name.asc())).scalars().all()
+    return [AdminFacilitySummaryResponse(
+        id=facility.id,
+        name=facility.name,
+        kind=facility.kind,
+        region_id=facility.region_id,
+        active=facility.active,
+        authorizations=[AdminFacilityVerificationResponse(
+            id=entry.id, facility_id=entry.facility_id, route=entry.route,
+            authority=entry.authority, reference=entry.reference, status=entry.status,
+            verification_level=entry.verification_level,
+            valid_from=entry.valid_from.isoformat() if entry.valid_from else None,
+            valid_until=entry.valid_until.isoformat() if entry.valid_until else None,
+            reviewer_id=entry.reviewer_id, last_verified_at=entry.last_verified_at.isoformat() if entry.last_verified_at else "",
+            scope_notes=entry.scope_notes, reason="Administrative verification evidence",
+        ) for entry in db.execute(select(FacilityAuthorization).where(FacilityAuthorization.facility_id == facility.id)).scalars().all()],
+    ) for facility in facilities]
 
 @router.post("/api/v1/admin/facilities/{facility_id}/verification", response_model=AdminFacilityVerificationResponse, status_code=status.HTTP_201_CREATED)
 @router.post("/admin/facilities/{facility_id}/verification", response_model=AdminFacilityVerificationResponse, status_code=status.HTTP_201_CREATED)
