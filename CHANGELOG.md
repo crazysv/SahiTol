@@ -8,6 +8,14 @@ engine unavailable, so no fresh PostGIS container, persistent-volume restore,
 or real-phone debug-LAN rehearsal was performed. T042 and its cross-task
 acceptance cases remain in progress/NOT_RUN rather than DONE/PASS.
 
+## 2026-10-01 -- T043 matching-acceptance repair
+
+The cross-surface suite still passes 44/44 after replacing a weak
+facility-matching assertion that accepted a 404 or empty result. It now creates
+an authorized material-matching recycler and requires it to be returned as
+eligible. Evidence now correctly distinguishes isolated deterministic coverage
+from the still-required real-device/hosted fault acceptance.
+
 ## 2026-10-01 -- T033 LiteRT interpreter verification
 
 Verified the declared TensorFlow 2.15.1 runtime and actual LiteRT interpreter

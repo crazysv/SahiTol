@@ -1,8 +1,9 @@
 # T043 Evidence: Cross-Surface Integration and Fault Acceptance
 
 **Task:** T043 — Cross-surface integration and fault acceptance test suite  
-**Status:** DONE  
-**Date:** 2026-09-30  
+**Status:** IN PROGRESS — deterministic integration coverage passes; the complete
+real-device, hosted fault-acceptance journey remains separate evidence.  
+**Date:** 2026-10-01  
 **Runner:** Python 3.10.11 / pytest-9.1.1 on Windows (local dev)
 
 ## Test Run Result
@@ -13,7 +14,10 @@ services\api\tests\test_cross_surface_integration_and_fault_acceptance.py ......
 ======================== 44 passed, 1 warning in 4.09s ========================
 ```
 
-Exit code: 0 (the shell exit-code 1 is a PowerShell artifact from the urllib3 version warning printed to stderr — pytest itself exited 0 as confirmed by the 44 passed/0 failed output).
+Exit code: 0. The independent 2026-10-01 rerun completed in 2.21 seconds with
+44 passed and one dependency deprecation warning. The facility-match test now
+creates an authorized recycler and requires that recycler to appear in the
+eligible results; it no longer accepts a 404 or merely a response-shaped body.
 
 ## Test Classes and Cases Covered
 
@@ -58,3 +62,14 @@ The test file was updated to align with implemented API shapes:
 - ✅ Optimistic concurrency — stale `expected_version` returns CONFLICT outcome
 - ✅ Idempotency — duplicate operation_id returns ALREADY_APPLIED
 - ✅ Dependency ordering — dependency-blocked ops return DEPENDENCY_PENDING
+
+## Scope boundary
+
+These are deterministic endpoint and database integration tests using the
+isolated test database. They verify the documented command, matching,
+idempotency, conflict, receipt, payment, ledger and admin contracts, but they
+do not by themselves prove the whole real-device/hosted journey under airplane
+mode, crash, storage, authentication and two-phone conditions. T025 supplies
+the independently completed server-backed two-phone confirmation; remaining
+cross-task acceptance cases retain their canonical `NOT_RUN` status until their
+complete required evidence exists.

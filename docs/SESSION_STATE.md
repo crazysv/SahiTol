@@ -139,3 +139,7 @@ before closing T041. T042 is now active: its focused recovery suite passes
 12/12 and Compose config validates, but Docker Desktop's Linux engine is
 unavailable, so a fresh PostGIS restore and real-phone debug-LAN rehearsal are
 still NOT_RUN. Resume those after the engine is healthy.
+T043 then reran cleanly: 44 focused deterministic tests pass, including an
+authorized-recycler match that was tightened from a response-shape check. Its
+real-device/hosted fault acceptance remains NOT_RUN; continue at T044 only
+after retaining that scope boundary.

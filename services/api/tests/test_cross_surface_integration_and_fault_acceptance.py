@@ -1130,8 +1130,9 @@ class TestEndToEndCollectorRecyclerLedgerAdmin:
             )
 
     def test_recycler_matching_endpoint_returns_candidates(self):
-        """Recycler matching endpoint returns structured response for a valid lot."""
+        """An authorized matching recycler is returned for a valid collector lot."""
         col = _make_collector_user("+919800000080")
+        recycler = _make_recycler_setup("+919800000180")
         lot_id = uuid.uuid4()
 
         # Create and list the lot
@@ -1152,10 +1153,14 @@ class TestEndToEndCollectorRecyclerLedgerAdmin:
             json={"search_radius_m": 50000},
             headers=col["headers"],
         )
-        assert resp.status_code in (200, 404), f"Matching endpoint failed: {resp.text}"
-        if resp.status_code == 200:
-            data = resp.json()
-            assert "matches" in data or "candidates" in data or "data" in data
+        assert resp.status_code == 200, f"Matching endpoint failed: {resp.text}"
+        data = resp.json()
+        assert data["total_candidates_evaluated"] >= 1
+        assert data["eligible_count"] >= 1
+        assert any(
+            match["facility_id"] == str(recycler["facility_id"])
+            for match in data["matches"]
+        ), "The authorized material-matching recycler must be returned."
 
     def test_admin_quality_flags_endpoint_accessible(self):
         """Admin quality flags endpoint returns paginated flag list."""

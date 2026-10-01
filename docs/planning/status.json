@@ -339,7 +339,7 @@
       "evidence": [
         "docs/evidence/T043_CROSS_SURFACE_INTEGRATION.md"
       ],
-      "note": "Cross-surface tests pass, but the real second-device confirmation boundary in dependency T025 is incomplete. T043 remains IN_PROGRESS until it can verify that path end-to-end.",
+      "note": "On 2026-10-01, all 44 deterministic cross-surface tests passed after strengthening the facility-match assertion to require a created authorized recycler in the eligible results. T025's deployed two-phone confirmation is now DONE. T043 remains IN_PROGRESS because isolated test-database coverage does not prove the complete real-device/hosted fault journey required by its acceptance cases.",
       "owner": "Owner + coding agent"
     },
     "T044": {
