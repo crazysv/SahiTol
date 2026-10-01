@@ -988,12 +988,22 @@ def create_offer(
 
     # Evaluate DQ-PRICE-OUTLIER under QUALITY_V1 without blocking collector choice (AT-020)
     if eff_rate and lot.material_id:
+        # Use the same eligible reference cohort as PRICE_V1: reviewed, recent,
+        # per-kg BUY observations for this material/condition/region and demo
+        # partition.  Pending, stale, piece-based, and recycler quote records
+        # must never distort a quality review baseline.
+        price_cutoff = now - timedelta(days=30)
         comparable_obs = (
             db.query(PriceObservation)
             .filter(
                 PriceObservation.material_id == lot.material_id,
-                PriceObservation.unit == "KG",
-                PriceObservation.is_demo == lot.is_demo
+                PriceObservation.region_id == facility.region_id,
+                PriceObservation.condition == offer.condition,
+                func.lower(PriceObservation.unit) == "kg",
+                PriceObservation.price_kind == "BUY",
+                PriceObservation.review_status == "VERIFIED",
+                PriceObservation.is_demo == lot.is_demo,
+                PriceObservation.observed_at >= price_cutoff,
             )
             .all()
         )

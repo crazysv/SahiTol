@@ -502,21 +502,40 @@ def test_trade_offer_price_outlier_flagging_without_blocking(
     recycler, facility, r_headers = recycler_user
     now = datetime.now(timezone.utc)
 
-    # Seed 5 comparable price observations for material MAT-PCB-01 (rate ~10000 paise/kg)
+    # Seed 5 eligible PRICE_V1 observations for the exact offer cohort.
     for i, rate in enumerate([9500, 10000, 10200, 10500, 11000]):
         obs = PriceObservation(
             id=uuid.uuid4(),
             material_id="MAT-PCB-01",
-            region_id="DL",
+            region_id=facility.region_id,
             rate_paise_per_unit=rate,
             unit="KG",
-            price_kind="INDICATIVE",
+            price_kind="BUY",
+            condition="INTACT",
             source_id=f"SRC-COMP-{i}",
             observed_at=now - timedelta(days=2),
             review_status="VERIFIED",
             is_demo=False
         )
         db.add(obs)
+
+    # These records must not enter the benchmark: they are respectively
+    # unreviewed, stale, a different price kind, and a different condition.
+    # If they were included, their high values would suppress the true outlier.
+    for i, overrides in enumerate([
+        {"review_status": "PENDING_REVIEW"},
+        {"observed_at": now - timedelta(days=31)},
+        {"price_kind": "QUOTE"},
+        {"condition": "SCRAP"},
+    ]):
+        values = {
+            "id": uuid.uuid4(), "material_id": "MAT-PCB-01", "region_id": facility.region_id,
+            "rate_paise_per_unit": 50000, "unit": "KG", "price_kind": "BUY",
+            "condition": "INTACT", "source_id": f"SRC-INELIGIBLE-{i}",
+            "observed_at": now - timedelta(days=2), "review_status": "VERIFIED", "is_demo": False,
+        }
+        values.update(overrides)
+        db.add(PriceObservation(**values))
 
     # Create lot and request
     lot = Lot(
@@ -566,6 +585,7 @@ def test_trade_offer_price_outlier_flagging_without_blocking(
     assert flag.severity == "MEDIUM"
     assert "outside IQR bounds" in flag.reason
     assert "does not accuse fraud" in flag.reason
+    assert flag.evidence_json["observation_count"] == 5
 
 
 def test_handover_weight_discrepancy_logs_quality_flag(

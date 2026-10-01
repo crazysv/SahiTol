@@ -40,6 +40,7 @@ from app.db.models.lot import (
 from app.db.models.material import Material
 from app.db.models.price import PriceSummary
 from app.domain.canonical import compute_canonical_hash
+from app.domain.quality import POLICY_VERSION, evaluate_large_weight
 from app.domain.matching import (
     CandidateFacility,
     LotContext,
@@ -363,12 +364,18 @@ def create_lot(
                 purpose="PHOTO",
                 captured_at=now
             ))
-            # Check duplicate media across active lots under QUALITY_V1
+            # Check SHA-256 reuse across active lots.  Upload IDs differ when
+            # the same image is uploaded more than once, so comparing IDs here
+            # would miss the actual QUALITY_V1 duplicate-media condition.
+            media = db.execute(select(MediaObject).where(MediaObject.id == media_id)).scalar_one_or_none()
+            if not media:
+                continue
             existing_lots = (
                 db.query(LotImage.lot_id)
                 .join(Lot, Lot.id == LotImage.lot_id)
+                .join(MediaObject, MediaObject.id == LotImage.media_id)
                 .filter(
-                    LotImage.media_id == media_id,
+                    MediaObject.sha256 == media.sha256,
                     LotImage.lot_id != lot.id,
                     Lot.status.notin_(["CANCELLED", "CLOSED"])
                 )
@@ -386,11 +393,11 @@ def create_lot(
                     policy_version="QUALITY_V1",
                     severity="MEDIUM",
                     evidence_json={
-                        "media_id": str(media_id),
+                        "media_sha256": media.sha256,
                         "other_lot_ids": other_ids
                     },
                     reason=(
-                        f"Media {media_id} previously referenced in {len(other_ids)} "
+                        f"Media SHA-256 {media.sha256[:12]}... previously referenced in {len(other_ids)} "
                         f"distinct active lot(s); review recommended (not proof of duplicate material or fraud)."
                     ),
                     status="OPEN",
@@ -399,20 +406,18 @@ def create_lot(
                 ))
 
     # Flag suspicious large weight for review without rejecting arbitrarily
-    if payload.estimated_weight_g and payload.estimated_weight_g > LARGE_WEIGHT_THRESHOLD_GRAMS:
+    large_weight_result = evaluate_large_weight(payload.estimated_weight_g or 0)
+    if not large_weight_result.passed:
         db.add(QualityFlag(
             id=uuid.uuid4(),
             entity_type="LOT",
             entity_id=lot.id,
             entity_version=1,
-            rule_id="LARGE_WEIGHT_ANOMALY",
-            policy_version="QUALITY_V1",
-            severity="MEDIUM",
-            evidence_json={
-                "estimated_weight_g": payload.estimated_weight_g,
-                "threshold_g": LARGE_WEIGHT_THRESHOLD_GRAMS
-            },
-            reason=f"Large weight anomaly: {payload.estimated_weight_g}g exceeds 500kg threshold; flagged for review without artificial rejection.",
+            rule_id=large_weight_result.rule_id,
+            policy_version=POLICY_VERSION,
+            severity=large_weight_result.severity.value,
+            evidence_json=large_weight_result.details,
+            reason=large_weight_result.reason,
             status="OPEN",
             created_at=now,
             updated_at=now
@@ -648,14 +653,17 @@ async def patch_lot(
 
     if payload.estimated_weight_g is not None:
         lot.estimated_weight_g = payload.estimated_weight_g
-        if payload.estimated_weight_g > LARGE_WEIGHT_THRESHOLD_GRAMS:
+        large_weight_result = evaluate_large_weight(payload.estimated_weight_g)
+        if not large_weight_result.passed:
             db.add(QualityFlag(
                 entity_type="LOT",
                 entity_id=lot.id,
                 entity_version=lot.version + 1,
-                rule_id="LARGE_WEIGHT_ANOMALY",
-                severity="MEDIUM",
-                evidence_json={"estimated_weight_g": payload.estimated_weight_g},
+                rule_id=large_weight_result.rule_id,
+                policy_version=POLICY_VERSION,
+                severity=large_weight_result.severity.value,
+                evidence_json=large_weight_result.details,
+                reason=large_weight_result.reason,
                 status="OPEN"
             ))
 
@@ -681,6 +689,40 @@ async def patch_lot(
                 purpose="PHOTO",
                 captured_at=now
             ))
+            media = db.execute(select(MediaObject).where(MediaObject.id == media_id)).scalar_one_or_none()
+            if not media:
+                continue
+            existing_lots = (
+                db.query(LotImage.lot_id)
+                .join(Lot, Lot.id == LotImage.lot_id)
+                .join(MediaObject, MediaObject.id == LotImage.media_id)
+                .filter(
+                    MediaObject.sha256 == media.sha256,
+                    LotImage.lot_id != lot.id,
+                    Lot.status.notin_(["CANCELLED", "CLOSED"]),
+                )
+                .distinct()
+                .all()
+            )
+            if existing_lots:
+                other_ids = [str(row[0]) for row in existing_lots]
+                db.add(QualityFlag(
+                    id=uuid.uuid4(),
+                    entity_type="LOT",
+                    entity_id=lot.id,
+                    entity_version=lot.version + 1,
+                    rule_id="DQ-DUPLICATE-MEDIA",
+                    policy_version=POLICY_VERSION,
+                    severity="MEDIUM",
+                    evidence_json={"media_sha256": media.sha256, "other_lot_ids": other_ids},
+                    reason=(
+                        f"Media SHA-256 {media.sha256[:12]}... previously referenced in {len(other_ids)} "
+                        "distinct active lot(s); review recommended (not proof of duplicate material or fraud)."
+                    ),
+                    status="OPEN",
+                    created_at=now,
+                    updated_at=now,
+                ))
 
     lot.version += 1
     lot.updated_at = now

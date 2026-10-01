@@ -199,9 +199,47 @@ def test_suspicious_large_weight_quality_flag_without_cap(collector_a):
             QualityFlag.__table__.select().where(QualityFlag.entity_id == lot_id)
         ).first()
         assert flag is not None
-        assert flag.rule_id == "LARGE_WEIGHT_ANOMALY"
+        assert flag.rule_id == "DQ-LARGE-WEIGHT"
         assert flag.severity == "MEDIUM"
         assert flag.status == "OPEN"
+
+
+def test_duplicate_media_uses_sha256_across_distinct_uploads(collector_a):
+    """QUALITY_V1 detects identical image content even when upload IDs differ."""
+    shared_sha256 = "a" * 64
+    first_media_id = uuid.uuid4()
+    second_media_id = uuid.uuid4()
+    with TestingSessionLocal() as session:
+        first_media = MediaObject(
+            id=first_media_id, owner_user_id=collector_a["id"], storage_key="test/first.jpg",
+            mime_type="image/jpeg", byte_size=123, sha256=shared_sha256, upload_state="VALIDATED",
+        )
+        second_media = MediaObject(
+            id=second_media_id, owner_user_id=collector_a["id"], storage_key="test/second.jpg",
+            mime_type="image/jpeg", byte_size=123, sha256=shared_sha256, upload_state="VALIDATED",
+        )
+        session.add_all([first_media, second_media])
+        session.commit()
+
+    first = client.post("/api/v1/lots", json={
+        "material_id": "MAT-PCB-01", "estimated_weight_g": 1000, "media_ids": [str(first_media_id)],
+    }, headers=collector_a["headers"])
+    assert first.status_code == 201
+    second = client.post("/api/v1/lots", json={
+        "material_id": "MAT-PCB-01", "estimated_weight_g": 1000, "media_ids": [str(second_media_id)],
+    }, headers=collector_a["headers"])
+    assert second.status_code == 201
+
+    with TestingSessionLocal() as session:
+        flag = session.execute(
+            QualityFlag.__table__.select().where(
+                QualityFlag.entity_id == uuid.UUID(second.json()["id"]),
+                QualityFlag.rule_id == "DQ-DUPLICATE-MEDIA",
+            )
+        ).first()
+        assert flag is not None
+        assert flag.evidence_json["media_sha256"] == shared_sha256
+        assert str(first.json()["id"]) in flag.evidence_json["other_lot_ids"]
 
 
 def test_location_provenance_gps_and_manual_coarse(collector_a):

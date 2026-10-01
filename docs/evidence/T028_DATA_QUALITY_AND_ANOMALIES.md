@@ -1,5 +1,32 @@
 # Test Evidence: T028 Implement Data-Quality and Anomaly Rules
 
+## 2026-10-01 independent repair and verification
+
+An independent implementation audit found three gaps in the otherwise-present
+QUALITY_V1 wiring:
+
+1. The offer outlier cohort included unreviewed, stale, incompatible-condition
+   and recycler-quote observations. It now matches the PRICE_V1 eligible cohort:
+   exact material/condition/facility region, `BUY`, kg, `VERIFIED`, same demo
+   partition and the last 30 days.
+2. Lot media reuse compared `media_id`, which misses a re-upload of identical
+   bytes. Create and update now compare `MediaObject.sha256` across active lots.
+3. Lot creation/update emitted a non-canonical `LARGE_WEIGHT_ANOMALY` ID. Both
+   now use `DQ-LARGE-WEIGHT` and the shared rule result.
+
+Verification after repair:
+
+```text
+pytest services/api/tests/test_quality.py services/api/tests/test_lots.py -q
+33 passed, 4 warnings in 2.18s
+```
+
+The price test includes high-value pending, stale, `QUOTE`, and different-
+condition rows and proves they do not suppress a legitimate outlier flag. The
+lot test creates two different upload records with the same SHA-256 and proves
+the second lot receives `DQ-DUPLICATE-MEDIA`. Warnings are third-party
+FastAPI/Starlette deprecations; no test failed.
+
 ## Metadata
 - **Task ID**: T028
 - **Phase**: Stage 5 (Data Quality, Anomaly Detection & Admin Governance)

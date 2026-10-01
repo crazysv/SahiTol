@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-01 -- T028 QUALITY_V1 cohort and media-integrity repair
+
+Independent audit found that the operational price-outlier baseline admitted
+pending, stale, incompatible and recycler-quote observations; it now uses the
+same reviewed 30-day material/condition/region/kg BUY cohort as PRICE_V1.
+Duplicate-media detection now compares SHA-256 across distinct uploads during
+lot create and update, and large-weight alerts consistently use
+`DQ-LARGE-WEIGHT`. Focused quality and lot verification passes 33/33, including
+proof that separate upload IDs with identical bytes create a review flag.
+
 ## 2026-10-01 -- T027 durable offline payment repair
 
 Replaced in-memory-only collector payment assertions with account-partitioned

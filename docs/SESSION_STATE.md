@@ -103,4 +103,7 @@ acknowledgement, and removes the collector-side acknowledgement action. Focused
 Android payment tests pass 6/6, including process-restart rehydration; continue
 at T028 after documentation validation. The updated APK was installed over the
 collector device without clearing data and relaunched without a Room migration
-failure.
+failure. T028 was then independently repaired and reverified: quality baselines
+now use only PRICE_V1-eligible observations, media reuse compares SHA-256 rather
+than upload ID, and large-weight flags use `DQ-LARGE-WEIGHT`; 33 focused
+quality/lot tests pass. Continue in order at T029.

@@ -221,7 +221,7 @@
       "evidence": [
         "docs/evidence/T028_DATA_QUALITY_AND_ANOMALIES.md"
       ],
-      "note": "Implemented data-quality rules under QUALITY_V1: missing/invalid/duplicate/stale/inconsistent checks, price bounds via IQR and zero-IQR fallback without accusing fraud or blocking collector choice (AT-020), weight variance >20% baseline (AT-033), image reuse detection, repeated transaction acceptance exclusion (AT-028), admin quality flags API with drill-down, summary metrics with true denominators (R-ADMIN-02, AT-065), and review resolution workflow emitting append-only hash-chained domain events.",
+      "note": "Independently reverified and repaired QUALITY_V1. Offer outlier baselines now include only reviewed, recent 30-day, exact material/condition/region, per-kg BUY observations in the correct demo partition; pending, stale, incompatible and recycler-quote records cannot suppress a flag. Duplicate-media detection now compares SHA-256 across distinct uploads on lot create and update, and large-weight flags use canonical DQ-LARGE-WEIGHT. Quality/lot tests pass 33/33.",
       "owner": "Owner + coding agent"
     },
     "T029": {
