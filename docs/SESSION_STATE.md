@@ -35,6 +35,13 @@ fallback without blocking material/weight/condition entry. Camera denial still
 requires a Settings change made on the phone because its ADB shell cannot
 revoke the granted permission.
 
+The T044 changed-terms/dispute path is now also live-device verified. Isolated
+handover `ST-50BF6E` was revised by the authorized recycler from 14.25 kg /
+₹4,275 to 13.00 kg / ₹3,900; C11 pulled the changed terms and the collector
+recorded a dispute. The hosted record is `DISPUTED` v3 without confirmation,
+and its recovered C11 state says joint review is required. Physical acceptance
+of revised terms and camera denial remain open.
+
 - **T046 DONE**: String parity 145/145 all locales. Audio 258/258 checksums OK. All AudioGrammarAndManifestTest PASS.
 - **T047 DONE**: 7 data cards, model card (macro-F1 0.0159), frozen SHA-256 manifest (T047_FROZEN_RELEASE_MANIFEST.json).
 - **T048 DONE**: 10-slide deck script, one-page fact sheet, five presenter role cards with Q&A crib.

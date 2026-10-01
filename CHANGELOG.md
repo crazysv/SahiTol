@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-10-02 -- T044 live revised-terms and dispute path
+
+Connected the approved C11 changed-terms state to the authenticated live
+acknowledgement and dispute endpoints. The collector now pulls the recycler's
+revised mass/value/reason, requires an explicit choice, and correctly renders a
+disputed record after restart. A physical isolated handover was revised by the
+recycler then disputed by the collector; deployed state is `DISPUTED` v3 with
+no confirmation and the original proposal hash unchanged. API handover tests
+and Android build/unit tests pass. Physical acceptance of revised terms remains
+open.
+
 ## 2026-10-02 -- T044 GPS-denial physical fallback
 
 With fine and coarse location permission denied on the collector handset, C04

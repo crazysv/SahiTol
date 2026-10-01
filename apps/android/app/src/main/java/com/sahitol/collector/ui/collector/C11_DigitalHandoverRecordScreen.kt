@@ -33,6 +33,7 @@ import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.domain.pdf.ReceiptPdfGenerator
 import com.sahitol.collector.domain.qr.QrGenerator
 import com.sahitol.collector.ui.theme.*
+import kotlinx.coroutines.launch
 
 /**
  * Screen C11: Digital Handover Record & QR Confirmation (Stitch b41f09f64e78).
@@ -63,16 +64,35 @@ fun C11_DigitalHandoverRecordScreen(
     var proposal by remember(handoverId) { mutableStateOf(handoverRepository.getHandoverProposal(handoverId)) }
     var refreshMessage by remember(handoverId) { mutableStateOf<String?>(null) }
     var pdfGeneratedFile by remember { mutableStateOf<String?>(null) }
+    var revision by remember(handoverId) { mutableStateOf<com.sahitol.collector.data.repository.LiveTermsRevision?>(null) }
+    var serverVersion by remember(handoverId) { mutableIntStateOf(0) }
+    var actionInProgress by remember(handoverId) { mutableStateOf(false) }
+    var showDisputeDialog by remember(handoverId) { mutableStateOf(false) }
+    var disputeReason by remember(handoverId) { mutableStateOf("") }
+    val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(handoverId, session.accountId) {
         val accountId = session.accountId ?: return@LaunchedEffect
         when (val result = facilityRepository.fetchLiveHandoverStatus(handoverId, accountId)) {
             is TradeResult.Success -> {
+                revision = result.value.latestTermsRevision
+                serverVersion = result.value.version
                 proposal = handoverRepository.updateServerStatus(handoverId, result.value.status)
                     ?: proposal.copy(status = result.value.status)
-                refreshMessage = if (result.value.status == "CONFIRMED") {
-                    "Recycler receipt confirmed by server."
-                } else null
+                proposal = revision?.let {
+                    proposal.copy(
+                        materialId = it.materialId,
+                        measuredWeightG = it.measuredWeightG,
+                        totalPayoutInr = it.finalTotalPaise / 100.0,
+                        rateInrPerKg = if (it.measuredWeightG > 0) it.finalTotalPaise / 100.0 * 1000 / it.measuredWeightG else 0.0
+                    )
+                } ?: proposal
+                refreshMessage = when (result.value.status) {
+                    "CONFIRMED" -> "Recycler receipt confirmed by server."
+                    "PENDING_COLLECTOR_ACK" -> "Review the recycler's changed measurement before confirming or disputing it."
+                    "DISPUTED" -> "Dispute recorded. The original handover evidence remains unchanged."
+                    else -> null
+                }
             }
             is TradeResult.Failure -> refreshMessage = result.message
         }
@@ -130,9 +150,10 @@ fun C11_DigitalHandoverRecordScreen(
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = SuccessGreen
-                            )
-                        }
-                    }
+                    )
+                }
+            }
+
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = NeutralSurface)
             )
@@ -333,11 +354,16 @@ fun C11_DigitalHandoverRecordScreen(
                         text = when (proposal.status) {
                             "CONFIRMED" -> "Recycler receipt confirmed / रसीद की पुष्टि हुई"
                             "PENDING_COLLECTOR_ACK" -> "Recycler revised the terms — your acknowledgement is required"
+                            "DISPUTED" -> "Handover disputed — joint review required"
                             else -> "Awaiting recycler confirmation / रिसाइकलर की पुष्टि बाकी है"
                         },
                         fontSize = 11.sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = if (proposal.status == "CONFIRMED") SuccessGreen else OnSurfaceVariant,
+                        color = when (proposal.status) {
+                            "CONFIRMED" -> SuccessGreen
+                            "DISPUTED" -> ErrorRed
+                            else -> OnSurfaceVariant
+                        },
                         textAlign = TextAlign.Center
                     )
 
@@ -371,6 +397,53 @@ fun C11_DigitalHandoverRecordScreen(
                                 color = OnSurfaceVariant,
                                 lineHeight = 14.sp
                             )
+                        }
+                    }
+                }
+            }
+
+            if (proposal.status == "PENDING_COLLECTOR_ACK" && revision != null) {
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = ErrorRed.copy(alpha = 0.08f)),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, ErrorRed.copy(alpha = 0.35f))
+                ) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth().padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text("Recycler changed the receipt terms", fontSize = 15.sp, fontWeight = FontWeight.Bold, color = OnSurface)
+                        Text(
+                            "${"%.2f".format(revision!!.measuredWeightG / 1000.0)} kg · ₹${"%.2f".format(revision!!.finalTotalPaise / 100.0)}",
+                            fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = ErrorRed
+                        )
+                        Text(revision!!.reason, fontSize = 12.sp, color = OnSurfaceVariant)
+                        Text("Review the changed terms before confirming. You can dispute without rewriting the original record.", fontSize = 11.sp, color = OnSurfaceVariant)
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Button(
+                                enabled = !actionInProgress,
+                                onClick = {
+                                    actionInProgress = true
+                                    coroutineScope.launch {
+                                        when (val result = facilityRepository.acknowledgeLiveHandoverTerms(handoverId, revision!!.termsHash, serverVersion, session.accountId ?: "")) {
+                                            is TradeResult.Success -> {
+                                                proposal = handoverRepository.updateServerStatus(handoverId, result.value) ?: proposal.copy(status = result.value)
+                                                revision = null
+                                                refreshMessage = "Revised terms acknowledged; recycler receipt confirmed by server."
+                                            }
+                                            is TradeResult.Failure -> refreshMessage = result.message
+                                        }
+                                        actionInProgress = false
+                                    }
+                                },
+                                modifier = Modifier.weight(1f), shape = RoundedCornerShape(8.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen)
+                            ) { Text(if (actionInProgress) "Saving…" else "Accept revised terms", fontSize = 11.sp) }
+                            OutlinedButton(
+                                enabled = !actionInProgress,
+                                onClick = { showDisputeDialog = true },
+                                modifier = Modifier.weight(1f), shape = RoundedCornerShape(8.dp)
+                            ) { Text("Dispute", fontSize = 11.sp, color = ErrorRed) }
                         }
                     }
                 }
@@ -491,5 +564,47 @@ fun C11_DigitalHandoverRecordScreen(
                 }
             }
         }
+    }
+
+    if (showDisputeDialog) {
+        AlertDialog(
+            onDismissRequest = { showDisputeDialog = false },
+            title = { Text("Dispute revised terms") },
+            text = {
+                OutlinedTextField(
+                    value = disputeReason,
+                    onValueChange = { disputeReason = it },
+                    label = { Text("Reason for joint re-weigh") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            },
+            confirmButton = {
+                Button(
+                    enabled = !actionInProgress,
+                    onClick = {
+                        showDisputeDialog = false
+                        actionInProgress = true
+                        coroutineScope.launch {
+                            when (val result = facilityRepository.disputeLiveHandover(
+                                handoverId,
+                                disputeReason.ifBlank { "Collector requests a joint re-weigh before settlement." },
+                                serverVersion,
+                                session.accountId ?: ""
+                            )) {
+                                is TradeResult.Success -> {
+                                    proposal = handoverRepository.updateServerStatus(handoverId, result.value) ?: proposal.copy(status = result.value)
+                                    revision = null
+                                    refreshMessage = "Dispute recorded. The original handover evidence remains unchanged."
+                                }
+                                is TradeResult.Failure -> refreshMessage = result.message
+                            }
+                            actionInProgress = false
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = ErrorRed)
+                ) { Text("Raise dispute") }
+            },
+            dismissButton = { TextButton(onClick = { showDisputeDialog = false }) { Text("Cancel") } }
+        )
     }
 }

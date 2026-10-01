@@ -75,7 +75,17 @@ data class LiveHandoverStatus(
     val status: String,
     val proposalHash: String,
     val version: Int,
-    val confirmedAt: String?
+    val confirmedAt: String?,
+    val latestTermsRevision: LiveTermsRevision?
+)
+
+/** The current recycler-proposed terms, present only while collector review is required. */
+data class LiveTermsRevision(
+    val materialId: String,
+    val measuredWeightG: Long,
+    val finalTotalPaise: Long,
+    val termsHash: String,
+    val reason: String
 )
 
 data class LiveHandoverResult(
@@ -359,16 +369,61 @@ class FacilityRepository(
         return parseLiveHandoverStatus(response.second)
     }
 
+    suspend fun acknowledgeLiveHandoverTerms(
+        handoverId: String,
+        termsHash: String,
+        expectedVersion: Int,
+        accountId: String
+    ): TradeResult<String> {
+        val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again to acknowledge the revised terms.")
+        val body = JSONObject().put("terms_hash", termsHash).put("expected_version", expectedVersion).toString()
+        val response = requestJson("POST", "/api/v1/handovers/$handoverId/acknowledge-terms", body, token)
+            ?: return TradeResult.Failure("Could not acknowledge the revised terms. Check the connection and retry.")
+        if (response.first !in 200..299) return TradeResult.Failure(apiMessage(response.second))
+        return runCatching { TradeResult.Success(JSONObject(response.second).getString("status")) }
+            .getOrElse { TradeResult.Failure("The acknowledgement response returned an unreadable response.") }
+    }
+
+    suspend fun disputeLiveHandover(
+        handoverId: String,
+        reason: String,
+        expectedVersion: Int,
+        accountId: String
+    ): TradeResult<String> {
+        val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again to raise the dispute.")
+        val body = JSONObject()
+            .put("reason", reason)
+            .put("proposed_correction", "Collector requests a joint re-weigh before settlement.")
+            .put("expected_version", expectedVersion)
+            .toString()
+        val response = requestJson("POST", "/api/v1/handovers/$handoverId/dispute", body, token)
+            ?: return TradeResult.Failure("Could not record the dispute. Check the connection and retry.")
+        if (response.first !in 200..299) return TradeResult.Failure(apiMessage(response.second))
+        return runCatching { TradeResult.Success(JSONObject(response.second).getString("status")) }
+            .getOrElse { TradeResult.Failure("The dispute response returned an unreadable response.") }
+    }
+
     private fun parseLiveHandoverStatus(body: String): TradeResult<LiveHandoverStatus> = try {
         val item = JSONObject(body)
         val confirmation = item.optJSONObject("confirmation")
+        val revisions = item.optJSONArray("terms_revisions")
+        val latestRevision = revisions?.takeIf { it.length() > 0 }?.getJSONObject(revisions.length() - 1)
         TradeResult.Success(
             LiveHandoverStatus(
                 handoverId = item.getString("id"),
                 status = item.getString("status"),
                 proposalHash = item.getString("proposal_hash"),
                 version = item.getInt("version"),
-                confirmedAt = confirmation?.optString("confirmed_at")?.ifBlank { null }
+                confirmedAt = confirmation?.optString("confirmed_at")?.ifBlank { null },
+                latestTermsRevision = latestRevision?.let {
+                    LiveTermsRevision(
+                        materialId = it.getString("final_material_id"),
+                        measuredWeightG = it.getLong("measured_weight_g"),
+                        finalTotalPaise = it.getLong("final_total_paise"),
+                        termsHash = it.getString("terms_hash"),
+                        reason = it.optString("reason").ifBlank { "Recycler measured a difference at receipt." }
+                    )
+                }
             )
         )
     } catch (_: Exception) { TradeResult.Failure("The handover status returned an unreadable response.") }

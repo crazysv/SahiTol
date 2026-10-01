@@ -185,6 +185,26 @@ unverified: this handset prevents ADB from revoking the already granted camera
 permission, so that state needs an owner-side Settings toggle before it can be
 claimed.
 
+## Fresh changed-terms and dispute retest (2026-10-02)
+
+An isolated second physical PCB lot
+`b9080683-528a-41d8-855d-eaa28da0a267` was created photo-free, synchronized,
+and accepted against a real hosted recycler offer. C10 created handover
+`50bf6e56-5106-42bf-abf1-873933370a17` (`ST-50BF6E`) with the original
+14.25 kg / ₹4,275.00 agreement. The authorized demo recycler then submitted
+an actual changed measurement of 13.00 kg / ₹3,900.00, with the recorded reason
+“T044 physical discrepancy: recycler scale recorded 13.00 kg.” The hosted API
+returned `PENDING_COLLECTOR_ACK` v2.
+
+On the physical collector, C11 pulled and displayed the changed mass, value,
+reason, explicit acknowledgement control, and a **Dispute** control. Selecting
+Dispute and submitting the joint re-weigh reason changed the hosted record to
+`DISPUTED` v3 with no `HandoverConfirmation`. After force-stop/reopen, C11
+visibly showed **Handover disputed — joint review required** and the immutable
+original proposal hash remained `579267e5…a0d3`. This is a live dispute path;
+the alternate collector acceptance button is covered by the focused API suite,
+but has not yet been physically tapped in this isolated scenario.
+
 ## Checklist Against T044 Output Requirements
 
 | Requirement | Result |
@@ -195,7 +215,7 @@ claimed.
 | Restart / confirmation pull | PASS — force-stop/relaunch recovered the deployed server handover by lot and C11 pulled `CONFIRMED` |
 | Airplane mode / offline QR | PASS — Offline Ready badge on C10, C11 throughout |
 | Background / manual sync | PASS — C08 manual sync and outbox transitions verified |
-| QR two-device handover | PASS for deployed happy path and collector restart/pull recovery; denial/discrepancy variants remain outstanding |
+| QR two-device handover | PASS for deployed happy path, restart/pull recovery, and live changed-terms/dispute path; camera denial and physical accept-revised-terms remain outstanding |
 | Hindi / Marathi labels | PASS — Bilingual titles throughout (hastantaran, sangrah evam vajan, etc.) |
 | Representative scenario usability | PASS for the current accepted-offer-to-QR-to-confirm path; denial/recovery variants remain outstanding |
 | Owner scenario tests not fieldwork | PASS — Clearly identified as owner demo scenario |
