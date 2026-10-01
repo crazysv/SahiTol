@@ -189,7 +189,7 @@
       "evidence": [
         "docs/evidence/T024_OFFLINE_QR_AND_COLLECTOR_RECEIPT.md"
       ],
-      "note": "Implemented C10 (handover capture & terms variance), C11 (offline QR code, SHA-256 seal, statutory Non-EPR banner, native A4 PDF receipt generator, and system share), and C16 (5-stage material passport spine) in Jetpack Compose matching Stitch designs; SAHITOL-JCS-1 canonical JSON hashing matching frozen fixture; Room outbox atomic queuing; verified via JUnit tests and clean APK assembly.",
+        "note": "Implemented C10 (handover capture & terms variance), C11 (offline QR code, SHA-256 seal, statutory Non-EPR banner, native A4 PDF receipt generator, and system share), and C16 (5-stage material passport spine) in Jetpack Compose matching Stitch designs; SAHITOL-JCS-1 canonical JSON hashing matching frozen fixture; Room outbox atomic queuing; verified via JUnit tests and clean APK assembly. Independent re-verification on 2026-10-01 passed 7 focused Android tests and confirmed C10 on the collector device.",
       "owner": "Owner + coding agent"
     },
     "T025": {

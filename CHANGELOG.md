@@ -995,3 +995,9 @@ The current backend handover suite passed all 13 cases, including canonical hash
 validation, immutable discrepancy handling, receipt disclaimer, and public
 redaction. No implementation change was needed.
 
+## 2026-10-01 — Offline handover re-verification (T024)
+
+Canonical JSON and handover-receipt Android tests passed 7/7. The physical
+collector flow also reached C10 Handover Capture with its review controls after
+offer acceptance. No implementation change was needed.
+

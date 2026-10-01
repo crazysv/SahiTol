@@ -87,3 +87,22 @@ Executed via `./gradlew.bat assembleDebug`:
 BUILD SUCCESSFUL
 APK generated: apps/android/app/build/outputs/apk/debug/app-debug.apk
 ```
+
+## Independent re-verification (2026-10-01)
+
+The focused Android tests were rerun on the current source:
+
+```text
+./gradlew.bat --no-daemon :app:testDebugUnitTest \
+  --tests "com.sahitol.collector.CanonicalJsonTest" \
+  --tests "com.sahitol.collector.HandoverAndReceiptTest"
+
+BUILD SUCCESSFUL
+CanonicalJsonTest: 3 tests, 0 failures, 0 errors
+HandoverAndReceiptTest: 4 tests, 0 failures, 0 errors
+```
+
+The collector device flow was also rechecked as part of the C07 acceptance repair:
+after accepting the seeded offer, device `N7OZPV59XWWKPF4X` navigated to C10
+Handover Capture and displayed the selected lot, yard, offline-ready state,
+revised term, and Review / Accept / Dispute controls. No T024 defect was found.
