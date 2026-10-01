@@ -185,6 +185,12 @@ authentication 200 and two directory 200 responses; a deployed-only lot gave
 the expected fresh-local-database 404. Compose CORS and port wiring and C08's
 previously inert Refresh action were repaired. Resume at T043's remaining
 real-device/hosted fault acceptance, while retaining its explicit scope.
+T043 was independently rerun on 2026-10-02 and initially exposed two linked
+collector-ownership regressions: a sync-created lot was absent from its owner
+index and its match request was rejected as another collector's lot. Ownership
+checks now use `current_user.collector.id` rather than the distinct user UUID;
+the focused suite passes 44/44. T043 remains in progress only for its real
+device/hosted fault-acceptance scope.
 T043 then reran cleanly: 44 focused deterministic tests pass, including an
 authorized-recycler match that was tightened from a response-shape check. Its
 real-device/hosted fault acceptance remains NOT_RUN; continue at T044 only

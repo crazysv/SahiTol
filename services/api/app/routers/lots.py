@@ -469,7 +469,11 @@ def list_lots(
 
     # Ownership scoping: collectors see only own lots; recyclers see market-eligible lots; admins see all
     if current_user.role == "COLLECTOR":
-        stmt = stmt.where(Lot.collector_id == current_user.id)
+        # Lots reference the collector profile, not the authentication user.
+        # Those UUIDs differ for every normal collector account.
+        if not current_user.collector:
+            raise HTTPException(status_code=403, detail="Collector profile required.")
+        stmt = stmt.where(Lot.collector_id == current_user.collector.id)
     elif current_user.role == "RECYCLER":
         stmt = stmt.where(Lot.status.in_(["LISTED", "MATCHED", "IN_TRANSIT", "DELIVERED"]))
     elif collector_id:
@@ -613,7 +617,10 @@ async def patch_lot(
     if not lot:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Lot '{lot_id}' not found.")
 
-    if lot.collector_id != current_user.id and current_user.role != "ADMIN":
+    if (
+        current_user.role != "ADMIN"
+        and (not current_user.collector or lot.collector_id != current_user.collector.id)
+    ):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden: Cannot edit another collector's lot.")
 
     if lot.status != "DRAFT":
@@ -1160,7 +1167,10 @@ def match_lot_recyclers(
             detail=f"Lot '{lot_id}' not found."
         )
 
-    if lot.collector_id != current_user.id and current_user.role != "ADMIN":
+    if (
+        current_user.role != "ADMIN"
+        and (not current_user.collector or lot.collector_id != current_user.collector.id)
+    ):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Forbidden: Cannot match recyclers for another collector's lot."

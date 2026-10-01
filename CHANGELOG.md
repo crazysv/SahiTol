@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-02 -- T043 collector ownership repair
+
+Corrected lot ownership checks to use the collector-profile UUID rather than
+the authentication-user UUID. The collector can now list and match sync-created
+lots; the focused cross-surface suite passes 44/44.
+
 ## 2026-10-02 -- T042 Docker recovery verification
 
 Docker Desktop recovered and a fresh local PostGIS/API/web stack now builds and

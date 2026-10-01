@@ -3,7 +3,7 @@
 **Task:** T043 — Cross-surface integration and fault acceptance test suite  
 **Status:** IN PROGRESS — deterministic integration coverage passes; the complete
 real-device, hosted fault-acceptance journey remains separate evidence.
-**Date:** 2026-10-01
+**Date:** 2026-10-02
 **Runner:** Python 3.10.11 / pytest-9.1.1 on Windows (local dev)
 
 ## Test Run Result
@@ -14,7 +14,7 @@ services\api\tests\test_cross_surface_integration_and_fault_acceptance.py ......
 ======================== 44 passed, 1 warning in 4.09s ========================
 ```
 
-Exit code: 0. The independent 2026-10-01 rerun completed in 2.21 seconds with
+Exit code: 0. The independent 2026-10-02 rerun completed in 3.14 seconds with
 44 passed and one dependency deprecation warning. The facility-match test now
 creates an authorized recycler and requires that recycler to appear in the
 eligible results; it no longer accepts a 404 or merely a response-shaped body.
@@ -52,6 +52,13 @@ The test file was updated to align with implemented API shapes:
 8. **Admin quality flags** — corrected URL from `/api/v1/quality/flags` → `/api/v1/admin/quality-flags`; response is a plain list.
 
 9. **Reference bootstrap** — corrected expected key from `data`/`version` to `metadata`/`materials`/`categories`.
+
+10. **Collector ownership identity** — sync-created lots correctly store the
+    collector-profile UUID, whereas access tokens identify the user UUID.
+    Corrected lot listing, editing and matching ownership checks to compare the
+    lot to `current_user.collector.id`. A newly created lot now appears in its
+    own collector index and returns matching candidates rather than a false
+    “another collector's lot” rejection.
 
 ## Constraints Verified
 
