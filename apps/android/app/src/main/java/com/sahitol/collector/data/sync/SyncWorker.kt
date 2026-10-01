@@ -28,6 +28,12 @@ class SyncWorker(
         val database = app.database
         val accountId = inputData.getString(KEY_ACCOUNT_ID) ?: "collector_default"
 
+        // A deployed server repair changed only this formerly transient
+        // collector-profile FK failure into a valid operation. Requeue that
+        // exact historic row for an explicit manual sync; do not loosen the
+        // treatment of any other repair-required record.
+        val repaired = database.outboxDao().requeueLegacyCollectorProfileFailures(accountId)
+        if (repaired > 0) Log.i(TAG, "Requeued $repaired legacy collector-profile operation(s)")
         val pending = database.outboxDao().getPendingOperations(accountId, 50)
         Log.i(TAG, "Manual sync loaded ${pending.size} pending operations")
         if (pending.isEmpty()) {

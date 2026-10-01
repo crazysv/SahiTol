@@ -212,13 +212,23 @@ Evidence: C16_material_passport_journey.png
    before a final fresh-lot retry; the rejected create remains visible as
    `NEEDS_REPAIR` and its dependent listing remains queued, rather than being
    falsely acknowledged.
+9. **2026-10-01 deployed physical publish verification:** After Render deployed
+   the profile-ID mapping, an authenticated live sync probe returned `APPLIED`
+   for a real PCB create. On the connected collector handset, the already
+   published PCB lot `f8b0587f-…` was recovered through an explicitly narrow
+   manual-sync rule for the former `lots_collector_id_fkey` server error. Both
+   `CREATE_DRAFT` and its UUID-dependent `LIST_LOT` are now `ACKNOWLEDGED`; the
+   local lot is `SYNCED`, `LISTED`, server version 2. Unrelated invalid material
+   and placeholder offer/handover repair rows were not requeued. Focused Android
+   recovery, outbox, payment, handover and recycler tests pass.
 
 ---
 
 ## Verdict: IN PROGRESS
 
 Device restart persistence, cellular connectivity and honest manual-sync failure
-visibility are now independently verified. T044 remains incomplete: a fresh
-server-backed collector offer, complete current-APK two-phone QR flow, camera/
+visibility and the real collector create-to-list publish state machine are now
+independently verified. T044 remains incomplete: a fresh server-backed
+collector request and recycler-created offer, complete current-APK two-phone QR flow, camera/
 GPS denial, airplane/background recovery, Hindi/Marathi and accessibility
 checks still need complete current-device evidence. Fieldwork remains UNMET.

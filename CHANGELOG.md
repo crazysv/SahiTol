@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-01 -- T044 deployed collector publish recovery
+
+After Render deployed the collector-profile mapping repair, physically
+reverified the collector create-to-list state machine. A manual sync requeues
+only the precise historic `lots_collector_id_fkey` server failure; it does not
+alter malformed or validation-rejected rows. The previously published PCB lot
+now has acknowledged create and dependent list operations and is server version
+2 / `LISTED` locally.
+
 ## 2026-10-01 -- T044 collector-profile lot ownership repair
 
 Corrected server sync to resolve a collector profile from the authenticated

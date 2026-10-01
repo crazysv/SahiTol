@@ -12,6 +12,14 @@ interface OutboxDao {
     @Query("SELECT * FROM outbox_operations WHERE accountId = :accountId AND state IN ('QUEUED', 'RETRY_WAIT') ORDER BY createdAt ASC LIMIT :batchSize")
     suspend fun getPendingOperations(accountId: String, batchSize: Int = 50): List<OutboxOperationEntity>
 
+    /**
+     * One-time recovery for the hosted collector-profile foreign-key defect.
+     * It deliberately targets only the historic server execution failure; all
+     * validation, offer and other repair-required records remain immutable.
+     */
+    @Query("UPDATE outbox_operations SET state = 'QUEUED', lastErrorCode = NULL WHERE accountId = :accountId AND entityType = 'LOT' AND command = 'CREATE_DRAFT' AND state = 'NEEDS_REPAIR' AND lastErrorCode LIKE '%lots_collector_id_fkey%'")
+    suspend fun requeueLegacyCollectorProfileFailures(accountId: String): Int
+
     @Query("SELECT * FROM outbox_operations WHERE accountId = :accountId ORDER BY createdAt ASC")
     suspend fun getOperationsForAccount(accountId: String): List<OutboxOperationEntity>
 

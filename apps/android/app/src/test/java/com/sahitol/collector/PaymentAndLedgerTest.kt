@@ -34,6 +34,8 @@ class PaymentAndLedgerTest {
     private class FakeOutboxDao : OutboxDao {
         val inserted = mutableListOf<OutboxOperationEntity>()
 
+        override suspend fun requeueLegacyCollectorProfileFailures(accountId: String): Int = 0
+
         override suspend fun enqueue(operation: OutboxOperationEntity) {
             inserted.add(operation)
         }

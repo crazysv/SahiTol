@@ -18,6 +18,8 @@ class HandoverAndReceiptTest {
     private class FakeOutboxDao : OutboxDao {
         val enqueuedOps = mutableListOf<OutboxOperationEntity>()
 
+        override suspend fun requeueLegacyCollectorProfileFailures(accountId: String): Int = 0
+
         override suspend fun enqueue(operation: OutboxOperationEntity) {
             enqueuedOps.add(operation)
         }

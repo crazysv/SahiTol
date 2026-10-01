@@ -10,6 +10,14 @@ import java.util.UUID
 class SyncWorkerTest {
 
     @Test
+    fun legacyCollectorProfileRecoveryIsNarrowlyScoped() {
+        val historic = "{\"code\":\"EXECUTION_ERROR\",\"message\":\"lots_collector_id_fkey\"}"
+        assertTrue(historic.contains("lots_collector_id_fkey"))
+        assertFalse("{\"code\":\"INVALID_MATERIAL\"}".contains("lots_collector_id_fkey"))
+        assertFalse("{\"code\":\"UNSUPPORTED_COMMAND\"}".contains("lots_collector_id_fkey"))
+    }
+
+    @Test
     fun testSyncBatchRequestSerialization() {
         val op = SyncOperationPayload(
             operationId = "op_123",

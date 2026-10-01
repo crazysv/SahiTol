@@ -160,6 +160,12 @@ foreign key requires the collector profile UUID. That mapping is repaired and
 the full sync suite passes 16/16; push/deploy it, then create one more fresh
 photo-free PCB lot and verify both CREATE_DRAFT and its dependent LIST_LOT are
 acknowledged before attempting a real recycler request.
+That physical retry is complete: a live authenticated probe returned APPLIED,
+and collector lot `f8b0587f-…` recovered from only the historic
+`lots_collector_id_fkey` failure. Its CREATE_DRAFT and dependent LIST_LOT are
+ACKNOWLEDGED and the local lot is SYNCED/LISTED at v2. Do not requeue unrelated
+NEEDS_REPAIR rows. Continue with a real facility request and recycler-created
+offer when the second handset is available again.
 The new-lot outbox contract was then repaired from unsupported `CREATE_LOT` /
 `material_code` / local-path media IDs to `CREATE_DRAFT` / `material_id` / no
 fabricated media IDs. Focused tests pass and an updated APK is on the collector
