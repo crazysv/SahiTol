@@ -128,7 +128,7 @@ class PriceAndRecyclerViewsTest {
     }
 
     @Test
-    fun facilityRepository_directoryAndOfferResponses() = runBlocking {
+    fun facilityRepository_cachedDirectoryIsReferenceOnly() {
         val facilities = facilityRepository.getFacilities()
         assertTrue(facilities.size >= 2)
         assertTrue(facilities.any { it.nameEn.contains("Verma") })
@@ -136,28 +136,9 @@ class PriceAndRecyclerViewsTest {
         val areaFiltered = facilityRepository.getFacilities("Dadar")
         assertTrue(areaFiltered.any { it.address.contains("Dadar") })
 
-        val offers = facilityRepository.getActiveOffers(lotWeightKg = 2.5)
-        assertEquals(3, offers.size)
-        val bestMatch = offers.first { it.isBestMatch }
-        assertEquals("Verma Electricals", bestMatch.facilityName)
-        assertEquals(475.0, bestMatch.totalPayoutInr, 0.01)
-
-        // Accept offer
-        val outboxOp = facilityRepository.respondToOfferAtomic(
-            offerId = bestMatch.offerId,
-            action = "ACCEPT_OFFER",
-            accountId = "col_test_santosh"
-        )
-
-        assertEquals("ACCEPT_OFFER", outboxOp.command)
-        assertEquals("OFFER", outboxOp.entityType)
-        assertEquals(64, outboxOp.payloadSha256.length)
-
-        assertEquals(1, fakeOutboxDao.enqueuedOps.size)
-        assertEquals(outboxOp.operationId, fakeOutboxDao.enqueuedOps[0].operationId)
-
-        assertEquals(1, fakeDomainEventDao.events.size)
-        assertEquals("OFFER_ACCEPTED", fakeDomainEventDao.events[0].eventType)
-        assertEquals(outboxOp.payloadSha256, fakeDomainEventDao.events[0].currentHash)
+        // Cached entries are browse-only. The repository exposes no method that
+        // turns their non-UUID reference IDs into a queued trade operation.
+        assertFalse(facilities.first().facilityId.matches(Regex("^[0-9a-fA-F]{8}-")))
+        assertTrue(fakeOutboxDao.enqueuedOps.isEmpty())
     }
 }

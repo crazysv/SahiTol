@@ -147,5 +147,9 @@ T044 physical retest found C14 manual sync only handled handover imports and
 showed stale queue state. The repair routes valid UUID operations to the normal
 batch endpoint, replaces stale manual work and reloads the full Room outbox;
 on the cellular collector it showed 10 acknowledged and 12 visible
-NEEDS_REPAIR legacy placeholders. Continue T044 by replacing the placeholder
-offer path with a server-backed flow, then retest its current APK journey.
+NEEDS_REPAIR legacy placeholders. The placeholder offer path is now replaced:
+C07/C08/C09 load only live UUID facilities/offers and accept only server-issued
+terms hashes/versions. A device test caught and fixed main-thread HTTP; the
+hosted demo directory now loads and the existing cable lot honestly shows zero
+offers. Continue T044 with a new compatible server-backed lot, recycler-created
+offer and current two-device journey; do not revive the superseded simulated C09 evidence.

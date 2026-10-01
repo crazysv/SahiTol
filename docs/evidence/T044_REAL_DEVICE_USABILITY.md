@@ -58,7 +58,10 @@ Evidence: device_c06_prices.png, device_c06_prices_tab.png, device_val_top.png
 
 Evidence: device_c08_sync.png, device_c08b_synced.png
 
-**Result: PASS** — Manual sync works; sync timestamp updates; lot moves out of outbox.
+**Result: SUPERSEDED** — This earlier screen observation did not exercise the
+current worker against valid trade records. The 2026-10-01 retest is recorded
+below: valid UUID rows acknowledged; legacy placeholder rows are visibly
+`NEEDS_REPAIR`, not treated as synchronized.
 
 ---
 
@@ -73,7 +76,13 @@ Evidence: device_c08_sync.png, device_c08b_synced.png
 
 Evidence: C09_recycler_profile_top.png, C09_recycler_profile_bottom.png, C09_request_sent_waiting.png, C09_offer_received_approved.png, C09_commercial_terms_accepted.png
 
-**Result: PASS** — Full recycler quote to accept flow executed. Original estimate: Rs.450.00.
+**Result: SUPERSEDED / NOT EVIDENCE** — The old C09 sequence used fabricated
+facility, request and offer IDs and a simulated recipient-acceptance action.
+It must not be presented as a real quote or accepted agreement. The repaired
+client now obtains the UUID-backed facility directory, sends a collector
+request only to a server UUID, polls real lot offers and accepts only the
+server-issued terms hash/version. A fresh two-party offer/acceptance is still
+required before this scenario can pass.
 
 ---
 
@@ -88,7 +97,8 @@ Evidence: C09_recycler_profile_top.png, C09_recycler_profile_bottom.png, C09_req
 
 Evidence: C10_handover_capture_discrepancy.png, C10_discrepancy_accepted.png
 
-**Result: PASS** — Discrepancy flag raised correctly for weighed vs. estimated mass; explicit Accept/Dispute choice preserved; evidence section shows GPS + hash chain intact.
+**Result: HISTORICAL UI OBSERVATION ONLY** — This follow-on screen came from the
+superseded simulated-offer path, so it is not current E2E evidence.
 
 ---
 
@@ -106,7 +116,9 @@ Evidence: C10_handover_capture_discrepancy.png, C10_discrepancy_accepted.png
 
 Evidence: C11_digital_handover_record_QR.png, C11_handover_record_bottom_share_pdf.png
 
-**Result: PASS** — Digital Handover Record generated with SHA-256 chain, QR code, and mandatory honest disclaimer. Received mass not equal recycling confirmed in UI text.
+**Result: HISTORICAL UI OBSERVATION ONLY** — The QR text/disclaimer were seen,
+but this record came from the superseded simulated-offer path. T025 contains
+the separate deployed two-device confirmation evidence.
 
 ---
 
@@ -141,9 +153,9 @@ Evidence: C16_material_passport_journey.png
 | Restart / offline persistence | Verified in T015, T041; Room DB persists across restart |
 | Airplane mode / offline QR | PASS — Offline Ready badge on C10, C11 throughout |
 | Background / manual sync | PASS — C08 manual sync and outbox transitions verified |
-| QR two-device handover | PASS — C11 QR displayed for yard scan (Ref: ST-7022); R04/R05 web console counterpart in T025 |
+| QR two-device handover | Partial — T025 contains deployed two-device confirmation; this task still needs a fresh current-APK flow |
 | Hindi / Marathi labels | PASS — Bilingual titles throughout (hastantaran, sangrah evam vajan, etc.) |
-| Representative scenario usability | PASS — Full E2E: Lot creation to Valuation to Offer to Accept to Discrepancy to Handover Record to QR |
+| Representative scenario usability | Partial — lot/valuation/device persistence observed; old offer-to-QR path was simulated and is superseded |
 | Owner scenario tests not fieldwork | PASS — Clearly identified as owner demo scenario |
 | Fieldwork obligation | UNMET — explicitly tracked; two-collector fieldwork remains outstanding |
 
@@ -165,6 +177,15 @@ Evidence: C16_material_passport_journey.png
    placeholder-offer/handover rows visibly marked `NEEDS_REPAIR`; none was
    falsely shown as synchronized. The remaining placeholders cannot represent a
    server-backed offer and require a real offer-record flow before E2E closure.
+5. **2026-10-01 live-offer repair:** The new APK was installed over the existing
+   collector data without clearing it. Initial live calls raised
+   `NetworkOnMainThreadException`; moving HTTP work to `Dispatchers.IO` fixed
+   it. On cellular, C07 then displayed `0 live offers available` for the saved
+   lot (instead of fabricated cards), and C08 loaded the actual hosted UUID
+   facility `Simulated Demonstration Recycling Hub`. The saved cable lot is not
+   accepted by that facility's current material list, so a valid request/offer
+   cannot be manufactured from it. A new compatible, server-backed lot and a
+   recycler-created offer remain required for the final two-party run.
 
 ---
 

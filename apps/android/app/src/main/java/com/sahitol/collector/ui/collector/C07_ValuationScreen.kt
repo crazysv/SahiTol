@@ -52,12 +52,18 @@ fun C07_ValuationScreen(
         priceRepository.calculateValuation("MAT-CAB-01", 2500, "GOOD")
     }
 
-    var offers by remember {
-        mutableStateOf(facilityRepository.getActiveOffers(lotWeightKg = 2.5))
-    }
+    var offers by remember { mutableStateOf<List<RecyclerOfferItem>>(emptyList()) }
+    var offerMessage by remember { mutableStateOf<String?>(null) }
 
     var isRateBasisExpanded by remember { mutableStateOf(false) }
     var acceptedOfferName by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(lotId, accountId) {
+        when (val result = facilityRepository.fetchLiveOffers(lotId, accountId)) {
+            is com.sahitol.collector.data.repository.TradeResult.Success -> offers = result.value
+            is com.sahitol.collector.data.repository.TradeResult.Failure -> offerMessage = result.message
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -376,7 +382,7 @@ fun C07_ValuationScreen(
                             color = OnSurface
                         )
                         Text(
-                            text = "${offers.size} Active Offers available",
+                            text = "${offers.count { it.status == "OPEN" }} live offers available",
                             fontSize = 12.sp,
                             color = OnSurfaceVariant
                         )
@@ -390,19 +396,25 @@ fun C07_ValuationScreen(
                 }
             }
 
+            if (offerMessage != null) {
+                item {
+                    Text(offerMessage!!, fontSize = 12.sp, color = OnSurfaceVariant)
+                }
+            }
+
             // Offers List
             items(offers) { offer ->
                 RecyclerOfferCard(
                     offer = offer,
                     onAccept = {
                         coroutineScope.launch {
-                            facilityRepository.respondToOfferAtomic(offer.offerId, "ACCEPT_OFFER", accountId)
-                            acceptedOfferName = offer.facilityName
-                            // The acceptance must lead to the next actionable
-                            // state. Previously the success banner was appended
-                            // after the offer list, often off-screen, so tapping
-                            // Accept appeared to do nothing.
-                            onNavigateHandover(lotId)
+                            when (val result = facilityRepository.acceptLiveOffer(offer, accountId)) {
+                                is com.sahitol.collector.data.repository.TradeResult.Success -> {
+                                    acceptedOfferName = offer.facilityName
+                                    onNavigateHandover(lotId)
+                                }
+                                is com.sahitol.collector.data.repository.TradeResult.Failure -> offerMessage = result.message
+                            }
                         }
                     }
                 )

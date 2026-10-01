@@ -1,5 +1,7 @@
 package com.sahitol.collector.data.repository
 
+import com.sahitol.collector.BuildConfig
+import android.util.Log
 import com.sahitol.collector.data.local.SahiTolDatabase
 import com.sahitol.collector.data.local.dao.DomainEventDao
 import com.sahitol.collector.data.local.dao.OutboxDao
@@ -10,8 +12,12 @@ import com.sahitol.collector.domain.matching.MatchingEngine.LotParameters
 import com.sahitol.collector.domain.matching.MatchingEngine.MatchingCandidate
 import com.sahitol.collector.domain.matching.MatchingEngine.MatchOutcome
 import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
 import java.security.MessageDigest
 import java.util.UUID
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 data class RecyclerFacilityItem(
     val facilityId: String,
@@ -43,8 +49,15 @@ data class RecyclerOfferItem(
     val offerType: String, // "RATE_PER_KG" or "FIXED_TOTAL"
     val isBestMatch: Boolean = false,
     val isOfflinePending: Boolean = false,
-    val status: String = "ACTIVE" // ACTIVE, ACCEPTED, REJECTED, EXPIRED
+    val status: String = "ACTIVE", // ACTIVE, ACCEPTED, REJECTED, EXPIRED
+    val termsHash: String? = null,
+    val version: Int? = null
 )
+
+sealed interface TradeResult<out T> {
+    data class Success<T>(val value: T) : TradeResult<T>
+    data class Failure(val message: String) : TradeResult<Nothing>
+}
 
 class FacilityRepository(
     private val database: SahiTolDatabase? = null,
@@ -52,7 +65,9 @@ class FacilityRepository(
     private val domainEventDao: DomainEventDao? = database?.domainEventDao()
 ) {
 
-    private val defaultFacilities = listOf(
+    // Reference-only cache for offline browsing. These identifiers are intentionally
+    // never used to create or accept a trade: actionable trade calls use server UUIDs.
+    private val cachedReferenceFacilities = listOf(
         RecyclerFacilityItem(
             facilityId = "fac-verma-01",
             nameEn = "Verma Electricals",
@@ -125,103 +140,95 @@ class FacilityRepository(
 
     fun getFacilities(areaFilter: String? = null): List<RecyclerFacilityItem> {
         if (areaFilter.isNullOrBlank() || areaFilter.equals("ALL", ignoreCase = true)) {
-            return defaultFacilities
+            return cachedReferenceFacilities
         }
-        return defaultFacilities.filter {
+        return cachedReferenceFacilities.filter {
             it.address.contains(areaFilter, ignoreCase = true) ||
             it.nameEn.contains(areaFilter, ignoreCase = true)
         }
     }
 
     fun getFacilityDetails(facilityId: String): RecyclerFacilityItem? {
-        return defaultFacilities.firstOrNull { it.facilityId == facilityId } ?: defaultFacilities.first()
+        return cachedReferenceFacilities.firstOrNull { it.facilityId == facilityId }
     }
 
-    fun getActiveOffers(lotWeightKg: Double = 2.5): List<RecyclerOfferItem> {
-        return listOf(
-            RecyclerOfferItem(
-                offerId = "off-verma-01",
-                facilityId = "fac-verma-01",
-                facilityName = "Verma Electricals",
-                routeDescription = "Standard Scrap Route #2 · 1.2 km away",
-                distanceKm = 1.2,
-                rateInrPerKg = 190.0,
-                totalPayoutInr = 190.0 * lotWeightKg,
-                offerType = "RATE_PER_KG",
-                isBestMatch = true
-            ),
-            RecyclerOfferItem(
-                offerId = "off-city-02",
-                facilityId = "fac-city-kabadi-04",
-                facilityName = "City Kabadi Yard",
-                routeDescription = "Direct Yard Drop · 4.5 km away",
-                distanceKm = 4.5,
-                rateInrPerKg = 170.0,
-                totalPayoutInr = 170.0 * lotWeightKg,
-                offerType = "FIXED_TOTAL"
-            ),
-            RecyclerOfferItem(
-                offerId = "off-patel-03",
-                facilityId = "fac-patel-05",
-                facilityName = "Patel Scrap Traders",
-                routeDescription = "Saved offline · Waiting to sync",
-                distanceKm = 2.8,
-                rateInrPerKg = 180.0,
-                totalPayoutInr = 180.0 * lotWeightKg,
-                offerType = "RATE_PER_KG",
-                isOfflinePending = true
-            )
-        )
+    suspend fun fetchLiveFacilities(): TradeResult<List<RecyclerFacilityItem>> {
+        val response = requestJson("GET", "/api/v1/facilities?is_demo=true") ?: return TradeResult.Failure("Could not reach the facility directory. Cached reference entries cannot receive a trade request.")
+        if (response.first !in 200..299) return TradeResult.Failure(apiMessage(response.second))
+        return try {
+            val facilities = org.json.JSONArray(response.second)
+            TradeResult.Success((0 until facilities.length()).map { index ->
+                val item = facilities.getJSONObject(index)
+                RecyclerFacilityItem(
+                    facilityId = item.getString("id"), nameEn = item.getString("name"), nameLocal = item.getString("name"),
+                    address = item.getString("address_public"), distanceKm = 0.0, travelTimeMinutes = 0,
+                    materialsAccepted = item.getJSONArray("materials_accepted").toStringList(), instantUpi = false,
+                    operatingHours = "Check with facility", rateInrPerKg = 0.0,
+                    verificationLevel = item.getString("verification_level"), routeCode = item.getJSONArray("authorized_routes").optString(0),
+                    offersPickup = item.optBoolean("pickup_available", false), latitude = null, longitude = null
+                )
+            })
+        } catch (_: Exception) { TradeResult.Failure("The facility directory returned an unreadable response.") }
     }
 
-    suspend fun respondToOfferAtomic(
-        offerId: String,
-        action: String, // "ACCEPT_OFFER" or "REJECT_OFFER"
-        accountId: String
-    ): OutboxOperationEntity {
-        val opId = UUID.randomUUID().toString()
-        val now = System.currentTimeMillis()
-
-        val payload = JSONObject().apply {
-            put("offer_id", offerId)
-            put("action", action)
-            put("account_id", accountId)
-            put("timestamp", now)
-        }.toString()
-
-        val digest = MessageDigest.getInstance("SHA-256")
-            .digest(payload.toByteArray())
-            .joinToString("") { "%02x".format(it) }
-
-        val outboxOp = OutboxOperationEntity(
-            operationId = opId,
-            accountId = accountId,
-            deviceId = "android_device",
-            entityType = "OFFER",
-            entityId = offerId,
-            command = action,
-            expectedVersion = 0,
-            payloadJson = payload,
-            payloadSha256 = digest,
-            state = "QUEUED",
-            createdAt = now
-        )
-
-        val domainEvent = DomainEventEntity(
-            eventId = UUID.randomUUID().toString(),
-            accountId = accountId,
-            entityType = "OFFER",
-            entityId = offerId,
-            eventType = if (action == "ACCEPT_OFFER") "OFFER_ACCEPTED" else "OFFER_REJECTED",
-            payloadJson = payload,
-            prevHash = "0".repeat(64),
-            currentHash = digest,
-            createdAt = now
-        )
-
-        outboxDao?.enqueue(outboxOp)
-        domainEventDao?.insertEvent(domainEvent)
-
-        return outboxOp
+    suspend fun requestRecycler(lotId: String, facilityId: String, accountId: String): TradeResult<Unit> {
+        if (!isUuid(lotId) || !isUuid(facilityId)) return TradeResult.Failure("Sync this saved lot and choose a live directory facility before sending a request.")
+        val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again before sending a request.")
+        val body = JSONObject().put("facility_id", facilityId).put("notes", "Collector request from Android").toString()
+        val response = requestJson("POST", "/api/v1/lots/$lotId/requests", body, token) ?: return TradeResult.Failure("Could not send the request. Check the connection and try again.")
+        return if (response.first in 200..299) TradeResult.Success(Unit) else TradeResult.Failure(apiMessage(response.second))
     }
+
+    suspend fun fetchLiveOffers(lotId: String, accountId: String): TradeResult<List<RecyclerOfferItem>> {
+        if (!isUuid(lotId)) return TradeResult.Failure("This saved lot has not been synchronized yet.")
+        val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again to check offers.")
+        val response = requestJson("GET", "/api/v1/lots/$lotId/offers", accessToken = token) ?: return TradeResult.Failure("Could not refresh offers. Check the connection and try again.")
+        if (response.first !in 200..299) return TradeResult.Failure(apiMessage(response.second))
+        return try {
+            val offers = org.json.JSONArray(response.second)
+            TradeResult.Success((0 until offers.length()).map { index ->
+                val item = offers.getJSONObject(index)
+                val ratePaise = item.optInt("effective_rate_paise_per_kg", 0)
+                val totalPaise = item.optInt("fixed_total_paise", 0)
+                RecyclerOfferItem(item.getString("id"), item.getString("facility_id"), "Recycler offer", "Live offer", 0.0,
+                    ratePaise / 100.0, totalPaise / 100.0, item.getString("price_basis"), status = item.getString("status"),
+                    termsHash = item.getString("terms_hash"), version = item.getInt("version"))
+            })
+        } catch (_: Exception) { TradeResult.Failure("The offer list returned an unreadable response.") }
+    }
+
+    suspend fun acceptLiveOffer(offer: RecyclerOfferItem, accountId: String): TradeResult<Unit> {
+        if (!isUuid(offer.offerId) || offer.termsHash.isNullOrBlank() || offer.version == null) return TradeResult.Failure("This offer is incomplete. Refresh it before accepting.")
+        val token = collectorDemoToken(accountId) ?: return TradeResult.Failure("Sign in again before accepting the offer.")
+        val body = JSONObject().put("terms_hash", offer.termsHash).put("expected_version", offer.version).toString()
+        val response = requestJson("POST", "/api/v1/offers/${offer.offerId}/accept", body, token) ?: return TradeResult.Failure("Could not accept the offer. Check the connection and try again.")
+        return if (response.first in 200..299) TradeResult.Success(Unit) else TradeResult.Failure(apiMessage(response.second))
+    }
+
+    private suspend fun collectorDemoToken(accountId: String): String? {
+        if (!accountId.startsWith("col_demo_")) {
+            Log.w("SahiTolTrade", "Live trade rejected for a non-demo local account")
+            return null
+        }
+        val response = requestJson("POST", "/api/v1/auth/demo", JSONObject().put("role", "COLLECTOR").put("persona_id", "santosh").put("device_id", "android-device").toString()) ?: return null
+        return if (response.first in 200..299) runCatching { JSONObject(response.second).getString("access_token") }.getOrNull() else null
+    }
+
+    private suspend fun requestJson(method: String, path: String, body: String? = null, accessToken: String? = null): Pair<Int, String>? = withContext(Dispatchers.IO) { try {
+        val connection = (URL(BuildConfig.API_BASE_URL.trimEnd('/') + path).openConnection() as HttpURLConnection).apply {
+            requestMethod = method; connectTimeout = 15_000; readTimeout = 15_000; setRequestProperty("Accept", "application/json")
+            if (accessToken != null) setRequestProperty("Authorization", "Bearer $accessToken")
+            if (body != null) { doOutput = true; setRequestProperty("Content-Type", "application/json"); outputStream.bufferedWriter().use { it.write(body) } }
+        }
+        val code = connection.responseCode
+        val text = (if (code in 200..299) connection.inputStream else connection.errorStream)?.bufferedReader()?.use { it.readText() }.orEmpty()
+        connection.disconnect(); code to text
+    } catch (error: Exception) {
+        Log.w("SahiTolTrade", "Live trade request failed for $method $path", error)
+        null
+    } }
+
+    private fun apiMessage(body: String): String = runCatching { JSONObject(body).optString("detail").ifBlank { "The server rejected this request." } }.getOrDefault("The server rejected this request.")
+    private fun isUuid(value: String): Boolean = runCatching { UUID.fromString(value) }.isSuccess
+    private fun org.json.JSONArray.toStringList(): List<String> = (0 until length()).map { getString(it) }
 }

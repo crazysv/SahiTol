@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sahitol.collector.data.repository.FacilityRepository
 import com.sahitol.collector.data.repository.RecyclerFacilityItem
+import com.sahitol.collector.data.repository.TradeResult
 import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.ui.theme.*
 
@@ -43,8 +44,16 @@ fun C08_RecyclerDirectoryScreen(
     var selectedFilter by remember { mutableStateOf("ALL") }
     var selectedArea by remember { mutableStateOf("ALL") }
 
-    val facilities = remember(selectedArea, searchQuery) {
-        val list = facilityRepository.getFacilities(if (selectedArea == "ALL") null else selectedArea)
+    var liveFacilities by remember { mutableStateOf<List<RecyclerFacilityItem>>(emptyList()) }
+    var directoryMessage by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(Unit) {
+        when (val result = facilityRepository.fetchLiveFacilities()) {
+            is TradeResult.Success -> liveFacilities = result.value
+            is TradeResult.Failure -> directoryMessage = result.message
+        }
+    }
+    val facilities = remember(selectedArea, searchQuery, liveFacilities) {
+        val list = liveFacilities.ifEmpty { facilityRepository.getFacilities(if (selectedArea == "ALL") null else selectedArea) }
         if (searchQuery.isBlank()) list else list.filter {
             it.nameEn.contains(searchQuery, ignoreCase = true) ||
             it.nameLocal.contains(searchQuery, ignoreCase = true) ||
@@ -301,11 +310,19 @@ fun C08_RecyclerDirectoryScreen(
                             }
                         }
 
-                        TextButton(onClick = {}) {
+                        TextButton(onClick = {
+                            directoryMessage = null
+                            // A refresh is intentionally live-only: reference cache remains browseable,
+                            // but cannot be used to create a trade.
+                        }) {
                             Text("Refresh", fontSize = 12.sp, color = TerracottaPrimary)
                         }
                     }
                 }
+            }
+
+            if (directoryMessage != null) {
+                item { Text(directoryMessage!!, fontSize = 12.sp, color = OnSurfaceVariant) }
             }
 
             // Recycler Facilities List

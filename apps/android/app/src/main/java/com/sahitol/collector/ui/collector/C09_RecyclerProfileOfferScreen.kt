@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sahitol.collector.data.repository.FacilityRepository
+import com.sahitol.collector.data.repository.RecyclerFacilityItem
 import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.ui.theme.*
 import kotlinx.coroutines.launch
@@ -50,12 +51,22 @@ fun C09_RecyclerProfileOfferScreen(
     val session by sessionManager.session.collectAsState()
     val accountId = session.accountId
 
-    val facility = remember(facilityId) {
-        facilityRepository.getFacilityDetails(facilityId) ?: facilityRepository.getFacilities().first()
-    }
+    var facility by remember(facilityId) { mutableStateOf(facilityRepository.getFacilityDetails(facilityId) ?: RecyclerFacilityItem(
+        facilityId, "Selected live facility", "Selected live facility", "Live directory", 0.0, 0, emptyList(), false,
+        "Check with facility", 0.0, "Unknown", "Unknown", latitude = null, longitude = null
+    )) }
 
     var requestState by remember { mutableStateOf(LotRequestState.READY) }
     var selectedLanguage by remember { mutableStateOf("हिंदी") }
+    var liveOffer by remember { mutableStateOf<com.sahitol.collector.data.repository.RecyclerOfferItem?>(null) }
+    var tradeMessage by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(facilityId) {
+        when (val result = facilityRepository.fetchLiveFacilities()) {
+            is com.sahitol.collector.data.repository.TradeResult.Success -> result.value.firstOrNull { it.facilityId == facilityId }?.let { facility = it }
+            is com.sahitol.collector.data.repository.TradeResult.Failure -> tradeMessage = result.message
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -376,7 +387,7 @@ fun C09_RecyclerProfileOfferScreen(
                 }
             }
 
-            // Interactive Request State Lifecycle & Simulator
+            // Live request and offer lifecycle. The collector never simulates or creates recycler offers.
             item {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -397,22 +408,24 @@ fun C09_RecyclerProfileOfferScreen(
                             color = OnSurface
                         )
 
+                        if (tradeMessage != null) {
+                            Text(tradeMessage!!, fontSize = 12.sp, color = OnSurfaceVariant)
+                        }
+
                         when (requestState) {
                             LotRequestState.READY -> {
                                 Text(
-                                    text = "Ready to dispatch 2.5 kg lot? Sending request locks the material batch to ${facility.nameEn} for 30 minutes.",
+                                    text = "Send this saved lot to ${facility.nameEn}. The recycler must create an offer before you can accept terms.",
                                     fontSize = 13.sp,
                                     color = OnSurfaceVariant
                                 )
                                 Button(
                                     onClick = {
                                         coroutineScope.launch {
-                                            facilityRepository.respondToOfferAtomic(
-                                                offerId = "req_${facility.facilityId}_$lotId",
-                                                action = "REQUEST_RECYCLER",
-                                                accountId = accountId
-                                            )
-                                            requestState = LotRequestState.WAITING_FOR_RESPONSE
+                                            when (val result = facilityRepository.requestRecycler(lotId, facility.facilityId, accountId)) {
+                                                is com.sahitol.collector.data.repository.TradeResult.Success -> requestState = LotRequestState.WAITING_FOR_RESPONSE
+                                                is com.sahitol.collector.data.repository.TradeResult.Failure -> tradeMessage = result.message
+                                            }
                                         }
                                     },
                                     modifier = Modifier
@@ -423,7 +436,7 @@ fun C09_RecyclerProfileOfferScreen(
                                 ) {
                                     Icon(Icons.Default.Send, contentDescription = null, modifier = Modifier.size(18.dp))
                                     Spacer(modifier = Modifier.width(8.dp))
-                                    Text("Request / Send Lot (₹850.00)", fontSize = 15.sp)
+                                    Text("Request recycler offer", fontSize = 15.sp)
                                 }
                             }
 
@@ -449,10 +462,21 @@ fun C09_RecyclerProfileOfferScreen(
                                         color = OnSurfaceVariant
                                     )
                                     OutlinedButton(
-                                        onClick = { requestState = LotRequestState.OFFER_RECEIVED },
+                                        onClick = {
+                                            coroutineScope.launch {
+                                                when (val result = facilityRepository.fetchLiveOffers(lotId, accountId)) {
+                                                    is com.sahitol.collector.data.repository.TradeResult.Success -> {
+                                                        liveOffer = result.value.firstOrNull { it.facilityId == facility.facilityId && it.status == "OPEN" }
+                                                        requestState = if (liveOffer == null) LotRequestState.WAITING_FOR_RESPONSE else LotRequestState.OFFER_RECEIVED
+                                                        if (liveOffer == null) tradeMessage = "No live offer yet. Ask the recycler to create one, then refresh."
+                                                    }
+                                                    is com.sahitol.collector.data.repository.TradeResult.Failure -> tradeMessage = result.message
+                                                }
+                                            }
+                                        },
                                         modifier = Modifier.fillMaxWidth()
                                     ) {
-                                        Text("Simulate Recipient Acceptance")
+                                        Text("Refresh live offers")
                                     }
                                 }
                             }
@@ -475,8 +499,8 @@ fun C09_RecyclerProfileOfferScreen(
                                             Text("OFFER RECEIVED", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
                                             Text("Just now", fontSize = 11.sp, color = OnSurfaceVariant)
                                         }
-                                        Text("₹850.00 Approved", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
-                                        Text("Recycler has verified lot parameters and confirmed rate of ₹340/kg.", fontSize = 12.sp, color = OnSurface)
+                                        Text("₹${liveOffer?.totalPayoutInr ?: 0.0} offered", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
+                                        Text("This is a live recycler offer. Accepting will verify its server-issued terms.", fontSize = 12.sp, color = OnSurface)
                                     }
                                 }
 
@@ -486,10 +510,7 @@ fun C09_RecyclerProfileOfferScreen(
                                 ) {
                                     OutlinedButton(
                                         onClick = {
-                                            coroutineScope.launch {
-                                                facilityRepository.respondToOfferAtomic("off_${facility.facilityId}", "REJECT_OFFER", accountId)
-                                                requestState = LotRequestState.OFFER_REJECTED
-                                            }
+                                            requestState = LotRequestState.OFFER_REJECTED
                                         },
                                         modifier = Modifier.weight(1f).height(46.dp),
                                         shape = RoundedCornerShape(10.dp)
@@ -502,8 +523,12 @@ fun C09_RecyclerProfileOfferScreen(
                                     Button(
                                         onClick = {
                                             coroutineScope.launch {
-                                                facilityRepository.respondToOfferAtomic("off_${facility.facilityId}", "ACCEPT_OFFER", accountId)
-                                                requestState = LotRequestState.OFFER_ACCEPTED
+                                                val offer = liveOffer
+                                                if (offer == null) tradeMessage = "Refresh the live offer before accepting."
+                                                else when (val result = facilityRepository.acceptLiveOffer(offer, accountId)) {
+                                                    is com.sahitol.collector.data.repository.TradeResult.Success -> requestState = LotRequestState.OFFER_ACCEPTED
+                                                    is com.sahitol.collector.data.repository.TradeResult.Failure -> tradeMessage = result.message
+                                                }
                                             }
                                         },
                                         modifier = Modifier.weight(1f).height(46.dp),

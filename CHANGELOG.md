@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-10-01 -- T044 live offer-path repair
+
+Removed the collector's fabricated facility/request/offer identifiers from the
+actionable C07/C08/C09 flow. The app now loads the hosted UUID-backed demo
+directory, sends a collector request only for a server-backed compatible lot,
+polls real offers, and accepts only the recycler-issued terms hash/version.
+The physical retest found and fixed a main-thread HTTP failure; it then showed
+zero real offers for the current incompatible cable lot and the live hosted
+facility. Earlier simulated C09 evidence was marked superseded, and T044
+remains in progress until a fresh two-party run is completed.
+
 ## 2026-10-01 -- T044 physical manual-sync repair
 
 Physical C14 testing on the cellular-connected collector device found that
