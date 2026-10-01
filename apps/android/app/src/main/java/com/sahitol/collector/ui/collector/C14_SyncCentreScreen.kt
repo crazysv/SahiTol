@@ -19,6 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sahitol.collector.data.local.entity.OutboxOperationEntity
@@ -61,6 +63,7 @@ fun C14_SyncCentreScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .statusBarsPadding()
                         .padding(horizontal = 16.dp, vertical = 12.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
@@ -77,10 +80,13 @@ fun C14_SyncCentreScreen(
                             )
                         }
                         Text(
+                            modifier = Modifier.weight(1f),
                             text = "Sync Centre / डेटा सिंक केंद्र",
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
-                            color = OnSurface
+                            color = OnSurface,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 }
@@ -110,7 +116,7 @@ fun C14_SyncCentreScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Column {
+                        Column(modifier = Modifier.weight(1f)) {
                             Text(
                                 text = "COLLECTOR MOVEMENT BOARD",
                                 style = MaterialTheme.typography.labelSmall,
@@ -121,7 +127,9 @@ fun C14_SyncCentreScreen(
                                 text = "डेटा सिंक स्थिति",
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold,
-                                color = OnSurface
+                                color = OnSurface,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis
                             )
                             Text(
                                 text = "Offline-first ledger & dispatch manager",
@@ -376,22 +384,28 @@ private fun OutboxOpCard(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = "${op.command} • #${op.entityId.take(8)}",
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
-                    color = OnSurface
+                    color = OnSurface,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = "EntityType: ${op.entityType} • Attempts: ${op.attemptCount}",
                     style = MaterialTheme.typography.labelSmall,
-                    color = OnSurfaceVariant
+                    color = OnSurfaceVariant,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
 
             Box(
                 modifier = Modifier
+                    .padding(start = 8.dp)
+                    .widthIn(max = 112.dp)
                     .clip(RoundedCornerShape(6.dp))
                     .background(badgeColor.copy(alpha = 0.15f))
                     .padding(horizontal = 8.dp, vertical = 4.dp)
@@ -401,7 +415,10 @@ private fun OutboxOpCard(
                     style = MaterialTheme.typography.labelSmall,
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
-                    color = badgeColor
+                    color = badgeColor,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center
                 )
             }
         }

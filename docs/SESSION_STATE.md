@@ -33,8 +33,11 @@ check_docs.py: PASS 0 errors, 2949 links, 34 screens, 98 requirements.
 ## APK
 
 - Debug APK: apps/android/app/build/outputs/apk/debug/app-debug.apk
-- Size: 33.25 MB
-- SHA-256: db71f114d25e5bb54a2c34a8962c8736798b8cb5a77469cf6c8d952ab5464824
+- SHA-256: 82f1b2bbcd3689906dc41d9fafcfa955460f6e1a9b7f2991883f94c988ab99a2
+
+## 2026-10-01 maintenance update
+
+The debug APK now contains a scoped layout correction for approved collector screens C03, C06, C07, C14, and C15: Android 15 status-bar insets are reserved, light system surfaces receive readable system icons, and flexible rows prevent long content from collapsing into vertical text. `:app:assembleDebug` passed; the APK was installed over the existing application and launched on device `N7OZPV59XWWKPF4X` at 00:22 IST. No data was cleared. The next owner action is a brief on-device visual spot-check of the affected screens before video recording.
 
 ## Known gaps (immutable disclosures)
 

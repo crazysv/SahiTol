@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sahitol.collector.data.repository.FacilityRepository
@@ -78,10 +79,13 @@ fun C07_ValuationScreen(
                         }
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
+                            modifier = Modifier.weight(1f),
                             text = "Valuation & Offers",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
-                            color = OnSurface
+                            color = OnSurface,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
 
@@ -142,7 +146,10 @@ fun C07_ValuationScreen(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
+                            Row(
+                                modifier = Modifier.weight(1f),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
                                 Icon(
                                     Icons.Default.Build,
                                     contentDescription = null,
@@ -150,24 +157,28 @@ fun C07_ValuationScreen(
                                     modifier = Modifier.size(24.dp)
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Column {
+                                Column(modifier = Modifier.weight(1f)) {
                                     Text(
                                         text = "Copper Cable Lot",
                                         fontSize = 16.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = OnSurface
+                                        color = OnSurface,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
                                     )
                                     Text(
                                         text = "केबल (तांबा) · 2.5 kg · Good Condition",
                                         fontSize = 12.sp,
-                                        color = OnSurfaceVariant
+                                        color = OnSurfaceVariant,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
                                     )
                                 }
                             }
 
                             SuggestionChip(
                                 onClick = {},
-                                label = { Text("Verified", fontSize = 11.sp) },
+                                label = { Text("Verified", fontSize = 11.sp, maxLines = 1) },
                                 colors = SuggestionChipDefaults.suggestionChipColors(
                                     containerColor = SuccessGreen.copy(alpha = 0.12f),
                                     labelColor = SuccessGreen
@@ -182,7 +193,10 @@ fun C07_ValuationScreen(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
+                            Row(
+                                modifier = Modifier.weight(1f),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
                                 Icon(
                                     Icons.Default.LocationOn,
                                     contentDescription = null,
@@ -193,7 +207,9 @@ fun C07_ValuationScreen(
                                 Text(
                                     text = valuation.yardLocation,
                                     fontSize = 12.sp,
-                                    color = OnSurfaceVariant
+                                    color = OnSurfaceVariant,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
                                 )
                             }
                             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -351,7 +367,7 @@ fun C07_ValuationScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column {
+                    Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = "Recycler Offers / खरीदार बोलियां",
                             fontSize = 17.sp,
@@ -366,7 +382,7 @@ fun C07_ValuationScreen(
                     }
 
                     TextButton(onClick = { onNavigateDirectory(lotId) }) {
-                        Text("View Directory", color = TerracottaPrimary)
+                        Text("View Directory", color = TerracottaPrimary, maxLines = 1)
                         Spacer(modifier = Modifier.width(4.dp))
                         Icon(Icons.Default.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp))
                     }

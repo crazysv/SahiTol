@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-01 -- Android collector layout maintenance
+
+Corrected device-reported layout failures in the approved collector screens C03, C06, C07, C14, and C15. Every affected top bar now reserves the Android 15 status-bar inset; system status/navigation icons use a readable light-surface appearance. Flexible text regions use explicit weights and bounded lines, so the price-feed badge, offer directory action, profile label, sync-operation badges, and long lot details no longer collapse into narrow vertical columns. `:app:assembleDebug` completed successfully and the resulting debug APK was installed and launched on device `N7OZPV59XWWKPF4X`; a final owner visual spot-check remains appropriate before recording the demo video.
+
 ## 2026-09-30 -- T048-T050 DONE: Release Phase Complete
 
 T048 DONE: 10-slide deck script, one-page fact sheet (all numbers from T041-T047 evidence), five presenter role cards, Q&A crib. docs/evidence/T048_PPT_PRESENTER_HANDOFF.md

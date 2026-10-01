@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sahitol.collector.ui.theme.*
@@ -63,6 +64,7 @@ fun C15_SettingsScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .statusBarsPadding()
                         .padding(horizontal = 16.dp, vertical = 12.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
@@ -79,10 +81,13 @@ fun C15_SettingsScreen(
                             )
                         }
                         Text(
+                            modifier = Modifier.weight(1f),
                             text = "Settings / सेटिंग्स",
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
-                            color = OnSurface
+                            color = OnSurface,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 }
@@ -113,6 +118,7 @@ fun C15_SettingsScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Row(
+                            modifier = Modifier.weight(1f),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
@@ -129,7 +135,7 @@ fun C15_SettingsScreen(
                                 )
                             }
 
-                            Column {
+                            Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = if (isDemo) "DEMO PROFILE" else "Collector ID #SC-8921",
                                     style = MaterialTheme.typography.labelSmall,
@@ -140,7 +146,9 @@ fun C15_SettingsScreen(
                                     text = collectorAlias,
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold,
-                                    color = OnSurface
+                                    color = OnSurface,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
                                 )
                                 Text(
                                     text = "Phone: $maskedPhone",
@@ -160,7 +168,8 @@ fun C15_SettingsScreen(
                                 text = if (isDemo) "Demo Mode" else "Level 3 Agent",
                                 style = MaterialTheme.typography.labelSmall,
                                 fontWeight = FontWeight.Bold,
-                                color = OnSurfaceVariant
+                                color = OnSurfaceVariant,
+                                maxLines = 1
                             )
                         }
                     }
@@ -185,11 +194,12 @@ fun C15_SettingsScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Row(
+                                modifier = Modifier.weight(1f),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(10.dp)
                             ) {
                                 Text(text = "⚡", fontSize = 22.sp)
-                                Column {
+                                Column(modifier = Modifier.weight(1f)) {
                                     Text(
                                         text = "$unsyncedCount Batches Pending Sync",
                                         style = MaterialTheme.typography.labelMedium,

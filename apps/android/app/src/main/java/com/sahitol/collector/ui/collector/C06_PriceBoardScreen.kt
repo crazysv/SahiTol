@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -188,12 +189,14 @@ fun C06_PriceBoardScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column {
+                    Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = "Price Board / भाव बोर्ड",
                             fontSize = 22.sp,
                             fontWeight = FontWeight.Bold,
-                            color = OnSurface
+                            color = OnSurface,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
                         )
                         Text(
                             text = "Indicative yard rates and local market trends",
@@ -203,6 +206,7 @@ fun C06_PriceBoardScreen(
                     }
 
                     Surface(
+                        modifier = Modifier.padding(start = 8.dp),
                         shape = RoundedCornerShape(8.dp),
                         color = TerracottaPrimary.copy(alpha = 0.1f)
                     ) {
@@ -221,7 +225,9 @@ fun C06_PriceBoardScreen(
                                 text = "Live Feed",
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = TerracottaPrimary
+                                color = TerracottaPrimary,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
                         }
                     }
@@ -497,16 +503,23 @@ fun PriceBenchmarkCard(
                         text = item.materialNameEn,
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Bold,
-                        color = OnSurface
+                        color = OnSurface,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
                     )
                     Text(
                         text = item.materialNameHi,
                         fontSize = 13.sp,
-                        color = OnSurfaceVariant
+                        color = OnSurfaceVariant,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
 
-                Column(horizontalAlignment = Alignment.End) {
+                Column(
+                    modifier = Modifier.padding(start = 8.dp),
+                    horizontalAlignment = Alignment.End
+                ) {
                     Row(verticalAlignment = Alignment.Bottom) {
                         Text(
                             text = "₹ ${item.rateInrPerKg.toInt()}",
@@ -550,7 +563,9 @@ fun PriceBenchmarkCard(
                             text = trendText,
                             fontSize = 11.sp,
                             fontWeight = FontWeight.SemiBold,
-                            color = trendColor
+                            color = trendColor,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 }
