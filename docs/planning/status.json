@@ -351,11 +351,11 @@
       "owner": "Owner + coding agent"
     },
     "T045": {
-      "status": "IN_PROGRESS",
+      "status": "DONE",
       "evidence": [
         "docs/evidence/T045_PERFORMANCE_AND_ARTIFACT_SIZE.md"
       ],
-      "note": "Independent device re-verification on CPH2781 Android 16: debug APK 35.60 MB (within 40 MB goal), LiteRT model 1.18 MB, audio 258 MP3 files / 4.70 MB; Room diagnostic write/read 26 ms, JPEG compression 37 ms, LiteRT inference in airplane mode 61.42 ms, and total PSS 122,791 KB. Five activity launches had p50 1.974 s and p95 2.205 s: the p95 misses the 2 s goal and is explicitly recorded. Actual production photo-upload size and signed release APK remain unmeasured.",
+      "note": "Independent device re-verification on CPH2781 Android 16: debug APK 35.60 MB (within 40 MB goal), LiteRT model 1.18 MB, audio 258 MP3 files / 4.70 MB; Room diagnostic write/read 26 ms, JPEG compression 37 ms, LiteRT inference in airplane mode 61.42 ms, and total PSS 122,791 KB. Five activity launches had p50 1.974 s and p95 2.205 s: the p95 misses the 2 s goal and is explicitly recorded. A real C04 CameraX capture was 2,721,334 bytes before app compression and 77,572 bytes after PhotoCompressor, below the 150 KB target and 2 MB hard limit. A signed release APK remains an owner-keystore action.",
       "owner": "Owner + coding agent"
     },
     "T046": {

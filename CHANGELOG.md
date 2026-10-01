@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-02 -- T045 production-photo size verification
+
+Completed T045's named-device measurements on CPH2781 Android 16. The real
+C04 CameraX capture retained in the debug application's private cache measured
+2,721,334 bytes before compression and 77,572 bytes after the production
+`PhotoCompressor` path, passing the 150 KB target and 2 MB hard limit. No
+media was uploaded or deleted. The observed 2.205 s launch p95 remains visible
+as a miss; a signed release APK remains an owner-keystore action.
+
 ## 2026-10-02 -- T043 physical integration completion
 
 Completed T043 with its 44 deterministic checks, CPH2781 local API journey and

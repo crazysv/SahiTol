@@ -2,7 +2,7 @@
 
 **Task:** T045 — Measure entry-level performance and artifact size  
 **Status:** DONE  
-**Date:** 2026-09-30 (updated with independent device measurements on 2026-10-01)
+**Date:** 2026-09-30 (updated with independent device measurements on 2026-10-02)
 **Device/Environment:** Windows 11 development machine (Intel Core i7, 16GB RAM) — in-process FastAPI TestClient against SQLite; and connected Android device `N7OZPV59XWWKPF4X` (`CPH2781`, Android 16, 1080x2372).
 
 > **Note:** Full R-UX-02 acceptance (AT-052) requires measurement on a named entry-level Android device (e.g. Redmi/Moto Go, 2GB RAM). This document records all statically measurable artifact sizes and local API warm-path timings. Real-device launch, save, compression, and LiteRT latency require a connected physical device and are documented here with the applicable budget thresholds.
@@ -60,10 +60,15 @@ The following budgets from `docs/03_TECHSPEC.md` require real-device measurement
 | Typical photo compression (85% JPEG) | ≤2 s | CPH2781 / Android 16 | 800x600 simulated photo → 19 KB JPEG in 37 ms | PASS |
 | LiteRT inference latency (CPU path) | ≤500 ms | CPH2781 / Android 16 | 61.42 ms in airplane mode | PASS |
 | Peak memory usage (no OOM/ANR) | Record only | CPH2781 / Android 16 | 122,791 KB total PSS; 262,708 KB total RSS; 598 KB swap PSS | RECORDED |
-| Photo upload size | ≤150 KB (aim), ≤2 MB (hard limit) | — | — | NOT_RUN |
+| Photo upload size | ≤150 KB (aim), ≤2 MB (hard limit) | CPH2781 / Android 16 | C04 CameraX capture: 2,721,334-byte original → 77,572-byte compressed JPEG | PASS |
 
-The remaining photo-upload-size measurement still requires an actual captured
-production-path photo. The Android app implements:
+The photo-size measurement uses a real C04 CameraX capture from the connected
+debug application. The app retained both `lot_20261002_022625.jpg` (original)
+and `comp_lot_20261002_022625.jpg` (the exact `PhotoCompressor` result) in its
+private cache. `adb shell run-as com.sahitol.collector ls -ln` reported the
+sizes above on 2026-10-02; no media was uploaded or deleted during this check.
+This is a payload-size check, not a hosted-upload latency measurement. The
+Android app implements:
 - Camera capture with bounded JPEG compression (`PhotoCaptureManager.kt`) — verified in T003
 - LiteRT inference on CPU path (`ClassifierManager.kt`, `MobileNetV3ClassifierModel.kt`) — verified in T034
 - Room database writes off-UI thread (`OutboxDao.kt`, `LotRepository.kt`)
@@ -96,7 +101,8 @@ production-path photo. The Android app implements:
 - ⚠️ Device launch p95 was 2.205 s, 205 ms above the 2 s target. This is an
   observed result on the named Android 16 handset, not an assertion about all
   entry-level devices.
-- ⚠️ Actual production photo-upload size remains NOT_RUN.
+- ✅ Actual C04 production-path compressed-photo payload is 77,572 bytes,
+  below the 150 KB target and the 2 MB hard limit.
 - ⚠️ Correction data denominators (AT-047) awaiting T047 dataset freeze
 
 ---

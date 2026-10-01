@@ -1,6 +1,6 @@
 # Current handoff
 
-Handoff date: 2026-10-01 (Asia/Kolkata). Phase: **T044 repair and real-device verification in progress; happy-path two-device QR confirmation complete, denial/recovery checks remain.**
+Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T045 performance/artifact measurement complete; continue remaining release evidence in canonical task order.**
 
 Scope and progression: [master](../MASTER_CONTENT.md), [tracker](08_TRACKER.md), [implementation plan](07_IMPLEMENTATION_PLAN.md). Authoritative statuses live in [status.json](planning/status.json).
 
@@ -89,13 +89,15 @@ The debug APK now contains a scoped layout correction for approved collector scr
 
 T001 verification setup is repaired: the API's pinned test dependency set and repository-root import path now collect all 318 API tests under Python 3.10. T006's SQLite geometry test double now returns EWKB-compatible values, and the schema/facility/lot/matching verification subset passes 45 tests. Continue in catalog order with T007.
 
-## 2026-10-01 device performance recheck
+## 2026-10-02 device performance recheck
 
 On CPH2781 Android 16, the debug APK is 35.60 MB; photo compression was 37 ms,
 Room diagnostic write/read 26 ms, and LiteRT airplane-mode inference 61.42 ms.
 Five activity launches gave 1.974 s p50 and 2.205 s p95, so the 2 s p95 target
-is currently missed. Memory was 122,791 KB total PSS. The release APK and an
-actual production-photo upload remain unmeasured.
+is currently missed. Memory was 122,791 KB total PSS. A real C04 CameraX
+capture was 2,721,334 bytes and the app's `PhotoCompressor` output was 77,572
+bytes, below the 150 KB target and 2 MB hard limit. A signed release APK
+remains unmeasured because signing requires the owner's keystore.
 
 ## Known gaps (immutable disclosures)
 

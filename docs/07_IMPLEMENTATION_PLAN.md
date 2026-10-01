@@ -710,7 +710,7 @@ Task closure: implement the output, test relevant paths/failure cases, save repr
 
 ## T045
 
-**Measure entry-level performance and artifact size** — stage 6; scope RELEASE; status **IN_PROGRESS**.
+**Measure entry-level performance and artifact size** — stage 6; scope RELEASE; status **DONE**.
 
 Dependencies: [T034](07_IMPLEMENTATION_PLAN.md#t034), [T037](07_IMPLEMENTATION_PLAN.md#t037), [T043](07_IMPLEMENTATION_PLAN.md#t043).
 
