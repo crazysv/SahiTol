@@ -7,6 +7,18 @@
 
 > **Note:** Full R-UX-02 acceptance (AT-052) requires measurement on a named entry-level Android device (e.g. Redmi/Moto Go, 2GB RAM). This document records all statically measurable artifact sizes and local API warm-path timings. Real-device launch, save, compression, and LiteRT latency require a connected physical device and are documented here with the applicable budget thresholds.
 
+## Current v2 verification boundary (2026-10-02)
+
+The integrated v2 debug APK is 39,364,594 bytes (37.54 MiB) and remains under
+the 40 MB debug target. The bundled float32 v2 model is 3,762,528 bytes (3.59
+MiB), SHA-256
+`32098e6714ea806ecfdf0d87e848aa394ac3d852c81989ecae33f0e142e5438f`.
+The connected CPH2781 device executed v2 inference in C05 and S00. The C05
+photo produced a 37.5% result and correctly abstained. S00 then reported
+`84.13 ms` CPU inference in airplane mode and displayed the correct `0.52`
+threshold. This is a named-device debug measurement, not an entry-level-device
+or release-APK claim.
+
 ---
 
 ## 1. Artifact Sizes

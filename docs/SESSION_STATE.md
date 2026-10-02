@@ -17,11 +17,13 @@ composition, price, or route. The obsolete Kaggle/Roboflow experiment remains
 quarantined and is not in the APK.
 
 Verification completed: 5 Python model-contract/interpreter tests, 88 Android
-unit tests, and debug APK build passed. The new model still requires a physical
-Android C04/C05 inference run and v2 performance measurements; no ADB device
-was connected at this checkpoint. T034, T044, T045 and T047 are therefore
-IN_PROGRESS until that evidence is collected and the release manifest is
-regenerated.
+unit tests, and debug APK build passed. On 2026-10-02 the rebuilt debug APK was
+installed in place on CPH2781 / Android 16 (`N7OZPV59XWWKPF4X`): C04 reached C05,
+the real v2 classifier returned 37.5% and correctly abstained to manual
+selection, and S00 ran the model in airplane mode at 84.13 ms CPU latency with
+the correct 0.52 threshold. No lot was saved. High-confidence confirmation,
+two-device QR, signed release APK, and entry-level-device coverage remain
+unverified; T034/T044/T045/T047 therefore remain scoped to their open evidence.
 
 ## Separate non-production classifier experiment
 
@@ -76,8 +78,9 @@ console and API health endpoint returned HTTP 200.
 
 ## Phase completion summary
 
-**Do not treat the release as complete. T041–T048 are complete, but shared
-release acceptance and the remaining release-evidence tasks are outstanding.**
+**Do not treat the release as complete. Several implementation tasks have
+passing focused checks, but shared release acceptance and the remaining
+release-evidence tasks are outstanding.**
 
 Latest T044 checkpoint: C07/C08 render the actual selected synchronized PCB and
 show no invented pickup. The deployed accepted offer `5e53f4de-…` was resumed

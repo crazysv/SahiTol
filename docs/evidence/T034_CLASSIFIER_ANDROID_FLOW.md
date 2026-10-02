@@ -15,9 +15,15 @@ labels remain manual-only; the raw label is retained and no chemistry, grade,
 composition, pricing, or route is inferred. The classifier never changes the
 collector's selection without an explicit C05 confirmation.
 
-The updated Android unit suite (88 tests) and `:app:assembleDebug` pass. The
-new model still needs physical-device C04/C05 inference and performance
-measurement; no ADB device was connected during this update.
+The updated Android unit suite (88 tests) and `:app:assembleDebug` pass. On
+2026-10-02 the v2 debug APK was installed with `adb install -r` on the connected
+CPH2781 / Android 16 handset (`N7OZPV59XWWKPF4X`). A real C04 photo reached C05,
+the bundled model returned a 37.5% top score, and the UI displayed the explicit
+manual fallback because it was below the 0.52 threshold; no lot was saved.
+The S00 diagnostic also ran the bundled model offline and reported a 66%
+provider-label result plus **84.13 ms CPU inference** with the correct visible
+v2 threshold of `0.52`. A high-confidence safely-mapped class and the complete
+two-device journey remain outstanding.
 
 ## Metadata
 - **Task ID**: T034

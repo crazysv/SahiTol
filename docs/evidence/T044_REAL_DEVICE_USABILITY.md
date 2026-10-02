@@ -11,6 +11,16 @@ below is the independent deployed happy-path retest. Deployed two-phone
 confirmation is also recorded separately in T025.
 Fieldwork obligation remains explicitly UNMET per project constraints.
 
+## 2026-10-02 v2 classifier retest
+
+The current debug APK was reinstalled in place on the same handset and launched
+without clearing app data. C04 captured one unsaved photo and continued to C05.
+The v2 classifier ran locally and displayed `मॉडल निश्चित नहीं है (कम विश्वास /
+अस्पष्ट)` with `37.5%` confidence and the explicit manual-selection grid; no
+lot was saved. This verifies model loading, local inference, the low-confidence
+route, and the human-confirmation guard in the current build. It does not verify
+the high-confidence confirmation path, two-device QR flow, or release APK.
+
 ---
 
 ## Scenarios Tested
