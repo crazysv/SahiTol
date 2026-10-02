@@ -119,3 +119,11 @@ startup number.
 
 **Release APK size:** measure the signed release APK once it exists. The
 required bundled model and offline Hindi/Marathi audio must remain available.
+# 2026-10-02 v2 replacement notice
+
+The device measurements below were collected with the retired v1 model and
+must not be reused as v2 evidence. The new v2 float32 artifact is 3,762,528
+bytes and the current debug APK is 39,364,594 bytes. Android LiteRT latency,
+memory, launch, compression, and final APK-size measurements for v2 remain
+pending on a connected named device.
+

@@ -1,5 +1,24 @@
 # Test Evidence: T034 Integrate Classifier into Approved Android Flow
 
+## 2026-10-02 v2 integration update
+
+The Android asset and runtime contract now use the two-source float32 model,
+not the retired v1 model described in older paragraphs below. `classifier.tflite`
+and `data/curated/model/classifier.tflite` both have SHA-256
+`32098e6714ea806ecfdf0d87e848aa394ac3d852c81989ecae33f0e142e5438f` and size
+3,762,528 bytes. `LiteRtClassifier` uses provider labels, threshold `0.52`,
+and model version `v2.0-mendeley-openimages`.
+
+Only `Keyboard`, `Mobile`, and `Mouse` have a reviewed mapping to broad
+`MIXED` electronics. Battery, PCB, plastic, metal, glass and other generic
+labels remain manual-only; the raw label is retained and no chemistry, grade,
+composition, pricing, or route is inferred. The classifier never changes the
+collector's selection without an explicit C05 confirmation.
+
+The updated Android unit suite (88 tests) and `:app:assembleDebug` pass. The
+new model still needs physical-device C04/C05 inference and performance
+measurement; no ADB device was connected during this update.
+
 ## Metadata
 - **Task ID**: T034
 - **Phase**: Stage 5 (Mobile Flow & AI Integration)

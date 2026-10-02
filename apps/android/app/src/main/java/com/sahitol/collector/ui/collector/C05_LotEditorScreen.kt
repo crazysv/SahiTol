@@ -33,7 +33,7 @@ import java.util.Locale
  * Screen C05: Material, Weight & Condition Lot Editor (Stitch afa6f950fa3a).
  * Features:
  * - Live On-Device LiteRT Advisory Classifier inference off the main thread.
- * - Real confidence score display and advisory threshold evaluation (0.65).
+ * - Real confidence score display and advisory threshold evaluation (0.52).
  * - SahiTol AI Suggestion banner with Confirm / Change / Abstain controls.
  * - Separate persistence of AI suggestion vs human-confirmed material label (R-ML-04).
  * - 3x3 Grid of Material Tiles (CRT, LCD, PCB, Cable, Battery, Motor, Plastics, Mixed, UNKNOWN).
@@ -84,11 +84,8 @@ fun C05_LotEditorScreen(
             val result = classifier.classifyFileAsync(initialPhotoPath)
             classificationResult = result
             isAnalyzing = false
-            if (result.meetsThreshold) {
-                val mappedCategory = MaterialCategory.fromModelCode(result.categoryCode)
-                selectedMaterial = mappedCategory
-                isAiConfirmed = true
-            }
+            // A prediction never changes the collector's material choice by
+            // itself. The collector must tap Confirm for a reviewed mapping.
         }
     }
 
@@ -238,7 +235,7 @@ fun C05_LotEditorScreen(
                     }
                 } else if (classificationResult != null) {
                     val result = classificationResult!!
-                    if (result.meetsThreshold) {
+                    if (result.meetsThreshold && !result.isFallback) {
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(14.dp),
@@ -278,7 +275,7 @@ fun C05_LotEditorScreen(
                                             fontWeight = FontWeight.Bold
                                         )
                                         Text(
-                                            text = "लेटेंसी: ${result.latencyMs.toInt()} ms • ऑफलाइन LiteRT",
+                                        text = "लेटेंसी: ${result.latencyMs.toInt()} ms • ऑफलाइन LiteRT • स्वयं पुष्टि करें",
                                             style = MaterialTheme.typography.labelSmall,
                                             color = OnSurfaceVariant
                                         )
@@ -344,13 +341,13 @@ fun C05_LotEditorScreen(
                                 }
                                 Column {
                                     Text(
-                                        text = "मॉडल निश्चित नहीं है (कम विश्वास / अस्पष्ट)",
+                                        text = if (result.meetsThreshold) "मॉडल का लेबल सुरक्षित रूप से मैप नहीं किया जा सकता" else "मॉडल निश्चित नहीं है (कम विश्वास / अस्पष्ट)",
                                         style = MaterialTheme.typography.labelMedium,
                                         fontWeight = FontWeight.Bold,
                                         color = OnSurface
                                     )
                                     Text(
-                                        text = "विश्वास स्तर: ${String.format(Locale.US, "%.1f", result.confidence * 100)}% (सीमा 65% से कम)",
+                                        text = if (result.meetsThreshold) "मॉडल लेबल: ${result.categoryNameHi} • ${String.format(Locale.US, "%.1f", result.confidence * 100)}% — स्वतः चयन नहीं" else "विश्वास स्तर: ${String.format(Locale.US, "%.1f", result.confidence * 100)}% (सीमा 52% से कम)",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = ErrorRed,
                                         fontWeight = FontWeight.SemiBold
@@ -905,7 +902,7 @@ fun C05_LotEditorScreen(
                                     if (it.meetsThreshold) it.categoryCode else "ABSTAIN"
                                 } ?: initialAiSuggestion
                                 val finalAiConfidence = classificationResult?.confidence ?: initialAiConfidence
-                                val finalAiModelVersion = classificationResult?.modelVersion ?: "v1.0"
+                                val finalAiModelVersion = classificationResult?.modelVersion ?: "v2.0-mendeley-openimages"
 
                                 onSaveLot(
                                     selectedMaterial.code,
@@ -947,7 +944,7 @@ fun C05_LotEditorScreen(
                                 if (it.meetsThreshold) it.categoryCode else "ABSTAIN"
                             } ?: initialAiSuggestion
                             val finalAiConfidence = classificationResult?.confidence ?: initialAiConfidence
-                            val finalAiModelVersion = classificationResult?.modelVersion ?: "v1.0"
+                            val finalAiModelVersion = classificationResult?.modelVersion ?: "v2.0-mendeley-openimages"
 
                             onSaveLot(
                                 selectedMaterial.code,

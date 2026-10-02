@@ -1,59 +1,53 @@
 {
   "model_name": "SahiTol On-Device E-Waste Image Classifier",
-  "model_version": "v1.0",
+  "model_version": "v2.0-mendeley-openimages",
+  "experiment": "mendeley_plus_openimages_v1",
   "model_file": "classifier.tflite",
-  "sha256": "35d0ad7cdd7f8c3d5f20ecda408b87d7f091a8b997f30793554ce416f790eb23",
-  "size_bytes": 1233896,
-  "size_mb": 1.18,
+  "sha256": "32098e6714ea806ecfdf0d87e848aa394ac3d852c81989ecae33f0e142e5438f",
+  "size_bytes": 3762528,
+  "size_mb": 3.588,
   "architecture": "MobileNetV3-Small",
-  "parameters_count": 946044,
+  "quantization": "none (float32 TFLite selected; float16 export changed one top-1 prediction)",
   "input_tensor": {
-    "name": "serving_default_input_1:0",
-    "shape": [
-      1,
-      224,
-      224,
-      3
-    ],
+    "name": "input_layer_1",
+    "shape": [1, 224, 224, 3],
     "dtype": "float32",
-    "normalization_range": [
-      -1.0,
-      1.0
-    ],
+    "normalization_range": [-1.0, 1.0],
     "formula": "(pixel_rgb / 127.5) - 1.0"
   },
   "output_tensor": {
-    "name": "StatefulPartitionedCall:0",
-    "shape": [
-      1,
-      12
-    ],
+    "shape": [1, 12],
     "dtype": "float32",
-    "interpretation": "Softmax probability distribution over 12 e-waste categories"
+    "interpretation": "Softmax output in the exact provider-label order in labels.json"
   },
   "classes": [
-    "MAT-BAT-01",
-    "MAT-BAT-02",
-    "MAT-CAB-01",
-    "MAT-CRT-01",
-    "MAT-LCD-01",
-    "MAT-MET-01",
-    "MAT-MIX-01",
-    "MAT-MOT-01",
-    "MAT-PCB-01",
-    "MAT-PCB-02",
-    "MAT-PLA-01",
-    "MAT-UNK-01"
+    "Battery_Waste", "Glass_Waste", "Keyboard", "Light_Bulb",
+    "Medical_Waste", "Metal_Waste", "Mobile", "Mouse", "Organic_Waste",
+    "PCB", "Paper_Waste", "Plastic_Waste"
   ],
-  "advisory_threshold": 0.65,
-  "runtime_characteristics": {
-    "avg_latency_ms": 7.57,
-    "p95_latency_ms": 8.3,
-    "device_target": "Android arm64-v8a / armeabi-v7a (CPU LiteRT / NNAPI)",
-    "memory_bound_mb": 15.0
+  "advisory_threshold": 0.52,
+  "mapping_policy": {
+    "preserve_provider_label": true,
+    "reviewed_manual_category_mappings": {
+      "Keyboard": "MIXED",
+      "Mobile": "MIXED",
+      "Mouse": "MIXED"
+    },
+    "manual_only_provider_labels": [
+      "Battery_Waste", "Glass_Waste", "Light_Bulb", "Medical_Waste",
+      "Metal_Waste", "Organic_Waste", "PCB", "Paper_Waste", "Plastic_Waste"
+    ],
+    "reason": "Provider labels do not establish battery chemistry, PCB grade, plastic composition, metal composition, or a SahiTol material route."
   },
   "export_parity": {
-    "max_abs_probability_difference": 0.001816,
+    "samples": 381,
+    "max_abs_probability_difference": 0.000008672475814819336,
+    "top1_match_rate": 1.0,
     "parity_verified": true
+  },
+  "runtime_characteristics": {
+    "colab_cpu_median_ms": 3.247,
+    "colab_cpu_p95_ms": 3.802,
+    "android_device_timing": "not yet measured for v2"
   }
 }

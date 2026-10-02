@@ -127,3 +127,15 @@ manifest, all seven data cards, all nine dataset manifests, and both research
 evidence documents. This check confirms the integrity of the declared freeze;
 it does not convert the documented low model performance, unreviewed licences,
 or unmet fieldwork obligation into a pass claim.
+# 2026-10-02 v2 model replacement notice
+
+The original v1 model measurements in this evidence file are historical and
+are superseded for the Android asset. The current two-source float32 artifact
+is 3,762,528 bytes with SHA-256
+`32098e6714ea806ecfdf0d87e848aa394ac3d852c81989ecae33f0e142e5438f`.
+Its held-out evidence is recorded in `data/curated/model/evaluation_report.json`
+and its provider-label/manual-mapping policy is recorded in
+`data/curated/model/model_card.md`. T047 remains in progress until the v2
+physical-device inference/performance evidence is collected and the manifest
+is finally frozen.
+

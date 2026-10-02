@@ -1,8 +1,10 @@
 # E-waste classifier v2 — isolated experiment
 
-This directory is a **non-production experiment**. It does not alter the
-Android app, the bundled LiteRT model, `data/curated/`, or release evidence.
-Promotion requires a separate owner decision after reproducible evaluation.
+This directory records reproducible research evidence for the two-source model
+now selected for Android integration. The Kaggle/Roboflow branch remains
+quarantined and non-production. Product copies are maintained separately in
+`data/curated/model/` and the Android asset bundle; this directory remains the
+source-evidence record and is not runtime data.
 
 ## Goal
 
@@ -33,7 +35,9 @@ that can be exported for review.
 
 The owner executed the isolated Colab experiment. The data, checkpoints,
 manifests and reports remain in the owner's Drive under
-`SahiTol/experiments/e_waste_model_v2`; they are not product assets.
+`SahiTol/experiments/e_waste_model_v2`; only the specifically hashed float32
+export described below was promoted to the product asset locations after the
+owner's explicit decision.
 
 `mendeley_plus_openimages_v1` trained MobileNetV3Small with the 1,508
 Mendeley train crops plus 600 separately audited Open Images train crops. Its
@@ -55,8 +59,9 @@ This evidence applies directly only to Keyboard, Mobile and Mouse for the
 Open Images test. `Glass_Waste` remains weak on the Mendeley held-out test
 (F1 56.25%, 19 examples); generic provider labels must not be turned into
 claims about battery chemistry, PCB grade, plastic composition or metal
-composition. A separate owner promotion decision, Android-device measurement,
-and product integration review are still required.
+composition. Android-device measurement and final release-manifest review
+remain required. Product integration preserves the provider label and manual
+fallback; it does not turn generic labels into hazardous-material claims.
 
 ## Source status as of 2026-10-02
 

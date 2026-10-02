@@ -1,20 +1,21 @@
 {
-  "format_version": "1.0",
-  "generated_at": "2026-09-30T15:07:15Z",
-  "description": "SahiTol Release v1.0 -- Frozen Dataset and Model Evidence Package (T047)",
+  "format_version": "1.1",
+  "generated_at": "2026-10-02T16:00:00Z",
+  "status": "SUPERSEDED_PENDING_V2_DEVICE_VERIFICATION",
+  "description": "SahiTol model evidence manifest updated for v2.0-mendeley-openimages; final freeze remains pending v2 Android-device verification (T034/T044/T045).",
   "fieldwork_status": "R-RES-02 UNMET: Two-collector primary fieldwork not conducted. All datasets are desk-research / public-source only.",
   "artifacts": {
     "classifier_tflite": {
       "path": "apps/android/app/src/main/assets/model/classifier.tflite",
-      "sha256": "35d0ad7cdd7f8c3d5f20ecda408b87d7f091a8b997f30793554ce416f790eb23",
-      "size_bytes": 1233896,
-      "description": "LiteRT quantized MobileNetV3-Small e-waste classifier v1.0",
+      "sha256": "32098e6714ea806ecfdf0d87e848aa394ac3d852c81989ecae33f0e142e5438f",
+      "size_bytes": 3762528,
+      "description": "Float32 LiteRT MobileNetV3-Small e-waste classifier v2.0-mendeley-openimages",
       "linked_card": "data/curated/model/model_card.md"
     },
     "model_card": {
       "path": "data/curated/model/model_card.md",
-      "sha256": "e5c3217d04a9db75e64141e1233b869c1219c693b661d43b4846aeb892513513",
-      "description": "Model card with actual evaluation results (macro-F1 0.0159, 100pct abstention, 7.57ms inference), advisory policy, limitations"
+      "sha256": "62362ed5e06fbd3bf8476d9a7f4e03236b1e3c4af5c8bb1b6d55efff4f799e20",
+      "description": "Model card with two-source held-out metrics, provider-label mapping policy, advisory fallback, and pending device measurement"
     },
     "ml_image_dataset": {
       "path": "data/curated/ml_image_dataset",
@@ -127,12 +128,13 @@
   "summary": {
     "data_cards_complete": 7,
     "data_cards_required": 7,
-    "classifier_sha256": "35d0ad7cdd7f8c3d5f20ecda408b87d7f091a8b997f30793554ce416f790eb23",
-    "model_card_sha256": "e5c3217d04a9db75e64141e1233b869c1219c693b661d43b4846aeb892513513",
+    "classifier_sha256": "32098e6714ea806ecfdf0d87e848aa394ac3d852c81989ecae33f0e142e5438f",
+    "model_card_sha256": "62362ed5e06fbd3bf8476d9a7f4e03236b1e3c4af5c8bb1b6d55efff4f799e20",
     "audio_manifest_sha256": "de5de1a8fc5b00e105a017a665d28f0ecf1413d06ad13aeaf193cbbae80a82d4",
     "honest_gaps": [
       "R-RES-02 UNMET: Two-collector primary fieldwork not conducted.",
-      "Model macro-F1 0.0159 and 100pct abstention at threshold 0.65 -- classifier safe but low accuracy; full manual fallback mandatory and implemented.",
+      "v2 Mendeley held-out macro-F1 0.8841 and accepted accuracy 0.9112 at threshold 0.52; fresh Open Images diagnostic macro-F1 0.9830. These are dataset diagnostics, not field guarantees.",
+      "v2 Android-device inference and performance evidence remain pending; this manifest is not the final release freeze.",
       "Native-speaker review of Hindi/Marathi audio NOT_REVIEWED.",
       "Desk-research prices only; no confirmed primary field market transactions."
     ]

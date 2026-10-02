@@ -32,6 +32,11 @@ enum class MaterialCategory(
         fun fromModelCode(modelCode: String?): MaterialCategory {
             if (modelCode.isNullOrBlank()) return OTHER
             return when (modelCode.uppercase()) {
+                // V2 provider labels. Only direct whole-device mappings are
+                // offered for collector confirmation. Generic provider labels
+                // deliberately stay OTHER: an image cannot establish battery
+                // chemistry, PCB grade, plastic composition, or metal type.
+                "KEYBOARD", "MOBILE", "MOUSE" -> MIXED_EWASTE
                 "MAT-BAT-01", "MAT-BAT-02", "BATTERY" -> BATTERY_LI_ION
                 "MAT-CAB-01", "CABLE" -> COPPER_CABLE
                 "MAT-CRT-01", "CRT" -> CRT_MONITOR
@@ -42,6 +47,11 @@ enum class MaterialCategory(
                 "MAT-PLA-01", "PLASTICS" -> RIGID_PLASTIC
                 else -> fromCode(modelCode)
             }
+        }
+
+        fun hasSafeManualMapping(modelCode: String?): Boolean = when (modelCode?.uppercase()) {
+            "KEYBOARD", "MOBILE", "MOUSE" -> true
+            else -> false
         }
     }
 }

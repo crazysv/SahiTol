@@ -1,352 +1,66 @@
 {
-  "model_architecture": "MobileNetV3-Small",
-  "input_resolution": [
-    224,
-    224,
-    3
-  ],
-  "normalization": "[-1.0, 1.0] (float32)",
-  "num_classes": 12,
-  "classes": [
-    "MAT-BAT-01",
-    "MAT-BAT-02",
-    "MAT-CAB-01",
-    "MAT-CRT-01",
-    "MAT-LCD-01",
-    "MAT-MET-01",
-    "MAT-MIX-01",
-    "MAT-MOT-01",
-    "MAT-PCB-01",
-    "MAT-PCB-02",
-    "MAT-PLA-01",
-    "MAT-UNK-01"
-  ],
+  "experiment": "mendeley_plus_openimages_v1",
+  "model_version": "v2.0-mendeley-openimages",
+  "status": "INTEGRATED_ADVISORY_MODEL_DEVICE_VERIFICATION_PENDING",
   "dataset_split_counts": {
-    "train": 115,
-    "validation": 19,
-    "test": 38
+    "mendeley_train": 1508,
+    "openimages_train": 600,
+    "mixed_validation": 476,
+    "mendeley_held_out_test": 325,
+    "openimages_fresh_external_test": 90
   },
-  "untouched_test_metrics": {
-    "accuracy": 0.1053,
-    "macro_f1": 0.0159,
-    "weighted_f1": 0.0201,
-    "total_test_samples": 38
+  "validation_threshold_selection": {
+    "threshold": 0.52,
+    "selection_data": "mixed validation only",
+    "combined_accuracy": 0.8992,
+    "combined_macro_f1": 0.8964,
+    "coverage": 0.9517,
+    "accepted_accuracy": 0.9272
   },
-  "advisory_threshold": {
-    "recommended_threshold": 0.65,
-    "test_coverage": 0.0,
-    "test_abstention_rate": 1.0,
-    "test_accuracy_on_accepted": 0.0,
-    "note": "When top-1 confidence < recommended_threshold, application abstains and routes to safe manual selection (C04/C05)."
-  },
-  "per_class_breakdown": {
-    "MAT-BAT-01": {
-      "precision": 0.1053,
-      "recall": 1.0,
-      "f1_score": 0.1905,
-      "support": 4
-    },
-    "MAT-BAT-02": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 4
-    },
-    "MAT-CAB-01": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 4
-    },
-    "MAT-CRT-01": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 4
-    },
-    "MAT-LCD-01": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 4
-    },
-    "MAT-MET-01": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 2
-    },
-    "MAT-MIX-01": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 2
-    },
-    "MAT-MOT-01": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 2
-    },
-    "MAT-PCB-01": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 4
-    },
-    "MAT-PCB-02": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 4
-    },
-    "MAT-PLA-01": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 2
-    },
-    "MAT-UNK-01": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1_score": 0.0,
-      "support": 2
+  "mendeley_held_out_test": {
+    "accuracy": 0.8738,
+    "macro_f1": 0.8841,
+    "coverage_at_threshold": 0.9354,
+    "abstention_rate": 0.0646,
+    "accepted_accuracy": 0.9112,
+    "support": 325,
+    "per_class_f1": {
+      "Battery_Waste": 0.9091,
+      "Glass_Waste": 0.5625,
+      "Keyboard": 0.9444,
+      "Light_Bulb": 1.0,
+      "Medical_Waste": 0.9412,
+      "Metal_Waste": 0.8193,
+      "Mobile": 0.7213,
+      "Mouse": 1.0,
+      "Organic_Waste": 1.0,
+      "PCB": 0.9091,
+      "Paper_Waste": 0.9333,
+      "Plastic_Waste": 0.8696
     }
   },
-  "confusion_matrix": [
-    [
-      4,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      4,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      4,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      4,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      4,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      2,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      2,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      2,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      4,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      4,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      2,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      2,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ]
-  ],
-  "threshold_calibration_sweep": [
-    {
-      "threshold": 0.4,
-      "val_coverage": 0.0,
-      "val_abstention_rate": 1.0,
-      "val_accepted_accuracy": 0.0
-    },
-    {
-      "threshold": 0.5,
-      "val_coverage": 0.0,
-      "val_abstention_rate": 1.0,
-      "val_accepted_accuracy": 0.0
-    },
-    {
-      "threshold": 0.6,
-      "val_coverage": 0.0,
-      "val_abstention_rate": 1.0,
-      "val_accepted_accuracy": 0.0
-    },
-    {
-      "threshold": 0.65,
-      "val_coverage": 0.0,
-      "val_abstention_rate": 1.0,
-      "val_accepted_accuracy": 0.0
-    },
-    {
-      "threshold": 0.7,
-      "val_coverage": 0.0,
-      "val_abstention_rate": 1.0,
-      "val_accepted_accuracy": 0.0
-    },
-    {
-      "threshold": 0.75,
-      "val_coverage": 0.0,
-      "val_abstention_rate": 1.0,
-      "val_accepted_accuracy": 0.0
-    },
-    {
-      "threshold": 0.8,
-      "val_coverage": 0.0,
-      "val_abstention_rate": 1.0,
-      "val_accepted_accuracy": 0.0
-    },
-    {
-      "threshold": 0.85,
-      "val_coverage": 0.0,
-      "val_abstention_rate": 1.0,
-      "val_accepted_accuracy": 0.0
-    }
-  ],
-  "honest_reporting_disclosure": {
-    "primary_field_data": "NONE (Trained exclusively on licensed public images; R-RES-02 desk research)",
-    "borrowed_benchmarks": "NONE (All metrics computed directly on SahiTol untouched test split)",
-    "excluded_materials_count": 9,
-    "excluded_materials": [
-      "MAT-BAT-03",
-      "MAT-BAT-04",
-      "MAT-MOT-02",
-      "MAT-PLA-02",
-      "MAT-CAB-02",
-      "MAT-MET-02",
-      "MAT-MET-03",
-      "MAT-MIX-02",
-      "MAT-OTH-01"
-    ]
+  "openimages_fresh_external_test": {
+    "accuracy": 0.9778,
+    "macro_f1": 0.983,
+    "coverage_at_threshold": 1.0,
+    "abstention_rate": 0.0,
+    "support": 90,
+    "classes": ["Keyboard", "Mobile", "Mouse"],
+    "note": "External-domain diagnostic; applies only to these three directly aligned provider classes."
+  },
+  "export_parity": {
+    "format": "float32_tflite",
+    "samples": 381,
+    "max_abs_probability_difference": 0.000008672475814819336,
+    "top1_matches": 381,
+    "top1_match_rate": 1.0
+  },
+  "safety_and_provenance": {
+    "primary_field_data": "NONE",
+    "borrowed_benchmarks": "NONE",
+    "manual_confirmation_required": true,
+    "generic_provider_labels_never_infer": ["battery chemistry", "PCB grade", "plastic composition", "metal composition"],
+    "kaggle_or_roboflow_assets_used": false,
+    "android_device_measurement": "PENDING"
   }
 }

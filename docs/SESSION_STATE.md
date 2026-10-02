@@ -1,5 +1,28 @@
 # Current handoff
 
+## 2026-10-02 v2 classifier integration checkpoint
+
+The owner authorized integration of the previously validated two-source
+`mendeley_plus_openimages_v1` model. The exact float32 TFLite export is now
+bundled in both model asset locations with SHA-256
+`32098e6714ea806ecfdf0d87e848aa394ac3d852c81989ecae33f0e142e5438f` and size
+3,762,528 bytes. Android uses provider-label order, `[-1,1]` normalization,
+threshold `0.52`, and model version `v2.0-mendeley-openimages`.
+
+Safe mapping is intentionally narrow: only Keyboard/Mobile/Mouse may be
+confirmed as broad MIXED electronics. Battery, PCB, plastic, metal, glass,
+medical, organic, paper, and light-bulb provider labels remain manual-only;
+the app preserves the raw label and does not infer chemistry, grade,
+composition, price, or route. The obsolete Kaggle/Roboflow experiment remains
+quarantined and is not in the APK.
+
+Verification completed: 5 Python model-contract/interpreter tests, 88 Android
+unit tests, and debug APK build passed. The new model still requires a physical
+Android C04/C05 inference run and v2 performance measurements; no ADB device
+was connected at this checkpoint. T034, T044, T045 and T047 are therefore
+IN_PROGRESS until that evidence is collected and the release manifest is
+regenerated.
+
 ## Separate non-production classifier experiment
 
 The owner authorized a quarantined Roboflow/Kaggle **content-quality

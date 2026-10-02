@@ -394,3 +394,11 @@ observed. T044 cannot be marked DONE until its canonical dependencies T041–T04
 are complete. This does not close shared release acceptance cases that depend
 on other tasks, and it does not represent owner scenario tests as collector
 fieldwork. The two-collector fieldwork obligation remains explicitly UNMET.
+# 2026-10-02 v2 replacement notice
+
+The prior classifier observation in this file used the retired v1 model and
+65% threshold. QR, offline, permission, language, and handover observations
+remain valid for the app shell, but the C04/C05 classifier scenario must be
+re-run with v2 (`v2.0-mendeley-openimages`, threshold `0.52`) before claiming
+current model behavior.
+

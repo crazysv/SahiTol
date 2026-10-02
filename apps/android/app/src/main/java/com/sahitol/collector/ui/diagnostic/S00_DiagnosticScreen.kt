@@ -564,7 +564,7 @@ fun S00_DiagnosticScreen(
                 classificationResult?.let { res ->
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
-                        text = "LiteRT MobileNetV3-Small: ${String.format("%.2f", res.latencyMs)}ms inference on CPU in airplane mode (Threshold: 0.65)",
+                        text = "LiteRT MobileNetV3-Small: ${String.format("%.2f", res.latencyMs)}ms inference on CPU in airplane mode (Threshold: ${classifier.advisoryThreshold})",
                         fontSize = 11.sp,
                         color = SuccessGreen
                     )

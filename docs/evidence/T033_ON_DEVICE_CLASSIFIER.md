@@ -1,5 +1,27 @@
 # Test Evidence: T033 Train, Evaluate, and Export On-Device Model
 
+## 2026-10-02 product-model replacement (supersedes the v1 artifact below)
+
+The original 1.18 MB v1 classifier evidence is historical and is no longer the
+bundled product asset. The integrated artifact is the validated
+`mendeley_plus_openimages_v1` float32 export:
+
+- SHA-256: `32098e6714ea806ecfdf0d87e848aa394ac3d852c81989ecae33f0e142e5438f`
+- Size: 3,762,528 bytes (3.588 MB); input `[1,224,224,3]`, output `[1,12]`, float32
+- Exact provider-label order is recorded in `labels.json`; normalization is
+  `(pixel / 127.5) - 1.0`; threshold selected on mixed validation is `0.52`.
+- Mendeley held-out test: 325 samples, 87.38% top-1, 88.41% macro-F1,
+  93.54% coverage and 91.12% accepted accuracy.
+- Fresh Open Images diagnostic: 90 samples, 97.78% top-1 and 98.30% macro-F1;
+  this applies only to Keyboard/Mobile/Mouse.
+- Float32 parity: 381/381 top-1 matches; maximum probability difference
+  `8.672475814819336e-06`. The float16 export is not used because it changed a
+  top-1 result.
+- `python -m pytest services/api/tests/test_ml_classifier.py -q`: **5 passed**.
+
+This replacement has no Android-device timing yet. Kaggle and Roboflow assets
+are excluded. The old v1 metrics below must not be used for release claims.
+
 ## 2026-10-01 independent runtime verification
 
 The prior audit listed the TensorFlow interpreter as unavailable. The development

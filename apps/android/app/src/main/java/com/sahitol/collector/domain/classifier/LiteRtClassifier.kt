@@ -3,6 +3,7 @@ package com.sahitol.collector.domain.classifier
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import com.sahitol.collector.domain.model.MaterialCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
@@ -24,7 +25,7 @@ data class ClassificationResult(
     val latencyMs: Double,
     val isFallback: Boolean,
     val rawScores: Map<String, Float>,
-    val modelVersion: String = "v1.0",
+    val modelVersion: String = "v2.0-mendeley-openimages",
     val modelChecksum: String = LiteRtClassifier.EXPECTED_SHA256
 )
 
@@ -36,15 +37,15 @@ class LiteRtClassifier(
 ) {
     private var interpreter: Interpreter? = customInterpreter
     val labels = mutableListOf<String>()
-    val advisoryThreshold = 0.65f
-    val modelVersion = "v1.0"
+    val advisoryThreshold = 0.52f
+    val modelVersion = "v2.0-mendeley-openimages"
     var isCorrupted = forceCorrupted
         private set
     var actualSha256: String? = null
         private set
 
     companion object {
-        const val EXPECTED_SHA256 = "35d0ad7cdd7f8c3d5f20ecda408b87d7f091a8b997f30793554ce416f790eb23"
+        const val EXPECTED_SHA256 = "32098e6714ea806ecfdf0d87e848aa394ac3d852c81989ecae33f0e142e5438f"
         const val MODEL_PATH = "model/classifier.tflite"
         const val LABELS_PATH = "model/labels.json"
     }
@@ -55,12 +56,12 @@ class LiteRtClassifier(
         } else if (context != null) {
             loadLabels()
         } else {
-            // Default 12 classes from model metadata
+            // Exact provider-label order from the bundled v2 float32 export.
             labels.addAll(
                 listOf(
-                    "MAT-BAT-01", "MAT-BAT-02", "MAT-CAB-01", "MAT-CRT-01",
-                    "MAT-LCD-01", "MAT-MET-01", "MAT-MIX-01", "MAT-MOT-01",
-                    "MAT-PCB-01", "MAT-PCB-02", "MAT-PLA-01", "MAT-UNK-01"
+                    "Battery_Waste", "Glass_Waste", "Keyboard", "Light_Bulb",
+                    "Medical_Waste", "Metal_Waste", "Mobile", "Mouse", "Organic_Waste",
+                    "PCB", "Paper_Waste", "Plastic_Waste"
                 )
             )
         }
@@ -128,12 +129,13 @@ class LiteRtClassifier(
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            // Fallback hardcoded 12 classes from model metadata
+            // Same exact order as the bundled v2 model. This must stay aligned
+            // with labels.json; otherwise inference falls back safely.
             labels.addAll(
                 listOf(
-                    "MAT-BAT-01", "MAT-BAT-02", "MAT-CAB-01", "MAT-CRT-01",
-                    "MAT-LCD-01", "MAT-MET-01", "MAT-MIX-01", "MAT-MOT-01",
-                    "MAT-PCB-01", "MAT-PCB-02", "MAT-PLA-01", "MAT-UNK-01"
+                    "Battery_Waste", "Glass_Waste", "Keyboard", "Light_Bulb",
+                    "Medical_Waste", "Metal_Waste", "Mobile", "Mouse", "Organic_Waste",
+                    "PCB", "Paper_Waste", "Plastic_Waste"
                 )
             )
         }
@@ -185,7 +187,7 @@ class LiteRtClassifier(
             var maxScore = -1.0f
             val rawMap = mutableMapOf<String, Float>()
             for (i in scores.indices) {
-                val label = labels.getOrElse(i) { "MAT-UNK-01" }
+                val label = labels.getOrElse(i) { "ABSTAIN" }
                 val score = scores[i]
                 rawMap[label] = score
                 if (score > maxScore) {
@@ -194,9 +196,14 @@ class LiteRtClassifier(
                 }
             }
 
-            val bestLabel = if (maxIdx >= 0) labels[maxIdx] else "MAT-UNK-01"
+            val bestLabel = if (maxIdx >= 0) labels[maxIdx] else "ABSTAIN"
             val (en, hi, mr) = getCategoryNames(bestLabel)
             val meetsThreshold = maxScore >= advisoryThreshold
+            // The provider label is retained verbatim. Only whole-device IT
+            // labels have a reviewed mapping to a manual SahiTol category.
+            // A high score for battery, PCB, plastic, metal, glass, or other
+            // generic provider classes must not select a more specific route.
+            val needsManualSelection = !MaterialCategory.hasSafeManualMapping(bestLabel)
 
             return ClassificationResult(
                 categoryCode = bestLabel,
@@ -206,7 +213,7 @@ class LiteRtClassifier(
                 confidence = maxScore,
                 meetsThreshold = meetsThreshold,
                 latencyMs = latencyMs,
-                isFallback = !meetsThreshold,
+                isFallback = !meetsThreshold || needsManualSelection,
                 rawScores = rawMap,
                 modelVersion = modelVersion,
                 modelChecksum = actualSha256 ?: EXPECTED_SHA256
@@ -281,7 +288,7 @@ class LiteRtClassifier(
 
     fun getFallbackResult(latencyMs: Double): ClassificationResult {
         return ClassificationResult(
-            categoryCode = "MAT-UNK-01",
+            categoryCode = "ABSTAIN",
             categoryNameEn = "Unknown / Other",
             categoryNameHi = "अज्ञात / अन्य",
             categoryNameMr = "अज्ञात / इतर",
@@ -297,18 +304,19 @@ class LiteRtClassifier(
 
     fun getCategoryNames(code: String): Triple<String, String, String> {
         return when (code) {
-            "MAT-CAB-01" -> Triple("Cables & Wires", "केबल (Cable)", "केबल (Cable)")
-            "MAT-BAT-01" -> Triple("Lead-Acid Battery", "लेड-एसिड बैटरी", "लेड-अ‍ॅसिड बॅटरी")
-            "MAT-BAT-02" -> Triple("Lithium-Ion Battery", "लिथियम-आयन बैटरी", "लिथियम-आयन बॅटरी")
-            "MAT-CRT-01" -> Triple("CRT Glass / Monitors", "सीआरटी ग्लास / टीवी", "सीआरटी काच / टीव्ही")
-            "MAT-LCD-01" -> Triple("Flat Display / Screens", "एलसीडी / डिस्प्ले स्क्रीन", "एलसीडी / डिस्प्ले स्क्रीन")
-            "MAT-MET-01" -> Triple("Metals (Cu/Al/Fe)", "धातु (तांबा/एल्युमिनियम)", "धातू (तांबे/अल्युमिनियम)")
-            "MAT-MIX-01" -> Triple("Mixed Electronics", "मिश्रित ई-कचरा", "मिश्रित ई-कचरा")
-            "MAT-MOT-01" -> Triple("Motors & Compressors", "मोटर और कंप्रेसर", "मोटर आणि कॉम्प्रेसर")
-            "MAT-PCB-01" -> Triple("High-Grade PCB", "उच्च श्रेणी पीसीबी", "उच्च दर्जाचे पीसीबी")
-            "MAT-PCB-02" -> Triple("Low/Mid-Grade PCB", "सामान्य पीसीबी", "सामान्य पीसीबी")
-            "MAT-PLA-01" -> Triple("Rigid FR Plastics", "कठोर प्लास्टिक", "कठीण प्लॅस्टिक")
-            else -> Triple("Unknown Scrap", "अज्ञात सामग्री", "अज्ञात वस्तू")
+            "Battery_Waste" -> Triple("Battery waste", "बैटरी कचरा", "बॅटरी कचरा")
+            "Glass_Waste" -> Triple("Glass waste", "कांच कचरा", "काचेचा कचरा")
+            "Keyboard" -> Triple("Computer keyboard", "कंप्यूटर कीबोर्ड", "संगणक कीबोर्ड")
+            "Light_Bulb" -> Triple("Light bulb", "बल्ब", "बल्ब")
+            "Medical_Waste" -> Triple("Medical waste", "चिकित्सा कचरा", "वैद्यकीय कचरा")
+            "Metal_Waste" -> Triple("Metal waste", "धातु कचरा", "धातू कचरा")
+            "Mobile" -> Triple("Mobile phone", "मोबाइल फोन", "मोबाईल फोन")
+            "Mouse" -> Triple("Computer mouse", "कंप्यूटर माउस", "संगणक माउस")
+            "Organic_Waste" -> Triple("Organic waste", "जैविक कचरा", "सेंद्रिय कचरा")
+            "PCB" -> Triple("Printed circuit board", "सर्किट बोर्ड (पीसीबी)", "सर्किट बोर्ड (पीसीबी)")
+            "Paper_Waste" -> Triple("Paper waste", "कागज कचरा", "कागद कचरा")
+            "Plastic_Waste" -> Triple("Plastic waste", "प्लास्टिक कचरा", "प्लास्टिक कचरा")
+            else -> Triple("Manual selection required", "स्वयं चयन आवश्यक", "स्वतः निवड आवश्यक")
         }
     }
 

@@ -1,86 +1,55 @@
-# Model Card: SahiTol MobileNetV3-Small E-Waste Classifier
+# SahiTol MobileNetV3-Small e-waste classifier v2
 
-## 1. Model Details
-- **Model Name**: SahiTol On-Device E-Waste Image Classifier
-- **Model Version**: `v1.0`
-- **Model Filename**: `classifier.tflite`
-- **Model Architecture**: MobileNetV3-Small (Keras transfer learning backbone + custom dense head)
-- **Quantization**: LiteRT (TensorFlow Lite) dynamic range quantized flatbuffer
-- **Artifact Size**: 1.18 MB (1233896 bytes)
-- **Model SHA-256**: `35d0ad7cdd7f8c3d5f20ecda408b87d7f091a8b997f30793554ce416f790eb23`
-- **Parameter Count**: 946,044
-- **Developer**: SahiTol AI/ML & Core Systems Working Group
-- **License**: Apache 2.0 / Weights derived from open-source MobileNetV3 licensed weights
-- **Linked Tasks**: `T032`, `T033`, `T034`, `T047`
-- **Linked Requirements**: `R-ML-01`, `R-ML-02`, `R-ML-03`, `R-DATA-07`
-- **Linked Acceptance Cases**: `AT-044`, `AT-045`, `AT-046`, `AT-059`
+## Status and intended use
 
----
+This is an offline, advisory classifier integrated into the Android collector.
+It suggests a provider label; the collector must confirm or manually change the
+material in C05. It never certifies compliance, determines price, infers
+chemistry/grade/composition, or routes a lot automatically. Missing, corrupt,
+low-confidence, and unmappable predictions use manual fallback.
 
-## 2. Intended Use & Advisory Philosophy
-- **Primary Intended Use**: Advisory visual classification assisting informal waste collectors in rapidly identifying e-waste material categories on entry-level Android devices offline.
-- **Strict Non-Automated Guardrail**:
-  - The model provides **advisory recommendations only**. It **never** automatically authorizes transactions, determines material pricing, certifies hazardous compliance, or bypasses human confirmation.
-  - The user must explicitly confirm or manually adjust the suggested category on screen `C05`.
-- **Advisory Threshold Policy (`threshold = 0.65`)**:
-  - When the top-1 predicted softmax score is $\ge 0.65$, the app displays the suggested category with an honest confidence score and plain language explanation.
-  - When the top-1 score is $< 0.65$, the model abstains and automatically routes the collector to manual category selection (`C04`/`C05`).
-- **Out-of-Scope Uses**:
-  - Do not use for automated legal compliance, EPR certificate generation, scrap grading without human inspection, or chemical composition certification.
+Product artifact: `classifier.tflite` (float32 TFLite), 3,762,528 bytes,
+SHA-256 `32098e6714ea806ecfdf0d87e848aa394ac3d852c81989ecae33f0e142e5438f`.
+Architecture is MobileNetV3-Small, input `[1,224,224,3]` float32, output
+`[1,12]` float32. Pixels are normalized exactly once as
+`(pixel_rgb / 127.5) - 1.0`.
 
----
+## Output labels and safe mapping
 
-## 3. Training Data & Leakage-Free Splitting
-- **Dataset**: SahiTol Curated Public E-Waste Image Dataset (`data/curated/ml_image_dataset/`).
-- **Verified Sources**: Wikimedia Commons, Stanford TrashNet, Google Open Images V7, Mendeley Data.
-- **Field Data Provenance**: **ZERO primary field photos claimed**. Sourced strictly through desk research conforming to the owner's decision and the explicit `UNMET` status of `R-RES-02`.
-- **Physical Object Grouping**: All photos from the same physical item or capture sequence share a unique `physical_object_group` ID.
-- **Split Distribution**:
-  - **Train**: 115 images (66.9%)
-  - **Validation**: 19 images (11.0%)
-  - **Test**: 38 images (22.1%)
-- **Zero Leakage**: 0 physical object groups cross split boundaries.
+The exact output order is in `labels.json`:
 
----
+`Battery_Waste`, `Glass_Waste`, `Keyboard`, `Light_Bulb`, `Medical_Waste`,
+`Metal_Waste`, `Mobile`, `Mouse`, `Organic_Waste`, `PCB`, `Paper_Waste`,
+`Plastic_Waste`.
 
-## 4. Evaluation Metrics on Untouched Test Set
-Evaluated directly on the untouched test split of 38 images with zero threshold tuning on test data:
+Only `Keyboard`, `Mobile`, and `Mouse` have a reviewed mapping to the broad
+manual category `MIXED` (mixed electronics). The raw provider label is retained
+for audit. Battery, PCB, plastic, metal, glass, medical, organic, paper, and
+light-bulb labels remain manual-only; no chemistry, grade, composition, or
+regulatory route is inferred from them.
 
-| Metric | Score |
-|---|---|
-| **Overall Accuracy** | 10.53% |
-| **Macro-Averaged F1** | 0.0159 |
-| **Weighted F1** | 0.0201 |
-| **Coverage at Threshold (0.65)** | 0.00% |
-| **Abstention Rate** | 100.00% |
-| **Accuracy on Accepted Samples** | 0.00% |
+## Training and evaluation evidence
 
-### Per-Class Performance
-| Material ID | Precision | Recall | F1-Score | Support |
-|---|---|---|---|---|
-| `MAT-BAT-01` | 0.105 | 1.000 | 0.191 | 4 |
-| `MAT-BAT-02` | 0.000 | 0.000 | 0.000 | 4 |
-| `MAT-CAB-01` | 0.000 | 0.000 | 0.000 | 4 |
-| `MAT-CRT-01` | 0.000 | 0.000 | 0.000 | 4 |
-| `MAT-LCD-01` | 0.000 | 0.000 | 0.000 | 4 |
-| `MAT-MET-01` | 0.000 | 0.000 | 0.000 | 2 |
-| `MAT-MIX-01` | 0.000 | 0.000 | 0.000 | 2 |
-| `MAT-MOT-01` | 0.000 | 0.000 | 0.000 | 2 |
-| `MAT-PCB-01` | 0.000 | 0.000 | 0.000 | 4 |
-| `MAT-PCB-02` | 0.000 | 0.000 | 0.000 | 4 |
-| `MAT-PLA-01` | 0.000 | 0.000 | 0.000 | 2 |
-| `MAT-UNK-01` | 0.000 | 0.000 | 0.000 | 2 |
+The isolated `mendeley_plus_openimages_v1` run used 1,508 Mendeley train crops
+and 600 independently audited Open Images train crops. It selected threshold
+`0.52` using only the 476-item mixed validation set. The Mendeley held-out test
+(325 crops) measured 87.38% top-1 accuracy, 88.41% macro-F1, 93.54% coverage,
+and 91.12% accepted accuracy. A fresh Open Images diagnostic (90 crops,
+Keyboard/Mobile/Mouse only) measured 97.78% top-1 accuracy and 98.30% macro-F1
+at 100% coverage. These are dataset diagnostics, not a guarantee of field
+performance; `Glass_Waste` was the weakest Mendeley class (F1 56.25%).
 
----
+The float32 export matched the reference top-1 prediction on 381/381 parity
+samples; maximum probability difference was `8.672475814819336e-06`. The
+float16 export changed one top-1 prediction and is not used.
 
-## 5. LiteRT Export & Numerical Parity
-- **Target Runtime**: Android LiteRT (TensorFlow Lite Interpreter 2.15+)
-- **Quantization Parity**: Maximum absolute difference between float32 Keras predictions and quantized LiteRT flatbuffer across test images is **0.001816** ($\le 0.08$ threshold).
-- **Latency Benchmark**: Average inference time: **7.57 ms** (p95: **8.3 ms**), well within the 200 ms interactive budget on entry-level Android devices.
+## Provenance and limitations
 
----
+Sources are the audited Mendeley CC BY 4.0 dataset and per-asset licensed Open
+Images records. No Kaggle or Roboflow asset entered this model. No primary
+field photos are claimed. Generic provider labels are not equivalent to the
+SahiTol material taxonomy. Glare, occlusion, mixed objects, low light, and
+out-of-distribution inputs can still be wrong even above threshold.
 
-## 6. Limitations & Safe Fallbacks
-1. **Class Scope Limitations**: The classifier covers 12 visual classes. The remaining 9 taxonomy materials (`MAT-BAT-03`, `MAT-BAT-04`, `MAT-MOT-02`, `MAT-PLA-02`, `MAT-CAB-02`, `MAT-MET-02`, `MAT-MET-03`, `MAT-MIX-02`, `MAT-OTH-01`) are deliberately excluded due to public image ambiguities and route directly to manual selection.
-2. **Adverse Conditions**: Glare, extreme low lighting, or deeply occluded scrap assemblies may yield low confidence or misclassifications. In all such cases, the user can override the suggestion with a single tap.
-3. **No Network Dependency**: Inference runs 100% locally on-device without telemetry or cloud API calls.
+Android-device timing and final APK-size measurements for this replacement are
+pending; Colab CPU timing (median 3.247 ms, p95 3.802 ms) is not Android timing.
