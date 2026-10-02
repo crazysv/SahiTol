@@ -57,6 +57,13 @@ groups and zero exact SHA-256 hashes crossing splits. Model selection must use
 only the 698 validation assets; neither held-out set may be read during
 training or threshold selection.
 
+Training completed on the T4 Colab runtime with MobileNetV3Small. The frozen
+checkpoint reached validation accuracy 83.95% (loss 0.5700); fine-tuning the
+final 30 non-BatchNorm feature layers improved it to **88.83%** (loss 0.3646)
+on the same 698 validation assets. These are selection-time metrics only, not
+held-out results, product accuracy, or promotion evidence. Neither Mendeley
+nor Kaggle held-out file was read by this run.
+
 ## Guardrails retained for v2
 
 - The two-source float32 model remains frozen as the reference run.

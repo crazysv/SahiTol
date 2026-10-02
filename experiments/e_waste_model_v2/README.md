@@ -119,6 +119,12 @@ historic held-out assets and 220 new Kaggle held-out assets. Its preparation
 audit reports zero grouped and exact-hash split leakage. It is prepared only;
 training, calibration, and held-out evaluation have not yet happened.
 
+Its validation-only MobileNetV3Small run is now complete: the frozen checkpoint
+scored 83.95% validation accuracy (loss 0.5700), and final-layer fine-tuning
+scored 88.83% (loss 0.3646) across 698 validation assets. Threshold calibration
+and held-out evaluation have not yet happened; these values are not product
+performance claims.
+
 The first v2 review is recorded in [V2_SOURCE_AUDIT.md](V2_SOURCE_AUDIT.md).
 It confirms that none of the four remaining candidates may be blindly mixed
 into the validated two-source run. Wikimedia is the only candidate currently

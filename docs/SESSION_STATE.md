@@ -26,6 +26,10 @@ The quarantined combined manifest is now prepared—not trained—with 3,136
 training and 698 validation assets, plus separate Mendeley (325) and Kaggle
 (220) held-out sets. Preparation found zero grouped/exact-hash split leakage.
 Continue with validation-only training and do not read either held-out set.
+The validation-only MobileNetV3Small run completed: frozen validation accuracy
+was 83.95% (loss 0.5700) and fine-tuned validation accuracy 88.83% (loss
+0.3646). Continue with threshold selection on validation only, then the
+separate held-out evaluations; this is a quarantined research result only.
 
 Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T048 presentation deliverable complete; continue remaining release evidence in canonical task order.**
 
