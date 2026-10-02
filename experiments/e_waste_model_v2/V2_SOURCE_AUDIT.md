@@ -64,6 +64,22 @@ on the same 698 validation assets. These are selection-time metrics only, not
 held-out results, product accuracy, or promotion evidence. Neither Mendeley
 nor Kaggle held-out file was read by this run.
 
+With the validation-selected fixed threshold 0.65, the quarantined model was
+then evaluated once. Its new Kaggle held-out five-label set (220 assets) scored
+97.73% raw top-1 and 97.94% macro-F1, compared with the frozen two-source
+baseline's 75.00% and 72.15% on exactly that set: a +22.73 percentage-point
+domain-specific accuracy change. But the same new model regressed on the
+historic Mendeley held-out set (325 assets): 76.31% raw top-1 and 78.02%
+macro-F1 versus the two-source reference's recorded 87.38% and 88.41%.
+Its Mendeley accepted accuracy was also 89.43% at only 69.85% coverage.
+
+**Decision: reject this Kaggle-augmented checkpoint as a promotion candidate.**
+It specializes to the Kaggle image family while degrading the broader existing
+e-waste result, especially Metal_Waste (recall 43.18%), Glass_Waste (F1
+40.91%), and Mobile (F1 60.00%) on Mendeley. It remains a quarantined research
+artifact; no TFLite conversion, Android measurement, APK replacement, or
+release claim is warranted.
+
 ## Guardrails retained for v2
 
 - The two-source float32 model remains frozen as the reference run.

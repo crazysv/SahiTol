@@ -125,6 +125,15 @@ scored 88.83% (loss 0.3646) across 698 validation assets. Threshold calibration
 and held-out evaluation have not yet happened; these values are not product
 performance claims.
 
+The quarantined model was rejected for promotion after held-out comparison. It
+improved sharply on its own new Kaggle five-label test (97.73% raw accuracy,
+97.94% macro-F1; +22.73 percentage points versus the two-source reference on
+that same set), but regressed on the broader historic Mendeley held-out test to
+76.31% raw accuracy and 78.02% macro-F1 (the reference run recorded 87.38%
+and 88.41%). It is therefore a domain-specialist research artifact, not a
+better SahiTol classifier. No APK, TFLite model, or approved reference artifact
+changed.
+
 The first v2 review is recorded in [V2_SOURCE_AUDIT.md](V2_SOURCE_AUDIT.md).
 It confirms that none of the four remaining candidates may be blindly mixed
 into the validated two-source run. Wikimedia is the only candidate currently

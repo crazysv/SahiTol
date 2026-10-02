@@ -30,6 +30,12 @@ The validation-only MobileNetV3Small run completed: frozen validation accuracy
 was 83.95% (loss 0.5700) and fine-tuned validation accuracy 88.83% (loss
 0.3646). Continue with threshold selection on validation only, then the
 separate held-out evaluations; this is a quarantined research result only.
+The held-out comparison rejects the Kaggle-augmented checkpoint for promotion:
+it scored 97.73% on its own five-label Kaggle test (+22.73 points over the
+two-source reference on that set) but regressed to 76.31% raw accuracy on the
+broader Mendeley held-out test versus the reference's recorded 87.38%. Keep the
+approved two-source float32 model unchanged; no product or release asset may
+use this quarantined checkpoint.
 
 Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T048 presentation deliverable complete; continue remaining release evidence in canonical task order.**
 
