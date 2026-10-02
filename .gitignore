@@ -36,6 +36,12 @@ backups/
 media_storage/
 runtime-media/
 
+# Large, reproducible-but-local experiment inputs and run outputs.  The
+# experiment's source registry, scripts, notebook, and reports remain tracked.
+experiments/**/data/raw/
+experiments/**/data/prepared/
+experiments/**/runs/
+
 # Generated archives and dumps
 docs.zip
 *.dump

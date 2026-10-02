@@ -1,0 +1,72 @@
+{
+  "registry_version": "2026-10-02",
+  "experiment": "e_waste_model_v2",
+  "policy": {
+    "allowed_training_statuses": ["ELIGIBLE_AFTER_FILE_AUDIT", "ELIGIBLE_PER_ASSET"],
+    "prohibited_status_prefixes": ["HOLD_", "PENDING_"],
+    "automatic_labeling": "Provider labels and machine-readable boxes may be transformed only when their semantics map directly to a SahiTol class. Ambiguous chemistry, alloy, grade, or mixed-object labels are excluded or mapped to manual fallback; they are never guessed.",
+    "split_rule": "Group by original source, provider object/sequence, exact hash and perceptual-duplicate cluster before deterministic split. Augmentation is training-only."
+  },
+  "sources": [
+    {
+      "id": "MENDELEY_BANGLADESHI_2025",
+      "title": "Custom Bangladeshi E-Waste Image Dataset for Object Detection and Recognition",
+      "url": "https://data.mendeley.com/datasets/77383kmdnw/1",
+      "license": "CC BY 4.0",
+      "status": "ELIGIBLE_AFTER_FILE_AUDIT",
+      "reported_size": "2157 images / 12 provider classes",
+      "allowed_mappings": {"PCB": "MAT-PCB-01_OR_MAT-PCB-02_REVIEW", "Battery Waste": "BATTERY_FAMILY_MANUAL_CHEMISTRY", "Mobile": "MAT-MIX-01", "Keyboard": "MAT-MIX-01", "Plastic Waste": "MAT-PLA-01_REVIEW", "Metal Waste": "EXCLUDE_UNLESS_METAL_IS_VISUALLY_DEFENSIBLE"},
+      "blockers": ["download file manifest", "retain attribution and hashes", "audit class-level relevance", "deduplicate against all other sources"]
+    },
+    {
+      "id": "ROBOFLOW_EWASTE_2025",
+      "title": "E-waste Computer Vision Dataset v1",
+      "url": "https://universe.roboflow.com/ewaste-k1a9x/e-waste-tdvbp/dataset/1",
+      "license": "CC BY 4.0 stated by dataset page",
+      "status": "PENDING_PROVENANCE",
+      "reported_size": "999 images, detection annotations, train-only provider split",
+      "allowed_mappings": {},
+      "blockers": ["inspect source-image provenance", "inspect object class list", "create independent grouped split", "do not reuse provider's all-train split"]
+    },
+    {
+      "id": "OPEN_IMAGES_V7",
+      "title": "Open Images V7 selected e-waste-adjacent subset",
+      "url": "https://storage.googleapis.com/openimages/web/factsfigures_v7.html",
+      "license": "Per-image licences and attribution must be retained; dataset annotations CC BY 4.0",
+      "status": "ELIGIBLE_PER_ASSET",
+      "reported_size": "selective retrieval only",
+      "allowed_mappings": {"Printed circuit board": "MAT-PCB-01_OR_MAT-PCB-02_REVIEW", "Computer monitor": "DISPLAY_FAMILY_REVIEW", "Mobile phone": "MAT-MIX-01", "Keyboard": "MAT-MIX-01"},
+      "blockers": ["retrieve individual image licence/attribution", "use verified labels/boxes", "avoid generic battery/cable/metal chemistry claims"]
+    },
+    {
+      "id": "WIKIMEDIA_COMMONS_EWASTE",
+      "title": "Wikimedia Commons electronic waste category",
+      "url": "https://commons.wikimedia.org/wiki/Category:Electronic_waste",
+      "license": "Per-file licence and attribution",
+      "status": "ELIGIBLE_PER_ASSET",
+      "reported_size": "selective retrieval only",
+      "allowed_mappings": {},
+      "blockers": ["record each file page and author", "exclude files without an unambiguous material label", "preserve ShareAlike obligations where applicable"]
+    },
+    {
+      "id": "KAGGLE_AKSHAT_EWASTE",
+      "title": "E Waste Image Dataset",
+      "url": "https://www.kaggle.com/datasets/akshat103/e-waste-image-dataset",
+      "license": "Apache 2.0 stated by Kaggle metadata",
+      "status": "HOLD_SOURCE_PROVENANCE",
+      "reported_size": "12.36 MB; provider lists 10 appliance/e-waste classes",
+      "allowed_mappings": {},
+      "blockers": ["provider description includes proprietary sources", "resolve original image rights before any use", "do not treat hosting licence as proof of underlying image rights"]
+    },
+    {
+      "id": "ZENODO_MMEWASTE",
+      "title": "MMEWaste: A multi-modal image dataset for electronic waste",
+      "url": "https://zenodo.org/records/17239217",
+      "license": "CC BY 4.0 metadata",
+      "status": "HOLD_RIGHTS_AND_SCOPE",
+      "reported_size": "3.8 GB ZIP; nine electronic-component classes",
+      "allowed_mappings": {},
+      "blockers": ["record says full data temporarily confidential", "confirm which exact files are released and usable", "component labels do not directly map to whole-lot material taxonomy"]
+    }
+  ]
+}
