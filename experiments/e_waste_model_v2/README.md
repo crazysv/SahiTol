@@ -73,6 +73,13 @@ and product integration review are still required.
 training, validation, calibration, or test sets. This is how we honour the
 owner's request to examine all six without making a legally unsafe shortcut.
 
+The first v2 review is recorded in [V2_SOURCE_AUDIT.md](V2_SOURCE_AUDIT.md).
+It confirms that none of the four remaining candidates may be blindly mixed
+into the validated two-source run. Wikimedia is the only candidate currently
+worth a strictly per-asset automated staging probe; Roboflow needs provenance,
+Kaggle is rejected for unresolved proprietary inputs, and Zenodo's component
+taxonomy needs a separate experiment rather than relabelling.
+
 ## Run order
 
 1. Run `python scripts/validate_registry.py` locally or in Colab.

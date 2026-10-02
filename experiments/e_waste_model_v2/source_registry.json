@@ -25,6 +25,7 @@
       "license": "CC BY 4.0 stated by dataset page",
       "status": "PENDING_PROVENANCE",
       "reported_size": "999 images, detection annotations, train-only provider split",
+      "audit_note": "The public page was rechecked on 2026-10-02: it says CC BY 4.0 and 999 images, but supplies a 100% train / 0% validation / 0% test split and no original-image provenance manifest. Do not download or train until provenance is provided.",
       "allowed_mappings": {},
       "blockers": ["inspect source-image provenance", "inspect object class list", "create independent grouped split", "do not reuse provider's all-train split"]
     },
@@ -56,6 +57,7 @@
       "license": "Apache 2.0 stated by Kaggle metadata",
       "status": "HOLD_SOURCE_PROVENANCE",
       "reported_size": "12.36 MB; provider lists 10 appliance/e-waste classes",
+      "audit_note": "The public Kaggle API explicitly says images include proprietary sources. Apache 2.0 upload metadata is not clearance for those underlying images; this candidate is rejected unless original rights are traced per asset.",
       "allowed_mappings": {},
       "blockers": ["provider description includes proprietary sources", "resolve original image rights before any use", "do not treat hosting licence as proof of underlying image rights"]
     },
@@ -64,8 +66,9 @@
       "title": "MMEWaste: A multi-modal image dataset for electronic waste",
       "url": "https://zenodo.org/records/17239217",
       "license": "CC BY 4.0 metadata",
-      "status": "HOLD_RIGHTS_AND_SCOPE",
+      "status": "HOLD_SCOPE_AND_TAXONOMY",
       "reported_size": "3.8 GB ZIP; nine electronic-component classes",
+      "audit_note": "The public Zenodo API exposes CC BY 4.0 and a partial 3.8 GB archive, but the nine labels are electronic components, not the current whole-item/material provider classes. It requires a separate component-taxonomy experiment after archive inventory; never collapse component labels into PCB/material claims.",
       "allowed_mappings": {},
       "blockers": ["record says full data temporarily confidential", "confirm which exact files are released and usable", "component labels do not directly map to whole-lot material taxonomy"]
     }
