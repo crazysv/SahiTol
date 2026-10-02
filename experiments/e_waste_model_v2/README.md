@@ -17,6 +17,10 @@ from an ambiguous image label.
   candidates.
 - `scripts/validate_registry.py` checks that a source cannot be silently used
   unless it is explicitly eligible.
+- `scripts/download_mendeley_candidate.py` stages the eligible Mendeley archive
+  outside the product, with an archive hash and safe ZIP extraction.
+- `scripts/inspect_mendeley_candidate.py` writes provider-native labels and
+  deliberately leaves ambiguous SahiTol mappings blank.
 - `notebooks/SahiTol_EWaste_V2_Experiment.ipynb` is a Google Colab-ready
   scaffold. It is deliberately configured to stop before training when the
   asset ledger, licences, or grouped split are incomplete.
