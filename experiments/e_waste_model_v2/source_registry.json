@@ -35,6 +35,7 @@
       "license": "Per-image licences and attribution must be retained; dataset annotations CC BY 4.0",
       "status": "ELIGIBLE_PER_ASSET",
       "reported_size": "selective retrieval only",
+      "audit_note": "The isolated 2026-10-02 run used official V6 TRAIN boxes, V5 TEST boxes and 2018_04 per-image metadata only after per-asset CC BY 2.0, attribution, source-ID, SHA-256 and duplicate checks. These are Open Images artifacts, not a blanket clearance for every Open Images file.",
       "allowed_mappings": {"Printed circuit board": "MAT-PCB-01_OR_MAT-PCB-02_REVIEW", "Computer monitor": "DISPLAY_FAMILY_REVIEW", "Mobile phone": "MAT-MIX-01", "Keyboard": "MAT-MIX-01"},
       "blockers": ["retrieve individual image licence/attribution", "use verified labels/boxes", "avoid generic battery/cable/metal chemistry claims"]
     },

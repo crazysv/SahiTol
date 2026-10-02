@@ -29,6 +29,35 @@ Large raw downloads, prepared images, and run outputs are deliberately ignored
 by Git. Keep their manifests, hashes, licences, and metrics in a run directory
 that can be exported for review.
 
+## Recorded experimental result — 2026-10-02
+
+The owner executed the isolated Colab experiment. The data, checkpoints,
+manifests and reports remain in the owner's Drive under
+`SahiTol/experiments/e_waste_model_v2`; they are not product assets.
+
+`mendeley_plus_openimages_v1` trained MobileNetV3Small with the 1,508
+Mendeley train crops plus 600 separately audited Open Images train crops. Its
+476-item mixed validation set selected an abstention threshold of `0.52`
+without reading either final evaluation set. The model then produced:
+
+| Evidence set | Scope | Result |
+|---|---|---|
+| Mendeley held-out test | 325 crops, 12 provider classes | 87.38% top-1, 88.41% macro-F1; 93.54% coverage and 91.12% accepted accuracy at the fixed threshold |
+| Fresh Open Images test | 90 never-before-read crops, Keyboard/Mobile/Mouse only | 97.78% top-1, 98.30% macro-F1; 100% coverage at the fixed threshold |
+| Float32 TFLite parity | 381 held-out/diagnostic crops | 381/381 matching top-1 predictions; maximum probability difference `8.67e-06`; 3.588 MB |
+
+The fresh Open Images test had zero overlapping source IDs, exact crop hashes,
+or conservative dHash near-duplicate candidates with the 2,584 combined
+train/validation crops. The float16 export is explicitly **rejected**: it
+changed one of 381 top-1 predictions. Colab CPU timing is not Android timing.
+
+This evidence applies directly only to Keyboard, Mobile and Mouse for the
+Open Images test. `Glass_Waste` remains weak on the Mendeley held-out test
+(F1 56.25%, 19 examples); generic provider labels must not be turned into
+claims about battery chemistry, PCB grade, plastic composition or metal
+composition. A separate owner promotion decision, Android-device measurement,
+and product integration review are still required.
+
 ## Source status as of 2026-10-02
 
 | Candidate | Status | Why |
