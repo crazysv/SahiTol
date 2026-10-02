@@ -25,7 +25,7 @@
       "license": "CC BY 4.0 stated by dataset page",
       "status": "PENDING_PROVENANCE",
       "reported_size": "999 images, detection annotations, train-only provider split",
-      "audit_note": "The public page was rechecked on 2026-10-02: it says CC BY 4.0 and 999 images, but supplies a 100% train / 0% validation / 0% test split and no original-image provenance manifest. Do not download or train until provenance is provided.",
+      "audit_note": "The public page was rechecked on 2026-10-02: it says CC BY 4.0 and 999 images, but supplies a 100% train / 0% validation / 0% test split and no original-image provenance manifest. A quarantined archive audit found 1,073 conservative dHash-near pairs with the Kaggle candidate (many filename stems match and dHash distance is 0); Roboflow cannot be treated as an independent source or mixed with Kaggle. Do not download or train until provenance is provided.",
       "allowed_mappings": {},
       "blockers": ["inspect source-image provenance", "inspect object class list", "create independent grouped split", "do not reuse provider's all-train split"]
     },
@@ -57,7 +57,7 @@
       "license": "Apache 2.0 stated by Kaggle metadata",
       "status": "HOLD_SOURCE_PROVENANCE",
       "reported_size": "12.36 MB; provider lists 10 appliance/e-waste classes",
-      "audit_note": "The public Kaggle API explicitly says images include proprietary sources. Apache 2.0 upload metadata is not clearance for those underlying images; this candidate is rejected unless original rights are traced per asset.",
+      "audit_note": "The public Kaggle API explicitly says images include proprietary sources. Apache 2.0 upload metadata is not clearance for those underlying images; this candidate is rejected unless original rights are traced per asset. A quarantined ZIP inventory on 2026-10-02 found 2,964 readable SHA-unique images and 36 internal exact duplicates. It has 1,073 conservative dHash-near pairs with the Roboflow candidate, so the two candidates must not be combined or treated as independent evidence.",
       "allowed_mappings": {},
       "blockers": ["provider description includes proprietary sources", "resolve original image rights before any use", "do not treat hosting licence as proof of underlying image rights"]
     },

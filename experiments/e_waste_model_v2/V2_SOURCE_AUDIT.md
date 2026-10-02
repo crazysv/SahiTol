@@ -13,6 +13,32 @@ artifact, the Android app, or the product model.
 | Zenodo MMEWaste | Zenodo record is CC BY 4.0 and says it releases partial data, but its nine labels are electronic components: diode, capacitor, transistor, resistor, inductor, IC, switch/connector, potentiometer and other | **Not compatible with the current 12-class whole-item classifier.** It must not be relabelled as `PCB`, battery chemistry, or material composition. | A separate, explicitly component-level experiment after archive inventory, asset hashing, and a direct product taxonomy decision. |
 | Wikimedia Commons electronic waste | The root category has 105 heterogeneous files. Individual files expose licence, author and description. The direct discarded-keyboard and phone-waste examples found are CC BY-SA; the CC0/CC BY examples found describe monitor parts or a component-on-PCB scene, not a current direct whole-item class. | **Per-asset staging only; no current training addition.** No bulk import: categories/titles are not object boxes, licences differ, and many scenes contain multiple objects. | An automated strict ledger selecting enough files with a direct description, compatible licence, single defensible current class and source attribution; use it as a small domain probe before any training. |
 
+## Quarantine archive results — Roboflow and Kaggle
+
+The owner supplied both provider ZIPs into the isolated Drive workspace. The
+archives were read without extraction or model training:
+
+| Archive | Result |
+|---|---|
+| Roboflow COCO v1 | SHA-256 `e75e4c51b1b92004cf8a7187da97ec4ec0bd1af0631f443e20e90326fc79d58c`; 999 image files and a train-only COCO annotation file. It declares ten boxed classes: Battery, Keyboard, Microwave, Mobile, Mouse, PCB, Player, Printer, Television and Washing Machine. |
+| Kaggle | SHA-256 `1b0ab4530da8f2317ad6b435dadd1eeedf97f3d9ecc8e93942d270ea59c6db30`; 3,000 image files, of which 2,964 are SHA-unique and 36 are internal exact duplicates. Folder labels are the same ten names. |
+| Cross-source audit | No byte-identical cross-source files, but **1,073** conservative dHash-near pairs at distance <=3. Many have matching filename stems and dHash distance 0 (for example, `Keyboard_0`), demonstrating transformed/resaved copies rather than independent examples. |
+
+Therefore Roboflow must be excluded from any Kaggle benchmark split and it
+adds no independent training information. The only defensible next comparison
+is a **Kaggle-only quarantined model**, using deterministic duplicate-grouped
+splits made from its 2,964 unique assets. This remains provenance-pending and
+is not eligible for the approved model, APK, release evidence, or any claim of
+production accuracy.
+
+Kaggle-only duplicate grouping then retained 2,949 assets in 2,859 independent
+groups. Its 36 internal SHA-identical duplicates were removed; 116 same-label
+near-duplicate pairs were grouped; and 15 assets in nine cross-label
+near-duplicate pairs were excluded rather than assigned an invented class.
+The deterministic grouped allocation is 70/15/15 with **zero** groups crossing
+splits. This is a source-native ten-class split, not yet a combined-model
+split; a cross-source audit against Mendeley and Open Images remains required.
+
 ## Guardrails retained for v2
 
 - The two-source float32 model remains frozen as the reference run.

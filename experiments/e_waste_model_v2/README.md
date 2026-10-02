@@ -91,6 +91,21 @@ and cross-source duplicate checks can be determined without manual drawing or
 labelling. A source that cannot provide an archive is simply recorded as
 `NOT_RUN`; no substitute data are invented.
 
+The supplied Roboflow and Kaggle archives were then compared. Although they
+contain no byte-identical cross-source files, 1,073 conservative perceptual
+near-duplicate pairs were found, including many filename-matched, dHash-zero
+pairs. They are therefore one shared dataset family, not two sources that can
+be combined. Roboflow is excluded from the quarantine benchmark; Kaggle may be
+tested alone after its internal near-duplicate groups are split. This does not
+resolve Kaggle provenance and remains non-product research only.
+
+The Kaggle-only split audit retained 2,949 images in 2,859 leakage groups,
+removed 36 internal exact duplicates, grouped 116 same-label near-duplicate
+pairs, and excluded 15 assets from nine cross-label near-duplicate pairs. Its
+deterministic 70/15/15 assignment has zero groups crossing splits. A further
+cross-source audit against Mendeley and Open Images is still required before a
+combined quarantine benchmark.
+
 The first v2 review is recorded in [V2_SOURCE_AUDIT.md](V2_SOURCE_AUDIT.md).
 It confirms that none of the four remaining candidates may be blindly mixed
 into the validated two-source run. Wikimedia is the only candidate currently

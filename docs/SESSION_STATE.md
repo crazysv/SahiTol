@@ -12,6 +12,12 @@ inventing SahiTol mappings. Continue only after the owner supplies each
 provider ZIP to the Drive experiment folder; then audit its report before
 creating any benchmark split or training run. Registry eligibility remains
 unchanged: both sources are provenance-pending and cannot be promoted.
+The supplied ZIP audit found 1,073 conservative Roboflow/Kaggle perceptual
+near-duplicate pairs, so they are not independent sources and must not be
+combined. A Kaggle-only audit retained 2,949 assets in 2,859 duplicate groups
+with zero groups crossing a deterministic 70/15/15 split. Continue with the
+cross-source duplicate audit against Mendeley/Open Images before any combined
+quarantine benchmark.
 
 Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T048 presentation deliverable complete; continue remaining release evidence in canonical task order.**
 
