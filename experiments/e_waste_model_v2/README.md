@@ -113,6 +113,12 @@ The candidate is excluded even though it could be a hash collision; only the
 remaining five-label Kaggle subset may proceed to a combined quarantine
 benchmark.
 
+The prepared quarantine comparison has 3,136 training and 698 validation
+assets across the original twelve provider labels, with 325 retained Mendeley
+historic held-out assets and 220 new Kaggle held-out assets. Its preparation
+audit reports zero grouped and exact-hash split leakage. It is prepared only;
+training, calibration, and held-out evaluation have not yet happened.
+
 The first v2 review is recorded in [V2_SOURCE_AUDIT.md](V2_SOURCE_AUDIT.md).
 It confirms that none of the four remaining candidates may be blindly mixed
 into the validated two-source run. Wikimedia is the only candidate currently

@@ -48,6 +48,15 @@ hash collision, but it is excluded from any combined benchmark regardless. No
 other Kaggle file was cleared by assumption; this limited result applies only
 to the five direct generic mappings listed above.
 
+The resulting quarantined 12-class comparison manifest is prepared but **not
+trained**. It contains 3,136 training assets (1,508 Mendeley; 600 Open Images;
+1,028 Kaggle), 698 validation assets (326; 150; 222), 325 retained Mendeley
+historic held-out assets, and 220 new Kaggle held-out assets. The one
+cross-source candidate was excluded. The preparation audit reports zero source
+groups and zero exact SHA-256 hashes crossing splits. Model selection must use
+only the 698 validation assets; neither held-out set may be read during
+training or threshold selection.
+
 ## Guardrails retained for v2
 
 - The two-source float32 model remains frozen as the reference run.

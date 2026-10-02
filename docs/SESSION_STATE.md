@@ -22,6 +22,10 @@ That audit then compared the five direct generic mappings: 1,471 Kaggle assets
 versus 1,466 Mendeley/Open Images crops had zero exact matches and one
 cross-label perceptual candidate. Exclude that Kaggle asset before preparing a
 combined quarantine benchmark; no product assets changed.
+The quarantined combined manifest is now prepared—not trained—with 3,136
+training and 698 validation assets, plus separate Mendeley (325) and Kaggle
+(220) held-out sets. Preparation found zero grouped/exact-hash split leakage.
+Continue with validation-only training and do not read either held-out set.
 
 Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T048 presentation deliverable complete; continue remaining release evidence in canonical task order.**
 
