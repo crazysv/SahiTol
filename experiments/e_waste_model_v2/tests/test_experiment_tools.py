@@ -12,9 +12,49 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PREPARE = ROOT / "scripts" / "prepare_asset_ledger.py"
 SPLIT = ROOT / "scripts" / "make_grouped_splits.py"
+QUARANTINE = ROOT / "scripts" / "inventory_quarantined_archive.py"
 
 
 class ExperimentToolTests(unittest.TestCase):
+    def test_quarantined_inventory_hashes_images_without_making_them_eligible(self) -> None:
+        import zipfile
+        from PIL import Image
+
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            image_path = temp / "image.png"
+            Image.new("RGB", (2, 2), color="red").save(image_path)
+            archive = temp / "candidate.zip"
+            with zipfile.ZipFile(archive, "w") as bundle:
+                bundle.write(image_path, "train/Keyboard/example.png")
+                bundle.write(image_path, "train/Keyboard/copy.png")
+            result = subprocess.run(
+                [sys.executable, str(QUARANTINE), "--source-id", "ROBOFLOW_EWASTE_2025",
+                 "--archive", str(archive), "--output-dir", str(temp / "output")],
+                cwd=ROOT, text=True, capture_output=True, check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            report = json.loads((temp / "output" / "quarantine_inventory_report.json").read_text(encoding="utf-8"))
+            self.assertEqual(report["accepted_readable_unique_images"], 1)
+            self.assertEqual(report["rejected_files"], 1)
+            self.assertIn("PROVENANCE_PENDING_NOT_FOR_PRODUCT", (temp / "output" / "quarantined_asset_inventory.csv").read_text(encoding="utf-8"))
+
+    def test_quarantined_inventory_refuses_zip_path_traversal(self) -> None:
+        import zipfile
+
+        with tempfile.TemporaryDirectory() as directory:
+            temp = Path(directory)
+            archive = temp / "unsafe.zip"
+            with zipfile.ZipFile(archive, "w") as bundle:
+                bundle.writestr("../escape.jpg", b"bad")
+            result = subprocess.run(
+                [sys.executable, str(QUARANTINE), "--source-id", "ROBOFLOW_EWASTE_2025",
+                 "--archive", str(archive), "--output-dir", str(temp / "output")],
+                cwd=ROOT, text=True, capture_output=True, check=False,
+            )
+            self.assertEqual(result.returncode, 2)
+            self.assertIn("Unsafe ZIP member", result.stderr)
+
     def test_eligible_asset_is_kept_held_asset_is_rejected_and_groups_do_not_leak(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temp = Path(directory)

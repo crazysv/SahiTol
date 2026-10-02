@@ -70,8 +70,26 @@ and product integration review are still required.
 | Zenodo MMEWaste | `HOLD_RIGHTS_AND_SCOPE` | The record exposes CC BY 4.0 metadata, but says the complete dataset remains temporarily confidential and its usable subset/scope must be confirmed. |
 
 `HOLD_*` and `PENDING_*` sources may be investigated but must not enter the
-training, validation, calibration, or test sets. This is how we honour the
-owner's request to examine all six without making a legally unsafe shortcut.
+approved-model training, validation, calibration, or test sets. This is how we
+honour the owner's request to examine all six without making a legally unsafe
+shortcut.
+
+### Owner-authorized quarantined benchmark — 2026-10-02
+
+The owner authorized an **isolated content-quality comparison** for the
+Roboflow and Kaggle candidates. This is not a licence clearance and does not
+change either registry status. The comparison must use a newly created,
+quarantined run directory, must not read the approved model's fresh final Open
+Images test during selection, and must never copy a checkpoint or image into
+the APK, `data/curated/`, or release evidence.
+
+`scripts/inventory_quarantined_archive.py` is the required first gate. It
+safely extracts a ZIP, verifies each image, hashes it, removes exact internal
+duplicates, and reports only the provider-folder labels it observes. It does
+not infer a SahiTol label. After its report is available, direct label mappings
+and cross-source duplicate checks can be determined without manual drawing or
+labelling. A source that cannot provide an archive is simply recorded as
+`NOT_RUN`; no substitute data are invented.
 
 The first v2 review is recorded in [V2_SOURCE_AUDIT.md](V2_SOURCE_AUDIT.md).
 It confirms that none of the four remaining candidates may be blindly mixed

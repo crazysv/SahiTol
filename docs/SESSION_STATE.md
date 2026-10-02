@@ -1,5 +1,18 @@
 # Current handoff
 
+## Separate non-production classifier experiment
+
+The owner authorized a quarantined Roboflow/Kaggle **content-quality
+comparison** on 2026-10-02. It is isolated in
+`experiments/e_waste_model_v2/` and does not alter any release task, Android
+asset, approved two-source float32 model, or release evidence. The first gate
+is ready and locally verified: safely extract a provider ZIP, validate readable
+images, hash and deduplicate them, and report observed provider labels without
+inventing SahiTol mappings. Continue only after the owner supplies each
+provider ZIP to the Drive experiment folder; then audit its report before
+creating any benchmark split or training run. Registry eligibility remains
+unchanged: both sources are provenance-pending and cannot be promoted.
+
 Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T048 presentation deliverable complete; continue remaining release evidence in canonical task order.**
 
 Scope and progression: [master](../MASTER_CONTENT.md), [tracker](08_TRACKER.md), [implementation plan](07_IMPLEMENTATION_PLAN.md). Authoritative statuses live in [status.json](planning/status.json).

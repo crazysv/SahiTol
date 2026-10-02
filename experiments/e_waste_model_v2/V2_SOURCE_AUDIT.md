@@ -24,6 +24,24 @@ artifact, the Android app, or the product model.
 - No manual bounding boxes, guessed classes, chemistry claims, component-to-PCB
   collapsing, or product changes are permitted in this audit phase.
 
+## Owner-authorized quarantine comparison
+
+On 2026-10-02 the owner authorized a limited Roboflow/Kaggle comparison to
+answer one question: whether either provider's images improve a separate,
+non-product model under deterministic evaluation. This authorization does not
+resolve the Roboflow original-image provenance gap or Kaggle's proprietary
+source statement. It therefore does **not** change their registry statuses,
+the eligible training-source set, or the release status of any model.
+
+The required order is: archive hash and safe extraction; automatic readable
+image and exact-duplicate inventory; observed provider-label report;
+cross-source duplicate audit; direct-label mapping review; grouped splits;
+then a separately named benchmark run. If an archive cannot be obtained or
+labels do not map directly, that candidate is recorded as `NOT_RUN` rather
+than forced into training. No result may replace the two-source float32 model
+without later provenance clearance, a separate owner promotion decision, and
+Android-device verification.
+
 ## Result of the first automatic Wikimedia probe
 
 The probe checked the entire root category's per-file metadata rather than
