@@ -11,7 +11,7 @@ artifact, the Android app, or the product model.
 | Roboflow E-waste v1 | Public page: CC BY 4.0, 999 images, object detection, but 100% provider train split | **Blocked**. The page does not provide original-image provenance or a source-group manifest. Its provider split cannot be trusted for evaluation. | Written/image-level provenance and a downloadable manifest of original source groups; then make new grouped splits ourselves. |
 | Kaggle Akshat E-Waste | Kaggle API describes ten classes and says images come from open datasets, repositories **and proprietary sources**, despite an Apache 2.0 upload licence | **Rejected** for any experiment. A host licence cannot grant rights to underlying proprietary images. | Traceable rights and attribution for every original image, not merely a re-upload licence. |
 | Zenodo MMEWaste | Zenodo record is CC BY 4.0 and says it releases partial data, but its nine labels are electronic components: diode, capacitor, transistor, resistor, inductor, IC, switch/connector, potentiometer and other | **Not compatible with the current 12-class whole-item classifier.** It must not be relabelled as `PCB`, battery chemistry, or material composition. | A separate, explicitly component-level experiment after archive inventory, asset hashing, and a direct product taxonomy decision. |
-| Wikimedia Commons electronic waste | The root category has 105 heterogeneous files. Individual files expose licence, author and description; examples include CC BY-SA keyboard and phone-waste scenes. | **Per-asset staging only.** No bulk import: categories/titles are not object boxes, licences differ, and many scenes contain multiple objects. | An automated strict ledger selecting only files with a direct description, compatible licence, single defensible class and source attribution; use it as a small domain probe before any training. |
+| Wikimedia Commons electronic waste | The root category has 105 heterogeneous files. Individual files expose licence, author and description. The direct discarded-keyboard and phone-waste examples found are CC BY-SA; the CC0/CC BY examples found describe monitor parts or a component-on-PCB scene, not a current direct whole-item class. | **Per-asset staging only; no current training addition.** No bulk import: categories/titles are not object boxes, licences differ, and many scenes contain multiple objects. | An automated strict ledger selecting enough files with a direct description, compatible licence, single defensible current class and source attribution; use it as a small domain probe before any training. |
 
 ## Guardrails retained for v2
 
@@ -23,6 +23,17 @@ artifact, the Android app, or the product model.
   unseen test is required for every later candidate model.
 - No manual bounding boxes, guessed classes, chemistry claims, component-to-PCB
   collapsing, or product changes are permitted in this audit phase.
+
+## Result of the first automatic Wikimedia probe
+
+The probe checked the entire root category's per-file metadata rather than
+assuming a category licence. It found no sufficient, non-ShareAlike,
+directly-labelled Keyboard or Mobile training subset. The few CC0/CC BY files
+that are strongly described are monitor/display scenes or electronic
+components; mapping either into `Glass_Waste` or generic `PCB` would be a
+semantic invention. Therefore Wikimedia adds **zero training assets** to v2
+at this stage. It may still be useful later as an explicitly labelled,
+qualitative e-waste-scene probe.
 
 ## Primary records
 
