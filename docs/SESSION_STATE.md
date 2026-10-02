@@ -18,6 +18,10 @@ combined. A Kaggle-only audit retained 2,949 assets in 2,859 duplicate groups
 with zero groups crossing a deterministic 70/15/15 split. Continue with the
 cross-source duplicate audit against Mendeley/Open Images before any combined
 quarantine benchmark.
+That audit then compared the five direct generic mappings: 1,471 Kaggle assets
+versus 1,466 Mendeley/Open Images crops had zero exact matches and one
+cross-label perceptual candidate. Exclude that Kaggle asset before preparing a
+combined quarantine benchmark; no product assets changed.
 
 Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T048 presentation deliverable complete; continue remaining release evidence in canonical task order.**
 

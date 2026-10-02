@@ -39,6 +39,15 @@ The deterministic grouped allocation is 70/15/15 with **zero** groups crossing
 splits. This is a source-native ten-class split, not yet a combined-model
 split; a cross-source audit against Mendeley and Open Images remains required.
 
+That five-label audit has now run. It compared 1,471 selected Kaggle assets
+against 716 directly mapped Mendeley crops and 750 Open Images train/validation
+crops. There were zero exact cross-source matches and one dHash<=3 candidate:
+Kaggle `modified-dataset/train/Battery/battery_96.jpg` versus an Open Images
+Mobile crop (distance 2). It is a cross-label candidate and may be a perceptual
+hash collision, but it is excluded from any combined benchmark regardless. No
+other Kaggle file was cleared by assumption; this limited result applies only
+to the five direct generic mappings listed above.
+
 ## Guardrails retained for v2
 
 - The two-source float32 model remains frozen as the reference run.

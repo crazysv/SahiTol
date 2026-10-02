@@ -106,6 +106,13 @@ deterministic 70/15/15 assignment has zero groups crossing splits. A further
 cross-source audit against Mendeley and Open Images is still required before a
 combined quarantine benchmark.
 
+That limited cross-source audit has completed for Battery, Keyboard, Mobile,
+Mouse and PCB: 1,471 Kaggle assets were compared with 716 Mendeley and 750 Open
+Images crops. It found zero exact matches and one cross-label dHash candidate.
+The candidate is excluded even though it could be a hash collision; only the
+remaining five-label Kaggle subset may proceed to a combined quarantine
+benchmark.
+
 The first v2 review is recorded in [V2_SOURCE_AUDIT.md](V2_SOURCE_AUDIT.md).
 It confirms that none of the four remaining candidates may be blindly mixed
 into the validated two-source run. Wikimedia is the only candidate currently
