@@ -20,6 +20,16 @@ pass. Next action: commit/push/deploy this repair, verify `ST-EFDB28` through
 the scanner fallback, then request the owner's action-time confirmation before
 recording the recycler's final receipt confirmation.
 
+The owner then confirmed the live receipt action. The recycler browser shows a
+server-backed confirmed receipt for `efdb28c3-5bb8-44d5-b70a-2736304a42b7`:
+MAT-PCB-01, 13.00 kg received, ₹2,340.00 agreed value, and the matching
+SHA-256 seal. Returning to C10 on CPH2781 refreshed the saved proposal and
+showed **Recycler Handover Confirmed — Receipt ST-EFDB28 has been confirmed by
+the recycler.** This establishes the full deployed collector → recycler offer
+→ agreement → QR reference verification → recycler confirmation path for one
+real demo record. It is evidence for this record only; separate device,
+accessibility, performance, and release-artifact checks remain distinct.
+
 ## 2026-10-04 live counterparty and recycler-payload repair staged
 
 End-to-end tracing found two separate faults behind a collector/recycler

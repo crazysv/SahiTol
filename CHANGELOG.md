@@ -11,7 +11,8 @@ confirmation flow as a scanned QR. The endpoint's focused handover test and
 the web production build pass. A live PCB 13 kg offer was issued and accepted
 on the connected collector device; its server handover record `ST-EFDB28` was
 generated and its QR receipt now renders on that device. Recycler confirmation
-is deliberately still pending.
+was then completed through the recycler scanner. The browser receipt and
+collector handover screen both show the same confirmed 13 kg, ₹2,340 record.
 
 ## 2026-10-04 -- Recycler live-counterparty and payload-truthfulness repair
 
