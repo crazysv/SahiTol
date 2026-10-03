@@ -8,6 +8,7 @@ import R02_IncomingLot from './R02_IncomingLot';
 import R03_QuoteTerminal from './R03_QuoteTerminal';
 import R06_OperationalProfile from './R06_OperationalProfile';
 import R07_HistoryExports from './R07_HistoryExports';
+import { fetchRecyclerIncoming } from '../../lib/api';
 
 vi.mock('../../lib/api', () => ({
   fetchRecyclerIncoming: vi.fn().mockResolvedValue([
@@ -103,6 +104,28 @@ describe('Recycler Console Views (T022)', () => {
     // Statutory notice present
     expect(screen.getByText(/SahiTol Platform Integrity & Statutory Notice/i)).toBeDefined();
     expect(screen.getByText(/Collector Platform Fee = 0 paise/i)).toBeDefined();
+  });
+
+  it('explains why an accepted request cannot dispatch a duplicate quote', async () => {
+    vi.mocked(fetchRecyclerIncoming).mockResolvedValueOnce([
+      {
+        request_id: 'accepted-request', lot_id: 'ST-ACCEPTED', facility_id: 'facility-1', state: 'ACCEPTED', reason: null,
+        created_at: '2026-10-04T00:00:00Z', offers: [{ id: 'offer-1', status: 'ACCEPTED' }],
+        lot: { material_id: 'MAT-PCB-01', material_name: 'Printed circuit boards', material_context: null, estimated_weight_g: 13000, condition: 'CLEAN', coarse_area: null, collector_alias: 'Demo Santosh', images: [] },
+      },
+    ]);
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/recycler/quote?ref=ST-ACCEPTED&requestId=accepted-request']}>
+          <R03_QuoteTerminal />
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
+
+    expect(await screen.findByText(/This offer has already been accepted/i)).toBeDefined();
+    expect(screen.queryByRole('button', { name: /Dispatch Quote/i })).toBeNull();
+    expect(screen.getByRole('link', { name: /Return to Inbox/i })).toBeDefined();
   });
 
   it('renders R06_OperationalProfile with scope, service area, and rate updates', () => {

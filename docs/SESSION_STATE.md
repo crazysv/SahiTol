@@ -1,5 +1,17 @@
 # Current handoff
 
+## 2026-10-04 completed quote explanation and duplicate-offer boundary
+
+Live inspection of the recycler quote route for the 13 kg PCB test record
+showed request `1083a07a-e833-438a-acbe-c5a32ae441e4` in `ACCEPTED` state with
+its ₹2,340 offer accepted. The dispatch control was disabled correctly but
+looked non-responsive because R03 supplied no explanation. R03 now renders a
+clear accepted/active/closed state instead of the dispatch controls. The API
+also returns HTTP 409 if a pending request already has an `OPEN` offer, so a
+reload or direct retry cannot create a duplicate. Focused trade tests pass.
+Next action: commit/push, wait for Pages and Render, then verify this exact
+accepted record renders the explanatory state on `sahitol.pages.dev`.
+
 ## 2026-10-04 end-to-end live offer and handover trace in progress
 
 Commit `aec2450` is deployed to Pages and Render. A live collector lot

@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-10-04 -- Recycler completed-quote state and duplicate guard
+
+The live recycler quote terminal left **Dispatch Quote** disabled without
+explaining that the selected request had already been accepted. R03 now
+replaces the pricing controls with a clear terminal-state message and inbox /
+history actions when a request is accepted, closed, or already has an open
+offer. The offer API also rejects a second open offer for the same request
+with HTTP 409, while preserving the existing withdraw-then-replace workflow.
+Focused trade tests pass; the production web build was started locally, but
+the existing Vite process did not finish within the terminal window and is
+not recorded as passed here.
+
 ## 2026-10-04 -- QR manual-reference verification repair
 
 Fixed the recycler scanner's manual fallback: it previously displayed a

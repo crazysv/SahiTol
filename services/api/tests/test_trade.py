@@ -617,6 +617,14 @@ def test_quote_offer_rate_per_kg_and_fixed_total(collector_user, recycler_setup)
     assert offer_data["is_expired"] is False
     assert offer_data["effective_rate_paise_per_kg"] == 46000
 
+    duplicate = client.post(
+        f"/api/v1/requests/{req_id}/offers",
+        json=offer_body,
+        headers=recycler_setup["headers"]
+    )
+    assert duplicate.status_code == 409
+    assert "active offer" in duplicate.json()["detail"]
+
     # 2. Quote offer with FIXED_TOTAL
     lot_id_2 = uuid.uuid4()
     with TestingSessionLocal() as session:

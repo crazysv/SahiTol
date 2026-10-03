@@ -916,6 +916,17 @@ def create_offer(
             detail=f"Cannot quote on request in state '{req.state}'."
         )
 
+    existing_open_offer = (
+        db.query(Offer)
+        .filter(Offer.request_id == req.id, Offer.status == "OPEN")
+        .first()
+    )
+    if existing_open_offer:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="This request already has an active offer. Withdraw it before sending a replacement."
+        )
+
     lot = db.query(Lot).filter(Lot.id == req.lot_id, Lot.deleted_at.is_(None)).first()
     if not lot:
         raise HTTPException(status_code=404, detail="Lot associated with request not found.")

@@ -14,6 +14,8 @@ export default function R03_QuoteTerminal() {
   const lotRef = request?.lot_id || searchParams.get('ref') || 'Unknown lot';
   const weight = request ? (request.lot.estimated_weight_g || 0) / 1000 : 0;
   const materialName = request?.lot.material_name || request?.lot.material_id || 'Unspecified material';
+  const hasOpenOffer = request?.offers.some((offer) => offer.status === 'OPEN') ?? false;
+  const dispatchBlocked = request ? request.state !== 'PENDING' || hasOpenOffer : true;
 
   const [pricingModel, setPricingModel] = useState<'RATE_PER_KG' | 'FIXED_TOTAL'>('RATE_PER_KG');
   const [ratePerKg, setRatePerKg] = useState(180);
@@ -29,7 +31,7 @@ export default function R03_QuoteTerminal() {
   const calculatedTotal = pricingModel === 'RATE_PER_KG' ? Math.round(weight * ratePerKg) : fixedTotal;
 
   const handleDispatchQuote = async () => {
-    if (!requestId || !request || request.state !== 'PENDING' || weight <= 0) {
+    if (!requestId || !request || dispatchBlocked || weight <= 0) {
       setSubmitError('This quote must be opened from one pending live incoming request with a positive declared weight.');
       return;
     }
@@ -111,6 +113,36 @@ export default function R03_QuoteTerminal() {
               className="px-space-lg py-2.5 bg-surface-container-high text-on-surface font-headline font-semibold text-sm rounded-lg hover:bg-surface-container-highest transition-colors"
             >
               View Active Bids
+            </Link>
+          </div>
+        </div>
+      ) : dispatchBlocked ? (
+        <div className="bg-surface-container-low rounded-xl p-space-xl shadow-sm border border-surface-container-high text-center space-y-space-md">
+          <div className="w-16 h-16 bg-surface-container-high text-on-surface-variant rounded-full flex items-center justify-center mx-auto">
+            <span className="material-symbols-outlined text-4xl">task_alt</span>
+          </div>
+          <h3 className="text-2xl font-headline font-bold text-on-surface">
+            {request.state === 'ACCEPTED' ? 'This offer has already been accepted' : hasOpenOffer ? 'This request already has an active offer' : `This request is ${request.state.toLowerCase()}`}
+          </h3>
+          <p className="text-sm text-on-surface-variant max-w-lg mx-auto">
+            {request.state === 'ACCEPTED'
+              ? `Lot ${lotRef} is already under agreed terms. A second quote cannot be dispatched.`
+              : hasOpenOffer
+                ? `The collector already has a live offer for lot ${lotRef}. Return to the inbox instead of sending a duplicate.`
+                : `Lot ${lotRef} is no longer available for a new quote.`}
+          </p>
+          <div className="pt-space-md flex justify-center gap-space-md">
+            <Link
+              to="/recycler"
+              className="px-space-lg py-2.5 bg-primary text-on-primary font-headline font-bold text-sm rounded-lg hover:bg-primary-container transition-colors shadow-sm"
+            >
+              Return to Inbox
+            </Link>
+            <Link
+              to="/recycler/history"
+              className="px-space-lg py-2.5 bg-surface-container-high text-on-surface font-headline font-semibold text-sm rounded-lg hover:bg-surface-container-highest transition-colors"
+            >
+              View History
             </Link>
           </div>
         </div>
@@ -292,7 +324,7 @@ export default function R03_QuoteTerminal() {
 
               <button
                 onClick={handleDispatchQuote}
-                disabled={isSubmitting || request.state !== 'PENDING'}
+                disabled={isSubmitting}
                 className="w-full sm:w-auto px-space-xl py-2.5 bg-primary hover:bg-primary-container text-on-primary font-headline font-bold text-sm rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
               >
                 <span className="material-symbols-outlined text-[18px]">send</span>
