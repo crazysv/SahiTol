@@ -1,5 +1,17 @@
 # Current handoff
 
+## 2026-10-03 C07 visual regression checkpoint
+
+The approved C07 Valuation & Offers Compose layout was corrected after a
+physical-device screenshot exposed a nested weighted-row measurement defect:
+the top bar expanded to approximately 1,152 px and left a large blank region.
+The title row is now flattened, the offline badge has stable width, and lot
+title/detail text may wrap to two lines. On `N7OZPV59XWWKPF4X` (CPH2781,
+1080x2372), the rebuilt APK was installed without clearing data; the UI dump
+reported top bar y=0..336 and content y=336, and the valuation/evidence cards
+were visible in the live screenshot. `:app:testDebugUnitTest` and
+`:app:assembleDebug` passed. No functional or release-evidence scope changed.
+
 ## 2026-10-02 v2 classifier integration checkpoint
 
 The owner authorized integration of the previously validated two-source

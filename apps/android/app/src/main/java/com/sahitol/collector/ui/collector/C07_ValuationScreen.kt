@@ -87,24 +87,23 @@ fun C07_ValuationScreen(
                         .fillMaxWidth()
                         .statusBarsPadding()
                         .padding(horizontal = 16.dp, vertical = 12.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        IconButton(onClick = onNavigateBack) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                        }
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(
-                            modifier = Modifier.weight(1f),
-                            text = "Valuation & Offers",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = OnSurface,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(end = 8.dp),
+                        text = "Valuation & Offers",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = OnSurface,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
 
                     // Offline Badge
                     Surface(
@@ -176,18 +175,18 @@ fun C07_ValuationScreen(
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Column(modifier = Modifier.weight(1f)) {
                                     Text(
-                                    text = lotContext.materialLabel,
+                                        text = lotContext.materialLabel,
                                         fontSize = 16.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = OnSurface,
-                                        maxLines = 1,
+                                        maxLines = 2,
                                         overflow = TextOverflow.Ellipsis
                                     )
                                     Text(
                                         text = lotContext.detailLabel,
                                         fontSize = 12.sp,
                                         color = OnSurfaceVariant,
-                                        maxLines = 1,
+                                        maxLines = 2,
                                         overflow = TextOverflow.Ellipsis
                                     )
                                 }

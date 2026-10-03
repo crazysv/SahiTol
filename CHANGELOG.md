@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-03 -- C07 live visual regression repair
+
+Flattened the approved C07 top-bar title row to prevent Compose weight
+measurement from expanding the header and pushing valuation content below the
+fold. Long material titles/details now wrap to two lines. Rebuilt and
+installed on the connected CPH2781 device; live UI bounds and screenshot show
+the normal compact header and visible valuation cards. Android unit tests and
+debug assembly pass.
+
 ## 2026-10-02 -- T048 actual PowerPoint deliverable
 
 Created and render-checked `deliverables/SahiTol_Release_Evidence_Deck.pptx`.

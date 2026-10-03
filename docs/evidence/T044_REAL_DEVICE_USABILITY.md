@@ -21,6 +21,28 @@ lot was saved. This verifies model loading, local inference, the low-confidence
 route, and the human-confirmation guard in the current build. It does not verify
 the high-confidence confirmation path, two-device QR flow, or release APK.
 
+## 2026-10-03 C07 visual correction retest
+
+The approved C07 Valuation & Offers screen was rebuilt after a live-device
+visual check found an Android Compose measurement defect in the top bar. The
+title had been vertically displaced by a nested weighted row, leaving a large
+blank header and pushing the valuation content below the fold. The repair
+flattens the title row, reserves the badge width correctly, and permits the
+lot title/detail to wrap to two lines.
+
+The rebuilt debug APK was installed on `N7OZPV59XWWKPF4X` without clearing
+application data. Reopening a saved PCB lot displayed the top bar at the
+normal status-bar position, the full `Valuation & Offers` title, the
+`Offline Ready` badge, the complete two-line material title/detail, and the
+valuation/evidence cards without the former blank region. UI-dump bounds put
+the top bar at y=0..336 and content at y=336, versus the prior pathological
+top-bar/content boundary at y≈1152. `:app:testDebugUnitTest` and
+`:app:assembleDebug` both passed.
+
+**Result: PASS** — C07 visual regression fixed and independently rechecked on
+the physical collector device. This is a layout/usability correction only; it
+does not expand the functional or release-evidence claims above.
+
 ---
 
 ## Scenarios Tested
