@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route, Link } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import RecyclerLayout from './components/recycler/RecyclerLayout';
 import R01_Inbox from './components/recycler/R01_Inbox';
@@ -151,6 +151,7 @@ export default function App() {
           <Route path="/" element={<HomeView />} />
           
           {/* Recycler Console (T022 & T025 - R01 to R07) */}
+          <Route path="/recycler/inbox" element={<Navigate to="/recycler" replace />} />
           <Route path="/recycler" element={<RecyclerLayout />}>
             <Route index element={<R01_Inbox />} />
             <Route path="incoming" element={<R02_IncomingLot />} />

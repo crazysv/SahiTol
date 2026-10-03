@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-04 -- Recycler inbox URL compatibility repair
+
+Added the missing `/recycler/inbox` compatibility route. It now redirects to
+the actual inbox at `/recycler`, rather than rendering a blank React root.
+The production bundle was built locally and both routes were verified against
+the rendered **Yard Dashboard & Material Inbox** state.
+
 ## 2026-10-04 -- Recycler console uses the real offer API
 
 Replaced the recycler console's static inbox and simulated quote-dispatch delay

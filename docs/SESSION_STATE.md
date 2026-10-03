@@ -1,5 +1,15 @@
 # Current handoff
 
+## 2026-10-04 recycler inbox route repair pending publication
+
+The Recycler console's actual inbox route is `/recycler`; the formerly
+documented `/recycler/inbox` route had no matching React route and therefore
+correctly produced a blank root rather than an inbox. Added a compatibility
+redirect from `/recycler/inbox` to `/recycler`. A local production build was
+verified: both URLs render **Yard Dashboard & Material Inbox**, and the alias
+ends at `/recycler`. This correction must be published before the collector
+and recycler browser workflow is retested.
+
 ## 2026-10-04 recycler offer-console integration published; device offer verification pending
 
 Physical collector testing confirmed that C09's request endpoint succeeds, but
