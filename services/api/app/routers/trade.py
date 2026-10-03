@@ -46,6 +46,11 @@ from app.security import UserRole, get_current_user, require_roles
 
 router = APIRouter(tags=["trade"])
 
+# The isolated demo recycler is seeded with this deterministic identifier.  Keep
+# the authenticated demo console bound to it even if an older hosted database
+# still contains a legacy demo membership from an earlier seed revision.
+DEMO_RECYCLER_FACILITY_ID = uuid.uuid5(uuid.NAMESPACE_DNS, "fac-sim-01")
+
 
 def ensure_utc(dt: Optional[datetime]) -> Optional[datetime]:
     """Normalize datetime to UTC for safe comparisons across SQLite and Postgres."""
@@ -126,6 +131,11 @@ def get_user_facility(
     )
     if facility_id:
         query = query.filter(FacilityUser.facility_id == facility_id)
+    elif current_user.role == UserRole.RECYCLER.value and current_user.is_demo:
+        # A previously deployed seed used a different synthetic facility UUID.
+        # Do not let that stale membership make the current live directory and
+        # browser console refer to different demo counterparties.
+        query = query.filter(FacilityUser.facility_id == DEMO_RECYCLER_FACILITY_ID)
 
     fu = query.first()
     if not fu:

@@ -1,5 +1,26 @@
 # Current handoff
 
+## 2026-10-04 live counterparty and recycler-payload repair staged
+
+End-to-end tracing found two separate faults behind a collector/recycler
+mismatch. The Android live directory currently returns facility
+`uuid5(NAMESPACE_DNS, "fac-sim-01")`, but a legacy hosted membership could make
+the recycler demo login select an older synthetic facility instead. A phone
+request could therefore be successfully created yet not appear in the browser
+inbox. `trade.get_user_facility` now binds the demo recycler operator to the
+current deterministic synthetic facility; `handovers.py` uses the same ID.
+
+The recycler `R02` and `R03` screens also contained unrelated hard-coded cable,
+weight and collector data. They now fetch the exact request selected from R01,
+carry its request ID into the quote route, render server values, and block an
+offer if that request cannot be found or is no longer pending. Focused API
+tests (21) and `npm run build` pass locally. The prior Vitest command remains
+unsuitable as a final gate because its existing query polling keeps the runner
+open; its renderer fixtures have been updated but require a bounded runner
+configuration. Next action: commit/push, wait for Render/Pages, then re-run a
+real phone request through the browser quote and collector refresh before
+claiming cross-surface verification.
+
 ## 2026-10-04 recycler inbox route repair published and verified
 
 The Recycler console's actual inbox route is `/recycler`; the formerly

@@ -272,7 +272,7 @@ def test_demo_offline_import_requires_server_lookup_then_recycler_confirmation()
     payload = {
         "schema_version": "SAHITOL-HANDOVER-1",
         "handover_id": str(handover_id), "transaction_id": str(transaction_id), "lot_id": str(lot_id),
-        "collector_id": "offline-demo-account", "facility_id": "1aafb3d0-9ef2-4f34-95ca-0e6f3441e851",
+        "collector_id": "offline-demo-account", "facility_id": str(uuid.uuid5(uuid.NAMESPACE_DNS, "fac-sim-01")),
         "material_snapshot": {"material_id": "MAT-PCB-01", "condition": "INTACT", "regulatory_route": "AUTHORIZED_EWASTE"},
         "weight_snapshot": {"estimated_weight_g": 2300, "measured_weight_g": 2300},
         "value_snapshot": {"currency": "INR", "agreed_total_paise": 41400},

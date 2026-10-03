@@ -41,9 +41,10 @@ from app.security import UserRole, get_current_user, require_roles
 router = APIRouter(tags=["handovers"])
 
 # The only server-created counterparty permitted by the demo import endpoint.
-# It is intentionally a stable UUID so an offline demo proposal can name the
-# facility before it reaches the server.  This is not used for live accounts.
-DEMO_RECYCLER_FACILITY_ID = uuid.UUID("1aafb3d0-9ef2-4f34-95ca-0e6f3441e851")
+# It deliberately matches auth.py and trade.py so an offline proposal, the
+# Android live directory, and the recycler browser console all use one demo
+# facility.  This is not used for live accounts.
+DEMO_RECYCLER_FACILITY_ID = uuid.uuid5(uuid.NAMESPACE_DNS, "fac-sim-01")
 
 NON_EPR_STATUTORY_NOTICE = (
     "This Digital Handover Record certifies platform receipt and material transfer only. "

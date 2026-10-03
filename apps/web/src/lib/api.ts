@@ -145,6 +145,7 @@ export type RecyclerIncomingRequest = {
     condition: string | null;
     coarse_area: string | null;
     collector_alias: string | null;
+    images: Array<{ media_id: string; storage_key: string; mime_type: string; byte_size: number; sha256: string; purpose: string }>;
   };
   offers: Array<{ id: string; status: string }>;
 };

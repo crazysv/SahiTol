@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-10-04 -- Recycler live-counterparty and payload-truthfulness repair
+
+Fixed a deployed-demo data drift that allowed Android to direct a lot to the
+current synthetic facility while the recycler browser could resolve an older
+synthetic facility membership. The API now consistently selects the current
+deterministic demo facility for the demo operator, and the demo handover import
+uses that same identifier. Recycler inspection and quote views now reload the
+server request, preserve its request ID, material, condition, collector alias
+and declared weight, and refuse to issue a quote for a missing/non-pending
+request. The old static cable, 85.5 kg scale and unrelated collector copy are
+removed. Focused API tests and the production web build pass; deployed
+cross-surface verification remains pending.
+
 ## 2026-10-04 -- Recycler inbox URL compatibility repair
 
 Added the missing `/recycler/inbox` compatibility route. It now redirects to

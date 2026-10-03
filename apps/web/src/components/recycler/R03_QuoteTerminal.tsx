@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { createRecyclerOffer } from '../../lib/api';
+import { useQuery } from '@tanstack/react-query';
+import { createRecyclerOffer, fetchRecyclerIncoming } from '../../lib/api';
 
 export default function R03_QuoteTerminal() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const lotRef = searchParams.get('ref') || 'ST-24A7';
   const requestId = searchParams.get('requestId');
-  const weight = parseFloat(searchParams.get('weight') || '84.8');
+  const { data: incoming, isLoading, error } = useQuery({
+    queryKey: ['recycler-incoming'], queryFn: fetchRecyclerIncoming,
+  });
+  const request = incoming?.find((item) => item.request_id === requestId);
+  const lotRef = request?.lot_id || searchParams.get('ref') || 'Unknown lot';
+  const weight = request ? (request.lot.estimated_weight_g || 0) / 1000 : 0;
+  const materialName = request?.lot.material_name || request?.lot.material_id || 'Unspecified material';
 
   const [pricingModel, setPricingModel] = useState<'RATE_PER_KG' | 'FIXED_TOTAL'>('RATE_PER_KG');
   const [ratePerKg, setRatePerKg] = useState(180);
-  const [fixedTotal, setFixedTotal] = useState(Math.round(weight * 180));
+  const [fixedTotal, setFixedTotal] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [quoteDispatched, setQuoteDispatched] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (request && fixedTotal === 0) setFixedTotal(Math.round(weight * ratePerKg));
+  }, [request, weight, ratePerKg, fixedTotal]);
+
   const calculatedTotal = pricingModel === 'RATE_PER_KG' ? Math.round(weight * ratePerKg) : fixedTotal;
 
   const handleDispatchQuote = async () => {
-    if (!requestId) {
-      setSubmitError('Open this screen from a live incoming request before dispatching an offer.');
+    if (!requestId || !request || request.state !== 'PENDING' || weight <= 0) {
+      setSubmitError('This quote must be opened from one pending live incoming request with a positive declared weight.');
       return;
     }
     setIsSubmitting(true);
@@ -30,7 +40,7 @@ export default function R03_QuoteTerminal() {
         price_basis: pricingModel,
         rate_paise_per_kg: pricingModel === 'RATE_PER_KG' ? Math.round(ratePerKg * 100) : undefined,
         fixed_total_paise: pricingModel === 'FIXED_TOTAL' ? Math.round(fixedTotal * 100) : undefined,
-        condition: 'SCRAP',
+        condition: request.lot.condition || 'UNSPECIFIED',
         weight_basis_g: Math.round(weight * 1000),
       });
       setIsSubmitting(false);
@@ -40,6 +50,14 @@ export default function R03_QuoteTerminal() {
       setSubmitError(error instanceof Error ? error.message : 'Could not create the offer.');
     }
   };
+
+  if (isLoading) return <p className="text-sm text-on-surface-variant">Loading the live request before preparing an offer…</p>;
+  if (error || !request) return (
+    <div className="space-y-space-md">
+      <p className="text-sm text-error" role="alert">{error instanceof Error ? error.message : 'This incoming request is no longer available to this recycler account.'}</p>
+      <Link to="/recycler" className="text-sm text-primary hover:underline">Return to Inbox</Link>
+    </div>
+  );
 
   return (
     <div className="space-y-space-lg max-w-4xl mx-auto">
@@ -57,7 +75,7 @@ export default function R03_QuoteTerminal() {
             Commercial Offer Terminal: <span className="text-primary font-mono">{lotRef}</span>
           </h2>
           <p className="text-xs text-on-surface-variant mt-0.5">
-            Incoming Yard #402 • Verified Weight: <span className="font-bold text-on-surface font-mono">{weight} kg</span>
+            Live request • Declared weight: <span className="font-bold text-on-surface font-mono">{weight} kg</span>
           </p>
         </div>
 
@@ -79,7 +97,7 @@ export default function R03_QuoteTerminal() {
             Quote Successfully Dispatched!
           </h3>
           <p className="text-sm text-emerald-800 max-w-md mx-auto">
-            Commercial offer of <span className="font-bold font-mono">₹{calculatedTotal.toLocaleString('en-IN')}</span> has been transmitted to collector Ramesh Kumar's phone. Terms locked with cryptographic SHA-256 fingerprint.
+            Commercial offer of <span className="font-bold font-mono">₹{calculatedTotal.toLocaleString('en-IN')}</span> has been transmitted for lot <span className="font-bold font-mono">{lotRef}</span>. Terms are locked to the server-issued request.
           </p>
           <div className="pt-space-md flex justify-center gap-space-md">
             <Link
@@ -121,10 +139,10 @@ export default function R03_QuoteTerminal() {
                 <tbody className="bg-surface-container-lowest divide-y divide-surface-container-high">
                   <tr>
                     <td className="p-space-md font-headline font-bold text-on-surface">
-                      Insulated Copper Wire
+                      {materialName}
                     </td>
                     <td className="p-space-md text-on-surface-variant text-xs">
-                      55% Recovery (Standard Grade)
+                      {request.lot.condition || 'Condition not specified'}
                     </td>
                     <td className="p-space-md font-mono text-on-surface font-bold">
                       {weight.toFixed(2)} kg
@@ -274,7 +292,7 @@ export default function R03_QuoteTerminal() {
 
               <button
                 onClick={handleDispatchQuote}
-                disabled={isSubmitting}
+                disabled={isSubmitting || request.state !== 'PENDING'}
                 className="w-full sm:w-auto px-space-xl py-2.5 bg-primary hover:bg-primary-container text-on-primary font-headline font-bold text-sm rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
               >
                 <span className="material-symbols-outlined text-[18px]">send</span>

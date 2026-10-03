@@ -14,7 +14,7 @@ vi.mock('../../lib/api', () => ({
     {
       request_id: 'request-1', lot_id: 'ST-24A7', facility_id: 'facility-1', state: 'PENDING', reason: null,
       created_at: '2026-10-04T00:00:00Z', offers: [],
-      lot: { material_id: 'CABLE', material_name: 'Insulated Copper Cable', material_context: null, estimated_weight_g: 85500, condition: 'SCRAP', coarse_area: null, collector_alias: 'Ramesh Kumar' },
+      lot: { material_id: 'CABLE', material_name: 'Insulated Copper Cable', material_context: null, estimated_weight_g: 85500, condition: 'SCRAP', coarse_area: null, collector_alias: 'Ramesh Kumar', images: [] },
     },
   ]),
   createRecyclerOffer: vi.fn(),
@@ -63,31 +63,36 @@ describe('Recycler Console Views (T022)', () => {
     expect(screen.getByText('Insulated Copper Cable')).toBeDefined();
   });
 
-  it('renders R02_IncomingLot with photo inspection and weight tolerance calculation', () => {
+  it('renders R02_IncomingLot from the live request without substituting a static lot', async () => {
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
     render(
-      <MemoryRouter initialEntries={['/recycler/incoming?ref=ST-24A7']}>
-        <R02_IncomingLot />
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/recycler/incoming?ref=ST-24A7&requestId=request-1']}>
+          <R02_IncomingLot />
+        </MemoryRouter>
+      </QueryClientProvider>
     );
 
-    expect(screen.getByText(/Lot Inspection Workspace:/i)).toBeDefined();
+    expect(await screen.findByText(/Lot Inspection Workspace:/i)).toBeDefined();
     expect(screen.getByText('ST-24A7')).toBeDefined();
-    expect(screen.getByText(/Digital Platform Scale #4 Connected/i)).toBeDefined();
+    expect(screen.getByText('Insulated Copper Cable')).toBeDefined();
     expect(screen.getByText(/Ramesh Kumar/i)).toBeDefined();
     expect(screen.getByText(/Proceed to Quote Terminal/i)).toBeDefined();
 
-    // Tolerance calculation
     expect(screen.getByText('85.5 kg')).toBeDefined();
   });
 
-  it('renders R03_QuoteTerminal with RATE_PER_KG and FIXED_TOTAL pricing models', () => {
+  it('renders R03_QuoteTerminal with the matching live request and pricing models', async () => {
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
     render(
-      <MemoryRouter initialEntries={['/recycler/quote?ref=ST-24A7&weight=84.8']}>
-        <R03_QuoteTerminal />
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/recycler/quote?ref=ST-24A7&requestId=request-1']}>
+          <R03_QuoteTerminal />
+        </MemoryRouter>
+      </QueryClientProvider>
     );
 
-    expect(screen.getByText(/Commercial Offer Terminal:/i)).toBeDefined();
+    expect(await screen.findByText(/Commercial Offer Terminal:/i)).toBeDefined();
     expect(screen.getByText(/Rate per Kilogram \(RATE_PER_KG\)/i)).toBeDefined();
     expect(screen.getByText(/Fixed Total Sum \(FIXED_TOTAL\)/i)).toBeDefined();
 
