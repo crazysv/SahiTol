@@ -1,6 +1,6 @@
 # Current handoff
 
-## 2026-10-04 recycler offer-console integration pending publication
+## 2026-10-04 recycler offer-console integration published; device offer verification pending
 
 Physical collector testing confirmed that C09's request endpoint succeeds, but
 the deployed recycler R01/R03 web console was presentation-only: its inbox was
@@ -8,11 +8,11 @@ static and its dispatch action only changed browser state. The existing approved
 R01 and R03 visuals are now wired locally to the real recycler incoming queue
 and `POST /api/v1/requests/{request_id}/offers`; they use a fresh recycler demo
 token, render API errors, and pass the server request ID and verified weight to
-the quote terminal. The source build completed. This web change is not yet
-published to `https://sahitol.pages.dev`, so the deployed console still cannot
-create the collector's awaited offer. Do not claim cross-surface offer creation
-until the selected files are reviewed, committed, pushed, and the Pages build
-is verified against the live collector request.
+the quote terminal. Commit `0829962` was pushed to `main`, and the deployed
+`https://sahitol.pages.dev/recycler/inbox` bundle returned HTTPS 200 and
+contained the new live-inbox code. The actual browser-to-API offer creation and
+collector-side refresh still require a final live device/browser run; do not
+claim cross-surface offer completion until that run is recorded.
 
 ## 2026-10-04 automatic lot sync checkpoint
 

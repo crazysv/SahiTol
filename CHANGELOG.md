@@ -1,11 +1,13 @@
 # Changelog
 
-## 2026-10-04 -- Recycler console uses the real offer API locally
+## 2026-10-04 -- Recycler console uses the real offer API
 
 Replaced the recycler console's static inbox and simulated quote-dispatch delay
-with the real incoming-request and offer-creation endpoints. The change remains
-local and is explicitly not evidence of a live cross-surface offer until it has
-been published and verified through the deployed Pages console.
+with the real incoming-request and offer-creation endpoints. Commit `0829962`
+was pushed to `main`; the deployed Pages inbox returned HTTPS 200 and its
+served bundle contained the new live-inbox code. A final browser-to-API offer
+creation and collector refresh remains separately required before claiming
+cross-surface completion.
 
 ## 2026-10-04 -- Automatic sync after durable lot save
 
