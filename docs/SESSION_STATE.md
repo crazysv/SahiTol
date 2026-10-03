@@ -9,8 +9,11 @@ looked non-responsive because R03 supplied no explanation. R03 now renders a
 clear accepted/active/closed state instead of the dispatch controls. The API
 also returns HTTP 409 if a pending request already has an `OPEN` offer, so a
 reload or direct retry cannot create a duplicate. Focused trade tests pass.
-Next action: commit/push, wait for Pages and Render, then verify this exact
-accepted record renders the explanatory state on `sahitol.pages.dev`.
+Commit `94dc0b2` is deployed. The exact record was reloaded at
+`sahitol.pages.dev`: it visibly states **This offer has already been accepted**
+and exposes only **Return to Inbox** and **View History**. The stale disabled
+dispatch control is gone. Continue remaining manual workflow checks only with
+a new pending collector request; do not reuse this finalized test record.
 
 ## 2026-10-04 end-to-end live offer and handover trace in progress
 

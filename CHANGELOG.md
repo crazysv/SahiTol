@@ -8,9 +8,11 @@ replaces the pricing controls with a clear terminal-state message and inbox /
 history actions when a request is accepted, closed, or already has an open
 offer. The offer API also rejects a second open offer for the same request
 with HTTP 409, while preserving the existing withdraw-then-replace workflow.
-Focused trade tests pass; the production web build was started locally, but
-the existing Vite process did not finish within the terminal window and is
-not recorded as passed here.
+Focused trade tests pass. Commit `94dc0b2` is deployed, and the exact live
+accepted 13 kg PCB request now renders **This offer has already been
+accepted** with Inbox and History links rather than a disabled dispatch button.
+The local Vite process did not finish within the terminal window and is not
+recorded as a separate production-build pass here.
 
 ## 2026-10-04 -- QR manual-reference verification repair
 
