@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { fetchRecyclerIncoming } from '../../lib/api';
 
 interface IncomingLotItem {
   id: string;
@@ -16,97 +18,38 @@ interface IncomingLotItem {
   hasPhoto: boolean;
 }
 
-const INITIAL_LOTS: IncomingLotItem[] = [
-  {
-    id: 'lot-001',
-    referenceId: 'ST-24A7',
-    time: '14:02 Today',
-    collectorAlias: 'Ramesh Kumar (#409)',
-    collectorTier: 'Trusted Tier 2',
-    materialName: 'Insulated Copper Cable',
-    materialCategory: 'CABLES_WIRES',
-    declaredWeightKg: 85.5,
-    verifiedWeightKg: 84.8,
-    status: 'WAITING_REVIEW',
-    impuritiesEst: '< 1.2%',
-    hasPhoto: true,
-  },
-  {
-    id: 'lot-002',
-    referenceId: 'ST-24B3',
-    time: '13:45 Today',
-    collectorAlias: 'Santosh Yadav (#312)',
-    collectorTier: 'Tier 1 Standard',
-    materialName: 'Printed Circuit Boards (Grade A)',
-    materialCategory: 'CIRCUIT_BOARDS',
-    declaredWeightKg: 120.0,
-    verifiedWeightKg: 119.5,
-    status: 'WAITING_REVIEW',
-    impuritiesEst: '< 0.5%',
-    hasPhoto: true,
-  },
-  {
-    id: 'lot-003',
-    referenceId: 'ST-24C9',
-    time: '12:30 Today',
-    collectorAlias: 'Anil Rathore (#551)',
-    collectorTier: 'Tier 1 Standard',
-    materialName: 'Brass Radiator Cuttings',
-    materialCategory: 'NON_FERROUS_METALS',
-    declaredWeightKg: 230.0,
-    verifiedWeightKg: 230.0,
-    status: 'OFFER_PENDING',
-    impuritiesEst: '< 1.0%',
-    hasPhoto: true,
-  },
-  {
-    id: 'lot-004',
-    referenceId: 'ST-24D1',
-    time: '11:15 Today',
-    collectorAlias: 'Mohan Lal (#208)',
-    collectorTier: 'Trusted Tier 2',
-    materialName: 'Aluminium Extrusion Scrap',
-    materialCategory: 'NON_FERROUS_METALS',
-    declaredWeightKg: 340.0,
-    verifiedWeightKg: 338.2,
-    status: 'ACCEPTED',
-    impuritiesEst: '< 1.8%',
-    hasPhoto: true,
-  },
-  {
-    id: 'lot-005',
-    referenceId: 'ST-24E6',
-    time: '10:50 Today',
-    collectorAlias: 'Sunil Paswan (#184)',
-    collectorTier: 'New Collector',
-    materialName: 'Mixed Computer Scrap',
-    materialCategory: 'MIXED_ELECTRONICS',
-    declaredWeightKg: 155.0,
-    verifiedWeightKg: 152.0,
-    status: 'WAITING_REVIEW',
-    impuritiesEst: '< 3.0%',
-    hasPhoto: true,
-  },
-  {
-    id: 'lot-006',
-    referenceId: 'ST-24F2',
-    time: '09:20 Today',
-    collectorAlias: 'Vikram Singh (#380)',
-    collectorTier: 'Trusted Tier 2',
-    materialName: 'Copper Transformer Coils',
-    materialCategory: 'CABLES_WIRES',
-    declaredWeightKg: 420.0,
-    verifiedWeightKg: 418.5,
-    status: 'OFFER_PENDING',
-    impuritiesEst: '< 0.8%',
-    hasPhoto: true,
-  },
-];
-
 export default function R01_Inbox() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState<'ALL' | 'WAITING' | 'CABLES' | 'BOARDS'>('ALL');
-  const [lots] = useState<IncomingLotItem[]>(INITIAL_LOTS);
+  const { data: incoming, isLoading, error } = useQuery({
+    queryKey: ['recycler-incoming'],
+    queryFn: fetchRecyclerIncoming,
+    refetchInterval: 10_000,
+  });
+  const lots = useMemo<IncomingLotItem[]>(() => {
+    if (!incoming) return [];
+    return incoming.map((request) => {
+      const materialName = request.lot.material_name || request.lot.material_id || 'Unspecified material';
+      const category = materialName.toUpperCase().includes('PCB') || materialName.toUpperCase().includes('CIRCUIT')
+        ? 'CIRCUIT_BOARDS'
+        : materialName.toUpperCase().includes('CABLE') ? 'CABLES_WIRES' : 'OTHER';
+      const openOffer = request.offers.some((offer) => offer.status === 'OPEN');
+      return {
+        id: request.request_id,
+        referenceId: request.lot_id,
+        time: new Date(request.created_at).toLocaleString(),
+        collectorAlias: request.lot.collector_alias || 'Collector',
+        collectorTier: 'Live request',
+        materialName,
+        materialCategory: category,
+        declaredWeightKg: (request.lot.estimated_weight_g || 0) / 1000,
+        verifiedWeightKg: null,
+        status: openOffer ? 'OFFER_PENDING' : request.state === 'PENDING' ? 'WAITING_REVIEW' : request.state === 'ACCEPTED' ? 'ACCEPTED' : 'REJECTED',
+        impuritiesEst: 'Not assessed',
+        hasPhoto: false,
+      };
+    });
+  }, [incoming]);
 
   const filteredLots = lots.filter((lot) => {
     if (filter === 'WAITING') return lot.status === 'WAITING_REVIEW';
@@ -184,6 +127,9 @@ export default function R01_Inbox() {
           </div>
         </div>
       </section>
+
+      {isLoading && <p className="text-sm text-on-surface-variant">Loading live incoming requests…</p>}
+      {error && <p className="text-sm text-error" role="alert">{error instanceof Error ? error.message : 'Could not load live incoming requests.'}</p>}
 
       {/* Summary Metric Cards */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-space-md">
@@ -365,13 +311,13 @@ export default function R01_Inbox() {
                   <td className="p-space-md text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button
-                        onClick={() => navigate(`/recycler/incoming?ref=${lot.referenceId}`)}
+                        onClick={() => navigate(`/recycler/incoming?ref=${lot.referenceId}&requestId=${lot.id}`)}
                         className="px-space-md py-1 text-xs font-semibold bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded transition-colors"
                       >
                         Inspect
                       </button>
                       <button
-                        onClick={() => navigate(`/recycler/quote?ref=${lot.referenceId}`)}
+                        onClick={() => navigate(`/recycler/quote?ref=${lot.referenceId}&requestId=${lot.id}&weight=${lot.verifiedWeightKg ?? lot.declaredWeightKg}`)}
                         className="px-space-md py-1 text-xs font-semibold bg-primary hover:bg-primary-container text-on-primary rounded transition-colors shadow-sm"
                       >
                         Quote

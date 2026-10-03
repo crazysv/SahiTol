@@ -248,7 +248,14 @@ fun CollectorNavHost(
                             )
                         )
 
-                        // Update counts and navigate to valuation
+                        // Saving is durable before this point. Start an immediate
+                        // best-effort upload when the device is online; WorkManager
+                        // retains the request for a later retry when it is offline.
+                        SyncWorker.enqueueAutomaticSync(context, session.accountId)
+
+                        // Update counts and navigate to valuation. The Room flow
+                        // refreshes this lot from Saved locally to Synced when the
+                        // worker receives the server acknowledgement.
                         unsyncedCount = lotRepository.getUnsyncedCount(session.accountId)
                         navController.navigate(Screen.LotValuation.createRoute(created.lotId)) {
                             popUpTo(Screen.Home.route) { inclusive = false }
@@ -441,6 +448,7 @@ fun CollectorNavHost(
             C09_RecyclerProfileOfferScreen(
                 facilityId = facilityId,
                 lotId = lotId,
+                lot = lots.firstOrNull { it.lotId == lotId },
                 facilityRepository = facilityRepository,
                 sessionManager = sessionManager,
                 onNavigateBack = {

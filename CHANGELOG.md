@@ -1,5 +1,44 @@
 # Changelog
 
+## 2026-10-04 -- Recycler console uses the real offer API locally
+
+Replaced the recycler console's static inbox and simulated quote-dispatch delay
+with the real incoming-request and offer-creation endpoints. The change remains
+local and is explicitly not evidence of a live cross-surface offer until it has
+been published and verified through the deployed Pages console.
+
+## 2026-10-04 -- Automatic sync after durable lot save
+
+After a successful local lot transaction, the collector now immediately queues
+a network-constrained WorkManager sync. When online, the saved lot advances to
+`SYNCED` without requiring a visit to C14; when offline, the durable outbox is
+retained unchanged for later retry and C14 remains available as an explicit
+fallback. On CPH2781, a manually entered PCB lot was saved and reached the
+valuation screen as **Synced** without opening the Sync screen.
+
+## 2026-10-04 -- Live recycler routing and offer truthfulness repair
+
+Corrected the collector's directory-to-offer path after physical-device testing.
+Cached directory records are now visibly marked as reference-only and cannot
+open a trade-request screen; only a successful live directory lookup exposes
+the facility action. C09 now receives and renders the actual selected lot and
+does not show a fabricated cable lot, payout, or “live offer” before the
+recycler has issued server-backed terms. On CPH2781, the synced 15 kg PCB lot
+was verified through C07 → live C08 → C09 and its request reached **Request
+sent — Waiting for response**.
+
+## 2026-10-03 -- Manual sync retries recovered after fresh authentication
+
+Fixed an Android manual-sync recovery defect where valid `AUTH_REQUIRED`
+outbox operations were left permanently unsendable after a temporary 401 even
+when a new demo token was available. Manual sync now requeues only that active
+account's authentication-blocked operations after a successful fresh token;
+repair-required records remain untouched. On the connected CPH2781, five
+existing local lots uploaded successfully (ten create/list operations), the
+newest PCB lot reached `SYNCED`/`LISTED` version 2, and its live recycler
+request advanced to **Request sent — Waiting for response**. Android unit
+tests and debug assembly passed.
+
 ## 2026-10-03 -- C07 live visual regression repair
 
 Flattened the approved C07 top-bar title row to prevent Compose weight

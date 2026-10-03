@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sahitol.collector.data.repository.FacilityRepository
 import com.sahitol.collector.data.repository.RecyclerFacilityItem
+import com.sahitol.collector.data.local.entity.LotEntity
 import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.ui.theme.*
 import kotlinx.coroutines.launch
@@ -39,6 +40,7 @@ enum class LotRequestState {
 fun C09_RecyclerProfileOfferScreen(
     facilityId: String,
     lotId: String,
+    lot: LotEntity?,
     facilityRepository: FacilityRepository,
     sessionManager: SessionManager,
     onNavigateBack: () -> Unit,
@@ -50,6 +52,7 @@ fun C09_RecyclerProfileOfferScreen(
     val coroutineScope = rememberCoroutineScope()
     val session by sessionManager.session.collectAsState()
     val accountId = session.accountId
+    val lotContext = remember(lot) { lotDisplayContext(lot) }
 
     var facility by remember(facilityId) { mutableStateOf(facilityRepository.getFacilityDetails(facilityId) ?: RecyclerFacilityItem(
         facilityId, "Selected live facility", "Selected live facility", "Live directory", 0.0, 0, emptyList(), false,
@@ -258,7 +261,7 @@ fun C09_RecyclerProfileOfferScreen(
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = "100% Match",
+                                text = if (lotContext.canonicalMaterialId in facility.materialsAccepted) "Listed route" else "Check route",
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = SuccessGreen
@@ -274,20 +277,20 @@ fun C09_RecyclerProfileOfferScreen(
                         ) {
                             Column {
                                 Text("YOUR LOT", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = OnSurfaceVariant)
-                                Text("Cable (Copper Mixed)", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = OnSurface)
-                                Text("2.5 kg net weight", fontSize = 12.sp, color = OnSurfaceVariant)
+                                Text(lotContext.materialLabel, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = OnSurface)
+                                Text(lotContext.weightLabel, fontSize = 12.sp, color = OnSurfaceVariant)
                             }
                             Column(horizontalAlignment = Alignment.End) {
                                 Text("ACCEPTED HERE", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
-                                Text("Cable - Standard Grade A", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = OnSurface)
-                                Text("Route Authorized", fontSize = 12.sp, color = SuccessGreen)
+                                Text(if (lotContext.canonicalMaterialId in facility.materialsAccepted) "Listed material route" else "Route needs review", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = OnSurface)
+                                Text("Final terms come from the recycler", fontSize = 12.sp, color = SuccessGreen)
                             }
                         }
                     }
                 }
             }
 
-            // Live Commercial Offer Card
+            // There is no offer until the recycler creates a server-issued offer for this lot.
             item {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -307,7 +310,7 @@ fun C09_RecyclerProfileOfferScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Live Commercial Offer",
+                            text = "Commercial offer status",
                                 fontSize = 15.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = OnSurface
@@ -317,45 +320,11 @@ fun C09_RecyclerProfileOfferScreen(
                                 color = TerracottaPrimary.copy(alpha = 0.12f)
                             ) {
                                 Text(
-                                    text = "Valid for 45 mins",
+                                    text = "No offer yet",
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = TerracottaPrimary,
                                     modifier = Modifier.padding(horizontal = 6.dp, vertical = 3.dp)
-                                )
-                            }
-                        }
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Column {
-                                Text(
-                                    text = "Offered Rate per kg",
-                                    fontSize = 12.sp,
-                                    color = OnSurfaceVariant
-                                )
-                                Text(
-                                    text = "₹340.00 / kg",
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = OnSurface
-                                )
-                            }
-
-                            Column(horizontalAlignment = Alignment.End) {
-                                Text(
-                                    text = "Estimated Total Payout",
-                                    fontSize = 12.sp,
-                                    color = OnSurfaceVariant
-                                )
-                                Text(
-                                    text = "₹850.00",
-                                    fontSize = 26.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = TerracottaPrimary
                                 )
                             }
                         }
@@ -377,7 +346,7 @@ fun C09_RecyclerProfileOfferScreen(
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "Weighing basis: Certified digital platform scale at facility gate. Instant UPI transfer upon verification.",
+                                    text = "The directory rate is indicative only. A recycler must create server-issued terms before you can accept an offer.",
                                     fontSize = 11.sp,
                                     color = OnSurfaceVariant
                                 )

@@ -1,5 +1,71 @@
 # Current handoff
 
+## 2026-10-04 recycler offer-console integration pending publication
+
+Physical collector testing confirmed that C09's request endpoint succeeds, but
+the deployed recycler R01/R03 web console was presentation-only: its inbox was
+static and its dispatch action only changed browser state. The existing approved
+R01 and R03 visuals are now wired locally to the real recycler incoming queue
+and `POST /api/v1/requests/{request_id}/offers`; they use a fresh recycler demo
+token, render API errors, and pass the server request ID and verified weight to
+the quote terminal. The source build completed. This web change is not yet
+published to `https://sahitol.pages.dev`, so the deployed console still cannot
+create the collector's awaited offer. Do not claim cross-surface offer creation
+until the selected files are reviewed, committed, pushed, and the Pages build
+is verified against the live collector request.
+
+## 2026-10-04 automatic lot sync checkpoint
+
+C05 now calls `SyncWorker.enqueueAutomaticSync` only after
+`LotRepository.createLotAtomic` has committed the lot and its durable outbox
+operations. The worker requires a connected network, so an offline save is
+never lost or blocked; it remains `SAVED_LOCAL_ONLY` until Android can run the
+worker, and C14 **Sync Now** remains an explicit recovery action. The app's
+existing Room lot flow refreshes C07 when the server acknowledgement changes
+the state to `SYNCED`.
+
+The rebuilt debug APK was installed over the existing collector data on
+CPH2781. A manual no-photo PCB save went straight to C07 and displayed
+**Synced** after the automatic worker completed; no visit to C14 was used.
+Android unit tests and debug assembly passed.
+
+## 2026-10-04 live directory and lot-to-offer display repair
+
+Physical phone testing found that C08 could route a collector from an offline
+cached reference facility into C09. Those records have non-server IDs and must
+never accept a recycler request. C08 now distinguishes the live directory from
+the browse-only reference directory, disables reference cards, and states the
+required refresh action. C09 now receives the selected `LotEntity` from the
+navigation host and displays that lot; its former hard-coded cable/₹850
+“offer” has been replaced with an explicit no-offer-yet state.
+
+On CPH2781, the newest synced PCB lot (15 kg) was rechecked: C07 **View
+Directory** → C08 **Live Recycler Directory** → the live demo facility → C09
+**Request recycler offer**. The request visibly reached **Request sent —
+Waiting for response**. This is the correct collector-side stopping point:
+the next state requires a recycler-created server offer.
+
+## 2026-10-03 manual-sync authentication recovery and live offer request
+
+Physical testing on `N7OZPV59XWWKPF4X` (CPH2781) found five valid local lot
+create/list operations stranded in `AUTH_REQUIRED` after a temporary hosted
+authentication failure. C14's manual worker authenticated successfully but
+only loaded `QUEUED`/`RETRY_WAIT` rows, so it reported no sendable work and the
+newly saved lots stayed local. `SyncWorker` now requeues only the active
+account's `AUTH_REQUIRED` rows after obtaining a fresh demo token; validation
+failures remain `NEEDS_REPAIR` and are never silently retried or deleted.
+
+The rebuilt debug APK was installed over the existing app without clearing
+data. A live phone sync acknowledged all ten create/list operations for the
+five valid lots. The newest PCB lot `fa2791c5-…` is now `SYNCED`, `LISTED`,
+server version 2. Reopening it through C07/C08/C09 and tapping **Request
+recycler offer** visibly produced **Request sent — Waiting for response** for
+the live demo facility. The remaining 13 historic `NEEDS_REPAIR` entries stay
+visible as action-required records and are not evidence of an unsynced lot.
+`:app:testDebugUnitTest` and `:app:assembleDebug` passed. The next genuine
+workflow step is recycler-side creation of a live offer, followed by the
+collector's Refresh live offers action.
+
 ## 2026-10-03 C07 visual regression checkpoint
 
 The approved C07 Valuation & Offers Compose layout was corrected after a

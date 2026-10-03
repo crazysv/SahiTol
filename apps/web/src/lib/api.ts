@@ -129,3 +129,53 @@ export async function confirmDemoHandover(record: HandoverDetail): Promise<void>
   });
   if (!res.ok) throw new Error(`Server confirmation failed (${res.status})`);
 }
+
+export type RecyclerIncomingRequest = {
+  request_id: string;
+  lot_id: string;
+  facility_id: string;
+  state: string;
+  reason: string | null;
+  created_at: string;
+  lot: {
+    material_id: string | null;
+    material_name: string | null;
+    material_context: string | null;
+    estimated_weight_g: number | null;
+    condition: string | null;
+    coarse_area: string | null;
+    collector_alias: string | null;
+  };
+  offers: Array<{ id: string; status: string }>;
+};
+
+export async function fetchRecyclerIncoming(): Promise<RecyclerIncomingRequest[]> {
+  const res = await fetch(`${API_BASE_URL}/api/v1/recycler/incoming?request_state=ALL`, {
+    headers: await recyclerHeaders(),
+  });
+  if (!res.ok) throw new Error(`Incoming requests failed (${res.status})`);
+  return res.json() as Promise<RecyclerIncomingRequest[]>;
+}
+
+export async function createRecyclerOffer(
+  requestId: string,
+  payload: {
+    price_basis: 'RATE_PER_KG' | 'FIXED_TOTAL';
+    rate_paise_per_kg?: number;
+    fixed_total_paise?: number;
+    condition: string;
+    weight_basis_g: number;
+  },
+): Promise<{ id: string }> {
+  const res = await fetch(`${API_BASE_URL}/api/v1/requests/${encodeURIComponent(requestId)}/offers`, {
+    method: 'POST',
+    headers: await recyclerHeaders(),
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    let detail = `Offer creation failed (${res.status})`;
+    try { detail = (await res.json()).detail || detail; } catch { /* retain status */ }
+    throw new Error(detail);
+  }
+  return res.json() as Promise<{ id: string }>;
+}

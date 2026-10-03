@@ -68,6 +68,9 @@ fun C08_RecyclerDirectoryScreen(
             it.address.contains(searchQuery, ignoreCase = true)
         }
     }
+    // Cached directory entries are deliberately browse-only.  A server-issued facility id is
+    // required before a lot can be sent to a recycler, so never route a cached card into C09.
+    val hasLiveDirectory = liveFacilities.isNotEmpty()
 
     Scaffold(
         topBar = {
@@ -305,13 +308,13 @@ fun C08_RecyclerDirectoryScreen(
                             Spacer(modifier = Modifier.width(8.dp))
                             Column {
                                 Text(
-                                    text = "Offline Cached Directory",
+                                    text = if (hasLiveDirectory) "Live Recycler Directory" else "Offline Reference Directory",
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.SemiBold,
                                     color = OnSurface
                                 )
                                 Text(
-                                    text = "Updated 2 days ago · Saved for Local Zone",
+                                    text = if (hasLiveDirectory) "Live facilities can receive a recycler request" else "Reference entries cannot receive a recycler request",
                                     fontSize = 11.sp,
                                     color = OnSurfaceVariant
                                 )
@@ -339,13 +342,24 @@ fun C08_RecyclerDirectoryScreen(
                 item { Text(directoryMessage!!, fontSize = 12.sp, color = OnSurfaceVariant) }
             }
 
+            if (!hasLiveDirectory) {
+                item {
+                    Text(
+                        text = "To request an offer, connect to the internet and tap Refresh. Your saved lot will remain safe on this phone.",
+                        fontSize = 12.sp,
+                        color = OnSurfaceVariant
+                    )
+                }
+            }
+
             // Recycler Facilities List
             items(facilities) { facility ->
                 RecyclerDirectoryCard(
                     facility = facility,
                     materialLabel = lotContext.materialLabel,
-                    enabled = lotContext.isConcreteLot,
-                    onClick = { if (lotContext.isConcreteLot) onNavigateFacilityProfile(facility.facilityId, lotId) }
+                    enabled = lotContext.isConcreteLot && hasLiveDirectory,
+                    isLiveFacility = hasLiveDirectory,
+                    onClick = { if (lotContext.isConcreteLot && hasLiveDirectory) onNavigateFacilityProfile(facility.facilityId, lotId) }
                 )
             }
 
@@ -429,6 +443,7 @@ fun RecyclerDirectoryCard(
     facility: RecyclerFacilityItem,
     materialLabel: String,
     enabled: Boolean,
+    isLiveFacility: Boolean,
     onClick: () -> Unit
 ) {
     Card(
@@ -519,7 +534,11 @@ fun RecyclerDirectoryCard(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "${facility.operatingHours} · ₹${facility.rateInrPerKg.toInt()}/kg rate",
+                        text = if (isLiveFacility) {
+                            "${facility.operatingHours} · ₹${facility.rateInrPerKg.toInt()}/kg rate"
+                        } else {
+                            "Reference only — refresh to request an offer"
+                        },
                         fontSize = 12.sp,
                         color = OnSurfaceVariant
                     )
@@ -534,7 +553,7 @@ fun RecyclerDirectoryCard(
                 ) {
                     Icon(Icons.Default.ArrowForward, contentDescription = null, modifier = Modifier.size(14.dp))
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text("Navigate", fontSize = 12.sp)
+                    Text(if (isLiveFacility) "View facility" else "Reference only", fontSize = 12.sp)
                 }
             }
         }

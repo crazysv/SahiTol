@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import { createRecyclerOffer } from '../../lib/api';
 
 export default function R03_QuoteTerminal() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const lotRef = searchParams.get('ref') || 'ST-24A7';
+  const requestId = searchParams.get('requestId');
   const weight = parseFloat(searchParams.get('weight') || '84.8');
 
   const [pricingModel, setPricingModel] = useState<'RATE_PER_KG' | 'FIXED_TOTAL'>('RATE_PER_KG');
@@ -12,15 +14,31 @@ export default function R03_QuoteTerminal() {
   const [fixedTotal, setFixedTotal] = useState(Math.round(weight * 180));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [quoteDispatched, setQuoteDispatched] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const calculatedTotal = pricingModel === 'RATE_PER_KG' ? Math.round(weight * ratePerKg) : fixedTotal;
 
-  const handleDispatchQuote = () => {
+  const handleDispatchQuote = async () => {
+    if (!requestId) {
+      setSubmitError('Open this screen from a live incoming request before dispatching an offer.');
+      return;
+    }
     setIsSubmitting(true);
-    setTimeout(() => {
+    setSubmitError(null);
+    try {
+      await createRecyclerOffer(requestId, {
+        price_basis: pricingModel,
+        rate_paise_per_kg: pricingModel === 'RATE_PER_KG' ? Math.round(ratePerKg * 100) : undefined,
+        fixed_total_paise: pricingModel === 'FIXED_TOTAL' ? Math.round(fixedTotal * 100) : undefined,
+        condition: 'SCRAP',
+        weight_basis_g: Math.round(weight * 1000),
+      });
       setIsSubmitting(false);
       setQuoteDispatched(true);
-    }, 400);
+    } catch (error) {
+      setIsSubmitting(false);
+      setSubmitError(error instanceof Error ? error.message : 'Could not create the offer.');
+    }
   };
 
   return (
@@ -231,6 +249,9 @@ export default function R03_QuoteTerminal() {
           </div>
 
           {/* Action Terminal Buttons */}
+          {submitError && (
+            <p className="text-sm text-error" role="alert">{submitError}</p>
+          )}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-sm">
             <button
               onClick={() => navigate('/recycler')}

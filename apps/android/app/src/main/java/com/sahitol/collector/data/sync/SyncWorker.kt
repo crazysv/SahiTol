@@ -32,18 +32,39 @@ class SyncWorker(
         // collector-profile FK failure into a valid operation. Requeue that
         // exact historic row for an explicit manual sync; do not loosen the
         // treatment of any other repair-required record.
-        val repaired = database.outboxDao().requeueLegacyCollectorProfileFailures(accountId)
-        if (repaired > 0) Log.i(TAG, "Requeued $repaired legacy collector-profile operation(s)")
-        val pending = database.outboxDao().getPendingOperations(accountId, 50)
-        Log.i(TAG, "Manual sync loaded ${pending.size} pending operations")
-        if (pending.isEmpty()) {
-            return Result.success()
-        }
-
-        val syncEngine = SyncEngine(database)
-
         return try {
             val accessToken = if (accountId.startsWith("col_demo_")) demoAccessToken() else null
+
+            val repaired = database.outboxDao().requeueLegacyCollectorProfileFailures(accountId)
+            if (repaired > 0) Log.i(TAG, "Requeued $repaired legacy collector-profile operation(s)")
+
+            // AUTH_REQUIRED is a transport/authentication outcome, not a permanent
+            // validation failure. A manual sync must retry those durable operations
+            // after obtaining a fresh token; otherwise a temporary 401 leaves every
+            // subsequently valid lot stranded forever while the UI misleadingly says
+            // that there is nothing pending.
+            if (accessToken != null) {
+                val authRetries = database.outboxDao().getOperationsForAccount(accountId)
+                    .filter { it.state == "AUTH_REQUIRED" }
+                authRetries.forEach { operation ->
+                    database.outboxDao().updateState(
+                        operation.operationId,
+                        "QUEUED",
+                        "MANUAL_RETRY_AFTER_AUTH"
+                    )
+                }
+                if (authRetries.isNotEmpty()) {
+                    Log.i(TAG, "Requeued ${authRetries.size} operation(s) after fresh authentication")
+                }
+            }
+
+            val pending = database.outboxDao().getPendingOperations(accountId, 50)
+            Log.i(TAG, "Manual sync loaded ${pending.size} pending operations")
+            if (pending.isEmpty()) {
+                return Result.success()
+            }
+
+            val syncEngine = SyncEngine(database)
             val results = if (accessToken == null) {
                 pending.map { operation ->
                     SyncOperationResult(operation.operationId, "AUTH_REQUIRED", operation.entityId, null, null, "Authentication required", null)
@@ -195,7 +216,8 @@ class SyncWorker(
         val text = stream?.bufferedReader()?.use { it.readText() }.orEmpty()
         connection.disconnect()
         code to text
-    } catch (_: Exception) {
+    } catch (error: Exception) {
+        Log.w(TAG, "Sync request failed for $path", error)
         null
     }
 
@@ -207,6 +229,19 @@ class SyncWorker(
         fun workName(accountId: String) = "$WORK_NAME_PREFIX$accountId"
 
         fun enqueueManualSync(context: Context, accountId: String) {
+            enqueue(context, accountId)
+        }
+
+        /**
+         * Starts a best-effort upload immediately after a lot is durably saved.
+         * WorkManager keeps it pending while the device has no network, so local
+         * saving remains the source of truth and a manual sync is only a fallback.
+         */
+        fun enqueueAutomaticSync(context: Context, accountId: String) {
+            enqueue(context, accountId)
+        }
+
+        private fun enqueue(context: Context, accountId: String) {
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
@@ -218,9 +253,9 @@ class SyncWorker(
 
             WorkManager.getInstance(context).enqueueUniqueWork(
                 workName(accountId),
-                // A foreground manual action must not be silently ignored by a
-                // stale retry. The cancelled worker retains its durable outbox;
-                // the replacement reuses the same operation IDs.
+                // A new explicit action or saved lot must not be held behind a
+                // stale retry. Durable operation IDs remain in the outbox, so the
+                // replacement safely picks them up without losing local data.
                 ExistingWorkPolicy.REPLACE,
                 syncRequest
             )

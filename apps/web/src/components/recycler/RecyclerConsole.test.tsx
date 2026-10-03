@@ -1,12 +1,24 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import RecyclerLayout from './RecyclerLayout';
 import R01_Inbox from './R01_Inbox';
 import R02_IncomingLot from './R02_IncomingLot';
 import R03_QuoteTerminal from './R03_QuoteTerminal';
 import R06_OperationalProfile from './R06_OperationalProfile';
 import R07_HistoryExports from './R07_HistoryExports';
+
+vi.mock('../../lib/api', () => ({
+  fetchRecyclerIncoming: vi.fn().mockResolvedValue([
+    {
+      request_id: 'request-1', lot_id: 'ST-24A7', facility_id: 'facility-1', state: 'PENDING', reason: null,
+      created_at: '2026-10-04T00:00:00Z', offers: [],
+      lot: { material_id: 'CABLE', material_name: 'Insulated Copper Cable', material_context: null, estimated_weight_g: 85500, condition: 'SCRAP', coarse_area: null, collector_alias: 'Ramesh Kumar' },
+    },
+  ]),
+  createRecyclerOffer: vi.fn(),
+}));
 
 describe('Recycler Console Views (T022)', () => {
   it('renders RecyclerLayout with logo, yard subtitle, and all navigation links', () => {
@@ -30,17 +42,20 @@ describe('Recycler Console Views (T022)', () => {
     expect(screen.getByText('Inbox Content')).toBeDefined();
   });
 
-  it('renders R01_Inbox with operational metrics and lot queue filtering', () => {
+  it('renders R01_Inbox with live operational metrics and lot queue filtering', async () => {
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
     render(
-      <MemoryRouter>
-        <R01_Inbox />
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <R01_Inbox />
+        </MemoryRouter>
+      </QueryClientProvider>
     );
 
     expect(screen.getByText('Yard Dashboard & Material Inbox')).toBeDefined();
     expect(screen.getByText(/Active Shift #402/i)).toBeDefined();
     expect(screen.getByText(/Weighbridge Status/i)).toBeDefined();
-    expect(screen.getByText('ST-24A7')).toBeDefined();
+    expect(await screen.findByText('ST-24A7')).toBeDefined();
 
     // Filter to Cables
     const cablesBtn = screen.getByRole('button', { name: /Cables/i });
