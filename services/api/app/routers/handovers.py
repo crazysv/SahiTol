@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
 from pydantic import BaseModel, Field
-from sqlalchemy import desc, select
+from sqlalchemy import String, cast, desc, select
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
@@ -574,6 +574,34 @@ def get_latest_lot_handover(
     if not handover:
         raise HTTPException(status_code=404, detail="No handover exists for this lot.")
     return get_handover(handover.id, current_user, db)
+
+
+@router.get("/handovers/lookup", response_model=HandoverDetailResponse)
+@router.get("/api/v1/handovers/lookup", response_model=HandoverDetailResponse)
+def lookup_handover_by_reference(
+    reference: str = Query(..., min_length=6, max_length=9, description="ST- plus the six-character handover reference"),
+    current_user: User = Depends(require_roles(UserRole.RECYCLER, UserRole.ADMIN)),
+    db: Session = Depends(get_db),
+):
+    """Resolve the short reference printed beside an offline QR record for an authorized recycler."""
+    normalized = reference.strip().upper()
+    if normalized.startswith("ST-"):
+        normalized = normalized[3:]
+    if len(normalized) != 6 or any(character not in "0123456789ABCDEF" for character in normalized):
+        raise HTTPException(status_code=422, detail="Reference must be ST- followed by six hexadecimal characters.")
+
+    matches = (
+        db.query(Handover)
+        .filter(cast(Handover.id, String).ilike(f"{normalized}%"))
+        .order_by(desc(Handover.created_at))
+        .limit(2)
+        .all()
+    )
+    if not matches:
+        raise HTTPException(status_code=404, detail="Handover reference not found.")
+    if len(matches) > 1:
+        raise HTTPException(status_code=409, detail="Reference is ambiguous; scan the QR code instead.")
+    return get_handover(matches[0].id, current_user, db)
 
 
 @router.get("/handovers/{id}", response_model=HandoverDetailResponse)

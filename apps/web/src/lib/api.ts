@@ -121,6 +121,14 @@ export async function lookupDemoHandover(handoverId: string): Promise<HandoverDe
   return res.json();
 }
 
+export async function lookupDemoHandoverByReference(reference: string): Promise<HandoverDetail> {
+  const res = await fetch(`${API_BASE_URL}/api/v1/handovers/lookup?reference=${encodeURIComponent(reference)}`, {
+    headers: await recyclerHeaders(),
+  });
+  if (!res.ok) throw new Error(`Server lookup failed (${res.status})`);
+  return res.json();
+}
+
 export async function confirmDemoHandover(record: HandoverDetail): Promise<void> {
   const res = await fetch(`${API_BASE_URL}/api/v1/handovers/${encodeURIComponent(record.id)}/confirm`, {
     method: 'POST',

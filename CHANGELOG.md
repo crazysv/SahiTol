@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-10-04 -- QR manual-reference verification repair
+
+Fixed the recycler scanner's manual fallback: it previously displayed a
+six-character receipt reference but could not resolve it to a handover, so the
+server-verification and confirmation controls remained unavailable. The API now
+resolves an authenticated recycler's `ST-XXXXXX` reference to its single
+handover record, and R04 uses that result to populate the same verified
+confirmation flow as a scanned QR. The endpoint's focused handover test and
+the web production build pass. A live PCB 13 kg offer was issued and accepted
+on the connected collector device; its server handover record `ST-EFDB28` was
+generated and its QR receipt now renders on that device. Recycler confirmation
+is deliberately still pending.
+
 ## 2026-10-04 -- Recycler live-counterparty and payload-truthfulness repair
 
 Fixed a deployed-demo data drift that allowed Android to direct a lot to the

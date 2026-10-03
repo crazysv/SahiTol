@@ -291,6 +291,14 @@ def test_demo_offline_import_requires_server_lookup_then_recycler_confirmation()
     lookup = client.get(f"/api/v1/handovers/{handover_id}", headers=recycler_headers)
     assert lookup.status_code == 200
     assert lookup.json()["proposal_hash"] == proposal_hash
+    short_reference = f"ST-{str(handover_id).split('-')[0][:6].upper()}"
+    manual_lookup = client.get(
+        "/api/v1/handovers/lookup",
+        params={"reference": short_reference},
+        headers=recycler_headers,
+    )
+    assert manual_lookup.status_code == 200
+    assert manual_lookup.json()["id"] == str(handover_id)
     resumed = client.get(f"/api/v1/lots/{lot_id}/handover", headers=collector_headers)
     assert resumed.status_code == 200
     assert resumed.json()["id"] == str(handover_id)

@@ -1,5 +1,25 @@
 # Current handoff
 
+## 2026-10-04 end-to-end live offer and handover trace in progress
+
+Commit `aec2450` is deployed to Pages and Render. A live collector lot
+`a9ed8a4b-7e3b-4982-93e6-761b0f5b0e29` (PCB, 13 kg) now appears in the recycler
+inbox with the exact same material and mass. The browser's R02 inspection and
+R03 quote views were exercised against it and preserved that identity; a live
+₹2,340 offer at ₹180/kg was issued. On CPH2781, **Refresh live offers**
+retrieved the same ₹2,340 offer, and acceptance loaded the matching 13 kg
+server agreement. A pending server handover `ST-EFDB28` was generated and its
+collector QR record renders correctly.
+
+Testing also found that R04's manual reference fallback never supplied a
+handover ID, leaving **Verify with Server** disabled. It is repaired locally:
+`GET /api/v1/handovers/lookup?reference=ST-XXXXXX` resolves the printed
+six-character reference for an authorized recycler, and R04 uses it to enter
+the verified confirmation state. The focused API test and web production build
+pass. Next action: commit/push/deploy this repair, verify `ST-EFDB28` through
+the scanner fallback, then request the owner's action-time confirmation before
+recording the recycler's final receipt confirmation.
+
 ## 2026-10-04 live counterparty and recycler-payload repair staged
 
 End-to-end tracing found two separate faults behind a collector/recycler

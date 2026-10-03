@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { confirmDemoHandover, HandoverDetail, lookupDemoHandover } from '../../lib/api';
+import { confirmDemoHandover, HandoverDetail, lookupDemoHandover, lookupDemoHandoverByReference } from '../../lib/api';
 
 type BarcodeDetectorInstance = {
   detect: (source: ImageBitmapSource) => Promise<Array<{ rawValue: string }>>;
@@ -126,12 +126,32 @@ export default function R04_QRScan() {
 
   useEffect(() => stopCamera, [stopCamera]);
 
-  const handleLookup = () => {
+  const handleLookup = async () => {
     if (!manualRef.trim()) return;
+    setIsLookingUp(true);
+    setLookupError(null);
     setScannedRecord({
       ref: manualRef.toUpperCase(),
       status: 'Reference entered — server lookup required',
     });
+    try {
+      const serverRecord = await lookupDemoHandoverByReference(manualRef);
+      const snapshot = serverRecord.proposal_payload.material_snapshot;
+      const weightG = serverRecord.proposal_payload.weight_snapshot?.estimated_weight_g;
+      setScannedRecord({
+        ref: manualRef.toUpperCase(),
+        material: snapshot?.material_id,
+        weight: typeof weightG === 'number' ? weightG / 1000 : undefined,
+        hash: serverRecord.proposal_hash,
+        handoverId: serverRecord.id,
+        serverRecord,
+        status: 'Server proposal verified — ready for recycler confirmation',
+      });
+    } catch (error) {
+      setLookupError(error instanceof Error ? error.message : 'Server lookup failed.');
+    } finally {
+      setIsLookingUp(false);
+    }
   };
 
   const verifyWithServer = async () => {
