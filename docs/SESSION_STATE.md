@@ -486,3 +486,23 @@ APK assembled successfully and was installed over CPH2781 data. Installation
 returned to the launcher, so do not claim an observed Files-app export until a
 confirmed QR record is reopened and Save PDF is tapped. Commit/push after docs
 validation, then use that existing C11 record for the physical export check.
+
+2026-10-04 visual repair: owner screenshots on CPH2781 exposed
+real responsive-layout failures in registered C08/C09/C10 screens: action
+labels collapsed into narrow vertical columns, long route/status text was
+clipped, the C10 agreement value was duplicated, and two equivalent QR-record
+actions appeared after proposal creation. The implementation now gives
+long-text actions adequate height/width, moves facility actions below their
+supporting copy, compacts C10 into a single agreement summary plus readable
+status cells, and retains only one QR-record action. The six-item C10/C11
+footer no longer splits “Handover” across multiple lines. This changes no
+workflow or approved screen hierarchy.
+
+Verification: two forced clean `:app:assembleDebug` builds passed on 2026-10-04
+(40 tasks each). The final APK installed over the existing CPH2781 app without
+clearing data. Direct device inspection of C08 confirmed that `Route match`,
+`Recenter`, and `Refresh` stay horizontal, the filter row scrolls instead of
+compressing, and reference facility actions occupy a full-width control rather
+than a thin vertical strip. C09/C10/C11 changes were included in the same
+successful full Kotlin compilation; their state-specific device paths were not
+replayed, so this is not a claim of separate manual-flow revalidation.

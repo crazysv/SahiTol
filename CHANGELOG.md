@@ -1487,6 +1487,22 @@ offer acceptance. No implementation change was needed.
   installation UI returned to the launcher before an existing record could be
   re-opened, so the on-device export tap itself remains to be observed.
 
+## 2026-10-04 — Collector small-screen layout repair
+
+- Repaired the Android layouts exposed by the CPH2781 screenshots without
+  changing the owner-approved Stitch screen structure. C08 now reserves width
+  for the lot context and GPS actions, horizontally scrolls long route chips,
+  and places each facility action below its supporting text rather than
+  squeezing a button into a narrow column.
+- C09 uses responsive language controls and taller offer/handover actions so
+  English, Hindi and Marathi labels are never vertically clipped.
+- C10 replaces the duplicate side-by-side amount summary with one unambiguous
+  agreement summary, lays review and status content out responsively, and
+  removes the duplicate QR-record action after a server proposal is created.
+- Rebuilt from scratch, installed on CPH2781 without clearing local data, and
+  visually checked C08: route status, Recenter, Refresh, facility actions and
+  horizontally scrolling filters render without vertical text collapse.
+
 ## 2026-10-01 — Real two-device QR audit (T025)
 
 Replaced the simulated web QR interaction with Chrome rear-camera decoding and

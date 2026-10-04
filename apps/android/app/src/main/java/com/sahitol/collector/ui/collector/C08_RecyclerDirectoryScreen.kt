@@ -153,7 +153,10 @@ fun C08_RecyclerDirectoryScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             Icon(
                                 Icons.Default.Build,
                                 contentDescription = null,
@@ -178,7 +181,7 @@ fun C08_RecyclerDirectoryScreen(
 
                         SuggestionChip(
                             onClick = {},
-                            label = { Text(if (lotContext.isConcreteLot) "Matching route" else "Select a lot", fontSize = 11.sp) },
+                            label = { Text(if (lotContext.isConcreteLot) "Route match" else "Select lot", fontSize = 11.sp) },
                             colors = SuggestionChipDefaults.suggestionChipColors(
                                 containerColor = SuccessGreen.copy(alpha = 0.12f),
                                 labelColor = SuccessGreen
@@ -249,7 +252,10 @@ fun C08_RecyclerDirectoryScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             Icon(
                                 Icons.Default.Place,
                                 contentDescription = null,
@@ -275,9 +281,9 @@ fun C08_RecyclerDirectoryScreen(
                         OutlinedButton(
                             onClick = { /* Recenter */ },
                             shape = RoundedCornerShape(8.dp),
-                            contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
+                            contentPadding = PaddingValues(horizontal = 10.dp, vertical = 8.dp)
                         ) {
-                            Text("Recenter GPS", fontSize = 11.sp, color = TerracottaPrimary)
+                            Text("Recenter", fontSize = 11.sp, color = TerracottaPrimary)
                         }
                     }
                 }
@@ -298,7 +304,10 @@ fun C08_RecyclerDirectoryScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             Icon(
                                 Icons.Default.Refresh,
                                 contentDescription = null,
@@ -306,7 +315,7 @@ fun C08_RecyclerDirectoryScreen(
                                 modifier = Modifier.size(18.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
-                            Column {
+                            Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = if (hasLiveDirectory) "Live Recycler Directory" else "Offline Reference Directory",
                                     fontSize = 12.sp,
@@ -321,7 +330,10 @@ fun C08_RecyclerDirectoryScreen(
                             }
                         }
 
-                        TextButton(onClick = {
+                        TextButton(
+                            modifier = Modifier.widthIn(min = 88.dp),
+                            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 6.dp),
+                            onClick = {
                             directoryMessage = null
                             coroutineScope.launch {
                                 // Reference entries remain browseable offline, but this explicit
@@ -495,12 +507,14 @@ fun RecyclerDirectoryCard(
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 SuggestionChip(
                     onClick = {},
-                    label = { Text("$materialLabel route", fontSize = 11.sp) },
+                    label = { Text("$materialLabel route", fontSize = 11.sp, maxLines = 1) },
                     colors = SuggestionChipDefaults.suggestionChipColors(
                         containerColor = SuccessGreen.copy(alpha = 0.10f),
                         labelColor = SuccessGreen
@@ -520,10 +534,9 @@ fun RecyclerDirectoryCard(
 
             HorizontalDivider(color = OutlineVariantColor.copy(alpha = 0.2f))
 
-            Row(
+            Column(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -547,13 +560,13 @@ fun RecyclerDirectoryCard(
                 Button(
                     onClick = onClick,
                     enabled = enabled,
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
                     shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = TerracottaPrimary),
-                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                    colors = ButtonDefaults.buttonColors(containerColor = TerracottaPrimary)
                 ) {
                     Icon(Icons.Default.ArrowForward, contentDescription = null, modifier = Modifier.size(14.dp))
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text(if (isLiveFacility) "View facility" else "Reference only", fontSize = 12.sp)
+                    Text(if (isLiveFacility) "View facility" else "Reference only — refresh to request", fontSize = 12.sp)
                 }
             }
         }

@@ -16,8 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sahitol.collector.data.repository.HandoverProposal
@@ -216,7 +218,15 @@ fun C10_HandoverCaptureScreen(
                     selected = true,
                     onClick = { /* Current */ },
                     icon = { Icon(Icons.Default.Place, contentDescription = "Handover") },
-                    label = { Text("Handover", fontSize = 10.sp) },
+                    label = {
+                        Text(
+                            "Handover",
+                            fontSize = 9.sp,
+                            maxLines = 1,
+                            softWrap = false,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    },
                     colors = NavigationBarItemDefaults.colors(
                         selectedIconColor = TerracottaPrimary,
                         selectedTextColor = TerracottaPrimary,
@@ -332,7 +342,10 @@ fun C10_HandoverCaptureScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             Icon(
                                 Icons.Default.Warning,
                                 contentDescription = null,
@@ -352,48 +365,41 @@ fun C10_HandoverCaptureScreen(
                             color = (if (termsState == "DISPUTED") ErrorRed else MustardSecondary).copy(alpha = 0.15f)
                         ) {
                             Text(
-                                text = if (termsState == "DISPUTED") "Disputed" else "Agreement loaded",
+                                text = if (termsState == "DISPUTED") "Disputed" else "Loaded",
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = if (termsState == "DISPUTED") ErrorRed else MustardSecondary,
-                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                maxLines = 1,
+                                softWrap = false,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                             )
                         }
                     }
 
-                    // Comparison grid
-                    Row(
+                    // Compact, responsive agreement summary. Long labels must never be squeezed
+                    // into two narrow columns on an entry-level phone.
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(SurfaceContainerLowest, RoundedCornerShape(8.dp))
                             .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceAround
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("Agreed total", fontSize = 11.sp, color = OnSurfaceVariant)
-                            Text("₹%.2f".format(proposal.totalPayoutInr), fontSize = 16.sp, fontWeight = FontWeight.SemiBold, color = OnSurface)
-                            Text("%.2f kg @ ₹%.2f/kg".format(proposal.estimatedWeightG / 1000.0, proposal.rateInrPerKg), fontSize = 10.sp, color = OnSurfaceVariant)
-                        }
-                        Box(
-                            modifier = Modifier
-                                .width(1.dp)
-                                .height(40.dp)
-                                .background(OutlineVariantColor.copy(alpha = 0.5f))
+                        Text("Agreed handover value", fontSize = 11.sp, color = OnSurfaceVariant)
+                        Text(
+                            "₹%.2f".format(proposal.totalPayoutInr),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = if (termsState == "DISPUTED") ErrorRed else TerracottaPrimary
                         )
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("Agreed handover value", fontSize = 11.sp, color = OnSurfaceVariant)
-                            Text(
-                                "₹%.2f".format(proposal.totalPayoutInr),
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = if (termsState == "DISPUTED") ErrorRed else TerracottaPrimary
-                            )
-                            Text(
-                                "%.2f kg agreed; no recycler measurement yet".format(proposal.estimatedWeightG / 1000.0),
-                                fontSize = 10.sp,
-                                color = OnSurfaceVariant
-                            )
-                        }
+                        Text(
+                            "%.2f kg at ₹%.2f/kg · recycler measurement pending".format(
+                                proposal.estimatedWeightG / 1000.0,
+                                proposal.rateInrPerKg
+                            ),
+                            fontSize = 11.sp,
+                            color = OnSurfaceVariant
+                        )
                     }
 
                     // Review details expansion
@@ -421,13 +427,13 @@ fun C10_HandoverCaptureScreen(
 
                     // Agreement state and inspection controls. A recycler measurement or
                     // revision is only available after the QR handover exists on the server.
-                    Row(
+                    Column(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         OutlinedButton(
                             onClick = { showReviewDetails = !showReviewDetails },
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
                             shape = RoundedCornerShape(8.dp)
                         ) {
                             Icon(Icons.Default.Info, contentDescription = null, modifier = Modifier.size(14.dp))
@@ -435,36 +441,24 @@ fun C10_HandoverCaptureScreen(
                             Text("Review", fontSize = 11.sp)
                         }
 
-                        Surface(
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(8.dp),
-                            color = SuccessGreen.copy(alpha = 0.15f)
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp),
-                                horizontalArrangement = Arrangement.Center,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(14.dp), tint = SuccessGreen)
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text("Terms accepted", fontSize = 11.sp, color = SuccessGreen)
-                            }
-                        }
-
-                        Surface(
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(8.dp),
-                            color = SurfaceContainer
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp),
-                                horizontalArrangement = Arrangement.Center,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(Icons.Default.Info, contentDescription = null, modifier = Modifier.size(14.dp), tint = OnSurfaceVariant)
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text("Awaiting measurement", fontSize = 11.sp, color = OnSurfaceVariant)
-                            }
+                            AgreementStatusCell(
+                                modifier = Modifier.weight(1f),
+                                icon = Icons.Default.Check,
+                                label = "Terms accepted",
+                                color = SuccessGreen,
+                                background = SuccessGreen.copy(alpha = 0.15f)
+                            )
+                            AgreementStatusCell(
+                                modifier = Modifier.weight(1f),
+                                icon = Icons.Default.Info,
+                                label = "Measurement pending",
+                                color = OnSurfaceVariant,
+                                background = SurfaceContainer
+                            )
                         }
                     }
                 }
@@ -608,14 +602,11 @@ fun C10_HandoverCaptureScreen(
                             }
                         }
 
-                        Button(
-                            onClick = { onNavigateRecord(proposal.handoverId) },
-                            modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(8.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen)
-                        ) {
-                            Text("Open Digital Handover Record (QR)")
-                        }
+                        Text(
+                            "Use the handover-record button above to view or share this QR record.",
+                            fontSize = 11.sp,
+                            color = OnSurfaceVariant
+                        )
                     }
                 }
             }
@@ -667,5 +658,30 @@ fun C10_HandoverCaptureScreen(
                 }
             }
         )
+    }
+}
+
+@Composable
+private fun AgreementStatusCell(
+    modifier: Modifier = Modifier,
+    icon: ImageVector,
+    label: String,
+    color: Color,
+    background: Color
+) {
+    Surface(
+        modifier = modifier.heightIn(min = 56.dp),
+        shape = RoundedCornerShape(8.dp),
+        color = background
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(icon, contentDescription = null, modifier = Modifier.size(14.dp), tint = color)
+            Spacer(modifier = Modifier.width(5.dp))
+            Text(label, fontSize = 11.sp, color = color, maxLines = 2)
+        }
     }
 }

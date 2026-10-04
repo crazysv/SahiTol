@@ -86,7 +86,10 @@ fun C09_RecyclerProfileOfferScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        modifier = Modifier.weight(1f),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         IconButton(onClick = onNavigateBack) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                         }
@@ -115,7 +118,7 @@ fun C09_RecyclerProfileOfferScreen(
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.SemiBold,
                                     color = if (isSelected) Color.White else OnSurfaceVariant,
-                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 3.dp)
+                                    modifier = Modifier.padding(horizontal = 5.dp, vertical = 7.dp)
                                 )
                             }
                         }
@@ -275,12 +278,15 @@ fun C09_RecyclerProfileOfferScreen(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Column {
+                            Column(modifier = Modifier.weight(1f, fill = false)) {
                                 Text("YOUR LOT", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = OnSurfaceVariant)
                                 Text(lotContext.materialLabel, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = OnSurface)
                                 Text(lotContext.weightLabel, fontSize = 12.sp, color = OnSurfaceVariant)
                             }
-                            Column(horizontalAlignment = Alignment.End) {
+                            Column(
+                                modifier = Modifier.weight(1f, fill = false),
+                                horizontalAlignment = Alignment.End
+                            ) {
                                 Text("ACCEPTED HERE", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
                                 Text(if (lotContext.canonicalMaterialId in facility.materialsAccepted) "Listed material route" else "Route needs review", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = OnSurface)
                                 Text("Final terms come from the recycler", fontSize = 12.sp, color = SuccessGreen)
@@ -481,12 +487,12 @@ fun C09_RecyclerProfileOfferScreen(
                                         onClick = {
                                             requestState = LotRequestState.OFFER_REJECTED
                                         },
-                                        modifier = Modifier.weight(1f).height(46.dp),
+                                        modifier = Modifier.weight(1f).heightIn(min = 60.dp),
                                         shape = RoundedCornerShape(10.dp)
                                     ) {
                                         Icon(Icons.Default.Close, contentDescription = null, modifier = Modifier.size(16.dp))
                                         Spacer(modifier = Modifier.width(6.dp))
-                                        Text("Reject")
+                                        Text("Reject", maxLines = 1)
                                     }
 
                                     Button(
@@ -500,13 +506,13 @@ fun C09_RecyclerProfileOfferScreen(
                                                 }
                                             }
                                         },
-                                        modifier = Modifier.weight(1f).height(46.dp),
+                                        modifier = Modifier.weight(1f).heightIn(min = 60.dp),
                                         shape = RoundedCornerShape(10.dp),
                                         colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen)
                                     ) {
                                         Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(16.dp))
                                         Spacer(modifier = Modifier.width(6.dp))
-                                        Text("Accept Offer")
+                                        Text("Accept\nOffer", maxLines = 2, lineHeight = 16.sp)
                                     }
                                 }
                             }
@@ -532,13 +538,13 @@ fun C09_RecyclerProfileOfferScreen(
 
                                         Button(
                                             onClick = { onNavigateHandover(lotId) },
-                                            modifier = Modifier.fillMaxWidth().height(44.dp),
+                                            modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
                                             shape = RoundedCornerShape(8.dp),
                                             colors = ButtonDefaults.buttonColors(containerColor = TerracottaPrimary)
                                         ) {
                                             Icon(Icons.Default.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp))
                                             Spacer(modifier = Modifier.width(6.dp))
-                                            Text("Proceed to Handover / हस्तनांतरण करें")
+                                            Text("Proceed to Handover / हस्तनांतरण करें", maxLines = 2)
                                         }
                                     }
                                 }
