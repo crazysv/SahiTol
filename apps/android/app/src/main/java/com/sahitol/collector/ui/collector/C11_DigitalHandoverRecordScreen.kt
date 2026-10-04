@@ -33,6 +33,7 @@ import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.domain.pdf.ReceiptPdfGenerator
 import com.sahitol.collector.domain.qr.QrGenerator
 import com.sahitol.collector.ui.theme.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -71,30 +72,37 @@ fun C11_DigitalHandoverRecordScreen(
     var disputeReason by remember(handoverId) { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
 
+    // Recycler confirmation happens on a different device. Keep this record
+    // current while it remains visible instead of requiring the collector to
+    // leave and reopen the screen after the QR confirmation completes.
     LaunchedEffect(handoverId, session.accountId) {
         val accountId = session.accountId ?: return@LaunchedEffect
-        when (val result = facilityRepository.fetchLiveHandoverStatus(handoverId, accountId)) {
-            is TradeResult.Success -> {
-                revision = result.value.latestTermsRevision
-                serverVersion = result.value.version
-                proposal = handoverRepository.updateServerStatus(handoverId, result.value.status)
-                    ?: proposal.copy(status = result.value.status)
-                proposal = revision?.let {
-                    proposal.copy(
-                        materialId = it.materialId,
-                        measuredWeightG = it.measuredWeightG,
-                        totalPayoutInr = it.finalTotalPaise / 100.0,
-                        rateInrPerKg = if (it.measuredWeightG > 0) it.finalTotalPaise / 100.0 * 1000 / it.measuredWeightG else 0.0
-                    )
-                } ?: proposal
-                refreshMessage = when (result.value.status) {
-                    "CONFIRMED" -> "Recycler receipt confirmed by server."
-                    "PENDING_COLLECTOR_ACK" -> "Review the recycler's changed measurement before confirming or disputing it."
-                    "DISPUTED" -> "Dispute recorded. The original handover evidence remains unchanged."
-                    else -> null
+        while (true) {
+            when (val result = facilityRepository.fetchLiveHandoverStatus(handoverId, accountId)) {
+                is TradeResult.Success -> {
+                    revision = result.value.latestTermsRevision
+                    serverVersion = result.value.version
+                    proposal = handoverRepository.updateServerStatus(handoverId, result.value.status)
+                        ?: proposal.copy(status = result.value.status)
+                    proposal = revision?.let {
+                        proposal.copy(
+                            materialId = it.materialId,
+                            measuredWeightG = it.measuredWeightG,
+                            totalPayoutInr = it.finalTotalPaise / 100.0,
+                            rateInrPerKg = if (it.measuredWeightG > 0) it.finalTotalPaise / 100.0 * 1000 / it.measuredWeightG else 0.0
+                        )
+                    } ?: proposal
+                    refreshMessage = when (result.value.status) {
+                        "CONFIRMED" -> "Recycler receipt confirmed by server."
+                        "PENDING_COLLECTOR_ACK" -> "Review the recycler's changed measurement before confirming or disputing it."
+                        "DISPUTED" -> "Dispute recorded. The original handover evidence remains unchanged."
+                        else -> null
+                    }
+                    if (result.value.status in setOf("CONFIRMED", "DISPUTED")) break
                 }
+                is TradeResult.Failure -> refreshMessage = result.message
             }
-            is TradeResult.Failure -> refreshMessage = result.message
+            delay(3_000)
         }
     }
 

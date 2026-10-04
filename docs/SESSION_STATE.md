@@ -466,3 +466,14 @@ The two PCB lots inspected (13 kg and 13.5 kg) both returned no accepted server
 transaction and therefore remained correctly blocked; no test offer, handover,
 or confirmation was created. Commit/push the two Android screen fixes and then
 repeat C10 device navigation with a lot whose server transaction is AGREED.
+
+2026-10-04 QR follow-up: the C11 record for the latest 11 kg PCB handover
+(`ST-8B56B5`) stayed visually PENDING even after recycler website confirmation.
+An authenticated server read proved the handover is `CONFIRMED` at v2; C11 had
+made only its initial status request before the recycler acted. C11 now polls
+the existing server status endpoint every three seconds while pending and stops
+after confirmed/disputed terminal states. The Android debug build passed and
+was installed over CPH2781 without clearing data. This is a UI freshness repair;
+the device still needs a visible C11 re-entry or a new handover to observe the
+automatic transition on the screen itself. Commit/push with documentation
+validation, then use the updated APK for the next two-device handover.

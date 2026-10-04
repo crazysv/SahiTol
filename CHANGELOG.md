@@ -1466,6 +1466,17 @@ offer acceptance. No implementation change was needed.
   accepted server transaction, so they remained correctly blocked; no offer,
   handover, or confirmation was created during this check.
 
+## 2026-10-04 — QR confirmation state refresh
+
+- Repaired C11 Digital Handover Record to refresh its server state every three
+  seconds while a recycler confirmation is pending. The collector does not need
+  to leave and reopen the QR screen after a second-device confirmation.
+- Verified the live server state for handover `ST-8B56B5`: it is `CONFIRMED`,
+  version 2. The previous collector screen was stale because it had checked
+  before confirmation and never checked again.
+- `:app:assembleDebug` passed and the replacement debug APK was installed over
+  existing data on CPH2781. No external trade state was changed by this repair.
+
 ## 2026-10-01 — Real two-device QR audit (T025)
 
 Replaced the simulated web QR interaction with Chrome rear-camera decoding and
