@@ -1450,6 +1450,22 @@ Canonical JSON and handover-receipt Android tests passed 7/7. The physical
 collector flow also reached C10 Handover Capture with its review controls after
 offer acceptance. No implementation change was needed.
 
+## 2026-10-04 — Collector handover resume clarity
+
+- Repaired C10 so a rupee amount is labelled as the **agreed handover value**,
+  not mass. The screen now separates accepted terms from a recycler measurement
+  that has not yet been recorded.
+- Removed two inert-looking controls: the accepted-terms and awaiting-measurement
+  states are now clearly non-action status surfaces. A recovered server handover
+  opens its existing QR record instead of attempting a second creation.
+- Repaired C07 resume behavior: it recovers an existing accepted transaction
+  independently of the open-offers list, so a re-opened lot can continue to
+  handover when the server reports an accepted agreement.
+- `:app:assembleDebug` passed and the debug APK was installed over existing
+  data on CPH2781. The currently visible 13 kg and 13.5 kg PCB lots have no
+  accepted server transaction, so they remained correctly blocked; no offer,
+  handover, or confirmation was created during this check.
+
 ## 2026-10-01 — Real two-device QR audit (T025)
 
 Replaced the simulated web QR interaction with Chrome rear-camera decoding and

@@ -70,6 +70,7 @@ fun C10_HandoverCaptureScreen(
     var showDisputeDialog by remember { mutableStateOf(false) }
     var isSaving by remember { mutableStateOf(false) }
     var savedSuccessToast by remember { mutableStateOf(false) }
+    val hasServerHandover = proposal.handoverId != lotId && proposal.canonicalHash.isNotBlank()
 
     LaunchedEffect(lotId, accountId, lotContext.canonicalMaterialId) {
         loadingAgreement = true
@@ -380,14 +381,18 @@ fun C10_HandoverCaptureScreen(
                                 .background(OutlineVariantColor.copy(alpha = 0.5f))
                         )
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("Recorded handover mass", fontSize = 11.sp, color = OnSurfaceVariant)
+                            Text("Agreed handover value", fontSize = 11.sp, color = OnSurfaceVariant)
                             Text(
                                 "₹%.2f".format(proposal.totalPayoutInr),
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = if (termsState == "DISPUTED") ErrorRed else TerracottaPrimary
                             )
-                            Text("%.2f kg; no recycler measurement yet".format((proposal.measuredWeightG ?: proposal.estimatedWeightG) / 1000.0), fontSize = 10.sp, color = OnSurfaceVariant)
+                            Text(
+                                "%.2f kg agreed; no recycler measurement yet".format(proposal.estimatedWeightG / 1000.0),
+                                fontSize = 10.sp,
+                                color = OnSurfaceVariant
+                            )
                         }
                     }
 
@@ -414,7 +419,8 @@ fun C10_HandoverCaptureScreen(
                         }
                     }
 
-                    // Three Decision Buttons
+                    // Agreement state and inspection controls. A recycler measurement or
+                    // revision is only available after the QR handover exists on the server.
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -429,31 +435,36 @@ fun C10_HandoverCaptureScreen(
                             Text("Review", fontSize = 11.sp)
                         }
 
-                        Button(
-                            onClick = { termsState = "AGREED" },
+                        Surface(
                             modifier = Modifier.weight(1f),
                             shape = RoundedCornerShape(8.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = if (termsState == "ACCEPTED") SuccessGreen else TerracottaPrimary
-                            )
+                            color = SuccessGreen.copy(alpha = 0.15f)
                         ) {
-                            Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(14.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text("Agreed", fontSize = 11.sp)
+                            Row(
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp),
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(14.dp), tint = SuccessGreen)
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text("Terms accepted", fontSize = 11.sp, color = SuccessGreen)
+                            }
                         }
 
-                        OutlinedButton(
-                            onClick = { },
+                        Surface(
                             modifier = Modifier.weight(1f),
                             shape = RoundedCornerShape(8.dp),
-                            enabled = false,
-                            colors = ButtonDefaults.outlinedButtonColors(
-                                contentColor = if (termsState == "DISPUTED") ErrorRed else OnSurfaceVariant
-                            )
+                            color = SurfaceContainer
                         ) {
-                            Icon(Icons.Default.Close, contentDescription = null, modifier = Modifier.size(14.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text("Recycler revision", fontSize = 11.sp)
+                            Row(
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp),
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(Icons.Default.Info, contentDescription = null, modifier = Modifier.size(14.dp), tint = OnSurfaceVariant)
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text("Awaiting measurement", fontSize = 11.sp, color = OnSurfaceVariant)
+                            }
                         }
                     }
                 }
@@ -490,7 +501,7 @@ fun C10_HandoverCaptureScreen(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(Icons.Default.CheckCircle, contentDescription = null, tint = SuccessGreen, modifier = Modifier.size(24.dp))
                             Spacer(modifier = Modifier.height(4.dp))
-                            Text("Accepted mass: %.2f kg".format((proposal.measuredWeightG ?: proposal.estimatedWeightG) / 1000.0), fontSize = 12.sp, fontWeight = FontWeight.Bold, color = OnSurface)
+                            Text("Accepted mass: %.2f kg".format(proposal.estimatedWeightG / 1000.0), fontSize = 12.sp, fontWeight = FontWeight.Bold, color = OnSurface)
                             Text("Recycler measurement has not been recorded", fontSize = 10.sp, color = OnSurfaceVariant)
                         }
                     }
@@ -524,6 +535,10 @@ fun C10_HandoverCaptureScreen(
             // Primary Save Action Button
             Button(
                 onClick = {
+                    if (hasServerHandover) {
+                        onNavigateRecord(proposal.handoverId)
+                        return@Button
+                    }
                     isSaving = true
                     coroutineScope.launch {
                         val tx = agreement
@@ -546,12 +561,16 @@ fun C10_HandoverCaptureScreen(
                     .height(52.dp),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = TerracottaPrimary),
-                enabled = !isSaving && !loadingAgreement && agreement != null && acceptedOffer != null && lotContext.canonicalMaterialId != null
+                enabled = hasServerHandover || (!isSaving && !loadingAgreement && agreement != null && acceptedOffer != null && lotContext.canonicalMaterialId != null)
             ) {
                 Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = if (isSaving) "Saving..." else "Save & Generate Handover Record / हस्तनांतरण सहेजें",
+                    text = when {
+                        hasServerHandover -> "Open Digital Handover Record (QR)"
+                        isSaving -> "Saving..."
+                        else -> "Save & Generate Handover Record / हस्तनांतरण सहेजें"
+                    },
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
                 )

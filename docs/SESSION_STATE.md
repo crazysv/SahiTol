@@ -454,3 +454,15 @@ The fresh corrected PCB lot reached hosted Postgres but the pre-existing demo
 user had no `collectors` profile. Demo login now repairs this legacy bootstrap
 state; its 14 focused auth tests pass. Push/deploy the server repair, then tap
 manual sync to retry the already-queued valid PCB lot.
+
+2026-10-04 device follow-up: C10's displayed money was incorrectly labelled as
+"Recorded handover mass" and its apparent agreement/revision buttons had no
+server action. C10 now labels the accepted value accurately, makes the pending
+measurement state explicit, and opens a recovered server QR record instead of
+creating a duplicate. C07 now separately recovers an accepted transaction so
+the handover continuation is not lost when the open-offer list is empty. The
+Android debug build passed and was installed over CPH2781 without clearing data.
+The two PCB lots inspected (13 kg and 13.5 kg) both returned no accepted server
+transaction and therefore remained correctly blocked; no test offer, handover,
+or confirmation was created. Commit/push the two Android screen fixes and then
+repeat C10 device navigation with a lot whose server transaction is AGREED.

@@ -66,6 +66,18 @@ fun C07_ValuationScreen(
     var acceptedOfferName by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(lotId, accountId) {
+        // A lot can already have an accepted transaction after the app is reopened.
+        // The offers endpoint intentionally returns only currently open offers, so do
+        // not make the handover route disappear just because that list is empty.
+        when (val acceptedResult = facilityRepository.fetchAcceptedTransaction(lotId, accountId)) {
+            is com.sahitol.collector.data.repository.TradeResult.Success -> {
+                if (acceptedResult.value.lifecycle in setOf("AGREED", "IN_TRANSIT", "CONFIRMED")) {
+                    acceptedOfferName = "Accepted live facility"
+                }
+            }
+            is com.sahitol.collector.data.repository.TradeResult.Failure -> Unit
+        }
+
         when (val result = facilityRepository.fetchLiveOffers(lotId, accountId)) {
             is com.sahitol.collector.data.repository.TradeResult.Success -> {
                 offers = result.value
