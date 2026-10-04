@@ -509,8 +509,8 @@ fun C11_DigitalHandoverRecordScreen(
                                     statusText = proposal.status
                                 )
                             )
-                            pdfGeneratedFile = pdfFile.name
-                            Toast.makeText(context, "Saved PDF: ${pdfFile.name}", Toast.LENGTH_LONG).show()
+                            pdfGeneratedFile = "${pdfFile.locationLabel}: ${pdfFile.displayName}"
+                            Toast.makeText(context, "Saved to ${pdfFile.locationLabel}", Toast.LENGTH_LONG).show()
                         } catch (e: Exception) {
                             Toast.makeText(context, "PDF generation failed: ${e.message}", Toast.LENGTH_SHORT).show()
                         }
@@ -539,7 +539,7 @@ fun C11_DigitalHandoverRecordScreen(
                         Icon(Icons.Default.CheckCircle, contentDescription = null, tint = SuccessGreen, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
-                            text = "PDF exported: $pdfGeneratedFile",
+                            text = "PDF saved: $pdfGeneratedFile",
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Medium,
                             color = OnSurface

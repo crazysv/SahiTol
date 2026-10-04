@@ -1477,6 +1477,16 @@ offer acceptance. No implementation change was needed.
 - `:app:assembleDebug` passed and the replacement debug APK was installed over
   existing data on CPH2781. No external trade state was changed by this repair.
 
+## 2026-10-04 — Accessible receipt PDF export
+
+- Repaired C11 **Save PDF** so Android 10+ exports to the user-visible
+  `Downloads/SahiTol` collection through MediaStore, rather than temporary app
+  cache storage. Android 8–9 keeps a documented app-files fallback.
+- The saved-screen message now gives the actual location and filename. The
+  current debug APK built successfully and was installed on CPH2781. The
+  installation UI returned to the launcher before an existing record could be
+  re-opened, so the on-device export tap itself remains to be observed.
+
 ## 2026-10-01 — Real two-device QR audit (T025)
 
 Replaced the simulated web QR interaction with Chrome rear-camera decoding and

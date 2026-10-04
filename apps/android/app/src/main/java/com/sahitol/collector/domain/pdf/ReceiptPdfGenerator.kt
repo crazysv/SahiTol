@@ -1,10 +1,14 @@
 package com.sahitol.collector.domain.pdf
 
 import android.content.Context
+import android.content.ContentValues
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import com.sahitol.collector.domain.qr.QrGenerator
 import java.io.File
 import java.io.FileOutputStream
@@ -14,6 +18,11 @@ import java.io.FileOutputStream
  * Implements R-HAND-06 / AT-034 with statutory Non-EPR disclosure and cryptographic hash seal.
  */
 object ReceiptPdfGenerator {
+
+    data class ReceiptExport(
+        val displayName: String,
+        val locationLabel: String
+    )
 
     data class ReceiptData(
         val handoverId: String,
@@ -30,7 +39,7 @@ object ReceiptPdfGenerator {
         val statusText: String = "PENDING_CONFIRMATION"
     )
 
-    fun generateReceiptPdf(context: Context, data: ReceiptData): File {
+    fun generateReceiptPdf(context: Context, data: ReceiptData): ReceiptExport {
         val pdfDocument = PdfDocument()
         val pageInfo = PdfDocument.PageInfo.Builder(595, 842, 1).create() // A4 standard in points
         val page = pdfDocument.startPage(pageInfo)
@@ -163,14 +172,38 @@ object ReceiptPdfGenerator {
 
         pdfDocument.finishPage(page)
 
-        // Output File
-        val outputDir = File(context.cacheDir, "receipts").apply { mkdirs() }
-        val outputFile = File(outputDir, "Receipt_${data.referenceCode}_${System.currentTimeMillis()}.pdf")
-        FileOutputStream(outputFile).use { out ->
-            pdfDocument.writeTo(out)
-        }
-        pdfDocument.close()
+        val displayName = "Receipt_${data.referenceCode}_${System.currentTimeMillis()}.pdf"
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                // MediaStore makes the receipt visible in Files/Downloads without a
+                // broad storage permission. It is intentionally not written to cache.
+                val values = ContentValues().apply {
+                    put(MediaStore.Downloads.DISPLAY_NAME, displayName)
+                    put(MediaStore.Downloads.MIME_TYPE, "application/pdf")
+                    put(MediaStore.Downloads.RELATIVE_PATH, "${Environment.DIRECTORY_DOWNLOADS}/SahiTol")
+                }
+                val uri = context.contentResolver.insert(
+                    MediaStore.Downloads.EXTERNAL_CONTENT_URI,
+                    values
+                ) ?: error("Could not create the Downloads receipt file.")
+                try {
+                    context.contentResolver.openOutputStream(uri)?.use { out ->
+                        pdfDocument.writeTo(out)
+                    } ?: error("Could not write the Downloads receipt file.")
+                } catch (error: Exception) {
+                    context.contentResolver.delete(uri, null, null)
+                    throw error
+                }
+                return ReceiptExport(displayName, "Downloads/SahiTol")
+            }
 
-        return outputFile
+            // Android 8–9 fallback. Newer devices use the public Downloads path above.
+            val outputDir = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "SahiTol").apply { mkdirs() }
+            val outputFile = File(outputDir, displayName)
+            FileOutputStream(outputFile).use { out -> pdfDocument.writeTo(out) }
+            return ReceiptExport(displayName, "SahiTol app files")
+        } finally {
+            pdfDocument.close()
+        }
     }
 }

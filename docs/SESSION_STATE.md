@@ -477,3 +477,12 @@ was installed over CPH2781 without clearing data. This is a UI freshness repair;
 the device still needs a visible C11 re-entry or a new handover to observe the
 automatic transition on the screen itself. Commit/push with documentation
 validation, then use the updated APK for the next two-device handover.
+
+2026-10-04 receipt export follow-up: C11 previously wrote its generated PDF to
+`cacheDir`, contrary to its visible "Save PDF" label. It now writes Android
+10+ exports with MediaStore to `Downloads/SahiTol` and reports that path plus
+the generated filename; Android 8–9 has a documented app-files fallback. The
+APK assembled successfully and was installed over CPH2781 data. Installation
+returned to the launcher, so do not claim an observed Files-app export until a
+confirmed QR record is reopened and Save PDF is tapped. Commit/push after docs
+validation, then use that existing C11 record for the physical export check.
