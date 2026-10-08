@@ -29,6 +29,7 @@ import com.sahitol.collector.data.repository.PriceBenchmarkItem
 import com.sahitol.collector.data.repository.PriceRepository
 import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.ui.theme.*
+import com.sahitol.collector.ui.components.SahiTolWordmark
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -84,12 +85,7 @@ fun C06_PriceBoardScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "सहीTol",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = TerracottaPrimary
-                        )
+                        SahiTolWordmark(modifier = Modifier.width(104.dp))
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
                             text = "Collector",

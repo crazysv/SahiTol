@@ -25,6 +25,7 @@ import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.domain.payment.CollectorLedgerSummary
 import com.sahitol.collector.domain.payment.TransactionSummary
 import com.sahitol.collector.ui.theme.*
+import com.sahitol.collector.ui.components.SahiTolWordmark
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,25 +59,8 @@ fun C12_LedgerScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Surface(
-                            shape = RoundedCornerShape(4.dp),
-                            color = TerracottaPrimary
-                        ) {
-                            Text(
-                                text = "सहीTol",
-                                color = OnPrimary,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 14.sp,
-                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                            )
-                        }
+                        SahiTolWordmark(modifier = Modifier.width(104.dp))
                         Column {
-                            Text(
-                                text = "SahiTol",
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = OnSurface
-                            )
                             Text(
                                 text = "Collector Ledger · $alias",
                                 fontSize = 10.sp,

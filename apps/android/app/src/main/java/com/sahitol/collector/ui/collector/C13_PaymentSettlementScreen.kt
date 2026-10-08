@@ -22,6 +22,7 @@ import com.sahitol.collector.data.session.SessionManager
 import com.sahitol.collector.domain.payment.PaymentMethod
 import com.sahitol.collector.domain.payment.PaymentState
 import com.sahitol.collector.ui.theme.*
+import com.sahitol.collector.ui.components.SahiTolWordmark
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,18 +64,7 @@ fun C13_PaymentSettlementScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Surface(
-                            shape = RoundedCornerShape(4.dp),
-                            color = TerracottaPrimary
-                        ) {
-                            Text(
-                                text = "सहीTol",
-                                color = OnPrimary,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 14.sp,
-                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                            )
-                        }
+                        SahiTolWordmark(modifier = Modifier.width(104.dp))
                         Column {
                             Text(
                                 text = "Payment Settlement",

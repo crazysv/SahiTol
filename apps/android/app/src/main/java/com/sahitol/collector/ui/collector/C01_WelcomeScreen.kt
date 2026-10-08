@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sahitol.collector.ui.components.SahiTolWordmark
 import com.sahitol.collector.ui.theme.*
 
 /**
@@ -53,36 +54,7 @@ fun C01_WelcomeScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(48.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(SecondaryContainer),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = "⚖",
-                                fontSize = 24.sp
-                            )
-                        }
-                        Column {
-                            Text(
-                                text = "सही तौल",
-                                style = MaterialTheme.typography.titleLarge,
-                                fontWeight = FontWeight.Bold,
-                                color = OnSurface
-                            )
-                            Text(
-                                text = "SahiTol Yard OS",
-                                style = MaterialTheme.typography.labelSmall,
-                                color = OnSurfaceVariant
-                            )
-                        }
-                    }
+                    SahiTolWordmark(modifier = Modifier.width(120.dp))
 
                     // Diagnostic Link Badge
                     Row(

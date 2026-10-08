@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sahitol.collector.data.local.entity.LotEntity
+import com.sahitol.collector.ui.components.SahiTolWordmark
 import com.sahitol.collector.ui.theme.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -74,26 +75,10 @@ fun C03_HomeScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(6.dp))
-                                .background(TerracottaPrimary)
-                                .padding(horizontal = 8.dp, vertical = 4.dp)
-                        ) {
-                            Text(
-                                text = "सहीTol",
-                                style = MaterialTheme.typography.labelMedium,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
-                        }
+                        SahiTolWordmark(
+                            modifier = Modifier.width(106.dp)
+                        )
                         Column {
-                            Text(
-                                text = "SahiTol",
-                                style = MaterialTheme.typography.labelSmall,
-                                fontWeight = FontWeight.Bold,
-                                color = OnSurface
-                            )
                             Text(
                                 text = if (isDemo) "DEMO MODE" else "Collector App",
                                 style = MaterialTheme.typography.labelSmall,
