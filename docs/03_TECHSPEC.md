@@ -1,6 +1,6 @@
 # Technical specification
 
-Authority: [master](../MASTER_CONTENT.md). Related: [schema](06_SCHEMA.md), [API](16_API_CONTRACT.md), [sync](17_OFFLINE_SYNC.md), [decisions](09_DECISIONS.md). Scope IDs are in the [register](15_REQUIREMENTS.md).
+Authority: [PRD](01_PRD.md) and [decisions](09_DECISIONS.md). Related: [schema](06_SCHEMA.md), [API](16_API_CONTRACT.md), and [sync](17_OFFLINE_SYNC.md). Scope IDs are in the [register](15_REQUIREMENTS.md).
 
 ## Architecture and code boundaries
 

@@ -1,12 +1,12 @@
 # Documentation guide
 
-SahiTol is the product; SIH26229 is the supplied problem statement. These documents reconcile the two provided transcripts and turn the agreed scope into linked implementation and acceptance work. Start with [MASTER_CONTENT](../MASTER_CONTENT.md) for the full idea, then [PRD](01_PRD.md). The screenshots from the prior project guided organization only.
+SahiTol is the product; SIH26229 is the supplied problem statement. These documents reconcile the supplied evidence and turn the agreed scope into linked implementation and acceptance work. Start with the [PRD](01_PRD.md). The screenshots from the prior project guided organization only.
 
 ## Reading paths
 
 New reader: master → PRD → [app flow](04_APPFLOW.md) → [architecture](03_TECHSPEC.md) → [demo](24_DEMO_PRESENTATION.md) → [limitations/evidence](21_RESEARCH_EVIDENCE.md).
 
-Coding agent: [AGENTS](../AGENTS.md) → [session state](SESSION_STATE.md) → [tracker](08_TRACKER.md) → [decisions](09_DECISIONS.md)/[questions](10_OPEN_QUESTIONS.md) → selected [task](07_IMPLEMENTATION_PLAN.md) → its linked requirements/specifications/cases. Use [session-start](../commands/session-start.md) and [session-continue](../commands/session-continue.md) as custom-command bodies. They maintain continuity and advance through authorized tasks without routine “next task?” permission. Register them using the actual IDE's supported mechanism; no IDE-specific installation is claimed.
+Implementation contributor: [session state](SESSION_STATE.md) → [tracker](08_TRACKER.md) → [decisions](09_DECISIONS.md)/[questions](10_OPEN_QUESTIONS.md) → selected [task](07_IMPLEMENTATION_PLAN.md) → its linked requirements/specifications/cases. Preserve the documented scope, update evidence honestly, and use the recovery process when continuity is needed.
 
 ## Document map
 

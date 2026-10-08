@@ -218,7 +218,7 @@ use this quarantined checkpoint.
 
 Handoff date: 2026-10-02 (Asia/Kolkata). Phase: **T048 presentation deliverable complete; continue remaining release evidence in canonical task order.**
 
-Scope and progression: [master](../MASTER_CONTENT.md), [tracker](08_TRACKER.md), [implementation plan](07_IMPLEMENTATION_PLAN.md). Authoritative statuses live in [status.json](planning/status.json).
+Scope and progression: [PRD](01_PRD.md), [tracker](08_TRACKER.md), [implementation plan](07_IMPLEMENTATION_PLAN.md). Authoritative statuses live in [status.json](planning/status.json).
 
 ## Live deployment
 

@@ -119,9 +119,9 @@ def anchors(text):
     return result
 
 def check_links(root=ROOT):
-    errors=[]; count=0; paths=list(root.rglob('*.md'))
+    errors=[]; count=0
+    paths=[path for path in root.rglob('*.md') if not any(p in {'.git','node_modules','.venv','build','dist'} for p in path.parts)]
     for path in paths:
-        if any(p in {'.git','node_modules','.venv','build','dist'} for p in path.parts): continue
         text=path.read_text(encoding='utf-8')
         text=re.sub(r'```.*?```','',text,flags=re.S)
         for match in re.finditer(r'\[[^\]\n]*\]\(([^)\n]+)\)',text):

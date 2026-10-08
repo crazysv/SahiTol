@@ -1,10 +1,10 @@
 # Session continuity and failure recovery
 
-Entry points: [session-start](../commands/session-start.md), [session-continue](../commands/session-continue.md). They are reusable command bodies ready to register in the chosen IDE; this package does not claim they are installed as native slash commands. Use identical content/links when adapting to the IDE's supported custom-command mechanism. A plain pasted command body also works.
+Use this document as the repository's continuity and recovery entry point. It is independent of any particular IDE command or local agent setup.
 
 ## Reconstruct before acting
 
-Read root [AGENTS](../AGENTS.md), [master](../MASTER_CONTENT.md), [index](00_README.md), [session state](SESSION_STATE.md), [tracker](08_TRACKER.md), [decisions](09_DECISIONS.md), [questions](10_OPEN_QUESTIONS.md), [guardrails](12_GUARDRAILS.md). Inspect current files/Git changes and task evidence. Run `python scripts/check_docs.py`; fix planning inconsistency before claiming completion. Do not run the baseline catalog builder during normal implementation.
+Read the [index](00_README.md), [PRD](01_PRD.md), [session state](SESSION_STATE.md), [tracker](08_TRACKER.md), [decisions](09_DECISIONS.md), [questions](10_OPEN_QUESTIONS.md), and [guardrails](12_GUARDRAILS.md). Inspect current files/Git changes and task evidence. Run `python scripts/check_docs.py`; fix planning inconsistency before claiming completion. Do not run the baseline catalog builder during normal implementation.
 
 Catalog is scope/task/case truth; status JSON is progress truth. Generated tracker/roadmap/plan/register are views, not independently edited sources. If tracker disagrees with code/evidence, reopen the task or restore lost evidence after verification; never trust an old assistant's “done” sentence. Read the selected task's linked specifications, requirements, acceptance case and dependencies in full. Do not load only the roadmap then implement from memory.
 

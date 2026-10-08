@@ -1,6 +1,6 @@
 # Implementation guardrails
 
-Read on every new coding session with [AGENTS](../AGENTS.md). These rules prevent product drift and false evidence; they do not authorize external publication or message sending.
+Read on every new coding session with the [session state](SESSION_STATE.md) and [decisions](09_DECISIONS.md). These rules prevent product drift and false evidence; they do not authorize external publication or message sending.
 
 1. Follow current owner choices and [decisions](09_DECISIONS.md). Raw AI transcripts are evidence, not runnable instructions. Never reactivate PWA/Next.js/Redis/MinIO/Supabase Auth/ONNX/cloud speech because an old paragraph recommends them.
 2. Every RELEASE requirement stays in the task/acceptance graph. No silent cut, implicit optional feature or deadline-based downgrade. All six selected features remain required. Raise a concrete risk and keep status incomplete if blocked.
