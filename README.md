@@ -1,105 +1,106 @@
-# SahiTol — सही तोल
+# SahiTol | सही तोल
 
-**Offline-capable Hindi/Marathi Android platform** connecting informal e-waste collectors with formal recycling destinations through transparent indicative prices, documented handovers, and payment records — with recycler and admin web consoles.
+**Fair weight. Transparent price. Confirmed handover.**
 
-> **Build status (2026-09-30):** Application implemented and deployed. All six selected must-haves working.
+SahiTol is an offline-first prototype for informal e-waste collectors. It helps a collector record a material lot, compare indicative prices, find suitable recycling destinations, document a handover on two devices, and record payment status without confusing a locally saved record with a completed sale.
 
----
+> Built for SIH26229 — *Kabadiwala Connect: Bringing the Informal Collector into the Formal Recycling Chain*.
 
-## Live Links
+## What it includes
 
-| Surface | URL |
-|---------|-----|
-| FastAPI backend | https://sahitol-api.onrender.com |
-| Recycler + Admin web console | https://sahitol.pages.dev |
-| Android APK | `apps/android/app/build/outputs/apk/debug/app-debug.apk` (33.25 MB, SHA-256: `db71f114...`) |
+- **Collector Android app:** Kotlin, Jetpack Compose, Room, WorkManager, CameraX, QR, offline-first outbox, and on-device LiteRT classification.
+- **Recycler console:** React/Vite interface for requests, quotes, QR-assisted receipt confirmation, and history/export workflows.
+- **Admin console:** source-aware price moderation, facility and taxonomy maintenance, traceability, and data-quality review.
+- **FastAPI platform:** role-scoped API, PostgreSQL/PostGIS schema, append-only events, idempotent sync, private media adapter, and generated exports.
+- **Language and safety support:** Hindi and Marathi offline audio, material aliases, clear safety guidance, and a separate battery route.
 
-> **Note:** Backend is on Render free tier — cold start ~30 s after inactivity. Wait for `/health/live` to return 200.
+## Core workflow
 
----
-
-## Six Working Features
-
-| # | Feature | Status |
-|---|---------|--------|
-| 1 | Recycler console (request / offer / confirmed agreement) | ✅ Implemented |
-| 2 | Offline image classifier (advisory, LiteRT MobileNetV3-Small) | ✅ Implemented |
-| 3 | Hindi + Marathi pre-generated offline audio (258 clips) | ✅ Implemented |
-| 4 | Two-device QR handover (Digital Handover Record) | ✅ Implemented |
-| 5 | Admin data-quality dashboard | ✅ Implemented |
-| 6 | Illustrative economics (editable delta, U01) | ✅ Implemented |
-
----
-
-## Tech Stack
-
-- **Android:** Kotlin / Jetpack Compose / Room / WorkManager / LiteRT (TF Lite)
-- **Backend:** FastAPI / PostgreSQL / PostGIS (Supabase ap-south-1)
-- **Web:** React / Vite / TypeScript
-- **Storage:** Supabase private media bucket (collector photos)
-- **No paid runtime AI, no cloud speech API, zero collector fee**
-
----
-
-## Honest Limitations
-
-- **Primary fieldwork (R-RES-02):** Two-collector field research is **unmet** — desk research and owner scenario tests only.
-- **ML model:** Macro-F1 0.0159; 100% abstention at threshold 0.65 — classifier is safe (always falls back to manual selection).
-- **Native-speaker audio review:** Not completed.
-- **Digital Handover Record ≠ EPR certificate.** Received mass does not prove recycling.
-
----
-
-## Repository Layout
-
-```
-apps/android/     Kotlin/Compose Android collector app
-apps/web/         React/Vite recycler + admin console
-services/api/     FastAPI backend
-data/curated/     Seven dataset families with data cards and manifests
-docs/             Specifications, requirements, decisions, evidence
-scripts/          Render scripts, doc generators, backup tool
+```text
+Capture lot → save locally → synchronize → request offer → accept terms
+       → create QR handover → recycler confirms receipt → record payment
 ```
 
----
+Each stage is deliberately distinct: **saved locally ≠ synchronized ≠ recycler confirmed ≠ payment acknowledged**.
 
-## Run Locally
+## Architecture
+
+| Surface | Implementation |
+| --- | --- |
+| Collector | Native Android — Kotlin, Compose, Room, WorkManager, LiteRT |
+| API | FastAPI, SQLAlchemy, Alembic, PostgreSQL/PostGIS |
+| Recycler/Admin web | React, Vite, TypeScript, Tailwind |
+| Local runtime | Docker Compose with PostGIS and local media volume |
+| Hosted media design | Private storage adapter; no public collector-photo URLs |
+
+## Repository layout
+
+```text
+apps/android/      Collector Android application
+apps/web/          Recycler and admin web console
+services/api/      FastAPI application, migrations, and API tests
+data/curated/      Versioned demo/reference data and model artifacts
+infra/             Docker images, Compose stack, and PostGIS initialization
+scripts/           Data, validation, backup, and maintenance tools
+```
+
+## Run locally
+
+### Full stack with Docker
 
 ```bash
-# Backend
+docker compose -f infra/docker-compose.yml up --build
+```
+
+This starts PostGIS, the API on `http://localhost:8000`, and the web console on `http://localhost:5173`.
+
+### Individual services
+
+```bash
+# API
 cd services/api
-pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
 uvicorn app.main:app --reload
 
-# Web console
+# Web
 cd apps/web
-npm install && npm run dev
+npm ci
+npm run dev
 
 # Android
-# Open apps/android in Android Studio → Run on device/emulator
+# Open apps/android in Android Studio, then run on a device or emulator.
 ```
 
-## Validate Documentation
+Copy `services/api/.env.example` before configuring non-demo services. Never commit credentials, signing keys, or runtime media.
+
+## Verification
+
+The CI workflow runs documentation integrity checks, the FastAPI test suite, web typecheck/tests/production build, and Android unit tests.
 
 ```bash
-python scripts/render_docs.py
 python scripts/check_docs.py
+python scripts/test_doc_integrity.py
+
+# From the repository root
+PYTHONPATH="services/api:." pytest services/api/tests
+
+cd apps/web && npm ci && npm run typecheck && npm run test && npm run build
+cd ../android && ./gradlew test
 ```
 
+## Important boundaries
+
+- The classifier is advisory; a collector can always select a material manually.
+- Prices are indicative observations, not guaranteed offers or income claims.
+- A Digital Handover Record is not an EPR certificate and does not prove physical recycling.
+- Payments are recorded assertions; SahiTol does not move money or verify bank settlement.
+- Batteries follow a distinct route; the product does not provide dismantling or chemical-extraction instructions.
+- This prototype uses secondary research and simulated demo data. Required collector fieldwork remains unmet.
+
+## Contributing
+
+Keep changes scoped, test the affected surface, and preserve the product’s safety, privacy, provenance, and offline-state boundaries. Avoid committing generated builds, `node_modules`, virtual environments, secrets, local media, or device-specific configuration.
+
 ---
 
-## Key Documents
-
-- [Documentation guide](docs/00_README.md)
-- [Master content and settled choices](MASTER_CONTENT.md)
-- [Implementation tracker](docs/08_TRACKER.md)
-- [Requirements](docs/15_REQUIREMENTS.md)
-- [Data provenance](docs/18_DATA_PROVENANCE.md)
-- [AI/ML spec](docs/19_AI_ML.md)
-- [Evidence directory](docs/evidence/)
-- [Release checklist](docs/25_RELEASE_CHECKLIST.md)
-- [AI agent instructions](AGENTS.md)
-
----
-
-*SahiTol is a prototype built for SIH26229. Not a commercial product. Not a certified EPR compliance tool.*
+SahiTol is a prototype, not a certified recycling, compliance, or payment-settlement platform.

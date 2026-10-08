@@ -46,7 +46,7 @@ describe('Second-Device QR Confirmation & Public Verification Views (T025)', () 
     fireEvent.click(lookupBtn);
     expect(screen.getByText('ST-9999')).toBeDefined();
     expect(screen.getByText(/server lookup required/i)).toBeDefined();
-    expect((screen.getByRole('button', { name: /Verify with Server/i }) as HTMLButtonElement).disabled).toBe(true);
+    expect((screen.getByRole('button', { name: /Verifying with Server/i }) as HTMLButtonElement).disabled).toBe(true);
   });
 
   it('renders R05_ReceiptReview only from the confirmed server handover, without a second confirmation action', async () => {

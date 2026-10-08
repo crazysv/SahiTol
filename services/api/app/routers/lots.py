@@ -302,12 +302,20 @@ def create_lot(
     db: Session = Depends(get_db)
 ):
     """Create or stage a new material lot in DRAFT status with owner checks and validation."""
-    effective_collector_id = payload.collector_id or current_user.id
-    if effective_collector_id != current_user.id and current_user.role != "ADMIN":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Forbidden: Cannot create lot on behalf of another collector."
-        )
+    if current_user.role == "COLLECTOR":
+        if not current_user.collector:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Collector profile required."
+            )
+        effective_collector_id = current_user.collector.id
+        if payload.collector_id and payload.collector_id != effective_collector_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Forbidden: Cannot create lot on behalf of another collector."
+            )
+    else:
+        effective_collector_id = payload.collector_id or current_user.id
 
     mat_route = payload.regulatory_route
     if payload.material_id:
@@ -507,7 +515,10 @@ def get_lot(
         )
 
     # Scoping check
-    if current_user.role == "COLLECTOR" and lot.collector_id != current_user.id:
+    if (
+        current_user.role == "COLLECTOR"
+        and (not current_user.collector or lot.collector_id != current_user.collector.id)
+    ):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Forbidden: Cannot view another collector's private lot."
@@ -770,7 +781,10 @@ def collect_lot(
     if not lot:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Lot '{lot_id}' not found.")
 
-    if lot.collector_id != current_user.id and current_user.role != "ADMIN":
+    if (
+        current_user.role != "ADMIN"
+        and (not current_user.collector or lot.collector_id != current_user.collector.id)
+    ):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden: Cannot collect another collector's lot.")
 
     if lot.status != "DRAFT":
@@ -865,7 +879,10 @@ def list_lot(
     if not lot:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Lot '{lot_id}' not found.")
 
-    if lot.collector_id != current_user.id and current_user.role != "ADMIN":
+    if (
+        current_user.role != "ADMIN"
+        and (not current_user.collector or lot.collector_id != current_user.collector.id)
+    ):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden: Cannot list another collector's lot.")
 
     if lot.status != "COLLECTED":
@@ -944,7 +961,10 @@ def cancel_lot(
     if not lot:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Lot '{lot_id}' not found.")
 
-    if lot.collector_id != current_user.id and current_user.role != "ADMIN":
+    if (
+        current_user.role != "ADMIN"
+        and (not current_user.collector or lot.collector_id != current_user.collector.id)
+    ):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden: Cannot cancel another collector's lot.")
 
     if lot.status in ("RECEIVED", "CLOSED"):
@@ -1024,7 +1044,10 @@ def estimate_lot_valuation(
     if not lot:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Lot '{lot_id}' not found.")
 
-    if lot.collector_id != current_user.id and current_user.role != "ADMIN":
+    if (
+        current_user.role != "ADMIN"
+        and (not current_user.collector or lot.collector_id != current_user.collector.id)
+    ):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden: Cannot value another collector's lot.")
 
     if not lot.material_id or not lot.estimated_weight_g:

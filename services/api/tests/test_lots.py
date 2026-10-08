@@ -10,6 +10,7 @@ from fastapi.testclient import TestClient
 from app.main import app
 from app.db.session import get_db
 from app.db.models.auth import User
+from app.db.models.collector import Collector
 from app.db.models.lot import Lot, LocationRecord, LotImage, MediaObject, ValuationSnapshot
 from app.db.models.audit import DomainEvent, QualityFlag, SyncChange
 from app.db.models.price import PriceSummary
@@ -53,6 +54,7 @@ def setup_lots_test_database():
 def collector_a():
     """Create test collector A."""
     user_id = uuid.uuid4()
+    collector_id = uuid.uuid4()
     with TestingSessionLocal() as session:
         user = User(
             id=user_id,
@@ -63,16 +65,28 @@ def collector_a():
             is_demo=False
         )
         session.add(user)
+        session.add(Collector(
+            id=collector_id,
+            user_id=user_id,
+            display_alias="Collector A",
+            preferred_language="hi",
+            consent_version="v1.0",
+        ))
         session.commit()
 
     token = create_access_token(subject=str(user_id), role="COLLECTOR", is_demo=False)
-    return {"id": user_id, "headers": {"Authorization": f"Bearer {token}"}}
+    return {
+        "id": user_id,
+        "collector_id": collector_id,
+        "headers": {"Authorization": f"Bearer {token}"},
+    }
 
 
 @pytest.fixture
 def collector_b():
     """Create test collector B."""
     user_id = uuid.uuid4()
+    collector_id = uuid.uuid4()
     with TestingSessionLocal() as session:
         user = User(
             id=user_id,
@@ -83,10 +97,21 @@ def collector_b():
             is_demo=False
         )
         session.add(user)
+        session.add(Collector(
+            id=collector_id,
+            user_id=user_id,
+            display_alias="Collector B",
+            preferred_language="hi",
+            consent_version="v1.0",
+        ))
         session.commit()
 
     token = create_access_token(subject=str(user_id), role="COLLECTOR", is_demo=False)
-    return {"id": user_id, "headers": {"Authorization": f"Bearer {token}"}}
+    return {
+        "id": user_id,
+        "collector_id": collector_id,
+        "headers": {"Authorization": f"Bearer {token}"},
+    }
 
 
 @pytest.fixture
@@ -127,7 +152,7 @@ def test_create_lot_draft_and_domain_effects(collector_a):
     data = resp.json()
 
     assert data["id"] == str(lot_id)
-    assert data["collector_id"] == str(collector_a["id"])
+    assert data["collector_id"] == str(collector_a["collector_id"])
     assert data["status"] == "DRAFT"
     assert data["version"] == 1
     assert data["regulatory_route"] == "AUTHORIZED_EWASTE"

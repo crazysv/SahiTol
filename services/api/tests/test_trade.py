@@ -914,8 +914,8 @@ def test_tampered_terms_hash_rejected(collector_user, recycler_setup):
     assert "terms hash mismatch" in resp.json()["detail"].lower()
 
 
-def test_simultaneous_acceptance_leaves_only_one_agreement(collector_user, recycler_setup, battery_facility_setup):
-    """Test two competing offers leave only one active agreement; second acceptance fails (R-OFFER-02 / AT-028)."""
+def test_second_open_offer_is_rejected_and_acceptance_creates_one_agreement(collector_user, recycler_setup, battery_facility_setup):
+    """A request has one open offer; accepting it creates exactly one agreement (R-OFFER-02 / AT-028)."""
     lot_id = uuid.uuid4()
     with TestingSessionLocal() as session:
         lot = Lot(
@@ -944,12 +944,13 @@ def test_simultaneous_acceptance_leaves_only_one_agreement(collector_user, recyc
         headers=recycler_setup["headers"]
     ).json()
 
-    # Facility makes a revised Offer 2
+    # A retry/reload cannot create a competing open offer for the same request.
     offer2 = client.post(
         f"/api/v1/requests/{req_id}/offers",
         json={"price_basis": "RATE_PER_KG", "rate_paise_per_kg": 47000},
         headers=recycler_setup["headers"]
-    ).json()
+    )
+    assert offer2.status_code == 409
 
     # Accept Offer 1
     resp1 = client.post(
@@ -958,15 +959,6 @@ def test_simultaneous_acceptance_leaves_only_one_agreement(collector_user, recyc
         headers=collector_user["headers"]
     )
     assert resp1.status_code == 200
-
-    # Attempt to accept Offer 2
-    resp2 = client.post(
-        f"/api/v1/offers/{offer2['id']}/accept",
-        json={"terms_hash": offer2["terms_hash"], "expected_version": 1},
-        headers=collector_user["headers"]
-    )
-    assert resp2.status_code == 409
-    assert "already has an active accepted agreement" in resp2.json()["detail"].lower() or "expired" in resp2.json()["detail"].lower()
 
     # Verify exactly one active transaction exists for this lot
     with TestingSessionLocal() as session:

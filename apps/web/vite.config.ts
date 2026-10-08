@@ -18,5 +18,10 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    // Recycler polling creates browser timers. A single fork gives every CI
+    // run an isolated teardown boundary instead of leaving the runner open.
+    pool: 'forks',
+    maxWorkers: 1,
+    minWorkers: 1,
   },
 });

@@ -80,7 +80,7 @@ describe('Recycler Console Views (T022)', () => {
     expect(screen.getByText(/Ramesh Kumar/i)).toBeDefined();
     expect(screen.getByText(/Proceed to Quote Terminal/i)).toBeDefined();
 
-    expect(screen.getByText('85.5 kg')).toBeDefined();
+    expect(screen.getAllByText('85.5 kg')).toHaveLength(2);
   });
 
   it('renders R03_QuoteTerminal with the matching live request and pricing models', async () => {
