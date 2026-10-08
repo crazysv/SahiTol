@@ -1,5 +1,7 @@
 # SahiTol | सही तोल
 
+[![CI](https://github.com/crazysv/SahiTol/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/crazysv/SahiTol/actions/workflows/ci.yml)
+
 **Fair weight. Transparent price. Confirmed handover.**
 
 SahiTol is an offline-first prototype for informal e-waste collectors. It helps a collector record a material lot, compare indicative prices, find suitable recycling destinations, document a handover on two devices, and record payment status without confusing a locally saved record with a completed sale.
